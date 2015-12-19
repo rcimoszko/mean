@@ -1,7 +1,7 @@
 'use strict';
 
 var policy = require('../policies/pinnacle.sports.policy'),
-    ctrl = require('../controllers/pinnacle.sports.server.controller');
+    ctrl = require('../controllers/pinnacle.sports.server.controller.js');
 
 module.exports = function (app) {
 

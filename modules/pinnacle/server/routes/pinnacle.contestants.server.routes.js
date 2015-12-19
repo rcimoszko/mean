@@ -1,7 +1,7 @@
 'use strict';
 
 var policy = require('../policies/pinnacle.contestants.policy'),
-    ctrl = require('../controllers/pinnacle.contestants.server.controller');
+    ctrl = require('../controllers/pinnacle.contestants.server.controller.js');
 
 module.exports = function (app) {
 
