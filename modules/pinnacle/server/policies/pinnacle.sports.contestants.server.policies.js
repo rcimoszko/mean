@@ -7,7 +7,7 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/pinnacle/sports/:pinSportId/leagues/:pinLeagueId/contestants',
+            resources: '/api/pinnacle/sports/:pinSportId/contestants',
             permissions: ['GET']
         }]
     }]);

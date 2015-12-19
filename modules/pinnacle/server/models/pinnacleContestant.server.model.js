@@ -9,6 +9,7 @@ var PinnacleContestantSchema = new Schema({
     name:           {type: String},
     pinnacleSport:  {name: String, ref: {type: Schema.ObjectId, ref: 'PinnacleSport'}},
     pinnacleLeague: {name: String, ref: {type: Schema.ObjectId, ref: 'PinnacleLeague'}},
+
     contestant:     {name: String, ref: {type: Schema.ObjectId, ref: 'Contestant'}},
     autoMatched:    {type: Boolean}
 });
