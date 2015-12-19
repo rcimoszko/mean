@@ -1,3 +1,11 @@
-/**
- * Created by ryancimoszko on 15-12-19.
- */
+'use strict';
+
+var policy = require('../policies/pinnacle.sports.leagues.contestants.policy'),
+    ctrl = require('../controllers/pinnacle.sports.leagues.contestants.server.controller');
+
+module.exports = function (app) {
+
+    app.route('/api/pinnacle/sports/:pinSportId/leagues/:pinLeagueId/contestants').all(policy.isAllowed)
+        .get(ctrl.getAll);
+
+};

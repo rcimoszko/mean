@@ -1,17 +1,11 @@
 'use strict';
 
-var policy = require('../policies/pinnacle.policy'),
-    ctrl = require('../controllers/pinnacle.sports.server.controller');
+var policy = require('../policies/pinnacle.sports.leagues.policy'),
+    ctrl = require('../controllers/pinnacle.sports.leagues.server.controller');
 
 module.exports = function (app) {
 
-    app.route('/api/pinnacle/sports').all(policy.isAllowed)
+    app.route('/api/pinnacle/sports/:pinSportId/leagues').all(policy.isAllowed)
         .get(ctrl.getAll);
-
-    app.route('/api/pinnacle/sports/:sportId').all(policy.isAllowed)
-        .get(ctrl.get)
-        .put(ctrl.update);
-
-    app.param('pinLeagueId', ctrl.byId);
 
 };
