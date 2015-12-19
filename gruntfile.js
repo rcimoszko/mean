@@ -58,13 +58,6 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
-      clientSCSS: {
-        files: defaultAssets.client.sass,
-        tasks: ['sass', 'csslint'],
-        options: {
-          livereload: true
-        }
-      },
       clientLESS: {
         files: defaultAssets.client.less,
         tasks: ['less', 'csslint'],
@@ -133,6 +126,7 @@ module.exports = function (grunt) {
         }
       }
     },
+<<<<<<< Updated upstream
     sass: {
       dist: {
         files: [{
@@ -145,6 +139,8 @@ module.exports = function (grunt) {
 				}]
       }
     },
+=======
+>>>>>>> Stashed changes
     less: {
       dist: {
         files: [{
@@ -243,7 +239,11 @@ module.exports = function (grunt) {
   });
 
   // Lint CSS and JavaScript files.
+<<<<<<< Updated upstream
   grunt.registerTask('lint', ['sass', 'less', 'jshint', 'csslint']);
+=======
+  grunt.registerTask('lint', ['less', 'jshint', 'eslint', 'csslint']);
+>>>>>>> Stashed changes
 
   // Lint project files and minify them into two production files.
   grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);
