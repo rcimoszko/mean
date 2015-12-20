@@ -59,6 +59,13 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
+            clientSCSS: {
+                files: defaultAssets.client.sass,
+                tasks: ['sass', 'csslint'],
+                options: {
+                    livereload: true
+                }
+            },
             clientLESS: {
                 files: defaultAssets.client.less,
                 tasks: ['less', 'csslint'],
@@ -129,6 +136,18 @@ module.exports = function (grunt) {
                 files: {
                     'public/dist/application.min.css': defaultAssets.client.css
                 }
+            }
+        },
+        sass: {
+            dist: {
+                files: [{
+                    expand: true,
+                    src: defaultAssets.client.sass,
+                    ext: '.css',
+                    rename: function (base, src) {
+                        return src.replace('/scss/', '/css/');
+                    }
+                }]
             }
         },
         less: {
@@ -278,7 +297,7 @@ module.exports = function (grunt) {
     });
 
     // Lint CSS and JavaScript files.
-    grunt.registerTask('lint', ['less', 'jshint', 'eslint', 'csslint']);
+    grunt.registerTask('lint', ['less', 'jshint', 'csslint']);
 
     // Lint project files and minify them into two production files.
     grunt.registerTask('build', ['env:dev', 'lint', 'ngAnnotate', 'uglify', 'cssmin']);

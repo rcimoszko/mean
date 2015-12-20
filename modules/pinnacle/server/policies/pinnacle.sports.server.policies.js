@@ -8,10 +8,10 @@ exports.invokeRolesPolicies = function () {
         roles: ['admin'],
         allows: [{
             resources: '/api/pinnacle/sports',
-            permissions: ['GET']
+            permissions: ['get']
         }, {
             resources: '/api/pinnacle/sports/:pinSportId',
-            permissions: ['GET', 'PUT']
+            permissions: ['get', 'put']
         }]
     }]);
 };

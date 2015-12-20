@@ -8,7 +8,7 @@ exports.invokeRolesPolicies = function () {
         roles: ['admin'],
         allows: [{
             resources: '/api/pinnacle/sports/:pinSportId/leagues',
-            permissions: ['GET']
+            permissions: ['get']
         }]
     }]);
 };

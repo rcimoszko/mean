@@ -72,18 +72,40 @@ var validateEnvironmentVariable = function () {
  */
 var validateSecureMode = function (config) {
 
-  if (config.secure !== true) {
+  if (!config.secure || config.secure.ssl !== true) {
     return true;
   }
 
-  var privateKey = fs.existsSync('./config/sslcerts/key.pem');
-  var certificate = fs.existsSync('./config/sslcerts/cert.pem');
+  var privateKey = fs.existsSync(path.resolve(config.secure.privateKey));
+  var certificate = fs.existsSync(path.resolve(config.secure.certificate));
 
   if (!privateKey || !certificate) {
     console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
     console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
     console.log();
-    config.secure = false;
+    config.secure.ssl = false;
+  }
+};
+
+/**
+ * Validate Session Secret parameter is not set to default in production
+ */
+var validateSessionSecret = function (config, testing) {
+
+  if (process.env.NODE_ENV !== 'production') {
+    return true;
+  }
+
+  if (config.sessionSecret === 'MEAN') {
+    if (!testing) {
+      console.log(chalk.red('+ WARNING: It is strongly recommended that you change sessionSecret config while running in production!'));
+      console.log(chalk.red('  Please add `sessionSecret: process.env.SESSION_SECRET || \'super amazing secret\'` to '));
+      console.log(chalk.red('  `config/env/production.js` or `config/env/local.js`'));
+      console.log();
+    }
+    return false;
+  } else {
+    return true;
   }
 };
 
@@ -159,9 +181,14 @@ var initGlobalConfig = function () {
   var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
 
   // Merge config files
-  var envConf = _.merge(defaultConfig, environmentConfig);
+  var config = _.merge(defaultConfig, environmentConfig);
 
-  var config = _.merge(envConf, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
+  // read package.json for MEAN.JS project information
+  var pkg = require(path.resolve('./package.json'));
+  config.meanjs = pkg;
+
+  // Extend the config object with the local-NODE_ENV.js custom/local environment. This will override any settings present in the local configuration.
+  config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js')) && require(path.join(process.cwd(), 'config/env/local-' + process.env.NODE_ENV + '.js'))) || {});
 
   // Initialize global globbed files
   initGlobalConfigFiles(config, assets);
@@ -172,9 +199,13 @@ var initGlobalConfig = function () {
   // Validate Secure SSL mode can be used
   validateSecureMode(config);
 
+  // Validate session secret
+  validateSessionSecret(config);
+
   // Expose configuration utilities
   config.utils = {
-    getGlobbedPaths: getGlobbedPaths
+    getGlobbedPaths: getGlobbedPaths,
+    validateSessionSecret: validateSessionSecret
   };
 
   return config;
