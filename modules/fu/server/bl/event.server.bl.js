@@ -59,7 +59,7 @@ function del(event, callback){
 }
 
 function getByQuery(query, callback){
-
+    m_Event.find(query, callback);
 }
 
 function cancel(event, callback){

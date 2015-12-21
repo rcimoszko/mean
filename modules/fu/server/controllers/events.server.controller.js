@@ -28,6 +28,11 @@ function byId(req, res, next, id){
 }
 
 function getAll(req, res, next){
+    if(!Object.keys(req.query).length){
+        return res.status(400).send({
+            message: 'Query is required'
+        });
+    }
 
     function cb (err, events){
         if (err) return next(err);
@@ -39,7 +44,8 @@ function getAll(req, res, next){
         res.json(events);
     }
 
-    EventBl.getAll(cb);
+
+    EventBl.getByQuery(req.query, cb);
 
 }
 

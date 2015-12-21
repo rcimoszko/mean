@@ -51,28 +51,49 @@ describe('/api/events', function () {
         async.waterfall(todo, done);
     });
 
-    /*
 
-    it('should not be able get list of pinnacle sports if guest', function (done) {
-        agent.get('/api/pinnacle/sports')
+
+    it('should not be able get list of events if guest', function (done) {
+        agent.get('/api/events')
             .expect(403)
             .end(function (err) {
                 done(err);
             });
     });
 
-    it('should not be able get list of pinnacle sports if user', function (done) {
-        var req = request.get('/api/pinnacle/sports');
+
+    it('should not be able get list of events if query not provided and user', function (done) {
+        var req = request.get('/api/events');
         userAgent.attachCookies(req);
         req.send()
-            .expect(403)
+            .expect(400)
             .end(function (err) {
                 done(err);
             });
     });
 
-    it('should be able get list of pinnacle sports if admin', function (done) {
-        var req = request.get('/api/pinnacle/sports');
+    it('should not be able get list of events if query not provided and admin', function (done) {
+        var req = request.get('/api/events');
+        adminAgent.attachCookies(req);
+        req.send()
+            .expect(400)
+            .end(function (err) {
+                done(err);
+            });
+    });
+
+    it('should be able get list of events if query provided and user', function (done) {
+        var req = request.get('/api/events?slug=event-slug');
+        userAgent.attachCookies(req);
+        req.send()
+            .end(function (req, res) {
+                res.body.should.be.instanceof(Array).and.have.lengthOf(1);
+                done();
+            });
+    });
+
+    it('should be able get list of events if query provided and admin', function (done) {
+        var req = request.get('/api/events?slug=event-slug');
         adminAgent.attachCookies(req);
         req.send()
             .end(function (req, res) {
@@ -80,7 +101,6 @@ describe('/api/events', function () {
                 done();
             });
     });
-    */
 
 
     it('should not be able to get a single event if guest', function (done) {
@@ -194,3 +214,8 @@ describe('/api/events', function () {
     });
 
 });
+
+
+//
+//'should be able get list of events if query provided and user'
+//'should be able get list of events if query provided and admin'

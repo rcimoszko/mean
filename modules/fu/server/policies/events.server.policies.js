@@ -13,6 +13,12 @@ exports.invokeRolesPolicies = function () {
             resources: '/api/events/:eventId',
             permissions: ['*']
         }]
+    },{
+        roles: ['user'],
+        allows: [{
+            resources: '/api/events',
+            permissions: ['get']
+        }]
     }]);
 };
 
