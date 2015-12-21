@@ -66,8 +66,12 @@ function cancel(event, callback){
     var todo = [];
 
     function cancelEvent(callback){
+
+        function cb(err){
+            callback(err);
+        }
         event.cancelled = true;
-        event.save(callback);
+        event.save(cb);
     }
 
     function cancelPicks(callback){

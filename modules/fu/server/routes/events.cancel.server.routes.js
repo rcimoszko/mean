@@ -6,6 +6,6 @@ var policy = require('../policies/events.cancel.server.policies'),
 module.exports = function (app) {
 
     app.route('/api/events/:eventId/cancel').all(policy.isAllowed)
-        .post(ctrl.cancel);
+        .put(ctrl.cancel);
 
 };

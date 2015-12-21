@@ -8,7 +8,7 @@ exports.invokeRolesPolicies = function () {
         roles: ['admin'],
         allows: [{
             resources: '/api/events/:eventId/cancel',
-            permissions: ['post']
+            permissions: ['put']
         }]
     }]);
 };

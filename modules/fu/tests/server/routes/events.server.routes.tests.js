@@ -149,7 +149,6 @@ describe('/api/events', function () {
         var req = request.put('/api/events/' + m_event._id);
         userAgent.attachCookies(req);
         req.send(m_event)
-            .send(m_event)
             .expect(403)
             .end(function (err) {
                 done(err);
@@ -162,7 +161,6 @@ describe('/api/events', function () {
         var req = request.put('/api/events/' + m_event._id);
         adminAgent.attachCookies(req);
         req.send(m_event)
-            .send(m_event)
             .expect(200)
             .end(function (err, res) {
                 if (err) return done(err);
@@ -185,7 +183,6 @@ describe('/api/events', function () {
         var req = request.delete('/api/events/' + m_event._id);
         userAgent.attachCookies(req);
         req.send(m_event)
-            .send(m_event)
             .expect(403)
             .end(function (err) {
                 done(err);
@@ -214,8 +211,3 @@ describe('/api/events', function () {
     });
 
 });
-
-
-//
-//'should be able get list of events if query provided and user'
-//'should be able get list of events if query provided and admin'

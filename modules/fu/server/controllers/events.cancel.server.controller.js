@@ -1,9 +1,8 @@
 'use strict';
 
-var path = require('path'),
-    mongoose = require('mongoose'),
-    EventBl = require(path.resolve('./modules/fu/server/bl/event.server.bl')),
-    errorHandler = require(path.resolve('./modules/fu/server/sys/error.server.sys'));
+var mongoose = require('mongoose'),
+    EventBl = require('../bl/event.server.bl'),
+    errorHandler = require('../sys/error.server.sys');
 
 function cancel(req, res) {
     function cb(err, event){
