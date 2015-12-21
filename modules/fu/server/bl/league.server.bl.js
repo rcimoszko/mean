@@ -29,7 +29,7 @@ function getAll(callback){
 
 function update(data, league, callback) {
 
-    function cb(err, league){
+    function cb(err){
         callback(err, league);
     }
 
@@ -67,3 +67,4 @@ exports.populate    = populate;
 exports.getAll      = getAll;
 exports.create      = create;
 exports.delete      = del;
+exports.getByQuery  = getByQuery;

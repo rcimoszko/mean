@@ -2,7 +2,7 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    EventBl = require(path.resolve('./modules/fu/server/bl/event.server.bl'));
+    EventBl = require('../bl/event.server.bl');
 
 
 function byId(req, res, next, id){

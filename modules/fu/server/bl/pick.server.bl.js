@@ -29,7 +29,7 @@ function getAll(callback){
 
 function update(data, pick, callback) {
 
-    function cb(err, pick){
+    function cb(err){
         callback(err, pick);
     }
 
@@ -63,9 +63,31 @@ function getByQuery(query, callback){
 }
 
 
+function cancelPick(pick, callback){
+    var update = {
+        roi: 0,
+        profit: 0,
+        result: 'Cancelled'
+    };
+
+    Pick.update({_id:pick}, update, callback);
+}
+
+function cancelPicksByEvent(event, callback){
+    var update = {
+        roi: 0,
+        profit: 0,
+        result: 'Cancelled'
+    };
+
+    Pick.update({event:event}, update, {multi:true}, callback);
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.create      = create;
-exports.delete      = del;/**
- * Created by ryancimoszko on 15-12-19.
- */
+exports.delete      = del;
+exports.getByQuery  = getByQuery;
+
+exports.cancelPicksByEvent = cancelPicksByEvent;
+exports.cancelPick         = cancelPick;

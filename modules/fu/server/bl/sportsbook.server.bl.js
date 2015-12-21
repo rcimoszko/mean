@@ -58,14 +58,7 @@ function del(sportsbook, callback){
     sportsbook.remove(cb);
 }
 
-function getByQuery(query, callback){
-
-}
-
-
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.create      = create;
-exports.delete      = del;/**
- * Created by ryancimoszko on 15-12-19.
- */
+exports.delete      = del;

@@ -17,7 +17,6 @@ function cancel(req, res) {
     }
 
     var event = req.event;
-
     EventBl.cancel(event, cb);
 }
 

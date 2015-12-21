@@ -29,7 +29,7 @@ function getAll(callback){
 
 function update(data, sport, callback) {
 
-    function cb(err, sport){
+    function cb(err){
         callback(err, sport);
     }
 

@@ -1,7 +1,9 @@
 'use strict';
 
 var _ = require('lodash'),
+    async = require('async'),
     mongoose = require('mongoose'),
+    PickBl = require('./pick.server.bl'),
     m_Event = mongoose.model('Event');
 
 function populate(event, callback){
@@ -29,12 +31,11 @@ function getAll(callback){
 
 function update(data, event, callback) {
 
-    function cb(err, event){
+    function cb(err){
         callback(err, event);
     }
 
     event = _.extend(event, data);
-
     event.save(cb);
 }
 
@@ -50,7 +51,6 @@ function create(data, callback) {
 }
 
 function del(event, callback){
-
     function cb(err){
         callback(err, event);
     }
@@ -63,10 +63,48 @@ function getByQuery(query, callback){
 }
 
 function cancel(event, callback){
+    var todo = [];
+
+    function cancelEvent(callback){
+        event.cancelled = true;
+        event.save(callback);
+    }
+
+    function cancelPicks(callback){
+        PickBl.cancelPicksByEvent(event, callback);
+    }
+
+    function cb(err){
+        callback(err, event);
+    }
+
+    todo.push(cancelEvent);
+    todo.push(cancelPicks);
+
+    async.waterfall(todo, cb);
 
 }
 
 function resolve(event, callback){
+
+    var todo = [];
+
+    function saveScores(callback){
+        callback(null);
+    }
+
+    function resolvePicks(callback){
+
+    }
+
+    function cb(err){
+        callback(err, event);
+    }
+
+    todo.push(saveScores);
+    todo.push(resolvePicks);
+
+    async.waterfall(todo, cb);
 
 }
 
@@ -92,8 +130,10 @@ function getGamecenter(event, callback){
 
 
 exports.populate    = populate;
+exports.get         = get;
 exports.getAll      = getAll;
 exports.create      = create;
+exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
 

@@ -42,11 +42,8 @@ var EventSchema = new Schema({
     endTime:                    {type: Date},
     over:                       {type: Boolean},
 
-    pinnacleId:                 {type: Number},
-    fiveDimesId:                {type: Number},
-
+    pinnacleId:                 {type: Number}, // To remove prolly
     pinnacleIds:                [Number],
-    fiveDimesIds:               [Number],
 
     betsAvailable:              [BetSchema],
     propsAvailable:             [PropSchema],
