@@ -6,6 +6,6 @@ var policy = require('../policies/events.resolve.server.policies'),
 module.exports = function (app) {
 
     app.route('/api/events/:eventId/resolve').all(policy.isAllowed)
-        .post(ctrl.resolve);
+        .put(ctrl.resolve);
 
 };

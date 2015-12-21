@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
+    PickResolveBl = require('./pick.resolve.server.bl'),
     PickBl = require('./pick.server.bl'),
     m_Event = mongoose.model('Event');
 
@@ -89,16 +90,18 @@ function cancel(event, callback){
 
 }
 
-function resolve(event, callback){
+function resolve(event, data, callback){
 
     var todo = [];
 
     function saveScores(callback){
-        callback(null);
+        event.over = true;
+        event.endTime = Date.now();
+        update(event, data, callback);
     }
 
-    function resolvePicks(callback){
-
+    function resolvePicks(event, callback){
+        PickResolveBl.resolvePicks(event, callback);
     }
 
     function cb(err){

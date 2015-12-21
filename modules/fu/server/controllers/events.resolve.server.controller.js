@@ -17,7 +17,8 @@ function resolve(req, res) {
     }
 
     var event = req.event;
-    EventBl.resolve(event, cb);
+    var data = req.body;
+    EventBl.resolve(event, data, cb);
 }
 
 exports.resolve  = resolve;

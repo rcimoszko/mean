@@ -13,7 +13,7 @@ var should = require('should'),
     request = supertest(app);
 
 
-var userAgent, adminAgent, credentials, user, admin, m_event, picks;
+var userAgent, adminAgent, credentials, user, admin, m_event;
 
 describe('/api/events/cancel', function () {
 
