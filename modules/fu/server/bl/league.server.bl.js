@@ -59,7 +59,7 @@ function del(league, callback){
 }
 
 function getByQuery(query, callback){
-
+    League.find(query, callback);
 }
 
 
@@ -69,4 +69,5 @@ exports.get         = get;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
+
 exports.getByQuery  = getByQuery;
