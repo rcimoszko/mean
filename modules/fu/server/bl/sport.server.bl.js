@@ -65,7 +65,7 @@ function getByQuery(query, callback){
 
 exports.populate    = populate;
 exports.getAll      = getAll;
+exports.get         = get;
 exports.create      = create;
-exports.delete      = del;/**
- * Created by ryancimoszko on 15-12-19.
- */
+exports.update      = update;
+exports.delete      = del;

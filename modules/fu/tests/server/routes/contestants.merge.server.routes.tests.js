@@ -3,8 +3,7 @@ var should = require('should'),
     async = require('async'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
-    m_Event = mongoose.model('Event'),
-    Pick = mongoose.model('Pick'),
+    Contestant = mongoose.model('Contestant'),
     userHelper = require('../user.helper.js'),
 
     supertest = require('supertest'),
@@ -13,9 +12,9 @@ var should = require('should'),
     request = supertest(app);
 
 
-var userAgent, adminAgent, credentials, user, admin, m_event;
+var userAgent, adminAgent, credentials, user, admin, contestant;
 
-describe('/api/events/{id}/cancel', function () {
+describe('/api/contestants/{id}/merge', function () {
 
     before(function (done) {
 
@@ -38,58 +37,47 @@ describe('/api/events/{id}/cancel', function () {
             });
         }
 
-        function createEvent(callback){
-            m_event = new m_Event({
-                slug: 'event-slug'
+        function createContestant(callback){
+            contestant = new Contestant({
+                name: 'contestant-name'
             });
-            m_event.save(callback);
+            contestant.save(callback);
         }
 
         todo.push(signInUser);
         todo.push(signInAdmin);
-        todo.push(createEvent);
+        todo.push(createContestant);
 
         async.waterfall(todo, done);
     });
 
 
 
-    it('should not be able cancel event if guest', function (done) {
-        agent.put('/api/events/' + m_event._id + '/cancel')
-            .send()
+    it('should not be able to merge contestants if guest', function (done) {
+        agent.put('/api/contestants/' + contestant._id + '/merge')
+            .send(contestant)
             .expect(403)
             .end(function (err) {
                 done(err);
             });
     });
 
-    it('should not be able cancel event if user', function (done) {
-        var req = request.put('/api/events/' + m_event._id + '/cancel');
+    it('should not be able to merge contestant if user', function (done) {
+        var req = request.put('/api/contestants/' + contestant._id + '/merge');
         userAgent.attachCookies(req);
-        req.send()
+        req.send(contestant)
             .expect(403)
             .end(function (err) {
                 done(err);
             });
     });
 
-    it('should be able to cancel event if admin', function (done) {
-        var req = request.put('/api/events/' + m_event._id + '/cancel');
-        adminAgent.attachCookies(req);
-        req.send()
-            .expect(200)
-            .end(function (err, res) {
-                if (err) return done(err);
-                (res.body._id).should.equal(String(m_event._id));
-                (res.body.cancelled).should.match(true);
-                done();
-            });
-    });
+    //'it should be able to merge contestants if admin
 
 
     after(function (done) {
         User.remove().exec(function () {
-            m_Event.remove().exec(done);
+            Contestant.remove().exec(done);
         });
     });
 

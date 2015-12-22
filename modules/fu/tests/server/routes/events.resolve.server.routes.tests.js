@@ -15,7 +15,7 @@ var should = require('should'),
 
 var userAgent, adminAgent, credentials, user, admin, m_event;
 
-describe('/api/events/resolve', function () {
+describe('/api/events/{id}/resolve', function () {
 
     before(function (done) {
 
