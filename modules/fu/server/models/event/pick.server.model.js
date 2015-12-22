@@ -43,8 +43,8 @@ var PickSchema = new Schema({
     commentCount:       {type:Number, default:0},
     slug:               {type: String},
 
-    oldPickId:          {type: Number},
-    oldRecordedLineId:  {type: Number},
+    oldPickId:          {type: Number},  //to remove
+    oldRecordedLineId:  {type: Number},  //to remove
     underdog:           {type: Boolean},
 
     copiedOrigin:       {user: {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}, pick: {type: Schema.ObjectId, ref: 'Pick'}},

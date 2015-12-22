@@ -9,7 +9,7 @@ var SportSchema = new Schema({
     active:     {type: Boolean},
     disabled:   {type: Boolean, default: false},
     main:       {type: Boolean},
-    oldId:      {type: Number},
+    oldId:      {type: Number},  //to remove
     pickMade:   {type: Boolean}
 });
 

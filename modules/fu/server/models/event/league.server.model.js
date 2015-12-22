@@ -21,7 +21,7 @@ var LeagueSchema = new Schema({
     neutral:            {type: Boolean, default: false},
     primarySportsbook:  {type: Schema.ObjectId, ref: 'Sportsbook'},
     main:               {type: Boolean, default: false},
-    oldId:              {type: Number},
+    oldId:              {type: Number},  //to remove
     type:               {type: String},
     pickMade:           {type: Boolean, default:false},
     leaderboardActive: {
