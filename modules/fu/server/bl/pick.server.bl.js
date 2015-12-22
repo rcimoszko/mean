@@ -83,6 +83,14 @@ function cancelPicksByEvent(event, callback){
     Pick.update({event:event}, update, {multi:true}, callback);
 }
 
+function resolve(pick, callback){
+    callback(null);
+}
+
+function report(pick, callback){
+    callback(null);
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
@@ -93,3 +101,6 @@ exports.getByQuery  = getByQuery;
 
 exports.cancelPicksByEvent = cancelPicksByEvent;
 exports.cancelPick         = cancelPick;
+
+exports.resolve = resolve;
+exports.report  = report;
