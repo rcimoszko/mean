@@ -32,7 +32,9 @@ var LeagueSchema = new Schema({
         last6Months: {type: Boolean, default: false},
         allTime: {type: Boolean, default: false}
     },
-    seasons: [SeasonSchema]
+    seasons: [SeasonSchema],
+
+    Group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} //To Populate
 });
 
 
