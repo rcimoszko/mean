@@ -5,14 +5,14 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     m_Comment = mongoose.model('Comment');
 
-function populate(contestant, callback){
+function populate(comment, callback){
 
 }
 
 function get(id, callback){
 
-    function cb(err, contestant){
-        callback(err, contestant);
+    function cb(err, comment){
+        callback(err, comment);
     }
 
     m_Comment.findById(id).exec(cb);
@@ -20,43 +20,43 @@ function get(id, callback){
 
 function getAll(callback){
 
-    function cb(err, contestants){
-        callback(err, contestants);
+    function cb(err, comments){
+        callback(err, comments);
     }
 
     m_Comment.find().exec(cb);
 
 }
 
-function update(data, contestant, callback) {
+function update(data, comment, callback) {
 
     function cb(err){
-        callback(err, contestant);
+        callback(err, comment);
     }
 
-    contestant = _.extend(contestant, data);
+    comment = _.extend(comment, data);
 
-    contestant.save(cb);
+    comment.save(cb);
 }
 
 function create(data, callback) {
 
     function cb(err){
-        callback(err, contestant);
+        callback(err, comment);
     }
 
-    var contestant = new m_Comment(data);
+    var comment = new m_Comment(data);
 
-    contestant.save(cb);
+    comment.save(cb);
 }
 
-function del(contestant, callback){
+function del(comment, callback){
 
     function cb(err){
-        callback(err, contestant);
+        callback(err, comment);
     }
 
-    contestant.remove(cb);
+    comment.remove(cb);
 }
 
 function getByQuery(query, callback){

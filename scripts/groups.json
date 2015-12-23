@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Dota 2",
+        "sport": {"name": "E Sports", "ref": ""}
+    },{
+        "name": "League of Legends",
+        "sport": {"name": "E Sports", "ref": ""}
+    },{
+        "name": "Counter Strike",
+        "sport": {"name": "E Sports", "ref": ""}
+    },
+
+    {
+        "name": "ATP",
+        "sport": {"name": "Tennis", "ref": ""}
+    },{
+        "name": "WTA",
+        "sport": {"name": "Tennis", "ref": ""}
+    }
+]
