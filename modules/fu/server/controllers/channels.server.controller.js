@@ -27,6 +27,23 @@ function byId(req, res, next, id){
     ChannelBl.get(id, cb);
 }
 
+
+function bySlug(req, res, next, slug){
+
+    function cb (err, channel){
+        if (err) return next(err);
+        if (!event) {
+            return res.status(404).send({
+                message: 'Channel not found'
+            });
+        }
+        req.channel = channel;
+        next();
+    }
+
+    ChannelBl.getBySlug(slug, cb);
+}
+
 function getAll(req, res, next){
     if(!Object.keys(req.query).length){
         return res.status(400).send({
@@ -88,6 +105,7 @@ function del(req, res, next){
 }
 
 exports.byId    = byId;
+exports.bySlug  = bySlug;
 exports.getAll  = getAll;
 exports.get     = get;
 exports.update  = update;

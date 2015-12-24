@@ -13,6 +13,10 @@ module.exports = function (app) {
         .put(ctrl.update)
         .delete(ctrl.delete);
 
+    app.route('/api/channels/:channelSlug').all(policy.isAllowed)
+        .get(ctrl.get);
+
     app.param('channelId', ctrl.byId);
+    app.param('channelSlug', ctrl.bySlug);
 
 };

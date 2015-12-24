@@ -18,6 +18,15 @@ function get(id, callback){
     Channel.findById(id).exec(cb);
 }
 
+function getBySlug(slug, callback){
+
+    function cb(err, channel){
+        callback(err, channel);
+    }
+
+    Channel.findOne({slug:slug}).exec(cb);
+}
+
 function getAll(callback){
 
     function cb(err, channels){
@@ -79,6 +88,7 @@ function getByGroup(group, callback){
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
+exports.getBySlug   = getBySlug;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;

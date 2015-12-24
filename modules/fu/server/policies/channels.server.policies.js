@@ -18,6 +18,9 @@ exports.invokeRolesPolicies = function () {
         allows: [{
             resources: '/api/channels',
             permissions: ['get']
+        }, {
+            resources: '/api/channels/:channelSlug',
+            permissions: ['get']
         }]
     }]);
 };
