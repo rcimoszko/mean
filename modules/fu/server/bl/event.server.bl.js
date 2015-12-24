@@ -131,10 +131,6 @@ function getPicks(event, callback){
 
 }
 
-function getGamecenter(event, callback){
-
-}
-
 
 exports.populate    = populate;
 exports.get         = get;
@@ -151,4 +147,3 @@ exports.reResolve   = reResolve;
 
 exports.getDiscussion   = getDiscussion;
 exports.getPicks        = getPicks;
-exports.getGamecenter   = getGamecenter;

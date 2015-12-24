@@ -7,28 +7,13 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/picks',
-            permissions: ['*']
-        }, {
-            resources: '/api/picks/:pickId',
-            permissions: ['*']
-        }, {
-            resources: '/api/picks/:pickSlug',
-            permissions: ['*']
+            resources: '/api/channels/:channelId/content',
+            permissions: ['get']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/picks',
-            permissions: ['get']
-        }, {
-            resources: '/api/picks/:pickSlug',
-            permissions: ['get']
-        }]
-    },{
-        roles: ['guest'],
-        allows: [ {
-            resources: '/api/picks/:pickSlug',
+            resources: '/api/channels/:channelId/content',
             permissions: ['get']
         }]
     }]);

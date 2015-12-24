@@ -17,6 +17,16 @@ function get(id, callback){
     Pick.findById(id).exec(cb);
 }
 
+
+function getBySlug(slug, callback){
+
+    function cb(err, pick){
+        callback(err, pick);
+    }
+
+    Pick.findOne({slug:slug}).exec(cb);
+}
+
 function getAll(callback){
 
     function cb(err, picks){
@@ -97,6 +107,7 @@ exports.get         = get;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
+exports.getBySlug   = getBySlug;
 exports.getByQuery  = getByQuery;
 
 exports.cancelPicksByEvent = cancelPicksByEvent;

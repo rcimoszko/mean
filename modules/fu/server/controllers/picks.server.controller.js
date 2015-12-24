@@ -27,6 +27,23 @@ function byId(req, res, next, id){
     PickBl.get(id, cb);
 }
 
+
+function bySlug(req, res, next, slug){
+
+    function cb (err, pick){
+        if (err) return next(err);
+        if (!pick) {
+            return res.status(404).send({
+                message: 'Pick not found'
+            });
+        }
+        req.pick = pick;
+        next();
+    }
+
+    PickBl.getBySlug(slug, cb);
+}
+
 function getAll(req, res, next){
     if(!Object.keys(req.query).length){
         return res.status(400).send({
@@ -92,3 +109,4 @@ exports.getAll  = getAll;
 exports.get     = get;
 exports.update  = update;
 exports.delete  = del;
+exports.bySlug  = bySlug;

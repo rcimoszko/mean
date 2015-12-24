@@ -2,7 +2,7 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    UserProfileBl = require('../bl/user.profile.server.bl');
+    ProfileBl = require('../bl/profile.server.bl');
 
 
 function get(req, res, next){
@@ -16,7 +16,7 @@ function get(req, res, next){
         res.json(userProfile);
     }
     var user = req.user;
-    UserProfileBl.get(user, cb);
+    ProfileBl.get(user, cb);
 }
 
 

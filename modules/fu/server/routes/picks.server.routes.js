@@ -13,6 +13,10 @@ module.exports = function (app) {
         .put(ctrl.update)
         .delete(ctrl.delete);
 
+    app.route('/api/picks/:pickSlug').all(policy.isAllowed)
+        .get(ctrl.get);
+
     app.param('pickId', ctrl.byId);
+    app.param('pickSlug', ctrl.bySlug);
 
 };
