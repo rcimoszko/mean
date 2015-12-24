@@ -5,7 +5,7 @@ var policy = require('../policies/users.profile.server.policies'),
 
 module.exports = function (app) {
 
-    app.route('/api/users/:userId/profile').all(policy.isAllowed)
+    app.route('/api/users/:username/profile').all(policy.isAllowed)
         .get(ctrl.get);
 
 };
