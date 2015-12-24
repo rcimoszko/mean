@@ -15,4 +15,34 @@ function getByUsername(username, callback){
 }
 
 
-exports.getByUsername = getByUsername;
+function getFollowing(user, callback){
+    callback(null);
+}
+
+function getHub(user, callback){
+    callback(null);
+}
+
+function getMessages(user, callback){
+    callback(null);
+}
+
+function getNotifications(user, callback){
+    callback(null);
+}
+
+function getPicks(user, callback){
+    callback(null);
+}
+
+function getTracker(user, callback){
+    callback(null);
+}
+
+exports.getByUsername   = getByUsername;
+exports.getFollowing        = getFollowing;
+exports.getHub              = getHub;
+exports.getMessages         = getMessages;
+exports.getNotifications    = getNotifications;
+exports.getPicks            = getPicks;
+exports.getTracker          = getTracker;
