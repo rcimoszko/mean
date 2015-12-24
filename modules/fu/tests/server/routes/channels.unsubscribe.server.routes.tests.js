@@ -40,7 +40,8 @@ describe('/api/channels/{id}/unsubscribe', function () {
         function createChannel(callback){
             channel = new Channel({
                 name: 'channel-name',
-                type: 'sport'
+                type: 'sport',
+                slug: 'slug'
             });
             channel.save(callback);
         }
