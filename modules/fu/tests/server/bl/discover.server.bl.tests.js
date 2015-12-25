@@ -1,0 +1,1 @@
+//get discover page in right format
