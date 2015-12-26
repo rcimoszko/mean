@@ -7,13 +7,13 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/user/:userId/unfollow',
+            resources: '/api/users/:userId/unfollow',
             permissions: ['post']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/user/:userId/unfollow',
+            resources: '/api/users/:userId/unfollow',
             permissions: ['post']
         }]
     }]);

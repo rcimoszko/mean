@@ -97,7 +97,48 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+
+    verified:               {type: Boolean,default: false},
+    premium:                {type: Boolean,default: false},
+    lifetimePremium:        {type: Boolean,default: false},
+    trial:                  {type: Boolean,default: false},
+    cancelledPremium:       {type: Boolean},
+    premiumEndDate:         {type: Date},
+    premiumRenewDate:       {type: Date},
+    birthday:               {type: Date},
+
+    units:                  {type: Number,default: 150},
+
+    oddsFormat:             {type: String, enum: ['American', 'Decimal', 'Fractional'],default: 'Decimal'},
+    favoriteSport:          {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
+    favoriteSportNew:       {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
+    profileUrl:             {type: String,default: 'https://res.cloudinary.com/hltkmtrz5/image/upload/v1408811714/profile-default.png'},
+    avatarUrl:              {type: String,default: 'https://res.cloudinary.com/hltkmtrz5/image/upload/c_fill,w_50/v1408811714/profile-default.png'},
+    twitterHandle:          {type: String },
+    usernameSet:            {type: Boolean,default: false},
+
+
+    stripeId:               {type: String},
+    subscriptionId:         {type: String},
+    oldId:                  {type: Number},
+    updatePassword:         {type: Boolean},
+    active:                 {type: Boolean, default: true},
+
+    dailyBet:               {type: Number, default: 0 },
+    winStreak:              {type: Number,default: 0},
+    loseStreak:             {type: Number,default: 0},
+    points:                 {type: Number,default: 0},
+    referral:               {type: String },
+
+    followingCount:         {type: Number, default: 0},
+    followerCount:          {type: Number,default: 0},
+
+    copyCount:              {type: Number,default: 0},
+    copiedCount:            {type: Number, default: 0},
+
+    pickMade:               {type: Boolean,default: false},
+    userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}
 });
 
 /**

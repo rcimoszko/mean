@@ -39,7 +39,7 @@ function getTracker(user, callback){
     callback(null);
 }
 
-exports.getByUsername   = getByUsername;
+exports.getByUsername       = getByUsername;
 exports.getFollowing        = getFollowing;
 exports.getHub              = getHub;
 exports.getMessages         = getMessages;
