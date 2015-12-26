@@ -58,6 +58,10 @@ function del(pinnacleSport, callback){
     pinnacleSport.remove(cb);
 }
 
+function findByQuery(query, callback){
+
+}
+
 
 exports.populate    = populate;
 exports.get         = get;
