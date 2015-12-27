@@ -58,7 +58,12 @@ function del(sportsbook, callback){
     sportsbook.remove(cb);
 }
 
+function getPinnacle(callback){
+    Sportsbook.findOne({name:'Pinnacle'}, callback);
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.create      = create;
 exports.delete      = del;
+exports.getPinnacle      = getPinnacle;

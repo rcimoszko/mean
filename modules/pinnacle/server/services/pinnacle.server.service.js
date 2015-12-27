@@ -14,7 +14,7 @@ function runFeed(callback){
     }
 
     function updateLeagues(callback){
-        PinLeaguesBl.updateInsertLeagues(callback);
+        PinLeaguesBl.updateInsertAllLeagues(callback);
     }
 
     function updateEvents(callback){
@@ -31,7 +31,7 @@ function runFeed(callback){
     }
 
     todo.push(updateSports);
-    //todo.push(updateLeagues);
+    todo.push(updateLeagues);
     //todo.push(updateEvents);
     //todo.push(updateOdds);
     //todo.push(updateScores);

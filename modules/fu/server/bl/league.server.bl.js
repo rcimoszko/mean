@@ -62,6 +62,9 @@ function getByQuery(query, callback){
     League.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    League.findOne(query, callback);
+}
 
 exports.populate    = populate;
 exports.getAll      = getAll;
@@ -71,3 +74,4 @@ exports.update      = update;
 exports.delete      = del;
 
 exports.getByQuery  = getByQuery;
+exports.getOneByQuery  = getOneByQuery;

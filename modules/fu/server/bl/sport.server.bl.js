@@ -62,6 +62,10 @@ function getByQuery(query, callback){
     Sport.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    Sport.findOne(query, callback);
+}
+
 
 exports.populate    = populate;
 exports.getAll      = getAll;
@@ -70,4 +74,5 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 
-exports.getByQuery  = getByQuery;
+exports.getByQuery     = getByQuery;
+exports.getOneByQuery  = getOneByQuery;
