@@ -9,7 +9,7 @@ SportsbookBl.getPinnacle(function(err, sportsbook){
 });
 
 function getPinnacle(){
-    return pinnacleSportsbook
+    return pinnacleSportsbook;
 }
 
 exports.getPinnacle = getPinnacle;

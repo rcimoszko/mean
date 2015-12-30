@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose'),
     PinApiBl = require('./pinnacle.api.server.bl'),
-    Event = mongoose.model('Event'),
     PinnacleSportBl = require('./pinnacleSport.server.bl'),
     PinnacleContestantBl = require('./pinnacleContestant.server.bl'),
     EventBl = require('../../../fu/server/bl/event.server.bl'),
@@ -130,7 +129,7 @@ function createEvent(pinnacleLeague, eventData, callback){
     }
 
 
-    function createEvent(contestants, callback){
+    function addEvent(contestants, callback){
         var neutral = eventData.neutral;
         if(!neutral){
             if(neutralSports.indexOf(pinnacleLeague.sport.name) !== -1){
@@ -171,7 +170,7 @@ function createEvent(pinnacleLeague, eventData, callback){
     todo.push(getPinnacleContestants);
     todo.push(checkIfContestantsAreValid);
     todo.push(matchEvent);
-    todo.push(createEvent);
+    todo.push(addEvent);
 
     function cb(err){
         if(err === 'invalid contestants') return callback(null);
@@ -199,7 +198,7 @@ function updateEvent(eventData, event, callback){
         event.save(callback);
     }
 
-    async.each(fieldsToUpdate, updateField, cb)
+    async.each(fieldsToUpdate, updateField, cb);
 
 }
 

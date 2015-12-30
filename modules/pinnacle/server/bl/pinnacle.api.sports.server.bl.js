@@ -56,7 +56,7 @@ function createSports(pinnacleSport, sportApi, callback){
             active: active
         };
 
-        SportBl.create(sport, callback)
+        SportBl.create(sport, callback);
     }
 
     function createPinnacleSport(sport, callback){
@@ -69,7 +69,7 @@ function createSports(pinnacleSport, sportApi, callback){
             sport:{name:sport.name, ref:sport}
         };
 
-        PinnacleSportBl.create(pinnacleSport, callback)
+        PinnacleSportBl.create(pinnacleSport, callback);
     }
 
     todo.push(createSport);

@@ -1,3 +1,5 @@
+'use strict';
+
 var async = require('async'),
     PinEventsBl = require('../bl/pinnacle.api.events.server.bl'),
     PinLeaguesBl = require('../bl/pinnacle.api.leagues.server.bl'),
@@ -37,7 +39,7 @@ function runFeed(callback){
     todo.push(updateOdds);
     //todo.push(updateScores);
 
-    async.waterfall(todo, callback)
+    async.waterfall(todo, callback);
 
 }
 

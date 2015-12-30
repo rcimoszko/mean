@@ -2,67 +2,14 @@
 
 var mongoose = require('mongoose'),
     PinApiBl = require('./pinnacle.api.server.bl'),
-    Event = mongoose.model('Event'),
     PinnacleSportBl = require('./pinnacleSport.server.bl'),
-    PinnacleContestantBl = require('./pinnacleContestant.server.bl'),
-    EventBl = require('../../../fu/server/bl/event.server.bl'),
-    slug = require('speakingurl'),
     PinnacleLeagueBl = require('./pinnacleLeague.server.bl'),
     async = require('async');
 
 
-function updateEvent(eventData, event, callback){
-    var fieldsToUpdate = ['startTime', 'contestant1Pitcher', 'contestant2Pitcher'];
-    var fieldChange = false;
-
-    function updateField(field, callback){
-        if(!(field in eventData)) return callback();
-        if(event[field] === eventData[field]) return callback();
-        event[field] = event;
-        callback();
-    }
-
-    function cb(err){
-        if(!fieldChange) return callback(null);
-        event.save(callback);
-    }
-
-    async.each(fieldsToUpdate, updateField, cb)
-
-}
-
 function processEvent(scoreApi, pinnacleLeague, callback){
     console.log(scoreApi);
     callback();
-    /*
-    var todo = [];
-
-
-    function getValues(callback){
-        parseEventApi(eventApi, pinnacleLeague, callback);
-    }
-
-    function findEvent(eventData, callback){
-        function cb(err, event){
-            callback(err, eventData, event);
-        }
-        EventBl.getOneByQuery({pinnacleIds: eventData.pinnacleId}, cb);
-    }
-
-    function updateOrCreateEvent(eventData, event, callback){
-        if(event){
-            updateEvent(eventData, event, callback);
-        } else{
-            createEvent(pinnacleLeague, eventData, callback);
-        }
-    }
-
-    todo.push(getValues);
-    todo.push(findEvent);
-    todo.push(updateOrCreateEvent);
-
-    async.waterfall(todo, callback);
-    */
 }
 
 function updateInsertScoresForLeague(pinnacleLeague, callback){

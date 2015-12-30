@@ -4,7 +4,6 @@
 var mongoose = require('mongoose'),
     _ = require('lodash'),
     PinApiBl = require('./pinnacle.api.server.bl'),
-    Event = mongoose.model('Event'),
     PinnacleSportBl = require('./pinnacleSport.server.bl'),
     PinnacleSportsbookBl = require('./pinnacle.sportsbook.server.bl'),
     EventBl = require('../../../fu/server/bl/event.server.bl'),

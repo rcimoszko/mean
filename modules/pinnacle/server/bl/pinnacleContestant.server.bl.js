@@ -100,7 +100,7 @@ function autoCreate(pinnacleContestant, pinnacleLeague, callback){
         if(pinnacleLeague.league){
             contestant.leagues = [{name: pinnacleLeague.league.name, ref: pinnacleLeague.league.ref}];
         }
-        ContestantBl.create(contestant, callback)
+        ContestantBl.create(contestant, callback);
     }
 
     function updatePinnacleContestant(contestant, callback){
@@ -112,7 +112,7 @@ function autoCreate(pinnacleContestant, pinnacleLeague, callback){
     todo.push(createContestant);
     todo.push(updatePinnacleContestant);
 
-    async.waterfall(todo, callback)
+    async.waterfall(todo, callback);
 }
 
 function findOrCreate(name, pinnacleLeague, callback){
