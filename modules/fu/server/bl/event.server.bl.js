@@ -63,6 +63,11 @@ function getByQuery(query, callback){
     m_Event.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    m_Event.findOne(query, callback);
+
+}
+
 function cancel(event, callback){
     var todo = [];
 
@@ -131,6 +136,11 @@ function getPicks(event, callback){
 
 }
 
+function addBet(bet, event, callback){
+    m_Event.update({_id: event}, {$addToSet: {pinnacleBets: bet._id}}, callback);
+}
+
+
 
 exports.populate    = populate;
 exports.get         = get;
@@ -139,6 +149,7 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
+exports.getOneByQuery  = getOneByQuery;
 
 exports.cancel      = cancel;
 exports.report      = report;
@@ -147,3 +158,4 @@ exports.reResolve   = reResolve;
 
 exports.getDiscussion   = getDiscussion;
 exports.getPicks        = getPicks;
+exports.addBet          = addBet;

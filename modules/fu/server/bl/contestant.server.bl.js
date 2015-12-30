@@ -65,6 +65,10 @@ function getByQuery(query, callback){
     Contestant.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    Contestant.findOne(query, callback);
+}
+
 function merge(mainContestant, contestantsToMerge, callback){
 
     function mergeEach(mergeContestant, callback){
@@ -146,6 +150,7 @@ function merge(mainContestant, contestantsToMerge, callback){
 }
 
 
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
@@ -153,5 +158,6 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
+exports.getOneByQuery  = getOneByQuery;
 
 exports.merge       = merge;

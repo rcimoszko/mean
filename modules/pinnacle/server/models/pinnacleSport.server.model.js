@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var PinnacleSportSchema = new Schema({
     name:       {type:String},
     sportId:    {type: Schema.Types.Mixed},
+    active:     {type: Boolean, default: false},
 
     sport:      {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}}
 });

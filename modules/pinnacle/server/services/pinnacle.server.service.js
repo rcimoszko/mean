@@ -18,22 +18,23 @@ function runFeed(callback){
     }
 
     function updateEvents(callback){
-        PinEventsBl.updateInsertEvents(callback);
+        PinEventsBl.updateInsertAllEvents(callback);
 
     }
 
     function updateOdds(callback){
-        PinOddsBl.updateInsertOdds(callback);
+        PinOddsBl.updateInsertAllOdds(callback);
     }
 
+
     function updateScores(callback){
-        PinScoresBl.updateScores(callback);
+        PinScoresBl.updateInsertAllScores(callback);
     }
 
     todo.push(updateSports);
     todo.push(updateLeagues);
-    //todo.push(updateEvents);
-    //todo.push(updateOdds);
+    todo.push(updateEvents);
+    todo.push(updateOdds);
     //todo.push(updateScores);
 
     async.waterfall(todo, callback)

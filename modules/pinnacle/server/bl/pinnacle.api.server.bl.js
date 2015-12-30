@@ -6,11 +6,11 @@ var mongoose = require('mongoose'),
 
 
 function getSports(callback){
-    return getRequest('/v1/sports', callback);
+    return getRequest('/v1/sports', 'xml', callback);
 }
 
 function getLeagues(sportId, callback){
-    return getRequest('/v1/leagues?sportid='+sportId, callback);
+    return getRequest('/v1/leagues?sportid='+sportId, 'xml', callback);
 }
 
 function getEvents(sportId, leagueId, last, callback){
@@ -18,7 +18,7 @@ function getEvents(sportId, leagueId, last, callback){
     if(last){
         path = path+'&last='+last;
     }
-    return getRequest(path, callback);
+    return getRequest(path, 'json', callback);
 }
 
 function getOdds(sportId, leagueId, last, callback){
@@ -26,7 +26,7 @@ function getOdds(sportId, leagueId, last, callback){
     if(last){
         path = path+'&last='+last;
     }
-    return getRequest(path, callback);
+    return getRequest(path, 'json', callback);
 }
 
 function getScores(sportId, leagueId, last, callback){
@@ -34,17 +34,17 @@ function getScores(sportId, leagueId, last, callback){
     if(last){
         path = path+'&last='+last;
     }
-    return getRequest(path, callback);
+    return getRequest(path, 'json', callback);
 }
 
-function getRequest(path, callback){
+function getRequest(path, responseType, callback){
 
     var options = {
         hostname: 'api.pinnaclesports.com',
         path: path,
         method: 'GET',
         headers: {
-            'Accept': 'application/xml'
+            'Accept': 'application/'+responseType
         },
         auth: 'RC438088:rcimos86!'
     };
@@ -58,9 +58,19 @@ function getRequest(path, callback){
         });
 
         res.on('end', function(){
-            parseString(data, function (err, result) {
-                callback(null, result);
-            });
+            switch(responseType){
+                case 'json':
+                    console.log(data);
+                    if(!data) return callback(null, null);
+                    callback(null, JSON.parse(data));
+                    break;
+                case 'xml':
+                    parseString(data, function (err, result) {
+                        callback(err, result);
+                    });
+                    break;
+            }
+
         });
 
     });

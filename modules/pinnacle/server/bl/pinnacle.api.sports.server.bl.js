@@ -40,6 +40,59 @@ var excludedSports = [
     'Futsal'
 ];
 
+function createSports(pinnacleSport, sportApi, callback){
+
+    var name = sportApi._,
+        active = parseInt(sportApi.$.feedContents),
+        id = parseInt(sportApi.$.id);
+
+    var todo = [];
+
+    function createSport(pinnacleSport, callback){
+        if(pinnacleSport) return callback(null, null);
+
+        var sport = {
+            name: name,
+            active: active
+        };
+
+        SportBl.create(sport, callback)
+    }
+
+    function createPinnacleSport(sport, callback){
+        if(!sport) return callback(null);
+
+        var pinnacleSport = {
+            name: name,
+            sportId: id,
+            active: active,
+            sport:{name:sport.name, ref:sport}
+        };
+
+        PinnacleSportBl.create(pinnacleSport, callback)
+    }
+
+    todo.push(createSport);
+    todo.push(createPinnacleSport);
+
+    async.waterfall(todo, callback);
+
+}
+
+function updateSport(pinnacleSport, sportApi, callback){
+    var active = parseInt(sportApi.$.feedContents);
+
+    if(pinnacleSport.active && active === 0){
+        pinnacleSport.active = false;
+        pinnacleSport.save(callback);
+    } else if(!pinnacleSport.active && active === 1){
+        pinnacleSport.active = true;
+        pinnacleSport.save(callback);
+    } else {
+        callback(null);
+    }
+}
+
 function updateInsertSports(callback){
 
     var todo = [];
@@ -50,14 +103,14 @@ function updateInsertSports(callback){
 
     function updateSports(result, callback){
         if(!result) return callback(null);
+
         var sports = result.rsp.sports[0].sport;
 
-        function updateInsertSport(sport, callback){
+        function updateInsertSport(sportApi, callback){
             var todo = [];
 
-            var name = sport._,
-                active = parseInt(sport.$.feedContents),
-                id = parseInt(sport.$.id);
+            var name = sportApi._,
+                id = parseInt(sportApi.$.id);
 
 
             if(excludedSports.indexOf(name) !== -1) return callback();
@@ -66,32 +119,16 @@ function updateInsertSports(callback){
                 PinnacleSport.findOne({ name: name, sportId: id}, callback);
             }
 
-            function createSport(pinnacleSport, callback){
-                if(pinnacleSport) return callback(null, null);
-
-                var sport = {
-                    name: name,
-                    active: active
-                };
-
-                SportBl.create(sport, callback)
-            }
-
-            function createPinnacleSport(sport, callback){
-                if(!sport) return callback(null);
-
-                var pinnacleSport = {
-                    name: name,
-                    sportId: id,
-                    sport:{name:sport.name, ref:sport}
-                };
-
-                PinnacleSportBl.create(pinnacleSport, callback)
+            function createOrUpdateSports(pinnacleSport, callback){
+                if(pinnacleSport){
+                    updateSport(pinnacleSport, sportApi, callback);
+                } else {
+                    createSports(pinnacleSport, sportApi, callback);
+                }
             }
 
             todo.push(findPinnacleSport);
-            todo.push(createSport);
-            todo.push(createPinnacleSport);
+            todo.push(createOrUpdateSports);
 
             async.waterfall(todo, callback);
         }

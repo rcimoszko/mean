@@ -11,6 +11,7 @@ var PinnacleContestantSchema = new Schema({
     pinnacleLeague: {name: String, ref: {type: Schema.ObjectId, ref: 'PinnacleLeague'}},
 
     contestant:     {name: String, ref: {type: Schema.ObjectId, ref: 'Contestant'}},
+    invalid:        {type: Boolean, default:false}, //new field
     autoMatched:    {type: Boolean}
 });
 

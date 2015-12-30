@@ -8,6 +8,7 @@ module.exports = _.extend(
     require('./event/sport.server.model'),
     require('./event/league.server.model'),
     require('./event/event.server.model'),
+    require('./event/bet.server.model'),
 
     require('./event/contestant.server.model'),
     require('./event/country.server.model'),

@@ -67,6 +67,10 @@ function getBySport(pinnacleSport, callback){
     PinnacleLeague.find({'pinnacleSport.ref':pinnacleSport}, cb);
 }
 
+function getByQuery(query, callback){
+    PinnacleLeague.find(query, callback);
+}
+
 function getOneByQuery(query, callback){
     PinnacleLeague.findOne(query, callback);
 }
@@ -80,3 +84,4 @@ exports.delete      = del;
 
 exports.getBySport    = getBySport;
 exports.getOneByQuery = getOneByQuery;
+exports.getByQuery    = getByQuery;

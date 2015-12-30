@@ -42,6 +42,7 @@ function createLeagues(leagueApi, pinnacleSport, pinnacleSportsbook, callback){
             leagueId: id,
             sportId: pinnacleSport.sportId,
             last: null,
+            pinnacleSport: {name: pinnacleSport.name, ref: pinnacleSport._id},
             league: {name: league.name, ref: league._id},
             sport: {name: pinnacleSport.sport.name, ref: pinnacleSport.sport.ref}
         };

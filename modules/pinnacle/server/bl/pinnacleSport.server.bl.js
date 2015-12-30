@@ -58,8 +58,12 @@ function del(pinnacleSport, callback){
     pinnacleSport.remove(cb);
 }
 
-function findByQuery(query, callback){
+function getByQuery(query, callback){
+    PinnacleSport.find(query, callback);
+}
 
+function getOneByQuery(query, callback){
+    PinnacleSport.findOne(query, callback);
 }
 
 
@@ -69,3 +73,6 @@ exports.getAll      = getAll;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
+
+exports.getByQuery     = getByQuery;
+exports.getOneByQuery  = getOneByQuery;
