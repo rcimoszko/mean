@@ -83,8 +83,8 @@ function update(req, res, next){
     }
 
     var channel = req.channel;
-    var json = req.body;
-    ChannelBl.update(channel, json, cb);
+    var data = req.body;
+    ChannelBl.update(data, channel, cb);
 }
 
 function del(req, res, next){

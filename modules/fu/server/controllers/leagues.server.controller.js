@@ -66,8 +66,8 @@ function update(req, res, next){
     }
 
     var league = req.league;
-    var json = req.body;
-    LeagueBl.update(league, json, cb);
+    var data = req.body;
+    LeagueBl.update(data, league, cb);
 }
 
 function del(req, res, next){

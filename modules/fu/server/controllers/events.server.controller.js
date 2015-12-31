@@ -66,8 +66,8 @@ function update(req, res, next){
     }
 
     var event = req.event;
-    var json = req.body;
-    EventBl.update(event, json, cb);
+    var data = req.body;
+    EventBl.update(data, event, cb);
 }
 
 function del(req, res, next){

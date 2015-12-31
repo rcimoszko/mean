@@ -66,8 +66,8 @@ function update(req, res, next){
     }
 
     var comment = req.comment;
-    var json = req.body;
-    CommentBl.update(comment, json, cb);
+    var data = req.body;
+    CommentBl.update(data, comment, cb);
 }
 
 function del(req, res, next){

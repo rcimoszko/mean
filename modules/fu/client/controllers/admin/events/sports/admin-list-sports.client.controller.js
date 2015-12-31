@@ -2,6 +2,11 @@
 
 angular.module('fu.admin').controller('AdminListSportsController', ['$scope', 'Sports',
     function ($scope, Sports) {
-        Sports.getAll()
+
+        function cb(err, sports){
+            $scope.sports = sports;
+        }
+
+        Sports.getAll(cb);
     }
 ]);

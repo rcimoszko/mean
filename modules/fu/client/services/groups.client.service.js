@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').factory('Groups', ['$rootScope', 'ApiGroups',
+angular.module('fu').factory('Groups', ['ApiGroups',
     function(ApiGroups) {
 
         var create = function(form, callback){
@@ -18,7 +18,7 @@ angular.module('fu').factory('Groups', ['$rootScope', 'ApiGroups',
             group.$save(cbSuccess, cbError);
         };
 
-        var update = function(group, form, callback){
+        var update = function(group, callback){
 
             function cbSuccess(group){
                 callback(null, group);
@@ -28,7 +28,7 @@ angular.module('fu').factory('Groups', ['$rootScope', 'ApiGroups',
                 callback(response.data.message);
             }
 
-            ApiGroups.update(group, form, cbSuccess, cbError);
+            group.$update({_id: group._id}, cbSuccess, cbError);
 
         };
 

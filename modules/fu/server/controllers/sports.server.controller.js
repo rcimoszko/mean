@@ -61,8 +61,8 @@ function update(req, res, next){
     }
 
     var sport = req.sport;
-    var json = req.body;
-    SportBl.update(sport, json, cb);
+    var data = req.body;
+    SportBl.update(data, sport, cb);
 }
 
 function del(req, res, next){

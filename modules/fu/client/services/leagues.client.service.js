@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').factory('Leagues', ['$rootScope', 'ApiLeagues',
+angular.module('fu').factory('Leagues', ['ApiLeagues',
     function(ApiLeagues) {
 
         var create = function(form, callback){
@@ -18,7 +18,7 @@ angular.module('fu').factory('Leagues', ['$rootScope', 'ApiLeagues',
             league.$save(cbSuccess, cbError);
         };
 
-        var update = function(league, form, callback){
+        var update = function(league, callback){
 
             function cbSuccess(league){
                 callback(null, league);
@@ -28,7 +28,7 @@ angular.module('fu').factory('Leagues', ['$rootScope', 'ApiLeagues',
                 callback(response.data.message);
             }
 
-            ApiLeagues.update(league, form, cbSuccess, cbError);
+            league.$update({_id: league._id}, cbSuccess, cbError);
 
         };
 

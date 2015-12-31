@@ -66,8 +66,8 @@ function update(req, res, next){
     }
 
     var contestant = req.contestant;
-    var json = req.body;
-    ContestantBl.update(contestant, json, cb);
+    var data = req.body;
+    ContestantBl.update(data, contestant, cb);
 }
 
 function del(req, res, next){

@@ -6,15 +6,15 @@ angular.module('fu').config(['$stateProvider',
         $stateProvider
             .state('admin.sports', {
                 url: '/sports',
-                templateUrl: 'modules/fu/client/views/admin/events/sports/list-sports.client.view.html',
+                templateUrl: 'modules/fu/client/views/admin/events/sports/admin-list-sports.client.view.html',
                 controller: 'AdminListSportsController',
                 data: {
                     roles: ['admin']
                 }
             })
-            .state('admin.sports.edit', {
+            .state('admin.editSport', {
                 url: '/sports/:sportId',
-                templateUrl: 'modules/fu/client/views/admin/events/sports/edit-sport.client.view.html',
+                templateUrl: 'modules/fu/client/views/admin/events/sports/admin-edit-sport.client.view.html',
                 controller: 'AdminEditSportController',
                 data: {
                     roles: ['admin']

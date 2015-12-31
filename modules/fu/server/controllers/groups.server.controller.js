@@ -66,8 +66,8 @@ function update(req, res, next){
     }
 
     var group = req.group;
-    var json = req.body;
-    GroupBl.update(group, json, cb);
+    var data = req.body;
+    GroupBl.update(data, group, cb);
 }
 
 function del(req, res, next){

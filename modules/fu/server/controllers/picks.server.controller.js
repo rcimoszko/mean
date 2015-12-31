@@ -83,8 +83,8 @@ function update(req, res, next){
     }
 
     var pick = req.pick;
-    var json = req.body;
-    PickBl.update(pick, json, cb);
+    var data = req.body;
+    PickBl.update(data, pick, cb);
 }
 
 function del(req, res, next){

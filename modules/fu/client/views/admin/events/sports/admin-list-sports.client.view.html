@@ -1,13 +1,21 @@
-
-<h1>Sports</h1>
-
-<table class="table table-striped">
-    <thead>
-
-    </thead>
-    <body>
-        <tr data-ng-repeat="sport in sports">
-            <td>{{sport.name}}</td>
-        </tr>
-    </body>
-</table>
+<h2><a ui-sref="admin.home">Home</a> > Sports</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Active</th>
+            <th>Disabled</th>
+            <th>Main</th>
+        </thead>
+        <body>
+            <tr data-ng-repeat="sport in sports">
+                <td><a ui-sref="admin.editSport({sportId:sport._id})">{{::sport.name}}</a></td>
+                <td><img data-ng-src="{{sport.iconUrl}}"></td>
+                <td><admin-list-boolean model="sport.active"></admin-list-boolean></td>
+                <td><admin-list-boolean model="sport.disabled"></admin-list-boolean></td>
+                <td><admin-list-boolean model="sport.main"></admin-list-boolean></td>
+            </tr>
+        </body>
+    </table>
+</div>

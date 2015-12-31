@@ -1,0 +1,5 @@
+
+<div class="form-group datepicker">
+    <label class="control-label"  data-ng-if="label" for="{{id}}">{{label}} <span class="required" data-ng-if="required">*</span></label>
+    <input type="text" id="{{id}}" name="{{id}}" class="form-control" placeholder="YYYY-MM-DD" show-button-bar="false" datepicker-popup="yyyy-MM-dd" ng-model="model" is-open="opened" close-text="Close" ng-required="required" ng-click="open($event)"/>
+</div>

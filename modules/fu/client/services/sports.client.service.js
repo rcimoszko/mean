@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').factory('Sports', ['$rootScope', 'ApiSports',
+angular.module('fu').factory('Sports', ['ApiSports',
     function(ApiSports) {
 
         var create = function(form, callback){
@@ -18,7 +18,7 @@ angular.module('fu').factory('Sports', ['$rootScope', 'ApiSports',
             sport.$save(cbSuccess, cbError);
         };
 
-        var update = function(sport, form, callback){
+        var update = function(sport, callback){
 
             function cbSuccess(sport){
                 callback(null, sport);
@@ -28,7 +28,7 @@ angular.module('fu').factory('Sports', ['$rootScope', 'ApiSports',
                 callback(response.data.message);
             }
 
-            ApiSports.update(sport, form, cbSuccess, cbError);
+            sport.$update({_id: sport._id}, cbSuccess, cbError);
 
         };
 
