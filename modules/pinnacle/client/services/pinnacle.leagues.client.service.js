@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('news').factory('PinnacleLeagues', ['ApiPinnacleLeagues',
+angular.module('pinnacle').factory('PinnacleLeagues', ['ApiPinnacleLeagues',
     function(ApiPinnacleLeagues) {
 
         var getAll = function(callback){
@@ -13,7 +13,7 @@ angular.module('news').factory('PinnacleLeagues', ['ApiPinnacleLeagues',
                 callback(err);
             }
 
-            ApiArticles.query(cbSuccess, cbError);
+            ApiPinnacleLeagues.query(cbSuccess, cbError);
         };
 
 

@@ -4,9 +4,10 @@ angular.module('fu').config(['$stateProvider',
     function ($stateProvider) {
 
         $stateProvider
-            .state('admin', {
-                url: '/admin',
-                templateUrl: 'modules/fu/client/views/admin/admin.client.view.html',
+            .state('admin.home', {
+                url: '',
+                templateUrl: 'modules/fu/client/views/admin/admin.home.client.view.html',
+                controller: 'AdminHomeController',
                 data: {
                     roles: ['admin']
                 }

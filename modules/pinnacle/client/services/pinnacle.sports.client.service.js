@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('news').factory('PinnacleSports', ['ApiPinnacleSports',
+angular.module('pinnacle').factory('PinnacleSports', ['ApiPinnacleSports',
     function(ApiPinnacleSports) {
 
         var getAll = function(callback){
