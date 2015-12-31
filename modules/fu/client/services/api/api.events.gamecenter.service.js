@@ -2,6 +2,6 @@
 
 angular.module('fu').factory('ApiEventsGamecenter', ['$resource',
     function ($resource) {
-        return $resource('api/events/:_id/gamecenter', { _id: '@__id' });
+        return $resource('api/events/:_id/gamecenter', { _id: '@_id' });
     }
 ]);

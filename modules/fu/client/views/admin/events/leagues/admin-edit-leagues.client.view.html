@@ -1,0 +1,11 @@
+<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.sports">Leagues</a> > {{league.name}}</h2>
+
+<form data-ng-submit="submit()">
+    <admin-boolean label="'Active'" model="league.active"></admin-boolean>
+    <admin-boolean label="'Disabled'" model="league.disabled"></admin-boolean>
+    <admin-boolean label="'Neutral'" model="league.neutral"></admin-boolean>
+    <admin-boolean label="'Main'" model="league.main"></admin-boolean>
+    <admin-boolean label="'Pick Made'" model="league.pickMade"></admin-boolean>
+    <!-- ADD GROUP FIELD -->
+    <admin-submit error="error"></admin-submit>
+</form>

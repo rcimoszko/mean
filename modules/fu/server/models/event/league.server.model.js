@@ -15,7 +15,7 @@ var SeasonSchema = new Schema({
 var LeagueSchema = new Schema({
     name:               {type: String, trim: true, required: 'Name cannot be blank'},
     sport:              {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
-    country:            {type: String},
+    country:            {type: String}, //to remove and change to group
     active:             {type: Boolean},
     disabled:           {type: Boolean, default: false},
     neutral:            {type: Boolean, default: false},
@@ -34,7 +34,7 @@ var LeagueSchema = new Schema({
     },
     seasons: [SeasonSchema],
 
-    Group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} //To Populate
+    group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} //To Populate
 });
 
 

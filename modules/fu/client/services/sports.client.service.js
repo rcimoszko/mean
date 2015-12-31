@@ -69,12 +69,27 @@ angular.module('fu').factory('Sports', ['ApiSports',
             sport.$delete(cbSuccess, cbError);
         };
 
+        var getLeagues = function(sport, callback){
+            function cbSuccess(leagues){
+                callback(null, leagues);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiSports.getLeagues({_id: sport._id}, cbSuccess, cbError);
+
+        };
+
         return {
             get:    get,
             getAll: getAll,
             create: create,
             update: update,
-            delete: del
+            delete: del,
+
+            getLeagues: getLeagues
         };
     }
 ]);

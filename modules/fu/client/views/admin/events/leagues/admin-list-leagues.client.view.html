@@ -1,0 +1,27 @@
+<h2><a ui-sref="admin.home">Home</a> > Leagues</h2>
+
+<div class="row">
+    <div class="col-sm-3">
+        <select class="form-control" data-ng-model="sport" data-ng-options="sport.name for sport in sports" data-ng-change="getLeagues()">
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <th>Name</th>
+        <th>Active</th>
+        <th>Disabled</th>
+        <th>Main</th>
+        </thead>
+        <body>
+        <tr data-ng-repeat="league in leagues">
+            <td><a ui-sref="admin.editLeague({leagueId:league._id})">{{::league.name}}</a></td>
+            <td><admin-list-boolean model="::league.active"></admin-list-boolean></td>
+            <td><admin-list-boolean model="::league.disabled"></admin-list-boolean></td>
+            <td><admin-list-boolean model="::league.main"></admin-list-boolean></td>
+        </tr>
+        </body>
+    </table>
+</div>

@@ -2,7 +2,7 @@
 
 angular.module('fu').factory('ApiEvents', ['$resource',
     function ($resource) {
-        return $resource('api/events/:_id/:action', { _id: '@__id' }, {
+        return $resource('api/events/:_id/:action', { _id: '@_id' }, {
             update: { method: 'PUT' },
             cancel:     { method: 'PUT', params: {action: 'cancel'}},
             report:     { method: 'POST', params: {action: 'report'}},
