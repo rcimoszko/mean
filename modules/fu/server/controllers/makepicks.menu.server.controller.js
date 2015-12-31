@@ -7,23 +7,18 @@ var path = require('path'),
 
 function get(req, res) {
 
-    if(!Object.keys(req.query).length){
-        return res.status(400).send({
-            message: 'Query is required'
-        });
-    }
 
-    function cb(err, makepicks){
+    function cb(err, makepicksMenu){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(makepicks);
+            res.json(makepicksMenu);
         }
     }
-    var query = req.query;
-    MakePicksBl.getPicks(query, cb);
+
+    MakePicksBl.getMenu(cb);
 }
 
 exports.get     = get;

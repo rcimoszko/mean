@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('news').factory('ApiChannels', ['$resource',
+angular.module('fu').factory('ApiChannels', ['$resource',
     function ($resource) {
         return $resource('api/channels/:_id/:action', { _id: '@__id' }, {
             update:       { method: 'PUT' },

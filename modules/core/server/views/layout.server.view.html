@@ -33,12 +33,18 @@
 
   <!-- Application CSS Files -->
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <body data-ng-controller="MainController" class="ng-cloak">
-  <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse" data-ng-class="{auth: authentication.user}"></header>
+  <!--<header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse" data-ng-class="{auth: authentication.user}"></header>-->
+  <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user}"></header>
   <section ng-include="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user"></section>
-  {% block content %}{% endblock %}
+  <section id="content"  data-ng-class="{auth: authentication.user}">
+
+      {% block content %}{% endblock %}
+  </section>
 
   <!--Embedding The User Object-->
   <script type="text/javascript">

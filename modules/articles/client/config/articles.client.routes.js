@@ -17,9 +17,6 @@ angular.module('articles').config(['$stateProvider',
       .state('articles.create', {
         url: '/create',
         templateUrl: 'modules/articles/client/views/create-article.client.view.html',
-        data: {
-          roles: ['user', 'admin']
-        }
       })
       .state('articles.view', {
         url: '/:articleId',

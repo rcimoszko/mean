@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('news').factory('ApiPicks', ['$resource',
+angular.module('fu').factory('ApiPicks', ['$resource',
     function ($resource) {
         return $resource('api/picks/:_id/:action', { _id: '@__id' }, {
             update:  { method: 'PUT' },

@@ -1,0 +1,14 @@
+<section id="make-picks" data-ng-controller="MakePicksController">
+    Make Picks
+
+    <div id="make-picks-menu">
+        <ul>
+            <li data-ng-repeat="sport in menu">
+                <a href data-ng-click="">{{sport.name}}</a>
+                <ul data-ng-repeat="group in sport.groups">
+                    <li><a href>{{group.name}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

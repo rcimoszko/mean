@@ -5,8 +5,15 @@ var _ = require('lodash'),
     mongoose = require('mongoose');
 
 
-function get(query, callback){
+function getPicks(query, callback){
     callback(null);
 }
 
-exports.get = get;
+function getMenu(callback){
+
+
+    callback(null);
+}
+
+exports.getPicks    = getPicks;
+exports.getMenu     = getMenu;

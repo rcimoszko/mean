@@ -1,0 +1,59 @@
+#top-menu{
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  height: @height-top-menu;
+  background-color:@color-bg-top-menu;
+  z-index:@zindex-top-menu;
+  .box-shadow(1);
+  &.auth{
+    left:@width-auth-side-menu;
+  }
+
+  ul{
+    float:right;
+    height:@height-top-menu;
+    li{
+      display:inline-block;
+      line-height:@height-top-menu;
+
+      a{
+        height:@height-top-menu;
+        display:inline-block;
+        text-transform:uppercase;
+        padding:0 20px;
+        color:lightgray;
+        font-size:18px;
+        &:hover{
+          color: darken(@color-text, 10%);
+        }
+
+      }
+    }
+  }
+
+  .logo-container{
+    line-height:60px;
+    padding:0 50px;
+    display:inline-block;
+  }
+
+  .search-container{
+    line-height:60px;
+    display:inline-block;
+    .fa-search{
+      color:fade(@color-text, 50%);
+      font-size:16px;
+    }
+    input{
+      margin-left:10px;
+      border:none;
+      line-height:40px;
+      &:focus{
+        outline:none;
+      }
+
+    }
+  }
+}

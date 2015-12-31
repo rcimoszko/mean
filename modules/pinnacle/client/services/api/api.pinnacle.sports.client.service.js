@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('news').factory('ApiPinnacleSports', ['$resource',
+angular.module('pinnacle').factory('ApiPinnacleSports', ['$resource',
     function ($resource) {
         return $resource('api/pinnacle/sports/:_id/:get', { _id: '@__id' }, {
             update:             { method: 'PUT' },

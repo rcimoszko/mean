@@ -1,0 +1,21 @@
+<div data-ng-controller="TopMenuController">
+    <div class="logo-container">
+        FansUnite
+    </div>
+
+    <div class="search-container">
+
+        <i class="fa fa-search">
+        </i>
+        <input type="text">
+    </div>
+
+    <ul data-ng-if="!authentication.user">
+        <li><a ui-sref="login">Login</a></li>
+        <li><a ui-sref="signUp">Sign Up</a></li>
+    </ul>
+    <ul>
+        <li><a ui-sref="makePicks">Make Picks</a></li>
+        <li><a ui-sref="discover">Discover</a></li>
+    </ul>
+</div>

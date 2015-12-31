@@ -1,0 +1,18 @@
+.btn-color(@class; @color-bg; @color-text){
+  .@{class} {
+    background-color:@color-bg;
+    color:@color-text;
+    .transition(all, 0.2s);
+    &:hover, &:focus{
+      color:@color-text;
+      background-color:darken(@color-bg, 5%);
+    }
+  }
+}
+
+.btn-size(@class; @font-size; @padding-vertical; @padding-horizontal){
+  .@{class} {
+    padding: @padding-vertical @padding-horizontal !important;
+    font-size: @font-size !important;
+  }
+}
