@@ -10,18 +10,18 @@
 <div class="table-responsive">
     <table class="table">
         <thead>
-        <th>Name</th>
-        <th>Active</th>
-        <th>Disabled</th>
-        <th>Main</th>
+            <th>Name</th>
+            <th>Active</th>
+            <th>Disabled</th>
+            <th>Main</th>
         </thead>
-        <body>
-        <tr data-ng-repeat="league in leagues">
-            <td><a ui-sref="admin.editLeague({leagueId:league._id})">{{::league.name}}</a></td>
-            <td><admin-list-boolean model="::league.active"></admin-list-boolean></td>
-            <td><admin-list-boolean model="::league.disabled"></admin-list-boolean></td>
-            <td><admin-list-boolean model="::league.main"></admin-list-boolean></td>
-        </tr>
-        </body>
+        <tbody>
+            <tr data-ng-repeat="league in leagues">
+                <td><a ui-sref="admin.editLeague({leagueId:league._id})">{{::league.name}}</a></td>
+                <td><admin-list-boolean model="::league.active"></admin-list-boolean></td>
+                <td><admin-list-boolean model="::league.disabled"></admin-list-boolean></td>
+                <td><admin-list-boolean model="::league.main"></admin-list-boolean></td>
+            </tr>
+        </tbody>
     </table>
 </div>

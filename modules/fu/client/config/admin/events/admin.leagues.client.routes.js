@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').config(['$stateProvider',
+angular.module('fu.admin').config(['$stateProvider',
     function ($stateProvider) {
 
         $stateProvider
