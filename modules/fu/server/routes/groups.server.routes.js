@@ -6,6 +6,7 @@ var policy = require('../policies/groups.server.policies'),
 module.exports = function (app) {
 
     app.route('/api/groups').all(policy.isAllowed)
+        .post(ctrl.create)
         .get(ctrl.getAll);
 
     app.route('/api/groups/:groupId').all(policy.isAllowed)

@@ -69,12 +69,27 @@ angular.module('fu').factory('Leagues', ['ApiLeagues',
             league.$delete(cbSuccess, cbError);
         };
 
+        var getContestants = function(leagueId, callback){
+            function cbSuccess(contestants){
+                callback(null, contestants);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiLeagues.getContestants({_id: leagueId}, cbSuccess, cbError);
+
+        };
+
         return {
             get:    get,
             getAll: getAll,
             create: create,
             update: update,
-            delete: del
+            delete: del,
+
+            getContestants: getContestants
         };
     }
 ]);

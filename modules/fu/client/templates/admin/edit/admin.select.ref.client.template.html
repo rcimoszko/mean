@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label class="control-label" data-ng-if="label">{{label}}</label>
+    <div class="controls">
+        <select class="form-control" data-ng-model="model" data-ng-options="{ref: option._id, name: option.name} as option[displayField] for option in options track by option.name">
+        </select>
+    </div>
+</div>

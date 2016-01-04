@@ -1,0 +1,21 @@
+<h2><a ui-sref="admin.home">Home</a> > Groups <a ui-sref="admin.createGroup" class="btn btn-default">Create</a></h2>
+
+<div class="row">
+    <div class="col-sm-3">
+        <select class="form-control" data-ng-model="sport" data-ng-options="sport.name for sport in sports" data-ng-change="getGroups()">
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <th>Name</th>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="group in groups">
+            <td><a ui-sref="admin.editGroup({groupId:group._id})">{{::group.name}}</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

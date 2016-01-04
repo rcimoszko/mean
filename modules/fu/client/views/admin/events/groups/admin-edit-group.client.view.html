@@ -1,0 +1,6 @@
+<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.groups">Groups</a> > {{group.name}}</h2>
+
+<form data-ng-submit="submit()">
+    <admin-select-ref label="'Sport'" model="group.sport" options="sports" display-field="'name'"></admin-select-ref>
+    <admin-submit error="error"></admin-submit>
+</form>

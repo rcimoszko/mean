@@ -12,19 +12,20 @@ angular.module('fu.admin').config(['$stateProvider',
                     roles: ['admin']
                 }
             })
+            .state('admin.leaguesBySport', {
+                url: '/leagues/:sportId',
+                templateUrl: 'modules/fu/client/views/admin/events/leagues/admin-list-leagues.client.view.html',
+                controller: 'AdminListLeaguesController',
+                data: {
+                    roles: ['admin']
+                }
+            })
             .state('admin.editLeague', {
-                url: '/leagues/:leagueId',
+                url: '/leagues/edit/:leagueId',
                 templateUrl: 'modules/fu/client/views/admin/events/leagues/admin-edit-league.client.view.html',
                 controller: 'AdminEditLeagueController',
                 data: {
                     roles: ['admin']
-                },
-                resolve: {
-                    leagueResolve: ['$stateParams', 'ApiLeagues', function ($stateParams, ApiLeagues) {
-                        return ApiLeagues.get({
-                            _id: $stateParams.leagueId
-                        });
-                    }]
                 }
             });
 

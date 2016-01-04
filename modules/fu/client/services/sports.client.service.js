@@ -69,7 +69,7 @@ angular.module('fu').factory('Sports', ['ApiSports',
             sport.$delete(cbSuccess, cbError);
         };
 
-        var getLeagues = function(sport, callback){
+        var getLeagues = function(sportId, callback){
             function cbSuccess(leagues){
                 callback(null, leagues);
             }
@@ -78,7 +78,33 @@ angular.module('fu').factory('Sports', ['ApiSports',
                 callback(response.data.message);
             }
 
-            ApiSports.getLeagues({_id: sport._id}, cbSuccess, cbError);
+            ApiSports.getLeagues({_id: sportId}, cbSuccess, cbError);
+
+        };
+
+        var getContestants = function(sportId, callback){
+            function cbSuccess(contestants){
+                callback(null, contestants);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiSports.getContestants({_id: sportId}, cbSuccess, cbError);
+
+        };
+
+        var getGroups = function(sportId, callback){
+            function cbSuccess(groups){
+                callback(null, groups);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiSports.getGroups({_id: sportId}, cbSuccess, cbError);
 
         };
 
@@ -89,7 +115,9 @@ angular.module('fu').factory('Sports', ['ApiSports',
             update: update,
             delete: del,
 
-            getLeagues: getLeagues
+            getLeagues: getLeagues,
+            getContestants: getContestants,
+            getGroups: getGroups
         };
     }
 ]);

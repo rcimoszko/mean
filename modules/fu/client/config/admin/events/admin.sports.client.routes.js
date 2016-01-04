@@ -13,7 +13,7 @@ angular.module('fu.admin').config(['$stateProvider',
                 }
             })
             .state('admin.editSport', {
-                url: '/sports/:sportId',
+                url: '/sports/edit/:sportId',
                 templateUrl: 'modules/fu/client/views/admin/events/sports/admin-edit-sport.client.view.html',
                 controller: 'AdminEditSportController',
                 data: {

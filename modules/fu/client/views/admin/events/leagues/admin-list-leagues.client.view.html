@@ -2,8 +2,13 @@
 
 <div class="row">
     <div class="col-sm-3">
-        <select class="form-control" data-ng-model="sport" data-ng-options="sport.name for sport in sports" data-ng-change="getLeagues()">
+        <select class="form-control" data-ng-model="sport" data-ng-options="sport._id as sport.name for sport in sports" data-ng-change="getLeagues()">
         </select>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" class="btn btn-default" data-ng-model="activeFilterEnabled" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Active Leagues
+        </button>
     </div>
 </div>
 
@@ -14,13 +19,15 @@
             <th>Active</th>
             <th>Disabled</th>
             <th>Main</th>
+            <th>Group</th>
         </thead>
         <tbody>
-            <tr data-ng-repeat="league in leagues">
+            <tr data-ng-repeat="league in leagues|filter:activeFilter">
                 <td><a ui-sref="admin.editLeague({leagueId:league._id})">{{::league.name}}</a></td>
                 <td><admin-list-boolean model="::league.active"></admin-list-boolean></td>
                 <td><admin-list-boolean model="::league.disabled"></admin-list-boolean></td>
                 <td><admin-list-boolean model="::league.main"></admin-list-boolean></td>
+                <td>{{::league.group.name}}</td>
             </tr>
         </tbody>
     </table>

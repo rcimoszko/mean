@@ -149,6 +149,13 @@ function merge(mainContestant, contestantsToMerge, callback){
     async.each(contestantsToMerge, mergeEach, callback);
 }
 
+function getBySport(sport, callback){
+    Contestant.find({'sport.ref':sport._id}, callback);
+}
+
+function getByLeague(league, callback){
+    Contestant.find({'leagues.ref': league._id}, callback);
+}
 
 
 exports.populate    = populate;
@@ -159,5 +166,8 @@ exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
+
+exports.getBySport  = getBySport;
+exports.getByLeague  = getByLeague;
 
 exports.merge       = merge;

@@ -70,6 +70,22 @@ function update(req, res, next){
     GroupBl.update(data, group, cb);
 }
 
+function create(req, res, next){
+    function cb (err,group){
+        if (err) return next(err);
+        if (!group) {
+            return res.status(500).send({
+                message: 'Failed to create Group'
+            });
+        }
+        res.json(group);
+
+    }
+
+    var data = req.body;
+    GroupBl.create(data,  cb);
+}
+
 function del(req, res, next){
 
     function cb (err, group){
@@ -91,4 +107,5 @@ exports.byId    = byId;
 exports.getAll  = getAll;
 exports.get     = get;
 exports.update  = update;
+exports.create  = create;
 exports.delete  = del;
