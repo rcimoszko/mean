@@ -1,0 +1,23 @@
+<div class="clearfix">
+    <div class="picks-event-container {{event.sport.ref.slug}}">
+        <div class="contestant-section">
+            <div class="heading">{{::event.startTime|date:'shortTime'}}</div>
+            <div class="contestants-container">
+                <div class="contestant-name bet-row">{{::contestant1.name}}</div>
+                <div class="contestant-name bet-row">{{::contestant2.name}}</div>
+            </div>
+        </div>
+        <bet-section bet-type="betType" bets="bets" contestant1-name="contestant1.name" contestant2-name="contestant2.name" data-ng-repeat="(betType, bets) in mainBets"></bet-section>
+
+        <div class="more-container">
+
+            <div class="heading">
+                MORE BETS
+            </div>
+            <div class="count-container">
+                <a href>+ {{event.bets.moreCount}}</a>
+            </div>
+        </div>
+
+    </div>
+</div>

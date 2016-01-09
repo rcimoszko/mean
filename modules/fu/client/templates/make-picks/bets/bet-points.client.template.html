@@ -1,0 +1,19 @@
+<div class="bet bet-total-points">
+    <span data-ng-click="addBet(bet)">
+        <span class="points">{{activeBet.points|formatPoints:activeBet.overUnder}}</span>
+        <span class="odds">({{activeBet.odds|formatOdds}})</span>
+    </span>
+    <span class="dropdown alt-bets" dropdown data-ng-if="isAlt">
+        <a href class="dropdown-toggle" dropdown-toggle>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu">
+            <div data-ng-repeat="bet in bets">
+                <a class="alt-bet" data-ng-click="setActive(bet)" >
+                    <span class="points">{{bet.points|formatPoints:bet.overUnder}}</span>
+                    <span class="odds">({{bet.odds|formatOdds}})</span>
+                </a>
+            </div>
+        </div>
+    </span>
+</div>

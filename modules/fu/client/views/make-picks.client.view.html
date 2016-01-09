@@ -1,14 +1,13 @@
-<section id="make-picks" data-ng-controller="MakePicksController">
-    Make Picks
+<section id="make-picks">
+    <div id="menu-container">
+        <ng-include src="'/modules/fu/client/views/make-picks/make-picks.menu.client.view.html'"></ng-include>
+    </div>
 
-    <div id="make-picks-menu">
-        <ul>
-            <li data-ng-repeat="sport in menu">
-                <a href data-ng-click="">{{sport.name}}</a>
-                <ul data-ng-repeat="group in sport.groups">
-                    <li><a href>{{group.name}}</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div id="picks-container">
+        <section ui-view></section>
+    </div>
+
+    <div id="right-container">
+        <ng-include src="'/modules/fu/client/views/make-picks/make-picks.bet-slip.client.view.html'"></ng-include>
     </div>
 </section>

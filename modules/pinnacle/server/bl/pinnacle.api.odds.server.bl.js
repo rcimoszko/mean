@@ -155,6 +155,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
 
     function addUpdateContestantMl(callback){
+
         function processMoneyline(contestantNum, callback){
 
             var todo = [];
@@ -171,7 +172,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
             }
 
             function findBet(callback){
-                var query = {event:event, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref,  'contestant.ref': event[contestantField].ref };
+                var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref,  'contestant.ref': event[contestantField].ref };
                 if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
                 BetBl.getOneByQuery(query, callback);
             }
@@ -196,9 +197,10 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
     function addUpdateDraw(callback){
         var todo = [];
         betData.odds = oddsApi.moneyline.draw;
+        betData.draw = true;
 
         function findBet(callback){
-            var query = {event:event, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, draw: true};
+            var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, draw: true};
             if( betData.otIncluded) query.otIncluded =  betData.otIncluded;
             BetBl.getOneByQuery(query, callback);
         }
@@ -243,6 +245,7 @@ function processSpreads(oddsApi, initialBetData, event, callback){
 
             function initializeValues(callback){
                 betData.odds = spreadApi[homeAway];
+                betData.contestant = {name: event[contestantField].name, ref: event[contestantField].ref, number: contestantNum.num};
                 if(!betData.betType) betData.betType = 'spread';
                 if(homeAway === 'home'){
                     betData.spread = spreadApi.hdp;
@@ -253,7 +256,7 @@ function processSpreads(oddsApi, initialBetData, event, callback){
             }
 
             function findBet(callback){
-                var query = {event:event, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'contestant.ref':event[contestantField].ref};
+                var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'contestant.ref':event[contestantField].ref};
                 if(betData.altLine) query.altNumber = betData.altNumber;
                 if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
 
@@ -307,7 +310,7 @@ function processTotals(oddsApi, initialBetData, event, callback){
             }
 
             function findBet(callback){
-                var query = {event:event, betType: betData.betType,betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder};
+                var query = {event:event._id, betType: betData.betType,betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder};
                 if(betData.altLine) query.altNumber = betData.altNumber;
                 if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
 
@@ -350,6 +353,7 @@ function processTeamTotals(oddsApi, initialBetData, event, callback){
             var todo = [];
 
             function initializeValues(callback){
+                betData.contestant = {name: event[contestantField].name, ref: event[contestantField].ref, number: contestantNum.num};
                 betData.overUnder = overUnder.overUnder;
                 betData.odds = oddsApi.teamTotal[homeAway][betData.overUnder];
                 betData.points = oddsApi.teamTotal[homeAway].points;
@@ -358,7 +362,7 @@ function processTeamTotals(oddsApi, initialBetData, event, callback){
             }
 
             function findBet(callback){
-                var query = {event:event, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder, 'contestant.ref':event[contestantField].ref};
+                var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder, 'contestant.ref':event[contestantField].ref};
                 if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
                 BetBl.getOneByQuery(query, callback);
             }

@@ -78,10 +78,12 @@ function updateLeagues(pinnacleLeague, leagueApi, pinnacleSportsbook, callback){
         } else if (active === 0 && pinnacleLeague.active === true) {
             pinnacleLeague.active = false;
             LeagueBl.update({active:true}, league, cb);
+        } else {
+            callback(null);
         }
     }
 
-    function savePinnacleLeague(league, callback){
+    function savePinnacleLeague(callback){
         pinnacleLeague.save(callback);
     }
 

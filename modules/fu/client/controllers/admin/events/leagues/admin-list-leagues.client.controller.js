@@ -31,6 +31,6 @@ angular.module('fu.admin').controller('AdminListLeaguesController', ['$scope', '
                 return sport.active;
             }
             return true;
-        }
+        };
     }
 ]);

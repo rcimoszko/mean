@@ -3,7 +3,7 @@
 angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
     function(ApiMakePicks, ApiMakePicksMenu) {
 
-        var getPicks = function(query, callback){
+        var getEvents = function(query, callback){
 
             function cbSuccess(picks){
                 callback(null, picks);
@@ -29,10 +29,13 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
             ApiMakePicksMenu.query(cbSuccess, cbError);
         };
 
+        var menu = [];
+
 
         return {
-            getPicks:   getPicks,
-            getMenu:    getMenu
+            getEvents:   getEvents,
+            getMenu:    getMenu,
+            menu:       menu
         };
 
     }

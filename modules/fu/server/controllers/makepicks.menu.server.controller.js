@@ -10,6 +10,7 @@ function get(req, res) {
 
     function cb(err, makepicksMenu){
         if (err) {
+            console.log(err);
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });

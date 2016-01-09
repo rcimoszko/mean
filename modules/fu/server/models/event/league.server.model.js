@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     async = require('async'),
+    slug = require('speakingurl'),
     Schema = mongoose.Schema;
 
 var SeasonSchema = new Schema({
@@ -34,7 +35,15 @@ var LeagueSchema = new Schema({
     },
     seasons: [SeasonSchema],
 
-    group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} //To Populate
+    group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} ,//To Populate
+    slug:         {type: String} // Added
+});
+
+LeagueSchema.pre('save', function(next) {
+    if(this.name && this.isModified('name')){
+        this.slug = slug(this.name);
+    }
+    next();
 });
 
 

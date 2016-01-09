@@ -1,0 +1,32 @@
+<div id="make-picks-menu" data-ng-controller="MakePicksMenuController">
+    <ul class="main-list">
+        <li data-ng-repeat="sport in menu">
+            <a href class="main-item" data-ng-click="updateSport(sport)" data-ng-class="{'semi-active': activeSport === sport}">
+                <sport-icon url="sport.iconUrl" color="'dark'"></sport-icon>
+                <span>{{sport.name}}</span>
+                <i class="fa pull-right" data-ng-class="{'fa-angle-down': activeSport === sport, 'fa-angle-right': activeSport !== sport}"></i>
+            </a>
+
+            <ul class="sub-1-list"  data-ng-show="activeSport === sport" data-ng-repeat="sub1 in sport.main">
+                <li>
+                    <a class="sub-1-item abstract" data-ng-click="updateSub1(sub1, sub1.abstract)" data-ng-if="sub1.abstract" href data-ng-class="{'semi-active': sub1 === activeSub1 && activeSub2, 'full-active': sub1 === activeSub1 && !activeSub2 }" >
+                        {{sub1.name}}
+                        <span>
+                            <i class="fa pull-right" data-ng-class="{'fa-angle-down': sub1 === activeSub1, 'fa-angle-right': sub1 !== activeSub1}"></i>
+                        </span>
+                    </a>
+                    <a class="sub-1-item" data-ng-click="updateSub1(sub1, sub1.abstract)" data-ng-if="!sub1.abstract" ui-sref="makePicks.league({sportSlug: sport.slug, leagueSlug: sub1.slug})" data-ng-class="{'full-active': sub1 === activeSub1 && !activeSub2 }">
+                        {{sub1.name}}
+                    </a>
+
+                    <ul class="sub-2-list" data-ng-show="sub1 === activeSub1" data-ng-repeat="sub2 in sub1.main">
+                        <li>
+                            <a class="sub-2-item" data-ng-click="updateSub2(sub2)" data-ng-class="{'active': sub2 === activeSub2 }" ui-sref="makePicks.league({sportSlug: sport.slug, leagueSlug: sub2.slug})">{{sub2.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>

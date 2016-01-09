@@ -1,0 +1,75 @@
+#make-picks-menu{
+
+  .sport-icon{
+    height:18px;
+    width:18px;
+    margin-right:8px;
+  }
+  .fa-angle-right, .fa-angle-down{
+    margin-top:3px;
+  }
+  .box-shadow(1);
+
+  .main-list{
+    list-style-type:none;
+    padding-left:0;
+    .main-item{
+      background-color:white;
+      padding:3px 5px;
+      border-bottom:1px solid @color-bg;
+      display:block;
+      color:@color-text;
+      &:hover{
+        color:darken(@color-text, 10%);
+      }
+      &.semi-active{
+        font-weight:bold;
+      }
+      > span{
+        vertical-align:middle;
+      }
+    }
+    > li:last-of-type .main-item{
+      border:none;
+    }
+  }
+
+  .sub-1-list{
+    list-style-type:none;
+    padding-left:0px;
+    .sub-1-item{
+      background-color:darken(@color-bg, 8%);
+      padding:3px 5px 3px 15px;
+      border-bottom:1px solid @color-bg;
+      display:block;
+      color:@color-text;
+      &:not(.abstract){
+        &:hover, &.full-active{
+          background-color:@color-blue;
+          color:white;
+        }
+      }
+      &.abstract{
+        &:hover, &.full-active{
+          color:darken(@color-text, 10%);
+        }
+      }
+    }
+  }
+
+  .sub-2-list{
+    list-style-type:none;
+    padding-left:0px;
+    .sub-2-item{
+      background-color:darken(@color-bg, 8%);
+      padding:3px 5px 3px 25px;
+      border-bottom:1px solid @color-bg;
+      display:block;
+      color:@color-text;
+      &:hover, &.active{
+        background-color:@color-blue;
+        color:white;
+      }
+    }
+  }
+}

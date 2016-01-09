@@ -1,0 +1,8 @@
+<section id="make-picks-picks" data-ng-controller="MakePicksController">
+    <div data-ng-repeat="dateGroup in events">
+        <h2>{{dateGroup.date |date:'longDate'}}</h2>
+        <div data-ng-repeat="event in dateGroup.events">
+            <make-picks event="event"></make-picks>
+        </div>
+    </div>
+</section>

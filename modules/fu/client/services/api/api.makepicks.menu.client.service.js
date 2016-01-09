@@ -2,6 +2,6 @@
 
 angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
     function ($resource) {
-        return $resource('api/makepicks', {});
+        return $resource('api/makepicks/menu', {});
     }
 ]);
