@@ -7,5 +7,94 @@
   background-color:@color-bg-auth-side-menu;
   z-index:@zindex-auth-side-menu;
   .box-shadow(1);
+  .logo-container{
+    text-align:center;
+    padding-top:8px;
+    height:@height-top-menu;
+    background-color:@color-bg-auth-side-menu-sub;
+  }
 
+  .user-container{
+    height:95px;
+    padding:30px 10px 30px 20px;
+    .username{
+      font-size:20px;
+      color:@color-orange;
+      font-weight:@font-weight-bold;
+      vertical-align:middle;
+      margin-left:10px;
+
+    }
+  }
+
+  .stats-container{
+    height:140px;
+    background-color:@color-bg-auth-side-menu-sub;
+    padding:20px;
+    .units, .profit{
+      float:left;
+      width:50%;
+      text-align:center;
+
+    }
+    .active-picks{
+      text-align:center;
+      float:left;
+      width:100%;
+      margin-top:5px;
+    }
+    .num{
+      color:white;
+      font-size:20px;
+    }
+    .text{
+      color:fade(white,60%);
+      font-weight:200;
+      text-transform:uppercase;
+    }
+
+  }
+
+  .menu-container{
+    padding:20px;
+    .add-btn{
+      border:1px solid fade(white,50%);
+      border-radius:13px;
+      text-align:center;
+      width:13px;
+      height:13px;
+      color:fade(white,50%);
+      font-size:12px;
+      line-height:10px;
+      margin-top:3px;
+    }
+
+
+    ul.user-menu{
+      padding-left:0;
+      list-style-type:none;
+      > li{
+        font-size:16px;
+        font-weight:300;
+        margin-bottom:20px;
+
+        a{
+          color:fade(white,60%);
+        }
+      }
+    }
+    ul.channel-list{
+      list-style-type:none;
+      padding-left:20px;
+      margin-top:10px;
+      > li{
+        font-size:14px;
+        font-weight:300;
+        margin-bottom:5px;
+      a{
+        color:fade(white,95%);
+      }
+    }
+    }
+  }
 }

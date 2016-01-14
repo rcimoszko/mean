@@ -24,6 +24,14 @@ var validateLocalStrategyEmail = function (email) {
   return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, { require_tld: false }));
 };
 
+
+/**
+ * A Validation function for local strategy password
+ */
+var validateLocalStrategyPassword = function(password) {
+    return (this.provider !== 'local' || (password && password.length > 6));
+};
+
 /**
  * User Schema
  */
@@ -31,14 +39,12 @@ var UserSchema = new Schema({
   firstName: {
     type: String,
     trim: true,
-    default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+    default: ''
   },
   lastName: {
     type: String,
     trim: true,
-    default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+    default: ''
   },
   displayName: {
     type: String,
@@ -61,7 +67,8 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    default: ''
+    default: '',
+    validate: [validateLocalStrategyPassword, 'Password should be longer']
   },
   salt: {
     type: String
@@ -156,6 +163,7 @@ UserSchema.pre('save', function (next) {
 /**
  * Hook a pre validate method to test the local password
  */
+/*
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
     var result = owasp.test(this.password);
@@ -167,7 +175,7 @@ UserSchema.pre('validate', function (next) {
 
   next();
 });
-
+*/
 /**
  * Create instance method for hashing a password
  */

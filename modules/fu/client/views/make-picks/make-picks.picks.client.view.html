@@ -1,8 +1,24 @@
-<section id="make-picks-picks" data-ng-controller="MakePicksController">
+<section id="make-picks-picks" data-ng-controller="MakePicksPicksController">
+    <div class="make-picks-sub-menu">
+        <h1 data-ng-if="makePicks.active.league">
+            <i class="fa fa-bars" data-ng-click="toggleMenu()"></i>
+            {{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}
+
+
+            <span class="pull-right bet-duration-filter">
+                {{activeBetDuration}} <i class="fa fa-angle-down"></i>
+            </span>
+        </h1>
+    </div>
+    <div class="make-picks-filters">
+        <ul>
+            <li data-ng-repeat="betType in betTypes"><a href data-ng-click="setActiveBetType(betType)" data-ng-class="{active: betType === activeBetType}">{{betType}}</a></li>
+        </ul>
+    </div>
     <div data-ng-repeat="dateGroup in events">
         <h2>{{dateGroup.date |date:'longDate'}}</h2>
         <div data-ng-repeat="event in dateGroup.events">
-            <make-picks event="event"></make-picks>
+            <make-picks event="event" bet-types="betTypes" columns="columns" active-bet-type="activeBetType"></make-picks>
         </div>
     </div>
 </section>

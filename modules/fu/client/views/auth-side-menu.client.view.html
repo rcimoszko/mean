@@ -1,3 +1,55 @@
 <section id="auth-side-menu">
+    <div class="logo-container">
+        <a ui-sref="home">
+            <img data-ng-src="/modules/fu/client/img/general/logo-text.png">
+        </a>
+    </div>
+    <div class="user-container">
+        <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
+        <a href class="username">{{authentication.user.username}}</a>
+    </div>
+    <div class="stats-container">
+        <div class="profit">
+            <div class="num">
+                +150
+            </div>
+            <div class="text">
+                profit
+            </div>
+        </div>
+        <div class="units">
+            <div class="num">
+                {{authentication.user.units}}
+            </div>
+            <div class="text">
+                units
+            </div>
+        </div>
+        <div class="active-picks">
+            <div class="num">
+                10 / 25
+            </div>
+            <div class="text">
+                active picks / units
+            </div>
+        </div>
+    </div>
+    <div class="menu-container">
+        <ul class="user-menu">
+            <li><a ui-sref="myHub">HUB</a></li>
+            <li>
+                <a>CHANNELS</a>
 
+                <span class="pull-right add-btn">+</span>
+                <ul class="channel-list">
+                    <li><a ui-sref="channel({channelSlug:channel.slug})">NHL</a></li>
+                    <li><a ui-sref="channel({channelSlug:channel.slug})">NBA</a></li>
+                </ul>
+            </li>
+            <li><a ui-sref="myTracker">PICKTRACKER</a></li>
+            <li><a ui-sref="myProfile">PROFILE</a></li>
+            <li><a ui-sref="myPicks">MY PICKS</a></li>
+            <li><a ui-sref="myFollowing">FOLLOWING</a></li>
+        </ul>
+    </div>
 </section>

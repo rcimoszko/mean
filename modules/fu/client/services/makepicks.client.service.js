@@ -13,7 +13,7 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
                 callback(err);
             }
 
-            ApiMakePicks.query(query, cbSuccess, cbError);
+            ApiMakePicks.get(query, cbSuccess, cbError);
         };
 
         var getMenu = function(callback){
@@ -30,12 +30,13 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
         };
 
         var menu = [];
-
+        var active = {};
 
         return {
-            getEvents:   getEvents,
+            getEvents:  getEvents,
             getMenu:    getMenu,
-            menu:       menu
+            menu:       menu,
+            active:     active
         };
 
     }

@@ -1,10 +1,7 @@
 'use strict';
 
-// Setting up route
 angular.module('fu').config(['$stateProvider',
     function ($stateProvider) {
-
-        // Home state routing
         $stateProvider
             .state('makePicks', {
                 abstract: true,

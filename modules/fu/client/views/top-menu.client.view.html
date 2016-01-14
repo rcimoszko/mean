@@ -1,6 +1,8 @@
 <div data-ng-controller="TopMenuController">
-    <div class="logo-container">
-        FansUnite
+    <div class="logo-container" data-ng-if="!authentication.user">
+        <a ui-sref="home">
+            <img data-ng-src="/modules/fu/client/img/general/logo-full.png">
+        </a>
     </div>
 
     <div class="search-container">
@@ -10,12 +12,15 @@
         <input type="text">
     </div>
 
-    <ul data-ng-if="!authentication.user">
-        <li><a ui-sref="login">Login</a></li>
-        <li><a ui-sref="signUp">Sign Up</a></li>
-    </ul>
-    <ul>
-        <li><a ui-sref="makePicks.home">Make Picks</a></li>
-        <li><a ui-sref="discover">Discover</a></li>
-    </ul>
+    <div class="menu-links pull-right">
+
+        <ul data-ng-if="!authentication.user">
+            <li><a ui-sref="login">Login</a></li>
+            <li><a ui-sref="signup">Sign Up</a></li>
+        </ul>
+        <ul>
+            <li><a ui-sref="makePicks.home">Make Picks</a></li>
+            <li><a ui-sref="discover">Discover</a></li>
+        </ul>
+    </div>
 </div>

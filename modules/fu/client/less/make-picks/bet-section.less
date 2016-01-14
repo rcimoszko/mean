@@ -1,7 +1,23 @@
+.bet-section-container{
+  display:none;
+  @media (min-width: @screen-md-min) {
+    display:inline-block !important;
+  }
+  &.active{
+    display:inline-block;
+  }
+
+
+  &:last-of-type{
+    .bets-container{
+      border-right:0;
+    }
+  }
+}
 .bet-section{
   display: inline-block;
   vertical-align:top;
-  font-size:14px;
+  font-size:13px;
   text-align:center;
 
   .bets-container{
@@ -11,18 +27,27 @@
     padding:10px 0;
     margin:0 10px;
     border-bottom:1px solid @color-gray-divider;
-
   }
   .bet-2{
     padding:10px 0;
     margin:0 10px;
   }
   .bet{
-    padding:0 18px;
+    padding:0 10px;
     .odds{
       color:fade(@color-text, 70%);
-      font-size:13px;
+      font-size:12px;
       padding-left:5px;
+
+    }
+    .alt-bets{
+      .dropdown-menu{
+        right:0;
+        text-align:right;
+        padding-right:10px;
+        min-width:100px;
+        border-radius:0;
+      }
     }
   }
 

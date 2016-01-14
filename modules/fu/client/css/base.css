@@ -2,15 +2,29 @@ body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   background-color: #eeeeee;
   color: #6a6b6c;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
 }
 #content {
   margin-top: 60px;
-  padding-top: 20px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+@media (min-width: 992px) {
+  #content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 #content.auth {
   margin-left: 200px;
+}
+#content > section {
+  position: relative;
+}
+a {
+  color: #21759b;
 }
 a:hover,
 a:focus {
@@ -31,6 +45,164 @@ a:focus {
   -o-filter: invert(0.7);
   -ms-filter: invert(0.7);
 }
+.btn {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: 0;
+  border-radius: 0;
+}
+.btn:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: 0;
+}
+.btn-orange {
+  background-color: #e9893a;
+  color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-orange:hover,
+.btn-orange:focus {
+  color: white;
+  background-color: #e67b23;
+}
+.btn-blue {
+  background-color: #104673;
+  color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-blue:hover,
+.btn-blue:focus {
+  color: white;
+  background-color: #0d385d;
+}
+.btn-facebook {
+  background-color: #4261b1;
+  color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-facebook:hover,
+.btn-facebook:focus {
+  color: white;
+  background-color: #3b579e;
+}
+.btn-google {
+  background-color: #d15c40;
+  color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-google:hover,
+.btn-google:focus {
+  color: white;
+  background-color: #c74d30;
+}
+.loading,
+.loading:before,
+.loading:after {
+  border-radius: 50%;
+}
+.loading:before,
+.loading:after {
+  position: absolute;
+  content: '';
+}
+.loading:before {
+  width: 5.2em;
+  height: 10.2em;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 5.2em 5.1em;
+  transform-origin: 5.2em 5.1em;
+  -webkit-animation: load2 2s infinite ease 1.5s;
+  animation: load2 2s infinite ease 1.5s;
+}
+.loading {
+  text-indent: -99999em;
+  margin: 0 auto;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  box-shadow: inset 0 0 0 1em #ffffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loading:after {
+  width: 5.2em;
+  height: 10.2em;
+  border-radius: 0 10.2em 10.2em 0;
+  top: -0.1em;
+  left: 5.1em;
+  -webkit-transform-origin: 0px 5.1em;
+  transform-origin: 0px 5.1em;
+  -webkit-animation: load2 2s infinite ease;
+  animation: load2 2s infinite ease;
+}
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.loading-blue:before {
+  background: #104673;
+}
+.loading-blue:after {
+  background: #104673;
+}
+.loading-orange:before {
+  background: #e9893a;
+}
+.loading-orange:after {
+  background: #e9893a;
+}
+.loading-bg-gray:before {
+  background: #eeeeee;
+}
+.loading-bg-gray:after {
+  background: #eeeeee;
+}
+.loading-sm {
+  font-size: 2px;
+}
+.loading-md {
+  font-size: 5px;
+}
+.loading-log {
+  font-size: 6px;
+}
 #auth-side-menu {
   position: fixed;
   top: 0;
@@ -41,13 +213,95 @@ a:focus {
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
+#auth-side-menu .logo-container {
+  text-align: center;
+  padding-top: 8px;
+  height: 60px;
+  background-color: #156790;
+}
+#auth-side-menu .user-container {
+  height: 95px;
+  padding: 30px 10px 30px 20px;
+}
+#auth-side-menu .user-container .username {
+  font-size: 20px;
+  color: #e9893a;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+#auth-side-menu .stats-container {
+  height: 140px;
+  background-color: #156790;
+  padding: 20px;
+}
+#auth-side-menu .stats-container .units,
+#auth-side-menu .stats-container .profit {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+#auth-side-menu .stats-container .active-picks {
+  text-align: center;
+  float: left;
+  width: 100%;
+  margin-top: 5px;
+}
+#auth-side-menu .stats-container .num {
+  color: white;
+  font-size: 20px;
+}
+#auth-side-menu .stats-container .text {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 200;
+  text-transform: uppercase;
+}
+#auth-side-menu .menu-container {
+  padding: 20px;
+}
+#auth-side-menu .menu-container .add-btn {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 13px;
+  text-align: center;
+  width: 13px;
+  height: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  line-height: 10px;
+  margin-top: 3px;
+}
+#auth-side-menu .menu-container ul.user-menu {
+  padding-left: 0;
+  list-style-type: none;
+}
+#auth-side-menu .menu-container ul.user-menu > li {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+#auth-side-menu .menu-container ul.user-menu > li a {
+  color: rgba(255, 255, 255, 0.6);
+}
+#auth-side-menu .menu-container ul.channel-list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+#auth-side-menu .menu-container ul.channel-list > li {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+#auth-side-menu .menu-container ul.channel-list > li a {
+  color: rgba(255, 255, 255, 0.95);
+}
 #top-menu {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   height: 60px;
-  background-color: #ffffff;
+  background-color: white;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -75,12 +329,27 @@ a:focus {
 }
 #top-menu .logo-container {
   line-height: 60px;
-  padding: 0 50px;
+  width: 55px;
   display: inline-block;
+  padding-left: 10px;
+  overflow: hidden;
+}
+@media (min-width: 992px) {
+  #top-menu .logo-container {
+    padding-left: 20px;
+    overflow: visible;
+    width: 200px;
+  }
 }
 #top-menu .search-container {
   line-height: 60px;
-  display: inline-block;
+  display: none;
+  padding-left: 20px;
+}
+@media (min-width: 992px) {
+  #top-menu .search-container {
+    display: inline-block;
+  }
 }
 #top-menu .search-container .fa-search {
   color: rgba(106, 107, 108, 0.5);
@@ -94,32 +363,86 @@ a:focus {
 #top-menu .search-container input:focus {
   outline: none;
 }
+#top-menu .menu-links {
+  display: none;
+}
+@media (min-width: 992px) {
+  #top-menu .menu-links {
+    display: inline-block;
+  }
+}
 #make-picks {
   position: absolute;
   left: 0;
   right: 0;
 }
 #make-picks #menu-container {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1010;
+  height: 100%;
+  background-color: white;
+  width: 200px;
+  left: -200px;
+  overflow-y: scroll;
+  margin-top: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+#make-picks #menu-container.show {
+  -moz-transition: left 0.2s ease-in-out;
+  -webkit-transition: left 0.2s ease-in-out;
+  -o-transition: left 0.2s ease-in-out;
+  -ms-transition: left 0.2s ease-in-out;
+  transition: left 0.2s ease-in-out;
   left: 0;
-  padding-left: 30px;
-  width: 195px;
+}
+@media (min-width: 992px) {
+  #make-picks #menu-container {
+    -moz-transition: left 0s ease-in-out;
+    -webkit-transition: left 0s ease-in-out;
+    -o-transition: left 0s ease-in-out;
+    -ms-transition: left 0s ease-in-out;
+    transition: left 0s ease-in-out;
+    top: auto;
+    bottom: auto;
+    height: auto;
+    left: 0;
+    display: block;
+    position: absolute;
+    background-color: transparent;
+    width: 165px;
+    z-index: 0;
+  }
+}
+#make-picks .menu-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  -ms-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+#make-picks .menu-overlay.show {
+  display: block;
 }
 #make-picks #picks-container {
   position: absolute;
-  left: 195px;
-  right: 300px;
-  padding-left: 30px;
+  left: 0;
 }
-#make-picks #right-container {
-  position: absolute;
-  right: 0;
-  width: 300px;
-  padding: 10px;
-  top: 0;
-}
-#make-picks-menu {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+@media (min-width: 992px) {
+  #make-picks #picks-container {
+    padding-left: 30px;
+    left: 165px;
+    right: 300px;
+  }
 }
 #make-picks-menu .sport-icon {
   height: 18px;
@@ -130,16 +453,27 @@ a:focus {
 #make-picks-menu .fa-angle-down {
   margin-top: 3px;
 }
+@media (min-width: 992px) {
+  #make-picks-menu {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+}
 #make-picks-menu .main-list {
   list-style-type: none;
   padding-left: 0;
+  margin-bottom: 0;
 }
 #make-picks-menu .main-list .main-item {
   background-color: white;
-  padding: 3px 5px;
+  padding: 8px 5px;
   border-bottom: 1px solid #eeeeee;
   display: block;
   color: #6a6b6c;
+}
+@media (min-width: 992px) {
+  #make-picks-menu .main-list .main-item {
+    padding: 3px 5px;
+  }
 }
 #make-picks-menu .main-list .main-item:hover {
   color: #515252;
@@ -166,7 +500,7 @@ a:focus {
 }
 #make-picks-menu .sub-1-list .sub-1-item:not(.abstract):hover,
 #make-picks-menu .sub-1-list .sub-1-item:not(.abstract).full-active {
-  background-color: #104673;
+  background-color: #21759b;
   color: white;
 }
 #make-picks-menu .sub-1-list .sub-1-item.abstract:hover,
@@ -186,22 +520,89 @@ a:focus {
 }
 #make-picks-menu .sub-2-list .sub-2-item:hover,
 #make-picks-menu .sub-2-list .sub-2-item.active {
-  background-color: #104673;
+  background-color: #21759b;
   color: white;
+}
+#make-picks-picks {
+  margin-top: 20px;
 }
 #make-picks-picks div:first-of-type h2 {
   margin-top: 0;
 }
 #make-picks-picks h2 {
   text-transform: uppercase;
-  font-size: 20px;
-  margin-bottom: 25px;
+  font-size: 16px;
+  margin-bottom: 12px;
   margin-top: 25px;
+}
+#make-picks-picks .bet-duration-filter {
+  text-transform: uppercase;
+}
+.make-picks-sub-menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: #21759b;
+  color: white;
+  padding: 10px 10px;
+}
+@media (min-width: 992px) {
+  .make-picks-sub-menu {
+    position: static;
+    background-color: transparent;
+    padding: 0;
+    color: #6a6b6c;
+  }
+}
+.make-picks-sub-menu .fa-bars {
+  cursor: pointer;
+}
+@media (min-width: 992px) {
+  .make-picks-sub-menu .fa-bars {
+    display: none;
+  }
+}
+.make-picks-sub-menu h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+@media (min-width: 992px) {
+  .make-picks-sub-menu h1 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+}
+.make-picks-sub-menu h1 .fa-angle-right {
+  margin: 0 10px;
+  font-size: 14px;
+  color: white;
+}
+@media (min-width: 992px) {
+  .make-picks-sub-menu h1 .fa-angle-right {
+    font-size: 22px;
+    color: #909192;
+  }
+}
+.bet-section-container {
+  display: none;
+}
+@media (min-width: 992px) {
+  .bet-section-container {
+    display: inline-block !important;
+  }
+}
+.bet-section-container.active {
+  display: inline-block;
+}
+.bet-section-container:last-of-type .bets-container {
+  border-right: 0;
 }
 .bet-section {
   display: inline-block;
   vertical-align: top;
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
 }
 .bet-section .bets-container {
@@ -217,19 +618,59 @@ a:focus {
   margin: 0 10px;
 }
 .bet-section .bet {
-  padding: 0 18px;
+  padding: 0 10px;
 }
 .bet-section .bet .odds {
   color: rgba(106, 107, 108, 0.7);
-  font-size: 13px;
+  font-size: 12px;
   padding-left: 5px;
+}
+.bet-section .bet .alt-bets .dropdown-menu {
+  right: 0;
+  text-align: right;
+  padding-right: 10px;
+  min-width: 100px;
+  border-radius: 0;
 }
 .picks-event-container {
   padding: 15px 15px;
   background-color: white;
   margin-bottom: 10px;
   float: left;
+  border-radius: 5px;
+  width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  /*
+  &.columns-1{
+    width:auto;
+  }
+  &.columns-2{
+    width:auto;
+
+  }
+  &.columns-3{
+    width:auto;
+  }
+  &.columns-4{
+    width:100%;
+    .bet-section-container{
+      float:left;
+      width:20%;
+    }
+
+    .contestant-section{
+      float:left;
+      width:20%;
+    }
+    .bet-section{
+      display:block;
+    }
+  }
+  &.columns-5{
+    width:100%;
+
+  }
+  */
 }
 .picks-event-container .contestant-section {
   display: inline-block;
@@ -241,7 +682,7 @@ a:focus {
   border-right: 1px solid #eaeaea;
 }
 .picks-event-container .contestant-section .contestants-container .contestant-name {
-  font-size: 16px;
+  font-size: 14px;
   padding-top: 10px;
 }
 .picks-event-container .more-container {
@@ -261,4 +702,154 @@ a:focus {
 }
 .picks-event-container .bet-row {
   height: 45px;
+}
+.make-picks-filters {
+  margin-top: 20px;
+}
+@media (min-width: 992px) {
+  .make-picks-filters {
+    display: none;
+  }
+}
+.make-picks-filters ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.make-picks-filters ul li {
+  display: inline-block;
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+.make-picks-filters ul li a.active {
+  border-bottom: 1px solid #21759b;
+}
+.bet-slip {
+  position: absolute;
+  top: 60px;
+  bottom: 70px;
+  right: 20px;
+  left: 20px;
+  overflow-y: scroll;
+}
+.bet-slip h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+}
+.btn-bet-slip {
+  background-color: #104673;
+  margin-right: 30px;
+  border-radius: 0;
+  color: white;
+  padding: 3px 0;
+  width: 100%;
+}
+@media (min-width: 480px) {
+  .btn-bet-slip {
+    width: 240px;
+  }
+}
+.bet-slip-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+@media (min-width: 480px) {
+  .bet-slip-container {
+    width: 240px;
+    right: 30px;
+  }
+}
+.bet-slip-container h1 {
+  display: none;
+}
+.bet-slip-container.picks-page {
+  position: fixed;
+  right: 0;
+  width: 300px;
+  padding: 20px;
+  bottom: 0;
+  top: 60px;
+  border-left: 2px solid #dddddf;
+  margin-left: 20px;
+  overflow-y: scroll;
+  display: none;
+}
+@media (min-width: 480px) {
+  .bet-slip-container.picks-page {
+    display: block;
+  }
+}
+.bet-slip-container.picks-page h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #dddddf;
+  padding-bottom: 15px;
+  display: block;
+}
+.bet-slip-container.picks-page .btn-bet-slip {
+  display: block;
+}
+@media (min-width: 480px) {
+  .bet-slip-container.picks-page .btn-bet-slip {
+    display: none;
+  }
+}
+.bet-slip-pick-container {
+  background-color: white;
+  padding: 0 10px;
+}
+.bet-slip-pick-container .bet-slip-pick {
+  border-bottom: 1px solid #eaeaea;
+  padding: 10px 0;
+  position: relative;
+}
+.bet-slip-pick-container .bet-slip-pick:last-of-type {
+  border-bottom: 0;
+}
+.bet-slip-pick-container .bet-slip-pick .heading {
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+.bet-slip-pick-container .bet-slip-pick .remove-container {
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.bet-slip-pick-container .bet-slip-pick .values-container {
+  margin-top: 5px;
+}
+.submit-btn-container {
+  border-top: 2px solid #dddddf;
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px;
+  margin: 0 20px;
+}
+.team-name-header {
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.auth-form {
+  margin: 0 auto;
+  max-width: 400px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.avatar.avatar-sm {
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
 }

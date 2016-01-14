@@ -8,7 +8,10 @@ angular.module('fu').directive('betMoneyline', function () {
         },
         templateUrl: 'modules/fu/client/templates/make-picks/bets/bet-moneyline.client.template.html',
         controller: ['$scope', function ($scope){
-            $scope.bet = $scope.bets[0];
+            $scope.addBet = $scope.$parent.addBet;
+            if($scope.bets){
+                $scope.bet = $scope.bets[0];
+            }
         }]
     };
 });

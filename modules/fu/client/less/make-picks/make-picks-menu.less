@@ -1,5 +1,4 @@
 #make-picks-menu{
-
   .sport-icon{
     height:18px;
     width:18px;
@@ -8,17 +7,25 @@
   .fa-angle-right, .fa-angle-down{
     margin-top:3px;
   }
-  .box-shadow(1);
+
+  @media (min-width: @screen-md-min) {
+    .box-shadow(1);
+  }
 
   .main-list{
     list-style-type:none;
     padding-left:0;
+    margin-bottom:0;
     .main-item{
       background-color:white;
-      padding:3px 5px;
+      padding:8px 5px;
       border-bottom:1px solid @color-bg;
       display:block;
       color:@color-text;
+
+      @media (min-width: @screen-md-min) {
+        padding:3px 5px;
+      }
       &:hover{
         color:darken(@color-text, 10%);
       }
@@ -45,7 +52,7 @@
       color:@color-text;
       &:not(.abstract){
         &:hover, &.full-active{
-          background-color:@color-blue;
+          background-color:@color-blue-2;;
           color:white;
         }
       }
@@ -67,7 +74,7 @@
       display:block;
       color:@color-text;
       &:hover, &.active{
-        background-color:@color-blue;
+        background-color:@color-blue-2;;
         color:white;
       }
     }

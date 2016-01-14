@@ -5,12 +5,13 @@ angular.module('fu').directive('betSectionMoneyline', function () {
         restrict: 'E',
         scope: {
             bets: '=',
-            contestant1Name: '=',
-            contestant2Name: '='
+            event: '='
         },
         templateUrl: 'modules/fu/client/templates/make-picks/bet-sections/bet-section-moneyline.client.template.html',
         controller: ['$scope', function ($scope){
-            if('draw' in $scope.bets){
+            $scope.contestant1Name = $scope.event.contestant1.name;
+            $scope.contestant2Name = $scope.event.contestant2.name;
+            if($scope.bets && 'draw' in $scope.bets){
                 $scope.isDraw = true;
             }
         }]

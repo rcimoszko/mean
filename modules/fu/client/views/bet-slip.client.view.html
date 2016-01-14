@@ -1,0 +1,56 @@
+<div class="bet-slip-container" data-ng-controller="BetSlipController" data-ng-class="{'picks-page': isPicksPage}">
+    <h1>
+        BET SLIP
+    </h1>
+
+    <button class="btn-bet-slip btn btn-blue">
+        BET SLIP <span data-ng-if="betSlip.stats.count > 0">({{betSlip.stats.count}})</span>
+    </button>
+
+    <div class="bet-slip">
+        <h2 data-ng-if="betSlip.stats.count === 0">
+            No Picks
+        </h2>
+
+        <div data-ng-repeat="eventGroup in events|orderBy:'date'">
+            <div class="team-name-header">
+                <a href>
+                    {{eventGroup.event|teamNameHeader}}
+                </a>
+            </div>
+            <div class="bet-slip-pick-container">
+                <div class="bet-slip-pick" data-ng-repeat="pick in eventGroup.picks">
+                    <div class="bet-name">
+                        {{pick|betName:eventGroup.event}}
+                    </div>
+                    <div class="bet-type">
+                        {{pick.betType}} - {{pick.betDuration}}
+                    </div>
+                    <div class="remove-container">
+                        <a href data-ng-click="betSlip.addRemove(pick, eventGroup.event);">&times;</a>
+                    </div>
+                    <div class="row text-center values-container">
+                        <div class="col-xs-4">
+                            <div class="heading">Units</div>
+                            <input min="1" max="5" type="number" ng-model="pick.units" ng-init="pick.units = 1"  data-ng-class="{error: pick.invalidUnits}"/>
+                        </div>
+                        <div class="col-xs-4" data-ng-class="{changed: pick.oddsChanged}">
+                            <div class="heading">Odds</div>
+                            {{pick.odds|formatOdds}}
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="heading">Return</div>
+                            {{(pick.units * pick.odds)|number:2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-btn-container" data-ng-show="betSlip.stats.count > 0">
+        <button class="btn btn-blue" data-ng-click="submitPicks()" data-ng-disabled="loading.isLoading.pickSubmit">
+            <span data-ng-if="!loading.isLoading.pickSubmit">Submit</span>
+            <loading is-loading="loading.isLoading.pickSubmit" size="'sm'" color="'blue'"></loading>
+        </button>
+    </div>
+</div>

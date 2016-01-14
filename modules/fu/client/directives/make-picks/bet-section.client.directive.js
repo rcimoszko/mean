@@ -5,8 +5,7 @@ angular.module('fu').directive('betSection', function ($compile) {
         restrict: 'E',
         scope: {
             bets: '=',
-            contestant1Name: '=',
-            contestant2Name: '=',
+            event: '=',
             betType: '='
         },
         template: '',
@@ -15,16 +14,16 @@ angular.module('fu').directive('betSection', function ($compile) {
 
             switch($scope.betType){
                 case 'moneyline':
-                    directive = '<bet-section-moneyline bets="bets" contestant1-name="contestant1Name" contestant2-name="contestant2Name"></bet-section-moneyline>';
+                    directive = '<bet-section-moneyline event="event" bets="bets"></bet-section-moneyline>';
                     break;
                 case 'spread':
-                    directive = '<bet-section-spread bets="bets" contestant1-name="contestant1Name" contestant2-name="contestant2Name"></bet-section-spread>';
+                    directive = '<bet-section-spread event="event" bets="bets"></bet-section-spread>';
                     break;
                 case 'total points':
-                    directive = '<bet-section-total-points bets="bets"></bet-section-total-points>';
+                    directive = '<bet-section-total-pointsevent="event"  bets="bets"></bet-section-total-points>';
                     break;
                 case 'team totals':
-                    directive = '<bet-section-team-totals bets="bets" contestant1-name="contestant1Name" contestant2-name="contestant2Name"></bet-section-team-totals>';
+                    directive = '<bet-section-team-totals event="event" bets="bets"></bet-section-team-totals>';
                     break;
             }
 

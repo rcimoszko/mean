@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks',
-    function ($scope, $stateParams, $filter, Authentication, MakePicks) {
+angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks', '$rootScope',
+    function ($scope, $stateParams, $filter, Authentication, MakePicks, $rootScope) {
         $scope.authentication = Authentication;
-
         $scope.leagueSlug = $stateParams.leagueSlug;
         $scope.sportSlug = $stateParams.sportSlug;
-
 
         $scope.updateSport = function(sport){
             $scope.activeSub1 = null;
@@ -24,16 +22,18 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
             } else {
                 $scope.activeSub1 = sub1;
                 $scope.activeSub2 = null;
+                MakePicks.active.league = $scope.activeSub1;
             }
         };
 
         $scope.updateSub2 = function(sub2){
             $scope.activeSub2 = sub2;
+            MakePicks.active.league = $scope.activeSub2;
         };
 
         $scope.setActiveMenu = function(){
             var activeSport = $filter('filter')($scope.menu, {slug:$scope.sportSlug});
-            if(activeSport.length){
+            if(activeSport.length === 1){
                 $scope.activeSport = activeSport[0];
                 for(var i=0; i<$scope.activeSport.main.length; i++){
                     var sub1 = $scope.activeSport.main[i];
@@ -43,16 +43,19 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
                             if(sub2.slug === $scope.leagueSlug){
                                 $scope.activeSub1 = sub1;
                                 $scope.activeSub2 = sub2;
+                                MakePicks.active.league = $scope.activeSub2;
                                 break;
                             }
                         }
                     }
                     if(sub1.slug === $scope.leagueSlug){
                         $scope.activeSub1 = sub1;
+                        MakePicks.active.league = $scope.activeSub1;
                         break;
                     }
                 }
             }
+            $rootScope.$broadcast('menuSet');
         };
 
 
@@ -65,6 +68,8 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
             }
         }
         MakePicks.getMenu(cbGetMenu);
+
+        $scope.showMenu = false;
 
 
 

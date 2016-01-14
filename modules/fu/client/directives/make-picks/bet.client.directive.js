@@ -5,10 +5,11 @@ angular.module('fu').directive('bet', function ($compile) {
         restrict: 'E',
         scope: {
             bets: '=',
+            event: '=',
             betType: '='
         },
         template: '',
-        controller:  ['$scope', '$element',  function ( $scope, $element) {
+        controller:  ['$scope', '$element', 'BetSlip',  function ( $scope, $element, BetSlip) {
             var directive;
             switch($scope.betType){
                 case 'moneyline':
@@ -26,7 +27,7 @@ angular.module('fu').directive('bet', function ($compile) {
             $element.append(el);
 
             $scope.addBet = function(bet){
-                console.log(bet);
+                BetSlip.addRemove(bet, $scope.event);
             };
 
         }]

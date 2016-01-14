@@ -5,11 +5,12 @@ angular.module('fu').directive('betSectionSpread', function () {
         restrict: 'E',
         scope: {
             bets: '=',
-            contestant1Name: '=',
-            contestant2Name: '='
+            event: '='
         },
         templateUrl: 'modules/fu/client/templates/make-picks/bet-sections/bet-section-spread.client.template.html',
         controller: ['$scope', function ($scope){
+            $scope.contestant1Name = $scope.event.contestant1.name;
+            $scope.contestant2Name = $scope.event.contestant2.name;
 
         }]
     };

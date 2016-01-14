@@ -1,0 +1,20 @@
+.make-picks-filters{
+  margin-top:20px;
+  @media (min-width: @screen-md-min) {
+    display:none;
+  }
+
+  ul{
+    list-style-type:none;
+    padding-left:0;
+    li{
+      display:inline-block;
+      margin-right:20px;
+      text-transform:uppercase;
+
+      a.active{
+        border-bottom:1px solid @color-blue-2;
+      }
+    }
+  }
+}

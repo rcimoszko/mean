@@ -4,7 +4,10 @@ angular.module('fu').directive('makePicks', function () {
     return {
         restrict: 'E',
         scope: {
-            event: '='
+            event: '=',
+            betTypes: '=',
+            columns: '=',
+            activeBetType: '='
         },
         templateUrl: 'modules/fu/client/templates/make-picks/make-picks.client.template.html',
         controller: ['$scope', function ($scope){
@@ -12,7 +15,6 @@ angular.module('fu').directive('makePicks', function () {
             $scope.contestant2 = $scope.event.contestant2.ref;
 
             $scope.mainBets = $scope.event.bets.main;
-
 
         }]
     };

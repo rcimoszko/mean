@@ -1,13 +1,11 @@
-<section id="make-picks">
-    <div id="menu-container">
+<section id="make-picks" data-ng-controller="MakePicksController">
+    <div id="menu-container" data-ng-class="{show: showMenu}">
         <ng-include src="'/modules/fu/client/views/make-picks/make-picks.menu.client.view.html'"></ng-include>
     </div>
+    <div class="menu-overlay" data-ng-class="{show: showMenu}" data-ng-click="toggleMenu()"></div>
 
     <div id="picks-container">
         <section ui-view></section>
     </div>
 
-    <div id="right-container">
-        <ng-include src="'/modules/fu/client/views/make-picks/make-picks.bet-slip.client.view.html'"></ng-include>
-    </div>
 </section>

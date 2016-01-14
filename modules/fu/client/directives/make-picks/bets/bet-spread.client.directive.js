@@ -8,10 +8,13 @@ angular.module('fu').directive('betSpread', function () {
         },
         templateUrl: 'modules/fu/client/templates/make-picks/bets/bet-spread.client.template.html',
         controller: ['$scope', '$filter', function ($scope, $filter){
-            $scope.activeBet = $filter('filter')($scope.bets, {active:true})[0];
-            var altLines = $filter('filter')($scope.bets, {altLine:true});
-            if(altLines.length){
-                $scope.isAlt = true;
+            $scope.addBet = $scope.$parent.addBet;
+            if($scope.bets){
+                $scope.activeBet = $filter('filter')($scope.bets, {active:true})[0];
+                var altLines = $filter('filter')($scope.bets, {altLine:true});
+                if(altLines.length){
+                    $scope.isAlt = true;
+                }
             }
 
             $scope.setActive = function(bet){

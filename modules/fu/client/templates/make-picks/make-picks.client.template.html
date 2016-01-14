@@ -1,5 +1,5 @@
 <div class="clearfix">
-    <div class="picks-event-container {{event.sport.ref.slug}}">
+    <div class="picks-event-container {{event.sport.ref.slug}} columns-{{columns}}">
         <div class="contestant-section">
             <div class="heading">{{::event.startTime|date:'shortTime'}}</div>
             <div class="contestants-container">
@@ -7,10 +7,11 @@
                 <div class="contestant-name bet-row">{{::contestant2.name}}</div>
             </div>
         </div>
-        <bet-section bet-type="betType" bets="bets" contestant1-name="contestant1.name" contestant2-name="contestant2.name" data-ng-repeat="(betType, bets) in mainBets"></bet-section>
+        <div class="bet-section-container" data-ng-repeat="betType in betTypes" data-ng-class="{active: activeBetType === betType}">
+            <bet-section event="event" bet-type="betType" bets="mainBets[betType]"></bet-section>
+        </div>
 
-        <div class="more-container">
-
+        <div class="more-container" data-ng-if="event.bets.moreCount">
             <div class="heading">
                 MORE BETS
             </div>
@@ -18,6 +19,5 @@
                 <a href>+ {{event.bets.moreCount}}</a>
             </div>
         </div>
-
     </div>
 </div>

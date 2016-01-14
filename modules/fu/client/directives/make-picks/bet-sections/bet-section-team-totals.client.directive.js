@@ -5,12 +5,12 @@ angular.module('fu').directive('betSectionTeamTotals', function () {
         restrict: 'E',
         scope: {
             bets: '=',
-            contestant1Name: '=',
-            contestant2Name: '='
+            event: '='
         },
         templateUrl: 'modules/fu/client/templates/make-picks/bet-sections/bet-section-team-totals.client.template.html',
         controller: ['$scope', function ($scope){
-
+            $scope.contestant1Name = $scope.event.contestant1.name;
+            $scope.contestant2Name = $scope.event.contestant2.name;
         }]
     };
 });

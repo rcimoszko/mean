@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core').filter('formatPoints', function(){
-    return function(points, overUnder){
+    return function(points){
         if(!isNaN(points)){
             var value = points % 1;
             var pointsText;
@@ -18,7 +18,7 @@ angular.module('core').filter('formatPoints', function(){
 
             } else {
                 points = points.toFixed(1);
-                pointsText = overUnder[0] + ' ' + points;
+                pointsText = points;
             }
             return pointsText;
         }

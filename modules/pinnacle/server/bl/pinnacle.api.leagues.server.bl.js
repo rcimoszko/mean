@@ -75,9 +75,9 @@ function updateLeagues(pinnacleLeague, leagueApi, pinnacleSportsbook, callback){
         if (active === 1 && pinnacleLeague.active === false){
             pinnacleLeague.active = true;
             LeagueBl.update({active:true}, league, cb);
-        } else if (active === 0 && pinnacleLeague.active === true) {
+        } else if (active === 0) { // add back && pinnacleLeague.active === false
             pinnacleLeague.active = false;
-            LeagueBl.update({active:true}, league, cb);
+            LeagueBl.update({active:false}, league, cb);
         } else {
             callback(null);
         }
@@ -162,7 +162,7 @@ function updateInsertLeagues(pinnacleSport, callback){
         function processLeague_loop(leagueApi, callback){
             processLeague(leagueApi, pinnacleSport, pinnacleSportsbook, callback);
         }
-        async.eachSeries(leagues.league, processLeague_loop, callback);
+        async.each(leagues.league, processLeague_loop, callback);
 
     }
 
