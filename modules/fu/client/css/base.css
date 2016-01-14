@@ -253,7 +253,6 @@ a:focus {
 }
 #auth-side-menu .stats-container .text {
   color: rgba(255, 255, 255, 0.6);
-  font-weight: 200;
   text-transform: uppercase;
 }
 #auth-side-menu .menu-container {
@@ -276,7 +275,6 @@ a:focus {
 }
 #auth-side-menu .menu-container ul.user-menu > li {
   font-size: 16px;
-  font-weight: 300;
   margin-bottom: 20px;
 }
 #auth-side-menu .menu-container ul.user-menu > li a {
@@ -289,7 +287,7 @@ a:focus {
 }
 #auth-side-menu .menu-container ul.channel-list > li {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 700;
   margin-bottom: 5px;
 }
 #auth-side-menu .menu-container ul.channel-list > li a {
@@ -387,7 +385,7 @@ a:focus {
   left: -200px;
   overflow-y: scroll;
   margin-top: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 #make-picks #menu-container.show {
   -moz-transition: left 0.2s ease-in-out;

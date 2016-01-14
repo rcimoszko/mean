@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading',
-    function($filter, ApiUserMakePicks, Loading) {
+angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication',
+    function($filter, ApiUserMakePicks, Loading, Authentication) {
         var events = [];
         var stats = {count:0};
 
@@ -61,9 +61,11 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
         var submit = function(callback){
             Loading.isLoading.pickSubmit = true;
 
-            function cbSuccess(contestant){
+            function cbSuccess(results){
                 Loading.isLoading.pickSubmit = false;
-                callback(null, contestant);
+                Authentication.user = results.user;
+                events.length = 0;
+                callback(null, results);
             }
 
             function cbError(response){

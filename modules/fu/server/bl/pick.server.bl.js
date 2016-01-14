@@ -69,7 +69,11 @@ function del(pick, callback){
 }
 
 function getByQuery(query, callback){
+}
 
+
+function getOneByQuery(query, callback){
+    Pick.findOne(query, callback);
 }
 
 
@@ -108,7 +112,9 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 exports.getBySlug   = getBySlug;
-exports.getByQuery  = getByQuery;
+
+exports.getByQuery      = getByQuery;
+exports.getOneByQuery   = getOneByQuery;
 
 exports.cancelPicksByEvent = cancelPicksByEvent;
 exports.cancelPick         = cancelPick;

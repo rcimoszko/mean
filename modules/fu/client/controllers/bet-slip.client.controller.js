@@ -14,7 +14,11 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
         $scope.events = BetSlip.events;
 
         $scope.submitPicks = function(){
-            function cb(err){
+            function cb(err, results){
+                if(err){
+
+                }
+
 
             }
             $scope.betSlip.submit(cb);

@@ -6,13 +6,11 @@ var path = require('path'),
     errorHandler = require(path.resolve('./modules/fu/server/sys/error.server.sys'));
 
 function submit(req, res) {
-    function cb(err, messages){
+    function cb(err, picks){
         if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
+            return res.status(400).send(err);
         } else {
-            res.json(messages);
+            res.json(picks);
         }
     }
 
