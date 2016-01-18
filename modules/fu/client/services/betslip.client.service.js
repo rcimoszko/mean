@@ -43,6 +43,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
 
 
         var addRemove = function(pick, event){
+            pick.selected = !pick.selected;
             var eventIndex = getEventIndex(event);
             if(eventIndex !== undefined){
                 var pickIndex = events[eventIndex].picks.indexOf(pick);

@@ -1,13 +1,26 @@
 <section id="make-picks-picks" data-ng-controller="MakePicksPicksController">
     <div class="make-picks-sub-menu">
         <h1 data-ng-if="makePicks.active.league">
-            <i class="fa fa-bars" data-ng-click="toggleMenu()"></i>
-            {{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}
+            <div class="heading">
+                <i class="fa fa-bars" data-ng-click="toggleMenu()"></i>
+                {{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}
 
-
-            <span class="pull-right bet-duration-filter">
-                {{activeBetDuration}} <i class="fa fa-angle-down"></i>
-            </span>
+            </div>
+            <div class="bet-duration-filter">
+                {{activeBetDuration}}
+                <span class="dropdown" dropdown>
+                    <a href class="dropdown-toggle" dropdown-toggle>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class="dropdown-menu pull-right">
+                        <div data-ng-repeat="betDuration in betDurations" >
+                            <a href data-ng-click="setActiveBetDuration(betDuration)" >
+                                {{betDuration}}
+                            </a>
+                        </div>
+                    </div>
+                </span>
+            </div>
         </h1>
     </div>
     <div class="make-picks-filters">
@@ -18,7 +31,7 @@
     <div data-ng-repeat="dateGroup in events">
         <h2>{{dateGroup.date |date:'longDate'}}</h2>
         <div data-ng-repeat="event in dateGroup.events">
-            <make-picks event="event" bet-types="betTypes" columns="columns" active-bet-type="activeBetType"></make-picks>
+            <make-picks event="event" bet-types="betTypes" bet-durations="betDurations" columns="columns" active-bet-type="activeBetType" active-bet-duration="activeBetDuration"></make-picks>
         </div>
     </div>
 </section>

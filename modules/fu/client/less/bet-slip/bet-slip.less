@@ -41,38 +41,36 @@
 }
 
 .bet-slip-container.picks-page{
-  position:fixed;
-  right:0;
-  width:300px;
-  padding:20px;
-  bottom:0;
-  top:@height-top-menu;
-  border-left:2px solid @color-gray-bg-divider;
-  margin-left:20px;
-  overflow-y:scroll;
-  display:none;
 
-
-  @media (min-width: @screen-xs-min) {
+  @media (min-width: @screen-lgxl-min) {
     display:block;
-  }
-
-  h1{
-    text-align:center;
-    margin-top:0;
-    margin-bottom:0;
-    font-size:20px;
-    text-transform:uppercase;
-    border-bottom:2px solid @color-gray-bg-divider;
-    padding-bottom:15px;
-    display:block;
-  }
-  .btn-bet-slip{
-    display:block;
-    @media (min-width: @screen-xs-min) {
-      display:none;
+    position:fixed;
+    right:0;
+    width:300px;
+    padding:20px;
+    bottom:0;
+    top:@height-top-menu;
+    border-left:2px solid @color-gray-bg-divider;
+    margin-left:20px;
+    overflow-y:scroll;
+    h1{
+      text-align:center;
+      margin-top:0;
+      margin-bottom:0;
+      font-size:20px;
+      text-transform:uppercase;
+      border-bottom:2px solid @color-gray-bg-divider;
+      padding-bottom:15px;
+      display:block;
+    }
+    .btn-bet-slip{
+      display:block;
+      @media (min-width: @screen-xs-min) {
+        display:none;
+      }
     }
   }
+
 }
 
 .bet-slip-pick-container{

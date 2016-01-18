@@ -1,8 +1,8 @@
 <div class="bet bet-spread">
     <div data-ng-if="activeBet">
-        <a href data-ng-click="addBet(activeBet)" data-ng-class="{'selected': activeBet.selected, 'picked': activeBet.picked}">
-            <span class="spread">{{activeBet.spread|formatSpread}}</span>
-            <span class="odds">({{activeBet.odds|formatOdds}})</span>
+        <a class="bet-btn" href data-ng-click="addBet(activeBet)" data-ng-class="{'selected': activeBet.selected, 'picked': activeBet.picked}">
+            <div class="spread">{{activeBet.spread|formatSpread}}</div>
+            <div class="odds">({{activeBet.odds|formatOdds}})</div>
         </a>
         <span class="dropdown alt-bets" dropdown data-ng-if="isAlt">
             <a href class="dropdown-toggle" dropdown-toggle>

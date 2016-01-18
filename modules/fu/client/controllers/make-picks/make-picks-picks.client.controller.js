@@ -14,9 +14,13 @@ angular.module('fu').controller('MakePicksPicksController', ['$scope', '$statePa
         $scope.setActiveBetType = function(betType){
             $scope.activeBetType = betType;
         };
+        $scope.setActiveBetDuration = function(betDuration){
+            $scope.activeBetDuration = betDuration;
+        };
 
         function getEvents(query){
             function cbGetEvents(err, results){
+                console.log(results);
                 if(!err){
                     $scope.events = results.events;
                     $scope.betTypes = results.betTypes;

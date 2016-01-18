@@ -7,17 +7,19 @@
   background-color:@color-blue-2;
   color:white;
   padding:10px @padding-mobile;
+  height:35px;
 
-  @media (min-width: @screen-md-min) {
+  @media (min-width: @screen-sm-min) {
     position:static;
     background-color:transparent;
     padding:0;
     color:@color-text;
+    height:20px;
   }
 
   .fa-bars{
     cursor:pointer;
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
       display:none;
     }
 
@@ -25,21 +27,44 @@
   h1{
     margin-top:0;
     margin-bottom:0;
-    font-size:16px;
+    font-size:13px;
+    position:relative;
+
     
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
       margin-bottom:15px;
+      font-size:16px;
+    }
+    @media (min-width: @screen-md-min) {
       font-size:20px;
     }
     .fa-angle-right{
-      margin:0 10px;
-      font-size:14px;
+      margin:0 2px;
+      font-size:12px;
       color:white;
 
-      @media (min-width: @screen-md-min) {
-        font-size:22px;
+      @media (min-width: @screen-sm-min) {
+        font-size:16px;
+        margin:0 10px;
         color:lighten(@color-text, 15%);
       }
+      @media (min-width: @screen-md-min) {
+        font-size:22px;
+      }
+    }
+    .heading{
+      position:absolute;
+      left:0;
+      right:120px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow:hidden;
+    }
+    .bet-duration-filter{
+      position:absolute;
+      right:0;
+      width:120px;
+      text-align:right;
     }
   }
 }

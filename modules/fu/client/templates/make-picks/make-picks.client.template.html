@@ -1,16 +1,22 @@
 <div class="clearfix">
-    <div class="picks-event-container {{event.sport.ref.slug}} columns-{{columns}}">
-        <div class="contestant-section">
-            <div class="heading">{{::event.startTime|date:'shortTime'}}</div>
-            <div class="contestants-container">
-                <div class="contestant-name bet-row">{{::contestant1.name}}</div>
-                <div class="contestant-name bet-row">{{::contestant2.name}}</div>
+    <div class="picks-event-container {{event.sport.ref.slug}} columns-{{columns}}" data-ng-class="{'has-more':event.bets.moreCount}">
+        <div data-ng-repeat="betDuration in betDurations|filter:activeBetDuration">
+            <div class="contestant-section">
+                <div class="heading">{{::event.startTime|date:'shortTime'}}</div>
+                <div class="contestants-container">
+                    <div>
+                        <div class="contestant-name bet-row">{{::contestant1.name}}</div>
+                    </div>
+                    <div class="contestant-name bet-row">{{::contestant2.name}}</div>
+                </div>
+            </div>
+            <div class="bet-section-container bet-section-container-{{betType}}" data-ng-repeat="betType in betTypes" data-ng-class="{active: activeBetType === betType}">
+                <bet-section event="event" bet-type="betType" bets="event.bets[betDuration][betType]"></bet-section>
             </div>
         </div>
-        <div class="bet-section-container" data-ng-repeat="betType in betTypes" data-ng-class="{active: activeBetType === betType}">
-            <bet-section event="event" bet-type="betType" bets="mainBets[betType]"></bet-section>
-        </div>
 
+
+        <!--
         <div class="more-container" data-ng-if="event.bets.moreCount">
             <div class="heading">
                 MORE BETS
@@ -19,5 +25,6 @@
                 <a href>+ {{event.bets.moreCount}}</a>
             </div>
         </div>
+        -->
     </div>
 </div>

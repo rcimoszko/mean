@@ -13,7 +13,6 @@
     width:200px;
     left:-200px;
     overflow-y:scroll;
-    margin-top:20px;
     .box-shadow(1);
 
     &.show{
@@ -21,7 +20,8 @@
       left:0;
     }
 
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
+      margin-top:20px;
       .box-shadow(0);
       .transition(left, 0s);
       top:auto;
@@ -54,9 +54,14 @@
   #picks-container{
     position:absolute;
     left:0;
-    @media (min-width: @screen-md-min) {
+    right:0;
+
+    @media (min-width: @screen-sm-min) {
       padding-left:30px;
       left:165px;
+    }
+
+    @media (min-width: @screen-lgxl-min) {
       right:300px;
     }
 

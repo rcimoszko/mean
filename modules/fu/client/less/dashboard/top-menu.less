@@ -8,7 +8,9 @@
   z-index:@zindex-top-menu;
   .box-shadow(1);
   &.auth{
-    left:@width-auth-side-menu;
+    @media (min-width: @screen-sm-min) {
+      left:@width-auth-side-menu;
+    }
   }
 
   ul{

@@ -11,7 +11,7 @@ var BetSchema = new Schema({
     pinnacleId:     {type: Number},
     pinnacleAltId:  {type: Number},
     betType:        {type: String, required: true}, // enum: ['spread', 'total points', 'team totals', 'moneyline', 'sets'],
-    betDuration:    {type: String, enum: ['match', 'matchups', 'game', 'fight', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1'], required: true},
+    betDuration:    {type: String, required: true}, //enum: ['match', 'matchups', 'game', 'fight', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1']
     otIncluded:     {type: Boolean}, //Hockey Only
     odds:           {type: Number},
     altLine:        {type: Boolean},
