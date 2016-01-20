@@ -3,10 +3,10 @@
 angular.module('fu').factory('User', ['Authentication',
     function(Authentication) {
 
-        var user = {};
+        var picks = [];
 
         return {
-            user: user
+            picks: picks
         };
 
     }

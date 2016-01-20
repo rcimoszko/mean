@@ -4,6 +4,7 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     PickResolveBl = require('./pick.resolve.server.bl'),
+    LeagueBl = require('./league.server.bl'),
     PickBl = require('./pick.server.bl'),
     m_Event = mongoose.model('Event');
 
@@ -65,7 +66,10 @@ function getByQuery(query, callback){
 
 function getOneByQuery(query, callback){
     m_Event.findOne(query, callback);
+}
 
+function getByLeague(league, callback){
+    getByQuery({'league.ref': league._id}, callback);
 }
 
 function cancel(event, callback){
@@ -150,6 +154,7 @@ exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
+exports.getByLeague  = getByLeague;
 
 exports.cancel      = cancel;
 exports.report      = report;

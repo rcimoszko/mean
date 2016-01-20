@@ -87,8 +87,6 @@ function getPicks(query, callback){
     var todo = [];
     var processedEvents = [];
     var leagueId = query.leagueId;
-    var betTypes = [];
-    var betDurations = [];
     var results = {};
 
     function getEvents(callback){
@@ -113,7 +111,7 @@ function getPicks(query, callback){
         var betTypeOrder = ['spread', 'moneyline', 'total points', 'team totals'];
         results.betTypes = _.chain(events).pluck('pinnacleBets').flatten().pluck('betType').unique().value();
         results.betTypes = _.sortBy(results.betTypes, function(betType){
-            if(betTypeOrder.indexOf(betType) === -1) return results.betTypeOrder.length;
+            if(betTypeOrder.indexOf(betType) === -1) return betTypeOrder.length;
             return betTypeOrder.indexOf(betType);
         });
         callback(null, events);
@@ -124,7 +122,7 @@ function getPicks(query, callback){
         var betDurationOrder = ['match', 'matchups', 'game', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
         results.betDurations = _.chain(events).pluck('pinnacleBets').flatten().pluck('betDuration').unique().value();
         results.betDurations = _.sortBy(results.betDurations, function(betDuration){
-            if(betDurationOrder.indexOf(betDuration) === -1) return results.betDurationOrder.length;
+            if(betDurationOrder.indexOf(betDuration) === -1) return betDurationOrder.length;
             return betDurationOrder.indexOf(betDuration);
         });
         callback(null, events);

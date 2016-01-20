@@ -25,8 +25,7 @@ function submit(user, eventGroups, callback){
         if(totalAtRisk > user.units){
             var err = {
                 message: 'Not enough Units remaining, Please remove some picks from you Bet Slip.',
-                type: 'units',
-                value: false
+                type: 'units'
             };
             callback(err);
         }
@@ -38,7 +37,7 @@ function submit(user, eventGroups, callback){
         var now = new Date();
 
         function checkEvent(event, callback){
-            if(now >  new Date(event.startTime)) startedEvents.push(event);
+            if(now > new Date(event.startTime)) startedEvents.push({eventId: event._id});
             callback();
         }
 

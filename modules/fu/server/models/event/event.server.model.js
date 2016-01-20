@@ -22,7 +22,8 @@ var EventSchema = new Schema({
     pinnacleIds:                [Number],
     pinnacleEventType:          {type: Schema.Types.Mixed},
 
-    pinnacleBets:              [{type: Schema.ObjectId, ref: 'Bet'}],
+    pinnacleBets:               [{type: Schema.ObjectId, ref: 'Bet'}],
+    betsAvailable:              [Schema.Types.Mixed], // To remove after migration
 
     contestant1Pitcher:         {type: String},
     contestant2Pitcher:         {type: String},

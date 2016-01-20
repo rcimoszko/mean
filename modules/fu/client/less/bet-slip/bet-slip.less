@@ -1,18 +1,3 @@
-.bet-slip{
-  position: absolute;
-  top: 60px;
-  bottom: 70px;
-  right: 20px;
-  left: 20px;
-  overflow-y: scroll;
-  h2{
-    text-align:center;
-    font-size:16px;
-    font-weight:@font-weight-light;
-    font-style:italic;
-  }
-}
-
 .btn-bet-slip{
   background-color:@color-blue;
   margin-right:30px;
@@ -30,86 +15,119 @@
   bottom:0;
   right:0;
   width:100%;
-  @media (min-width: @screen-xs-min) {
-    width:240px;
-    right:30px;
-  }
-
-  h1{
-    display:none;
-  }
-}
-
-.bet-slip-container.picks-page{
-
-  @media (min-width: @screen-lgxl-min) {
-    display:block;
-    position:fixed;
-    right:0;
-    width:300px;
-    padding:20px;
-    bottom:0;
-    top:@height-top-menu;
-    border-left:2px solid @color-gray-bg-divider;
-    margin-left:20px;
-    overflow-y:scroll;
-    h1{
-      text-align:center;
-      margin-top:0;
-      margin-bottom:0;
-      font-size:20px;
-      text-transform:uppercase;
-      border-bottom:2px solid @color-gray-bg-divider;
-      padding-bottom:15px;
-      display:block;
-    }
-    .btn-bet-slip{
-      display:block;
-      @media (min-width: @screen-xs-min) {
-        display:none;
-      }
-    }
-  }
-
-}
-
-.bet-slip-pick-container{
   background-color:white;
-  padding:0 10px;
-  .bet-slip-pick{
-    border-bottom:1px solid @color-gray-divider;
-    padding:10px 0;
-    position:relative;
-    &:last-of-type{
-      border-bottom:0;
-    }
-    .heading{
-      text-transform:uppercase;
-      font-size:11px;
-      margin-bottom:4px;
-    }
-    .remove-container{
-      position:absolute;
-      top:5px;
-      right:0;
-    }
-    .values-container{
-      margin-top:5px;
+  z-index:@zindex-bet-slip;
+  .box-shadow(2);
+  @media (min-width: @screen-xs-min) {
+    right:10px;
+    width:240px;
+  }
+
+  &.show{
+    min-height:500px;
+    width:100%;
+    @media (min-width: @screen-xs-min) {
+      width:300px;
     }
   }
-}
 
-.submit-btn-container{
-  border-top:2px solid @color-gray-bg-divider;
-  position:absolute;
-  bottom:0;
-  height:60px;
-  left:0;
-  right:0;
-  text-align:center;
-  padding:10px;
-  margin:0 20px;
+  .bet-slip{
+    position:absolute;
+    bottom:0;
+    top:0;
+    right:0;
+    left:0;
+    display:none;
+    h1{
+      font-size:18px;
+      margin:0;
+      padding:8px;
+      text-align:center;
+      background-color:@color-blue;
+      color:white;
+      .close{
+        line-height:0.75;
+        color:white;
+      }
+      border-bottom:1px solid @color-bg;
+    }
 
+    .picks-container{
+      position: absolute;
+      top: 35px;
+      bottom: 70px;
+      right: 20px;
+      left: 20px;
+      overflow-y: scroll;
+      h2{
+        text-align:center;
+        font-size:16px;
+        font-weight:@font-weight-light;
+        font-style:italic;
+      }
+
+      .bet-slip-pick-container{
+        background-color:@color-bg-light;
+        &.error{
+          border:1px solid fade(@color-orange, 70%) !important;
+        }
+        .bet-slip-pick{
+          border-bottom:1px solid white;
+          padding:10px;
+          position:relative;
+          &.error{
+            border:1px solid fade(@color-orange, 70%) !important;
+          }
+          &:last-of-type{
+            border-bottom:0;
+          }
+          .heading{
+            text-transform:uppercase;
+            font-size:11px;
+            margin-bottom:4px;
+          }
+          .remove-container{
+            position:absolute;
+            top:5px;
+            right:10px;
+          }
+          .values-container{
+            margin-top:5px;
+            .changed{
+              border:1px solid fade(@color-orange, 70%) !important;
+            }
+          }
+        }
+      }
+
+      .error-message-container{
+        position:fixed;
+        right:25px;
+        background-color:fade(@color-bg, 80%);
+        color:@color-orange;
+        margin:5px;
+        bottom:70px;
+        width:240px;
+        padding:3px;
+      }
+
+    }
+
+
+    .submit-btn-container{
+      border-top:2px solid @color-gray-bg-divider;
+      position:absolute;
+      bottom:0;
+      height:60px;
+      left:0;
+      right:0;
+      text-align:center;
+      padding:10px;
+      margin:0 20px;
+
+    }
+
+  }
 
 }
 
@@ -119,4 +137,57 @@
   margin-bottom:5px;
 }
 
+.bet-slip-container.picks-page{
 
+  @media (min-width: @screen-lgxl-min) {
+    display:block !important;
+    position:fixed;
+    right:0;
+    width:300px;
+    padding:20px;
+    bottom:0;
+    top:@height-top-menu;
+    border-left:2px solid @color-gray-bg-divider;
+    margin-left:20px;
+    overflow-y:scroll;
+    background-color:transparent;
+    box-shadow:none;
+    .bet-slip{
+      display:block !important;
+
+      .picks-container{
+        top: 60px;
+      }
+      .bet-slip-pick-container{
+        background-color:white;
+        .bet-slip-pick{
+          border-bottom:1px solid @color-gray-divider;
+        }
+      }
+    }
+
+
+
+    h1{
+      text-align:center;
+      background-color:transparent;
+      color:@color-text;
+      font-size:20px;
+      text-transform:uppercase;
+      border-bottom:2px solid @color-gray-bg-divider;
+      padding:0 0 15px 0;
+      display:block;
+      margin:20px 20px 0 20px;
+
+      .close{
+        display:none;
+      }
+    }
+    .btn-bet-slip{
+      display:block;
+      @media (min-width: @screen-xs-min) {
+        display:none;
+      }
+    }
+  }
+}

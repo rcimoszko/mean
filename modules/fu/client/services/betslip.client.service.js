@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication',
-    function($filter, ApiUserMakePicks, Loading, Authentication) {
+angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication', 'User',
+    function($filter, ApiUserMakePicks, Loading, Authentication, User) {
         var events = [];
         var stats = {count:0};
 
@@ -59,19 +59,40 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
             calculatePickCount();
         };
 
+        function removeAllSelected(){
+            for(var i=0; i<events.length; i++){
+                for(var j=0; j<events[i].picks.length; j++){
+                    events[i].picks[j].selected = false;
+                }
+            }
+        }
+
+        function removeErrors(){
+            for(var i=0; i<events.length; i++){
+                events[i].error = false;
+                for(var j=0; j<events[i].picks.length; j++){
+                    events[i].picks[j].error = false;
+                    events[i].picks[j].oddsChanged = false;
+                }
+            }
+        }
+
         var submit = function(callback){
+            removeErrors();
             Loading.isLoading.pickSubmit = true;
 
             function cbSuccess(results){
+                removeAllSelected();
                 Loading.isLoading.pickSubmit = false;
                 Authentication.user = results.user;
+                User.picks.push(results.picks);
                 events.length = 0;
                 callback(null, results);
             }
 
             function cbError(response){
                 Loading.isLoading.pickSubmit = false;
-                callback(response.data.message);
+                callback(response.data);
             }
 
             ApiUserMakePicks.save(events, cbSuccess, cbError);

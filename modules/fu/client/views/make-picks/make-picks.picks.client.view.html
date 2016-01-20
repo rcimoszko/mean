@@ -6,7 +6,7 @@
                 {{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}
 
             </div>
-            <div class="bet-duration-filter">
+            <div class="bet-duration-filter" data-ng-if="activeBetDuration">
                 {{activeBetDuration}}
                 <span class="dropdown" dropdown>
                     <a href class="dropdown-toggle" dropdown-toggle>
@@ -34,4 +34,5 @@
             <make-picks event="event" bet-types="betTypes" bet-durations="betDurations" columns="columns" active-bet-type="activeBetType" active-bet-duration="activeBetDuration"></make-picks>
         </div>
     </div>
+    <h4 data-ng-if="events.length === 0"><em>No Active Events</em></h4>
 </section>

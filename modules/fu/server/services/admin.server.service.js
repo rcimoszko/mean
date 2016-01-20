@@ -4,6 +4,8 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     SportBl = require('../bl/sport.server.bl'),
+    LoopBl = require('../bl/loop.server.bl'),
+    BetBl = require('../bl/bet.server.bl'),
     LeagueBl = require('../bl/league.server.bl'),
     slug = require('speakingurl');
 
@@ -58,4 +60,29 @@ function assignSlugs(callback){
     async.waterfall(todo, callback);
 }
 
+function decoupleBets(callback){
+
+    function processEvent(event, callback){
+
+        function processBet(bet, callback){
+            function cb(err, bet){
+                event.pinnacleBets.push(bet);
+                callback(err);
+            }
+            BetBl.create(bet, cb);
+        }
+
+        function cb(err){
+            delete event.betsAvailable;
+            event.save(callback);
+        }
+
+        async.each(event.betsAvailable, processBet, cb);
+    }
+
+    LoopBl.processEventGeneric(processEvent, callback);
+}
+
+
 exports.assignSlugs = assignSlugs;
+exports.decoupleBets = decoupleBets;
