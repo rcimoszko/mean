@@ -119,7 +119,7 @@ function getPicks(query, callback){
 
 
     function getBetDurations(events, callback){
-        var betDurationOrder = ['match', 'matchups', 'game', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
+        var betDurationOrder = ['match', 'matchups', 'game', 'game (OT included)', 'game (regular time)', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
         results.betDurations = _.chain(events).pluck('pinnacleBets').flatten().pluck('betDuration').unique().value();
         results.betDurations = _.sortBy(results.betDurations, function(betDuration){
             if(betDurationOrder.indexOf(betDuration) === -1) return betDurationOrder.length;

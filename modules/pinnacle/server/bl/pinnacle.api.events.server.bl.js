@@ -60,7 +60,7 @@ function parseEventApi(eventApi, pinnacleLeague, callback){
     if('awayPitcher' in eventApi) event.contestant2Pitcher = eventApi.awayPitcher;
 
     event.neutral = eventApi.home.indexOf('(n)') !== -1 ||eventApi.away.indexOf('(n)') !== -1;
-    if(pinnacleLeague.name.indexOf('OT Included') !== -1) event.type = 'ot included';
+    if(pinnacleLeague.name === 'NHL') event.type = 'ot included';
     if(pinnacleLeague.name.indexOf('Regular Time') !== -1) event.type = 'regular time';
     if(eventApi.home.indexOf('(+1.5 Sets)') !== -1) event.type = '+1.5 sets';
     if(eventApi.home.indexOf('(-1.5 Sets)') !== -1) event.type = '-1.5 sets';
@@ -291,7 +291,7 @@ function updateInsertAllEvents(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name:'Hockey'}, callback);
     }
 
     function processSports(pinnacleSports, callback){

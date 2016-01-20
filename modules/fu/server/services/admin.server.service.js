@@ -83,6 +83,32 @@ function decoupleBets(callback){
     LoopBl.processEventGeneric(processEvent, callback);
 }
 
+function updateHockeyBets(callback){
+    var todo = [];
 
-exports.assignSlugs = assignSlugs;
-exports.decoupleBets = decoupleBets;
+    function updateOvertimeBets(callback){
+        var query = {otIncluded: true, betType: 'game'};
+        var update = {betType: 'game (OT included)'};
+        var options = {multi: true};
+
+        BetBl.updateByQuery(query, update, options, callback);
+    }
+
+    function updateRegBets(callback){
+        var query = {otIncluded: true, betType: 'game'};
+        var update = {betType: 'game (regular time)'};
+        var options = {multi: true};
+
+        BetBl.updateByQuery(query, update, options, callback);
+    }
+
+    todo.push(updateOvertimeBets);
+    todo.push(updateRegBets);
+
+    async.waterfall(todo, callback);
+
+}
+
+exports.assignSlugs         = assignSlugs;
+exports.decoupleBets        = decoupleBets;
+exports.updateHockeyBets    = updateHockeyBets;

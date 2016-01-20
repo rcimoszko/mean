@@ -173,7 +173,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
             function findBet(callback){
                 var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref,  'contestant.ref': event[contestantField].ref };
-                if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
+
                 BetBl.getOneByQuery(query, callback);
             }
 
@@ -201,7 +201,6 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
         function findBet(callback){
             var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, draw: true};
-            if( betData.otIncluded) query.otIncluded =  betData.otIncluded;
             BetBl.getOneByQuery(query, callback);
         }
 
@@ -258,7 +257,6 @@ function processSpreads(oddsApi, initialBetData, event, callback){
             function findBet(callback){
                 var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'contestant.ref':event[contestantField].ref};
                 if(betData.altLine) query.altNumber = betData.altNumber;
-                if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
 
                 BetBl.getOneByQuery(query, callback);
             }
@@ -312,7 +310,6 @@ function processTotals(oddsApi, initialBetData, event, callback){
             function findBet(callback){
                 var query = {event:event._id, betType: betData.betType,betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder};
                 if(betData.altLine) query.altNumber = betData.altNumber;
-                if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
 
                 BetBl.getOneByQuery(query, callback);
             }
@@ -363,7 +360,6 @@ function processTeamTotals(oddsApi, initialBetData, event, callback){
 
             function findBet(callback){
                 var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref, 'overUnder':betData.overUnder, 'contestant.ref':event[contestantField].ref};
-                if(betData.otIncluded) query.otIncluded =  betData.otIncluded;
                 BetBl.getOneByQuery(query, callback);
             }
 
@@ -402,10 +398,10 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
         switch (event.pinnacleEventType[eventPinId]){
             case 'ot included':
-                betData.otIncluded = true;
+                if(betData.betDuration === 'game') betData.betDuration = 'game (OT included)';
                 break;
             case 'regular time':
-                betData.otIncluded = false;
+                if(betData.betDuration === 'game') betData.betDuration = 'game (regular time)';
                 break;
             default:
                 var betTypeInfo = event.pinnacleEventType[eventPinId]; //E Sports
@@ -537,7 +533,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name:'Hockey'}, callback);
     }
 
     function processSports(pinnacleSports, callback){

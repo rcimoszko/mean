@@ -39,8 +39,8 @@ function runFeed(callback){
         PinScoresBl.updateInsertAllScores(callback);
     }
 
-    todo.push(updateSports);
-    todo.push(updateLeagues);
+    //todo.push(updateSports);
+    //todo.push(updateLeagues);
     todo.push(updateEvents);
     todo.push(updateOdds);
     //todo.push(updateScores);
