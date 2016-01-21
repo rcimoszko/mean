@@ -69,11 +69,13 @@ function decoupleBets(callback){
                 event.pinnacleBets.push(bet);
                 callback(err);
             }
+            console.log(bet._id);
+            bet.event = event._id;
             BetBl.create(bet, cb);
         }
 
         function cb(err){
-            delete event.betsAvailable;
+            event.betsAvailable = undefined;
             event.save(callback);
         }
 
@@ -87,16 +89,16 @@ function updateHockeyBets(callback){
     var todo = [];
 
     function updateOvertimeBets(callback){
-        var query = {otIncluded: true, betType: 'game'};
-        var update = {betType: 'game (OT included)'};
+        var query = {otIncluded: true, betDuration: 'game'};
+        var update = {betDuration: 'game (OT included)'};
         var options = {multi: true};
 
         BetBl.updateByQuery(query, update, options, callback);
     }
 
     function updateRegBets(callback){
-        var query = {otIncluded: true, betType: 'game'};
-        var update = {betType: 'game (regular time)'};
+        var query = {otIncluded: false, betDuration: 'game'};
+        var update = {betDuration: 'game (regular time)'};
         var options = {multi: true};
 
         BetBl.updateByQuery(query, update, options, callback);
@@ -105,7 +107,11 @@ function updateHockeyBets(callback){
     todo.push(updateOvertimeBets);
     todo.push(updateRegBets);
 
-    async.waterfall(todo, callback);
+    function cb(err){
+        callback(err);
+    }
+
+    async.parallel(todo, cb);
 
 }
 

@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
+  pbkdf2 = require('pbkdf2-sha256'),
+  config = require('../../../../config/config'),
+  _ = require('lodash'),
+  MailChimpAPI = require('mailchimp').MailChimpAPI,
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
@@ -148,9 +152,11 @@ var UserSchema = new Schema({
     userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}
 });
 
+
 /**
- * Hook a pre save method to hash the password
+ * Hook a pre validate method to test the local password
  */
+/*
 UserSchema.pre('save', function (next) {
   if (this.password && this.isModified('password')) {
     this.salt = crypto.randomBytes(16).toString('base64');
@@ -160,10 +166,6 @@ UserSchema.pre('save', function (next) {
   next();
 });
 
-/**
- * Hook a pre validate method to test the local password
- */
-/*
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
     var result = owasp.test(this.password);
@@ -175,10 +177,7 @@ UserSchema.pre('validate', function (next) {
 
   next();
 });
-*/
-/**
- * Create instance method for hashing a password
- */
+
 UserSchema.methods.hashPassword = function (password) {
   if (this.salt && password) {
     return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
@@ -187,11 +186,81 @@ UserSchema.methods.hashPassword = function (password) {
   }
 };
 
-/**
- * Create instance method for authenticating user
- */
 UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password);
+};*/
+
+
+//Pres save to check password
+UserSchema.pre('save', function(next) {
+    if(!this.updatePassword){
+        if (this.password && this.password.length > 6 && this.password.length !== 88) {
+            this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+            this.password = this.hashPassword(this.password);
+        }
+    }
+    next();
+});
+
+//Post save to subscribe to mailchimp email list
+UserSchema.post('save', function(user){
+    var now = new Date();
+    var dateDiff = now - user.created;
+    if(dateDiff < 1000 && user.email && process.env.NODE_ENV === 'production'){
+        try {
+            var api = new MailChimpAPI(config.mailchimp.apiKey, { version : '2.0' });
+            api.lists_list(function(err, lists){
+                if(err){
+                    console.log(err);
+                } else {
+                    _.each(lists.data, function(list){
+                        if(list.name === config.mailchimp.listName){
+                            api.lists_subscribe({id: list.id, email: {email: user.email}, merge_vars: {'FNAME': user.firstName, 'LNAME': user.lastName, 'UNAME': user.username }, double_optin: false}, function(err, response){
+                                if(err){
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+});
+
+//Create instance method for hashing a password
+UserSchema.methods.hashPassword = function(password) {
+    if (this.salt && password) {
+        return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+    } else {
+        return password;
+    }
+};
+
+//Validdate Old Passtword
+UserSchema.methods.validateOldPassword = function (key, string) {
+    var parts = string.split('$');
+    var iterations = parts[1];
+    var salt = parts[2];
+    return pbkdf2(key, new Buffer(salt), iterations, 32).toString('base64') === parts[3];
+};
+
+//Create instance method for authenticating user
+UserSchema.methods.authenticate = function(password) {
+    if(this.updatePassword){
+        try {
+            return this.validateOldPassword(password, this.password);
+        }
+        catch(err) {
+            console.log(err);
+            return false;
+        }
+
+    } else {
+        return this.password === this.hashPassword(password);
+    }
 };
 
 /**

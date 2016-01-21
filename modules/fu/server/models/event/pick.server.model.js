@@ -11,9 +11,9 @@ var PickSchema = new Schema({
     league:             {type: Schema.ObjectId, ref: 'League', required: true},
     user:               {name: String, 'ref': {type: Schema.ObjectId, ref: 'User'}},
 
-    betType:            {type: String, enum: ['spread', 'total points', 'team totals', 'moneyline', 'sets'], required: true},
+    betType:            {type: String, required: true}, // enum: ['spread', 'total points', 'team totals', 'moneyline', 'sets'],
     otIncluded:         {type: Boolean}, //Hockey Only
-    betDuration:        {type: String, enum: ['match', 'matchups', 'game', 'fight', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1'], required: true},
+    betDuration:        {type: String, required: true}, // enum: ['match', 'matchups', 'game', 'fight', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1'],
     altLine:            {type: Boolean},
 
     odds:               {type: Number},
@@ -49,7 +49,9 @@ var PickSchema = new Schema({
 
     copiedOrigin:       {user: {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}, pick: {type: Schema.ObjectId, ref: 'Pick'}},
     copiedFrom:         {user: {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}, pick: {type: Schema.ObjectId, ref: 'Pick'}},
-    copied:             [{name: String, ref: {type: Schema.ObjectId, ref: 'User'}, _id: false }]
+    copied:             [{name: String, ref: {type: Schema.ObjectId, ref: 'User'}, _id: false }],
+
+    userStats:          {type: Schema.Types.Mixed}
 });
 
 mongoose.model('Pick', PickSchema);

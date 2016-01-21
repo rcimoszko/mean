@@ -76,6 +76,13 @@ function getOneByQuery(query, callback){
     Pick.findOne(query, callback);
 }
 
+function updateByQuery(query, update, options, callback){
+    Pick.update(query, update, options, callback);
+}
+
+function aggregate(array, callback){
+    Pick.aggregate(array).exec(callback);
+}
 
 function cancelPick(pick, callback){
     var update = {
@@ -116,6 +123,8 @@ exports.getBySlug   = getBySlug;
 exports.getByQuery      = getByQuery;
 exports.getOneByQuery   = getOneByQuery;
 
+exports.updateByQuery   = updateByQuery;
+exports.aggregate       = aggregate;
 exports.cancelPicksByEvent = cancelPicksByEvent;
 exports.cancelPick         = cancelPick;
 

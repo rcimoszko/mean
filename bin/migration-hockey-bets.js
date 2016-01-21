@@ -24,6 +24,7 @@ var AdminService = require('../modules/fu/server/services/admin.server.service.j
 function updateHockeyBets() {
     function cb(err){
         if(err)console.log(err);
+        console.log('done');
         mongoose.connection.close();
     }
 

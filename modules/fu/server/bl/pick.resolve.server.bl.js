@@ -19,20 +19,19 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'RegulationScore'];
                     opponentScore = event['contestant'+opponentNo+'RegulationScore'];
                     break;
-                case 'hockey':
-                    if(pick.otIncluded === true){
-                        contestantScore = event['contestant'+contestantNo+'FinalScore'];
-                        opponentScore = event['contestant'+opponentNo+'FinalScore'];
-                    } else {
-                        contestantScore = event['contestant'+contestantNo+'RegulationScore'];
-                        opponentScore = event['contestant'+opponentNo+'RegulationScore'];
-                    }
-                    break;
                 default:
                     contestantScore = event['contestant'+contestantNo+'FinalScore'];
                     opponentScore = event['contestant'+opponentNo+'FinalScore'];
                     break;
             }
+            break;
+        case 'game (OT included)':
+            contestantScore = event['contestant'+contestantNo+'FinalScore'];
+            opponentScore = event['contestant'+opponentNo+'FinalScore'];
+            break;
+        case 'game (regular time)':
+            contestantScore = event['contestant'+contestantNo+'RegulationScore'];
+            opponentScore = event['contestant'+opponentNo+'RegulationScore'];
             break;
         case '1st 5 innings':
         case '1st half':
@@ -58,6 +57,15 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case 'map 1':
             contestantScore = event['contestant'+contestantNo+'Set1Score'];
             opponentScore = event['contestant'+opponentNo+'Set1Score'];
+            break;
+        case 'map 2':
+            contestantScore = event['contestant'+contestantNo+'Set2Score'];
+            opponentScore = event['contestant'+opponentNo+'Set2Score'];
+            break;
+
+        case 'map 3':
+            contestantScore = event['contestant'+contestantNo+'Set3Score'];
+            opponentScore = event['contestant'+opponentNo+'Set3Score'];
             break;
         case '2nd half':
             switch(event.sport.name.toLowerCase()){

@@ -3,29 +3,157 @@
 var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
-    Bet = mongoose.model('Bet'),
-    Pick = mongoose.model('Pick'),
-    User = mongoose.model('User'),
     slug = require('speakingurl'),
     PickBl = require('./pick.server.bl'),
     LeaderboardQueryBl = require('./leaderboard.query.server.bl');
 
 
 function addCopy(user, bet){
-    Pick.update({_id:bet}, {$addToSet:{copied: {name: user.username, ref: user._id}}}).exec(function(err, numAffected){
-        if(err){
-            console.log(err);
-        }
-    });
+    var query = {_id: bet};
+    var update = {$addToSet:{copied: {name: user.username, ref: user._id}}};
+
+    function cb(err){
+        if(err) console.log(err);
+    }
+
+    PickBl.updateByQuery(query, update, {}, cb);
 }
 
+function calculateStats(userId, type, typeId, timeFrame, callback){
+
+    var aggArray = [];
+
+    var match = {
+        $match: {
+            'user.ref': userId,
+            'result': {$ne: 'Pending'}
+        }
+    };
+    match.$match[type] = typeId;
+
+    var group = {
+        $group:{
+            _id: '$user.ref',
+            roi: {$avg: '$roi'},
+            betCount: {$sum:1}
+        }
+    };
+
+    switch (timeFrame){
+        case 'last 30':
+            var startTime = new Date();
+            startTime.setDate(startTime.getDate()-30);
+            match.$match.timeResolved  = {$gte: startTime};
+            break;
+    }
+
+
+    aggArray.push(match);
+    aggArray.push(group);
+
+    PickBl.aggregate(aggArray, callback);
+}
+
+function getStats(pick, callback){
+    //sport, league, contestant
+    //get roi, picks made
+    var todo = [];
+    var stats = {sport: {}, league: {}, group: {}, contestant: {}};
+
+
+    function calculateAllTimeSportStats(callback){
+        stats.sport.allTime = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.sport = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'sport', pick.sport, 'all time', cb);
+    }
+
+    function calculateAllTimeLeagueStats(callback){
+        stats.league.allTime = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.league.allTime = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'league', pick.league, 'all time', cb);
+
+    }
+
+    function calculateAllTimeGroupStats(callback){
+        callback();
+    }
+
+    function calculateAllTimeContestantStats(callback){
+
+        stats.contestant.allTime = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.contestant.allTime = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'contestant.ref', pick.contestant.ref, 'all time', cb);
+    }
+
+    function calculateLast30SportStats(callback){
+        stats.sport.last30 = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.sport.last30 = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'sport', pick.sport, 'last 30', cb);
+    }
+
+    function calculateLast30LeagueStats(callback){
+        stats.league.last30 = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.league.last30 = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'league', pick.league, 'last 30', cb);
+
+    }
+
+    function calculateLast30GroupStats(callback){
+        callback();
+    }
+
+    function calculateLast30ContestantStats(callback){
+
+        stats.contestant.last30 = {betCount: 0, roi: 0};
+        function cb(err, stats){
+            stats.contestant.last30 = {betCount: stats.betCount, roi: stats.roi};
+            callback(err);
+        }
+
+        calculateStats(pick.user.ref, 'contestant.ref', pick.contestant.ref, 'last 30', cb);
+    }
+
+
+    todo.push(calculateAllTimeSportStats);
+    todo.push(calculateAllTimeLeagueStats);
+    todo.push(calculateAllTimeGroupStats);
+    todo.push(calculateAllTimeContestantStats);
+    todo.push(calculateLast30SportStats);
+    todo.push(calculateLast30LeagueStats);
+    todo.push(calculateLast30GroupStats);
+    todo.push(calculateLast30ContestantStats);
+
+    function cb(err){
+        callback(err, stats);
+    }
+
+    async.parallel(todo, cb);
+}
 
 function getRanking(user, filterType, filterId, dateId, minBets, minProfit, callback){
-    var leaderboardQuery = LeaderboardQueryBl.getLeaderboardQuery('completed', dateId, filterType, String(filterId), 'all', 'both');
-
-    Pick.aggregate([
-        leaderboardQuery,
-        {
+    var aggregate = [];
+    var match1 = LeaderboardQueryBl.getLeaderboardQuery('completed', dateId, filterType, String(filterId), 'all', 'both');
+    var group = {
             $group:{
                 _id: '$user.ref',
                 profit: {$sum: '$profit'},
@@ -36,16 +164,23 @@ function getRanking(user, filterType, filterId, dateId, minBets, minProfit, call
                 loss: {$sum: {$cond: [{$lt:['$profit', 0]}, 1, 0]}},
                 betCount: {$sum:1}
             }
-        },
-        {
-            $sort : {profit: -1}
-        },
-        { $match:{
-            betCount: { $gt: minBets },
-            profit: { $gt: minProfit }
+        };
+    var sort = {
+        $sort : {profit: -1}
+    };
+
+    var match2 = { $match:{
+        betCount: { $gt: minBets },
+        profit: { $gt: minProfit }
         }
-        }
-    ]).exec(function(err, leaderboard){
+    };
+
+    aggregate.push(match1);
+    aggregate.push(group);
+    aggregate.push(sort);
+    aggregate.push(match2);
+
+    function cb(err, leaderboard){
         var rank = _.findIndex(leaderboard, { _id: user._id });
         if(rank !== -1){
             var ranking = leaderboard[rank];
@@ -54,7 +189,10 @@ function getRanking(user, filterType, filterId, dateId, minBets, minProfit, call
         } else {
             callback(null);
         }
-    });
+    }
+
+    PickBl.aggregate(aggregate, cb);
+
 }
 
 function isPremium(event, user, callback){
@@ -224,6 +362,16 @@ function create(event, bet, user, callback){
         callback();
     }
 
+
+    function getPickStats(callback){
+        function cb(err, stats){
+            pick.userStats = stats;
+            callback(err);
+        }
+
+        getStats(pick, cb);
+    }
+
     function checkPremium(callback){
 
         function cb(premium, premiumTypes, premiumStats){
@@ -252,11 +400,13 @@ function create(event, bet, user, callback){
 
     }
 
+
     todo.push(createPick);
     todo.push(addAdditionalInfo);
     todo.push(addHomeAway);
     todo.push(createSlug);
     todo.push(checkCopiedFrom);
+    todo.push(getPickStats);
     todo.push(checkPremium);
 
     async.waterfall(todo, callback);
