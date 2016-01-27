@@ -483,6 +483,7 @@ function updateInsertOddsForLeague(pinnacleLeague, callback){
 
     function processEventOddsFeed(results, callback){
         if(!results) return callback(null);
+
         pinnacleLeague.last = results.last;
 
         var eventsOddsApi = results.leagues[0].events;
@@ -490,7 +491,6 @@ function updateInsertOddsForLeague(pinnacleLeague, callback){
         function processEventOdds_loop(eventOddsApi, callback){
             processEventOdds(eventOddsApi, pinnacleLeague, callback);
         }
-
         async.eachSeries(eventsOddsApi, processEventOdds_loop, callback);
     }
 
@@ -533,7 +533,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name:'Tennis'}, callback);
+        PinnacleSportBl.getByQuery({active:true}, callback);
     }
 
     function processSports(pinnacleSports, callback){

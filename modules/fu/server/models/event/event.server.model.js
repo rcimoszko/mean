@@ -36,6 +36,8 @@ var EventSchema = new Schema({
     contestant2RegulationScore: {type: Number},
     contestant1FinalScore:      {type: Number},
     contestant2FinalScore:      {type: Number},
+    contestant1SetsWon:         {type: Number},
+    contestant2SetsWon:         {type: Number},
 
     contestant1H1Score:         {type: Number},
     contestant1H2Score:         {type: Number},
@@ -71,6 +73,8 @@ var EventSchema = new Schema({
     contestant2Set4Score:       {type: Number},
     contestant1Set5Score:       {type: Number},
     contestant2Set5Score:       {type: Number},
+    contestant1Set6Score:       {type: Number},
+    contestant2Set6Score:       {type: Number},
 
     contestant1OTScore:         {type: Number},
     contestant2OTScore:         {type: Number},
@@ -90,7 +94,9 @@ var EventSchema = new Schema({
     commentCount:               {type:Number, default:0},
 
     oldId:                      {type:Number},
-    slug:                       {type: String}
+    slug:                       {type: String},
+    scores:                     {type: Boolean, default: false},
+    resolved:                   {type: Boolean, default: false}
 
 });
 

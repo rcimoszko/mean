@@ -12,7 +12,8 @@ var PinnacleLeagueSchema = new Schema({
     last:           {type: String},
 
     league:         {name: String, ref: {type: Schema.ObjectId, ref: 'League'}},
-    sport:          {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}}
+    sport:          {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
+    useScraper:     {type: Boolean, default: false}
 });
 
 mongoose.model('PinnacleLeague', PinnacleLeagueSchema);

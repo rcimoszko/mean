@@ -291,7 +291,7 @@ function updateInsertAllEvents(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name:'Tennis'}, callback);
+        PinnacleSportBl.getByQuery({active:true}, callback);
     }
 
     function processSports(pinnacleSports, callback){

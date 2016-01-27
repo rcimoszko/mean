@@ -36,6 +36,32 @@ var validateLocalStrategyPassword = function(password) {
     return (this.provider !== 'local' || (password && password.length > 6));
 };
 
+
+
+function unique(modelName, field, caseSensitive) {
+    return function(value, respond) {
+        if(value && value.length) {
+            var query = mongoose.model(modelName).where(field, new RegExp('^'+value+'$', caseSensitive ? 'i' : undefined));
+            if(this.isNew) {
+                query = query.where('_id').ne(this._id);
+                query.count(function (err, n) {
+                    respond(n < 1);
+                });
+            } else {
+                respond(true);
+            }
+        } else if(typeof value === 'undefined'){
+            respond(true);
+        }
+        else if(field === 'email' && value === ''){
+            respond(true);
+        }
+        else{
+            respond(false);
+        }
+    };
+}
+
 /**
  * User Schema
  */
@@ -55,12 +81,10 @@ var UserSchema = new Schema({
     trim: true
   },
   email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+      type: String,
+      trim: true,
+      validate: [unique('User', 'email'), 'Email already exists'],
+      match: [/.+\@.+\..+/, 'Please fill a valid address']
   },
   username: {
     type: String,

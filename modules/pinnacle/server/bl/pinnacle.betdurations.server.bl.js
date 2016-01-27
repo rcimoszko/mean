@@ -216,7 +216,7 @@ var betDurations = {
         2: '2nd set winner',
         3: '3rd set winner'
     },
-    'Aussie Rules Footbal':{
+    'Aussie Rules Football':{
         0: 'game',
         1: '1st half',
         2: '2nd half',
@@ -226,49 +226,49 @@ var betDurations = {
         6: '4th quarter'
     },
     'Alpine Skiing':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Biathlon':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Ski Jumping':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Cross Country':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Formula 1':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Cycling':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Bobsleigh':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Figure Skating':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Freestyle Skiing':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Luge':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Nordic Combined':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Short Track':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Skeleton':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Snow Boarding':{
-        0:'matchups'
+        0: 'matchups'
     },
     'Speed Skating':{
-        0:'matchups'
+        0: 'matchups'
     }
 };
 
