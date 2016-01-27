@@ -1,4 +1,4 @@
-<section id="auth-side-menu">
+<section id="auth-side-menu" data-ng-controller="AuthSideMenuController">
     <div class="logo-container">
         <a ui-sref="home">
             <img data-ng-src="/modules/fu/client/img/general/logo-text.png">
@@ -48,7 +48,7 @@
             </li>
             <li><a ui-sref="myTracker">PICKTRACKER</a></li>
             <li><a ui-sref="myProfile">PROFILE</a></li>
-            <li><a ui-sref="myPicks">MY PICKS</a></li>
+            <li><a href data-ng-click="showMyPicks()">MY PICKS</a></li>
             <li><a ui-sref="myFollowing">FOLLOWING</a></li>
         </ul>
     </div>

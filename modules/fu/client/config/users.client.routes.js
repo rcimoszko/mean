@@ -18,13 +18,6 @@ angular.module('fu').config(['$stateProvider',
                         roles: ['user']
                     }
                 })
-                .state('myPicks', {
-                    url: '/my-picks',
-                    templateUrl: 'modules/fu/client/views/users/my-picks.client.view.html',
-                    data: {
-                        roles: ['user']
-                    }
-                })
                 .state('myProfile', {
                     url: '/my-profile',
                     templateUrl: 'modules/fu/client/views/users/my-profile.client.view.html',
