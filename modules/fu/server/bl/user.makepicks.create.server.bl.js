@@ -238,7 +238,7 @@ function isPremium(event, user, callback){
 
     if(event.sport.name.toLowerCase() === 'tennis' || event.sport.name.toLowerCase() === 'e sports' || event.sport.name.toLowerCase() === 'golf'){
         filterType = 'sport';
-        filterId = event.sport.ref;
+        filterId = event.sport.ref._id;
     }
 
     var todo = [];

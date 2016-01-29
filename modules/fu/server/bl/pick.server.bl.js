@@ -4,9 +4,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     Pick = mongoose.model('Pick');
 
-function populate(pick, callback){
-
-}
+var populate = [{path: 'event', select: '-pinnacleBets'}];
 
 function get(id, callback){
 
@@ -69,8 +67,16 @@ function del(pick, callback){
 }
 
 function getByQuery(query, callback){
+    Pick.find(query).populate(populate).sort('eventStartTime').exec(callback);
 }
 
+function getPending(query, callback){
+    Pick.find(query).populate(populate).sort('eventStartTime').exec(callback);
+}
+
+function getCompleted(query, callback){
+    Pick.find(query).populate(populate).sort('-eventStartTime').exec(callback);
+}
 
 function getOneByQuery(query, callback){
     Pick.findOne(query, callback);
@@ -112,7 +118,6 @@ function report(pick, callback){
     callback(null);
 }
 
-exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
 exports.create      = create;
@@ -122,6 +127,9 @@ exports.getBySlug   = getBySlug;
 
 exports.getByQuery      = getByQuery;
 exports.getOneByQuery   = getOneByQuery;
+
+exports.getPending = getPending;
+exports.getCompleted = getCompleted;
 
 exports.updateByQuery   = updateByQuery;
 exports.aggregate       = aggregate;

@@ -144,6 +144,11 @@ function addBet(bet, event, callback){
     m_Event.update({_id: event}, {$addToSet: {pinnacleBets: bet._id}}, callback);
 }
 
+function getUnresolvedEvents(callback){
+    var query = {resolved:false, scores:true};
+    m_Event.find(query, callback);
+}
+
 
 
 exports.populate    = populate;
@@ -164,3 +169,5 @@ exports.reResolve   = reResolve;
 exports.getDiscussion   = getDiscussion;
 exports.getPicks        = getPicks;
 exports.addBet          = addBet;
+
+exports.getUnresolvedEvents = getUnresolvedEvents;

@@ -74,7 +74,6 @@ function processEvent(scoreApi, pinnacleLeague, callback){
             callback(null, event);
         }
         var scoreType;
-        //console.log(event);
         if(event.pinnacleEventType && scoreApi.id in event.pinnacleEventType){
             scoreType = event.pinnacleEventType[scoreApi.id];
         }
@@ -90,6 +89,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     }
 
     function saveEvent(event, callback){
+        console.log(event);
         event.save(callback);
     }
 
@@ -167,7 +167,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name:'Hockey'}, callback);
+        PinnacleSportBl.getByQuery({active:true}, callback);
     }
 
     function processSports(pinnacleSports, callback){

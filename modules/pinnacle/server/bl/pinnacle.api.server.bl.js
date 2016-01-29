@@ -58,9 +58,9 @@ function getRequest(path, responseType, callback){
         });
 
         res.on('end', function(){
-            console.log(data);
             switch(responseType){
                 case 'json':
+                    console.log(data);
                     if(!data) return callback(null, null);
                     callback(null, JSON.parse(data));
                     break;
@@ -70,7 +70,6 @@ function getRequest(path, responseType, callback){
                     });
                     break;
             }
-
         });
 
     });

@@ -78,17 +78,17 @@ function insertScores_basketball(event, scores, callback){
 
     if('1st quarter' in scores){
         event.contestant1Q1Score = scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team2;
 
         if('1st half' in scores){
-            event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant1Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
+            event.contestant2Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
         }
     }
 
     if('1st half' in scores){
-        event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+        event.contestant1H1Score = scores['1st half'].team1;
+        event.contestant2H1Score = scores['1st half'].team2;
     }
 
     if('game' in scores){
@@ -271,6 +271,14 @@ function insertScores_eSports(event, scores, scoreType, callback){
                     event.contestant1Set3Score = scores.match.team1;
                     event.contestant2Set3Score = scores.match.team2;
                     break;
+                case 'map 4':
+                    event.contestant1Set4Score = scores.match.team1;
+                    event.contestant2Set4Score = scores.match.team2;
+                    break;
+                case 'map 5':
+                    event.contestant1Set5Score = scores.match.team1;
+                    event.contestant2Set5Score = scores.match.team2;
+                    break;
                 case 'map 1, 1st to 10 Kills':
                     event.contestant1Set1KillsFirst = scores.match.team1;
                     event.contestant2Set1KillsFirst = scores.match.team2;
@@ -278,6 +286,10 @@ function insertScores_eSports(event, scores, scoreType, callback){
                 case 'map 2, 1st to 10 Kills':
                     event.contestant1Set2KillsFirst = scores.match.team1;
                     event.contestant2Set2KillsFirst = scores.match.team2;
+                    break;
+                case 'map 3, 1st to 10 Kills':
+                    event.contestant1Set3KillsFirst = scores.match.team1;
+                    event.contestant2Set3KillsFirst = scores.match.team2;
                     break;
                 case 'map 1, 1st blood':
                     event.contestant1Set1FirstBlood = scores.match.team1;
@@ -287,6 +299,10 @@ function insertScores_eSports(event, scores, scoreType, callback){
                     event.contestant1Set2FirstBlood = scores.match.team1;
                     event.contestant2Set2FirstBlood = scores.match.team2;
                     break;
+                case 'map 3, 1st blood':
+                    event.contestant1Set3FirstBlood = scores.match.team1;
+                    event.contestant2Set3FirstBlood = scores.match.team2;
+                    break;
                 case 'map 1, Kills':
                     event.contestant1Set1Score = scores.match.team1;
                     event.contestant2Set1Score = scores.match.team2;
@@ -294,6 +310,10 @@ function insertScores_eSports(event, scores, scoreType, callback){
                 case 'map 2, Kills':
                     event.contestant1Set2Score = scores.match.team1;
                     event.contestant2Set2Score = scores.match.team2;
+                    break;
+                case 'map 3, Kills':
+                    event.contestant1Set3Score = scores.match.team1;
+                    event.contestant2Set3Score = scores.match.team2;
                     break;
             }
         } else {
@@ -333,17 +353,17 @@ function insertScores_football(event, scores, callback){
 
     if('1st quarter' in scores){
         event.contestant1Q1Score = scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team2;
 
         if('1st half' in scores){
-            event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant1Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
+            event.contestant2Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
         }
     }
 
     if('1st half' in scores){
-        event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+        event.contestant1H1Score = scores['1st half'].team1;
+        event.contestant2H1Score = scores['1st half'].team2;
     }
 
     if('game' in scores){
@@ -353,6 +373,7 @@ function insertScores_football(event, scores, callback){
         event.contestant2FinalScore = scores.game.team2;
         event.scores = true;
     }
+
     callback();
 }
 
@@ -468,17 +489,17 @@ function insertScores_horseRacing(event, scores, callback){
 function insertScores_lacrosse(event, scores, callback){
     if('1st quarter' in scores){
         event.contestant1Q1Score = scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team2;
 
         if('1st half' in scores){
-            event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant1Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
+            event.contestant2Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
         }
     }
 
     if('1st half' in scores){
-        event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+        event.contestant1H1Score = scores['1st half'].team1;
+        event.contestant2H1Score = scores['1st half'].team2;
     }
 
     if('game' in scores){
@@ -852,17 +873,17 @@ function insertScores_padelTennis(event, scores, callback){
 function insertScores_aussieRules(event, scores, callback){
     if('1st quarter' in scores){
         event.contestant1Q1Score = scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team2;
 
         if('1st half' in scores){
-            event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant1Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
+            event.contestant2Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
         }
     }
 
     if('1st half' in scores){
-        event.contestant1Q1Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-        event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+        event.contestant1H1Score = scores['1st half'].team1;
+        event.contestant2H1Score = scores['1st half'].team2;
     }
 
     if('game' in scores){

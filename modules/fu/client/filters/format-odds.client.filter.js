@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').filter('formatOdds',['Authentication', function(Authentication) {
+angular.module('fu').filter('formatOdds', ['Authentication', function(Authentication) {
     return function(odds) {
         var oddsFormat = 'Decimal';
         if(Authentication.user){

@@ -1,0 +1,22 @@
+<table class="table pick-table">
+    <thead>
+        <th>TIME</th>
+        <th colspan="3">PICK</th>
+        <th>ODDS</th>
+        <th>UNITS</th>
+        <th>RETURN</th>
+        <th>ACTIONS</th>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="pick in picks">
+            <td class="time text-center">{{pick.event.startTime|date:'MMM d'}}<br/>{{pick.event.startTime|date:'h:mm a'}}</td>
+            <td class="bet-duration text-center text-uppercase">{{pick.betDuration}}</td>
+            <td class="game-name text-uppercase"><span ng-bind-html="pick|gameName"></span></td>
+            <td class="pick-name text-center text-uppercase"><span ng-bind-html="pick|pickName"></span></td>
+            <td class="odds text-center">{{pick.odds|formatOdds}}</td>
+            <td class="units text-center">{{pick.units}}</td>
+            <td class="profit text-center">{{pick|pickReturn}}</td>
+            <td class="actions text-center actions"><i class="fa fa-comments"></i><i class="fa fa-share-alt"></i></td>
+        </tr>
+    </tbody>
+</table>

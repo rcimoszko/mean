@@ -143,12 +143,22 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
             case '-1.5 sets':
                 betData.betType = 'sets';
                 spreads.contestant1 = -1.5;
-                spreads.contestant2 = +1.5;
+                spreads.contestant2 = 1.5;
                 break;
             case '+1.5 sets':
                 betData.betType = 'sets';
-                spreads.contestant1 = +1.5;
+                spreads.contestant1 = 1.5;
                 spreads.contestant2 = -1.5;
+                break;
+            case '-2.5 sets':
+                betData.betType = 'sets';
+                spreads.contestant1 = -2.5;
+                spreads.contestant2 = 2.5;
+                break;
+            case '+2.5 sets':
+                betData.betType = 'sets';
+                spreads.contestant1 = 2.5;
+                spreads.contestant2 = -2.5;
                 break;
         }
     }
@@ -168,12 +178,12 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
                 betData.odds = oddsApi.moneyline[homeAway];
                 if(spreads) betData.spread = spreads[contestantField];
                 if(oddsApi.moneyline[homeAway] > oddsApi.moneyline[opponentHomeAway]) betData.underdog = true;
-                callback(null);
+                callback();
             }
 
             function findBet(callback){
                 var query = {event:event._id, betType: betData.betType, betDuration: betData.betDuration, 'sportsbook.ref':betData.sportsbook.ref,  'contestant.ref': event[contestantField].ref };
-
+                if(betData.spread) query.spread = betData.spread;
                 BetBl.getOneByQuery(query, callback);
             }
 
@@ -397,6 +407,13 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
 
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
         switch (event.pinnacleEventType[eventPinId]){
+            case '-1.5 sets':
+            case '+1.5 sets':
+            case '-2.5 sets':
+            case '+2.5 sets':
+                betData.betDuration = 'match';
+                break;
+
             case 'ot included':
                 if(betData.betDuration === 'game') betData.betDuration = 'game (OT included)';
                 break;
@@ -533,7 +550,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name:'Tennis'}, callback);
     }
 
     function processSports(pinnacleSports, callback){

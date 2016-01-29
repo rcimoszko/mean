@@ -17,6 +17,7 @@ angular.module('fu').directive('betSection', function ($compile) {
                     directive = '<bet-section-moneyline event="event" bets="bets"></bet-section-moneyline>';
                     break;
                 case 'spread':
+                case 'sets':
                     directive = '<bet-section-spread event="event" bets="bets"></bet-section-spread>';
                     break;
                 case 'total points':

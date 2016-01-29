@@ -1,0 +1,75 @@
+.pick-table{
+  th{
+    text-align:center;
+    font-weight:@font-weight-light;
+    font-size:16px;
+  }
+  tbody{
+    tr{
+      &.win{
+        .profit, .roi{
+          color:@color-green;
+        }
+      }
+      &.loss{
+        .profit, .roi{
+          color:@color-red;
+        }
+
+      }
+      &.push{
+
+      }
+      &.half{
+
+      }
+      td{
+        vertical-align:middle;
+        color:darken(@color-text, 10%);
+        font-size:13px;
+        &.time{
+          color:@color-text;
+          font-size:12px;
+        }
+        &.bet-duration{
+          font-size:12px;
+          width:110px;
+        }
+        &.game-name{
+          .selected{
+            color:@color-blue-2;
+          }
+          .score{
+            display:inline-block;
+            width:35px;
+          }
+          &.winner-1{
+            .score-1{
+              font-weight:bold
+            }
+          }
+          &.winner-2{
+            .score-2{
+              font-weight:bold
+            }
+          }
+        }
+        &.pick-name{
+        }
+        &.odds, &.units, &.profit, &.roi{
+
+        }
+        &.actions{
+          font-size:16px;
+          .fa-comments{
+            color:@color-orange;
+            margin-right:10px;
+          }
+          .fa-share-alt{
+            color:@color-blue-2;
+          }
+        }
+      }
+    }
+  }
+}

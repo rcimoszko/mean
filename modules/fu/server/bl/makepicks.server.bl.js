@@ -33,6 +33,17 @@ function processSpread(betBt){
     return _.groupBy(betBt, groupContestantName);
 }
 
+function processSets(betBt){
+    betBt[0].active = true;
+    betBt[1].active = true;
+    if(betBt.length === 4){
+        betBt[2].altLine = true;
+        betBt[3].altLine = true;
+    }
+
+    return _.groupBy(betBt, groupContestantName);
+}
+
 function processMoneylines(betBt){
     var moneylines = _.filter(betBt, filterMoneylines);
     moneylines = _.groupBy(moneylines, groupContestantName);
@@ -75,6 +86,7 @@ function processBetTypes(betBt, betType){
             bets = processTeamTotals(betBt);
             break;
         case 'sets':
+            bets = processSets(betBt);
             break;
         default:
             bets = processMoneylines(betBt);
@@ -108,7 +120,7 @@ function getPicks(query, callback){
     }
 
     function getBetTypes(events, callback){
-        var betTypeOrder = ['spread', 'moneyline', 'total points', 'team totals'];
+        var betTypeOrder = ['spread', 'moneyline', 'total points', 'team totals', 'sets'];
         results.betTypes = _.chain(events).pluck('pinnacleBets').flatten().pluck('betType').unique().value();
         results.betTypes = _.sortBy(results.betTypes, function(betType){
             if(betTypeOrder.indexOf(betType) === -1) return betTypeOrder.length;

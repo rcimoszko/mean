@@ -1,0 +1,31 @@
+.modal-my-picks{
+  width:900px;
+  .modal-content{
+    background-color:@color-bg;
+  }
+  .modal-header{
+    text-align:center;
+    .pending-picks-icon, .completed-picks-icon{
+      display:inline-block;
+      padding:10px 30px 0 30px;
+      cursor:pointer;
+      &.active{
+        color:@color-blue-2;
+      }
+    }
+    .fa{
+      font-size:50px;
+    }
+    .text{
+      font-size:16px;
+      margin-top:10px;
+    }
+  }
+
+  .modal-body{
+    .picks-table-container{
+      margin:0 30px;
+      background-color:white;
+    }
+  }
+}

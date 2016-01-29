@@ -2,7 +2,7 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    UserBl = require(path.resolve('./modules/fu/server/bl/user.server.bl')),
+    UserBl = require('../bl/user.server.bl'),
     errorHandler = require(path.resolve('./modules/fu/server/sys/error.server.sys'));
 
 function get(req, res) {
@@ -18,7 +18,7 @@ function get(req, res) {
 
     var user = req.user;
 
-    UserBl.getPicks(user, cb);
+    UserBl.getCompletedPicks(user, cb);
 }
 
 
