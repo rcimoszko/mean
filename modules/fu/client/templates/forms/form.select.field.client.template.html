@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label class="control-label" data-ng-if="label" data-ng-class="{'col-sm-4': horizontal}">{{label}} <span class="required" data-ng-if="required">*</span></label>
+    <div class="controls" data-ng-class="{'col-sm-8': horizontal}">
+        <select data-ng-model="model" class="form-control" data-ng-options="option[selectField] as option[displayField] for option in options" ng-required="required"></select>
+    </div>
+</div>

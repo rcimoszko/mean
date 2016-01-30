@@ -89,7 +89,6 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     }
 
     function saveEvent(event, callback){
-        console.log(event);
         event.save(callback);
     }
 

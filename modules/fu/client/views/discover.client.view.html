@@ -1,3 +1,46 @@
 <section id="discover">
+    <div class="container-fluid filter-container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-2">
+                <h2>RANK</h2>
+                <div>{{rank}}</div>
+            </div>
+            <div class="col-xs-12 col-sm-10">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.sport" class="form-control" ng-options="sport.name for sport in filters.sport|orderBy:'name'" data-ng-change="updateLeagues(); updateLeaderboard"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-disabled="filter.sport.id === 'all'" data-ng-model="filter.league" class="form-control" ng-options="league.name for league in filters.league|orderBy:'name'" data-ng-change="updateTeams(); updateLeaderboard()"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-disabled="filter.league.id === 'all'" data-ng-model="filter.team" class="form-control" ng-options="team.name for team in filters.team|orderBy:'name'" data-ng-change="updateLeaderboard()"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.homeAway" class="form-control" ng-options="homeAway for homeAway in filters.homeAway" data-ng-change="updateLeaderboard()"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.betDuration" class="form-control text-capitalize" ng-options="betDuration for betDuration in filters.betDuration" data-ng-change="updateLeaderboard();"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.betType" class="form-control text-capitalize" ng-options="betType for betType in filters.betType" data-ng-change="updateLeaderboard()"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.minBets" class="form-control" ng-options="unitSize.name for unitSize in filters.unitSize" data-ng-change="updateLeaderboard();"></select>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <select data-ng-model="filter.date" class="form-control" ng-options="date.name for date in filters.date" data-ng-change="updateLeaderboard();"></select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- sport, league, team, date, bet type, home away-->
+    </div>
+
     Discover
 </section>
