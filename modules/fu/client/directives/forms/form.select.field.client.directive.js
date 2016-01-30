@@ -15,4 +15,4 @@ angular.module('dotted.core').directive('formSelectField', function () {
         controller: ['$scope','$filter', function ($scope, $filter) {
         }]
     };
-})
+});
