@@ -10,6 +10,18 @@ exports.invokeRolesPolicies = function () {
             resources: '/api/leagues/:leagueId/contestants',
             permissions: ['*']
         }]
+    },{
+        roles: ['user'],
+        allows: [{
+            resources: '/api/leagues/:leagueId/contestants',
+            permissions: ['*']
+        }]
+    },{
+        roles: ['guest'],
+        allows: [{
+            resources: '/api/leagues/:leagueId/contestants',
+            permissions: ['*']
+        }]
     }]);
 };
 

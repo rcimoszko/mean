@@ -6,17 +6,24 @@ var path = require('path'),
 
 
 function get(req, res, next){
-    function cb (err, leaderboard){
+
+    if(!Object.keys(req.query).length){
+        return res.status(400).send({
+            message: 'Query is required'
+        });
+    }
+
+    function cb (err, contestants){
         if (err) return next(err);
-        if (!leaderboard) {
+        if (!contestants) {
             return res.status(404).send({
                 message: 'Invalid query'
             });
         }
-        res.json(leaderboard);
+        res.json(contestants);
     }
 
-    LeaderboardBl.getContestants(req.league._id, cb);
+    LeaderboardBl.getContestants(req.params.leagueId, cb);
 }
 
 

@@ -31,6 +31,7 @@ var LeagueSchema = new Schema({
         last60Days: {type: Boolean, default: false},
         last90Days: {type: Boolean, default: false},
         last6Months: {type: Boolean, default: false},
+        lastYear: {type: Boolean, default: false},
         allTime: {type: Boolean, default: false}
     },
     seasons: [SeasonSchema],

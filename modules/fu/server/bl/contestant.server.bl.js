@@ -157,6 +157,10 @@ function getByLeague(league, callback){
     Contestant.find({'leagues.ref': league._id}, callback);
 }
 
+function getByLeagueId(leagueId, callback){
+    Contestant.find({'leagues.ref': leagueId}, callback);
+}
+
 
 exports.populate    = populate;
 exports.getAll      = getAll;
@@ -169,5 +173,6 @@ exports.getOneByQuery  = getOneByQuery;
 
 exports.getBySport  = getBySport;
 exports.getByLeague  = getByLeague;
+exports.getByLeagueId  = getByLeagueId;
 
 exports.merge       = merge;

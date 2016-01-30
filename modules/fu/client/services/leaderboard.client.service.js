@@ -11,6 +11,7 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
             function cbError(response){
                 callback(response.data.message);
             }
+            ApiLeaderboard.query(query, cbSuccess, cbError);
         };
 
         var getSports = function(callback){
@@ -22,6 +23,7 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
                 callback(response.data.message);
             }
 
+            ApiLeaderboardSports.query(cbSuccess, cbError);
         };
 
         var getLeagues = function(sportId, callback){
@@ -33,6 +35,7 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
                 callback(response.data.message);
             }
 
+            ApiLeaderboardLeagues.query({sportId: sportId}, cbSuccess, cbError);
         };
 
         var getContestants = function(leagueId, callback){
@@ -43,6 +46,8 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
             function cbError(response){
                 callback(response.data.message);
             }
+
+            ApiLeaderboardContestants.query({leagueId: leagueId}, cbSuccess, cbError);
         };
 
 

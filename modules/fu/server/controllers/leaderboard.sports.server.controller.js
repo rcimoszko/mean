@@ -6,6 +6,7 @@ var path = require('path'),
 
 
 function get(req, res, next){
+
     function cb (err, leaderboard){
         if (err) return next(err);
         if (!leaderboard) {
@@ -17,6 +18,7 @@ function get(req, res, next){
     }
 
     LeaderboardBl.getSports(cb);
+
 }
 
 

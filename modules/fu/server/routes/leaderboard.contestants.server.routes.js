@@ -5,7 +5,7 @@ var policy = require('../policies/leaderboard.contestants.server.policies'),
 
 module.exports = function (app) {
 
-    app.route('/api/leaderboard/contestants/:leagueId').all(policy.isAllowed)
+    app.route('/api/leaderboard/contestants').all(policy.isAllowed)
         .get(ctrl.get);
 
 };

@@ -5,7 +5,7 @@ var policy = require('../policies/leaderboard.leagues.server.policies'),
 
 module.exports = function (app) {
 
-    app.route('/api/leaderboard/leagues/:sportId').all(policy.isAllowed)
+    app.route('/api/leaderboard/leagues').all(policy.isAllowed)
         .get(ctrl.get);
 
 };
