@@ -85,7 +85,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
                 removeAllSelected();
                 Loading.isLoading.pickSubmit = false;
                 Authentication.user = results.user;
-                User.picks.push(results.picks);
+                User.picks.pending.push(results.picks);
                 events.length = 0;
                 callback(null, results);
             }
