@@ -37,7 +37,9 @@ var LeagueSchema = new Schema({
     seasons: [SeasonSchema],
 
     group:        {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}} ,//To Populate
-    slug:         {type: String} // Added
+    slug:         {type: String}, // Added
+    betTypes:     [String],
+    betDurations: [String]
 });
 
 LeagueSchema.pre('save', function(next) {

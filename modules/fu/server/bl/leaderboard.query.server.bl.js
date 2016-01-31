@@ -70,5 +70,19 @@ function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, bet
     return query;
 }
 
+function getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType){
+    var query = {};
+    query.eventStartTime = getDateQuery(dateId);
+    if(sportId !== 'all')       query.sport = mongoose.Types.ObjectId(sportId);
+    if(leagueId !== 'all')      query.league = mongoose.Types.ObjectId(leagueId);
+    if(contestantId !== 'all')  query['contestant.ref'] = mongoose.Types.ObjectId(contestantId);
+    if(betType !== 'all')       query.betType = betType;
+    if(homeAway !== 'both')     query['contestant.homeAway'] = homeAway;
+    if(betDuration !== 'all')   query.betDuration = betDuration;
+
+    return query;
+}
+
 exports.getDateQuery = getDateQuery;
 exports.getLeaderboardQuery = getLeaderboardQuery;
+exports.getLeaderboardQueryNew = getLeaderboardQueryNew;

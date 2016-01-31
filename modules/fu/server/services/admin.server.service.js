@@ -6,7 +6,9 @@ var _ = require('lodash'),
     SportBl = require('../bl/sport.server.bl'),
     LoopBl = require('../bl/loop.server.bl'),
     BetBl = require('../bl/bet.server.bl'),
+    PickBl = require('../bl/pick.server.bl'),
     LeagueBl = require('../bl/league.server.bl'),
+    ContestantBl = require('../bl/contestant.server.bl'),
     slug = require('speakingurl');
 
 function assignSlugs(callback){
@@ -34,9 +36,34 @@ function assignSlugs(callback){
             function processLeagues(leagues, callback){
 
                 function processLeague(league, callback){
-                    league.slug = slug(league.name);
-                    console.log(league.name);
-                    league.save(callback);
+
+                    var todo = [];
+
+                    function saveLeague(callback){
+                        league.slug = slug(league.name);
+                        console.log(league.name);
+                        league.save(callback);
+                    }
+
+                    function getContestants(league, num, callback){
+                        ContestantBl.getByLeague(league, callback);
+                    }
+
+                    function processContestants(contestants, callback){
+                        function processContestant(contestant, callback){
+                            contestant.slug = slug(contestant.name);
+                            contestant.save(callback);
+                        }
+
+                        async.eachSeries(contestants, processContestant, callback);
+                    }
+
+                    todo.push(saveLeague);
+                    todo.push(getContestants);
+                    todo.push(processContestants);
+
+                    async.waterfall(todo, callback);
+
                 }
                 async.eachSeries(leagues, processLeague, callback);
 
@@ -115,6 +142,124 @@ function updateHockeyBets(callback){
 
 }
 
+function assignBetTypes(callback){
+    var todo = [];
+    var generalOrder = ['spread', 'moneyline', 'total points', 'team totals'];
+
+    function setBetTypesForSports(callback){
+        function processSport(sport, callback){
+            var aggArray = [];
+            var match = {$match: {sport:mongoose.Types.ObjectId(sport._id)}};
+            var group = {$group: {_id: '$sport', betTypes: {$addToSet:'$betType'}}};
+            aggArray.push(match);
+            aggArray.push(group);
+
+            function cb(err, sportBetTypes){
+                if(sportBetTypes.length && sportBetTypes[0].betTypes.length){
+                    sport.betTypes = _.sortBy(sportBetTypes[0].betTypes, function(betType){
+                        if(generalOrder.indexOf(betType) === -1) return generalOrder.length;
+                        return generalOrder.indexOf(betType);
+                    });
+                }
+                sport.save(callback);
+            }
+            PickBl.aggregate(aggArray, cb);
+        }
+        LoopBl.processSportGeneric(processSport, callback);
+    }
+
+    function setBetTypesForLeagues(callback){
+        function processLeague(league, callback){
+            var aggArray = [];
+            var match = {$match: {league:mongoose.Types.ObjectId(league._id)}};
+            var group = {$group: {_id: '$league', betTypes: {$addToSet:'$betType'}}};
+            aggArray.push(match);
+            aggArray.push(group);
+
+            function cb(err, leagueBetTypes){
+                if(leagueBetTypes.length && leagueBetTypes[0].betTypes.length){
+                    league.betTypes = _.sortBy(leagueBetTypes[0].betTypes, function(betType){
+                        if(generalOrder.indexOf(betType) === -1) return generalOrder.length;
+                        return generalOrder.indexOf(betType);
+                    });
+                }
+                console.log(league.betTypes);
+                league.save(callback);
+            }
+            PickBl.aggregate(aggArray, cb);
+        }
+        LoopBl.processLeagueGeneric(processLeague, callback);
+
+    }
+
+    todo.push(setBetTypesForSports);
+    todo.push(setBetTypesForLeagues);
+
+    async.waterfall(todo, callback);
+}
+
+function assignBetDurations(callback){
+
+    var todo = [];
+    var generalOrder = ['match', 'matchups', 'game', 'game (OT included)', 'game (regular time)', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
+
+    function setBetDurationsForSports(callback){
+        function processSport(sport, callback){
+            var aggArray = [];
+            var match = {$match: {sport:mongoose.Types.ObjectId(sport._id)}};
+            var group = {$group: {_id: '$sport', betDurations: {$addToSet:'$betDuration'}}};
+            aggArray.push(match);
+            aggArray.push(group);
+
+            function cb(err, sportBetDurations){
+                if(sportBetDurations.length && sportBetDurations[0].betDurations.length){
+                    sport.betDurations = _.sortBy(sportBetDurations[0].betDurations, function(betDuration){
+                        if(generalOrder.indexOf(betDuration) === -1) return generalOrder.length;
+                        return generalOrder.indexOf(betDuration);
+                    });
+                }
+                sport.save(callback);
+            }
+            PickBl.aggregate(aggArray, cb);
+        }
+        LoopBl.processSportGeneric(processSport, callback);
+    }
+
+    function setBetDurationsForLeagues(callback){
+        function processLeague(league, callback){
+            var aggArray = [];
+            var match = {$match: {league:mongoose.Types.ObjectId(league._id)}};
+            var group = {$group: {_id: '$league', betDurations: {$addToSet:'$betDuration'}}};
+            aggArray.push(match);
+            aggArray.push(group);
+
+            function cb(err, leagueBetDurations){
+                if(leagueBetDurations.length && leagueBetDurations[0].betDurations.length){
+                    league.betDurations = _.sortBy(leagueBetDurations[0].betDurations, function(betDuration){
+                        if(generalOrder.indexOf(betDuration) === -1) return generalOrder.length;
+                        return generalOrder.indexOf(betDuration);
+                    });
+                }
+                console.log(league.betDurations);
+                league.save(callback);
+            }
+            PickBl.aggregate(aggArray, cb);
+        }
+        LoopBl.processLeagueGeneric(processLeague, callback);
+
+    }
+
+    todo.push(setBetDurationsForSports);
+    todo.push(setBetDurationsForLeagues);
+
+    async.waterfall(todo, callback);
+
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
+
+exports.assignBetTypes        = assignBetTypes;
+exports.assignBetDurations    = assignBetDurations;
+

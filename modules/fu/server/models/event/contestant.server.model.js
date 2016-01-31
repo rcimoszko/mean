@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     async = require('async'),
+    slug = require('speakingurl'),
     Schema = mongoose.Schema;
 
 var ContestantSchema = new Schema({
@@ -23,7 +24,15 @@ var ContestantSchema = new Schema({
     oldIds:         [{type: Schema.ObjectId, ref: 'Contestant'}], //to remove
     otherNames:     [String],
     record:         [{year:{type:Number}, wins:{type:Number}, losses:{type:Number}}],
+    slug:           {type: String, trim: true},
     scraperId:      {type: Number}
+});
+
+ContestantSchema.pre('save', function(next) {
+    if(this.name && this.isModified('name')){
+        this.slug = slug(this.name);
+    }
+    next();
 });
 
 ContestantSchema.statics.includeLeague = function(sportName){
