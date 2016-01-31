@@ -360,7 +360,6 @@ function processTeamTotals(oddsApi, initialBetData, event, callback){
             var todo = [];
 
             function initializeValues(callback){
-                console.log(oddsApi);
                 betData.contestant = {name: event[contestantField].name, ref: event[contestantField].ref, number: contestantNum.num};
                 betData.overUnder = overUnder.overUnder;
                 betData.odds = oddsApi.teamTotal[homeAway][betData.overUnder];

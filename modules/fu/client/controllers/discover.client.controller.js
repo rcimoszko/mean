@@ -92,13 +92,25 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             $state.go('discover.contestant', {sportSlug: $scope.filter.sport.slug, leagueSlug: $scope.filter.league.slug, contestant: $scope.filter.contestant.slug});
         };
 
-        $scope.updateLeaderboard = function(){
+        function buildQuery(){
+            $scope.query = {};
+        }
 
+        $scope.updateLeaderboard = function(){
+            buildQuery();
+
+            function cb(err, leaderboard){
+                console.log(leaderboard);
+            }
+
+            Leaderboard.getLeaderboard($scope.query, cb);
         };
 
         function cbGetSports(err, sports){
             $scope.filters.sports = $scope.filters.sports.concat(sports);
         }
+
+
 
         Leaderboard.getSports(cbGetSports);
 

@@ -26,7 +26,6 @@ function runFeed(callback){
     function updateEvents(callback){
         console.log('updateEvents');
         PinEventsBl.updateInsertAllEvents(callback);
-
     }
 
     function updateOdds(callback){
@@ -36,17 +35,17 @@ function runFeed(callback){
 
 
     function updateScores(callback){
+        console.log('updateScores');
         PinScoresBl.updateInsertAllScores(callback);
     }
 
-    todo.push(updateScores);
     todo.push(updateSports);
     todo.push(updateLeagues);
     todo.push(updateEvents);
     todo.push(updateOdds);
+    todo.push(updateScores);
 
     async.waterfall(todo, callback);
-
 }
 
 function assignPinnacleSports(callback){

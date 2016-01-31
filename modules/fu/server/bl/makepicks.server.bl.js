@@ -208,7 +208,7 @@ function getPicks(query, callback){
 
         var eventsByDate = _.groupBy(processedEvents, function(event){
             var date = new Date(event.startTime);
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()+7);
         });
 
         var events = [];
