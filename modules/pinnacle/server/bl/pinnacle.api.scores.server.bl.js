@@ -57,7 +57,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         if(!event) return callback('event not found or resolved');
         function processPeriod_loop(periodApi, callback){
             var betDuration = PinBetDuration.getBetDuration(sportName, periodApi.number);
-            scores[betDuration] = {team1: periodApi.team1Score, team2: periodApi.team2Score};
+            scores[betDuration] = {team1: periodApi.team2Score, team2: periodApi.team1Score};
 
             callback();
         }

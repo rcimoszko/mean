@@ -150,15 +150,15 @@ function merge(mainContestant, contestantsToMerge, callback){
 }
 
 function getBySport(sport, callback){
-    Contestant.find({'sport.ref':sport._id}, callback);
+    Contestant.find({'sport.ref':sport._id}).sort('name').exec(callback);
 }
 
 function getByLeague(league, callback){
-    Contestant.find({'leagues.ref': league._id}, callback);
+    Contestant.find({'leagues.ref': league._id}).sort('name').exec(callback);
 }
 
 function getByLeagueId(leagueId, callback){
-    Contestant.find({'leagues.ref': leagueId}, callback);
+    Contestant.find({'leagues.ref': leagueId}).sort('name').exec(callback);
 }
 
 

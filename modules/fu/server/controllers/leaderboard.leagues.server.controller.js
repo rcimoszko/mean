@@ -23,7 +23,7 @@ function get(req, res, next){
         res.json(leagues);
     }
 
-    LeaderboardBl.getLeagues(req.params.sportId, req.params.dateId, cb);
+    LeaderboardBl.getLeagues(req.query.sportId, req.query.dateId, cb);
 }
 
 

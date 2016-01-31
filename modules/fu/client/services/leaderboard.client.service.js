@@ -26,7 +26,7 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
             ApiLeaderboardSports.query(cbSuccess, cbError);
         };
 
-        var getLeagues = function(sportId, callback){
+        var getLeagues = function(sportId, dateId, callback){
             function cbSuccess(leagues){
                 callback(null, leagues);
             }
@@ -35,7 +35,7 @@ angular.module('fu').factory('Leaderboard', ['ApiLeaderboard', 'ApiLeaderboardSp
                 callback(response.data.message);
             }
 
-            ApiLeaderboardLeagues.query({sportId: sportId}, cbSuccess, cbError);
+            ApiLeaderboardLeagues.query({sportId: sportId, dateId: dateId}, cbSuccess, cbError);
         };
 
         var getContestants = function(leagueId, callback){

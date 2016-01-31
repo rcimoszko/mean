@@ -5,9 +5,21 @@ acl = new acl(new acl.memoryBackend());
 
 exports.invokeRolesPolicies = function () {
     acl.allow([{
-        roles: ['*'],
+        roles: ['admin'],
         allows: [{
-            resources: '/api/leaderboard/contestants/:leagueId',
+            resources: '/api/leaderboard/contestants',
+            permissions: ['get']
+        }]
+    },{
+        roles: ['user'],
+        allows: [{
+            resources: '/api/leaderboard/contestants',
+            permissions: ['get']
+        }]
+    },{
+        roles: ['guest'],
+        allows: [{
+            resources: '/api/leaderboard/contestants',
             permissions: ['get']
         }]
     }]);

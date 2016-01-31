@@ -7,19 +7,19 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/leaderboard/leagues/:sportId',
+            resources: '/api/leaderboard/leagues',
             permissions: ['get']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/leaderboard/leagues/:sportId',
+            resources: '/api/leaderboard/leagues',
             permissions: ['get']
         }]
     },{
         roles: ['guest'],
         allows: [{
-            resources: '/api/leaderboard/leagues/:sportId',
+            resources: '/api/leaderboard/leagues',
             permissions: ['get']
         }]
     }]);
