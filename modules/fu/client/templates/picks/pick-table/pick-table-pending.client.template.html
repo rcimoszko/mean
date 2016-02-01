@@ -16,7 +16,10 @@
             <td class="odds text-center">{{pick.odds|formatOdds}}</td>
             <td class="units text-center">{{pick.units}}</td>
             <td class="profit text-center">{{pick|pickReturn}}</td>
-            <td class="actions text-center actions"><i class="fa fa-comments"></i><i class="fa fa-share-alt"></i></td>
+            <td class="actions text-center actions">
+                <btn-comment></btn-comment>
+                <btn-share></btn-share>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -118,6 +118,10 @@ function report(pick, callback){
     callback(null);
 }
 
+function populateBy(picks, populate, callback){
+    Pick.populate(picks, populate, callback);
+}
+
 exports.getAll      = getAll;
 exports.get         = get;
 exports.create      = create;
@@ -138,3 +142,4 @@ exports.cancelPick         = cancelPick;
 
 exports.resolve = resolve;
 exports.report  = report;
+exports.populateBy  = populateBy;

@@ -1,0 +1,214 @@
+.leaderboard-table{
+  background-color:white;
+  margin-top:20px;
+  border-radius:5px;
+  width:100%;
+  @media (min-width: @screen-xs-min) {
+    table-layout:fixed;
+  }
+  thead{
+    tr{
+      th{
+        text-align:center;
+        font-size:12px;
+        padding:8px 2px;
+        vertical-align:middle;
+        @media (min-width: @screen-sm-min) {
+          padding:15px 4px 15px 4px;
+        }
+        @media (min-width: @screen-md-min) {
+          padding:15px 8px 15px 8px;
+        }
+        &.active{
+          border-bottom:2px solid @color-blue-2;
+          background-color:white;
+        }
+        a{
+          color:@color-text;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+        text-align:center;
+        vertical-align:middle;
+        font-size:12px;
+        padding:5px 2px;
+        @media (min-width: @screen-sm-min) {
+          padding:15px 8px 15px 8px;
+          font-size:14px;
+        }
+        &.active{
+          font-weight:@font-weight-bold;
+          background-color:transparent;
+        }
+        &.rank{
+          font-size:12px;
+          color:darken(@color-text, 10%);
+          @media (min-width: @screen-sm-min) {
+            font-size:16px;
+          }
+        }
+        &.actions{
+          width:100px;
+          .btn-action{
+            margin-right:5px;
+          }
+        }
+        &.pages{
+          text-align:left;
+        }
+        &.username{
+          font-size:12px;
+          text-overflow:ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          @media (min-width: @screen-sm-min) {
+            font-size:16px;
+          }
+          .avatar{
+            display:none;
+            margin-right:6px;
+
+            @media (min-width: @screen-sm-min) {
+              display:inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+  .rank{
+    width:30px;
+    @media (min-width: @screen-xs-min) {
+      width:50px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:50px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:60px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:50px;
+    }
+  }
+  .username{
+    text-align:left;
+    max-width: 70px;
+    @media (min-width: @screen-xs-min) {
+      max-width: 140px;
+    }
+    @media (min-width: @screen-sm-min) {
+      max-width: auto;
+    }
+    @media (min-width: @screen-md-min) {
+      max-width: auto;
+    }
+    @media (min-width: @screen-lg-min) {
+      max-width: auto;
+    }
+  }
+  .profit{
+    width:40px;
+    @media (min-width: @screen-xs-min) {
+      width:60px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:65px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .roi{
+    width:40px;
+    @media (min-width: @screen-sm-min) {
+      width:60px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:65px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .win-loss{
+    min-width:55px;
+    @media (min-width: @screen-xs-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:75px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:80px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+
+  }
+  .avg-odds{
+    display:none;
+    @media (min-width: @screen-xs-min) {
+      display:table-cell;
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:80px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:85px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .avg-bet{
+    display:none;
+    @media (min-width: @screen-xs-min) {
+      display:table-cell;
+      width:60px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:75px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .actions{
+    max-width:52px;
+    @media (min-width: @screen-xs-min) {
+      max-width:auto;
+      width:70px;
+    }
+  }
+}

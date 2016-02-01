@@ -49,28 +49,84 @@ function get(query, callback){
 
     }
 
-    function getLeaderboard(callback){
-        var match = {$match: leaderboardQuery};
-        match.$match.result = {$ne: 'Pending' };
-        var project =  {$project:{_id:1, avgOdds:1, avgBet:1, units:1, profit:1, wins:1, losses:1, pending:1, roi: { $multiply:[{$divide: [ '$profit', '$units' ]}, 100]}}};
+    function buildLeaderboard(callback){
+        var todo = [];
 
-        var aggregate = [];
-        aggregate.push(match);
-        aggregate.push(project);
+        function getLeaderboard(callback){
+            var match = {$match: leaderboardQuery};
+            match.$match.result = {$ne: 'Pending' };
+            var group = {$group:{
+                _id: '$user.ref',
+                avgOdds: { $avg: '$odds' },
+                avgBet: { $avg: '$units' },
+                units: {$sum: '$units'},
+                profit: {$sum: '$profit'},
+                wins: {$sum: {$cond: [{$gt:['$profit', 0]}, 1, 0]}},
+                losses: {$sum: {$cond: [{$lt:['$profit', 0]}, 1, 0]}},
+                pending: {$sum: 0},
+                count: {$sum: 1}
+            }};
+            var project =  {$project:{_id:1, avgOdds:1, avgBet:1, units:1, profit:1, wins:1, losses:1, pending:1, count:1, roi: { $multiply:[{$divide: [ '$profit', '$units' ]}, 100]}}};
 
-        PickBl.aggregate(aggregate, callback);
+            var aggregate = [];
+            aggregate.push(match);
+            aggregate.push(group);
+            aggregate.push(project);
+
+            PickBl.aggregate(aggregate, callback);
+        }
+
+        function getPendingPicks(callback){
+            var match = {$match: leaderboardQuery};
+            match.$match.result = 'Pending';
+            var group = {$group:{ _id: '$user.ref',  pending: { $sum: 1 }}};
+
+            var aggregate = [];
+            aggregate.push(match);
+            aggregate.push(group);
+
+            PickBl.aggregate(aggregate, callback);
+
+        }
+
+        function done(err, results){
+            var leaderboard = results.leaderboard;
+            var pendingPicks = results.pendingPicks;
+            for(var i=0; i<leaderboard.length; i++){
+                for(var j=0; j<pendingPicks.length; j++){
+                    if(String(leaderboard[i]._id) === String(pendingPicks[j]._id)){
+                        leaderboard[i].pending = pendingPicks[j].pending;
+                    }
+                }
+            }
+
+            callback(null, leaderboard);
+        }
+
+        todo = {leaderboard: getLeaderboard, pendingPicks: getPendingPicks};
+        async.parallel(todo, done);
+
     }
 
-    function getPendingPicks(callback){
-
+    function filterMinBets(leaderboard, callback){
+        if(minBets !== 'all'){
+            leaderboard = _.filter(leaderboard, function(user){
+                return user.count > minBets;
+            });
+        }
+        callback(null, leaderboard);
     }
 
-    function mergeTables(callback){
-
+    function populateUser(leaderboard, callback){
+        var populate = {path: '_id', model:'User', select: 'username avatarUrl'};
+        PickBl.populateBy(leaderboard, populate, callback);
     }
+
 
     todo.push(createLeaderboardQuery);
-    todo.push(getLeaderboard);
+    todo.push(buildLeaderboard);
+    todo.push(filterMinBets);
+    todo.push(populateUser);
 
     async.waterfall(todo, callback);
 

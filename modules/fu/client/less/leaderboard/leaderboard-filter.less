@@ -1,0 +1,35 @@
+.leaderboard-filter{
+  background-color:white;
+  padding:5px;
+  border-radius:3px;
+
+  @media (min-width: @screen-xs-min) {
+    padding:20px;
+  }
+  .rank{
+    text-align:center;
+    .rank-number{
+      font-size:40px;
+      color:darken(@color-text, 5%);
+    }
+  }
+
+  h2{
+    margin:0;
+    font-size:16px;
+  }
+
+  .form-control{
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .filters{
+    .row:last-of-type{
+      .form-control{
+        @media (min-width: @screen-md-min) {
+          margin-bottom:0;
+        }
+      }
+    }
+  }
+}

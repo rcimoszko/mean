@@ -1,37 +1,37 @@
 <section id="discover" data-ng-controller="DiscoverController">
-    <div class="container-fluid filter-container">
+    <div class="container-fluid filter-container leaderboard-filter">
         <div class="row">
-            <div class="col-xs-12 col-sm-2">
+            <div class="col-xs-12 col-sm-2 rank">
                 <h2>RANK</h2>
-                <div>{{rank}}</div>
+                <div class="rank-number">{{rank}}</div>
             </div>
-            <div class="col-xs-12 col-sm-10">
+            <div class="col-xs-12 col-sm-10 filters">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-model="filter.date" class="form-control" ng-options="date.name for date in filters.dates" data-ng-change="updateLeaderboard(); updateLeagues();"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-model="filter.sport" class="form-control" ng-options="sport.name for sport in filters.sports|orderBy:'name'" data-ng-change="sportChange(); updateLeaderboard();"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-disabled="filter.sport._id === 'all'" data-ng-model="filter.league" class="form-control" ng-options="league.name for league in filters.leagues" data-ng-change="leagueChange(); updateLeaderboard()"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-disabled="filter.league._id === 'all'" data-ng-model="filter.contestant" class="form-control" ng-options="contestant.name for contestant in filters.contestants" data-ng-change="contestantChange(); updateLeaderboard()"></select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-model="filter.minBets" class="form-control" ng-options="minBet.name for minBet in filters.minBets" data-ng-change="updateLeaderboard();"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-model="filter.homeAway" class="form-control" ng-options="homeAway.name for homeAway in filters.homeAway" data-ng-change="updateLeaderboard()"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-disabled="filter.sport._id === 'all'" data-ng-model="filter.betDuration" class="form-control text-capitalize" ng-options="betDuration.name for betDuration in filters.betDurations" data-ng-change="updateLeaderboard();"></select>
                         </div>
-                        <div class="col-xs-6 col-sm-3">
+                        <div class="col-xs-6 col-md-3">
                             <select data-ng-disabled="filter.sport._id === 'all'" data-ng-model="filter.betType" class="form-control text-capitalize" ng-options="betType.name for betType in filters.betTypes" data-ng-change="updateLeaderboard()"></select>
                         </div>
                     </div>

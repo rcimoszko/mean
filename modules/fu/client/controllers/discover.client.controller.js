@@ -143,14 +143,13 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 minBets: $scope.filter.minBets.id
             };
 
-            console.log(query);
-
             function cb(err, leaderboard){
-                console.log(leaderboard);
+                $scope.leaderboard = leaderboard;
+                setPages();
+                updateRank();
             }
-            /*
+
             Leaderboard.getLeaderboard(query, cb);
-            */
         };
 
         function setBetTypes(betTypeArray){
@@ -263,6 +262,38 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
 
 
         Leaderboard.getSports(cbGetSports);
+
+
+        function setPages(){
+            $scope.totalItems = $scope.leaderboard.length;
+            $scope.currentPage = 1;
+            $scope.pageSize = 10;
+            $scope.maxSize = 5;
+        }
+
+        $scope.order = 'profit';
+        $scope.updateOrder = function(field){
+            $scope.order = field;
+            updateRank();
+        };
+
+        $scope.currentOrder = function(user){
+            return -user[$scope.order];
+        };
+
+        $scope.rank = 'N/A';
+
+        function updateRank(){
+            var rankFound = false;
+            $scope.leaderboard = $filter('orderBy')($scope.leaderboard, $scope.currentOrder);
+            for(var i=0; i<$scope.leaderboard.length; i++){
+                if($scope.authentication.user._id === $scope.leaderboard[i]._id._id){
+                    $scope.rank = i+1;
+                    rankFound = true;
+                }
+            }
+            if(!rankFound) $scope.rank = 'N/A';
+        }
 
     }
 
