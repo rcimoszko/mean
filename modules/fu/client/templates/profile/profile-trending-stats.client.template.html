@@ -1,68 +1,65 @@
 <div class="panel profile-trending-stats profile-stats">
     <div class="panel-body">
         <h1>TRENDING STATISTICS <span class="time-heading">LAST 30 DAYS</span></h1>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-6">
-
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-line-chart"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.profit|number:2|addPlus}}</div>
-                            <div class="text">Profit</div>
-                        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-line-chart"></i>
                     </div>
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-refresh"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.roi|number:2}}%</div>
-                            <div class="text">ROI</div>
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-bar-chart"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.wins}}-{{profile.last30Stats.losses}}</div>
-                            <div class="text">RECORD</div>
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-align-left"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.avgOdds|formatOdds}}</div>
-                            <div class="text">Avg. Odds</div>
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-database"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.avgBet|number:2}}</div>
-                            <div class="text">Avg. Bet</div>
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="statistic-icon">
-                            <i class="fa fa-sort-numeric-asc"></i>
-                        </div>
-                        <div class="statistic-value-container">
-                            <div class="value">{{profile.last30Stats.streak}}</div>
-                            <div class="text">Streak</div>
-                        </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.profit|number:2|addPlus}}</div>
+                        <div class="text">Profit</div>
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <div google-chart chart="profitAreaChart" class="tracker-chart" id="profit-overview-line-chart"></div>
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-refresh"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.roi|number:2}}%</div>
+                        <div class="text">ROI</div>
+                    </div>
                 </div>
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.wins}}-{{profile.last30Stats.losses}}</div>
+                        <div class="text">RECORD</div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.avgOdds|formatOdds}}</div>
+                        <div class="text">Avg. Odds</div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-database"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.avgBet|number:2}}</div>
+                        <div class="text">Avg. Bet</div>
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-icon">
+                        <i class="fa fa-sort-numeric-asc"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <div class="value">{{profile.last30Stats.streak}}</div>
+                        <div class="text">Streak</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <area-chart data="profile.last30ProfitChart" height="150"></area-chart>
             </div>
         </div>
     </div>

@@ -4,11 +4,12 @@ angular.module('fu').directive('areaChart', function () {
     return {
         restrict: 'E',
         scope: {
-            pick: '='
+            data: '=',
+            height: '='
         },
         templateUrl: 'modules/fu/client/templates/charts/area-chart.client.template.html',
-        controller: ['$scope', function ($scope){
-
+        controller: ['$scope', 'Charts', function ($scope, Charts){
+            $scope.chart = Charts.createChart('area', $scope.data);
         }]
     };
 });
