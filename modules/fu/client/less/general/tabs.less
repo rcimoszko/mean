@@ -1,0 +1,33 @@
+.nav-tabs{
+  border-bottom:0;
+  li{
+    border-bottom:2px solid white;
+    a{
+      border-bottom:0;
+      color:@color-text;
+      border-bottom:2px solid @color-gray-divider;
+      margin-right:0;
+      &:hover{
+        background-color:white;
+        border-bottom:2px solid @color-gray-divider;
+      }
+    }
+    &.active{
+      a{
+        border:0;
+        border-bottom:2px solid @color-orange;
+        &:hover, &:focus{
+          border:0;
+          border-bottom:2px solid @color-orange;
+        }
+      }
+    }
+  }
+}
+.tabs-full{
+  text-align:center;
+}
+.tabs(tabs-2, 2);
+.tabs(tabs-3, 3);
+.tabs(tabs-4, 4);
+.tabs(tabs-5, 5);
