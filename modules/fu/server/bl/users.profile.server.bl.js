@@ -132,8 +132,8 @@ function getPerformance(categoryField, categoryModel, user, callback){
     }
 
     function populate(performance, callback){
-        var populate = {path: '_id', model:categoryModel, select: 'name'};
-        PickBl.populateBy(performance, populate, callback);
+        var pop = {path: '_id', model:categoryModel, select: 'name'};
+        PickBl.populateBy(performance, pop, callback);
     }
 
     todo.push(getTable);
@@ -170,7 +170,7 @@ function getTopPerformances(user, callback){
             return -1*category.profit;
         });
         topPerformances = topPerformances.slice(0, 5);
-        callback(err, topPerformances)
+        callback(err, topPerformances);
     }
 
     todo.push(getSportProfit);

@@ -173,8 +173,14 @@ var UserSchema = new Schema({
     copiedCount:            {type: Number, default: 0},
 
     pickMade:               {type: Boolean,default: false},
-    userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}}
+    userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}},
+
+    description:            {type: String, trim:true}
 });
+
+UserSchema.path('description').validate(function (v) {
+    return v.length <= 140;
+}, 'The maximum length is 140.');
 
 
 /**

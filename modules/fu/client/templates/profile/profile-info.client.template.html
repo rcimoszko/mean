@@ -1,0 +1,25 @@
+<div class="panel panel-square profile-info">
+    <div class="panel-body">
+        <div class="avatar-container">
+            <avatar size="'lg'" url="profile.user.avatarUrl"></avatar>
+        </div>
+        <h1>{{profile.user.username}}</h1>
+        <div class="follow-btn-container">
+            <btn-follow-lg user-id="profile.user._id"></btn-follow-lg>
+        </div>
+        <!--<h2>{{profile.user.description}}</h2>-->
+    </div>
+    <div class="panel-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6">
+                    <span class="count">{{profile.user.followingCount}}</span> <a class="follow-count-text" href data-ng-click="">FOLLOWING</a>
+                </div>
+                <div class="col-xs-6">
+                    <span class="count">{{profile.user.followerCount}}</span> <a class="follow-count-text" href data-ng-click="">FOLLOWERS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
