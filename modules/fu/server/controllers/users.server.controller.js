@@ -18,7 +18,7 @@ function byUsername(req, res, next, username){
         next();
     }
 
-    UserBl.get(username, cb);
+    UserBl.getByUsername(username, cb);
 }
 
 exports.byUsername    = byUsername;

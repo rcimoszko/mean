@@ -2,7 +2,7 @@
 
 angular.module('fu').factory('ApiUserProfile', ['$resource',
     function ($resource) {
-        return $resource('api/user/:_id/profile', { _id: '@_id' }, {
+        return $resource('api/users/:username/profile', { username: '@username' }, {
             update: { method: 'PUT' }
         });
     }

@@ -13,7 +13,7 @@ function getByUsername(username, callback){
         callback(err, user);
     }
 
-    User.findOne({'name':{ $regex: new RegExp(username, 'i')}}).exec(cb);
+    User.findOne({'username':{ $regex: new RegExp(username, 'i')}}).exec(cb);
 }
 
 

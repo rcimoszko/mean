@@ -1,54 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
-
-
-function getDateQuery(dateId){
-    var today = new Date();
-    var timeIntervalStart = new Date();
-    var timeIntervalEnd = new Date();
-    switch (dateId){
-        case 'last24Hours':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-1);
-            break;
-        case 'last7Days':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-7);
-            break;
-        case 'thisMonth':
-            timeIntervalStart.setHours(timeIntervalStart.getHours()-7);
-            timeIntervalStart = new Date(timeIntervalStart.getFullYear(), timeIntervalStart.getMonth(), 1, 0, 0);
-            timeIntervalStart.setHours(timeIntervalStart.getHours()+7);
-            break;
-        case 'lastMonth':
-            timeIntervalStart = new Date(today.getFullYear(), today.getMonth() - 1, 1, 0, 0);
-            timeIntervalStart.setHours(timeIntervalStart.getHours()+8);
-            timeIntervalEnd = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0);
-            timeIntervalEnd.setHours(timeIntervalEnd.getHours()+8);
-            break;
-        case 'last30Days':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-30);
-            break;
-        case 'last60Days':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-60);
-            break;
-        case 'last90Days':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-90);
-            break;
-        case 'last6Months':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-180);
-            break;
-    }
-
-    var query = {};
-
-
-    if(dateId === 'allTime'){
-        query = {$lte: timeIntervalEnd};
-    } else {
-        query = {$lte: timeIntervalEnd, $gte: timeIntervalStart};
-    }
-    return query;
-}
+var mongoose = require('mongoose'),
+    DateQueryBl = require('./date.query.server.bl');
 
 function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, betType, homeAway) {
     var query = {};
@@ -56,7 +9,7 @@ function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, bet
 
     switch (pendingCompleted) {
         case 'completed':
-            dateQuery = getDateQuery(dateId);
+            dateQuery = DateQueryBl.getDateQuery(dateId);
             query = {$match: {result: { $ne: 'Pending' }, eventStartTime: dateQuery }};
             break;
         case 'pending':
@@ -72,7 +25,7 @@ function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, bet
 
 function getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType){
     var query = {};
-    query.eventStartTime = getDateQuery(dateId);
+    query.eventStartTime =      DateQueryBl.getDateQuery(dateId);
     if(sportId !== 'all')       query.sport = mongoose.Types.ObjectId(sportId);
     if(leagueId !== 'all')      query.league = mongoose.Types.ObjectId(leagueId);
     if(contestantId !== 'all')  query['contestant.ref'] = mongoose.Types.ObjectId(contestantId);
@@ -83,6 +36,5 @@ function getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAwa
     return query;
 }
 
-exports.getDateQuery = getDateQuery;
 exports.getLeaderboardQuery = getLeaderboardQuery;
 exports.getLeaderboardQueryNew = getLeaderboardQueryNew;

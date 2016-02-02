@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 // Users service used for communicating with the users REST endpoint
 angular.module('users').factory('Users', ['$resource',
   function ($resource) {
@@ -10,6 +10,7 @@ angular.module('users').factory('Users', ['$resource',
     });
   }
 ]);
+*/
 
 //TODO this should be Users service
 angular.module('users.admin').factory('Admin', ['$resource',
