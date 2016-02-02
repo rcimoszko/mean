@@ -260,7 +260,6 @@ a:focus {
 }
 .avatar {
   background-color: white;
-  border-radius: 50px;
 }
 .avatar.avatar-xs {
   width: 25px;
@@ -271,6 +270,11 @@ a:focus {
   border-radius: 40px;
   height: 40px;
   width: 40px;
+}
+.avatar.avatar-lg {
+  border-radius: 90px;
+  width: 90px;
+  height: 90px;
 }
 .form-control {
   font-size: 12px;
@@ -352,8 +356,21 @@ a:focus {
 .panel {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
+.panel h1 {
+  font-size: 14px;
+  margin-top: 0;
+  font-weight: 700;
+}
+.panel h1 .time-heading {
+  font-size: 10px;
+  color: #6a6b6c;
+  margin-left: 8px;
+}
 h1 {
   color: #2b2b2c;
+}
+.table {
+  margin-bottom: 0;
 }
 .modal-prompt {
   width: 300px;
@@ -1735,7 +1752,7 @@ h1 {
 .profile-info {
   text-align: center;
 }
-.profile-info h1 {
+.profile-info h2 {
   font-size: 18px;
   text-transform: uppercase;
   margin-top: 8px;
@@ -1750,4 +1767,53 @@ h1 {
 .profile-info .follow-count-text {
   font-size: 13px;
   font-weight: 700;
+}
+.profile-stats .performance-container {
+  margin-top: 10px;
+}
+.profile-stats .statistic {
+  width: 50%;
+  float: left;
+  height: 50px;
+}
+.profile-stats .statistic .statistic-icon {
+  display: inline-block;
+  vertical-align: top;
+}
+.profile-stats .statistic .statistic-icon .fa {
+  font-size: 28px;
+  margin-right: 5px;
+  width: 40px;
+}
+.profile-stats .statistic .statistic-icon .fa-line-chart {
+  color: #4caf50;
+}
+.profile-stats .statistic .statistic-icon .fa-refresh {
+  color: #21759b;
+}
+.profile-stats .statistic .statistic-icon .fa-bar-chart {
+  color: #f44336;
+}
+.profile-stats .statistic .statistic-icon .fa-align-left {
+  color: #607d8b;
+}
+.profile-stats .statistic .statistic-icon .fa-database {
+  color: #9e9e9e;
+}
+.profile-stats .statistic .statistic-icon .fa-sort-numeric-asc {
+  color: #009688;
+}
+.profile-stats .statistic .statistic-value-container {
+  display: inline-block;
+  vertical-align: top;
+}
+.profile-stats .statistic .statistic-value-container .value {
+  color: #2b2b2c;
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.profile-stats .statistic .statistic-value-container .text {
+  font-size: 11px;
+  text-transform: uppercase;
 }

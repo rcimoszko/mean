@@ -1,3 +1,60 @@
-<div class="panel profile-all-time-stats">
-    profile all time stats
+<div class="panel profile-stats profile-all-time-stats">
+    <div class="panel-body">
+        <h1>STATISTICS <span class="time-heading">ALL TIME</span></h1>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-line-chart"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.profit|number:2|addPlus}}</div>
+                <div class="text">Profit</div>
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.roi|number:2}}%</div>
+                <div class="text">ROI</div>
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-bar-chart"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.wins}}-{{profile.allTimeStats.losses}}</div>
+                <div class="text">RECORD</div>
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-align-left"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.avgOdds|formatOdds}}</div>
+                <div class="text">Avg. Odds</div>
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-database"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.avgBet|number:2}}</div>
+                <div class="text">Avg. Bet</div>
+            </div>
+        </div>
+        <div class="statistic">
+            <div class="statistic-icon">
+                <i class="fa fa-sort-numeric-asc"></i>
+            </div>
+            <div class="statistic-value-container">
+                <div class="value">{{profile.allTimeStats.streak}}</div>
+                <div class="text">Streak</div>
+            </div>
+        </div>
+
+    </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="panel profile-top-performances">
+    <div class="panel-body">
+        <h1>TOP PERFORMANCES <span class="time-heading">ALL TIME</span></h1>
+        <table class="table">
+            <thead>
+            <th>CATEGORY</th>
+            <th class="text-center">ROI</th>
+            <th class="text-center">PROFIT</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="category in profile.topPerformances">
+                <td>{{category._id.name}}</td>
+                <td class="text-center">{{category.roi|number:1}}%</td>
+                <td class="text-center">{{category.profit|number:1}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

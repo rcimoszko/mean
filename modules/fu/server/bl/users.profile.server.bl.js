@@ -46,9 +46,9 @@ function getUserStats(user, dateId, callback){
     aggArray.push(group);
     aggArray.push(project);
 
-    function cb(err, stats){
-        if(stats.length){
-            stats = _.extend(stats, stats[0]);
+    function cb(err, calcStats){
+        if(calcStats.length){
+            stats = _.extend(stats, calcStats[0]);
         }
         callback(err, stats);
     }
@@ -191,7 +191,7 @@ function get(user, callback){
             username: user.username,
             followingCount: user.followingCount,
             followerCount: user.followerCount,
-            avatarUrl: user.avatarUrl
+            profileUrl: user.profileUrl
         };
         callback();
     }

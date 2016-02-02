@@ -10,7 +10,7 @@ angular.module('fu').directive('btnFollowLg', function () {
         controller: ['$scope', 'Users', function($scope, Users){
             $scope.toggleFollow = function(){
 
-            }
+            };
         }]
     };
 });
