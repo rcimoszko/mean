@@ -2041,6 +2041,19 @@ input.toggle:checked + label:after {
   float: left;
   text-align: center;
 }
+.trending-card {
+  float: left;
+  width: 25%;
+  text-align: center;
+  padding: 15px;
+}
+.trending-card .avatar {
+  margin-bottom: 10px;
+}
+.trending-card .username {
+  margin-top: 5px;
+  font-size: 16px;
+}
 .pick-list .pick {
   margin: 0 15px;
   padding: 15px 0;

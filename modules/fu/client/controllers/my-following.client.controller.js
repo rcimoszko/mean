@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Sports', '$filter',
-    function ($scope, User, Sports, $filter) {
+angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Sports', '$filter', 'Trending',
+    function ($scope, User, Sports, $filter, Trending) {
         $scope.filters = {};
 
         $scope.filters = {
@@ -120,8 +120,20 @@ angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Spo
         };
 
         $scope.updateTrending = function(){
+            var query = {
+                sportId: $scope.filter.sport._id,
+                leagueId: $scope.filter.league._id,
+                dateId: $scope.filter.date.id
+            };
+            function cb(err, trending){
+                console.log(trending);
+                $scope.trending = trending;
+            }
 
+            Trending.get(query, cb);
         };
+
+        $scope.updateTrending();
 
     }
 ]);

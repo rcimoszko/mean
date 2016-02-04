@@ -37,7 +37,16 @@
                         <tab-heading>STREAK</tab-heading>
                     </tab>
                     <tab>
-                        <tab-heading>FOLLOWING</tab-heading>
+                        <tab-heading>FOLLOWERS</tab-heading>
+                        <div class="trending-card" data-ng-repeat="user in trending.followers">
+                            <avatar url="user.user.ref.profileUrl" size="'md'"></avatar>
+                            <btn-follow-lg user-id="user.user.ref._id"></btn-follow-lg>
+                            <div class="username">
+                                <a ui-sref="profile({username:user.user.ref.username})">{{user.user.ref.username}}</a>
+                            </div>
+                            <div class="stat-value">{{user.count}}</div>
+                            <div class="stat-text">FOLLOWS</div>
+                        </div>
                     </tab>
                 </tabset>
 
