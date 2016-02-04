@@ -17,7 +17,7 @@ angular.module('fu').filter('betName',['$filter', function($filter) {
                 if(pick.draw){
                     text = 'Draw';
                 } else {
-                    text = pick.contestant.name;
+                    text = pick.contestant.name + ' Moneyline';
                 }
                 break;
             case 'sets':

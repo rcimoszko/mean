@@ -10,17 +10,17 @@
         <th class="actions">ACTIONS</th>
     </thead>
     <tbody>
-        <tr data-ng-repeat="user in leaderboard|orderBy:currentOrder:false | startFrom:(currentPage-1)*pageSize | limitTo:pageSize" data-ng-class="{active: user._id.username === authentication.user.username}">
+        <tr data-ng-repeat="user in leaderboard|orderBy:currentOrder:false | startFrom:(currentPage-1)*pageSize | limitTo:pageSize" data-ng-class="{active: user.user.username === authentication.user.username}">
             <td class="rank">{{$index+1 +((currentPage-1)*pageSize)}}</td>
-            <td class="username"><a ui-sref="profile({username:user._id.username})"><img class="avatar avatar-circle avatar-xs" data-ng-src="{{user._id.avatarUrl}}" alt="Profile Image"/>{{user._id.username}}</a></td>
+            <td class="username"><a ui-sref="profile({username:user.user.username})"><img class="avatar avatar-circle avatar-xs" data-ng-src="{{user.user.avatarUrl}}" alt="Profile Image"/>{{user.user.username}}</a></td>
             <td class="value profit" data-ng-class="{'active': order === 'profit'}">{{user.profit | number:1}}</td>
             <td class="value roi" data-ng-class="{'active': order === 'roi'}">{{user.roi | number:1}}%</td>
             <td class="value win-loss" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>
             <td class="value avg-odds" data-ng-class="{'active': order === 'avgOdds'}">{{user.avgOdds | formatOdds}}</td>
             <td class="value avg-bet" data-ng-class="{'active': order === 'avgBet'}">{{user.avgBet | number:1}}</td>
             <td class="actions">
-                <btn-follow user-id="user._id._id"></btn-follow>
-                <btn-pending-picks username="user._id.username" pick-count="user.pending"></btn-pending-picks>
+                <btn-follow user-id="user.user._id"></btn-follow>
+                <btn-pending-picks username="user.user.username" pick-count="user.pending"></btn-pending-picks>
             </td>
         </tr>
         <tr>

@@ -15,6 +15,8 @@ angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile',
             ApiUserProfile.get({username:username}, cbSuccess, cbError);
         };
 
+
+
         return {
             getProfile: getProfile
         };

@@ -28,32 +28,15 @@ function getContestants(leagueId, callback){
 }
 
 
-function get(query, callback){
-
-    var leaderboardQuery = {};
-    var minBets = query.minBets;
-
+function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, userArray, callback){
     var todo = [];
+    var leaderboardQuery = LeaderboardQueryBl.getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType);
 
-    function createLeaderboardQuery(callback){
-        var dateId       = query.dateId;
-        var sportId      = query.sportId;
-        var leagueId     = query.leagueId;
-        var contestantId = query.contestantId;
-        var homeAway     = query.homeAway;
-        var betDuration  = query.betDuration;
-        var betType      = query.betType;
-
-        leaderboardQuery = LeaderboardQueryBl.getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType);
-        callback();
-
-    }
-
-    function buildLeaderboard(callback){
-        var todo = [];
+    function createLeaderboard(callback){
 
         function getLeaderboard(callback){
             var match = {$match: leaderboardQuery};
+            if(userArray)leaderboardQuery['user.ref'] = {$in: userArray};
             match.$match.result = {$ne: 'Pending' };
             var group = {$group:{
                 _id: '$user.ref',
@@ -66,7 +49,7 @@ function get(query, callback){
                 pending: {$sum: 0},
                 count: {$sum: 1}
             }};
-            var project =  {$project:{_id:1, avgOdds:1, avgBet:1, units:1, profit:1, wins:1, losses:1, pending:1, count:1, roi: { $multiply:[{$divide: [ '$profit', '$units' ]}, 100]}}};
+            var project =  {$project:{user:'$_id', avgOdds:1, avgBet:1, units:1, profit:1, wins:1, losses:1, pending:1, count:1, roi: { $multiply:[{$divide: [ '$profit', '$units' ]}, 100]}}};
 
             var aggregate = [];
             aggregate.push(match);
@@ -103,9 +86,8 @@ function get(query, callback){
             callback(null, leaderboard);
         }
 
-        todo = {leaderboard: getLeaderboard, pendingPicks: getPendingPicks};
+        var todo = {leaderboard: getLeaderboard, pendingPicks: getPendingPicks};
         async.parallel(todo, done);
-
     }
 
     function filterMinBets(leaderboard, callback){
@@ -118,18 +100,30 @@ function get(query, callback){
     }
 
     function populateUser(leaderboard, callback){
-        var populate = {path: '_id', model:'User', select: 'username avatarUrl'};
+        var populate = {path: 'user', model:'User', select: 'username avatarUrl'};
         PickBl.populateBy(leaderboard, populate, callback);
     }
 
-
-    todo.push(createLeaderboardQuery);
-    todo.push(buildLeaderboard);
-    todo.push(filterMinBets);
+    todo.push(createLeaderboard);
+    if(minBets) todo.push(filterMinBets);
     todo.push(populateUser);
 
     async.waterfall(todo, callback);
 
+}
+
+function get(query, callback){
+
+    var minBets      = query.minBets;
+    var dateId       = query.dateId;
+    var sportId      = query.sportId;
+    var leagueId     = query.leagueId;
+    var contestantId = query.contestantId;
+    var homeAway     = query.homeAway;
+    var betDuration  = query.betDuration;
+    var betType      = query.betType;
+
+    buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, null, callback);
 
 }
 
@@ -137,3 +131,4 @@ exports.get            = get;
 exports.getSports      = getSports;
 exports.getLeagues     = getLeagues;
 exports.getContestants = getContestants;
+exports.buildLeaderboard = buildLeaderboard;

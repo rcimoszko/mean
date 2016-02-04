@@ -3,7 +3,9 @@
 var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
-    PicksBl = require('./pick.server.bl'),
+    PickBl = require('./pick.server.bl'),
+    FollowBl = require('./follow.server.bl'),
+    LeaderboardBl = require('./leaderboard.server.bl'),
     User = mongoose.model('User');
 
 
@@ -17,8 +19,95 @@ function getByUsername(username, callback){
 }
 
 
-function getFollowing(user, callback){
-    callback(null);
+function getFollowing(user, query, callback){
+    var todo = [];
+    var dateId = query.dateId;
+    var leagueId = query.leagueId;
+    var sportId = query.sportId;
+    var followingIdArray = [];
+    var followingList = [];
+
+    function getFollowingList_todo(callback){
+        function cb(err, list){
+            followingList = list;
+            callback(err);
+        }
+        FollowBl.getFollowingList(user._id, cb);
+    }
+
+    function getFollowingLeaderboard(callback){
+        function cb(err, followingLeaderboard){
+            callback(err, followingLeaderboard);
+        }
+
+        followingIdArray = _.chain(followingList).pluck('_id').value();
+        LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, followingIdArray, cb);
+    }
+
+    function mergeFollowingListAndLeaderboard(followingLeaderboard, callback){
+        var currentUser;
+        function findInLeaderboard(leaderboard){
+            return String(leaderboard.user._id) === String(currentUser._id);
+        }
+
+        for(var i=0; i<followingList.length; i++){
+            currentUser = followingList[i];
+            var found = _.find(followingLeaderboard, findInLeaderboard);
+            followingList[i] =  followingList[i].toJSON();
+            if(found){
+                followingList[i].avgOdds = found.avgOdds;
+                followingList[i].avgBet = found.avgBet;
+                followingList[i].units = found.units;
+                followingList[i].profit = found.profit;
+                followingList[i].roi = found.roi;
+                followingList[i].wins = found.wins;
+                followingList[i].losses = found.losses;
+                followingList[i].pending = found.pending;
+            } else {
+                followingList[i].avgOdds = 0;
+                followingList[i].avgBet = 0;
+                followingList[i].units =  0;
+                followingList[i].roi = 0;
+                followingList[i].profit = 0;
+                followingList[i].wins = 0;
+                followingList[i].losses = 0;
+                followingList[i].pending = 0;
+            }
+        }
+        callback();
+    }
+
+    function getFollowingPicks(callback){
+        var query = {'user.ref': {$in:followingIdArray}, result:'Pending'};
+        if(sportId !== 'all') query.sport = sportId;
+        if(leagueId !== 'all') query.league = leagueId;
+
+        PickBl.getGroupedByUser(query, callback);
+    }
+
+    function addPicksToList(userPendingPicks, callback){
+        for(var i=0; i<followingList.length; i++){
+            if(followingList[i]._id in userPendingPicks){
+                followingList[i].eventPicks = userPendingPicks[followingList[i]._id];
+            } else {
+                followingList[i].eventPicks = [];
+            }
+        }
+        callback();
+    }
+
+    function cb(err){
+        callback(err, followingList);
+    }
+
+    todo.push(getFollowingList_todo);
+    todo.push(getFollowingLeaderboard);
+    todo.push(mergeFollowingListAndLeaderboard);
+    todo.push(getFollowingPicks);
+    todo.push(addPicksToList);
+
+    async.waterfall(todo, cb);
+
 }
 
 function getHub(user, callback){
@@ -35,9 +124,7 @@ function getNotifications(user, callback){
 
 function getPendingPicks(user, callback){
     var query = {'user.ref': user._id, result: 'Pending'};
-    PicksBl.getPending(query, callback);
-
-
+    PickBl.getPending(query, callback);
 }
 
 
@@ -47,7 +134,7 @@ function getCompletedPicks(user, callback){
 
     function getPicks(callback){
         var query = {'user.ref': user._id, result: {$ne:'Pending'}};
-        PicksBl.getCompleted(query, callback);
+        PickBl.getCompleted(query, callback);
     }
 
     function assignScores(picks, callback){
@@ -179,6 +266,7 @@ function getCompletedPicks(user, callback){
 function getTracker(user, callback){
     callback(null);
 }
+
 
 exports.getByUsername       = getByUsername;
 exports.getFollowing        = getFollowing;

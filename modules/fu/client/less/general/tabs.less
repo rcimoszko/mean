@@ -3,11 +3,16 @@
   li{
     border-bottom:2px solid white;
     a{
-      border-bottom:0;
       color:@color-text;
       border-bottom:2px solid @color-gray-divider;
       margin-right:0;
+      border-top:0;
+      border-left:0;
+      border-right:0;
       &:hover{
+        border-top:0;
+        border-left:0;
+        border-right:0;
         background-color:white;
         border-bottom:2px solid @color-gray-divider;
       }
@@ -27,6 +32,15 @@
 .tabs-full{
   text-align:center;
 }
+.tabs-sm{
+  li{
+   a{
+     padding-top:5px;
+     padding-bottom:5px;
+   }
+  }
+}
+
 .tabs(tabs-2, 2);
 .tabs(tabs-3, 3);
 .tabs(tabs-4, 4);

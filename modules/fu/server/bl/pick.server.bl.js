@@ -2,6 +2,7 @@
 
 var _ = require('lodash'),
     mongoose = require('mongoose'),
+    async = require('async'),
     Pick = mongoose.model('Pick');
 
 var populate = [{path: 'event', select: '-pinnacleBets'}];
@@ -122,6 +123,46 @@ function populateBy(picks, populate, callback){
     Pick.populate(picks, populate, callback);
 }
 
+function getGroupedByEvent(query, callback){
+
+}
+
+function getGroupedByUser(query, callback){
+    var todo = [];
+
+    function getPicks(callback){
+        getByQuery(query, callback);
+    }
+
+    function groupByUser(picks, callback){
+        picks = _.groupBy(picks, 'user.ref');
+        callback(null, picks);
+    }
+
+    function groupByEvent(userPicks, callback){
+
+        for(var userId in userPicks){
+            //pull out unique events
+            var picks = userPicks[userId];
+            var events = _.chain(picks).pluck('event').unique().value();
+            userPicks[userId] = [];
+            for(var i=0; i<events.length; i++){
+                var picksEvent = _.filter(picks, {event: events[i]});
+                events[i] = events[i].toJSON();
+                events[i].picks = picksEvent;
+                userPicks[userId].push(events[i]);
+            }
+        }
+        callback(null, userPicks);
+    }
+
+    todo.push(getPicks);
+    todo.push(groupByUser);
+    todo.push(groupByEvent);
+
+    async.waterfall(todo, callback);
+}
+
 exports.getAll      = getAll;
 exports.get         = get;
 exports.create      = create;
@@ -143,3 +184,5 @@ exports.cancelPick         = cancelPick;
 exports.resolve = resolve;
 exports.report  = report;
 exports.populateBy  = populateBy;
+exports.getGroupedByEvent  = getGroupedByEvent;
+exports.getGroupedByUser  = getGroupedByUser;

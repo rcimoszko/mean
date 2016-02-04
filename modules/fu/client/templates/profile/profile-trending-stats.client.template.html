@@ -8,8 +8,8 @@
                         <i class="fa fa-line-chart"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.profit|number:2|addPlus}}</div>
-                        <div class="text">Profit</div>
+                        <div class="stat-value">{{profile.last30Stats.profit|number:2|addPlus}}</div>
+                        <div class="stat-text">Profit</div>
                     </div>
                 </div>
                 <div class="statistic">
@@ -17,8 +17,8 @@
                         <i class="fa fa-refresh"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.roi|number:2}}%</div>
-                        <div class="text">ROI</div>
+                        <div class="stat-value">{{profile.last30Stats.roi|number:2}}%</div>
+                        <div class="stat-text">ROI</div>
                     </div>
                 </div>
                 <div class="statistic">
@@ -26,8 +26,8 @@
                         <i class="fa fa-bar-chart"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.wins}}-{{profile.last30Stats.losses}}</div>
-                        <div class="text">RECORD</div>
+                        <div class="stat-value">{{profile.last30Stats.wins}}-{{profile.last30Stats.losses}}</div>
+                        <div class="stat-text">RECORD</div>
                     </div>
                 </div>
                 <div class="statistic">
@@ -35,8 +35,8 @@
                         <i class="fa fa-align-left"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.avgOdds|formatOdds}}</div>
-                        <div class="text">Avg. Odds</div>
+                        <div class="stat-value">{{profile.last30Stats.avgOdds|formatOdds}}</div>
+                        <div class="stat-text">Avg. Odds</div>
                     </div>
                 </div>
                 <div class="statistic">
@@ -44,8 +44,8 @@
                         <i class="fa fa-database"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.avgBet|number:2}}</div>
-                        <div class="text">Avg. Bet</div>
+                        <div class="stat-value">{{profile.last30Stats.avgBet|number:2}}</div>
+                        <div class="stat-text">Avg. Bet</div>
                     </div>
                 </div>
                 <div class="statistic">
@@ -53,8 +53,8 @@
                         <i class="fa fa-sort-numeric-asc"></i>
                     </div>
                     <div class="statistic-value-container">
-                        <div class="value">{{profile.last30Stats.streak}}</div>
-                        <div class="text">Streak</div>
+                        <div class="stat-value">{{profile.last30Stats.streak}}</div>
+                        <div class="stat-text">Streak</div>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,9 @@ var _ = require('lodash'),
     User = mongoose.model('User'),
     Follow = mongoose.model('Follow');
 
+
+var populate = [];
+
 function getFollowCount(user, callback){
     var userId = new mongoose.Types.ObjectId(user._id);
 
@@ -128,5 +131,21 @@ function unfollow(user, userUnfollow, callback){
 
 }
 
-exports.follow    = follow;
-exports.unfollow  = unfollow;
+
+function getFollowingList(userId, callback){
+    function cb(err, follows){
+        var followingList = _.chain(follows).pluck('following').pluck('ref').value();
+        callback(err, followingList);
+    }
+
+    Follow.find({'follower.ref':userId, endDate:null, 'following.ref':{$exists: true}}).populate({path: 'following.ref', select: 'avatarUrl username'}).exec(cb);
+}
+
+function getFollowerList(userId, callback){
+    Follow.find({'following.ref':userId, endDate: null, 'follower.ref':{$exists: true}}).populate({path: 'follower.ref', select: 'avatarUrl username'}).exec(callback);
+}
+
+exports.follow              = follow;
+exports.unfollow            = unfollow;
+exports.getFollowingList    = getFollowingList;
+exports.getFollowerList     = getFollowerList;

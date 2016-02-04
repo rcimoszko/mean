@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -28,12 +28,27 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserPicksCompleted.query({page:page}, cbSuccess, cbError);
         };
 
+        var getFollowing = function(query, callback){
+            function cbSuccess(following){
+                callback(null, following);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUserFollowing.query(query, cbSuccess, cbError);
+
+        };
+
+
         var picks = {pending:[]};
 
         return {
             picks: picks,
             getPendingPicks: getPendingPicks,
-            getCompletedPicks: getCompletedPicks
+            getCompletedPicks: getCompletedPicks,
+            getFollowing: getFollowing
         };
 
     }

@@ -1,0 +1,27 @@
+
+<div class="event-pick-list" data-ng-repeat="event in events">
+    <div class="event-header">
+        <div class="category">
+            {{event.sport.name}} // {{event.league.name}}
+        </div>
+        <table class="contestant-table">
+            <tbody>
+                <tr>
+                    <td rowspan="2" class="time">
+                        {{event.startTime|date:'MMM d'}}<br/>
+                        {{event.startTime|date:'shortTime'}}
+                    </td>
+                    <td class="contestant-1">
+                        {{event.contestant2.name}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="contestant-1">
+                        {{event.contestant1.name}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <pick-list picks="event.picks" include-user="includeUser"></pick-list>
+</div>

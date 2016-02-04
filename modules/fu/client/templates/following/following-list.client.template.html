@@ -1,0 +1,32 @@
+
+<ul class="dynamic-grid" angular-grid="followingList" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+    <li data-ng-repeat="user in followingList|orderBy:'-profit'" class="grid following-card">
+        <div class="header">
+            <avatar size="'md'" url="user.avatarUrl"></avatar>
+            <div class="user-info">
+                <div class="username"><a ui-sref="profile({username:user.username})">{{user.username}}</a>
+                    <div class="pull-right" style="padding-right:25px;">
+                        <btn-follow user-id="user._id"></btn-follow>
+                    </div>
+                </div>
+                <div class="statistics">
+                    <div class="stat-container">
+                        <div class="stat-value">{{user.profit|formatProfit}}</div>
+                        <div class="stat-text">PROFIT</div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-value">{{user.roi|formatRoi}}</div>
+                        <div class="stat-text">ROI</div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-value">{{user.wins}}-{{user.losses}}</div>
+                        <div class="stat-text">WIN/LOSS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="picks">
+            <event-pick-list events="user.eventPicks" include-user="false"></event-pick-list>
+        </div>
+    </li>
+</ul>

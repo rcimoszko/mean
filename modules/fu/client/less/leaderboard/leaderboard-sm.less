@@ -1,0 +1,29 @@
+.leaderboard-sm{
+  .avatar{
+    margin-right:10px;
+  }
+  thead{
+    tr{
+      th{
+        text-align:center;
+        &.active{
+          border-bottom:2px solid @color-blue-2;
+          background-color:white;
+        }
+        a{
+          color:@color-text;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+        &.active{
+          font-weight:@font-weight-bold;
+          background-color:transparent;
+        }
+      }
+    }
+  }
+}
