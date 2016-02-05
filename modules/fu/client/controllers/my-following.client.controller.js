@@ -123,7 +123,8 @@ angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Spo
             var query = {
                 sportId: $scope.filter.sport._id,
                 leagueId: $scope.filter.league._id,
-                dateId: $scope.filter.date.id
+                dateId: $scope.filter.date.id,
+                count: 4
             };
             function cb(err, trending){
                 console.log(trending);

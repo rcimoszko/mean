@@ -3,6 +3,8 @@
 var mongoose = require('mongoose'),
     DateQueryBl = require('./date.query.server.bl'),
     FollowBl = require('./follow.server.bl'),
+    LeaderboardBl = require('./leaderboard.server.bl'),
+    _ = require('lodash'),
     async = require('async');
 
 
@@ -26,7 +28,7 @@ function getMostFollowers(dateId, callback){
     }
 
     function populateUsers(followList, callback){
-        var populate = {path: 'user.ref', model:'User', select: 'username profileUrl'};
+        var populate = {path: 'user.ref', model:'User', select: 'username avatarUrl'};
         FollowBl.populateBy(followList, populate, callback);
     }
 
@@ -39,7 +41,7 @@ function getMostFollowers(dateId, callback){
 }
 
 function getMostProfit(dateId, sportId, leagueId, callback){
-    callback(null, null);
+    LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, null, callback);
 }
 
 function getWinStreak(dateId, sportId, leagueId, callback){
@@ -51,6 +53,7 @@ function get(query, callback){
     var dateId       = query.dateId;
     var sportId      = query.sportId;
     var leagueId     = query.leagueId;
+    var count     = query.count;
 
     function getMostFollowers_todo(callback){
         getMostFollowers(dateId, callback);
@@ -67,7 +70,7 @@ function get(query, callback){
     var todo = {followers: getMostFollowers_todo, profit: getMostProfit_todo, streak: getWinStreak_todo};
 
     function cb(err, results){
-        var trending = {followers: results.followers.splice(0,4), profit: [], streak: []};
+        var trending = {followers: results.followers.splice(0,count), profit: results.profit.splice(0,count), streak: []};
         callback(err, trending);
     }
 

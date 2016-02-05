@@ -2,7 +2,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-6 border-right-divider">
-                <h1>MY HANDICAPPERS</h1>
+                <h1>MY HANDICAPPERS <span class="time-heading">{{filter.date.name}}</span></h1>
                 <table class="table table-striped leaderboard-sm table-condensed ">
                     <thead>
                         <th></th>
@@ -28,25 +28,20 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <h1>TRENDING</h1>
+                <h1>TRENDING <span class="time-heading">{{filter.date.name}}</span></h1>
                 <tabset class="tabs-3 tabs-full tabs-sm">
                     <tab>
                         <tab-heading>PROFIT</tab-heading>
+                        <trending-card user="user.user" value="user.profit" type="'profit'" data-ng-repeat="user in trending.profit"></trending-card>
                     </tab>
                     <tab>
                         <tab-heading>STREAK</tab-heading>
+                        <trending-card user="user.user" value="user.profit" type="'profit'" data-ng-repeat="user in trending.streak"></trending-card>
                     </tab>
                     <tab>
                         <tab-heading>FOLLOWERS</tab-heading>
-                        <div class="trending-card" data-ng-repeat="user in trending.followers">
-                            <avatar url="user.user.ref.profileUrl" size="'md'"></avatar>
-                            <btn-follow-lg user-id="user.user.ref._id"></btn-follow-lg>
-                            <div class="username">
-                                <a ui-sref="profile({username:user.user.ref.username})">{{user.user.ref.username}}</a>
-                            </div>
-                            <div class="stat-value">{{user.count}}</div>
-                            <div class="stat-text">FOLLOWS</div>
-                        </div>
+                        <trending-card user="user.user.ref" value="user.count" type="'follows'" data-ng-repeat="user in trending.followers"></trending-card>
+
                     </tab>
                 </tabset>
 

@@ -65,7 +65,7 @@ a:focus {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -74,12 +74,12 @@ a:focus {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: #ffffff;
+  color: white;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -88,12 +88,12 @@ a:focus {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: #ffffff;
+  color: white;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -102,12 +102,12 @@ a:focus {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: #ffffff;
+  color: white;
   background-color: #3b579e;
 }
 .btn-google {
   background-color: #d15c40;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -116,7 +116,7 @@ a:focus {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: #ffffff;
+  color: white;
   background-color: #c74d30;
 }
 .btn-action {
@@ -146,7 +146,7 @@ a:focus {
   margin-top: -3px;
 }
 .btn-tracker .fa {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .btn-follow-lg {
   background-color: #1ccf31;
@@ -374,6 +374,7 @@ a:focus {
   font-size: 10px;
   color: #6a6b6c;
   margin-left: 8px;
+  text-transform: uppercase;
 }
 .border-right-divider {
   border-right: 1px solid #eaeaea;
@@ -698,7 +699,7 @@ input.toggle:checked + label:after {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: #ffffff;
+  background-color: white;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -1897,11 +1898,11 @@ input.toggle:checked + label:after {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #f44336;
+  color: #F44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -1987,13 +1988,13 @@ input.toggle:checked + label:after {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #f44336;
+  color: #F44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;

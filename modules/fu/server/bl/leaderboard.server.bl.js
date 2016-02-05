@@ -50,11 +50,12 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
                 count: {$sum: 1}
             }};
             var project =  {$project:{user:'$_id', avgOdds:1, avgBet:1, units:1, profit:1, wins:1, losses:1, pending:1, count:1, roi: { $multiply:[{$divide: [ '$profit', '$units' ]}, 100]}}};
-
+            var sort = {$sort:{profit:-1}};
             var aggregate = [];
             aggregate.push(match);
             aggregate.push(group);
             aggregate.push(project);
+            aggregate.push(sort);
 
             PickBl.aggregate(aggregate, callback);
         }
