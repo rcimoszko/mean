@@ -71,6 +71,9 @@ function del(channel, callback){
 function getByQuery(query, callback){
     Channel.find(query, callback);
 }
+function getOneByQuery(query, callback){
+    Channel.findOne(query, callback);
+}
 
 function getBySport(sport, callback){
     getByQuery({'sport.ref':sport}, callback);
@@ -93,6 +96,7 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
+exports.getOneByQuery   = getOneByQuery;
 
 exports.getBySport   = getBySport;
 exports.getByLeague  = getByLeague;

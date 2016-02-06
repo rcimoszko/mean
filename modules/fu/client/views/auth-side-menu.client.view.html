@@ -6,7 +6,7 @@
     </div>
     <div class="user-container">
         <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
-        <a href class="username">{{authentication.user.username}}</a>
+        <a ui-sref="profile({username:authentication.user.username})" class="username">{{authentication.user.username}}</a>
     </div>
     <div class="stats-container">
         <div class="profit">
@@ -40,7 +40,7 @@
             <li>
                 <a>CHANNELS</a>
 
-                <span class="pull-right add-btn">+</span>
+                <a href class="pull-right add-btn" data-ng-click="showChannelSelect()">+</a>
                 <ul class="channel-list">
                     <li><a ui-sref="channel({channelSlug:channel.slug})">NHL</a></li>
                     <li><a ui-sref="channel({channelSlug:channel.slug})">NBA</a></li>

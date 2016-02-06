@@ -6,6 +6,7 @@ var _ = require('lodash'),
     SportBl = require('../bl/sport.server.bl'),
     LoopBl = require('../bl/loop.server.bl'),
     BetBl = require('../bl/bet.server.bl'),
+    ChannelBl = require('../bl/channel.server.bl'),
     PickBl = require('../bl/pick.server.bl'),
     LeagueBl = require('../bl/league.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
@@ -256,10 +257,87 @@ function assignBetDurations(callback){
 
 }
 
+function createChannels(callback){
+    var excludeSports = ['Basketball', 'Hockey', 'Football'];
+    var leagueChannels = ['NBA', 'NFL', 'NHL', 'NCAAB', 'NCAAF', 'MLB'];
+    var otherChannels = ['Other Hockey', 'Other Basketball', 'Other Baseball'];
+    var todo = [];
+
+    function createSportChannels(callback){
+        function processSport(sport, callback){
+            if(excludeSports.indexOf(sport.name) !== -1) return callback(null);
+
+            function cb(err, channel){
+                if(channel) return callback(err);
+                var newChannel = {
+                    name: sport.name,
+                    type: 'sport',
+                    sport: {name: sport.name, ref:sport._id},
+                };
+                ChannelBl.create(newChannel, callback);
+            }
+
+            ChannelBl.getOneByQuery({'sport.name':sport.name}, cb);
+        }
+        LoopBl.processSportGeneric(processSport, callback);
+
+    }
+
+    function createLeagueChannels(callback){
+
+        function createLeagueChannel(leagueChannel, callback){
+            var todo = [];
+
+            function findLeague(callback){
+                LeagueBl.getOneByQuery({name: leagueChannel}, callback);
+            }
+
+            function createChannel(league, callback){
+                if(!league) return callback(null);
+
+                function cb(err, channel){
+                    if(channel) return callback(err);
+                    var newChannel = {
+                        name: leagueChannel,
+                        type: 'league',
+                        league: {name: league.name, ref:league._id}
+                    };
+                    ChannelBl.create(newChannel, callback);
+                }
+                ChannelBl.getOneByQuery({'league.ref':league._id}, cb);
+            }
+
+            function cb(err, channel){
+                callback(err);
+            }
+
+
+            todo.push(findLeague);
+            todo.push(createChannel);
+
+            async.waterfall(todo, cb);
+
+        }
+
+        async.eachSeries(leagueChannels, createLeagueChannel);
+
+    }
+
+    todo.push(createSportChannels);
+    todo.push(createLeagueChannels);
+
+    async.waterfall(todo, callback);
+
+
+
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
 
 exports.assignBetTypes        = assignBetTypes;
 exports.assignBetDurations    = assignBetDurations;
+
+exports.createChannels    = createChannels;
 

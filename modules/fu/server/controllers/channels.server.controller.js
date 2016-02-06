@@ -45,11 +45,6 @@ function bySlug(req, res, next, slug){
 }
 
 function getAll(req, res, next){
-    if(!Object.keys(req.query).length){
-        return res.status(400).send({
-            message: 'Query is required'
-        });
-    }
 
     function cb (err, channels){
         if (err) return next(err);
@@ -62,7 +57,7 @@ function getAll(req, res, next){
     }
 
 
-    ChannelBl.getByQuery(req.query, cb);
+    ChannelBl.getAll(cb);
 
 }
 

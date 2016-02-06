@@ -15,12 +15,12 @@
     <div class="menu-links pull-right">
 
         <ul data-ng-if="!authentication.user">
-            <li><a ui-sref="login">Login</a></li>
-            <li><a ui-sref="signup">Sign Up</a></li>
+            <li><a ui-sref="login" data-ng-class="{active: $scope.state.current.name === 'login'}">Login</a></li>
+            <li><a ui-sref="signup" data-ng-class="{active: $scope.state.current.name === 'signup'}">Sign Up</a></li>
         </ul>
         <ul>
-            <li><a ui-sref="makePicks.home">Make Picks</a></li>
-            <li><a ui-sref="discover.home">Discover</a></li>
+            <li><a ui-sref="makePicks.home" data-ng-class="{active:  $scope.state.current.name === 'makePicks'}">Make Picks</a></li>
+            <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
         </ul>
     </div>
 </div>

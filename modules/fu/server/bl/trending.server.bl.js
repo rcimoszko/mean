@@ -4,6 +4,8 @@ var mongoose = require('mongoose'),
     DateQueryBl = require('./date.query.server.bl'),
     FollowBl = require('./follow.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
+    PickBl = require('./pick.server.bl'),
+    LeaderboardQueryBl = require('./leaderboard.query.server.bl'),
     _ = require('lodash'),
     async = require('async');
 
@@ -45,7 +47,61 @@ function getMostProfit(dateId, sportId, leagueId, callback){
 }
 
 function getWinStreak(dateId, sportId, leagueId, callback){
-    callback(null, null);
+    var todo = [];
+
+    function getResults(callback){
+        var query = LeaderboardQueryBl.getLeaderboardQueryNew(dateId, sportId, leagueId, 'all', 'both', 'all', 'all');
+        query.result = { $ne: 'Pending' };
+        var match = {$match: query};
+        var sort =  {$sort: {eventStartTime: 1, timeResolved:-1}};
+        var group =  {$group: { _id: '$user',  results: {$push: '$result'}}};
+        var project = {$project:{user:'$_id', results:1}};
+
+        var aggArray = [];
+        aggArray.push(match);
+        aggArray.push(sort);
+        aggArray.push(group);
+        aggArray.push(project);
+
+        PickBl.aggregate(aggArray, callback);
+    }
+
+    function calculateWinStreak(userList, callback){
+        for(var i=0; i<userList.length; i++){
+            userList[i].winStreak = 0;
+            for(var j=0; j<userList[i].results.length; j++){
+                if(userList[i].results[j].toLowerCase().indexOf('win') !== -1){
+                    userList[i].winStreak++;
+                } else{
+                    userList[i].winStreak = 0;
+                }
+            }
+        }
+        userList = _.sortBy(userList, function(user){
+            return -1*user.winStreak;
+        });
+        callback(null, userList);
+    }
+
+    function cleanData(userList, callback){
+        for(var i=0; i<userList.length; i++){
+            userList[i].results = undefined;
+        }
+        callback(null, userList);
+    }
+
+    function populateUser(userList, callback){
+        var populate = {path: 'user.ref', model:'User', select: 'username avatarUrl'};
+        PickBl.populateBy(userList, populate, callback);
+    }
+
+    todo.push(getResults);
+    todo.push(calculateWinStreak);
+    todo.push(cleanData);
+    todo.push(populateUser);
+
+    async.waterfall(todo, callback);
+
 }
 
 function get(query, callback){
@@ -70,7 +126,7 @@ function get(query, callback){
     var todo = {followers: getMostFollowers_todo, profit: getMostProfit_todo, streak: getWinStreak_todo};
 
     function cb(err, results){
-        var trending = {followers: results.followers.splice(0,count), profit: results.profit.splice(0,count), streak: []};
+        var trending = {followers: results.followers.splice(0,count), profit: results.profit.splice(0,count), streak: results.streak.splice(0,count)};
         callback(err, trending);
     }
 

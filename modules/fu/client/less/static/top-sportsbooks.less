@@ -1,0 +1,142 @@
+#top-sportsbooks{
+  font-size:12px;
+  @media (min-width: @screen-sm-min) {
+    font-size:14px;
+  }
+  .sportsbook-logo-sm{
+    text-align:center;
+    font-size:16px;
+    @media (min-width: @screen-sm-min) {
+      display:none;
+    }
+  }
+
+
+  .sportsbook-table{
+
+    thead{
+      display:table-header-group;
+      @media (min-width: @screen-sm-min) {
+        display:none;
+      }
+
+      th{
+        text-align:center;
+        &.rank{
+          display:none;
+          width: 5%;
+          @media (min-width: @screen-sm-min) {
+            display:table-cell;
+          }
+        }
+        &.book{
+          display:none;
+          width: 25%;
+          @media (min-width: @screen-sm-min) {
+            display:table-cell;
+          }
+        }
+        &.deposit{
+          width: 30%;
+          @media (min-width: @screen-sm-min) {
+            width: 40%;
+          }
+        }
+
+        &.bonus{
+          width: 5%;
+
+        }
+        &.restricted{
+          width: 10%;
+
+        }
+        &.review {
+          width: 25%;
+          @media (min-width: @screen-sm-min) {
+            width: 15%;
+          }
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          vertical-align:middle;
+          text-align:center;
+
+          &.rank{
+            width: 5%;
+            display:none;
+            @media (min-width: @screen-sm-min) {
+              display:table-cell;
+            }
+
+          }
+          &.book{
+            width: 25%;
+            display:none;
+            @media (min-width: @screen-sm-min) {
+              display:table-cell;
+            }
+
+          }
+          &.deposit{
+            text-align:left;
+            width: 30%;
+            @media (min-width: @screen-sm-min) {
+              width: 40%;
+            }
+            ul{
+              float:left;
+              padding-left:0;
+              margin-left:8%;
+              margin-bottom:0;
+              @media (min-width: @screen-sm-min) {
+                width:42%;
+              }
+            }
+
+          }
+          &.bonus{
+            width: 5%;
+
+          }
+          &.restricted{
+            width: 10%;
+
+          }
+          &.review{
+            width: 25%;
+            @media (min-width: @screen-sm-min) {
+              width: 15%;
+            }
+            .btn-xs{
+              width:80%;
+              padding-top:5px;
+              padding-bottom:5px;
+              margin:4px 0;
+            }
+
+          }
+        }
+      }
+    }
+    &.sportsbook-table-heading{
+      display:none;
+      @media (min-width: @screen-sm-min) {
+        display:table;
+      }
+      thead{
+        display:table-header-group;
+        font-size:11px;
+        th{
+          border-bottom:0;
+        }
+      }
+    }
+  }
+}
+
+
+

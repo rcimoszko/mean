@@ -1,0 +1,105 @@
+<div class="panel" data-ng-controller="SportsbookController" id="sportsbook-review">
+
+    <div class="panel-heading">
+        <h3 class="text-center">{{sportsbook.name}}</h3>
+    </div>
+    <div class="panel-body">
+
+        <h2 class="text-center">
+            <div data-ng-bind-html="sportsbook.banner" data-ng-hide="location.isRestricted()">
+            </div>
+            <div data-ng-show="location.isRestricted()">
+                <h3>
+                <a href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">Sign Up for {{sportsbook.name}}</a>
+                </h3>
+            </div>
+        </h2>
+        <br>
+
+        <h1 class="text-center">
+            <a href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">
+                <img data-ng-src="/modules/fu/client/img/sportsbook/{{sportsbook.name.toLowerCase().replace(' ', '-')}}.png">
+            </a>
+        </h1>
+        <br>
+
+        <h2 class="text-center"><p class="grade">Grade: {{sportsbook.grade}} </p> </h2>
+
+        <p data-ng-if="sportsbook.overview !== ''">
+            <strong>Overview:</strong>
+            {{sportsbook.overview}}
+        </p>
+
+        <p>
+            <strong>Restricted Countries:</strong>
+            <ul>
+                <li class="flag" data-ng-repeat="country in sportsbook.restricted">
+                    <img data-ng-src="/modules/fu/client/img/flags/{{country.toLowerCase()}}.png" popover="{{country}}" popover-trigger="mouseenter">
+                    {{country}}
+                </li>
+            </ul>
+        </p>
+
+        <p class="text-center" data-ng-if="sportsbook.screenshot">
+            <img data-ng-src="/modules/fu/client/img/sportsbook/screenshots/{{sportsbook.name.toLowerCase().replace(' ', '-')}}.png">
+        </p>
+
+        <p data-ng-if="sportsbook.interface !== ''">
+            <strong>Interface:</strong>
+            {{sportsbook.interface}}
+        </p>
+        <p data-ng-if="sportsbook.offerings !== ''">
+            <strong>Offerings:</strong>
+            {{sportsbook.offerings}}
+        </p>
+        <p data-ng-if="sportsbook.cashReview !== ''">
+            <strong>Cash Review:</strong>
+            {{sportsbook.cashReview}}
+        </p>
+        <p data-ng-if="sportsbook.customerService !== ''">
+            <strong>Customer Service:</strong>
+            {{sportsbook.customerService}}
+        </p>
+
+        <p data-ng-if="sportsbook.depositMethods.length >0">
+            <strong>Deposit Methods:</strong>
+            <ul data-ng-repeat="methodGroup in sportsbook.depositMethods">
+                <li data-ng-repeat="method in methodGroup">{{method}}</li>
+            </ul>
+        </p>
+        <p data-ng-if="sportsbook.depositReview !== ''">
+            {{sportsbook.depositReview}}
+        </p>
+
+        <p data-ng-if="sportsbook.withdrawalMethods.length > 0">
+            <strong>Withdrawal Methods:</strong>
+            <ul data-ng-repeat="methodGroup in sportsbook.withdrawalMethods">
+                <li data-ng-repeat="method in methodGroup">{{method}}</li>
+            </ul>
+        </p>
+        <p data-ng-if="sportsbook.withdrawalReview !== ''">
+            {{sportsbook.withdrawalReview}}
+        </p>
+
+        <p data-ng-if="sportsbook.bonuses.length > 0">
+            <strong>Bonuses:</strong>
+            <ul>
+                <li data-ng-repeat="bonus in sportsbook.bonuses">
+                    <strong>{{bonus.type}} Bonus:</strong> {{bonus.bonus}}
+                </li>
+            </ul>
+        </p>
+
+        <p data-ng-if="sportsbook.languages.length > 0">
+            <strong>languages:</strong>
+            <ul data-ng-repeat="languageGroup in sportsbook.languages">
+                <li data-ng-repeat="language in languageGroup">{{language}}</li>
+            </ul>
+        </p>
+
+        <p class="text-center">
+            <a ui-sref='static.sportsbooks'>Back to Top Ten Sports Books</a>
+        </p>
+    </div>
+
+</div>

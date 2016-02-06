@@ -7,7 +7,7 @@ angular.module('fu').directive('trendingCardStreak', function () {
             value: '=',
             user: '='
         },
-        templateUrl: 'modules/fu/client/templates/trending/trending-cards/trending-card-profit.client.template.html',
+        templateUrl: 'modules/fu/client/templates/trending/trending-cards/trending-card-streak.client.template.html',
         controller: ['$scope', function ($scope){
 
         }]

@@ -19,6 +19,12 @@ exports.invokeRolesPolicies = function () {
             resources: '/api/sports',
             permissions: ['get']
         }]
+    },{
+        roles: ['guest'],
+        allows: [{
+            resources: '/api/sports',
+            permissions: ['get']
+        }]
     }]);
 };
 

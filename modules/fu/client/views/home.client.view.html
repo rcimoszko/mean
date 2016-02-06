@@ -1,1 +1,92 @@
-Splash
+<div data-ng-controller="SplashController" id="splash">
+    <div class="hero" id="section-one">
+        <div class="text-center">
+            <h1>Winning made easy.</h1>
+            <h2>Get access to thousands of handicappers with 100% verified records and transparent results.</h2>
+            <p class="text-center">
+                <a class="btn btn-lg btn-premium btn-green" ui-sref="signup" id="create-button" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Create Free Account - 1')">Create Free Account</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="section-two" class="picks">
+        <div class="text-center picks-moveup">
+            <div id="pro-picks" class="clearfix">
+                <div class="pro-picks-left">
+                    <div class="category">Hockey Pro Picks</div>
+                    <div class="units">+84</div>
+                    <div class="unit-text">units</div>
+                </div>
+                <div class="pro-picks-center">
+                    <div class="category"><a href="/profile/Synch">Synch</a></div>
+                    <div class="date">January 2015</div>
+                    <div class="units">+102</div>
+                    <div class="unit-text"></div>
+                </div>
+                <div class="pro-picks-right">
+                    <div class="category">Soccer Pro Picks</div>
+                    <div class="units">+45</div>
+                    <div class="unit-text">units</div>
+                </div>
+            </div>
+            <h3>
+                Revolutionizing the way people place wagers and making their gaming experience more social, enjoyable and transparent.
+            </h3>
+            <hr>
+        </div>
+    </div>
+
+    <div class="yt-vid" id="section-three">
+        <div class="video-content">
+            <h4>Upgrade your life with FansUnite.</h4>
+            <p>Don't be a Mitch, release your inner Dan</p>
+            <a href="#" data-ng-click="showVideoModal()" class="playvid">Watch the video</a>
+        </div>
+
+    </div>
+
+    <section id="section-four">
+        <div class="container">
+            <h3 class="text-center">Paying exorbitant fees for one handicapper and having to endure the hot and cold streaks is rough. We give you access to thousands of handicappers for a fraction of the price.</h3>
+        </div>
+        <p class="text-center">
+            <a class="btn btn-lg btn-premium btn-green" ui-sref="whyGoPro" data-ng-click="mixpanel.getPremiumClicked(page.getUrl(), 'Get Access Now')">Get Access Now</a>
+        </p>
+    </section>
+
+
+    <div id ="section-five">
+        <div class="container">
+            <h2 class="text-center">Win percentage of FansUnite's Top 5 Handicappers in:</h2>
+            <div class="row">
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/nhl-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/nba-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/ncaa-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/world-cup.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-six" class="bottom-cta">
+        <div class="container">
+            <div class="row">
+                <div class="landing-text-6">
+                    <p class="text-center">
+                        Discover how FansUnite and its community of expert handicappers can make you more profitable.
+                    </p>
+                    <p class="text-center">
+                        <a class="btn btn-lg btn-premium btn-green" ui-sref="signup" id="create-button"  data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Create Free Account - 2')">Create Free Account</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

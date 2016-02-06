@@ -25,10 +25,10 @@
         display:inline-block;
         text-transform:uppercase;
         padding:0 20px;
-        color:lightgray;
-        font-size:18px;
-        &:hover{
-          color: darken(@color-text, 10%);
+        color:@color-text;
+        font-size:14px;
+        &:hover, &.active{
+          color: @color-text-dark;
         }
 
       }

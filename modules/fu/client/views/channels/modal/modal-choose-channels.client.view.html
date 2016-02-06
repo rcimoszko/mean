@@ -1,0 +1,13 @@
+<div class="modal-header">
+   <button type="button" class="close" data-ng-click="modal.closeModal(modalInstance)"><span aria-hidden="true">&times;</span></button>
+   SELECT CHANNEL
+</div>
+
+<div class="modal-body clearfix">
+    <div class="col-xs-4 text-center" data-ng-repeat="channel in channels">
+        <div>
+            <a ui-sref="channel({channelSlug:channel.slug})" data-ng-click="modal.closeModal(modalInstance)" >{{channel.name}}</a>
+        </div>
+        <btn-subscribe channel-id="channel._id"></btn-subscribe>
+    </div>
+</div>

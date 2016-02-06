@@ -1,6 +1,8 @@
 .leaderboard-sm{
-  .avatar{
-    margin-right:10px;
+  width:100%;
+  table-layout:fixed;
+  @media (min-width: @screen-xs-min) {
+    table-layout:auto;
   }
   thead{
     tr{
@@ -23,7 +25,118 @@
           font-weight:@font-weight-bold;
           background-color:transparent;
         }
+        &.username{
+          font-size:12px;
+          text-overflow:ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          .avatar{
+            display:none;
+            margin-right:6px;
+            @media (min-width: @screen-xs-min) {
+              display:inline-block;
+            }
+          }
+        }
       }
+    }
+  }
+
+
+  .username{
+    text-align:left;
+    max-width: 70px;
+    @media (min-width: @screen-xs-min) {
+      max-width: 140px;
+    }
+    @media (min-width: @screen-sm-min) {
+      max-width: auto;
+    }
+    @media (min-width: @screen-md-min) {
+      max-width: auto;
+    }
+    @media (min-width: @screen-lg-min) {
+      max-width: auto;
+    }
+  }
+  .profit{
+    width:60px;
+    @media (min-width: @screen-xs-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:65px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .roi{
+    width:40px;
+    @media (min-width: @screen-xs-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:65px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .win-loss{
+    min-width:55px;
+    width:55px;
+    @media (min-width: @screen-xs-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:75px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:80px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+
+  }
+  .pending{
+    width:60px;
+    @media (min-width: @screen-sm-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-xssm-min) {
+      width:90px;
+    }
+    @media (min-width: @screen-sm-min) {
+      width:65px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:70px;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:120px;
+    }
+  }
+  .actions{
+    display:none;
+    @media (min-width: @screen-sm-min) {
+      display:table-cell;
     }
   }
 }

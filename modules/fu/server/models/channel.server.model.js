@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+    slug = require('speakingurl'),
     Schema = mongoose.Schema;
 
 var ChannelSchema = new Schema({
@@ -9,7 +10,15 @@ var ChannelSchema = new Schema({
     sport:  {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
     league: {name: String, ref: {type: Schema.ObjectId, ref: 'League'}},
     group:  {name: String, ref: {type: Schema.ObjectId, ref: 'Group'}},
-    slug:   {type: String, trim:true, required:true}
+    slug:   {type: String, trim:true}
 });
+
+ChannelSchema.pre('save', function(next) {
+    if(this.name && this.isModified('name')){
+        this.slug = slug(this.name);
+    }
+    next();
+});
+
 
 mongoose.model('Channel', ChannelSchema);

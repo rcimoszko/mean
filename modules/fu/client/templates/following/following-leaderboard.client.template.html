@@ -1,25 +1,25 @@
 <div class="panel panel-square">
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-6 border-right-divider">
+            <div class="col-md-6 border-right-divider-md">
                 <h1>MY HANDICAPPERS <span class="time-heading">{{filter.date.name}}</span></h1>
                 <table class="table table-striped leaderboard-sm table-condensed ">
                     <thead>
-                        <th></th>
-                        <th class="text-center" data-ng-class="{'active': order === 'profit'}"><a href data-ng-click="updateOrder('profit')">PROFIT</a></th>
-                        <th class="text-center" data-ng-class="{'active': order === 'roi'}"><a href data-ng-click="updateOrder('roi')" >ROI</a></th>
-                        <th class="text-center" data-ng-class="{'active': order === 'wins'}"><a href data-ng-click="updateOrder('wins')" >W/L</a></th>
-                        <th class="text-center" data-ng-class="{'active': order === 'pending'}"><a href data-ng-click="updateOrder('pending')" >PENDING</a></th>
-                        <th class="text-center"></th>
+                        <th class="username"></th>
+                        <th class="text-center profit" data-ng-class="{'active': order === 'profit'}"><a href data-ng-click="updateOrder('profit')">PROFIT</a></th>
+                        <th class="text-center roi" data-ng-class="{'active': order === 'roi'}"><a href data-ng-click="updateOrder('roi')" >ROI</a></th>
+                        <th class="text-center win-loss" data-ng-class="{'active': order === 'wins'}"><a href data-ng-click="updateOrder('wins')" >W/L</a></th>
+                        <th class="text-center pending" data-ng-class="{'active': order === 'pending'}"><a href data-ng-click="updateOrder('pending')" >PENDING</a></th>
+                        <th class="text-center actions"></th>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="user in followingLeaderboard|orderBy:currentOrder:false|limitTo:limit()">
-                            <td><avatar size="'xs'" url="user.avatarUrl"></avatar><a ui-sref="profile({username:user.username})">{{user.username}}<a/></td>
-                            <td class="text-center" data-ng-class="{'active': order === 'profit'}">{{user.profit| number:1}}</td>
-                            <td class="text-center" data-ng-class="{'active': order === 'roi'}">{{user.roi|number:1}}%</td>
-                            <td class="text-center" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>
-                            <td class="text-center" data-ng-class="{'active': order === 'pending'}">{{user.pending}}</td>
-                            <td><btn-follow user-id="user._id"></btn-follow></td>
+                            <td class="username"><avatar size="'xs'" url="user.avatarUrl"></avatar><a ui-sref="profile({username:user.username})">{{user.username}}<a/></td>
+                            <td class="text-center profit" data-ng-class="{'active': order === 'profit'}">{{user.profit| number:1}}</td>
+                            <td class="text-center roi" data-ng-class="{'active': order === 'roi'}">{{user.roi|number:1}}%</td>
+                            <td class="text-center win-loss" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>
+                            <td class="text-center pending" data-ng-class="{'active': order === 'pending'}">{{user.pending}}</td>
+                            <td class="actions"><btn-follow user-id="user._id"></btn-follow></td>
                         </tr>
                     </tbody>
                 </table>
@@ -27,7 +27,7 @@
                     <a  href data-ng-click="toggleLimit()"><span data-ng-if="limitOn">VIEW ALL</span><span data-ng-if="!limitOn">HIDE</span></a>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <h1>TRENDING <span class="time-heading">{{filter.date.name}}</span></h1>
                 <tabset class="tabs-3 tabs-full tabs-sm">
                     <tab>
@@ -36,7 +36,7 @@
                     </tab>
                     <tab>
                         <tab-heading>STREAK</tab-heading>
-                        <trending-card user="user.user" value="user.profit" type="'profit'" data-ng-repeat="user in trending.streak"></trending-card>
+                        <trending-card user="user.user.ref" value="user.winStreak" type="'streak'" data-ng-repeat="user in trending.streak"></trending-card>
                     </tab>
                     <tab>
                         <tab-heading>FOLLOWERS</tab-heading>

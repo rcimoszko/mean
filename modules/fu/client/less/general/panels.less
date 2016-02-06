@@ -4,6 +4,9 @@
 .panel-footer{
   background-color:transparent;
 }
+.panel-heading{
+  border-color:@color-gray-divider;
+}
 .panel{
   .box-shadow(1);
   h1{
@@ -18,8 +21,24 @@
       text-transform:uppercase;
     }
   }
+  h3{
+    text-transform:uppercase;
+    margin:5px 0;
+  }
 }
 
-.border-right-divider{
-  border-right:1px solid @color-gray-divider;
+.auth-panel{
+  margin:20px auto 0 auto;
+  max-width:400px;
+  h3{
+    margin:5px 0;
+    text-transform:uppercase;
+  }
+}
+
+.border-right-divider-md{
+
+  @media (min-width: @screen-md-min) {
+    border-right:1px solid @color-gray-divider;
+  }
 }

@@ -1,6 +1,9 @@
 .trending-card{
   float:left;
-  width:25%;
+  width:50%;
+  @media (min-width: @screen-xs-min) {
+    width:25%;
+  }
   text-align:center;
   padding:15px;
   .avatar{
@@ -9,5 +12,7 @@
   .username{
     margin-top:5px;
     font-size:16px;
+    text-overflow:ellipsis;
+    overflow:hidden;
   }
 }

@@ -11,5 +11,14 @@ angular.module('fu').controller('AuthSideMenuController', ['$scope', 'Modal',
             );
         };
 
+        $scope.showChannelSelect = function(){
+            Modal.showModal(
+                '/modules/fu/client/views/channels/modal/modal-choose-channels.client.view.html',
+                'ModalChooseChannelsController',
+                {},
+                'choose-channels'
+            );
+        };
+
     }
 ]);

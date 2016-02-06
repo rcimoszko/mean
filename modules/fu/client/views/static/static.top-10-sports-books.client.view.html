@@ -1,0 +1,68 @@
+<div class="panel" id="top-sportsbooks" data-ng-controller="SportsbookController">
+
+  <div class="panel-heading text-center">
+    <h3>FansUnite Top Ten Sports Books</h3>
+  </div>
+
+  <div class="panel-body">
+      <table class="sportsbook-table sportsbook-table-heading table table-condensed">
+          <thead class="heading">
+              <th class="rank">Rank</th>
+              <th class="book">Sportbook</th>
+              <th class="deposit">Deposit Method</th>
+              <th class="bonus">Bonus</th>
+              <th class="restricted">Restricted</th>
+              <th class="review">Review</th>
+          </thead>
+      </table>
+      <div data-ng-repeat="sportsbook in sportsbooks">
+          <div class="sportsbook-logo-sm">
+              <a href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">
+                  <img data-ng-src="/modules/fu/client/img/sportsbook/{{sportsbook.name.toLowerCase().replace(' ', '-')}}.png" class="sportsbook-logo">
+              </a>
+          </div>
+          <table class="sportsbook-table table table-condensed">
+              <thead>
+                  <th class="rank">Rank</th>
+                  <th class="book">Book</th>
+                  <th class="deposit">Deposit Method</th>
+                  <th class="bonus">Bonus</th>
+                  <th class="restricted">Restricted</th>
+                  <th class="review">Review</th>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="rank">{{$index + 1}}</td>
+                      <td class="book">
+                          <a href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">
+                              <img data-ng-src="/modules/fu/client/img/sportsbook/{{sportsbook.name.toLowerCase().replace(' ', '-')}}.png" class="sportsbook-logo">
+                          </a>
+                      </td>
+                      <td class="deposit">
+                          <ul data-ng-repeat="methodGroup in sportsbook.depositMethods">
+                              <li data-ng-repeat="method in methodGroup">{{method}}</li>
+                          </ul>
+                      </td>
+                      <td class="bonus">
+                          <a data-ng-if="sportsbook.bonus" popover="{{sportsbook.newAccountBonus}}" popover-trigger="mouseenter">
+                              Yes
+                          </a>
+                          <span data-ng-if="!sportsbook.bonus">
+                              No
+                          </span>
+                      </td>
+                      <td class="restricted">
+                          <span class="flag" data-ng-repeat="country in sportsbook.restricted">
+                              <img data-ng-src="/modules/fu/client/img/flags/{{country.toLowerCase()}}.png" popover="{{country}}" popover-trigger="mouseenter">
+                          </span>
+                      </td>
+                      <td class="review">
+                          <a class="btn btn-blue btn-xs" ui-sref="static.sportsbookReviews({name:sportsbook.name.replace(' ', '-')})">Review</a>
+                          <a class="btn btn-blue btn-xs" href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">Play Now</a>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+</div>

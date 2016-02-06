@@ -14,7 +14,9 @@
 .btn-color(btn-orange; @color-orange; white);
 .btn-color(btn-blue; @color-blue; white);
 .btn-color(btn-facebook; @color-facebook; white);
+.btn-color(btn-twitter; @color-twitter; white);
 .btn-color(btn-google; @color-google; white);
+.btn-color(btn-green; @color-green; white);
 
 .btn-action{
   font-size:16px;
@@ -64,4 +66,16 @@
   color:white;
   font-size:13px;
   padding:4px 18px;
+}
+.btn-subscribe{
+  background-color:@color-green-light;
+  color:white;
+  font-size:13px;
+  padding:4px 18px;
+}
+
+.btn-twitter, .btn-facebook, .btn-google{
+  .fa{
+    margin-right:5px;
+  }
 }

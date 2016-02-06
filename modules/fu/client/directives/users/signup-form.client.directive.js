@@ -4,7 +4,7 @@ angular.module('fu').directive('signupForm', function () {
     return {
         restrict: 'E',
         templateUrl: 'modules/fu/client/templates/users/signup-form.client.template.html',
-        controller: ['$scope', '$state', 'UserAuth', function ($scope, $state, UserAuth) {
+        controller: ['$scope', '$state', 'UserAuth', 'Sports', function ($scope, $state, UserAuth, Sports) {
 
             $scope.signup = function() {
                 $scope.error = null;
@@ -17,8 +17,11 @@ angular.module('fu').directive('signupForm', function () {
                     }
                 }
                 UserAuth.signup($scope.form, cb);
-
             };
+
+            Sports.getAll(function(err, sports){
+                $scope.sports = sports;
+            });
         }]
     };
 });
