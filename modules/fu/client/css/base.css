@@ -70,7 +70,7 @@ a:focus {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -79,12 +79,12 @@ a:focus {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: #ffffff;
+  color: white;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -93,12 +93,12 @@ a:focus {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: #ffffff;
+  color: white;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -107,12 +107,12 @@ a:focus {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: #ffffff;
+  color: white;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -121,12 +121,12 @@ a:focus {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: #ffffff;
+  color: white;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: #ffffff;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -135,12 +135,12 @@ a:focus {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: #ffffff;
+  color: white;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4caf50;
-  color: #ffffff;
+  background-color: #4CAF50;
+  color: white;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -149,7 +149,7 @@ a:focus {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: #ffffff;
+  color: white;
   background-color: #449d48;
 }
 .btn-action {
@@ -179,7 +179,7 @@ a:focus {
   margin-top: -3px;
 }
 .btn-tracker .fa {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .btn-follow-lg {
   background-color: #1ccf31;
@@ -621,7 +621,7 @@ input.toggle:checked + label:after {
   margin: 0 -20px;
 }
 #splash .btn-premium {
-  background-color: #4caf50;
+  background-color: #4CAF50;
   padding: 15px 30px;
   font-size: 20px;
   text-transform: uppercase;
@@ -670,7 +670,7 @@ input.toggle:checked + label:after {
   -moz-background-size: cover;
   -ms-background-size: cover;
   padding: 21% 0;
-  border-bottom: 20px solid #4caf50;
+  border-bottom: 20px solid #4CAF50;
 }
 @media (min-width: 1200px) {
   #splash #section-one {
@@ -809,7 +809,7 @@ input.toggle:checked + label:after {
 }
 #splash .bottom-cta p {
   margin: 0px auto 40px;
-  color: #000000;
+  color: black;
 }
 #splash #section-three {
   background: white;
@@ -1139,7 +1139,7 @@ input.toggle:checked + label:after {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: #ffffff;
+  background-color: white;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -2505,11 +2505,11 @@ input.toggle:checked + label:after {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #f44336;
+  color: #F44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -2601,13 +2601,13 @@ input.toggle:checked + label:after {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4caf50;
+  color: #4CAF50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #f44336;
+  color: #F44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
