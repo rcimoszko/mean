@@ -6,22 +6,14 @@
     </div>
     <div class="user-container">
         <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
-        <a ui-sref="profile({username:authentication.user.username})" class="username">{{authentication.user.username}}</a>
-        <!--
-        <div class="icon-container">
-            <div class="row">
-                <div class="col-xs-4">
-                    <i class="fa fa-"
-                </div>
-                <div class="col-xs-4">
-
-                </div>
-                <div class="col-xs-4">
-
-                </div>
+        <div class="username-container">
+            <a ui-sref="profile({username:authentication.user.username})" class="username">{{authentication.user.username}}</a>
+            <div class="icon-container">
+                <i ui-sref="messages"class="fa fa-envelope-o"></i>
+                <i class="fa fa-bell-o"></i>
+                <i ui-sref="settings" class="fa fa-cog"></i>
             </div>
         </div>
-        -->
     </div>
     <div class="stats-container">
         <div class="profit">

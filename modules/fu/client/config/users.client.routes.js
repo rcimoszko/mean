@@ -11,6 +11,13 @@ angular.module('fu').config(['$stateProvider',
                 url: '/signup',
                 templateUrl: 'modules/fu/client/views/users/signup.client.view.html'
             })
+                .state('settings', {
+                    url: '/settings',
+                    templateUrl: 'modules/fu/client/views/users/settings.client.view.html',
+                    data: {
+                        roles: ['user']
+                    }
+                })
                 .state('myHub', {
                     url: '/hub',
                     templateUrl: 'modules/fu/client/views/users/my-hub.client.view.html',

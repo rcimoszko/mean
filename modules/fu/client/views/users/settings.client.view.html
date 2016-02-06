@@ -1,0 +1,93 @@
+<section class="content-padding-top" data-ng-controller="SettingsController">
+    <div class="panel panel-settings">
+        <div class="panel-heading">
+            <h3>SETTINGS</h3>
+        </div>
+        <div class="panel-body">
+            <form data-ng-submit="updateUserProfile()" class="signin form-horizontal" autocomplete="off">
+                <fieldset>
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-xs-5 text-center">
+                                <div class="form-group">
+                                    <upload-profile-picture/>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-7">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="odds">Odds Format</label>
+                                    <select id="odds" name="odds" class="form-control" data-ng-model="user.oddsFormat" data-ng-options="oddsFormat for oddsFormat in oddsFormats"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sport">Favourite Sport</label>
+                                    <select id="sport" name="sport" class="form-control" data-ng-model="user.favoriteSport" data-ng-options="sport._id as sport.name for sport in sports"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter">Twitter</label>
+                                    <input type="twitter" id="twitter" name="twitter" class="form-control" data-ng-model="user.twitterHandle" data-ng-minlength="1" data-ng-maxlength="20">
+                                </div>
+                                <div class="text-center form-group">
+                                    <button type="submit" class="btn btn-large btn-blue">Save Profile</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="text-center">
+                <button data-ng-if="!user.premium && !user.trial" class="btn btn-premium btn-large" ng-click="newSubscription()">Upgrade to Pro</button>
+                <a data-ng-if="user.premium && !user.lifetimePremium && !user.cancelledPremium" href="#" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                <button data-ng-if="user.premium && user.cancelledPremium" class="btn btn-premium btn-large" ng-click="resumeSubscription()">Resume Pro Subscription</button>
+                <div data-ng-if="user.premium && user.cancelledPremium" class="subscription-note">Your pro subscription has been cancelled and will end on {{user.premiumEndDate|date:'longDate'}}.</div>
+                <div data-ng-if="user.premium && !user.cancelledPremium && !user.lifetimePremium" class="subscription-note">Your pro subscription will auto renew on  {{user.premiumRenewDate|date:'longDate'}}.</div>
+            </div>
+
+            <div class="status-messages">
+                <div data-ng-show="success" class="text-center text-success">
+                    <strong data-ng-bind="success"></strong>
+                    <strong></strong>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </div>
+
+            <h3 class="col-md-12 text-center">Social Account</h3>
+            <div class="col-md-12 text-center">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="/modules/fu/client/img/buttons/facebook.png" data-ng-disabled="isConnectedSocialAccount('facebook')">
+                        <a href="/api/auth/facebook" target="_self" data-ng-disabled="isConnectedSocialAccount('facebook')" class="btn btn-medium">
+                            Connect
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="/modules/fu/client/img/buttons/twitter.png" data-ng-disabled="isConnectedSocialAccount('twitter')">
+                        <a href="/api/auth/twitter" target="_self" data-ng-disabled="isConnectedSocialAccount('twitter')" class="btn btn-medium">
+                            Connect
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="/modules/fu/client/img/buttons/google.png" data-ng-disabled="isConnectedSocialAccount('google')">
+                        <a href="/api/auth/google" target="_self" data-ng-disabled="isConnectedSocialAccount('google')" class="btn btn-medium">
+                            Connect
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

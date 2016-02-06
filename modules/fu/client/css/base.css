@@ -20,7 +20,7 @@ body {
 }
 @media (min-width: 768px) {
   #content.auth {
-    margin-left: 200px;
+    margin-left: 180px;
   }
 }
 #content > section {
@@ -434,6 +434,10 @@ a:focus {
 .auth-panel h3 {
   margin: 5px 0;
   text-transform: uppercase;
+}
+.panel-settings {
+  max-width: 600px;
+  margin: 0 auto;
 }
 @media (min-width: 992px) {
   .border-right-divider-md {
@@ -1041,7 +1045,7 @@ input.toggle:checked + label:after {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 200px;
+  width: 180px;
   background-color: #21759b;
   z-index: 10;
   display: none;
@@ -1058,19 +1062,37 @@ input.toggle:checked + label:after {
   height: 60px;
   background-color: #156790;
 }
+#auth-side-menu .logo-container img {
+  max-width: 100%;
+}
 #auth-side-menu .user-container {
   height: 95px;
   padding: 30px 10px 30px 20px;
 }
-#auth-side-menu .user-container .username {
-  font-size: 20px;
+#auth-side-menu .user-container .avatar {
+  float: left;
+}
+#auth-side-menu .user-container .username-container {
+  overflow: hidden;
+  padding-left: 15px;
+}
+#auth-side-menu .user-container .username-container .username {
+  font-size: 16px;
   color: #e9893a;
   font-weight: 700;
   vertical-align: middle;
-  margin-left: 10px;
+  line-height: 0;
+}
+#auth-side-menu .user-container .username-container .icon-container {
+  margin-top: 10px;
+}
+#auth-side-menu .user-container .username-container .icon-container .fa {
+  color: White;
+  margin-right: 10px;
+  font-size: 14px;
 }
 #auth-side-menu .stats-container {
-  height: 140px;
+  height: 130px;
   background-color: #156790;
   padding: 20px;
 }
@@ -1088,7 +1110,7 @@ input.toggle:checked + label:after {
 }
 #auth-side-menu .stats-container .num {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
 }
 #auth-side-menu .stats-container .text {
   color: rgba(255, 255, 255, 0.6);
@@ -1114,8 +1136,8 @@ input.toggle:checked + label:after {
   list-style-type: none;
 }
 #auth-side-menu .menu-container ul.user-menu > li {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 13px;
+  margin-bottom: 16px;
 }
 #auth-side-menu .menu-container ul.user-menu > li a {
   color: rgba(255, 255, 255, 0.6);
@@ -1126,7 +1148,7 @@ input.toggle:checked + label:after {
   margin-top: 10px;
 }
 #auth-side-menu .menu-container ul.channel-list > li {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   margin-bottom: 5px;
 }
@@ -1145,7 +1167,7 @@ input.toggle:checked + label:after {
 }
 @media (min-width: 768px) {
   #top-menu.auth {
-    left: 200px;
+    left: 180px;
   }
 }
 #top-menu ul {
