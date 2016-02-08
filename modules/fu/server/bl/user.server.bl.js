@@ -41,7 +41,7 @@ function getFollowing(user, query, callback){
         }
 
         followingIdArray = _.chain(followingList).pluck('_id').value();
-        LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, followingIdArray, cb);
+        LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, followingIdArray, null, cb);
     }
 
     function mergeFollowingListAndLeaderboard(followingLeaderboard, callback){

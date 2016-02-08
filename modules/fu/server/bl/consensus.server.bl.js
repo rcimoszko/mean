@@ -53,10 +53,10 @@ function getConsensus(sportId, leagueId, count, callback){
                 event.contestant1Consensus = (event.contestant1Count/event.pickCount)*100;
                 event.contestant2Consensus = (event.contestant2Count/event.pickCount)*100;
                 if(event.contestant1Consensus > event.contestant2Consensus){
-                    event.maxConsensus = event.contestant1Consensus;
+                    event.maxConsensus = event.contestant1Consensus.toFixed(0);
                     event.contestantNum = 1;
                 } else if( event.contestant2Consensus > event.contestant1Consensus){
-                    event.maxConsensus = event.contestant2Consensus;
+                    event.maxConsensus = event.contestant2Consensus.toFixed(0);
                     event.contestantNum = 2;
                 } else {
                     event.contestantNum = 1;

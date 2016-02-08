@@ -43,7 +43,6 @@ function getPopularGames(sportId, leagueId, count, callback){
     todo.push(populateEvents);
 
     async.waterfall(todo, callback);
-
 }
 
 

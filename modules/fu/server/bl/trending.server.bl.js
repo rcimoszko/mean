@@ -43,7 +43,7 @@ function getMostFollowers(dateId, callback){
 }
 
 function getMostProfit(dateId, sportId, leagueId, callback){
-    LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, null, callback);
+    LeaderboardBl.buildLeaderboard(dateId, sportId, leagueId, 'all', 'both', 'all', 'all', null, null, null, callback);
 }
 
 function getWinStreak(dateId, sportId, leagueId, callback){

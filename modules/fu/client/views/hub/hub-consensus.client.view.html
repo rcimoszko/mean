@@ -1,13 +1,23 @@
 <section class="panel hub-consensus">
     <div class="panel-body">
-        <h1>
-            HOT PICK
-        </h1>
-        <h1>
-            CONSENSUS PICK
-        </h1>
-        <h1>
-            POPULAR GAMES
-        </h1>
+        <div class="hub-hot-picks-container">
+            <h1>
+                HOT PICK
+            </h1>
+            <hot-pick hot-pick="hub.hotPick" data-ng-if="hub.hotPick"></hot-pick>
+        </div>
+        <div class="hub-consensus-picks-container">
+            <h1>
+                CONSENSUS PICK
+            </h1>
+            <consensus-pick consensus-pick="pick" data-ng-repeat="pick in hub.consensus"></consensus-pick>
+        </div>
+
+        <div class="hub-popular-games-container">
+            <h1>
+                POPULAR GAMES
+            </h1>
+            <popular-game popular-game="game" data-ng-repeat="game in hub.popular"></popular-game>
+        </div>
     </div>
 </section>

@@ -28,7 +28,7 @@ function getContestants(leagueId, callback){
 }
 
 
-function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, userArray, callback){
+function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, userArray, count, callback){
     var todo = [];
     var leaderboardQuery = LeaderboardQueryBl.getLeaderboardQueryNew(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType);
 
@@ -91,6 +91,12 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
         async.parallel(todo, done);
     }
 
+    function filterCount(leaderboard, callback){
+        leaderboard = leaderboard.splice(0, count);
+        callback(null, leaderboard);
+    }
+
+
     function filterMinBets(leaderboard, callback){
         if(minBets !== 'all'){
             leaderboard = _.filter(leaderboard, function(user){
@@ -106,6 +112,7 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
     }
 
     todo.push(createLeaderboard);
+    if(count) todo.push(filterCount);
     if(minBets) todo.push(filterMinBets);
     todo.push(populateUser);
 
@@ -124,12 +131,12 @@ function get(query, callback){
     var betDuration  = query.betDuration;
     var betType      = query.betType;
 
-    buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, null, callback);
+    buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, null, null, callback);
 
 }
 
 exports.get            = get;
 exports.getSports      = getSports;
 exports.getLeagues     = getLeagues;
-exports.getContestants = getContestants;
+
 exports.buildLeaderboard = buildLeaderboard;

@@ -22,11 +22,17 @@ function getPopularGames(callback){
 }
 
 function getLeaderboard(callback){
-    callback(null);
+    LeaderboardBl.buildLeaderboard('last30Days', 'all', 'all', 'all', 'both', 'all', 'all', null, null, 5, callback);
 }
 
 function getTrending(callback){
-    callback(null);
+    var query = {
+        dateId: 'last30Days',
+        sportId: 'all',
+        leagueId: 'all',
+        count: 5
+    };
+    TrendingBl.get(query, callback);
 }
 
 function get(callback){
