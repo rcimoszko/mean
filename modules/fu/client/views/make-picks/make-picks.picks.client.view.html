@@ -7,10 +7,9 @@
 
             </div>
             <div class="bet-duration-filter" data-ng-if="activeBetDuration">
-                {{activeBetDuration}}
                 <span class="dropdown" dropdown>
                     <a href class="dropdown-toggle" dropdown-toggle>
-                        <i class="fa fa-angle-down"></i>
+                        {{activeBetDuration}} <i class="fa fa-angle-down"></i>
                     </a>
                     <div class="dropdown-menu pull-right">
                         <div data-ng-repeat="betDuration in betDurations" >

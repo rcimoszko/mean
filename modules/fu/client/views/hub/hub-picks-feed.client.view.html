@@ -1,0 +1,30 @@
+<div class="hub-picks-feed panel">
+    <div class="pick-feed-filter">
+        <span class="dropdown" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>
+                {{pickFilter}}<i class="fa fa-angle-down"></i>
+            </a>
+            <div class="dropdown-menu pull-right">
+                <div data-ng-repeat="pickFilter in pickFilters" >
+                    <a href data-ng-click="setPickFilter(pickFilter)" >
+                        {{pickFilter}}
+                    </a>
+                </div>
+            </div>
+        </span>
+    </div>
+    <tabset>
+        <tab>
+            <tab-heading>
+                ALL PICKS
+            </tab-heading>
+            <event-pick-list events="hub.allPicks" include-user="true"></event-pick-list>
+        </tab>
+        <tab>
+            <tab-heading>
+                PRO PICKS
+            </tab-heading>
+            <event-pick-list events="hub.proPicks" include-user="true"></event-pick-list>
+        </tab>
+    </tabset>
+</div>

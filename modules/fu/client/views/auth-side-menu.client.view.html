@@ -9,9 +9,9 @@
         <div class="username-container">
             <a ui-sref="profile({username:authentication.user.username})" class="username">{{authentication.user.username}}</a>
             <div class="icon-container">
-                <i ui-sref="messages"class="fa fa-envelope-o"></i>
-                <i class="fa fa-bell-o"></i>
-                <i ui-sref="settings" class="fa fa-cog"></i>
+                <a ui-sref="messages" href><i class="fa fa-envelope-o"></i></a>
+                <a href><i class="fa fa-bell-o"></i></a>
+                <a ui-sref="settings"><i class="fa fa-cog"></i></a>
             </div>
         </div>
     </div>
