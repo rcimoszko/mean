@@ -501,8 +501,6 @@ function resolvePick(event, pick, callback){
         opponentNo = 1;
     }
 
-    console.log(pick);
-    console.log(event);
     var todo = [];
 
     function getScores_todo(callback){

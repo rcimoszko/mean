@@ -550,7 +550,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name:'Basketball'}, callback);
     }
 
     function processSports(pinnacleSports, callback){

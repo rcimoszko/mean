@@ -8,7 +8,6 @@ angular.module('fu').directive('hotPick', function () {
         },
         templateUrl: 'modules/fu/client/templates/picks/hot-pick.client.template.html',
         controller: ['$scope', '$filter', function ($scope, $filter){
-            console.log($scope.hotPick.pick.betType);
             switch($scope.hotPick.pick.betType){
                 case 'moneyline':
                     $scope.value = $filter('formatOdds')($scope.hotPick.pick.value);

@@ -8,7 +8,6 @@ angular.module('fu').directive('popularGame', function () {
         },
         templateUrl: 'modules/fu/client/templates/picks/popular-game.client.template.html',
         controller: ['$scope', function ($scope){
-            console.log($scope.popularGame);
         }]
     };
 });

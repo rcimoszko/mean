@@ -152,6 +152,36 @@ a:focus {
   color: #ffffff;
   background-color: #449d48;
 }
+.btn-blue-empty {
+  color: #104673;
+  border: 2px solid #104673;
+  background-color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-blue-empty:hover,
+.btn-blue-empty:focus {
+  color: white;
+  background-color: #104673;
+}
+.btn-blue-2-empty {
+  color: #21759b;
+  border: 2px solid #21759b;
+  background-color: white;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-blue-2-empty:hover,
+.btn-blue-2-empty:focus {
+  color: white;
+  background-color: #21759b;
+}
 .btn-action {
   font-size: 16px;
   margin-right: 7px;
@@ -177,6 +207,7 @@ a:focus {
   line-height: 1.6;
   vertical-align: middle;
   margin-top: -3px;
+  text-align: center;
 }
 .btn-tracker .fa {
   color: #4caf50;
@@ -197,6 +228,9 @@ a:focus {
 .btn-facebook .fa,
 .btn-google .fa {
   margin-right: 5px;
+}
+.btn-container {
+  padding: 10px 0;
 }
 .loading,
 .loading:before,
@@ -2300,10 +2334,37 @@ input.toggle:checked + label:after {
 }
 .leaderboard-sm .actions {
   display: none;
+  text-align: center;
+  width: 60px;
 }
 @media (min-width: 768px) {
   .leaderboard-sm .actions {
     display: table-cell;
+  }
+}
+@media (min-width: 768px) {
+  .leaderboard-sm .actions {
+    width: 70px;
+  }
+}
+@media (min-width: 650px) {
+  .leaderboard-sm .actions {
+    width: 90px;
+  }
+}
+@media (min-width: 768px) {
+  .leaderboard-sm .actions {
+    width: 65px;
+  }
+}
+@media (min-width: 992px) {
+  .leaderboard-sm .actions {
+    width: 70px;
+  }
+}
+@media (min-width: 1200px) {
+  .leaderboard-sm .actions {
+    width: 120px;
   }
 }
 .leaderboard-filter {
@@ -2349,6 +2410,24 @@ input.toggle:checked + label:after {
 .hub-consensus .hub-consensus-picks-container {
   border-bottom: 1px solid #eaeaea;
   margin-bottom: 10px;
+}
+.pick-feed-filter {
+  position: absolute;
+  right: 25px;
+  top: 10px;
+  text-transform: uppercase;
+}
+.pick-feed-filter a {
+  color: #6a6b6c;
+}
+.pick-feed-filter .fa {
+  margin-left: 5px;
+}
+.pick-feed-filter .dropdown-menu {
+  font-size: 12px;
+  text-align: right;
+  padding-right: 14px;
+  min-width: 100px;
 }
 .btn-bet-slip {
   background-color: #104673;
@@ -2769,6 +2848,12 @@ input.toggle:checked + label:after {
   font-size: 16px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.trending-table .username {
+  text-align: left;
+}
+.trending-table .username .avatar {
+  margin-right: 5px;
 }
 #sportsbook-review ul {
   float: left;
