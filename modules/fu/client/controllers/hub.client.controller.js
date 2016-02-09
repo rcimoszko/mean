@@ -5,32 +5,47 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.authentication = Authentication;
 
 
-        $scope.pickFilters = ['pending', 'in-play', 'completed'];
+        function cbGetHub(err, hub){
+            $scope.hub = hub;
+        }
+
+        Hub.getHub(cbGetHub);
+
+
+
+        $scope.picks = {
+            pending: [],
+            completed: []
+        };
+
+        $scope.pages = {
+            pending: 0,
+            completed: 0
+        };
+
+        $scope.pickFilters = ['pending', 'completed'];
         $scope.pickFilter = $scope.pickFilters[0];
         $scope.setPickFilter = function(pickFilter){
             $scope.pickFilter = pickFilter;
         };
 
 
-        function cb(err, hub){
-            console.log(hub);
-            $scope.hub = hub;
-        }
+        $scope.getPicks = function(){
+            function cbGetPicks(err, picks){
+                console.log(picks);
+                $scope.picks[$scope.pickFilter] = $scope.picks[$scope.pickFilter].concat(picks);
+                $scope.pages[$scope.pickFilter]++;
+            }
 
-        Hub.getHub(cb);
+            var query = {
+                page: $scope.pages[$scope.pickFilter],
+                type: $scope.pickFilter
+            };
 
-        //hub all picks
+            Hub.getPicks(query, cbGetPicks);
+        };
 
-        //hub/picks
-        //hub/trending
-
-        //hub/propicks
-        //hub/consensus
-        //hub/hotpick
-        //hub/populargames
-        //hub/discussion
-
-
+        $scope.getPicks();
 
     }
 ]);

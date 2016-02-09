@@ -8,6 +8,12 @@ var path = require('path'),
 
 function get(req, res, next){
 
+    if(!Object.keys(req.query).length){
+        return res.status(400).send({
+            message: 'Query is required'
+        });
+    }
+
     function cb (err, hub){
         if (err) return next(err);
         if (!hub) {
@@ -18,7 +24,7 @@ function get(req, res, next){
         res.json(hub);
     }
 
-    HubBl.get(cb);
+    HubBl.getPicks(req.query, req.user, cb);
 }
 
 

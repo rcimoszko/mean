@@ -72,6 +72,11 @@ function getByLeague(league, callback){
     getByQuery({'league.ref': league._id}, callback);
 }
 
+function populateBy(events, populate, callback){
+    m_Event.populate(events, populate, callback);
+}
+
+
 function cancel(event, callback){
     var todo = [];
 
@@ -160,6 +165,7 @@ exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
 exports.getByLeague  = getByLeague;
+exports.populateBy  = populateBy;
 
 exports.cancel      = cancel;
 exports.report      = report;

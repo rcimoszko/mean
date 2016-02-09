@@ -6,6 +6,7 @@ var _ = require('lodash'),
     ConsensusBl = require('./consensus.server.bl'),
     PopularBl = require('./popular.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
+    PickListBl = require('./pick.list.server.bl'),
     TrendingBl = require('./trending.server.bl'),
     mongoose = require('mongoose');
 
@@ -48,6 +49,15 @@ function get(callback){
 
 }
 
+function getPicks(query, user, callback){
+    var pageLimit = 10;
+    var page = query.page;
+    var pendingCompleted = query.type;
+
+    PickListBl.getEventPickList('all', 'all', null, page, pageLimit, 2, pendingCompleted, user.premium, callback);
+
+}
+
 exports.getHotPick = getHotPick;
 exports.getConsensus = getConsensus;
 exports.getPopularGames = getPopularGames;
@@ -55,3 +65,4 @@ exports.getLeaderboard = getLeaderboard;
 exports.getTrending = getTrending;
 
 exports.get = get;
+exports.getPicks = getPicks;

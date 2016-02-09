@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
+    EventBl = require('./event.server.bl'),
     Pick = mongoose.model('Pick');
 
 var populate = [{path: 'event', select: '-pinnacleBets'}];
@@ -71,6 +72,12 @@ function getByQuery(query, callback){
     Pick.find(query).populate(populate).sort('eventStartTime').exec(callback);
 }
 
+function getByQueryWithOptions(query, options, callback){
+    console.log(query);
+    console.log(options);
+    Pick.find(query, null, options).populate(populate).sort('eventStartTime').exec(callback);
+}
+
 function getPending(query, callback){
     Pick.find(query).populate(populate).sort('eventStartTime').exec(callback);
 }
@@ -123,7 +130,43 @@ function populateBy(picks, populate, callback){
     Pick.populate(picks, populate, callback);
 }
 
-function getGroupedByEvent(query, callback){
+function getGroupedByEvent(query, options, callback){
+    var todo = [];
+
+    function getPicksByEvent(callback){
+        var aggArray = [];
+        var match = {$match : query};
+        var group = {$group: {'_id': '$event', picks: {$addToSet: '$$ROOT'}}};
+        var project = {$project: {event: '$_id', picks: 1}};
+        aggArray.push(match);
+        aggArray.push(group);
+        aggArray.push(project);
+
+        if(options.sort){
+            var sort = {$sort: options.sort};
+            aggArray.push(sort);
+        }
+        if(options.skip !== undefined){
+            var skip = {$skip: options.skip};
+            aggArray.push(skip);
+        }
+        if(options.limit){
+            var limit = {$limit: options.limit};
+            aggArray.push(limit);
+        }
+
+        aggregate(aggArray, callback);
+    }
+
+    function populateEvents(events, callback){
+        var populate = {path: 'event', model:'Event'};
+        populateBy(events, populate, callback);
+    }
+
+    todo.push(getPicksByEvent);
+    todo.push(populateEvents);
+
+    async.waterfall(todo, callback);
 
 }
 
@@ -162,6 +205,7 @@ function getGroupedByUser(query, callback){
 
     async.waterfall(todo, callback);
 }
+
 
 exports.getAll      = getAll;
 exports.get         = get;
