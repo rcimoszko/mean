@@ -84,6 +84,15 @@ function populateBy(comments, populate, callback){
     m_Comment.populate(comments, populate, callback);
 }
 
+function getPreviews(query, count, callback){
+    m_Comment.find(query).sort({timestamp:-1}).limit(count)
+        .populate('sport', 'name')
+        .populate('league', 'name')
+        .populate('event', 'contestant1 contestant2 slug commentCount')
+        .populate('pick')
+        .exec(callback);
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
@@ -92,6 +101,8 @@ exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.populateBy  = populateBy;
+
+exports.getPreviews  = getPreviews;
 
 exports.getBySport   = getBySport;
 exports.getByLeague  = getByLeague;

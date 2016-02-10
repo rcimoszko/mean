@@ -2732,6 +2732,48 @@ input.toggle:checked + label:after {
 .popular-game .pick-count .text {
   font-size: 10px;
 }
+.discussion-preview {
+  padding: 3px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+.discussion-preview:last-of-type {
+  border-bottom: 0;
+}
+.discussion-preview a {
+  color: #6a6b6c;
+}
+.discussion-preview .content-container {
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+}
+.discussion-preview .content-container .title {
+  font-weight: bold;
+}
+.discussion-preview .content-container .preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.discussion-preview .icon-container {
+  display: inline-block;
+  width: 18%;
+  text-align: right;
+  vertical-align: top;
+}
+.discussion-preview .icon-container .fa {
+  color: #21759b;
+  font-size: 16px;
+  margin-right: 5px;
+}
+.discussion-preview .icon-container .count {
+  font-size: 16px;
+  color: #2b2b2c;
+}
+.discussion-preview .icon-container .timestamp {
+  font-size: 11px;
+  color: #838586;
+  padding-top: 3px;
+}
 .auth-form .divider {
   height: 1px;
   text-align: center;

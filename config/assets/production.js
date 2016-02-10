@@ -21,6 +21,8 @@ module.exports = {
         'public/lib/angular-google-chart/ng-google-chart.js',
         'public/lib/angulargrid/angulargrid.min.js',
         'public/lib/lrInfiniteScroll/lrInfiniteScroll.js',
+        'public/lib/moment/min/moment-with-locales.min.js',
+        'public/lib/angular-moment/angular-moment.min.js',
         //'public/lib/ngSticky/dist/sticky.min.js'
       ]
     },

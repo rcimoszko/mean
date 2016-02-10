@@ -1,15 +1,22 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub',
-    function ($scope, Authentication, Hub) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews',
+    function ($scope, Authentication, Hub, CommentsPreviews) {
         $scope.authentication = Authentication;
 
+        /**
+         * General Hub Info
+         */
 
         function cbGetHub(err, hub){
             $scope.hub = hub;
         }
 
         Hub.getHub(cbGetHub);
+
+        /**
+         * Picks Feed
+         */
 
         $scope.picks = {
             all:{
@@ -54,7 +61,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             }
         };
 
-
         $scope.getPicks = function(){
             function cbGetPicks(err, picks){
                 $scope.picks[$scope.tab][$scope.pickFilter] = $scope.picks[$scope.tab][$scope.pickFilter].concat(picks);
@@ -81,7 +87,25 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             }
         };
 
+        /**
+         * Talk
+         */
 
 
+        $scope.getTalk = function(){
+            var query = {
+                sportId: 'all',
+                leagueId: 'all',
+                count: 5
+            };
+
+            function cb(err, previews){
+                console.log(previews);
+                $scope.previews = previews;
+            }
+
+            CommentsPreviews.getPreviews(query, cb);
+        };
+        $scope.getTalk();
     }
 ]);

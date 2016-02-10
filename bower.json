@@ -20,7 +20,9 @@
     "angulargrid": "~0.4.0",
     "ngSticky": "~1.8.7",
     "jquery": "~2.2.0",
-    "lrInfiniteScroll": "~1.0.0"
+    "lrInfiniteScroll": "~1.0.0",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.11.2"
   },
   "resolutions": {
     "angular": "~1.3"

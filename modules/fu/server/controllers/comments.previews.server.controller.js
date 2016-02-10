@@ -23,7 +23,7 @@ function get(req, res, next){
         res.json(comments);
     }
 
-    CommentsPreviewsBl.get(req.query, cb);
+    CommentsPreviewsBl.getPreviews(req.query, cb);
 }
 
 

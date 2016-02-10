@@ -1,0 +1,43 @@
+.discussion-preview{
+  padding:3px 0;
+  border-bottom:1px solid @color-gray-divider;
+  &:last-of-type{
+    border-bottom:0;
+  }
+  a{
+    color:@color-text;
+  }
+  .content-container{
+    display:inline-block;
+    width:80%;
+    vertical-align:top;
+    .title{
+      font-weight:bold;
+    }
+    .preview{
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+  }
+  .icon-container{
+    display:inline-block;
+    width:18%;
+    text-align:right;
+    vertical-align:top;
+    .fa{
+      color:@color-blue-2;
+      font-size:16px;
+      margin-right:5px;
+    }
+    .count{
+      font-size:16px;
+      color:@color-text-dark;
+    }
+    .timestamp{
+      font-size:11px;
+      color:lighten(@color-text, 10%);
+      padding-top:3px;
+    }
+  }
+
+}

@@ -78,3 +78,24 @@ angular.element(document).ready(function () {
   //Then init the app
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
+
+angular.module(ApplicationConfiguration.applicationModuleName).config(function(moment){
+    moment.locale('en', {
+        relativeTime : {
+            future: "in %s",
+            past:   "%s",
+            s:  "1m",
+            m:  "1m",
+            mm: "%dm",
+            h:  "1h",
+            hh: "%dh",
+            d:  "1d",
+            dd: "%dd",
+            M:  "1mo",
+            MM: "%dmo",
+            y:  "1y",
+            yy: "%dy"
+        }
+    });
+});
