@@ -21,7 +21,7 @@ angular.module('fu').filter('betName',['$filter', function($filter) {
                 }
                 break;
             case 'sets':
-                text = pick.contestant.name+' '+$filter('displayPoints')(pick.spread)+' sets';
+                text = pick.contestant.name+' '+$filter('formatSpread')(pick.spread)+' sets';
                 break;
         }
         return text;

@@ -1,35 +1,104 @@
 .pick-list{
   .pick{
     margin:0 15px;
-    padding:15px 0;
-    border-bottom:1px solid @color-gray-divider;
-    &:last-of-type{
-      border-bottom:0;
-    }
+    padding-top:15px;
     .avatar-container{
+      float:left;
+      width:65px;
+      text-align:center;
+      overflow:hidden;
+      .username{
+        margin-top:5px;
+        text-overflow:ellipsis;
+        overflow:hidden;
+      }
+    }
 
+    &:last-of-type{
+      .pick-container{
+        border-bottom:0;
+      }
     }
 
     .pick-container{
+      overflow:hidden;
+      border-bottom:1px solid @color-gray-divider;
+      padding-bottom:15px;
       .bet-name{
+        padding-left:5px;
         text-transform:uppercase;
         font-size:14px;
         color:@color-text-dark;
         margin-bottom:5px;
-
+        margin-right:8px;
+        .pro-label{
+          background-color:@color-green;
+          display:inline-block;
+          margin-right:3px;
+          color:white;
+          padding:0 3px;
+          font-size:11px;
+        }
       }
       .bet-duration{
         font-size:11px;
         color:@color-text;
         display:inline-block;
-        margin-left:8px;
       }
       .statistics{
         width:100%;
+        padding:5px 0;
         .stat-container{
           width:20%;
           float:left;
           text-align:center;
+          .stat-value{
+            font-size:14px;
+            &.stat-value-result{
+              text-transform:uppercase;
+            }
+          }
+          .stat-text{
+            font-size:10px;
+          }
+        }
+
+        &.statistic-result-l, &.statistic-result-hl{
+          .stat-value-profit, .stat-value-roi, .stat-value-result{
+            color:@color-red;
+          }
+        }
+        &.statistic-result-w, &.statistic-result-hw{
+          .stat-value-profit, .stat-value-roi, .stat-value-result{
+            color:@color-green;
+          }
+        }
+        &.statistic-result-p{
+          .stat-value-profit, .stat-value-roi, .stat-value-result{
+            color:@color-blue;
+          }
+        }
+        &.statistic-result-c{
+          .stat-value-profit, .stat-value-roi, .stat-value-result{
+            color:@color-text;
+          }
+        }
+      }
+      .actions{
+        width:100%;
+        padding-top:8px;
+        text-align:center;
+        font-size:10px;
+        .action-btn{
+          display:inline-block;
+          text-align:center;
+          margin-right:15px;
+          a{
+            color:lighten(@color-text,40%);
+          }
+          .fa{
+            margin-right:5px;
+          }
         }
       }
     }

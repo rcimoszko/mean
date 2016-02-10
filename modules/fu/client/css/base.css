@@ -186,6 +186,9 @@ a:focus {
   font-size: 16px;
   margin-right: 7px;
 }
+.btn-action:last-of-type {
+  margin-right: 0;
+}
 .btn-share .fa {
   color: #21759b;
 }
@@ -212,11 +215,16 @@ a:focus {
 .btn-tracker .fa {
   color: #4CAF50;
 }
-.btn-follow-lg {
+.btn-follow-rect {
   background-color: #1ccf31;
   color: white;
   font-size: 13px;
+}
+.btn-follow-lg {
   padding: 4px 18px;
+}
+.btn-follow-xs {
+  padding: 1px 5px;
 }
 .btn-subscribe {
   background-color: #1ccf31;
@@ -312,6 +320,12 @@ a:focus {
 }
 .loading-bg-gray:after {
   background: #eeeeee;
+}
+.loading-white:before {
+  background: white;
+}
+.loading-white:after {
+  background: white;
 }
 .loading-sm {
   font-size: 2px;
@@ -2411,6 +2425,13 @@ input.toggle:checked + label:after {
   border-bottom: 1px solid #eaeaea;
   margin-bottom: 10px;
 }
+.hub-picks-feed .tab-content {
+  height: 650px;
+}
+.hub-picks-feed .tab-content .event-pick-list-container {
+  height: 650px;
+  overflow-y: scroll;
+}
 .pick-feed-filter {
   position: absolute;
   right: 25px;
@@ -3020,31 +3041,108 @@ input.toggle:checked + label:after {
 }
 .pick-list .pick {
   margin: 0 15px;
-  padding: 15px 0;
-  border-bottom: 1px solid #eaeaea;
+  padding-top: 15px;
 }
-.pick-list .pick:last-of-type {
+.pick-list .pick .avatar-container {
+  float: left;
+  width: 65px;
+  text-align: center;
+  overflow: hidden;
+}
+.pick-list .pick .avatar-container .username {
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.pick-list .pick:last-of-type .pick-container {
   border-bottom: 0;
 }
+.pick-list .pick .pick-container {
+  overflow: hidden;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 15px;
+}
 .pick-list .pick .pick-container .bet-name {
+  padding-left: 5px;
   text-transform: uppercase;
   font-size: 14px;
   color: #2b2b2c;
   margin-bottom: 5px;
+  margin-right: 8px;
+}
+.pick-list .pick .pick-container .bet-name .pro-label {
+  background-color: #4CAF50;
+  display: inline-block;
+  margin-right: 3px;
+  color: white;
+  padding: 0 3px;
+  font-size: 11px;
 }
 .pick-list .pick .pick-container .bet-duration {
   font-size: 11px;
   color: #6a6b6c;
   display: inline-block;
-  margin-left: 8px;
 }
 .pick-list .pick .pick-container .statistics {
   width: 100%;
+  padding: 5px 0;
 }
 .pick-list .pick .pick-container .statistics .stat-container {
   width: 20%;
   float: left;
   text-align: center;
+}
+.pick-list .pick .pick-container .statistics .stat-container .stat-value {
+  font-size: 14px;
+}
+.pick-list .pick .pick-container .statistics .stat-container .stat-value.stat-value-result {
+  text-transform: uppercase;
+}
+.pick-list .pick .pick-container .statistics .stat-container .stat-text {
+  font-size: 10px;
+}
+.pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
+.pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
+  color: #F44336;
+}
+.pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
+.pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
+  color: #4CAF50;
+}
+.pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-result {
+  color: #104673;
+}
+.pick-list .pick .pick-container .statistics.statistic-result-c .stat-value-profit,
+.pick-list .pick .pick-container .statistics.statistic-result-c .stat-value-roi,
+.pick-list .pick .pick-container .statistics.statistic-result-c .stat-value-result {
+  color: #6a6b6c;
+}
+.pick-list .pick .pick-container .actions {
+  width: 100%;
+  padding-top: 8px;
+  text-align: center;
+  font-size: 10px;
+}
+.pick-list .pick .pick-container .actions .action-btn {
+  display: inline-block;
+  text-align: center;
+  margin-right: 15px;
+}
+.pick-list .pick .pick-container .actions .action-btn a {
+  color: #d1d1d1;
+}
+.pick-list .pick .pick-container .actions .action-btn .fa {
+  margin-right: 5px;
 }
 .event-pick-list .event-header {
   border-top: 1px solid #eaeaea;
@@ -3065,10 +3163,25 @@ input.toggle:checked + label:after {
   border-right: 1px solid #eaeaea;
   width: 70px;
 }
-.event-pick-list .event-header .contestant-table .contestant-1 {
+.event-pick-list .event-header .contestant-table .contestant-1,
+.event-pick-list .event-header .contestant-table .value-1 {
   border-bottom: 1px solid #eaeaea;
 }
 .event-pick-list .event-header .contestant-table .contestant-1,
 .event-pick-list .event-header .contestant-table .contestant-2 {
   padding: 3px;
+}
+.event-pick-list .event-header .contestant-table .value-1,
+.event-pick-list .event-header .contestant-table .value-2 {
+  width: 50px;
+  text-align: center;
+}
+.event-pick-list .event-footer {
+  padding: 3px 5px;
+  border-top: 1px solid #eaeaea;
+  text-align: center;
+}
+.event-pick-list .event-footer .fa {
+  color: #e9893a;
+  margin-right: 5px;
 }

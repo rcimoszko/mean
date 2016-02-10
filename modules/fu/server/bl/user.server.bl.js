@@ -4,6 +4,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
     PickBl = require('./pick.server.bl'),
+    PickListBl = require('./pick.list.server.bl'),
     FollowBl = require('./follow.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
     User = mongoose.model('User');
@@ -54,6 +55,7 @@ function getFollowing(user, query, callback){
             currentUser = followingList[i];
             var found = _.find(followingLeaderboard, findInLeaderboard);
             followingList[i] =  followingList[i].toJSON();
+            followingList[i].events = [];
             if(found){
                 followingList[i].avgOdds = found.avgOdds;
                 followingList[i].avgBet = found.avgBet;
@@ -78,20 +80,13 @@ function getFollowing(user, query, callback){
     }
 
     function getFollowingPicks(callback){
-        var query = {'user.ref': {$in:followingIdArray}, result:'Pending'};
-        if(sportId !== 'all') query.sport = sportId;
-        if(leagueId !== 'all') query.league = leagueId;
-
-        PickBl.getGroupedByUser(query, callback);
+        PickListBl.getUserEventPickList(sportId, leagueId, followingIdArray, user.premium, callback);
     }
 
-    function addPicksToList(userPendingPicks, callback){
-        for(var i=0; i<followingList.length; i++){
-            if(followingList[i]._id in userPendingPicks){
-                followingList[i].eventPicks = userPendingPicks[followingList[i]._id];
-            } else {
-                followingList[i].eventPicks = [];
-            }
+    function addPicksToList(userPickList, callback){
+        for(var i=0; i < userPickList.length; i++){
+            var index = _.findIndex(followingList, {_id: userPickList[i].user.ref});
+            if(index) followingList[index].events = userPickList[i].events;
         }
         callback();
     }

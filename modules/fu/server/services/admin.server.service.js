@@ -9,6 +9,7 @@ var _ = require('lodash'),
     ChannelBl = require('../bl/channel.server.bl'),
     PickBl = require('../bl/pick.server.bl'),
     LeagueBl = require('../bl/league.server.bl'),
+    CommentBl = require('../bl/comment.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
     slug = require('speakingurl');
 
@@ -332,6 +333,49 @@ function createChannels(callback){
 
 }
 
+function assignCommentIds(model, callback){
+    var todo = [];
+    function getComments(callback){
+        CommentBl.getAll(callback);
+    }
+
+    function populateComments(comments, callback){
+        var populate = {path:'discussion', model: model};
+        CommentBl.populateBy(comments, populate, callback);
+    }
+
+    function processComments(comments, callback){
+        function processComment(comment, callback){
+            if(comment.discussion){
+                if(model === 'Pick'){
+                    comment.pick = comment.discussion._id;
+                    comment.event = comment.discussion.event;
+                    comment.league = comment.discussion.league;
+                    comment.sport = comment.discussion.sport;
+                } else if (model === 'Event'){
+                    comment.event = comment.discussion._id;
+                    comment.league = comment.discussion.league.ref;
+                    comment.sport = comment.discussion.sport.ref;
+                }
+            }
+
+
+            function cb(err){
+                callback();
+            }
+            comment.save(cb);
+        }
+
+
+        async.eachSeries(comments, processComment, callback);
+    }
+    todo.push(getComments);
+    todo.push(populateComments);
+    todo.push(processComments);
+
+    async.waterfall(todo, callback);
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -340,4 +384,5 @@ exports.assignBetTypes        = assignBetTypes;
 exports.assignBetDurations    = assignBetDurations;
 
 exports.createChannels    = createChannels;
+exports.assignCommentIds    = assignCommentIds;
 

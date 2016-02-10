@@ -23,13 +23,13 @@ mongoose.connect(uristring, function (err, res) {
 var AdminService = require('../modules/fu/server/services/admin.server.service.js');
 
 
-function createChannels() {
+function assignCommentIds() {
     function cb(err){
         if(err)console.log(err);
         mongoose.connection.close();
     }
 
-    AdminService.createChannels(cb);
+    AdminService.assignCommentIds('Event', cb);
 }
 
-createChannels();
+assignCommentIds();

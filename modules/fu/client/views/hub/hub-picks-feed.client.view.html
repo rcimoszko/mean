@@ -5,8 +5,8 @@
                 {{pickFilter}}<i class="fa fa-angle-down"></i>
             </a>
             <div class="dropdown-menu pull-right">
-                <div data-ng-repeat="pickFilter in pickFilters" >
-                    <a href data-ng-click="setPickFilter(pickFilter)" >
+                <div data-ng-repeat="pickFilter in pickFilters">
+                    <a href data-ng-click="filterChange(pickFilter)">
                         {{pickFilter}}
                     </a>
                 </div>
@@ -14,17 +14,31 @@
         </span>
     </div>
     <tabset>
-        <tab>
+        <tab select="tabChange('all')"  >
             <tab-heading>
                 ALL PICKS
             </tab-heading>
-            <event-pick-list events="hub.allPicks" include-user="true"></event-pick-list>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'pending'">
+                <event-pick-list events="picks.all.pending" include-user="true"></event-pick-list>
+                <loading is-loading="disableScroll" color="'white'"></loading>
+            </div>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'completed'">
+                <event-pick-list events="picks.all.completed" include-user="true" ></event-pick-list>
+                <loading is-loading="disableScroll" color="'white'"></loading>
+            </div>
         </tab>
-        <tab>
+        <tab select="tabChange('pro')">
             <tab-heading>
                 PRO PICKS
             </tab-heading>
-            <event-pick-list events="hub.proPicks" include-user="true"></event-pick-list>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container"  data-ng-if="pickFilter === 'pending'">
+                <event-pick-list events="picks.pro.pending" include-user="true"></event-pick-list>
+                <loading is-loading="disableScroll" color="'white'"></loading>
+            </div>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'completed'">
+                <event-pick-list events="picks.pro.completed" include-user="true" ></event-pick-list>
+                <loading is-loading="disableScroll" color="'white'"></loading>
+            </div>
         </tab>
     </tabset>
 </div>

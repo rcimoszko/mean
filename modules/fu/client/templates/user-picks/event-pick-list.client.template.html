@@ -12,16 +12,33 @@
                         {{event.startTime|date:'shortTime'}}
                     </td>
                     <td class="contestant-1">
-                        {{event.contestant2.name}}
+                        {{event.contestant1.name}}
+                    </td>
+                    <td class="value-1">
+                        {{event.contestant1Value|displayHeaderValue:event.contestant1ValueType}}
                     </td>
                 </tr>
                 <tr>
-                    <td class="contestant-1">
-                        {{event.contestant1.name}}
+                    <td class="contestant-2">
+                        {{event.contestant2.name}}
+                    </td>
+                    <td class="value-2">
+                        {{event.contestant2Value|displayHeaderValue:event.contestant2ValueType}}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <pick-list picks="event.picks" include-user="includeUser"></pick-list>
+    <pick-list picks="event.picks" event="event" include-user="includeUser"></pick-list>
+    <div class="event-footer clearfix">
+        <div class="col-xs-4">
+            <i class="fa fa-star"></i> {{event.proCount}} PRO PICKS
+        </div>
+        <div class="col-xs-4">
+            <i class="fa fa-star-o"></i>  {{event.pickCount}} PICKS
+        </div>
+        <div class="col-xs-4">
+            <a ui-sref="gamecenter">VIEW ALL</a>
+        </div>
+    </div>
 </div>

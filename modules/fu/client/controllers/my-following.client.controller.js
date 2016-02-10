@@ -99,7 +99,7 @@ angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Spo
             return user.profit !== 0;
         };
         var hasPicksFilter = function(user){
-            return user.eventPicks.length > 0;
+            return user.events.length > 0;
         };
 
         function updateList(){

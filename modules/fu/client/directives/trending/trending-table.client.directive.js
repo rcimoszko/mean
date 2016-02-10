@@ -10,8 +10,6 @@ angular.module('fu').directive('trendingTable', function ($compile) {
         template: '',
         controller:  ['$scope', '$element',  function ( $scope, $element) {
             var directive;
-            console.log($scope.users);
-            console.log($scope.type);
 
             switch($scope.type){
                 case 'profit':

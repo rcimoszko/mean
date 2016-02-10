@@ -79,6 +79,11 @@ function getByPick(pick, callback){
     getByQuery({pick:pick}, callback);
 }
 
+
+function populateBy(comments, populate, callback){
+    m_Comment.populate(comments, populate, callback);
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
@@ -86,6 +91,7 @@ exports.create      = create;
 exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
+exports.populateBy  = populateBy;
 
 exports.getBySport   = getBySport;
 exports.getByLeague  = getByLeague;

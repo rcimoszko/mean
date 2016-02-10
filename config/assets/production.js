@@ -19,7 +19,9 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-slugify/angular-slugify.js',
         'public/lib/angular-google-chart/ng-google-chart.js',
-        'public/lib/angulargrid/angulargrid.min.js'
+        'public/lib/angulargrid/angulargrid.min.js',
+        'public/lib/lrInfiniteScroll/lrInfiniteScroll.js',
+        //'public/lib/ngSticky/dist/sticky.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

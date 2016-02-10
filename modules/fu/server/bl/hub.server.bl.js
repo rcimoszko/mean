@@ -50,11 +50,12 @@ function get(callback){
 }
 
 function getPicks(query, user, callback){
-    var pageLimit = 10;
+    var pageLimit = 100;
     var page = query.page;
     var pendingCompleted = query.type;
+    var pro = query.pro;
 
-    PickListBl.getEventPickList('all', 'all', null, page, pageLimit, 2, pendingCompleted, user.premium, callback);
+    PickListBl.getEventPickList('all', 'all', null, pro, page, pageLimit, 2, pendingCompleted, user.premium, callback);
 
 }
 

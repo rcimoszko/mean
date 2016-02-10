@@ -5,6 +5,7 @@ angular.module('fu').directive('pickList', function () {
         restrict: 'E',
         scope: {
             picks: '=',
+            event: '=',
             includeUser: '='
         },
         templateUrl: 'modules/fu/client/templates/user-picks/pick-list.client.template.html',

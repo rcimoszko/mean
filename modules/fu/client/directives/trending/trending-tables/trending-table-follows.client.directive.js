@@ -8,7 +8,6 @@ angular.module('fu').directive('trendingTableFollows', function () {
         },
         templateUrl: 'modules/fu/client/templates/trending/trending-tables/trending-table-follows.client.template.html',
         controller: ['$scope', function ($scope){
-            console.log($scope.users);
         }]
     };
 });

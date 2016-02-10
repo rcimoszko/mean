@@ -1,23 +1,49 @@
 
 <div class="pick-list">
     <div class="pick clearfix" data-ng-repeat="pick in picks">
-        <div class="avatar-container" data-ng-if="includeUser">
-
+        <div data-ng-if="pick.hidden">
+            HIDDEN
         </div>
-        <div class="pick-container">
-            <div class="bet-name">{{pick|betName:pick.event}} <span class="bet-duration">({{pick.betDuration}})</span></div>
-            <div class="statistics">
-                <div class="stat-container">
-                    <div class="stat-value">{{pick.units}}</div>
-                    <div class="stat-text">UNITS</div>
+        <div data-ng-if="!pick.hidden">
+            <div class="avatar-container" data-ng-if="includeUser">
+                <avatar size="'sm'" url="pick.user.ref.avatarUrl"></avatar>
+                <div class="username">
+                    <a ui-sref="profile({username:pick.user.ref.username})">{{pick.user.ref.username}}</a>
                 </div>
-                <div class="stat-container">
-                    <div class="stat-value">{{pick.odds|formatOdds}}</div>
-                    <div class="stat-text">ODDS</div>
+                <btn-follow user-id="pick.user.ref._id"></btn-follow>
+            </div>
+            <div class="pick-container">
+                <div class="bet-name"><span class="pro-label" data-ng-if="pick.premium">PRO</span> {{pick|betName:event}} <span class="bet-duration">{{pick.betDuration}}</span></div>
+                <div class="statistics clearfix statistic-result-{{pick.result|formatResult}}">
+                    <div class="stat-container">
+                        <div class="stat-value">{{pick.units}}</div>
+                        <div class="stat-text">UNITS</div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-value">{{pick.odds|formatOdds}}</div>
+                        <div class="stat-text">ODDS</div>
+                    </div>
+                    <div class="stat-container" data-ng-if="pick.result === 'Pending'">
+                        <div class="stat-value">{{pick|pickReturn}}</div>
+                        <div class="stat-text">RETURN</div>
+                    </div>
+                    <div class="stat-container" data-ng-if="pick.result !== 'Pending'">
+                        <div class="stat-value stat-value-profit">{{pick.profit|formatProfit}}</div>
+                        <div class="stat-text">PROFIT</div>
+                    </div>
+                    <div class="stat-container" data-ng-if="pick.result !== 'Pending'">
+                        <div class="stat-value stat-value-roi">{{pick.roi|formatRoi}}</div>
+                        <div class="stat-text">ROI</div>
+                    </div>
+                    <div class="stat-container stat-container-result" data-ng-if="pick.result !== 'Pending'">
+                        <div class="stat-value  stat-value-result">{{pick.result|formatResult}}</div>
+                        <div class="stat-text">RESULT</div>
+                    </div>
                 </div>
-                <div class="stat-container">
-                    <div class="stat-value">{{pick|pickReturn}}</div>
-                    <div class="stat-text">RETURN</div>
+                <div class="actions">
+                    <div class="action-btn"><a href><i class="fa fa-commenting"></i>COMMENT</a></div>
+                    <div class="action-btn"><a href><i class="fa fa-retweet"></i>COPY</a></div>
+                    <div class="action-btn"><a href><i class="fa fa-share-alt"></i>SHARE</a></div>
                 </div>
             </div>
         </div>

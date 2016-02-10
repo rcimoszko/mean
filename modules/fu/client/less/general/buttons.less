@@ -25,6 +25,9 @@
 .btn-action{
   font-size:16px;
   margin-right:7px;
+  &:last-of-type{
+    margin-right:0;
+  }
 }
 
 .btn-share{
@@ -66,12 +69,18 @@
   }
 }
 
-.btn-follow-lg{
+.btn-follow-rect{
   background-color:@color-green-light;
   color:white;
   font-size:13px;
+}
+.btn-follow-lg{
   padding:4px 18px;
 }
+.btn-follow-xs{
+  padding:1px 5px;
+}
+
 .btn-subscribe{
   background-color:@color-green-light;
   color:white;
