@@ -1,0 +1,16 @@
+<section class="panel channel-consensus">
+    <div class="panel-body">
+        <div class="channel-hot-picks-container" data-ng-if="channelContent.hotPick">
+            <h1>
+                HOT PICK
+            </h1>
+            <hot-pick hot-pick="channelContent.hotPick" data-ng-if="channelContent.hotPick"></hot-pick>
+        </div>
+        <div class="channel-consensus-picks-container" data-ng-if="channelContent.consensus.length">
+            <h1>
+                CONSENSUS PICK
+            </h1>
+            <consensus-pick consensus-pick="pick" data-ng-repeat="pick in channelContent.consensus"></consensus-pick>
+        </div>
+    </div>
+</section>

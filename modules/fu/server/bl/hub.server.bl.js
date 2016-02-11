@@ -41,7 +41,7 @@ function get(callback){
         hotPick: getHotPick,
         consensus: getConsensus,
         popular: getPopularGames,
-        leaderboard: getLeaderboard,
+        //leaderboard: getLeaderboard,
         trending: getTrending
     };
 

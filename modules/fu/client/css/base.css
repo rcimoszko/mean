@@ -2450,6 +2450,66 @@ input.toggle:checked + label:after {
   padding-right: 14px;
   min-width: 100px;
 }
+.channel-consensus h1 {
+  margin-bottom: 5px;
+}
+.channel-consensus .channel-hot-picks-container {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 10px;
+}
+.channel-consensus .channel-consensus-picks-container {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 10px;
+}
+.channel-event {
+  padding: 10px;
+}
+.channel-event .team-header .logo1 {
+  width: 30%;
+  display: inline-block;
+}
+.channel-event .team-header .team-names {
+  color: #2b2b2c;
+  font-size: 14px;
+  width: 40%;
+  display: inline-block;
+  text-align: center;
+}
+.channel-event .team-header .logo2 {
+  width: 30%;
+  display: inline-block;
+}
+.channel-event .odds {
+  border-top: 1px solid #eaeaea;
+  padding: 5px 0;
+}
+.channel-event .odds .odds-col {
+  display: inline-block;
+  text-align: center;
+  border-right: 1px solid #eaeaea;
+}
+.channel-event .odds .odds-col:last-of-type {
+  border-right: 0;
+}
+.channel-event .odds .odds-col .odds-header {
+  color: #2b2b2c;
+}
+.channel-event .odds.odds-1 .odds-col {
+  width: 100%;
+}
+.channel-event .odds.odds-2 .odds-col {
+  width: 50%;
+}
+.channel-event .odds.odds-3 .odds-col {
+  width: 33%;
+}
+.channel-event .picks {
+  border-top: 1px solid #eaeaea;
+  padding: 5px 0;
+}
+.channel-event .btn-container {
+  border-top: 1px solid #eaeaea;
+}
 .btn-bet-slip {
   background-color: #104673;
   margin-right: 30px;
@@ -2734,10 +2794,7 @@ input.toggle:checked + label:after {
 }
 .discussion-preview {
   padding: 3px 0;
-  border-bottom: 1px solid #eaeaea;
-}
-.discussion-preview:last-of-type {
-  border-bottom: 0;
+  border-top: 1px solid #eaeaea;
 }
 .discussion-preview a {
   color: #6a6b6c;
@@ -2753,6 +2810,7 @@ input.toggle:checked + label:after {
 .discussion-preview .content-container .preview {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .discussion-preview .icon-container {
   display: inline-block;

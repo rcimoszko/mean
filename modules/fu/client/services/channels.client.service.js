@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Channels', ['ApiChannels',
-    function(ApiChannels) {
+angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent',
+    function(ApiChannels, ApiChannelsContent) {
 
         var create = function(form, callback){
 
@@ -69,16 +69,16 @@ angular.module('fu').factory('Channels', ['ApiChannels',
             channel.$delete(cbSuccess, cbError);
         };
 
-        var getContestants = function(channelId, callback){
-            function cbSuccess(contestants){
-                callback(null, contestants);
+        var getContent = function(channelSlug, callback){
+            function cbSuccess(channelContent){
+                callback(null, channelContent);
             }
 
             function cbError(response){
                 callback(response.data.message);
             }
-
-            ApiChannels.getContestants({_id: channelId}, cbSuccess, cbError);
+            console.log(channelSlug);
+            ApiChannelsContent.get({slug: channelSlug}, cbSuccess, cbError);
 
         };
 
@@ -91,7 +91,7 @@ angular.module('fu').factory('Channels', ['ApiChannels',
             update: update,
             delete: del,
 
-            getContestants: getContestants
+            getContent: getContent
         };
     }
 ]);

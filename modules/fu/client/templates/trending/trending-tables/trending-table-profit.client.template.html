@@ -1,3 +1,19 @@
 <table class="table trending-table">
+    <thead>
+    <th class="username text-center">USERNAME</th>
+    <th class="value text-center">PROFIT</th>
+    <th class="actions text-center"></th>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="user in users">
+        <td class="username"><avatar size="'xs'" url="user.user.avatarUrl"></avatar>
+            <a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a>
+        </td>
+        <td class="value">{{user.profit|formatProfit}}</td>
 
+        <td class="actions">
+            <btn-follow user-id="user.user.ref._id"></btn-follow>
+        </td>
+    </tr>
+    </tbody>
 </table>

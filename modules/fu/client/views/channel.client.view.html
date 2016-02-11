@@ -1,3 +1,17 @@
-<section data-ng-controler="ChannelController" class="channel content-padding-top">
-    <h1>{{}}</h1>
+<section data-ng-controller="ChannelController" class="channel content-padding-top">
+    <ng-include src="'/modules/fu/client/views/channels/channel-top-menu.client.view.html'"></ng-include>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <ng-include src="'/modules/fu/client/views/channels/channel-games.client.view.html'"></ng-include>
+            </div>
+            <div class="col-sm-4">
+                <ng-include src="'/modules/fu/client/views/channels/channel-chat.client.view.html'"></ng-include>
+                <ng-include src="'/modules/fu/client/views/channels/channel-consensus.client.view.html'"></ng-include>
+                <ng-include src="'/modules/fu/client/views/channels/channel-trending.client.view.html'"></ng-include>
+                <ng-include src="'/modules/fu/client/views/channels/channel-discussion.client.view.html'"></ng-include>
+            </div>
+        </div>
+    </div>
 </section>

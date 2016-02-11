@@ -1,0 +1,63 @@
+.channel-event{
+  padding:10px;
+  .league{
+
+  }
+  .team-header{
+    .logo1{
+      width:30%;
+      display:inline-block;
+    }
+    .team-names{
+      color:@color-text-dark;
+      font-size:14px;
+      width:40%;
+      display:inline-block;
+      text-align:center;
+
+    }
+    .logo2{
+      width:30%;
+      display:inline-block;
+
+    }
+  }
+  .odds{
+    border-top:1px solid @color-gray-divider;
+    padding:5px 0;
+    .odds-col{
+      display:inline-block;
+      text-align:center;
+      border-right:1px solid @color-gray-divider;
+      &:last-of-type{
+        border-right:0;
+      }
+      .odds-header{
+        color:@color-text-dark;
+      }
+    }
+    &.odds-1{
+      .odds-col{
+        width:100%;
+      }
+    }
+    &.odds-2{
+      .odds-col{
+        width:50%;
+      }
+    }
+    &.odds-3{
+      .odds-col{
+        width:33%;
+      }
+    }
+  }
+  .picks{
+    border-top:1px solid @color-gray-divider;
+    padding:5px 0;
+  }
+  .btn-container{
+    border-top:1px solid @color-gray-divider;
+  }
+
+}

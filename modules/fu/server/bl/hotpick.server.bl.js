@@ -13,7 +13,8 @@ function getHotPick(sportId, leagueId, callback){
     function groupProPicks(callback){
         var query =  {result: 'Pending', premium: true};
         if(sportId !== 'all') query.sport = mongoose.Types.ObjectId(sportId);
-        if(leagueId !== 'all') query.sport = mongoose.Types.ObjectId(leagueId);
+        if(leagueId !== 'all') query.league = mongoose.Types.ObjectId(leagueId);
+
         var match = {$match: query};
         var group = {$group: {'_id': '$event', picks: {$addToSet: '$$ROOT'}}};
         var sort =  {$sort: {'eventStartTime': -1}};
@@ -101,6 +102,7 @@ function getHotPick(sportId, leagueId, callback){
     }
 
     function findHotPick(hotPickInfo, callback){
+        if(!Object.keys(hotPickInfo).length) return callback(null, null);
         var event =  hotPickInfo.event;
         var hotPick = {
             event: event,

@@ -13,7 +13,7 @@ function getConsensus(sportId, leagueId, count, callback){
     function groupPicks(callback){
         var query =  {result: 'Pending', betType: 'moneyline'};
         if(sportId !== 'all') query.sport = mongoose.Types.ObjectId(sportId);
-        if(leagueId !== 'all') query.sport = mongoose.Types.ObjectId(leagueId);
+        if(leagueId !== 'all') query.league = mongoose.Types.ObjectId(leagueId);
         var match = {$match: query};
         var group = {$group: {'_id':  '$event', picks: {$addToSet: '$$ROOT'}, pickCount:{$sum:1}}};
         var sort =  {$sort: {'eventStartTime': -1}};

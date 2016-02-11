@@ -46,11 +46,10 @@
             <li><a ui-sref="myHub">HUB</a></li>
             <li>
                 <a>CHANNELS</a>
-
                 <a href class="pull-right add-btn" data-ng-click="showChannelSelect()">+</a>
                 <ul class="channel-list">
-                    <li><a ui-sref="channel({channelSlug:channel.slug})">NHL</a></li>
-                    <li><a ui-sref="channel({channelSlug:channel.slug})">NBA</a></li>
+                    <li><a ui-sref="channel({channelSlug:'nhl'})">NHL</a></li>
+                    <li><a ui-sref="channel({channelSlug:'nba'})">NBA</a></li>
                 </ul>
             </li>
             <li><a ui-sref="myTracker">PICKTRACKER</a></li>

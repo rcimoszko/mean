@@ -2,7 +2,7 @@
     <a ui-sref="gamecenter({slug:slug})">
         <div class="content-container">
             <div class="title">{{title}} - <span class="category">{{category}}</span></div>
-            <div class="preview">{{commentPreview}}</div>
+            <div class="preview" ng-bind-html="commentPreview"></div>
         </div>
         <div class="icon-container">
             <div class="comment-count">

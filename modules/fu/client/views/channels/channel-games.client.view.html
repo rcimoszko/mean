@@ -1,0 +1,51 @@
+<div data-ng-repeat="eventGroup in channelContent.eventGroups">
+    <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
+    <ul class="dynamic-grid" angular-grid="eventGroup" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
+        <li data-ng-repeat="event in eventGroup.events|orderBy:'-profit'" class="grid">
+            <div class="channel-event">
+                <div class="league" data-ng-if="channel.type === 'sport'">
+                    {{event.league.name}}
+                </div>
+                <div class="team-header">
+                    <div class="logo1">
+
+                    </div>
+                    <div class="team-names">
+                        {{event|shortTeamNameHeader}}</br>
+                        {{event.startTime|date:'h:mm a'}}
+                    </div>
+                    <div class="logo2">
+
+                    </div>
+                </div>
+                <div class="odds odds-{{event.oddsColumns}}">
+                    <div class="odds-col" data-ng-repeat="betType in event.oddsColumnsOrder">
+                        <div class="odds-header">{{betType|shortNameBetType}}</div>
+                        <div class="team1">
+                            {{event.contestant1|abbrTeamName}} {{event.odds[betType][event.contestant1._id][0]|betLine}}
+                        </div>
+                        <div class="team1">
+                            {{event.contestant2|abbrTeamName}} {{event.odds[betType][event.contestant2._id][0]|betLine}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="picks">
+                    <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
+                    <table class="table-striped table table-condensed">
+                        <tbody>
+                        <tr data-ng-repeat="pick in event.picks">
+                            <td><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
+                            <td>{{pick|shortBetName:event}}</td>
+                            <td>{{pick.units}} units @ {{pick.odds|formatOdds}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-container text-center">
+                    <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter">VIEW GAMECENTER</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

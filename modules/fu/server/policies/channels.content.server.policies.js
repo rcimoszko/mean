@@ -7,13 +7,13 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/channels/:channelId/content',
+            resources: '/api/channels/:channelSlug/content',
             permissions: ['get']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/channels/:channelId/content',
+            resources: '/api/channels/:channelSlug/content',
             permissions: ['get']
         }]
     }]);
