@@ -6,6 +6,7 @@ var _ = require('lodash'),
     slug = require('speakingurl'),
     League = mongoose.model('League'),
     m_Event = mongoose.model('Event'),
+    TimezoneBl = require('./timezone.server.bl'),
     EventBl = require('./event.server.bl');
 
 function filterAltLine(bet){
@@ -205,10 +206,9 @@ function getPicks(query, callback){
     }
 
     function groupEventsByDay(callback){
-
         var eventsByDate = _.groupBy(processedEvents, function(event){
             var date = new Date(event.startTime);
-            date.setHours(date.getHours()+7);
+            date.setHours(date.getHours()+TimezoneBl.timezoneAdjust);
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         });
 

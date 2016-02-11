@@ -4,38 +4,8 @@ var _ = require('lodash'),
     EventBl = require('./event.server.bl'),
     PickBl = require('./pick.server.bl'),
     ContestantNameBl = require('./contestant.name.server.bl'),
+    TimezoneBl = require('./timezone.server.bl'),
     async = require('async');
-
-
-/*
- [
- {
-    date:
-    events: [
-         {
-         contestant1
-         contestant2
-         startTime
-         slug
-         proPicks: {
-
-         }
-         picks: {
-
-         },
-         pickCount: {
-
-         },
-         proPickCount: {
-
-         }
-    }
-    ]
- }
- ]
-
-
- */
 
 function processOverEvent(event, pEvent, picks, user, callback){
 
@@ -226,6 +196,7 @@ function getDateQuery(dateGroup, date){
     var timeIntervalStart;
     var timeIntervalEnd;
     var today = new Date();
+    var tzAdjust = TimezoneBl.timezoneAdjust;
     if(date){
         timeIntervalStart = new Date(date);
         timeIntervalEnd = new Date(date);
@@ -238,7 +209,7 @@ function getDateQuery(dateGroup, date){
                 timeIntervalEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1, 0, 0);
                 break;
             default: //upcoming
-                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0);
+                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()+tzAdjust, 0);
                 break;
         }
     }

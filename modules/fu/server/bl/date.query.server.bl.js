@@ -1,8 +1,11 @@
 'use strict';
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    TimezoneBl = require('./timezone.server.bl');
 
 function getDateQuery(dateId){
+
+    var tzAdjust = TimezoneBl.timezoneAdjust;
     var today = new Date();
     var timeIntervalStart = new Date();
     var timeIntervalEnd = new Date();
@@ -11,18 +14,18 @@ function getDateQuery(dateId){
             timeIntervalStart.setDate(timeIntervalStart.getDate()-1);
             break;
         case 'last7Days':
-            timeIntervalStart.setDate(timeIntervalStart.getDate()-7);
+            timeIntervalStart.setDate(timeIntervalStart.getDate()-tzAdjust);
             break;
         case 'thisMonth':
-            timeIntervalStart.setHours(timeIntervalStart.getHours()-7);
+            timeIntervalStart.setHours(timeIntervalStart.getHours()-tzAdjust);
             timeIntervalStart = new Date(timeIntervalStart.getFullYear(), timeIntervalStart.getMonth(), 1, 0, 0);
-            timeIntervalStart.setHours(timeIntervalStart.getHours()+7);
+            timeIntervalStart.setHours(timeIntervalStart.getHours()+tzAdjust);
             break;
         case 'lastMonth':
             timeIntervalStart = new Date(today.getFullYear(), today.getMonth() - 1, 1, 0, 0);
-            timeIntervalStart.setHours(timeIntervalStart.getHours()+8);
+            timeIntervalStart.setHours(timeIntervalStart.getHours()+tzAdjust+1);
             timeIntervalEnd = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0);
-            timeIntervalEnd.setHours(timeIntervalEnd.getHours()+8);
+            timeIntervalEnd.setHours(timeIntervalEnd.getHours()+tzAdjust+1);
             break;
         case 'last30Days':
             timeIntervalStart.setDate(timeIntervalStart.getDate()-30);
