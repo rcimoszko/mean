@@ -11,7 +11,6 @@ var ApplicationConfiguration = (function () {
       'ui.router',
       'ui.bootstrap',
       'ui.utils',
-      'angularFileUpload',
       'slugifier',
       'googlechart',
       'angularGrid',
