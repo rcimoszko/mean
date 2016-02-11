@@ -209,7 +209,7 @@ function getDateQuery(dateGroup, date){
                 timeIntervalEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1, 0, 0);
                 break;
             default: //upcoming
-                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()+tzAdjust, 0);
+                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()-tzAdjust, 0);
                 break;
         }
     }
