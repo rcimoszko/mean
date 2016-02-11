@@ -11,6 +11,7 @@ angular.module('fu').filter('displayBetValue',['$filter', function($filter) {
                 displayValue = $filter('formatPoints')(value);
                 break;
             case 'odds':
+            case 'moneyline':
                 displayValue = $filter('formatOdds')(value);
                 break;
         }

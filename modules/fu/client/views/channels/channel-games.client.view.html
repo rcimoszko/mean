@@ -1,51 +1,53 @@
-<div data-ng-repeat="eventGroup in channelContent.eventGroups">
-    <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
-    <ul class="dynamic-grid" angular-grid="eventGroup" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
-        <li data-ng-repeat="event in eventGroup.events|orderBy:'-profit'" class="grid">
-            <div class="channel-event">
-                <div class="league" data-ng-if="channel.type === 'sport'">
-                    {{event.league.name}}
-                </div>
-                <div class="team-header">
-                    <div class="logo1">
+<div class="channel-games">
+    <div data-ng-repeat="eventGroup in channelContent.eventGroups">
+        <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
+        <ul class="dynamic-grid" angular-grid="eventGroup" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
+            <li data-ng-repeat="event in eventGroup.events|orderBy:'-profit'" class="grid">
+                <div class="channel-event">
+                    <div class="league" data-ng-if="channel.type === 'sport'">
+                        {{event.league.name}}
+                    </div>
+                    <div class="team-header">
+                        <div class="logo1">
 
-                    </div>
-                    <div class="team-names">
-                        {{event.header}}</br>
-                        {{event.startTime|date:'h:mm a'}}
-                    </div>
-                    <div class="logo2">
-
-                    </div>
-                </div>
-                <div class="odds odds-{{event.lines.length}}">
-                    <div class="odds-col" data-ng-repeat="line in event.lines">
-                        <div class="odds-header">{{line.header}}</div>
-                        <div class="team1">
-                            {{line.line1.text}} {{line.line1.value|displayBetValue:line.betType}}
                         </div>
-                        <div class="team1">
-                            {{line.line2.text}} {{line.line2.value|displayBetValue:line.betType}}
+                        <div class="team-names">
+                            {{event.header}}</br>
+                            {{event.startTime|date:'h:mm a'}}
+                        </div>
+                        <div class="logo2">
+
                         </div>
                     </div>
+                    <div class="odds odds-{{event.lines.length}}">
+                        <div class="odds-col" data-ng-repeat="line in event.lines">
+                            <div class="odds-header">{{line.header}}</div>
+                            <div class="team1">
+                                {{line.line1.text}} {{line.line1.value|displayBetValue:line.betType}}
+                            </div>
+                            <div class="team1">
+                                {{line.line2.text}} {{line.line2.value|displayBetValue:line.betType}}
+                            </div>
+                        </div>
 
+                    </div>
+                    <div class="picks">
+                        <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
+                        <table class="table-striped table table-condensed">
+                            <tbody>
+                            <tr data-ng-repeat="pick in event.picks" data-ng-if="!pick.hidden">
+                                <td data-ng-if="!pick.hidden"><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
+                                <td data-ng-if="!pick.hidden">{{pick|shortBetName:event}}</td>
+                                <td data-ng-if="!pick.hidden">{{pick.units}} units @ {{pick.odds|formatOdds}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-container text-center">
+                        <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter">VIEW GAMECENTER</a>
+                    </div>
                 </div>
-                <div class="picks">
-                    <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
-                    <table class="table-striped table table-condensed">
-                        <tbody>
-                        <tr data-ng-repeat="pick in event.picks">
-                            <td><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
-                            <td>{{pick|shortBetName:event}}</td>
-                            <td>{{pick.units}} units @ {{pick.odds|formatOdds}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="btn-container text-center">
-                    <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter">VIEW GAMECENTER</a>
-                </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 </div>

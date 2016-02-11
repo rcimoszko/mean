@@ -3,8 +3,11 @@
 angular.module('fu').filter('shortBetName',['$filter', function($filter) {
     return function(pick, event) {
         var text;
-        var shortNameArray = pick.contestant.name.split(' ');
-        var shortName = shortNameArray[shortNameArray.length-1];
+        var shortName;
+        if(pick.contestant){
+            var shortNameArray = pick.contestant.name.split(' ');
+            shortName = shortNameArray[shortNameArray.length-1];
+        }
         switch(pick.betType){
             case 'spread':
                 text = shortName+' '+$filter('formatSpread')(pick.spread);
