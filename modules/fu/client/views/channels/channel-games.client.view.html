@@ -20,6 +20,7 @@
                         </div>
                     </div>
                     <div class="odds odds-{{event.lines.length}}">
+                        <div class="text-center" data-ng-if="event.lines.length === 0"><em>No Lines Available</em></div>
                         <div class="odds-col" data-ng-repeat="line in event.lines">
                             <div class="odds-header">{{line.header}}</div>
                             <div class="team1">
@@ -29,7 +30,6 @@
                                 {{line.line2.text}} {{line.line2.value|displayBetValue:line.betType}}
                             </div>
                         </div>
-
                     </div>
                     <div class="picks">
                         <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
