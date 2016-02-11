@@ -18,6 +18,7 @@ var ContestantSchema = new Schema({
     stadium:        {type: String, trim: true},
     name1:          {type: String, trim: true},
     name2:          {type: String, trim: true},
+    abbrName:       {type: String, trim: true},
     main:           {type: Boolean},
     auto:           {type: Boolean},
     origin:         {name: String, 'ref': {type: Schema.ObjectId, ref: 'Sportsbook'}},

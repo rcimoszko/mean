@@ -11,21 +11,21 @@
 
                     </div>
                     <div class="team-names">
-                        {{event|shortTeamNameHeader}}</br>
+                        {{event.header}}</br>
                         {{event.startTime|date:'h:mm a'}}
                     </div>
                     <div class="logo2">
 
                     </div>
                 </div>
-                <div class="odds odds-{{event.oddsColumns}}">
-                    <div class="odds-col" data-ng-repeat="betType in event.oddsColumnsOrder">
-                        <div class="odds-header">{{betType|shortNameBetType}}</div>
+                <div class="odds odds-{{event.lines.length}}">
+                    <div class="odds-col" data-ng-repeat="line in event.lines">
+                        <div class="odds-header">{{line.header}}</div>
                         <div class="team1">
-                            {{event.contestant1|abbrTeamName}} {{event.odds[betType][event.contestant1._id][0]|betLine}}
+                            {{line.line1.text}} {{line.line1.value|displayBetValue:line.betType}}
                         </div>
                         <div class="team1">
-                            {{event.contestant2|abbrTeamName}} {{event.odds[betType][event.contestant2._id][0]|betLine}}
+                            {{line.line2.text}} {{line.line2.value|displayBetValue:line.betType}}
                         </div>
                     </div>
 

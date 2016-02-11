@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     EventBl = require('./event.server.bl'),
     PickBl = require('./pick.server.bl'),
+    ContestantNameBl = require('./contestant.name.server.bl'),
     async = require('async');
 
 
@@ -66,31 +67,121 @@ function processOverEvent(event, pEvent, picks, user, callback){
 }
 
 
+function getMoneylines(event, bets, contestantSwitch){
+
+    var line = {header: 'ML', betType:'moneyline', line1: {type:'odds'}, line2:{type:'odds'}};
+    var betsByUser = _.groupBy(bets, function(bet){
+        if(bet.contestant) return bet.contestant.ref;
+    });
+
+    if(contestantSwitch){
+        line.line1.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
+        line.line2.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
+        line.line1.value = betsByUser[event.contestant2.ref._id][0].odds;
+        line.line2.value = betsByUser[event.contestant1.ref._id][0].odds;
+    } else {
+        line.line1.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
+        line.line2.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
+        line.line1.value = betsByUser[event.contestant1.ref._id][0].odds;
+        line.line2.value = betsByUser[event.contestant2.ref._id][0].odds;
+    }
+    return line;
+}
+
+function getSpreads(event, bets, contestantSwitch){
+    var line = {header: 'Spread', betType:'spread', line1: {type:'spread'}, line2:{type:'spread'}};
+    var betsByUser = _.groupBy(bets, function(bet){
+        if(bet.contestant) return bet.contestant.ref;
+    });
+    if(contestantSwitch){
+        line.line1.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
+        line.line2.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
+        line.line1.value = betsByUser[event.contestant2.ref._id][0].spread;
+        line.line2.value = betsByUser[event.contestant1.ref._id][0].spread;
+    } else {
+        line.line1.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
+        line.line2.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
+        line.line1.value = betsByUser[event.contestant1.ref._id][0].spread;
+        line.line2.value = betsByUser[event.contestant2.ref._id][0].spread;
+    }
+    return line;
+}
+
+function getTotals(bets){
+    var line = {header: 'Totals',  betType:'total points', line1: {type:'total points', text:'O'}, line2:{type:'odds', text:'U'}};
+    var betsOverUnder = _.groupBy(bets, 'overUnder');
+    line.line1.value = +betsOverUnder.over[0].points;
+    line.line2.value = betsOverUnder.over[0].points;
+    return line;
+}
+
 function processPendingEvent(event, pEvent, picks, user, callback){
 
     var todo = [];
 
+    function getHeader(callback){
+        var separator = ' @ ';
+        if(event.neutral) event.separator = ' vs. ';
+        if(pEvent.contestant1.name2 && pEvent.contestant2.name2){
+            pEvent.header = pEvent.contestant2.name2 + separator + pEvent.contestant1.name2;
+        } else{
+            pEvent.header = pEvent.contestant2.name + separator + pEvent.contestant1.name;
+        }
+        callback();
+    }
+
     function getLines(callback){
+        var todo = [];
+        var bets = [];
+        var lines = [];
         var mainBetType = ['moneyline', 'spread', 'total points'];
-        var mainBetDuration = ['match', 'game', 'fight', 'matchups'];
+        var mainBetDuration = ['match', 'game', 'game (OT included)', 'fight', 'matchups'];
 
-        var bets = _.filter(event.pinnacleBets, function(bet){
-            return !bet.altLine && mainBetType.indexOf(bet.betType) !== -1 && mainBetDuration.indexOf(bet.betDuration) !== -1;
-        });
 
-        bets = _.groupBy(bets, 'betType');
-
-        for (var betType in bets){
-            bets[betType] = _.groupBy(bets[betType], 'contestant.ref');
+        function groupByBetType(callback){
+            bets = _.filter(event.pinnacleBets, function(bet){
+                return !bet.altLine && mainBetType.indexOf(bet.betType) !== -1 && mainBetDuration.indexOf(bet.betDuration) !== -1;
+            });
+            bets = _.groupBy(bets, 'betType');
+            callback();
         }
 
-        pEvent.odds = bets;
-        pEvent.oddsColumns = Object.keys(bets).length;
-        pEvent.oddsColumnsOrder = _.sortBy(Object.keys(bets), function(betType){
-            return mainBetType.indexOf(betType);
-        });
-        callback();
+        function processBets(callback){
+            var contestantSwitch = true;
+            if(event.sport.name === 'Soccer') contestantSwitch = false;
 
+            for (var betType in bets){
+                var line;
+                switch (betType){
+                    case 'moneyline':
+                        line = getMoneylines(event, bets[betType], contestantSwitch);
+                        break;
+                    case 'spread':
+                        line = getSpreads(event, bets[betType], contestantSwitch);
+                        break;
+                    case 'total points':
+                        line = getTotals(bets[betType]);
+                        break;
+                }
+                if(line) lines.push(line);
+            }
+            callback();
+        }
+
+        function orderBets(callback){
+            lines = _.sortBy(lines, function(betGroup){
+                return mainBetType.indexOf(betGroup.betType);
+            });
+            pEvent.lines = lines;
+            callback();
+        }
+
+
+        todo.push(groupByBetType);
+        todo.push(processBets);
+        todo.push(orderBets);
+
+        async.waterfall(todo, callback);
     }
 
     function getProPicks(callback){
@@ -120,6 +211,7 @@ function processPendingEvent(event, pEvent, picks, user, callback){
     }
 
 
+    todo.push(getHeader);
     todo.push(getLines);
     todo.push(getProPicks);
     todo.push(getGeneralPicks);
