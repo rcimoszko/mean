@@ -5,35 +5,141 @@ var _ = require('lodash'),
     PickBl = require('./pick.server.bl'),
     ContestantNameBl = require('./contestant.name.server.bl'),
     TimezoneBl = require('./timezone.server.bl'),
+    BetTypeBl = require('./bet.bettype.server.bl'),
+    BetDurationBl = require('./bet.betduration.server.bl'),
     async = require('async');
+
+function getWinCount(picks){
+    var wins = _.filter(picks, function(pick) {
+        return pick.result.toLowerCase().indexOf('win') !== -1;
+    });
+    return wins.length;
+}
+
+function getLossCount(picks){
+    var losses = _.filter(picks, function(pick) {
+        return pick.result.toLowerCase().indexOf('loss') !== -1;
+    });
+    return losses.length;
+}
+
+function getUnitsWagered(picks){
+    var units = _.sum(picks, 'units');
+    return units;
+}
+
+function getTotalProfit(picks){
+    var profit = _.sum(picks, 'profit');
+    return profit;
+}
 
 function processOverEvent(event, pEvent, picks, user, callback){
 
     var todo = [];
 
     function getScores(callback){
+        if(event.contestant1FinalScore){
+            pEvent.hasScores = 1;
+            pEvent.score1 = event.contestant1FinalScore;
+            pEvent.score2 = event.contestant2FinalScore;
+        }
+        if(String(event.contestantWinner.ref) === String(event.contestant1.ref._id)){
+            pEvent.winnerNo = 1;
+        } else {
+            pEvent.winnerNo = 2;
+        }
+        callback();
+    }
 
+    function getLines(callback){
+        var todo = [];
+        var bets = [];
+        var lines = [];
+
+        function groupByBetType(callback){
+            bets = _.filter(event.pinnacleBets, function(bet){
+                return !bet.altLine && BetTypeBl.mainBetTypes.indexOf(bet.betType) !== -1 && BetDurationBl.mainBetDurations.indexOf(bet.betDuration) !== -1;
+            });
+            bets = _.groupBy(bets, 'betType');
+            callback();
+        }
+
+        function processBets(callback){
+            var contestantSwitch = true;
+            if(event.sport.name === 'Soccer') contestantSwitch = false;
+
+            for (var betType in bets){
+                var line;
+                switch (betType){
+                    case 'moneyline':
+                        line = getMoneylines(event, bets[betType], contestantSwitch);
+                        break;
+                    case 'spread':
+                        line = getSpreads(event, bets[betType], contestantSwitch);
+                        break;
+                    case 'total points':
+                        line = getTotals(bets[betType]);
+                        break;
+                }
+                if(line) lines.push(line);
+            }
+            callback();
+        }
+
+        function orderBets(callback){
+            lines = _.sortBy(lines, function(betGroup){
+                return BetDurationBl.mainBetDurations.indexOf(betGroup.betType);
+            });
+            pEvent.lines = lines;
+            callback();
+        }
+        todo.push(groupByBetType);
+        todo.push(processBets);
+        todo.push(orderBets);
+        async.waterfall(todo, callback);
     }
 
     function getClosingLines(callback){
-
+        callback();
     }
 
     function getProPickStats(callback){
-
+        var proPicks = _.filter(picks, {premium:true});
+        if(proPicks.length > 0){
+            pEvent.hasProStats = true;
+            var winCount = getWinCount(proPicks);
+            var lossCount = getLossCount(proPicks);
+            var unitWagered = getUnitsWagered(proPicks);
+            var totalProfit = getTotalProfit(proPicks);
+            if(winCount > lossCount) pEvent.generalResult = 'win';
+            if(winCount < lossCount) pEvent.generalResult = 'loss';
+            pEvent.proStats = {wins:winCount, losses: lossCount, profit: totalProfit, roi: Math.round((totalProfit/unitWagered)*100,2)+'%' };
+        }
+        callback();
     }
 
     function getGeneralStats(callback){
-
+        var generalPicks = _.filter(picks, {premium:false});
+        if(generalPicks.length > 0){
+            pEvent.hasGeneralStats = true;
+            var winCount = getWinCount(generalPicks);
+            var lossCount = getLossCount(generalPicks);
+            var unitWagered = getUnitsWagered(generalPicks);
+            var totalProfit = getTotalProfit(generalPicks);
+            if(winCount > lossCount) pEvent.generalResult = 'win';
+            if(winCount < lossCount) pEvent.generalResult = 'loss';
+            pEvent.generalStats = {wins:winCount, losses: lossCount, profit: totalProfit, roi: Math.round((totalProfit/unitWagered)*100,2)+'%' };
+        }
+        callback();
     }
 
     todo.push(getScores);
+    todo.push(getLines);
     todo.push(getClosingLines);
     todo.push(getProPickStats);
     todo.push(getGeneralStats);
 
     async.waterfall(todo, callback);
-
 }
 
 
@@ -89,28 +195,16 @@ function processPendingEvent(event, pEvent, picks, user, callback){
 
     var todo = [];
 
-    function getHeader(callback){
-        var separator = ' @ ';
-        if(event.neutral) event.separator = ' vs. ';
-        if(pEvent.contestant1.name2 && pEvent.contestant2.name2){
-            pEvent.header = pEvent.contestant2.name2 + separator + pEvent.contestant1.name2;
-        } else{
-            pEvent.header = pEvent.contestant2.name + separator + pEvent.contestant1.name;
-        }
-        callback();
-    }
 
     function getLines(callback){
         var todo = [];
         var bets = [];
         var lines = [];
-        var mainBetType = ['moneyline', 'spread', 'total points'];
-        var mainBetDuration = ['match', 'game', 'game (OT included)', 'fight', 'matchups'];
 
 
         function groupByBetType(callback){
             bets = _.filter(event.pinnacleBets, function(bet){
-                return !bet.altLine && mainBetType.indexOf(bet.betType) !== -1 && mainBetDuration.indexOf(bet.betDuration) !== -1;
+                return !bet.altLine && BetTypeBl.mainBetTypes.indexOf(bet.betType) !== -1 && BetDurationBl.mainBetDurations.indexOf(bet.betDuration) !== -1;
             });
             bets = _.groupBy(bets, 'betType');
             callback();
@@ -140,7 +234,7 @@ function processPendingEvent(event, pEvent, picks, user, callback){
 
         function orderBets(callback){
             lines = _.sortBy(lines, function(betGroup){
-                return mainBetType.indexOf(betGroup.betType);
+                return BetTypeBl.mainBetTypes.indexOf(betGroup.betType);
             });
             pEvent.lines = lines;
             callback();
@@ -180,8 +274,6 @@ function processPendingEvent(event, pEvent, picks, user, callback){
         callback();
     }
 
-
-    todo.push(getHeader);
     todo.push(getLines);
     todo.push(getProPicks);
     todo.push(getGeneralPicks);
@@ -228,6 +320,7 @@ function getDateQuery(dateGroup, date){
 function get(channel, user, date, callback){
 
     var todo = [];
+    console.log(date);
 
     function getEvents(callback) {
         var dateQuery = getDateQuery(channel.dateGroup, date);
@@ -253,7 +346,6 @@ function get(channel, user, date, callback){
             callback(err, events, picks);
         }
         PickBl.getByQuery(query, cb);
-
     }
 
     function processEvents(events, picks, callback){
@@ -270,6 +362,13 @@ function get(channel, user, date, callback){
                 startTime: event.startTime,
                 commentCount: event.commentCount
             };
+            var separator = ' @ ';
+            if(event.neutral) event.separator = ' vs. ';
+            if(pEvent.contestant1.name2 && pEvent.contestant2.name2){
+                pEvent.header = pEvent.contestant2.name2 + separator + pEvent.contestant1.name2;
+            } else{
+                pEvent.header = pEvent.contestant2.name + separator + pEvent.contestant1.name;
+            }
 
             function cb(err){
                 processedEvents.push(pEvent);

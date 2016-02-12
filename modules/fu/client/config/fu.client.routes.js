@@ -14,13 +14,6 @@ angular.module('fu').config(['$stateProvider',
             .state('profile', {
                 url: '/profile/:username',
                 templateUrl: 'modules/fu/client/views/profile.client.view.html'
-            })
-            .state('channel', {
-                url: '/channel/:channelSlug',
-                templateUrl: 'modules/fu/client/views/channel.client.view.html',
-                data: {
-                    roles: ['user']
-                }
             });
 
     }

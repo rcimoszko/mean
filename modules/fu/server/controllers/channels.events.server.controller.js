@@ -3,24 +3,24 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    ChannelBl = require('../bl/channel.content.server.bl');
+    ChannelEventsBl = require('../bl/channel.events.server.bl');
 
 
 function get(req, res, next){
 
-    function cb (err, channelContent){
+    function cb (err, channelEvents){
         if (err) return next(err);
-        if (!channelContent) {
+        if (!channelEvents) {
             return res.status(404).send({
                 message: 'Invalid query'
             });
         }
-        res.json(channelContent);
+        res.json(channelEvents);
     }
 
     var channel = req.channel;
 
-    ChannelBl.get(channel, req.user, req.query.date, cb);
+    ChannelEventsBl.get(channel, req.user, req.query.date, cb);
 }
 
 

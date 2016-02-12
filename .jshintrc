@@ -16,6 +16,7 @@
     "angular": true,
     "io": true,
     "mixpanel": true,
+    "moment": true,
     "StripeCheckout": true,
     "ApplicationConfiguration": true
   },

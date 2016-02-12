@@ -33,7 +33,7 @@ function getTrending(query, callback){
     TrendingBl.get(query, callback);
 }
 
-function get(channel, user, callback){
+function get(channel, user, date, callback){
 
     var query = {sportId: 'all', leagueId:'all'};
     switch(channel.type){
@@ -71,7 +71,7 @@ function get(channel, user, callback){
     }
 
     function getChannelEvents_todo(callback){
-        ChannelEventsBl.get(channel, user, null, callback);
+        ChannelEventsBl.get(channel, user, date, callback);
     }
 
     var todo = {

@@ -68,12 +68,20 @@
   }
 }
 
-.loading-color(@class; @color){
+.loading-bg-color(@class; @color){
   .@{class}:before {
     background: @color;
   }
   .@{class}:after {
     background: @color;
+  }
+}
+
+.loading-color(@class; @color){
+  .loading{
+    &.@{class}{
+      box-shadow: inset 0 0 0 1em @color;
+    }
   }
 }
 

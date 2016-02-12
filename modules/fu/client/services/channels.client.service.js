@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent',
-    function(ApiChannels, ApiChannelsContent) {
+angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', 'ApiChannelsEvents',
+    function(ApiChannels, ApiChannelsContent, ApiChannelsEvents) {
 
         var create = function(form, callback){
 
@@ -69,7 +69,7 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent',
             channel.$delete(cbSuccess, cbError);
         };
 
-        var getContent = function(channelSlug, callback){
+        var getContent = function(channelSlug, date, callback){
             function cbSuccess(channelContent){
                 callback(null, channelContent);
             }
@@ -77,8 +77,18 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent',
             function cbError(response){
                 callback(response.data.message);
             }
-            console.log(channelSlug);
-            ApiChannelsContent.get({slug: channelSlug}, cbSuccess, cbError);
+            ApiChannelsContent.get({slug: channelSlug, date: date}, cbSuccess, cbError);
+
+        };
+        var getEvents = function(channelSlug, date, callback){
+            function cbSuccess(channelContent){
+                callback(null, channelContent);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+            ApiChannelsEvents.query({slug: channelSlug, date:date}, cbSuccess, cbError);
 
         };
 
@@ -91,7 +101,8 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent',
             update: update,
             delete: del,
 
-            getContent: getContent
+            getContent: getContent,
+            getEvents: getEvents
         };
     }
 ]);

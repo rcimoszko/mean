@@ -1,4 +1,5 @@
 <div class="channel-games">
+    <h4 data-ng-if="channelContent.eventGroups.length === 0"><em>No Active Events</em></h4>
     <div data-ng-repeat="eventGroup in channelContent.eventGroups">
         <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
         <ul class="dynamic-grid" angular-grid="eventGroup" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
@@ -8,14 +9,14 @@
                         {{event.league.name}}
                     </div>
                     <div class="team-header">
-                        <div class="logo1">
+                        <div class="logo1" data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl">
 
                         </div>
-                        <div class="team-names">
+                        <div class="team-names" data-ng-class="{'no-logos': !event.contestant1.logoUrl || !event.contestant2.logoUrl}">
                             {{event.header}}</br>
                             {{event.startTime|date:'h:mm a'}}
                         </div>
-                        <div class="logo2">
+                        <div class="logo2" data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl">
 
                         </div>
                     </div>
@@ -31,17 +32,50 @@
                             </div>
                         </div>
                     </div>
-                    <div class="picks">
+                    <div class="picks"  data-ng-if="event.picks.length > 0">
                         <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
                         <table class="table-striped table table-condensed">
-                            <tbody>
-                            <tr data-ng-repeat="pick in event.picks" data-ng-if="!pick.hidden">
-                                <td data-ng-if="!pick.hidden"><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
-                                <td data-ng-if="!pick.hidden">{{pick|shortBetName:event}}</td>
-                                <td data-ng-if="!pick.hidden">{{pick.units}} units @ {{pick.odds|formatOdds}}</td>
-                            </tr>
+                                <tbody>
+                                <tr data-ng-repeat="pick in event.picks" data-ng-if="!pick.hidden">
+                                    <td data-ng-if="!pick.hidden"><span class="pro-label" data-ng-if="pick.premium">PRO</span><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
+                                    <td data-ng-if="!pick.hidden">{{pick|shortBetName:event}}</td>
+                                    <td data-ng-if="!pick.hidden">{{pick.units}} units @ {{pick.odds|formatOdds}}</td>
+                                </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="stats" data-ng-if="event.hasGeneralStats || event.hasProStats" data-ng-class="{}">
+                        <div class="pro-stats stats-container" data-ng-if="event.hasProStats">
+                            <div class=""></div>
+                            <div class="stat">
+                                <div class="header">W/L</div>
+                                {{event.proStats.wins}}/{{event.proStats.losses}}
+                            </div>
+                            <div class="stat">
+                                <div class="header">UNITS</div>
+                                {{event.proStats.profit|formatProfit}}
+                            </div>
+                            <div class="stat">
+                                <div class="header">ROI</div>
+                                {{event.proStats.roi}}
+                            </div>
+                        </div>
+                        <div class="general-stats stats-container" data-ng-if="event.hasGeneralStats">
+                            <div class="stat">
+                                <div class="header">W/L</div>
+                                {{event.generalStats.wins}}/{{event.generalStats.losses}}
+                            </div>
+                            <div class="stat">
+                                <div class="header">UNITS</div>
+                                {{event.generalStats.profit|formatProfit}}
+                            </div>
+                            <div class="stat">
+                                <div class="header">ROI</div>
+                                {{event.generalStats.roi}}
+                            </div>
+                        </div>
+
+                        </div>
                     </div>
                     <div class="btn-container text-center">
                         <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter">VIEW GAMECENTER</a>

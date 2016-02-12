@@ -3,12 +3,14 @@
 angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews',
     function ($scope, Authentication, Hub, CommentsPreviews) {
         $scope.authentication = Authentication;
+        $scope.loading = true;
 
         /**
          * General Hub Info
          */
 
         function cbGetHub(err, hub){
+            $scope.loading = false;
             console.log(hub);
             $scope.hub = hub;
         }

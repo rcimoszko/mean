@@ -1,0 +1,14 @@
+<h2><a ui-sref="admin.home">Home</a> > Channels <a ui-sref="admin.createChannel" class="btn btn-default">Create</a></h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <th>Name</th>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="channel in channels">
+            <td><a ui-sref="admin.editChannel({channelId:channel._id})">{{::channel.name}}</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -6,6 +6,7 @@ angular.module('fu').directive('loading', function () {
         scope: {
             isLoading: '=',
             color: '=',
+            bgColor: '=',
             size:'='
         },
         templateUrl: 'modules/fu/client/templates/general/loading.client.template.html'

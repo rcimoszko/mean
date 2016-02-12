@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="channel-top-menu clearfix">
+    <span class="channel-name">{{channel.name}}</span>
+    <span class="date-menu">
+        <ng-include src="'/modules/fu/client/views/channels/channel-top-menus/channel-top-menu-weekly.client.view.html'"></ng-include>
+        <ng-include src="'/modules/fu/client/views/channels/channel-top-menus/channel-top-menu-daily.client.view.html'"></ng-include>
+        <ng-include src="'/modules/fu/client/views/channels/channel-top-menus/channel-top-menu-upcoming.client.view.html'"></ng-include>
+    </span>
+    <div class="subscribe-btn-container">
+        <btn-subscribe channel-id="channel._id"></btn-subscribe>
+    </div>
+</div>
