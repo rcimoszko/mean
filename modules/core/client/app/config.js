@@ -15,6 +15,7 @@ var ApplicationConfiguration = (function () {
       'googlechart',
       'angularGrid',
       'lrInfiniteScroll',
+      'textAngular',
       'angularMoment'];
 
   // Add a new vertical module

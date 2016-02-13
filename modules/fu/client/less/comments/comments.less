@@ -1,0 +1,43 @@
+.comments{
+  .comment-container, .reply-container{
+    padding-bottom:10px;
+    margin-bottom:10px;
+    .avatar{
+      float:left;
+      margin-right:10px;
+    }
+    .content-container{
+      overflow:hidden;
+      padding-bottom:10px;
+      border-bottom:2px solid @color-gray-divider;
+      .username{
+        text-transform:uppercase;
+        display:inline-block;
+        margin-right:5px;
+      }
+      .timestamp{
+        display:inline-block;
+        color:@color-text-light;
+        margin-right:15px;
+      }
+      .pick{
+        display:inline-block;
+        color:@color-text-dark;
+        font-size:14px;
+      }
+      .actions{
+        margin-top:5px;
+        .btn-reply{
+          color:@color-text-light;
+          text-transform:uppercase;
+          .fa{
+            margin-right:5px;
+          }
+        }
+      }
+    }
+  }
+  .reply-container{
+    margin-top:10px;
+  }
+}

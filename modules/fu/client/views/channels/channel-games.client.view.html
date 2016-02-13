@@ -1,4 +1,4 @@
-<div class="channel-games">
+<div class="channel-games" data-ng-hide="eventsLoading">
     <h4 data-ng-if="channelContent.eventGroups.length === 0"><em>No Active Events</em></h4>
     <div data-ng-repeat="eventGroup in channelContent.eventGroups">
         <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
@@ -44,41 +44,58 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="stats" data-ng-if="event.hasGeneralStats || event.hasProStats" data-ng-class="{}">
-                        <div class="pro-stats stats-container" data-ng-if="event.hasProStats">
-                            <div class=""></div>
+                    <div class="consensus clearfix" data-ng-if="event.consensus">
+                        <div class="pick-count">{{event.consensus.pickCount}} PICKS</div>
+                        <div class="consensus-container " data-ng-repeat="consensus in event.consensus.consensus">
+                            <div class="value-1-container value-container">
+                                {{consensus.percent1}}%
+                            </div>
+                            <div class="bar-1-container bar-container">
+                                <div class="bar-1 bar pull-right" tooltip="{{consensus.pick1Count}} Picks" style="background-color:{{consensus.color1}}; width: {{consensus.percent1}}%"></div>
+                            </div>
+                            <div class="header">{{consensus.header}}</div>
+                            <div class="bar-2-container bar-container">
+                                <div class="bar-2 bar pull-left"  tooltip="{{consensus.pick2Count}} Picks" style="background-color:{{consensus.color2}}; width: {{consensus.percent2}}%"></div>
+                            </div>
+                            <div class="value-2-container value-container">
+                                {{consensus.percent2}}%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats stats-{{event.pickColumns}}" data-ng-if="event.hasGeneralStats || event.hasProStats">
+                        <div class="pro-stats stats-container results-{{event.proResult}}" data-ng-if="event.hasProStats">
+                            <div class="stat-section-header"><span class="pro-label">PRO PICKS</span></div>
                             <div class="stat">
                                 <div class="header">W/L</div>
-                                {{event.proStats.wins}}/{{event.proStats.losses}}
+                                <div class="value">{{event.proStats.wins}}/{{event.proStats.losses}}</div>
                             </div>
                             <div class="stat">
                                 <div class="header">UNITS</div>
-                                {{event.proStats.profit|formatProfit}}
+                                <div class="value">{{event.proStats.profit|formatProfit}}</div>
                             </div>
                             <div class="stat">
                                 <div class="header">ROI</div>
-                                {{event.proStats.roi}}
+                                <div class="value">{{event.proStats.roi}}</div>
                             </div>
                         </div>
-                        <div class="general-stats stats-container" data-ng-if="event.hasGeneralStats">
+                        <div class="general-stats stats-container results-{{event.generalResult}}" data-ng-if="event.hasGeneralStats">
+                            <div class="stat-section-header">COMMUNITY PICKS</div>
                             <div class="stat">
                                 <div class="header">W/L</div>
-                                {{event.generalStats.wins}}/{{event.generalStats.losses}}
+                                <div class="value">{{event.generalStats.wins}}/{{event.generalStats.losses}}</div>
                             </div>
                             <div class="stat">
                                 <div class="header">UNITS</div>
-                                {{event.generalStats.profit|formatProfit}}
+                                <div class="value">{{event.generalStats.profit|formatProfit}}</div>
                             </div>
                             <div class="stat">
                                 <div class="header">ROI</div>
-                                {{event.generalStats.roi}}
+                                <div class="value">{{event.generalStats.roi}}</div>
                             </div>
-                        </div>
-
                         </div>
                     </div>
                     <div class="btn-container text-center">
-                        <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter">VIEW GAMECENTER</a>
+                        <a class="btn btn-blue-2-empty btn-xs" ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.leagueSlug})">VIEW GAMECENTER</a>
                     </div>
                 </div>
             </li>

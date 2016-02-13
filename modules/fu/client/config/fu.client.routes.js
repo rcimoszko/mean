@@ -14,6 +14,10 @@ angular.module('fu').config(['$stateProvider',
             .state('profile', {
                 url: '/profile/:username',
                 templateUrl: 'modules/fu/client/views/profile.client.view.html'
+            })
+            .state('gamecenter', {
+                url: '/game/:eventSlug/:leagueSlug',
+                templateUrl: 'modules/fu/client/views/gamecenter.client.view.html'
             });
 
     }

@@ -5,7 +5,8 @@ module.exports = {
     lib: {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/textAngular/dist/textAngular.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -22,6 +23,9 @@ module.exports = {
         'public/lib/lrInfiniteScroll/lrInfiniteScroll.js',
         'public/lib/moment/min/moment-with-locales.min.js',
         'public/lib/angular-moment/angular-moment.min.js',
+        'public/lib/textAngular/dist/textAngular-rangy.min.js',
+        'public/lib/textAngular/dist/textAngular-sanitize.min.js',
+        'public/lib/textAngular/dist/textAngular.min.js'
         //'public/lib/ngSticky/dist/sticky.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

@@ -33,7 +33,6 @@ function getConsensus(sportId, leagueId, count, callback){
         callback(null, events);
     }
 
-
     function populateEvents(events, callback){
         var populate = {path: '_id', model:'Event'};
         PickBl.populateBy(events, populate, callback);

@@ -1,0 +1,6 @@
+<!--<i class="fa fa-chevron-left" datepicker-popup="" ng-model="currentDate"></i>-->
+<a href class="date" data-ng-click="updateDate(dayBeforeYesterday)" data-ng-hide="!upcoming">{{dayBeforeYesterday|date:"MMM d"}}</a>
+<a href class="date" data-ng-click="updateDate(yesterday)" >{{yesterday|date:"MMM d"}}</a>
+<a class="date active" data-ng-hide="upcoming">{{currentDate|date:"MMM d"}}</a>
+<!--<i class="fa fa-chevron-right" data-ng-hide="upcoming"></i>-->
+<a href class="date" data-ng-click="setUpcoming('upcoming')" data-ng-class="{'active': upcoming}">UPCOMING</a>

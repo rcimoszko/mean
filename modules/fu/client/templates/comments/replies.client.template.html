@@ -1,0 +1,19 @@
+<div class="reply-container" data-ng-repeat="reply in replies">
+    <avatar size="'sm'" url="getAvatarUrl(reply.user)"></avatar>
+    <div class="content-container">
+        <div class="username">
+            <a ui-sref="profile({username: reply.user.name})">
+                {{reply.user.name}}
+            </a>
+        </div>
+        <div class="timestamp" am-time-ago="reply.timestamp"></div>
+        <div class="text" ta-bind data-ng-model="reply.text"></div>
+        <div class="actions">
+            <a href data-ng-click="showReply = !showReply" class="btn-reply">
+                <i class="fa fa-reply"></i> Reply
+            </a>
+        </div>
+        <comment-form text="replyText" data-ng-show="showReply"></comment-form>
+    </div>
+    <replies replies="reply.replies"></replies>
+</div>

@@ -1,15 +1,15 @@
 <section data-ng-controller="ChannelController" class="channel content-padding-top">
-    <div class="loading-container">
+    <div class="loading-container" data-ng-hide="!loading">
         <loading bg-color="'gray'" color="'blue-2'" is-loading="loading"></loading>
     </div>
     <div data-ng-hide="loading">
         <ng-include src="'/modules/fu/client/views/channels/channel-top-menu.client.view.html'"></ng-include>
 
         <div class="row">
-            <div class="col-sm-8">
-                <ng-include src="'/modules/fu/client/views/channels/channel-games.client.view.html'"></ng-include>
+            <div class="col-md-8">
+                <div ui-view></div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <ng-include src="'/modules/fu/client/views/channels/channel-chat.client.view.html'"></ng-include>
                 <ng-include src="'/modules/fu/client/views/channels/channel-consensus.client.view.html'"></ng-include>
                 <ng-include src="'/modules/fu/client/views/channels/channel-trending.client.view.html'"></ng-include>

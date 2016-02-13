@@ -1,5 +1,5 @@
 .channel-event{
-  padding:10px;
+  padding:10px 10px 0 10px;
   .league{
     text-align:center;
   }
@@ -67,25 +67,83 @@
     }
   }
   .stats{
+    padding:5px 0;
     border-top:1px solid @color-gray-divider;
-
-    .stats-1{
-      .stat-container{
+    &.stats-1{
+      .stats-container{
         width:100%;
       }
     }
-    .stats-2{
-      .stat-container{
-        width:50%;
+    &.stats-2{
+      .stats-container{
+        width:49%;
       }
     }
-    .stat-container{
+    .stats-container{
+      &.results-win{
+        .value{
+          color:@color-green-light;
+        }
+      }
+      &.results-loss{
+        .value{
+          color:@color-red;
+        }
+      }
       display:inline-block;
+      text-align:center;
+      border-right:1px solid @color-gray-divider;
+      .stat-section-header{
+        padding-bottom:5px;
+        color:@color-text-dark;
+        font-weight:bold;
+      }
+      &:last-of-type{
+        border-right:0;
+      }
       .stat{
+        width:32%;
         display:inline-block;
         .header{
           color:@color-text-dark;
         }
+      }
+    }
+  }
+  .consensus{
+    border-top:1px solid @color-gray-divider;
+    padding:5px 0;
+    .pick-count{
+      color:@color-text-dark;
+      text-align:center;
+      font-size:13px;
+      padding:5px;
+      font-weight:bold;
+    }
+    .consensus-container{
+      height:30px;
+      width:100%;
+      float:left;
+      .value-container{
+        float:left;
+        width:10%;
+        color:@color-text-dark;
+        text-align:center;
+      }
+      .bar-container{
+        float:left;
+        width:30%;
+        height:12px;
+        margin-top:3px;
+        background-color:@color-gray-divider;
+      }
+      .header{
+        float:left;
+        width:20%;
+        text-align:center;
+      }
+      .bar{
+        height:12px;
       }
     }
   }

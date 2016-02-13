@@ -1,0 +1,33 @@
+.comment-form{
+  .ta-scroll-window {
+    &.form-control{
+      min-height: 100px;
+    }
+    .ta-bind{
+      min-height: 100px;
+      padding:18px;
+    }
+  }
+  .ta-root.focussed {
+    .ta-scroll-window.form-control {
+      border-color: @color-blue-2;
+      border-color: fade(@color-blue-2, 70%);
+      -moz-box-shadow:none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  .btn-default{
+    background-image:none;
+    padding:3px 6px;
+  }
+  .ta-toolbar{
+    text-align:center;
+    margin-bottom:5px;
+    .btn-group{
+      margin:0;
+      float:none;
+    }
+  }
+}

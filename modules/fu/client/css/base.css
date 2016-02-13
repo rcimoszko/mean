@@ -42,12 +42,8 @@ a:focus {
 .content-padding-top {
   padding-top: 20px;
 }
-.pro-label {
-  background-color: #4CAF50;
-  color: white;
-  margin-right: 5px;
-  padding: 0 3px;
-  font-size: 12px;
+p {
+  margin: 0;
 }
 .sport-icon {
   display: inline-block;
@@ -77,7 +73,7 @@ a:focus {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -86,12 +82,12 @@ a:focus {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: white;
+  color: #ffffff;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -100,12 +96,12 @@ a:focus {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: white;
+  color: #ffffff;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -114,12 +110,12 @@ a:focus {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: white;
+  color: #ffffff;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -128,12 +124,12 @@ a:focus {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: white;
+  color: #ffffff;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -142,12 +138,12 @@ a:focus {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: white;
+  color: #ffffff;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -156,7 +152,7 @@ a:focus {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: white;
+  color: #ffffff;
   background-color: #449d48;
 }
 .btn-blue-empty {
@@ -220,7 +216,7 @@ a:focus {
   text-align: center;
 }
 .btn-tracker .fa {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .btn-follow-rect {
   background-color: #1ccf31;
@@ -329,10 +325,10 @@ a:focus {
   background: #eeeeee;
 }
 .loading-bg-white:before {
-  background: white;
+  background: #ffffff;
 }
 .loading-bg-white:after {
-  background: white;
+  background: #ffffff;
 }
 .loading.loading-blue {
   box-shadow: inset 0 0 0 1em #104673;
@@ -347,7 +343,7 @@ a:focus {
   box-shadow: inset 0 0 0 1em #eeeeee;
 }
 .loading.loading-white {
-  box-shadow: inset 0 0 0 1em white;
+  box-shadow: inset 0 0 0 1em #ffffff;
 }
 .loading-sm {
   font-size: 2px;
@@ -362,7 +358,7 @@ a:focus {
   height: 100%;
   position: fixed;
   right: 0;
-  left: 20%;
+  left: 180px;
   top: 45%;
   bottom: 0;
 }
@@ -703,7 +699,7 @@ input.toggle:checked + label:after {
   margin: 0 -20px;
 }
 #splash .btn-premium {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   padding: 15px 30px;
   font-size: 20px;
   text-transform: uppercase;
@@ -752,7 +748,7 @@ input.toggle:checked + label:after {
   -moz-background-size: cover;
   -ms-background-size: cover;
   padding: 21% 0;
-  border-bottom: 20px solid #4CAF50;
+  border-bottom: 20px solid #4caf50;
 }
 @media (min-width: 1200px) {
   #splash #section-one {
@@ -891,7 +887,7 @@ input.toggle:checked + label:after {
 }
 #splash .bottom-cta p {
   margin: 0px auto 40px;
-  color: black;
+  color: #000000;
 }
 #splash #section-three {
   background: white;
@@ -1071,6 +1067,13 @@ input.toggle:checked + label:after {
     height: 500px;
   }
 }
+.pro-label {
+  background-color: #4caf50;
+  color: white;
+  margin-right: 5px;
+  padding: 0 3px;
+  font-size: 12px;
+}
 .modal-prompt {
   width: 300px;
   margin: 50px auto;
@@ -1239,7 +1242,7 @@ input.toggle:checked + label:after {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -2483,6 +2486,9 @@ input.toggle:checked + label:after {
 .channel-consensus h1 {
   margin-bottom: 5px;
 }
+.channel-consensus .channel-consensus-section:last-of-type {
+  border-bottom: 0;
+}
 .channel-consensus .channel-hot-picks-container {
   border-bottom: 1px solid #eaeaea;
   margin-bottom: 10px;
@@ -2498,14 +2504,17 @@ input.toggle:checked + label:after {
 .channel-top-menu .channel-name {
   position: absolute;
   left: 0;
-  width: 100px;
+  width: 18%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 24px;
   color: #2b2b2c;
 }
 .channel-top-menu .date-menu {
   position: absolute;
-  left: 100px;
-  right: 100px;
+  left: 18%;
+  right: 18%;
   text-align: center;
   font-size: 20px;
 }
@@ -2530,7 +2539,7 @@ input.toggle:checked + label:after {
 .channel-top-menu .subscribe-btn-container {
   position: absolute;
   right: 0;
-  width: 100px;
+  width: 18%;
 }
 .channel-top-menu .subscribe-btn-container .btn-subscribe {
   float: right;
@@ -2545,7 +2554,7 @@ input.toggle:checked + label:after {
   margin-top: 0;
 }
 .channel-event {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 .channel-event .league {
   text-align: center;
@@ -2603,22 +2612,77 @@ input.toggle:checked + label:after {
   border: 0;
 }
 .channel-event .stats {
+  padding: 5px 0;
   border-top: 1px solid #eaeaea;
 }
-.channel-event .stats .stats-1 .stat-container {
+.channel-event .stats.stats-1 .stats-container {
   width: 100%;
 }
-.channel-event .stats .stats-2 .stat-container {
-  width: 50%;
+.channel-event .stats.stats-2 .stats-container {
+  width: 49%;
 }
-.channel-event .stats .stat-container {
+.channel-event .stats .stats-container {
   display: inline-block;
+  text-align: center;
+  border-right: 1px solid #eaeaea;
 }
-.channel-event .stats .stat-container .stat {
-  display: inline-block;
+.channel-event .stats .stats-container.results-win .value {
+  color: #1ccf31;
 }
-.channel-event .stats .stat-container .stat .header {
+.channel-event .stats .stats-container.results-loss .value {
+  color: #f44336;
+}
+.channel-event .stats .stats-container .stat-section-header {
+  padding-bottom: 5px;
   color: #2b2b2c;
+  font-weight: bold;
+}
+.channel-event .stats .stats-container:last-of-type {
+  border-right: 0;
+}
+.channel-event .stats .stats-container .stat {
+  width: 32%;
+  display: inline-block;
+}
+.channel-event .stats .stats-container .stat .header {
+  color: #2b2b2c;
+}
+.channel-event .consensus {
+  border-top: 1px solid #eaeaea;
+  padding: 5px 0;
+}
+.channel-event .consensus .pick-count {
+  color: #2b2b2c;
+  text-align: center;
+  font-size: 13px;
+  padding: 5px;
+  font-weight: bold;
+}
+.channel-event .consensus .consensus-container {
+  height: 30px;
+  width: 100%;
+  float: left;
+}
+.channel-event .consensus .consensus-container .value-container {
+  float: left;
+  width: 10%;
+  color: #2b2b2c;
+  text-align: center;
+}
+.channel-event .consensus .consensus-container .bar-container {
+  float: left;
+  width: 30%;
+  height: 12px;
+  margin-top: 3px;
+  background-color: #eaeaea;
+}
+.channel-event .consensus .consensus-container .header {
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+.channel-event .consensus .consensus-container .bar {
+  height: 12px;
 }
 .channel-event .btn-container {
   border-top: 1px solid #eaeaea;
@@ -2811,11 +2875,11 @@ input.toggle:checked + label:after {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -2945,6 +3009,82 @@ input.toggle:checked + label:after {
   color: #838586;
   padding-top: 3px;
 }
+.comments .comment-container,
+.comments .reply-container {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.comments .comment-container .avatar,
+.comments .reply-container .avatar {
+  float: left;
+  margin-right: 10px;
+}
+.comments .comment-container .content-container,
+.comments .reply-container .content-container {
+  overflow: hidden;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eaeaea;
+}
+.comments .comment-container .content-container .username,
+.comments .reply-container .content-container .username {
+  text-transform: uppercase;
+  display: inline-block;
+  margin-right: 5px;
+}
+.comments .comment-container .content-container .timestamp,
+.comments .reply-container .content-container .timestamp {
+  display: inline-block;
+  color: #aaabac;
+  margin-right: 15px;
+}
+.comments .comment-container .content-container .pick,
+.comments .reply-container .content-container .pick {
+  display: inline-block;
+  color: #2b2b2c;
+  font-size: 14px;
+}
+.comments .comment-container .content-container .actions,
+.comments .reply-container .content-container .actions {
+  margin-top: 5px;
+}
+.comments .comment-container .content-container .actions .btn-reply,
+.comments .reply-container .content-container .actions .btn-reply {
+  color: #aaabac;
+  text-transform: uppercase;
+}
+.comments .comment-container .content-container .actions .btn-reply .fa,
+.comments .reply-container .content-container .actions .btn-reply .fa {
+  margin-right: 5px;
+}
+.comments .reply-container {
+  margin-top: 10px;
+}
+.comment-form .ta-scroll-window.form-control {
+  min-height: 100px;
+}
+.comment-form .ta-scroll-window .ta-bind {
+  min-height: 100px;
+  padding: 18px;
+}
+.comment-form .ta-root.focussed .ta-scroll-window.form-control {
+  border-color: #21759b;
+  border-color: rgba(33, 117, 155, 0.7);
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.comment-form .btn-default {
+  background-image: none;
+  padding: 3px 6px;
+}
+.comment-form .ta-toolbar {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.comment-form .ta-toolbar .btn-group {
+  margin: 0;
+  float: none;
+}
 .auth-form .divider {
   height: 1px;
   text-align: center;
@@ -3006,13 +3146,13 @@ input.toggle:checked + label:after {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #F44336;
+  color: #f44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
@@ -3252,6 +3392,52 @@ input.toggle:checked + label:after {
   padding-left: 30px;
   overflow: hidden;
 }
+.gamecenter-header .color-header .color-section {
+  float: left;
+  width: 50%;
+  height: 20px;
+}
+.gamecenter-header .event-info-container {
+  padding: 20px 0;
+}
+.gamecenter-header .event-info-container .contestant-container {
+  text-transform: uppercase;
+  width: 39%;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 18px;
+  color: #2b2b2c;
+}
+.gamecenter-header .event-info-container .event-details-container {
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  color: #2b2b2c;
+  text-align: center;
+  width: 21%;
+}
+.gamecenter-header .event-info-container .event-details-container .league-name {
+  color: #6a6b6c;
+}
+.gamecenter-pro-picks .pro-pick {
+  display: inline-block;
+  width: 25%;
+}
+.gamecenter-pro-picks .pro-pick .header .avatar {
+  float: left;
+  margin-right: 5px;
+}
+.gamecenter-pro-picks .pro-pick .header .user-info {
+  border-bottom: 2px solid #eaeaea;
+  overflow: hidden;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+.gamecenter-pro-picks .pro-pick .header .user-info .username {
+  font-size: 16px;
+}
 .pick-list .pick {
   margin: 0 15px;
   padding-top: 15px;
@@ -3284,7 +3470,7 @@ input.toggle:checked + label:after {
   margin-right: 8px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   display: inline-block;
   margin-right: 3px;
   color: white;
@@ -3320,7 +3506,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
@@ -3328,7 +3514,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,

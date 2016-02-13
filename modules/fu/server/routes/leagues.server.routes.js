@@ -14,5 +14,6 @@ module.exports = function (app) {
         .delete(ctrl.delete);
 
     app.param('leagueId', ctrl.byId);
+    app.param('leagueSlug', ctrl.bySlug);
 
 };

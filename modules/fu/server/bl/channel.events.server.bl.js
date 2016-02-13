@@ -4,10 +4,12 @@ var _ = require('lodash'),
     EventBl = require('./event.server.bl'),
     PickBl = require('./pick.server.bl'),
     ContestantNameBl = require('./contestant.name.server.bl'),
+    EventConsensusBl = require('./event.consensus.server.bl'),
     TimezoneBl = require('./timezone.server.bl'),
     BetTypeBl = require('./bet.bettype.server.bl'),
     BetDurationBl = require('./bet.betduration.server.bl'),
     async = require('async');
+
 
 function getWinCount(picks){
     var wins = _.filter(picks, function(pick) {
@@ -104,15 +106,17 @@ function processOverEvent(event, pEvent, picks, user, callback){
     }
 
     function getProPickStats(callback){
+        pEvent.pickColumns = 0;
         var proPicks = _.filter(picks, {premium:true});
         if(proPicks.length > 0){
+            pEvent.pickColumns = pEvent.pickColumns+1;
             pEvent.hasProStats = true;
             var winCount = getWinCount(proPicks);
             var lossCount = getLossCount(proPicks);
             var unitWagered = getUnitsWagered(proPicks);
             var totalProfit = getTotalProfit(proPicks);
-            if(winCount > lossCount) pEvent.generalResult = 'win';
-            if(winCount < lossCount) pEvent.generalResult = 'loss';
+            if(winCount > lossCount) pEvent.proResult = 'win';
+            if(winCount < lossCount) pEvent.proResult = 'loss';
             pEvent.proStats = {wins:winCount, losses: lossCount, profit: totalProfit, roi: Math.round((totalProfit/unitWagered)*100,2)+'%' };
         }
         callback();
@@ -121,6 +125,7 @@ function processOverEvent(event, pEvent, picks, user, callback){
     function getGeneralStats(callback){
         var generalPicks = _.filter(picks, {premium:false});
         if(generalPicks.length > 0){
+            pEvent.pickColumns = pEvent.pickColumns+1;
             pEvent.hasGeneralStats = true;
             var winCount = getWinCount(generalPicks);
             var lossCount = getLossCount(generalPicks);
@@ -141,7 +146,6 @@ function processOverEvent(event, pEvent, picks, user, callback){
 
     async.waterfall(todo, callback);
 }
-
 
 function getMoneylines(event, bets, contestantSwitch){
 
@@ -255,8 +259,18 @@ function processPendingEvent(event, pEvent, picks, user, callback){
     }
 
 
+    function getConsensus(callback){
+        function cb(err, consensus){
+            pEvent.consensus = consensus;
+            callback(err);
+        }
+        if(picks.length < 3) return callback();
+        EventConsensusBl.getEventConsensus(picks, pEvent.contestant2, pEvent.contestant1, cb);
+    }
+
+
     function getGeneralPicks(callback){
-        if(pEvent.picks.length < 3){
+        if(pEvent.picks.length < 3 && !pEvent.consensus){
             var generalPicks = _.filter(picks, {premium: false});
             pEvent.picks = pEvent.picks.concat(generalPicks.splice(0,3-pEvent.picks.length));
         }
@@ -276,6 +290,7 @@ function processPendingEvent(event, pEvent, picks, user, callback){
 
     todo.push(getLines);
     todo.push(getProPicks);
+    todo.push(getConsensus);
     todo.push(getGeneralPicks);
     todo.push(hideProPicks);
 
@@ -320,7 +335,6 @@ function getDateQuery(dateGroup, date){
 function get(channel, user, date, callback){
 
     var todo = [];
-    console.log(date);
 
     function getEvents(callback) {
         var dateQuery = getDateQuery(channel.dateGroup, date);
@@ -334,7 +348,8 @@ function get(channel, user, date, callback){
     function populateBets(events, callback) {
         var populate = [{path: 'pinnacleBets', model: 'Bet'},
                         {path:'contestant1.ref', model: 'Contestant'},
-                        {path:'contestant2.ref', model: 'Contestant'}];
+                        {path:'contestant2.ref', model: 'Contestant'},
+                        {path:'league.ref', model: 'League'}];
 
         EventBl.populateBy(events, populate, callback);
     }
@@ -354,10 +369,11 @@ function get(channel, user, date, callback){
         function processEvent(event, callback){
             var pEvent = {
                 sport: event.sport,
-                league: event.league,
+                league: event.league.ref,
                 contestant1: event.contestant1.ref,
                 contestant2: event.contestant2.ref,
                 slug: event.slug,
+                leagueSlug: event.league.ref.slug,
                 over: event.over,
                 startTime: event.startTime,
                 commentCount: event.commentCount

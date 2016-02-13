@@ -2,7 +2,7 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    GamecenterBl = require(path.resolve('./modules/fu/server/bl/gamecenter.server.bl')),
+    GamecenterBl = require('../bl/gamecenter.server.bl'),
     errorHandler = require(path.resolve('./modules/fu/server/sys/error.server.sys'));
 
 function get(req, res) {
@@ -17,8 +17,10 @@ function get(req, res) {
     }
 
     var event = req.event;
+    var league = req.league;
+    var user = req.user;
 
-    GamecenterBl.get(event, cb);
+    GamecenterBl.get(event, league, user, cb);
 }
 
 

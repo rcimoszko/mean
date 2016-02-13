@@ -5,6 +5,13 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     m_Comment = mongoose.model('Comment');
 
+var populate = [
+    {path:'users', model: 'User', select: 'username avatarUrl'},
+    {path:'user.ref', model: 'User', select:'username avatarUrl'},
+    {path:'pick', model: 'Pick'},
+    {path:'event', model: 'Event', select:'contestant1 contestant2 slug commentCount'}
+];
+
 function populate(comment, callback){
 
 }
@@ -60,7 +67,7 @@ function del(comment, callback){
 }
 
 function getByQuery(query, callback){
-    m_Comment.find(query, callback);
+    m_Comment.find(query).populate(populate).exec(callback);
 }
 
 function getBySport(sport, callback){
@@ -87,7 +94,7 @@ function populateBy(comments, populate, callback){
 function getPreviews(query, count, callback){
     m_Comment.find(query).sort({timestamp:-1}).limit(count)
         .populate('sport', 'name')
-        .populate('league', 'name')
+        .populate('league', 'name slug')
         .populate('event', 'contestant1 contestant2 slug commentCount')
         .populate('pick')
         .exec(callback);

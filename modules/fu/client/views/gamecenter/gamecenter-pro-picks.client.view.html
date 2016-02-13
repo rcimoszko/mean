@@ -1,0 +1,43 @@
+<div class="panel gamecenter-pro-picks" data-ng-if="gamecenter.picks.pro.length > 0">
+    <div class="panel-body">
+        <h1>PRO PICKS</h1>
+        <div class="pro-pick" data-ng-repeat="pick in gamecenter.picks.pro">
+            <div class="header">
+                <avatar size="'sm'" url="pick.user.ref.avatarUrl"></avatar>
+                <div class="user-info">
+                    <div class="username"><a ui-sref="profile({username:pick.user.ref.username})">{{pick.user.ref.username}}</a>
+                        <div class="pull-right">
+                            <btn-follow user-id="pick.user.ref._id"></btn-follow>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <th></th>
+                        <th>PROFIT</th>
+                        <th>ROI</th>
+                        <th>W/L</th>
+                    </thead>
+                </table>
+
+                <div class="statistics" data-ng-repeat="premiumType in pick.premiumTypes">
+                    {{premiumType}}
+                    <!--
+                    <div class="stat-container">
+                        <div class="stat-value">{{pick.premiumStats.profit|formatProfit}}</div>
+                        <div class="stat-text">PROFIT</div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-value">{{pick.premiumStats.roi|formatRoi}}</div>
+                        <div class="stat-text">ROI</div>
+                    </div>
+                    <div class="stat-container">
+                        <div class="stat-value">{{user.wins}}-{{user.losses}}</div>
+                        <div class="stat-text">WIN/LOSS</div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

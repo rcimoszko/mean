@@ -1,0 +1,19 @@
+<div class="panel gamecenter-header panel-square clearfix">
+    <div class="color-header clearfix">
+        <div class="color-section" style="background-color:{{gamecenter.header.contestant1Color}}"></div>
+        <div class="color-section" style="background-color:{{gamecenter.header.contestant2Color}}"></div>
+    </div>
+    <div class="event-info-container">
+        <div class="contestant-container">
+            {{gamecenter.header.contestant1Name}}
+        </div>
+        <div class="event-details-container">
+           <div class="league-name">{{gamecenter.header.leagueName}}</div>
+           <div>{{gamecenter.header.startTime|date:'MMM d'}}</div>
+           <div>{{gamecenter.header.startTime|date:'h:mma'}}</div>
+        </div>
+        <div class="contestant-container">
+            {{gamecenter.header.contestant2Name}}
+        </div>
+    </div>
+</div>

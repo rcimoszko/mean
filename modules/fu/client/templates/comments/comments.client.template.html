@@ -1,0 +1,27 @@
+<div class="comments">
+    <h4 class="text-center" data-ng-show="comments.length === 0">No Comments</h4>
+    <div class="comment-container" data-ng-repeat="comment in comments">
+        <avatar size="'sm'" url="comment.user.ref.avatarUrl"></avatar>
+        <div class="content-container">
+            <div class="username">
+                <a ui-sref="profile({username: comment.user.name})">
+                    {{comment.user.name}}
+                </a>
+            </div>
+            <div class="timestamp" am-time-ago="comment.timestamp"></div>
+            <div class="pick" data-ng-if="comment.pick">RE: {{comment.pick|betName:comment.event}}</div>
+            <div class="text" ta-bind data-ng-model="comment.text"></div>
+            <div class="actions">
+                <a href data-ng-click="showReply = !showReply" class="btn-reply">
+                    <i class="fa fa-reply"></i> Reply
+                </a>
+            </div>
+            <comment-form text="reply" data-ng-show="showReply"></comment-form>
+            <replies replies="comment.replies" users="comment.user"></replies>
+        </div>
+    </div>
+
+    <div class="comment-form-container">
+        <comment-form text="newComment"></comment-form>
+    </div>
+</div>

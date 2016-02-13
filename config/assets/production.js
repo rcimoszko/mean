@@ -6,6 +6,7 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+         'public/lib/textAngular/dist/textAngular.css'
       ],
       js: [
         'public/lib/angular/angular.min.js',
@@ -22,6 +23,9 @@ module.exports = {
         'public/lib/lrInfiniteScroll/lrInfiniteScroll.js',
         'public/lib/moment/min/moment-with-locales.min.js',
         'public/lib/angular-moment/angular-moment.min.js',
+        'public/lib/textAngular/dist/textAngular-rangy.min.js',
+        'public/lib/textAngular/dist/textAngular-sanitize.min.js',
+        'public/lib/textAngular/dist/textAngular.min.js'
         //'public/lib/ngSticky/dist/sticky.min.js'
       ]
     },
