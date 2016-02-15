@@ -1,0 +1,181 @@
+<div id="tracker-history">
+    <div class="row" id="filter-container">
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.sport" class="form-control" ng-options="sport.name for sport in filters.sport|orderBy:'name'" data-ng-change="updateFilterLeagues(); updatePages(); updateHistoryStats(); updateFilterBetDurations(); updateFilterDates();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-disabled="filter.sport.id === 'all'" data-ng-model="filter.league" class="form-control" ng-options="league.name for league in filters.league|orderBy:'name'" data-ng-change="updateFilterTeams(); updatePages(); updateHistoryStats(); updateFilterBetDurations(); updateFilterDates();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-disabled="filter.league.id === 'all'" data-ng-model="filter.team" class="form-control" ng-options="team.name for team in filters.team|orderBy:'name'" data-ng-change="updatePages(); updateHistoryStats(); updateFilterBetDurations();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.homeAway" class="form-control" ng-options="homeAway for homeAway in filters.homeAway" data-ng-change="updatePages(); updateHistoryStats(); updateFilterBetDurations();"></select>
+        </div>
+
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.betDuration" class="form-control text-capitalize" ng-options="betDuration for betDuration in filters.betDuration" data-ng-change="updatePages(); updateHistoryStats();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.betType" class="form-control text-capitalize" ng-options="betType for betType in filters.betType" data-ng-change="updatePages(); updateHistoryStats();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.unitSize" class="form-control" ng-options="unitSize.name for unitSize in filters.unitSize" data-ng-change="updatePages(); updateHistoryStats();"></select>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <select data-ng-model="filter.date" class="form-control" ng-options="date.name for date in filters.date" data-ng-change="updatePages(); updateHistoryStats();"></select>
+        </div>
+    </div>
+
+    <div class="table-header">
+        <div class="container-fluid history-overview-container">
+            <div class="row">
+
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2 data-ng-class="{'color-green':historyStats.profit > 0, 'color-red':historyStats.profit <0, 'push-color':historyStats.profit===0}">
+                            {{historyStats.profit.toFixed(2)|addPlus}}
+                        </h2>
+                        <h3>Profit</h3>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-refresh"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2 data-ng-class="{'color-green':historyStats.roi > 0, 'color-red':historyStats.roi <0, 'push-color':historyStats.roi===0}">{{historyStats.roi.toFixed(2)}}%</h2>
+                        <h3>ROI</h3>
+                    </div>
+
+                </div>
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-pie-chart"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2 data-ng-class="{'color-green':historyStats.roi > 0, 'color-red':historyStats.roi <0, 'push-color':historyStats.roi===0}">{{historyStats.winPercentage.toFixed(2)}}%</h2>
+                        <h3>Win %</h3>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2>{{historyStats.win}}-{{historyStats.loss}}-{{historyStats.push}}</h2>
+                        <h3>Record</h3>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2>{{historyStats.avgOdds|formatOdds}}</h2>
+                        <h3>Avg. Odds</h3>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-4 col-lg-2">
+                    <div class="statistic-icon">
+                        <i class="fa fa-database"></i>
+                    </div>
+                    <div class="statistic-value-container">
+                        <h2>{{historyStats.avgBet.toFixed(2)}}</h2>
+                        <h3>Avg. Bet</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3">
+                <select data-ng-model="pageSize.number" class="form-control" ng-options="pageSize for pageSize in pageSizes" data-ng-change="updatePages()"></select>
+            </div>
+            <div class="col-xs-9 col-sm-4">
+                <ul class="pagination">
+                    <li data-ng-class="{disabled: currentPage === 1}">
+                        <a data-ng-click="prevPage()">&laquo;</a>
+                    </li>
+                    <li>
+                    <span>
+                    {{currentPage}} of {{numberOfPages}}
+                    </span>
+                    </li>
+                    <li data-ng-class="{disabled: currentPage === numberOfPages}">
+                        <a data-ng-click="nextPage()">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-5 pull-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" data-ng-model="search.text" data-ng-change="updatePages(); updateHistoryStats();" ><span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="table-responsive">
+        <table class="table text-center" id="history">
+            <thead>
+            <th>Result</th>
+            <th>Date</th>
+            <th class="text-left">Game</th>
+            <th>Score</th>
+            <th>Bet Type</th>
+            <th>Bet</th>
+            <th>Odds</th>
+            <th>Units</th>
+            <th>ROI</th>
+            <th>Profit</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="pick in picks | filter:search.text | filter:historyFilter | startFrom:(currentPage-1)*pageSize.number | limitTo:pageSize.number ">
+                <td class="{{pick.result.toLowerCase()}}">{{pick.result}}</td>
+                <td>{{pick.event.startTime|date:'M/d/yy'}}<br/>{{pick.event.startTime|date:'h:mm a'}}</td>
+                <td class="text-left">
+                    <span data-ng-if="contestantService.getContestantSwitch(pick.event)">
+                        <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2.name}}</span><br/>
+                        <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1.name}}</span>
+                    </span>
+                    <span data-ng-if="!contestantService.getContestantSwitch(pick.event)">
+                        <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1.name}}</span><br/>
+                        <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2.name}}</span>
+                    </span>
+                </td>
+                <td>
+                    <span data-ng-if="contestantService.getContestantSwitch(pick.event)">
+                        <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2FinalScore}}</span><br/>
+                        <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1FinalScore}}</span>
+                    </span>
+                    <span data-ng-if="!contestantService.getContestantSwitch(pick.event)">
+                        <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1FinalScore}}</span><br/>
+                        <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2FinalScore}}</span>
+                    </span>
+                </td>
+                <td class="text-capitalize">{{pick.betType}}<br/>({{pick.betDuration}})</td>
+                <td>{{pick|betName:pick.event}}</td>
+                <td>{{pick.odds|formatOdds}}</td>
+                <td>{{pick.units}}</td>
+                <td class="{{pick.result.toLowerCase()}}">{{pick.roi.toFixed(1)}}%</td>
+                <td class="{{pick.result.toLowerCase()}}">{{pick.profit.toFixed(1)|addPlus}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--
+    <button data-ng-if="username === authentication.user.username" class="btn btn-medium-white" data-ng-click="export()">Export Data</button>
+     -->
+    <button data-ng-if="username === authentication.user.username" ng-csv="getExportData()" csv-header="getExportHeader()" class="btn btn-medium-white" filename="export.csv">Export Data</button>
+    <span data-ng-bind="exportError"></span>
+</div>

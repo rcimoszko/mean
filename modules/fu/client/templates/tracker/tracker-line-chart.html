@@ -1,0 +1,9 @@
+<div google-chart chart="chart" class="tracker-chart" style="height:85%;"></div>
+<div class="text-center">
+    <div class="btn-group overview-btn-group">
+        <label class="btn btn-default" data-ng-model="filter" data-ng-click="updateChart('Day');" btn-radio="'Day'">Day</label>
+        <label class="btn btn-default" data-ng-model="filter" data-ng-click="updateChart('Week');" btn-radio="'Week'">Week</label>
+        <label class="btn btn-default" data-ng-model="filter" data-ng-click="updateChart('Month');" btn-radio="'Month'">Month</label>
+        <label class="btn btn-default" data-ng-click="showModal()" data-ng-if="includeZoom"><i class="fa fa-search-plus"></i></label>
+    </div>
+</div>

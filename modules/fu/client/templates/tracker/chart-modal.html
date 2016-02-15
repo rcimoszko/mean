@@ -1,0 +1,8 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="close()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title text-center">{{title}}</h4>
+</div>
+
+<div class="clearfix modal-body">
+    <tracker-line-chart picks="picks" stat-summary="statSummary" field="field" include-zoom="false" ></tracker-line-chart>
+</div>

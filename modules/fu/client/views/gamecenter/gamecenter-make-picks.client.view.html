@@ -1,1 +1,13 @@
-make picks
+<div class="panel gamecenter-make-picks">
+    <tabset justified="true">
+        <tab data-ng-repeat="betDuration in bets.betDurations" data-ng-click="updateActiveBetDuration(betDuration)">
+            <tab-heading>{{betDuration|uppercase}}</tab-heading>
+            <div class="make-picks-filters">
+                <ul>
+                    <li data-ng-repeat="betType in betTypes"><a href data-ng-click="setActiveBetType(betType)" data-ng-class="{active: betType === activeBetType}">{{betType}}</a></li>
+                </ul>
+            </div>
+            <make-picks data-ng-if="gamecenter.bets" event="gamecenter.bets.event" bet-types="betTypes" bet-durations="betDurations" columns="columns" active-bet-type="activeBetType" active-bet-duration="activeBetDuration"></make-picks>
+        </tab>
+    </tabset>
+</div>

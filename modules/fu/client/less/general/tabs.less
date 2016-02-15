@@ -1,4 +1,4 @@
-.nav-tabs{
+.nav-tabs, .nav-justified{
   border-bottom:0;
   li{
     border-bottom:2px solid white;
@@ -9,6 +9,9 @@
       border-top:0;
       border-left:0;
       border-right:0;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
       &:hover{
         border-top:0;
         border-left:0;
@@ -28,9 +31,43 @@
       }
     }
   }
+
+  &.nav-justified{
+    border-bottom:0;
+    li{
+      border-bottom:2px solid white;
+      a{
+        color:@color-text;
+        border-bottom:2px solid @color-gray-divider;
+        margin-right:0;
+        border-top:0;
+        border-left:0;
+        border-right:0;
+        &:hover{
+          border-top:0;
+          border-left:0;
+          border-right:0;
+          background-color:white;
+          border-bottom:2px solid @color-gray-divider;
+        }
+      }
+      &.active{
+        a{
+          border:0;
+          border-bottom:2px solid @color-orange;
+          &:hover, &:focus{
+            border:0;
+            border-bottom:2px solid @color-orange;
+          }
+        }
+      }
+    }
+  }
 }
 .tabs-full{
-  text-align:center;
+  .nav-tabs{
+    text-align:center;
+  }
 }
 .tabs-sm{
   li{

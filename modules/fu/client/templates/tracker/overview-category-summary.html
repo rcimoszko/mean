@@ -1,0 +1,16 @@
+<table class="category-overview table text-center table-responsive">
+    <thead>
+    <th>{{title}}</th>
+    <th>Profit</th>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="stat in stats">
+        <td class="text-capitalize">
+            <span style="border-left:8px solid {{stat.color}};">
+            {{stat.category}}
+            </span>
+        </td>
+        <td>{{stat.profit.toFixed(2)|addPlus}}</td>
+    </tr>
+    </tbody>
+</table>

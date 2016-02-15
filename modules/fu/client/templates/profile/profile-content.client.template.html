@@ -2,10 +2,11 @@
     <tabset class="tabs-2 tabs-full" >
         <tab>
             <tab-heading>PICKS</tab-heading>
-            <!--<pick-list picks="profile-picks"></pick-list>-->
+            <event-pick-list include-user="false" events="profile.pendingPicks"></event-pick-list>
         </tab>
-        <tab>
+        <tab data-ng-click="initialClick()">
             <tab-heading>TRACKER</tab-heading>
+            <ng-include src="'/modules/fu/client/templates/profile/profile-tracker.client.template.html'"></ng-include>
         </tab>
     </tabset>
 </div>

@@ -4,6 +4,7 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     PicksBl = require('./pick.server.bl'),
+    MakePicksBl = require('./makepicks.server.bl'),
     EventConsensusBl = require('./event.consensus.server.bl'),
     CommentsBl = require('./comment.server.bl'),
     m_Event = mongoose.model('Event');
@@ -23,10 +24,20 @@ function get(event, league, user, callback){
             contestant1Name: event.contestant2.name,
             contestant2Name: event.contestant1.name,
             contestant1Color: '#E9893A',
-            contestant2Color: '#21759B'
+            contestant2Color: '#21759B',
+            contestant2FinalScore: event.contestant1FinalScore,
+            contestant1FinalScore: event.contestant2FinalScore
         };
-        if(event.contestant2.ref.lightColor) header.contestant1Color = event.contestant2.ref.lightColor;
-        if(event.contestant2.ref.lightColor) header.contestant2Color = event.contestant1.ref.lightColor;
+        if(event.contestant2.ref.lightColor) header.contestant1Color = event.contestant2.ref.darkColor;
+        if(event.contestant1.ref.lightColor) header.contestant2Color = event.contestant1.ref.darkColor;
+        if(event.contestant1FinalScore) header.hasScores = true;
+        if(event.contestantWinner){
+            if(String(event.contestantWinner.ref) === String(event.contestant1.ref._id)){
+                header.winner = 2;
+            } else if(String(event.contestantWinner.ref) === String(event.contestant2.ref._id)) {
+                header.winner = 1;
+            }
+        }
 
         callback(null, header);
     }
@@ -38,6 +49,7 @@ function get(event, league, user, callback){
         function getPicks(callback){
             PicksBl.getByQuery({event:event._id}, callback);
         }
+
         function getProPicks(generalPicks, callback){
             picks = {general: generalPicks};
             var proPicks = _.filter(generalPicks, {premium: true});
@@ -63,11 +75,19 @@ function get(event, league, user, callback){
     }
 
     function getConsensus_todo(callback){
-        callback(null);
+        EventConsensusBl.getGamecenterConsensus(event, callback);
     }
 
     function getDiscussion_todo(callback){
         CommentsBl.getByEvent(event._id, callback);
+    }
+
+    function getBets_todo(callback){
+        MakePicksBl.getEventBets(event._id, callback);
+    }
+
+    function getEvent(callback){
+        callback(null, event);
     }
 
     var todo = {
@@ -75,7 +95,9 @@ function get(event, league, user, callback){
         header: getHeader,
         picks: getPicks_todo,
         consensus: getConsensus_todo,
-        discussion: getDiscussion_todo
+        discussion: getDiscussion_todo,
+        bets: getBets_todo,
+        event: getEvent
     };
 
     async.parallel(todo, callback);

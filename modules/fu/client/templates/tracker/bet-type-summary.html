@@ -1,0 +1,28 @@
+<table class="table text-center table-responsive" id="bet-type">
+    <thead>
+        <th class="border-right">Bet Type</th>
+        <th>Win</th>
+        <th>Loss</th>
+        <th>Push</th>
+        <th>Total</th>
+        <th class="border-right">Wagered</th>
+        <th>Avg. Odds</th>
+        <th>Win %</th>
+        <th>ROI</th>
+        <th>Profit</th>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="stat in stats">
+        <td data-ng-class="{'win-color': stat.profit > 0, 'loss-color': stat.profit < 0, 'push-color': stat.profit === 0}" class="border-right">{{stat.category}}</td>
+        <td>{{stat.win}}</td>
+        <td>{{stat.loss}}</td>
+        <td>{{stat.push}}</td>
+        <td>{{stat.total}}</td>
+        <td class="border-right">{{stat.units}}</td>
+        <td>{{stat.avgOdds|formatOdds}}</td>
+        <td>{{stat.winPercentage.toFixed(2)}}%</td>
+        <td data-ng-class="{'win-color': stat.profit > 0, 'loss-color': stat.profit < 0, 'push-color': stat.profit === 0}">{{stat.roi.toFixed(2)}}%</td>
+        <td data-ng-class="{'win-color': stat.profit > 0, 'loss-color': stat.profit < 0, 'push-color': stat.profit === 0}">{{stat.profit.toFixed(2)|addPlus}}</td>
+    </tr>
+    </tbody>
+</table>

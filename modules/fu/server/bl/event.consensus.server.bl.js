@@ -2,9 +2,143 @@
 
 var async = require('async'),
     _ = require('lodash'),
+    PickBl = require('./pick.server.bl'),
     BetTypeBl = require('./bet.bettype.server.bl'),
     BetDurationBl = require('./bet.betduration.server.bl');
 
+
+function getGamecenterConsensus(event, callback){
+    var todo = [];
+    var contestant1 = event.contestant1.ref;
+    var contestant2 = event.contestant2.ref;
+
+    function getPicks(callback){
+        PickBl.getByQuery({event: event._id}, callback);
+    }
+
+    function getConsensus(picks, callback){
+        var todo = [];
+        function getSpreadConsensus(callback){
+            var spread;
+            var spreadPicks = _.filter(picks, function(pick){
+                return pick.betType === 'spread' && BetDurationBl.mainBetDurations.indexOf(pick.betDuration) !== -1;
+            });
+
+            if(spreadPicks.length){
+                spread = {
+                    betType: 'spread',
+                    header: 'SPREAD'
+                };
+                var contestant1Picks = _.filter(spreadPicks, function(pick){
+                    return String(pick.contestant.ref) === String(contestant1._id);
+                });
+
+                var percent1 = Math.round((contestant1Picks.length/spreadPicks.length)*100,0);
+                var percent2 = 100 - percent1;
+
+                if(percent1 > percent2){
+                    if(contestant1.logoUrl) spread.logoUrl = contestant1.logoUrl;
+                    spread.name = contestant1.name;
+                    spread.percent = percent1;
+
+                } else if (percent2 > percent1){
+                    if(contestant2.logoUrl) spread.logoUrl = contestant2.logoUrl;
+                    spread.name = contestant2.name;
+                    spread.percent = percent2;
+                } else {
+                    if(contestant1.logoUrl) spread.logoUrl = contestant1.logoUrl;
+                    spread.name = contestant1.name;
+                    spread.percent = 50;
+                }
+            }
+            callback(null, spread);
+        }
+
+        function getMoneylineConsensus(callback){
+            var moneyline;
+
+            var moneylinePicks = _.filter(picks, function(pick){
+                return pick.betType === 'moneyline' && BetDurationBl.mainBetDurations.indexOf(pick.betDuration) !== -1;
+            });
+            if(moneylinePicks.length){
+                moneyline = {
+                    betType: 'moneyline',
+                    header: 'MONEYLINE'
+                };
+
+                var contestant1Picks = _.filter(moneylinePicks, function(pick){
+                    return String(pick.contestant.ref) === String(contestant1._id);
+                });
+
+                var percent1 = Math.round((contestant1Picks.length/moneylinePicks.length)*100,0);
+                var percent2 = 100 - percent1;
+
+                if(percent1 > percent2){
+                    if(contestant1.logoUrl) moneyline.logoUrl = contestant1.logoUrl;
+                    moneyline.name = contestant1.name;
+                    moneyline.percent = percent1;
+
+                } else if (percent2 > percent1){
+                    if(contestant2.logoUrl) moneyline.logoUrl = contestant2.logoUrl;
+                    moneyline.name = contestant2.name;
+                    moneyline.percent = percent2;
+                } else {
+                    if(contestant1.logoUrl) moneyline.logoUrl = contestant1.logoUrl;
+                    moneyline.name = contestant1.name;
+                    moneyline.percent = 50;
+                }
+            }
+            callback(null, moneyline);
+        }
+
+        function getTotalsConsensus(callback){
+            var totals;
+            var totalsPicks = _.filter(picks, function(pick){
+                return pick.betType === 'total points' && BetDurationBl.mainBetDurations.indexOf(pick.betDuration) !== -1;
+            });
+            if(totalsPicks.length){
+                totals = {
+                    betType: 'total points',
+                    header: 'TOTALS'
+                };
+                var overPicks = _.filter(totalsPicks, function(pick){
+                    return pick.overUnder === 'over';
+                });
+
+                var percent1 = Math.round((overPicks.length/totalsPicks.length)*100,0);
+                var percent2 = 100 - percent1;
+
+                if(percent1 > percent2){
+                    totals.overUnder = 'over';
+                    totals.name = 'Over';
+                    totals.percent = percent1;
+                } else if (percent2 > percent1){
+                    totals.overUnder = 'over';
+                    totals.name = 'Under';
+                    totals.percent = percent2;
+                } else {
+                    totals.overUnder = 'over';
+                    totals.name = 'Over';
+                    totals.percent = 50;
+                }
+            }
+            callback(null, totals);
+        }
+
+        todo.push(getSpreadConsensus);
+        todo.push(getMoneylineConsensus);
+        todo.push(getTotalsConsensus);
+
+        async.parallel(todo, callback);
+
+    }
+
+    todo.push(getPicks);
+    todo.push(getConsensus);
+
+    async.waterfall(todo, callback);
+
+}
 
 function getEventConsensus(picks, contestant1, contestant2, callback){
     var todo = [];
@@ -113,3 +247,4 @@ function getEventConsensus(picks, contestant1, contestant2, callback){
 }
 
 exports.getEventConsensus = getEventConsensus;
+exports.getGamecenterConsensus = getGamecenterConsensus;

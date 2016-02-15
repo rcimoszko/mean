@@ -1,0 +1,19 @@
+<div class="panel gamecenter-picks">
+    <div class="panel-heading">
+        <h1>PICKS</h1>
+    </div>
+    <tabset class="tabs-full tabs-3">
+        <tab active="proActive">
+            <tab-heading>PRO ({{proPicks.length}})</tab-heading>
+            <pick-list include-user="true" picks="proPicks" event="event"></pick-list>
+        </tab>
+        <tab active="allActive">
+            <tab-heading>ALL ({{allPicks.length}})</tab-heading>
+            <pick-list include-user="true" picks="allPicks" event="event"></pick-list>
+        </tab>
+        <tab>
+            <tab-heading>FOLLOWING</tab-heading>
+            <pick-list include-user="true" picks="allPicks" event="event"></pick-list>
+        </tab>
+    </tabset>
+</div>

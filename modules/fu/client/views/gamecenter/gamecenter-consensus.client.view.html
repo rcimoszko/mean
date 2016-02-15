@@ -1,1 +1,11 @@
-consensus
+<div class="panel gamecenter-consensus consensus-{{consensus.length}}" data-ng-if="consensus.length > 0">
+    <div class="panel-body">
+        <h1>CONSENSUS</h1>
+        <div class="consensus-container" data-ng-repeat="con in consensus">
+            <div class="header">{{con.header}}</div>
+            <div class="logo-container" data-ng-if="con.logo"></div>
+            <div class="name" data-ng-if="!con.logo">{{con.name}}</div>
+            <div class="percent">{{con.percent}}%</div>
+        </div>
+    </div>
+</div>

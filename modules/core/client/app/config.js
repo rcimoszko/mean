@@ -16,7 +16,8 @@ var ApplicationConfiguration = (function () {
       'angularGrid',
       'lrInfiniteScroll',
       'textAngular',
-      'angularMoment'];
+      'angularMoment',
+      'angular.filter'];
 
   // Add a new vertical module
   var registerModule = function (moduleName, dependencies) {

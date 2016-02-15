@@ -96,6 +96,91 @@ function processBetTypes(betBt, betType){
     return bets;
 }
 
+function getBetTypes(events, results, callback){
+    var betTypeOrder = ['spread', 'moneyline', 'total points', 'team totals', 'sets'];
+    results.betTypes = _.chain(events).pluck('pinnacleBets').flatten().pluck('betType').unique().compact().value();
+    results.betTypes = _.sortBy(results.betTypes, function(betType){
+        if(betTypeOrder.indexOf(betType) === -1) return betTypeOrder.length;
+        return betTypeOrder.indexOf(betType);
+    });
+    callback(null, events);
+}
+
+function getBetDurations(events, results, callback){
+    var betDurationOrder = ['match', 'matchups', 'game', 'game (OT included)', 'game (regular time)', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
+    results.betDurations = _.chain(events).pluck('pinnacleBets').flatten().pluck('betDuration').unique().compact().value();
+    results.betDurations = _.sortBy(results.betDurations, function(betDuration){
+        if(betDurationOrder.indexOf(betDuration) === -1) return betDurationOrder.length;
+        return betDurationOrder.indexOf(betDuration);
+    });
+    callback(null, events);
+
+}
+
+function processEventBets(events, processedEvents, callback){
+
+    function processBets(m_event, callback){
+        var todo = [];
+        var event = m_event.toJSON();
+        var bets = [];
+
+
+        function groupBets(callback){
+
+            bets = _.groupBy(event.pinnacleBets, 'betDuration');
+
+            for(var bd in bets){
+                bets[bd] = _.groupBy(bets[bd], 'betType');
+                for(var bt in bets[bd]){
+                    bets[bd][bt] = processBetTypes(bets[bd][bt], bt);
+                }
+            }
+            event.bets = bets;
+
+
+            callback();
+        }
+
+        function divideBets(callback){
+            var mainGroups = ['match', 'game', 'fight', 'matchups', 'series'];
+
+
+            event.bets = {more:{}};
+
+            var moreBetsCount = _.filter(event.pinnacleBets, function(bet){
+                return mainGroups.indexOf(bet.betDuration) === -1;
+            });
+            if (moreBetsCount.length) event.bets.moreCount = moreBetsCount.length;
+
+            for(var betDuration in bets){
+                if(mainGroups.indexOf(betDuration) !== -1){
+                    event.bets.main = bets[betDuration];
+                } else {
+                    event.bets.more[betDuration] = bets[betDuration];
+                }
+            }
+            callback();
+        }
+
+        function removeBets(callback){
+            delete event.pinnacleBets;
+            processedEvents.push(event);
+            callback();
+        }
+
+        todo.push(groupBets);
+        //todo.push(divideBets);
+        todo.push(removeBets);
+
+        async.waterfall(todo, callback);
+
+    }
+
+    async.each(events, processBets, callback);
+
+}
+
+
 function getPicks(query, callback){
     var todo = [];
     var processedEvents = [];
@@ -120,89 +205,16 @@ function getPicks(query, callback){
         m_Event.find(query).select(select).sort(sort).populate(populate).exec(callback);
     }
 
-    function getBetTypes(events, callback){
-        var betTypeOrder = ['spread', 'moneyline', 'total points', 'team totals', 'sets'];
-        results.betTypes = _.chain(events).pluck('pinnacleBets').flatten().pluck('betType').unique().value();
-        results.betTypes = _.sortBy(results.betTypes, function(betType){
-            if(betTypeOrder.indexOf(betType) === -1) return betTypeOrder.length;
-            return betTypeOrder.indexOf(betType);
-        });
-        callback(null, events);
+    function getBetTypes_todo(events, callback){
+        getBetTypes(events, results, callback);
     }
 
-
-    function getBetDurations(events, callback){
-        var betDurationOrder = ['match', 'matchups', 'game', 'game (OT included)', 'game (regular time)', 'fight', 'series', '1st set winner', '1st 5 innings', '1st half', '2nd half', '1st period', '2nd period', '3rd period', '1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'map 1', 'map 2', 'map 3'];
-        results.betDurations = _.chain(events).pluck('pinnacleBets').flatten().pluck('betDuration').unique().value();
-        results.betDurations = _.sortBy(results.betDurations, function(betDuration){
-            if(betDurationOrder.indexOf(betDuration) === -1) return betDurationOrder.length;
-            return betDurationOrder.indexOf(betDuration);
-        });
-        callback(null, events);
-
+    function getBetDurations_todo(events, callback){
+        getBetDurations(events, results, callback);
     }
 
-    function processEventBets(events, callback){
-
-        function processBets(m_event, callback){
-            var todo = [];
-            var event = m_event.toJSON();
-            var bets = [];
-
-
-            function groupBets(callback){
-
-                bets = _.groupBy(event.pinnacleBets, 'betDuration');
-
-                for(var bd in bets){
-                    bets[bd] = _.groupBy(bets[bd], 'betType');
-                    for(var bt in bets[bd]){
-                        bets[bd][bt] = processBetTypes(bets[bd][bt], bt);
-                    }
-                }
-                event.bets = bets;
-
-
-                callback();
-            }
-
-            function divideBets(callback){
-                var mainGroups = ['match', 'game', 'fight', 'matchups', 'series'];
-
-
-                event.bets = {more:{}};
-
-                var moreBetsCount = _.filter(event.pinnacleBets, function(bet){
-                    return mainGroups.indexOf(bet.betDuration) === -1;
-                });
-                if (moreBetsCount.length) event.bets.moreCount = moreBetsCount.length;
-
-                for(var betDuration in bets){
-                    if(mainGroups.indexOf(betDuration) !== -1){
-                        event.bets.main = bets[betDuration];
-                    } else {
-                        event.bets.more[betDuration] = bets[betDuration];
-                    }
-                }
-                callback();
-            }
-
-            function removeBets(callback){
-                delete event.pinnacleBets;
-                processedEvents.push(event);
-                callback();
-            }
-
-            todo.push(groupBets);
-            //todo.push(divideBets);
-            todo.push(removeBets);
-
-            async.waterfall(todo, callback);
-
-        }
-
-        async.each(events, processBets, callback);
-
+    function processEventBets_todo(events, callback){
+        processEventBets(events, processedEvents, callback);
     }
 
     function groupEventsByDay(callback){
@@ -223,12 +235,55 @@ function getPicks(query, callback){
     }
 
     todo.push(getEvents);
-    todo.push(getBetTypes);
-    todo.push(getBetDurations);
-    todo.push(processEventBets);
+    todo.push(getBetTypes_todo);
+    todo.push(getBetDurations_todo);
+    todo.push(processEventBets_todo);
     todo.push(groupEventsByDay);
 
     async.waterfall(todo, callback);
+
+}
+
+function getEventBets(eventId, callback){
+    var todo = [];
+    var results = {};
+    var processedEvents = [];
+
+    function getEvent(callback){
+        var select = 'sport league neutral contestant1 contestant2 startTime pinnacleBets contestant1Pitcher contestant2Pitcher gameNo commentCount slug';
+        var sort = 'startTime';
+        var populate = [
+            {path:'sport.ref', select: 'name slug'},
+            {path:'pinnacleBets', select: 'betType betDuration otIncluded odds altLine altNumber spread contestant points overUnder draw underdog openingOdds openingSpread openingPoints'},
+            {path:'contestant1.ref', select: 'name darkColor lightColor name1 name2 record'},
+            {path:'contestant2.ref', select: 'name darkColor lightColor name1 name2 record'}];
+
+        m_Event.findById(eventId).select(select).sort(sort).populate(populate).exec(callback);
+    }
+
+    function getBetTypes_todo(event, callback){
+        getBetTypes(event, results, callback);
+    }
+
+    function getBetDurations_todo(event, callback){
+        getBetDurations(event, results, callback);
+    }
+
+    function processEventBets_todo(event, callback){
+        processEventBets([event], processedEvents, callback);
+    }
+
+    todo.push(getEvent);
+    todo.push(getBetTypes_todo);
+    todo.push(getBetDurations_todo);
+    todo.push(processEventBets_todo);
+
+    function cb(err){
+        results.event = processedEvents[0];
+        callback(err, results);
+    }
+
+    async.waterfall(todo, cb);
 
 }
 
@@ -317,5 +372,6 @@ function getMenu(callback){
 
 }
 
-exports.getPicks    = getPicks;
-exports.getMenu     = getMenu;
+exports.getPicks         = getPicks;
+exports.getEventBets     = getEventBets;
+exports.getMenu          = getMenu;

@@ -1,0 +1,241 @@
+<div id="tracker">
+    <div id="tracker-overlay" data-ng-if="!picks && username === authentication.user.username">
+        Start Making Picks to Begin Your Tracking<br/>
+        <a class="btn btn-medium" ui-sref="makePicks">Make Picks</a>
+    </div>
+    <tabset class="sub-tabs sub-tabs-4">
+    <tab active="trackerTabs[0].active" heading="OVERVIEW">
+        <div google-chart chart="profitAreaChart" data-ng-if="trackerTabs[0].active" class="tracker-chart" id="profit-overview-line-chart"></div>
+        <div class="text-center">
+            <div class="btn-group overview-btn-group">
+                <label class="btn btn-default" data-ng-model="overviewFilter" data-ng-click="updateOverview('Day'); updateProfitAreaChart('Day');" btn-radio="'Day'">Day</label>
+                <label class="btn btn-default" data-ng-model="overviewFilter" data-ng-click="updateOverview('Week'); updateProfitAreaChart('Week');" btn-radio="'Week'">Week</label>
+                <label class="btn btn-default" data-ng-model="overviewFilter" data-ng-click="updateOverview('Month'); updateProfitAreaChart('Month');" btn-radio="'Month'">Month</label>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-center">
+                <thead>
+                <th class="border-right">Date</th>
+                <th>Win</th>
+                <th>Loss</th>
+                <th>Push</th>
+                <th>Total</th>
+                <th class="border-right">Wagered</th>
+                <th>Avg. Odds</th>
+                <th>Win %</th>
+                <th>ROI</th>
+                <th>Profit</th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="stats in overviewStats">
+                    <td class="border-right" data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.category|date:'mediumDate'}}</td>
+                    <td>{{stats.win}}</td>
+                    <td>{{stats.loss}}</td>
+                    <td>{{stats.push}}</td>
+                    <td>{{stats.total}}</td>
+                    <td class="border-right">{{stats.units}}</td>
+                    <td>{{stats.avgOdds|formatOdds}}</td>
+                    <td>{{stats.winPercentage.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.roi.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.profit.toFixed(2)|addPlus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div google-chart chart="betTypeColumnChart" data-ng-if="trackerTabs[0].active" style="width:100%; height:200px;"></div>
+                <overview-category-summary stats="betTypeStats" title="'Bet Type'"></overview-category-summary>
+            </div>
+            <div class="col-sm-4">
+                <div google-chart chart="sportColumnChart" data-ng-if="trackerTabs[0].active" style="width:100%; height:200px;"></div>
+                <overview-category-summary stats="sportStats" title="'Sport'"></overview-category-summary>
+            </div>
+            <div class="col-sm-4">
+                <div google-chart chart="teamColumnChart" data-ng-if="trackerTabs[0].active" style="width:100%; height:200px;"></div>
+                <overview-category-summary stats="allTeamStats" title="'Team'"></overview-category-summary>
+            </div>
+        </div>
+
+    </tab>
+    <tab active="trackerTabs[1].active" heading="BET TYPE">
+        <div class="row">
+            <div class="col-sm-8">
+                <tracker-line-chart data-ng-if="trackerTabs[1].active" picks="picks" stat-summary="betTypeStats" field="'betType'" include-zoom="true" title="'Bet Type Profit'"></tracker-line-chart>
+            </div>
+            <div class="col-sm-4">
+                <h5 class="text-center">Unit Distribution</h5>
+                <div data-ng-if="trackerTabs[1].active" google-chart chart="betTypeWageredPieChart" class="tracker-chart"></div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-center category-summary">
+                <thead>
+                <th class="border-right">Bet Type</th>
+                <th>Win</th>
+                <th>Loss</th>
+                <th>Push</th>
+                <th>Total</th>
+                <th class="border-right">Wagered</th>
+                <th>Avg. Odds</th>
+                <th>Win %</th>
+                <th>ROI</th>
+                <th>Profit</th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="stats in betTypeStats|orderBy:'profit':true">
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}" class="border-right text-capitalize">
+                        <span style="border-left:8px solid {{stats.color}}">
+                            {{stats.category}}
+                        </span>
+                    </td>
+                    <td>{{stats.win}}</td>
+                    <td>{{stats.loss}}</td>
+                    <td>{{stats.push}}</td>
+                    <td>{{stats.total}}</td>
+                    <td class="border-right">{{stats.units}}</td>
+                    <td>{{stats.avgOdds|formatOdds}}</td>
+                    <td>{{stats.winPercentage.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.roi.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.profit.toFixed(2)|addPlus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </tab>
+    <tab active="trackerTabs[2].active" heading="SPORT">
+        <div class="row">
+            <div class="col-sm-8">
+                <tracker-line-chart data-ng-if="trackerTabs[2].active" picks="picks" stat-summary="sportStats" field="'event.sport'" include-zoom="true" title="'Sport Profit'"></tracker-line-chart>
+            </div>
+            <div class="col-sm-4">
+                <h5 class="text-center">Unit Distribution</h5>
+                <div data-ng-if="trackerTabs[2].active" google-chart chart="sportWageredPieChart" class="tracker-chart"></div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table text-center category-summary" id="Sport">
+                <thead>
+                <th class="border-right">Sport</th>
+                <th>Win</th>
+                <th>Loss</th>
+                <th>Push</th>
+                <th>Total</th>
+                <th class="border-right">Wagered</th>
+                <th>Avg. Odds</th>
+                <th>Win %</th>
+                <th>ROI</th>
+                <th>Profit</th>
+                </thead>
+                <tbody>
+                <tr class="clickable"  data-ng-repeat="stats in sportStats|orderBy:'profit':true" data-ng-click="updateLeagueStats(stats.category)" data-ng-class="{active: selectedSport === stats.category}">
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}" class="border-right text-capitalize">
+                            <span style="border-left:8px solid {{stats.color}}">
+                                {{stats.category}}
+                            </span>
+                    </td>
+                    <td>{{stats.win}}</td>
+                    <td>{{stats.loss}}</td>
+                    <td>{{stats.push}}</td>
+                    <td>{{stats.total}}</td>
+                    <td class="border-right">{{stats.units}}</td>
+                    <td>{{stats.avgOdds|formatOdds}}</td>
+                    <td>{{stats.winPercentage.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.roi.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.profit.toFixed(2)|addPlus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <tracker-line-chart data-ng-if="showLeagueChart" picks="picks" stat-summary="leagueStats" field="'event.league'" include-zoom="true" title="'League Profit'"></tracker-line-chart>
+            </div>
+            <div class="col-sm-4">
+                <h5  data-ng-if="showLeagueChart" class="text-center">Unit Distribution</h5>
+                <div data-ng-if="trackerTabs[2].active && leagueWageredPieChart" google-chart chart="leagueWageredPieChart" class="tracker-chart"></div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table text-center category-summary" id="League">
+                <thead>
+                <th class="border-right">League</th>
+                <th>Win</th>
+                <th>Loss</th>
+                <th>Push</th>
+                <th>Total</th>
+                <th class="border-right">Wagered</th>
+                <th>Avg. Odds</th>
+                <th>Win %</th>
+                <th>ROI</th>
+                <th>Profit</th>
+                </thead>
+                <tbody>
+                <tr data-ng-if="leagueStats.length === 0 || !leagueStats">
+                    <td colspan="10"><h4 class="text-center">Select a Sport</h4></td>
+                </tr>
+                <tr data-ng-if="leagueStats.length > 0" class="clickable"  data-ng-repeat="stats in leagueStats|orderBy:'profit':true" data-ng-click="updateTeamStats(stats.category)"  data-ng-class="{active: selectedLeague === stats.category}">
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}" class="border-right text-capitalize">
+                               <span data-ng-if="showLeagueChart" style="border-left:8px solid {{stats.color}}">
+                                    {{stats.category}}
+                               </span>
+                               <span data-ng-if="!showLeagueChart">
+                                    {{stats.category}}
+                               </span>
+                    </td>
+                    <td>{{stats.win}}</td>
+                    <td>{{stats.loss}}</td>
+                    <td>{{stats.push}}</td>
+                    <td>{{stats.total}}</td>
+                    <td class="border-right">{{stats.units}}</td>
+                    <td>{{stats.avgOdds|formatOdds}}</td>
+                    <td>{{stats.winPercentage.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.roi.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.profit.toFixed(2)|addPlus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table text-center" id="Team">
+                <thead>
+                <th class="border-right">Team</th>
+                <th>Win</th>
+                <th>Loss</th>
+                <th>Push</th>
+                <th>Total</th>
+                <th class="border-right">Wagered</th>
+                <th>Avg. Odds</th>
+                <th>Win %</th>
+                <th>ROI</th>
+                <th>Profit</th>
+                </thead>
+                <tbody>
+                <tr data-ng-if="teamStats.length === 0 || !teamStats">
+                    <td colspan="10"><h4 class="text-center">Select a League</h4></td>
+                </tr>
+                <tr  data-ng-if="teamStats.length > 0" data-ng-repeat="stats in teamStats|orderBy:'profit':true">
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}" class="border-right text-capitalize">{{stats.category}}</td>
+                    <td>{{stats.win}}</td>
+                    <td>{{stats.loss}}</td>
+                    <td>{{stats.push}}</td>
+                    <td>{{stats.total}}</td>
+                    <td class="border-right">{{stats.units}}</td>
+                    <td>{{stats.avgOdds|formatOdds}}</td>
+                    <td>{{stats.winPercentage.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.roi.toFixed(2)}}%</td>
+                    <td data-ng-class="{'win-color': stats.profit > 0, 'loss-color': stats.profit < 0, 'push-color': stats.profit === 0}">{{stats.profit.toFixed(2)|addPlus}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </tab>
+    <tab active="trackerTabs[3].active" heading="HISTORY">
+        <tracker-history picks="picks" username="username" data-ng-if="picks"></tracker-history>
+    </tab>
+    </tabset>
+</div>

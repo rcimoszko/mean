@@ -1,0 +1,277 @@
+#tracker{
+  .statistic-value-container{
+    h2{
+      margin: 0;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    h3{
+      margin: 0;
+      font-size: 12px;
+      color: #787d88;
+      text-transform: uppercase;
+    }
+  }
+
+
+
+  .winner{
+    font-weight:bold;
+  }
+  .chart{
+    width:200px;
+    height:200px;
+  }
+  table{
+    border:1px solid #ddd;
+    font-size:12px;
+    margin-bottom:10px;
+    thead{
+      background-color: #f9f9f9;
+      text-transform:uppercase;
+      font-size:11px;
+      th{
+        text-align:center;
+        font-weight:600;
+        border-bottom:0;
+        &:first-of-type{
+          text-align:left;
+        }
+        &.text-left{
+          text-align:left;
+        }
+      }
+    }
+    tbody{
+      tr{
+        &.clickable{
+          &:hover{
+            background-color:lighten(@color-bg, 2%);
+            cursor:pointer;
+          }
+
+        }
+        td{
+          vertical-align:middle;
+          &:first-of-type{
+            text-align:left;
+          }
+        }
+      }
+
+    }
+    .border-right{
+      border-right:1px dotted @color-gray-divider;
+    }
+  }
+
+  table#history{
+    td{
+      padding:8px;
+    }
+  }
+
+  .tab-content{
+    padding:20px;
+  }
+  .form-control{
+    font-size:12px;
+    height:28px;
+  }
+
+
+  .table-header{
+    background-color:#f9f9f9;
+    border:1px solid @color-gray-divider;
+    border-bottom:0;
+    padding:10px;
+  }
+
+  .history-overview-container{
+    background-color:white;
+    margin-bottom:10px;
+    padding:20px;
+    border:1px solid #f2f2f2;
+
+    .statistic-icon{
+      background-color:@color-orange;
+    }
+  }
+
+
+  .statistic{
+    margin-bottom:20px;
+    &:nth-of-type(5), &:nth-of-type(6){
+      margin-bottom:0
+    }
+    float:left;
+  }
+
+  .statistic-icon{
+    background-color:@color-blue-2;
+    width:35px;
+    height:35px;
+    border-radius:100%;
+    text-align:center;
+    line-height:37px;
+    float:left;
+    margin-right:20px;
+    @media (min-width: @screen-md-min) {
+      margin-right:10px;
+    }
+    @media (min-width: @screen-xl-min) {
+      margin-right:20px;
+    }
+    i{
+      color:white;
+      font-size:18px;
+    }
+  }
+
+  #tracker-overlay{
+    position:absolute;
+    top:97px;
+    bottom:26px;
+    left:21px;
+    right:21px;
+    z-index:200;
+    background-color:rgba(0, 0, 0, 0.5);
+    padding-top:140px;
+    color:white;
+    font-size:24px;
+    border-radius:2px;
+    text-align:center;
+  }
+
+  .sub-tabs-4{
+    ul.nav-tabs{
+      margin:5px 15px;
+      li{
+        width: 50%;
+        &:nth-of-type(1), &:nth-of-type(2){
+          padding-bottom:0;
+        }
+        @media (min-width: @screen-xs-min){
+          width: 25%;
+        }
+      }
+    }
+  }
+
+  .sub-tabs{
+    .nav-tabs{
+      li{
+
+        a{
+          font-size:12px;
+          padding:5px;
+        }
+      }
+    }
+
+  }
+
+  table#history{
+    font-size:12px;
+    thead{
+      th{
+        text-align:center;
+      }
+    }
+    td{
+      padding:5px 2px;
+      vertical-align:middle;
+    }
+  }
+
+  .win{
+    color:@color-green-light;
+  }
+  .loss{
+    color:@color-red;
+  }
+  .push{
+    color:@color-blue;
+  }
+  .cancelled{
+    color:gray;
+  }
+  .pending{
+    color:@color-orange;
+  }
+
+  table.category-overview{
+    td{
+      padding:8px 0;
+      &:first-of-type{
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+    span{
+      padding:8px 0 8px 4px;
+    }
+  }
+
+  table.category-summary{
+    td:first-of-type{
+      padding:8px 0;
+      &:first-of-type{
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+    span{
+      padding:8px 0 8px 4px;
+    }
+  }
+
+  .tracker-chart{
+    width:100%;
+  }
+
+  .overview-btn-group{
+    margin:10px auto 20px auto;
+  }
+
+
+  #tracker-history{
+    #filter-container{
+      .form-control{
+        margin-bottom:10px;
+      }
+    }
+    .history-overview-container{
+      .statistic-icon{
+        display:none;
+
+        @media(min-width:@screen-xs-min){
+          display:block;
+        }
+      }
+
+
+      .statistic-value-container{
+        margin-bottom:15px;
+        text-align:center;
+        @media(min-width:@screen-xs-min){
+          text-align:left;
+        }
+        @media(min-width:@screen-lg-min){
+          margin-bottom:0;
+        }
+      }
+      .col-xs-6{
+        &:nth-of-type(5), &:nth-of-type(6){
+          .statistic-value-container {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tracker-modal{
+  width:90%;
+}

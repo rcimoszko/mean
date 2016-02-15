@@ -4,6 +4,8 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
     PickBl = require('./pick.server.bl'),
+    EventBl = require('./event.server.bl'),
+    PickListBl = require('./pick.list.server.bl'),
     DateQueryBl = require('./date.query.server.bl'),
     User = mongoose.model('User');
 
@@ -107,7 +109,6 @@ function getProfitChart(user, dateId, callback) {
     async.waterfall(profileChartToDo, cb);
 }
 
-
 function getPerformance(categoryField, categoryModel, user, callback){
     var todo = [];
     var match = {$match: {'user.ref': mongoose.Types.ObjectId(user._id)}};
@@ -180,7 +181,6 @@ function getTopPerformances(user, callback){
 
 }
 
-
 function get(user, callback){
     var todo = [];
     var profile = {};
@@ -231,6 +231,46 @@ function get(user, callback){
         getTopPerformances(user, cb);
     }
 
+    function getProfilePicks_todo(callback){
+        function cb(err, pendingPicks){
+            profile.pendingPicks = pendingPicks;
+            callback(err);
+        }
+        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', user.premium, cb);
+    }
+
+    function getTrackerPicks_todo(callback){
+        var todo = [];
+
+        function getPicks(callback){
+            PickBl.getByQuery({'user.ref': user._id}, callback);
+        }
+
+        function populatePicks(picks, callback){
+            var populate = [{path:'contestant.ref', model: 'Contestant'}];
+            PickBl.populateBy(picks, populate, callback);
+        }
+
+        function populateEvents(picks, callback){
+            var populate = [{path:'event.league.ref', model: 'League'}];
+            EventBl.populateBy(picks, populate, callback);
+        }
+
+        todo.push(getPicks);
+        todo.push(populatePicks);
+        todo.push(populateEvents);
+
+        function cb(err, picks){
+            profile.trackerPicks = picks;
+            callback(err);
+        }
+
+        async.waterfall(todo, cb);
+
+
+
+    }
+
     function cb(err){
         callback(err, profile);
     }
@@ -240,6 +280,8 @@ function get(user, callback){
     todo.push(getlast30UserStats_todo);
     todo.push(getProfitChart_todo);
     todo.push(getTopPerformances_todo);
+    todo.push(getProfilePicks_todo);
+    todo.push(getTrackerPicks_todo);
 
     async.parallel(todo, cb);
 

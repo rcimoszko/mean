@@ -8,6 +8,16 @@
   }
   .event-info-container{
     padding:20px 0;
+    &.winner-1{
+      .score-1{
+        font-weight:bold;
+      }
+    }
+    &.winner-2{
+      .score-2{
+        font-weight:bold;
+      }
+    }
     .contestant-container{
       text-transform:uppercase;
       width:39%;
@@ -16,6 +26,10 @@
       vertical-align:middle;
       font-size:18px;
       color:@color-text-dark;
+      .contestant-name{
+        height:48px;
+        overflow:hidden;
+      }
     }
     .event-details-container{
       vertical-align:middle;
