@@ -2,24 +2,24 @@
 
 var path = require('path'),
     mongoose = require('mongoose'),
-    FollowBl = require(path.resolve('./modules/fu/server/bl/follow.server.bl')),
+    UserBl = require('../bl/user.server.bl'),
     errorHandler = require(path.resolve('./modules/fu/server/sys/error.server.sys'));
 
-function follow(req, res) {
-    function cb(err, follow){
+function get(req, res) {
+    function cb(err, messages){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(follow);
+            res.json(messages);
         }
     }
-    var followUser = req.profile;
+
     var user = req.user;
 
-    FollowBl.follow(user, followUser, cb);
+    UserBl.getInfo(user, cb);
 }
 
 
-exports.follow     = follow;
+exports.get     = get;

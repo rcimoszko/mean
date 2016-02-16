@@ -98,11 +98,17 @@ module.exports = function (app, db) {
   });
 
   // Add an event listener to the 'connection' event
+    config.files.server.sockets.forEach(function (socketConfiguration) {
+        require(path.resolve(socketConfiguration))(io);
+    });
+
+  /*
   io.on('connection', function (socket) {
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });
   });
+  */
 
   return server;
 };

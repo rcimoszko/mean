@@ -5,6 +5,7 @@ angular.module('fu').directive('avatar', function () {
         restrict: 'E',
         scope: {
             url: '=',
+            username: '=',
             size: '='
         },
         templateUrl: 'modules/fu/client/templates/users/avatar.client.template.html',

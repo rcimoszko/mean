@@ -5,13 +5,13 @@ var mongoose = require('mongoose'),
     errorHandler = require('../sys/error.server.sys');
 
 function subscribe(req, res) {
-    function cb(err, subscription){
+    function cb(err, channel){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(subscription);
+            res.json(channel);
         }
     }
 

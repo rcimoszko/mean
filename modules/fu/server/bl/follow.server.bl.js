@@ -92,11 +92,20 @@ function follow(user, userFollow, callback){
             callback(err, follow);
         }
         updateFollowCount(user, userFollow, cb);
+    }
 
+    function processReturnData(follow, callback){
+        var json = {
+            _id: userFollow._id,
+            avatarUrl: userFollow.avatarUrl,
+            username: userFollow.username
+        };
+        callback(null, json);
     }
 
     todo.push(followUser);
     todo.push(updateCount);
+    todo.push(processReturnData);
 
     async.waterfall(todo, callback);
 

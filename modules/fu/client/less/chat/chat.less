@@ -1,0 +1,150 @@
+.chat {
+
+  .timestamp {
+    font-size: 10px;
+  }
+
+  .chat-preview {
+    width: 100%;
+    height:65px;
+    position:relative;
+    cursor:pointer;
+
+    &.ng-hide-remove {
+      -webkit-transition:all ease 0.3s;
+      -moz-transition:all ease 0.3s;
+      -o-transition:all ease 0.3s;
+      transition:all ease 0.3s;
+      display:block!important;
+    }
+
+    //Hide
+    &.ng-hide-remove {
+      opacity:0;
+    }
+
+    //Show
+    &.ng-hide-remove.ng-hide-remove-active,
+    &.ng-hide-add
+    {
+      opacity:1;
+    }
+
+
+    .chat-preview-container{
+      background-color:white;
+      padding:10px;
+      display:inline-block;
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:60px;
+      right:0;
+      border-radius:2px 0 0 2px;
+      .message-container {
+        display:inline-block;
+        width:100%;
+        text-overflow:ellipsis;
+        overflow: hidden;
+        white-space:nowrap;
+        .username {
+          color: @color-blue-2;
+        }
+      }
+    }
+
+
+    .btn-expand {
+      color: @color-orange;
+      text-align:center;
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      width:60px;
+      border-radius:0 2px 2px 0;
+      font-size:30px;
+      margin:10px 0;
+      border-right:1px solid @color-gray-divider;
+    }
+  }
+  .chat-full {
+    height: 300px;
+    position: relative;
+    &.ng-hide-remove {
+      -webkit-transition:all ease 0.3s;
+      -moz-transition:all ease 0.3s;
+      -o-transition:all ease 0.3s;
+      transition:all ease 0.3s;
+      display:block!important;
+    }
+
+    //Hide
+    &.ng-hide-remove {
+      opacity:0;
+    }
+
+    //Show
+    &.ng-hide-remove.ng-hide-remove-active,
+    &.ng-hide-add
+    {
+      opacity:1;
+    }
+
+
+    .btn-close {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      border:0;
+    }
+    .message-list-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 30px;
+      background-color: white;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      ul.message-list {
+        padding:0 10px;
+        list-style-type: none;
+        .timestamp {
+          color: @color-text-light;
+        }
+        .username {
+          color: @color-blue-2;
+        }
+        .message {
+
+        }
+      }
+    }
+
+    .message-form {
+      .message-input-container {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 100px;
+        .message-input {
+          width: 100%;
+          height: 34px;
+          border:0;
+          border-top:1px solid @color-gray-divider;
+        }
+      }
+      .message-submit {
+        position: absolute;
+        right: 33px;
+        bottom: 0;
+        border:0;
+      }
+    }
+    .btn {
+      border-radius: 0;
+    }
+  }
+}

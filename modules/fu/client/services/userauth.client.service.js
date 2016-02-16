@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth',
-    function(Authentication, ApiAuth) {
+angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
+    function(Authentication, ApiAuth, User) {
 
         var signup = function(form, callback){
 
             function cbSuccess(response){
                 Authentication.user = response;
+                User.info.inialized = true;
                 callback(null);
             }
 
@@ -21,6 +22,7 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth',
 
             function cbSuccess(response){
                 Authentication.user = response;
+                User.initialize();
                 callback(null);
             }
 

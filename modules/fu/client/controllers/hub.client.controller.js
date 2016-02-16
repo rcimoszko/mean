@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews',
-    function ($scope, Authentication, Hub, CommentsPreviews) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub) {
         $scope.authentication = Authentication;
         $scope.loading = true;
+        $scope.socket = SocketHub;
+        if($scope.socket){
+            $scope.socket.connect();
+        }
+
+
 
         /**
          * General Hub Info
@@ -110,5 +116,8 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             CommentsPreviews.getPreviews(query, cb);
         };
         $scope.getTalk();
+
+
+
     }
 ]);

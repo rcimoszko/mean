@@ -26,7 +26,8 @@ module.exports = {
         'public/lib/textAngular/dist/textAngular-rangy.min.js',
         'public/lib/textAngular/dist/textAngular-sanitize.min.js',
         'public/lib/textAngular/dist/textAngular.min.js',
-        'public/lib/angular-filter/dist/angular-filter.min.js'
+        'public/lib/angular-filter/dist/angular-filter.min.js',
+        'public/lib/ng-scroll-glue/dist/ng-scroll-glue.min.js'
         //'public/lib/ngSticky/dist/sticky.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

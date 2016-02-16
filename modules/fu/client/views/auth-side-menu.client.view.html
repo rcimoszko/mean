@@ -16,6 +16,7 @@
         </div>
     </div>
     <div class="stats-container">
+        <!--
         <div class="profit">
             <div class="num">
                 +150
@@ -24,6 +25,7 @@
                 profit
             </div>
         </div>
+        -->
         <div class="units">
             <div class="num">
                 {{authentication.user.units}}
@@ -34,7 +36,7 @@
         </div>
         <div class="active-picks">
             <div class="num">
-                10 / 25
+                {{user.info.stats.activePicks}} / {{user.info.stats.activeUnits}}
             </div>
             <div class="text">
                 active picks / units
@@ -48,8 +50,9 @@
                 <a>CHANNELS</a>
                 <a href class="pull-right add-btn" data-ng-click="showChannelSelect()">+</a>
                 <ul class="channel-list">
-                    <li><a ui-sref="channel.main.home({channelSlug:'nhl'})">NHL</a></li>
-                    <li><a ui-sref="channel.main.home({channelSlug:'nba'})">NBA</a></li>
+                    <li data-ng-repeat="channel in user.info.channels">
+                        <a ui-sref="channel.main.home({channelSlug: channel.slug})">{{channel.name}}</a>
+                    </li>
                 </ul>
             </li>
             <li><a ui-sref="profile({username:authentication.user.username})">PROFILE</a></li>

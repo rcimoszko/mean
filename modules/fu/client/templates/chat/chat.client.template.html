@@ -1,0 +1,31 @@
+<div class="chat">
+    <div class="chat-preview" data-ng-show="!showFullChat" data-ng-click="showFullChat = !showFullChat">
+        <div class="btn-expand"><i class="fa fa-comment-o"></i></div>
+
+        <div class="chat-preview-container">
+            <div class="message-container">
+                <span class="username">{{messages[messages.length - 2].user.name}} &nbsp;</span>{{messages[messages.length - 2].message | limitTo:100}}
+            </div>
+            <div class="message-container">
+                <span class="username">{{messages[messages.length - 1].user.name}} &nbsp;</span>{{messages[messages.length - 1].message | limitTo:100}}
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-full" data-ng-show="showFullChat">
+        <button class="btn-close btn btn-default" data-ng-click="showFullChat = !showFullChat"><i class="fa fa-times"></i></button>
+
+        <div class="message-list-container" scroll-glue>
+            <ul class="message-list">
+                <li data-ng-repeat="message in messages"><a ui-sref="profile({username:message.user.name})"><span class="username">{{message.user.name}}:</span></a> <span class="message">{{message.message}}</span> <span class="timestamp" am-time-ago="message.timestamp"></span></li>
+            </ul>
+        </div>
+
+        <form class="message-form" ng-submit="sendMessage()">
+            <div class="message-input-container">
+                <input class="message-input" type="text" maxlength="250" data-ng-model="text" name="text" />
+            </div>
+            <input type="submit" class="message-submit btn btn-default" value="Submit"/>
+        </form>
+    </div>
+</div>

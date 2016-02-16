@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('fu').controller('MainController', ['$scope', 'Authentication',
-    function ($scope, Authentication) {
+angular.module('fu').controller('MainController', ['$scope', 'Authentication', 'User',
+    function ($scope, Authentication, User) {
         $scope.authentication = Authentication;
+        if($scope.authentication.user && !User.info.initialized) User.initialize();
     }
 ]);

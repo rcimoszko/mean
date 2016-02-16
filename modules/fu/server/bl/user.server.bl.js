@@ -6,6 +6,7 @@ var _ = require('lodash'),
     PickBl = require('./pick.server.bl'),
     PickListBl = require('./pick.list.server.bl'),
     FollowBl = require('./follow.server.bl'),
+    SubscriptionBl = require('./subscription.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
     User = mongoose.model('User');
 
@@ -18,7 +19,6 @@ function getByUsername(username, callback){
 
     User.findOne({'username':{ $regex: new RegExp(username, 'i')}}).exec(cb);
 }
-
 
 function getFollowing(user, query, callback){
     var todo = [];
@@ -121,8 +121,6 @@ function getPendingPicks(user, callback){
     var query = {'user.ref': user._id, result: 'Pending'};
     PickBl.getPending(query, callback);
 }
-
-
 
 function getCompletedPicks(user, callback){
     var todo = [];
@@ -262,6 +260,44 @@ function getTracker(user, callback){
     callback(null);
 }
 
+function getSubscriptions(user, callback){
+
+}
+
+function getInfo(user, callback){
+
+    function getPendingPicks_todo(callback){
+        getPendingPicks(user, callback);
+    }
+
+    function getFollowing_todo(callback){
+        FollowBl.getFollowingList(user._id, callback);
+    }
+
+    function getUserStats(callback){
+        //profit, active picks count, units wagered count
+        callback(null);
+    }
+
+    function getSubscriptions_todo(callback){
+        function cb(err, subscriptions){
+            var channels = _.map(subscriptions, 'channel.ref');
+            callback(err, channels);
+        }
+
+        SubscriptionBl.getByUser(user, cb);
+    }
+
+    var todo = {
+        pendingPicks: getPendingPicks_todo,
+        stats: getUserStats,
+        following: getFollowing_todo,
+        channels: getSubscriptions_todo
+    };
+
+    async.parallel(todo, callback);
+}
+
 
 exports.getByUsername       = getByUsername;
 exports.getFollowing        = getFollowing;
@@ -271,3 +307,4 @@ exports.getNotifications    = getNotifications;
 exports.getPendingPicks     = getPendingPicks;
 exports.getCompletedPicks   = getCompletedPicks;
 exports.getTracker          = getTracker;
+exports.getInfo             = getInfo;

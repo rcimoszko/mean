@@ -1,34 +1,40 @@
 'use strict';
 
-module.exports = function (io, socket) {
+var mongoose = require('mongoose'),
+    ChatBl = require('../bl/chat.server.bl');
+
+module.exports = function (io) {
 
     var nsp = io.of('/channel');
-    /*
-    io.emit('chatMessage', {
-        type: 'status',
-        text: 'Is now connected',
-        created: Date.now(),
-        profileImageURL: socket.request.user.profileImageURL,
-        username: socket.request.user.username
-    });
 
-    socket.on('chatMessage', function (message) {
-        message.type = 'message';
-        message.created = Date.now();
-        message.profileImageURL = socket.request.user.profileImageURL;
-        message.username = socket.request.user.username;
+    nsp.on('connection', function(socket) {
 
-        // Emit the 'chatMessage' event
-        io.emit('chatMessage', message);
-    });
+        socket.on('join channel', function(channelId){
+            socket.join(channelId);
 
-    socket.on('disconnect', function () {
-        io.emit('chatMessage', {
-            type: 'status',
-            text: 'disconnected',
-            created: Date.now(),
-            username: socket.request.user.username
+            function cb(err, messages){
+                messages.reverse();
+                nsp.to(channelId).emit('new message', messages);
+            }
+
+            ChatBl.getChannelChat(channelId, cb);
+        });
+
+
+
+        socket.on('new message', function(chat){
+            function cb(err, chat){
+                nsp.to(chat.channel.ref).emit('new message', chat);
+            }
+
+            ChatBl.create(chat, cb);
+        });
+
+        socket.on('disconnect', function(){
+
         });
     });
-    */
 };
+
+
+

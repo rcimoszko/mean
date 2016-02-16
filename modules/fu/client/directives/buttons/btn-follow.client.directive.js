@@ -7,9 +7,29 @@ angular.module('fu').directive('btnFollow', function () {
             userId:'='
         },
         templateUrl: 'modules/fu/client/templates/buttons/btn-follow.client.template.html',
-        controller: ['$scope', 'Users', function($scope, Users){
-            $scope.toggleFollow = function(){
+        controller: ['$scope', 'User', '$filter', 'Follow', function($scope, User, $filter, Follow){
+            var following = User.info.following;
 
+            $scope.isFollowing = function(){
+                var found = $filter('filter')(following, {_id: $scope.userId});
+                return found.length > 0;
+            };
+
+
+            $scope.imgUrl = function(){
+                if($scope.isFollowing()){
+                    return 'modules/fu/client/img/buttons/follow/following.png';
+                } else {
+                    return 'modules/fu/client/img/buttons/follow/follow.png';
+                }
+            };
+
+            $scope.toggleFollow = function(){
+                if($scope.isFollowing()){
+                    Follow.unfollow($scope.userId);
+                } else {
+                    Follow.follow($scope.userId);
+                }
             };
         }]
     };

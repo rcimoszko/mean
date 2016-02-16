@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', 'ApiChannelsEvents',
-    function(ApiChannels, ApiChannelsContent, ApiChannelsEvents) {
+angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', 'ApiChannelsEvents', 'User', '$filter',
+    function(ApiChannels, ApiChannelsContent, ApiChannelsEvents, User, $filter) {
 
         var create = function(form, callback){
 
@@ -80,6 +80,7 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', '
             ApiChannelsContent.get({slug: channelSlug, date: date}, cbSuccess, cbError);
 
         };
+
         var getEvents = function(channelSlug, date, callback){
             function cbSuccess(channelContent){
                 callback(null, channelContent);
@@ -92,6 +93,32 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', '
 
         };
 
+        var subscribe = function(channelId){
+            function cbSuccess(channel){
+                console.log(channel);
+                User.info.channels.push(channel);
+            }
+
+            function cbError(response){
+                console.log(response);
+            }
+            ApiChannels.subscribe({_id:channelId}, cbSuccess, cbError);
+        };
+
+        var unsubscribe = function(channelId){
+            function cbSuccess(channel){
+                var found = $filter('filter')(User.info.channels, {_id: channelId});
+                if(found.length){
+                    User.info.channels.splice(User.info.channels.indexOf(found[0]), 1);
+                }
+            }
+
+            function cbError(response){
+                console.log(response);
+            }
+            ApiChannels.unsubscribe({_id:channelId}, cbSuccess, cbError);
+
+        };
 
 
         return {
@@ -102,7 +129,10 @@ angular.module('fu').factory('Channels', ['ApiChannels', 'ApiChannelsContent', '
             delete: del,
 
             getContent: getContent,
-            getEvents: getEvents
+            getEvents: getEvents,
+
+            subscribe: subscribe,
+            unsubscribe: unsubscribe
         };
     }
 ]);

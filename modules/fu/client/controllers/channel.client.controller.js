@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels',
-    function ($scope, $state, $stateParams, $location, Authentication, Channels) {
+angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels', 'SocketChannel',
+    function ($scope, $state, $stateParams, $location, Authentication, Channels, SocketChannel) {
 
         $scope.date = $stateParams.date;
         $scope.channelSlug = $stateParams.channelSlug;
@@ -15,8 +15,6 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
             $scope.tomorrow = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + 1);
         }
 
-        console.log('refresh controller');
-
         if($scope.date){
             if(!moment($scope.date, "YYYY-MM-DD", true).isValid()) $state.go('channel', {channelSlug:$scope.channelSlug });
             var date = $scope.date.split('-');
@@ -24,11 +22,21 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
             setDate(date);
         }
 
+        function setupSocket(){
+            $scope.socket = SocketChannel;
+            if($scope.socket){
+                $scope.socket.connect();
+            }
+            $scope.socket.emit('join channel', $scope.channel._id);
+        }
+
         function cb(err, channelContent){
             console.log(channelContent);
             $scope.loading = false;
             $scope.channelContent = channelContent;
             $scope.channel = channelContent.channel;
+            setupSocket();
+
             if(!$scope.date){
                 switch($scope.channel.dateGroup){
                     case 'upcoming':

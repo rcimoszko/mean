@@ -9,10 +9,10 @@
         <td class="username"><avatar size="'xs'" url="user.user.avatarUrl"></avatar>
             <a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a>
         </td>
-        <td class="value">{{user.profit|formatProfit}}</td>
+        <td class="value text-center">{{user.profit|formatProfit}}</td>
 
         <td class="actions">
-            <btn-follow user-id="user.user.ref._id"></btn-follow>
+            <btn-follow user-id="user.user._id"></btn-follow>
         </td>
     </tr>
     </tbody>

@@ -1239,7 +1239,7 @@ input.toggle:checked + label:after {
 #auth-side-menu .stats-container .units,
 #auth-side-menu .stats-container .profit {
   float: left;
-  width: 50%;
+  width: 100%;
   text-align: center;
 }
 #auth-side-menu .stats-container .active-picks {
@@ -3772,11 +3772,17 @@ input.toggle:checked + label:after {
   width: 65px;
   text-align: center;
   overflow: hidden;
+  position: relative;
 }
 .pick-list .pick .avatar-container .username {
   margin-top: 5px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.pick-list .pick .avatar-container .btn-follow {
+  position: absolute;
+  right: 0;
+  top: 23px;
 }
 .pick-list .pick:last-of-type .pick-container {
   border-bottom: 0;
@@ -3908,4 +3914,127 @@ input.toggle:checked + label:after {
 .event-pick-list .event-footer .fa {
   color: #e9893a;
   margin-right: 5px;
+}
+.chat .timestamp {
+  font-size: 10px;
+}
+.chat .chat-preview {
+  width: 100%;
+  height: 65px;
+  position: relative;
+  cursor: pointer;
+}
+.chat .chat-preview.ng-hide-remove {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  display: block!important;
+}
+.chat .chat-preview.ng-hide-remove {
+  opacity: 0;
+}
+.chat .chat-preview.ng-hide-remove.ng-hide-remove-active,
+.chat .chat-preview.ng-hide-add {
+  opacity: 1;
+}
+.chat .chat-preview .chat-preview-container {
+  background-color: white;
+  padding: 10px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 60px;
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+.chat .chat-preview .chat-preview-container .message-container {
+  display: inline-block;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.chat .chat-preview .chat-preview-container .message-container .username {
+  color: #21759b;
+}
+.chat .chat-preview .btn-expand {
+  color: #e9893a;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  border-radius: 0 2px 2px 0;
+  font-size: 30px;
+  margin: 10px 0;
+  border-right: 1px solid #eaeaea;
+}
+.chat .chat-full {
+  height: 300px;
+  position: relative;
+}
+.chat .chat-full.ng-hide-remove {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  display: block!important;
+}
+.chat .chat-full.ng-hide-remove {
+  opacity: 0;
+}
+.chat .chat-full.ng-hide-remove.ng-hide-remove-active,
+.chat .chat-full.ng-hide-add {
+  opacity: 1;
+}
+.chat .chat-full .btn-close {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  border: 0;
+}
+.chat .chat-full .message-list-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  background-color: white;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.chat .chat-full .message-list-container ul.message-list {
+  padding: 0 10px;
+  list-style-type: none;
+}
+.chat .chat-full .message-list-container ul.message-list .timestamp {
+  color: #aaabac;
+}
+.chat .chat-full .message-list-container ul.message-list .username {
+  color: #21759b;
+}
+.chat .chat-full .message-form .message-input-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 100px;
+}
+.chat .chat-full .message-form .message-input-container .message-input {
+  width: 100%;
+  height: 34px;
+  border: 0;
+  border-top: 1px solid #eaeaea;
+}
+.chat .chat-full .message-form .message-submit {
+  position: absolute;
+  right: 33px;
+  bottom: 0;
+  border: 0;
+}
+.chat .chat-full .btn {
+  border-radius: 0;
 }

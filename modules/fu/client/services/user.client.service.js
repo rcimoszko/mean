@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -41,14 +41,52 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
 
         };
 
+        function updateActiveUnits(){
+            var unitCount = 0;
+            for(var i=0; i<info.picks.pending.length; i++){
+                unitCount =  unitCount + info.picks.pending[i].units;
+            }
+            info.stats.activeUnits = unitCount;
+        }
+
+        function updateActivePicks(){
+            info.stats.activePicks = info.picks.pending.length;
+        }
+
+        var initialize = function(){
+            function cbSuccess(userInfo){
+                info.initialized = true;
+                info.following = userInfo.following;
+                info.picks.pending = userInfo.pendingPicks;
+                info.channels = userInfo.channels;
+                updateActiveUnits();
+                updateActivePicks();
+
+            }
+
+            function cbError(response){
+
+            }
+
+            ApiUserInfo.get({}, cbSuccess, cbError);
+        };
+
+        var info = {initialized: false,
+                    following: [],
+                    channels: [],
+                    picks: {pending:[]},
+                    stats: {activeUnits:null, activePicks:null}};
 
         var picks = {pending:[]};
 
         return {
             picks: picks,
+            info: info,
+
             getPendingPicks: getPendingPicks,
             getCompletedPicks: getCompletedPicks,
-            getFollowing: getFollowing
+            getFollowing: getFollowing,
+            initialize: initialize
         };
 
     }

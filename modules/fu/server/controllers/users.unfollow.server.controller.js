@@ -15,7 +15,7 @@ function unfollow(req, res) {
             res.json(follow);
         }
     }
-    var followUser = req.userProfile;
+    var followUser = req.profile;
     var user = req.user;
 
     FollowBl.unfollow(user, followUser, cb);

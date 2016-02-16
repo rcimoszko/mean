@@ -5,13 +5,13 @@ var mongoose = require('mongoose'),
     errorHandler = require('../sys/error.server.sys');
 
 function unsubscribe(req, res) {
-    function cb(err){
+    function cb(err, channel){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.status(200).send({ message: 'unsubscribed' });
+            res.json(channel);
         }
     }
 
