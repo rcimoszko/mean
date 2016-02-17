@@ -4,7 +4,6 @@ angular.module('fu').controller('AuthSideMenuController', ['$scope', 'Modal', 'A
     function ($scope, Modal, Authentication, User) {
         $scope.authentication = Authentication;
         $scope.user = User;
-        console.log($scope.user);
 
         $scope.showMyPicks = function(){
             Modal.showModal(

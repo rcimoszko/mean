@@ -26,7 +26,8 @@ var ContestantSchema = new Schema({
     otherNames:     [String],
     record:         [{year:{type:Number}, wins:{type:Number}, losses:{type:Number}}],
     slug:           {type: String, trim: true},
-    scraperId:      {type: Number}
+    scraperId:      {type: Number},
+    logoUrl:        {type: String, trim: true}
 });
 
 ContestantSchema.pre('save', function(next) {

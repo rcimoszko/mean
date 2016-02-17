@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     async = require('async'),
     PickBl = require('./pick.server.bl'),
+    EventBl = require('./event.server.bl'),
     mongoose = require('mongoose');
 
 
@@ -38,9 +39,18 @@ function getPopularGames(sportId, leagueId, count, callback){
         PickBl.populateBy(events, populate, callback);
     }
 
+    function populateContestants(events, callback){
+        var populate = [{path: 'event.contestant1.ref', model:'Contestant'},
+                        {path: 'event.contestant2.ref', model:'Contestant'},
+                        {path: 'event.league.ref', model:'League'},
+                        ];
+        EventBl.populateBy(events, populate, callback);
+    }
+
     todo.push(groupPicks);
     todo.push(filterEvents);
     todo.push(populateEvents);
+    todo.push(populateContestants);
 
     async.waterfall(todo, callback);
 }

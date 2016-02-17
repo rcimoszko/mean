@@ -29,7 +29,7 @@ function getHotPick(sportId, leagueId, callback){
     }
 
     function populateEvents(events, callback){
-        var populate = {path: '_id', model:'Event'};
+        var populate = [{path: '_id', model:'Event'}];
         PickBl.populateBy(events, populate, callback);
     }
 
@@ -103,6 +103,7 @@ function getHotPick(sportId, leagueId, callback){
 
     function findHotPick(hotPickInfo, callback){
         if(!Object.keys(hotPickInfo).length) return callback(null, null);
+        console.log(hotPickInfo);
         var event =  hotPickInfo.event;
         var hotPick = {
             event: event,
@@ -132,7 +133,9 @@ function getHotPick(sportId, leagueId, callback){
                     break;
             }
 
-            BetBl.getOneByQuery(query, callback);
+            var populate = {path:'contestant.ref', Model:'Contestant'};
+
+            BetBl.getOneAndPopulate(query, populate, callback);
         }
 
         function getPick(bet, callback){
@@ -143,11 +146,13 @@ function getHotPick(sportId, leagueId, callback){
                     hotPick.pick.betName = bet.contestant.name;
                     hotPick.pick.value = bet.odds;
                     hotPick.pick.betType  = bet.betType;
+                    hotPick.pick.logoUrl  = bet.contestant.ref.logoUrl;
                     break;
                 case 'spread':
                     hotPick.pick.betName = bet.contestant.name;
                     hotPick.pick.value = bet.spread;
                     hotPick.pick.betType  = bet.betType;
+                    hotPick.pick.logoUrl  = bet.contestant.ref.logoUrl;
                     break;
                 case 'total points':
                     hotPick.pick.betName = event.contestant1.name +'/'+event.contestant2.name + ' Total Points';

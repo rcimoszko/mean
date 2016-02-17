@@ -1,12 +1,14 @@
 <div class="popular-game">
-    <a href>
+    <a ui-sref="gamecenter({eventSlug:popularGame.event.slug, leagueSlug: popularGame.event.league.ref.slug})">
         <div class="contestant">
+            <div data-ng-if="popularGame.event.contestant2.ref.logoUrl && popularGame.event.contestant1.ref.logoUrl"><logo size="'sm'" url="popularGame.event.contestant2.ref.logoUrl"></logo></div>
             {{popularGame.event.contestant2.name}}
         </div>
         <div class="separator">
                 @
         </div>
         <div class="contestant">
+            <div data-ng-if="popularGame.event.contestant2.ref.logoUrl && popularGame.event.contestant1.ref.logoUrl"><logo size="'sm'" url="popularGame.event.contestant1.ref.logoUrl"></logo></div>
             {{popularGame.event.contestant1.name}}
         </div>
     </a>

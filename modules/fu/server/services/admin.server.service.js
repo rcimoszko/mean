@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
+    ContestantLogo = mongoose.model('ContestantLogo'),
     SportBl = require('../bl/sport.server.bl'),
     LoopBl = require('../bl/loop.server.bl'),
     BetBl = require('../bl/bet.server.bl'),
@@ -376,6 +377,51 @@ function assignCommentIds(model, callback){
     async.waterfall(todo, callback);
 }
 
+function assignLogos(callback){
+    var todo = [];
+
+    function getConLogos(callback){
+        ContestantLogo.find({}, callback);
+    }
+
+    function processLogos(conLogos, callback){
+
+
+        function addLogo(conLogo, callback){
+            var todo = [];
+
+            function getContestants(callback){
+                ContestantBl.getByQuery({name: conLogo.name}, callback);
+            }
+
+            function updateContesants(contestants, callback){
+                function updateContestant(contestant, callback){
+                    var data = {
+                        abbrName: conLogo.abbrName,
+                        logoUrl: conLogo.logoUrl
+                    };
+                    ContestantBl.update(data, contestant, callback);
+                }
+
+                async.eachSeries(contestants, updateContestant, callback);
+            }
+
+            todo.push(getContestants);
+            todo.push(updateContesants);
+
+            async.waterfall(todo, callback);
+
+        }
+
+        async.eachSeries(conLogos, addLogo, callback);
+    }
+
+    todo.push(getConLogos);
+    todo.push(processLogos);
+
+    async.waterfall(todo, callback);
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -385,4 +431,6 @@ exports.assignBetDurations    = assignBetDurations;
 
 exports.createChannels    = createChannels;
 exports.assignCommentIds    = assignCommentIds;
+
+exports.assignLogos = assignLogos;
 

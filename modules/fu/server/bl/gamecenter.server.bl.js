@@ -25,6 +25,8 @@ function get(event, league, user, callback){
             contestant2Name: event.contestant1.name,
             contestant1Color: '#E9893A',
             contestant2Color: '#21759B',
+            contestant1LogoUrl: event.contestant2.ref.logoUrl,
+            contestant2LogoUrl: event.contestant1.ref.logoUrl,
             contestant2FinalScore: event.contestant1FinalScore,
             contestant1FinalScore: event.contestant2FinalScore
         };

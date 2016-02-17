@@ -6,6 +6,7 @@
     <div class="event-info-container winner-{{header.winner}}">
         <div class="contestant-container">
             <div class="contestant-name">{{header.contestant1Name}}</div>
+            <logo url="header.contestant1LogoUrl" size="'lg'" data-ng-if="header.contestant1LogoUrl"></logo>
             <div class="score-1" data-ng-if="header.hasScores">{{header.contestant1FinalScore}}</div>
         </div>
         <div class="event-details-container">
@@ -15,6 +16,7 @@
         </div>
         <div class="contestant-container">
             <div class="contestant-name">{{header.contestant2Name}}</div>
+            <logo url="header.contestant2LogoUrl" size="'lg'" data-ng-if="header.contestant2LogoUrl"></logo>
             <div class="score-2" data-ng-if="header.hasScores">{{header.contestant2FinalScore}}</div>
         </div>
     </div>

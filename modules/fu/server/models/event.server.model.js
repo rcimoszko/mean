@@ -13,5 +13,7 @@ module.exports = _.extend(
     require('./event/contestant.server.model'),
     require('./event/country.server.model'),
     require('./event/historicalvalues.server.model'),
-    require('./event/pick.server.model')
+    require('./event/pick.server.model'),
+
+    require('./event/contestantLogo.server.model')
 );

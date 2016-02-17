@@ -9,8 +9,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             $scope.socket.connect();
         }
 
-
-
         /**
          * General Hub Info
          */

@@ -93,7 +93,9 @@ function getConsensus(sportId, leagueId, count, callback){
                         event: event._id._id,
                         'contestant.ref': event._id['contestant'+event.contestantNum].ref
                     };
-                BetBl.getOneByQuery(query, callback);
+
+                var populate = {path: 'contestant.ref', model: 'Contestant'};
+                BetBl.getOneAndPopulate(query, populate, callback);
             }
 
             function createConsensus(bet, callback){
@@ -103,7 +105,8 @@ function getConsensus(sportId, leagueId, count, callback){
                     pick:{
                         contestant: bet.contestant.name,
                         league: event._id.league.name,
-                        percent: event.maxConsensus
+                        percent: event.maxConsensus,
+                        logoUrl: bet.contestant.ref.logoUrl
                     }
                 };
                 consensusResults.push(consensus);

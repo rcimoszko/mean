@@ -8,16 +8,16 @@
                     <div class="league" data-ng-if="channel.type === 'sport'">
                         {{event.league.name}}
                     </div>
-                    <div class="team-header">
+                    <div class="team-header clearfix">
                         <div class="logo1" data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl">
-
+                            <logo size="'sm'" url="event.contestant2.logoUrl"></logo>
                         </div>
                         <div class="team-names" data-ng-class="{'no-logos': !event.contestant1.logoUrl || !event.contestant2.logoUrl}">
                             {{event.header}}</br>
                             {{event.startTime|date:'h:mm a'}}
                         </div>
                         <div class="logo2" data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl">
-
+                            <logo size="'sm'" url="event.contestant1.logoUrl"></logo>
                         </div>
                     </div>
                     <div class="odds odds-{{event.lines.length}}">

@@ -3,8 +3,14 @@
         <h1>CONSENSUS</h1>
         <div class="consensus-container" data-ng-repeat="con in consensus">
             <div class="header">{{con.header}}</div>
-            <div class="logo-container" data-ng-if="con.logo"></div>
-            <div class="name" data-ng-if="!con.logo">{{con.name}}</div>
+            <div data-ng-if="con.betType !== 'total points'">
+                <div class="logo-container" data-ng-if="con.logoUrl"> <logo size="'md'" url="con.logoUrl"></logo></div>
+                <div class="name" data-ng-if="!con.logoUrl">{{con.name}}</div>
+            </div>
+            <div data-ng-if="con.betType === 'total points'">
+                <i class="fa fa-arrow-circle-o-up" data-ng-if="con.name === 'Over'"></i>
+                <i class="fa fa-arrow-circle-o-down" data-ng-if="con.name === 'Under'"></i>
+            </div>
             <div class="percent">{{con.percent}}%</div>
         </div>
     </div>

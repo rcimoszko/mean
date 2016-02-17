@@ -69,6 +69,10 @@ function updateByQuery(query, update, options, callback){
     Bet.update(query, update, options, callback);
 }
 
+function getOneAndPopulate(query, populate, callback){
+    Bet.findOne(query).populate(populate).exec(callback);
+}
+
 exports.populate    = populate;
 exports.get         = get;
 exports.getAll      = getAll;
@@ -78,3 +82,4 @@ exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
 exports.updateByQuery  = updateByQuery;
+exports.getOneAndPopulate  = getOneAndPopulate;
