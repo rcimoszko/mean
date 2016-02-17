@@ -16,14 +16,14 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
         }
 
 
-
         $scope.proActive = false;
         $scope.allActive = false;
 
         function initilizePicksTab(){
-            if($scope.proPicks.length){
+            if($scope.proPicks && $scope.proPicks.length){
                 $scope.proActive = true;
             }  else {
+                $scope.proPicks = [];
                 $scope.allActive = true;
             }
 

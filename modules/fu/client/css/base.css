@@ -79,7 +79,7 @@ p {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -88,12 +88,12 @@ p {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: white;
+  color: #ffffff;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -102,12 +102,12 @@ p {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: white;
+  color: #ffffff;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -116,12 +116,12 @@ p {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: white;
+  color: #ffffff;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -130,12 +130,12 @@ p {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: white;
+  color: #ffffff;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -144,12 +144,12 @@ p {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: white;
+  color: #ffffff;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -158,7 +158,7 @@ p {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: white;
+  color: #ffffff;
   background-color: #449d48;
 }
 .btn-blue-empty {
@@ -222,7 +222,7 @@ p {
   text-align: center;
 }
 .btn-tracker .fa {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .btn-follow-rect {
   background-color: #1ccf31;
@@ -331,10 +331,10 @@ p {
   background: #eeeeee;
 }
 .loading-bg-white:before {
-  background: white;
+  background: #ffffff;
 }
 .loading-bg-white:after {
-  background: white;
+  background: #ffffff;
 }
 .loading.loading-blue {
   box-shadow: inset 0 0 0 1em #104673;
@@ -349,7 +349,7 @@ p {
   box-shadow: inset 0 0 0 1em #eeeeee;
 }
 .loading.loading-white {
-  box-shadow: inset 0 0 0 1em white;
+  box-shadow: inset 0 0 0 1em #ffffff;
 }
 .loading-sm {
   font-size: 2px;
@@ -752,7 +752,7 @@ input.toggle:checked + label:after {
   margin: 0 -20px;
 }
 #splash .btn-premium {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   padding: 15px 30px;
   font-size: 20px;
   text-transform: uppercase;
@@ -801,7 +801,7 @@ input.toggle:checked + label:after {
   -moz-background-size: cover;
   -ms-background-size: cover;
   padding: 21% 0;
-  border-bottom: 20px solid #4CAF50;
+  border-bottom: 20px solid #4caf50;
 }
 @media (min-width: 1200px) {
   #splash #section-one {
@@ -940,7 +940,7 @@ input.toggle:checked + label:after {
 }
 #splash .bottom-cta p {
   margin: 0px auto 40px;
-  color: black;
+  color: #000000;
 }
 #splash #section-three {
   background: white;
@@ -1121,17 +1121,43 @@ input.toggle:checked + label:after {
   }
 }
 .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   margin-right: 5px;
   padding: 0 3px;
   font-size: 12px;
 }
 .color-green {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .color-red {
-  color: #F44336;
+  color: #f44336;
+}
+.search-container .dropdown-menu li .typeahead-group-header {
+  padding-left: 10px;
+  text-transform: uppercase;
+  height: 30px;
+  line-height: 3;
+}
+.search-container .dropdown-menu li .league-name {
+  color: #aaabac;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+.search-container .dropdown-menu li .start-time {
+  color: #aaabac;
+  font-size: 11px;
+  padding-left: 10px;
+}
+.search-container .dropdown-menu li:hover a {
+  background-image: none;
+}
+.search-container .dropdown-menu li:hover a .league-name {
+  color: white;
+}
+.search-container .dropdown-menu li:hover a .start-time {
+  color: white;
 }
 .modal-prompt {
   width: 300px;
@@ -1301,7 +1327,7 @@ input.toggle:checked + label:after {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -1309,26 +1335,6 @@ input.toggle:checked + label:after {
   #top-menu.auth {
     left: 180px;
   }
-}
-#top-menu ul {
-  float: right;
-  height: 60px;
-}
-#top-menu ul li {
-  display: inline-block;
-  line-height: 60px;
-}
-#top-menu ul li a {
-  height: 60px;
-  display: inline-block;
-  text-transform: uppercase;
-  padding: 0 20px;
-  color: #6a6b6c;
-  font-size: 14px;
-}
-#top-menu ul li a:hover,
-#top-menu ul li a.active {
-  color: #2b2b2c;
 }
 #top-menu .logo-container {
   line-height: 60px;
@@ -1345,25 +1351,29 @@ input.toggle:checked + label:after {
   }
 }
 #top-menu .search-container {
-  line-height: 60px;
   display: none;
-  padding-left: 20px;
 }
 @media (min-width: 992px) {
   #top-menu .search-container {
     display: inline-block;
   }
 }
-#top-menu .search-container .fa-search {
+#top-menu .search-container .search-box {
+  line-height: 60px;
+  padding-left: 20px;
+  width: 300px;
+}
+#top-menu .search-container .search-box .fa-search {
   color: rgba(106, 107, 108, 0.5);
   font-size: 16px;
 }
-#top-menu .search-container input {
+#top-menu .search-container .search-box input {
   margin-left: 10px;
   border: none;
   line-height: 40px;
+  width: 90%;
 }
-#top-menu .search-container input:focus {
+#top-menu .search-container .search-box input:focus {
   outline: none;
 }
 #top-menu .menu-links {
@@ -1373,6 +1383,26 @@ input.toggle:checked + label:after {
   #top-menu .menu-links {
     display: inline-block;
   }
+}
+#top-menu .menu-links ul {
+  float: right;
+  height: 60px;
+}
+#top-menu .menu-links ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+#top-menu .menu-links ul li a {
+  height: 60px;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 0 20px;
+  color: #6a6b6c;
+  font-size: 14px;
+}
+#top-menu .menu-links ul li a:hover,
+#top-menu .menu-links ul li a.active {
+  color: #2b2b2c;
 }
 #make-picks {
   position: absolute;
@@ -2689,7 +2719,7 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 .channel-event .stats .stats-container.results-loss .value {
-  color: #F44336;
+  color: #f44336;
 }
 .channel-event .stats .stats-container .stat-section-header {
   padding-bottom: 5px;
@@ -2934,11 +2964,11 @@ input.toggle:checked + label:after {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -3205,13 +3235,13 @@ input.toggle:checked + label:after {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #F44336;
+  color: #f44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
@@ -3393,7 +3423,7 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 #tracker .loss {
-  color: #F44336;
+  color: #f44336;
 }
 #tracker .push {
   color: #104673;
@@ -3801,17 +3831,25 @@ input.toggle:checked + label:after {
   margin-right: 8px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   display: inline-block;
   margin-right: 3px;
   color: white;
   padding: 0 3px;
   font-size: 11px;
 }
+.pick-list .pick .pick-container .bet-name .copy-pick {
+  font-size: 11px;
+  color: #aaabac;
+}
+.pick-list .pick .pick-container .bet-name .copy-pick .fa {
+  margin-right: 3px;
+}
 .pick-list .pick .pick-container .bet-duration {
   font-size: 11px;
   color: #6a6b6c;
   display: inline-block;
+  margin-right: 5px;
 }
 .pick-list .pick .pick-container .statistics {
   width: 100%;
@@ -3837,7 +3875,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
@@ -3845,7 +3883,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,
@@ -3860,7 +3898,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .actions {
   width: 100%;
   padding-top: 8px;
-  text-align: center;
+  text-align: left;
   font-size: 10px;
 }
 .pick-list .pick .pick-container .actions .action-btn {
@@ -3870,6 +3908,10 @@ input.toggle:checked + label:after {
 }
 .pick-list .pick .pick-container .actions .action-btn a {
   color: #d1d1d1;
+}
+.pick-list .pick .pick-container .actions .action-btn a.disabled {
+  cursor: default;
+  color: #eaebeb;
 }
 .pick-list .pick .pick-container .actions .action-btn .fa {
   margin-right: 5px;

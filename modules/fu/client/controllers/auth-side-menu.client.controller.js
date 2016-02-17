@@ -24,5 +24,14 @@ angular.module('fu').controller('AuthSideMenuController', ['$scope', 'Modal', 'A
             );
         };
 
+        $scope.showNotifications = function(){
+            Modal.showModal(
+                '/modules/fu/client/views/notifications/modal/modal-notifications.client.view.html',
+                'ModalNotificationsController',
+                {},
+                'notifications'
+            );
+        };
+
     }
 ]);

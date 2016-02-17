@@ -6,6 +6,13 @@ var path = require('path'),
 
 
 function get(req, res, next){
+
+    if(!Object.keys(req.query).length){
+        return res.status(400).send({
+            message: 'Query is required'
+        });
+    }
+
     function cb (err, results){
         if (err) return next(err);
         if (!results) {
@@ -15,8 +22,8 @@ function get(req, res, next){
         }
         res.json(results);
     }
-    var user = req.user;
-    SearchBl.get(user, cb);
+    var text = req.query.text;
+    SearchBl.get(text, cb);
 }
 
 

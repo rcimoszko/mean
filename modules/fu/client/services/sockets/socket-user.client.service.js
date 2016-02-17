@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('fu').service('SocketHub', ['$timeout', function($timeout) {
+angular.module('fu').service('SocketUser', ['$timeout', function($timeout) {
 
     this.connect = function () {
-        this.socket = io.connect(location.host+'/hub');
+        this.socket = io.connect(location.host+'/user');
     };
 
     this.on = function (eventName, callback) {

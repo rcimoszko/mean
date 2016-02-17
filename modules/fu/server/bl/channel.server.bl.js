@@ -87,6 +87,10 @@ function getByGroup(group, callback){
     getByQuery({'group.ref':group}, callback);
 }
 
+function getForSearch(query, callback){
+    Channel.find(query).sort('name').limit(5).exec(callback);
+}
+
 
 exports.populate    = populate;
 exports.getAll      = getAll;
@@ -101,3 +105,4 @@ exports.getOneByQuery   = getOneByQuery;
 exports.getBySport   = getBySport;
 exports.getByLeague  = getByLeague;
 exports.getByGroup   = getByGroup;
+exports.getForSearch   = getForSearch;

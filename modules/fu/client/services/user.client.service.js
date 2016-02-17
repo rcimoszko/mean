@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'SocketUser',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, SocketUser) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -61,6 +61,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
                 info.channels = userInfo.channels;
                 updateActiveUnits();
                 updateActivePicks();
+                SocketUser.connect();
+                SocketUser.emit('user join', Authentication.user._id);
 
             }
 

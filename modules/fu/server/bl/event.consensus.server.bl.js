@@ -18,6 +18,7 @@ function getGamecenterConsensus(event, callback){
 
     function getConsensus(picks, callback){
         var todo = [];
+
         function getSpreadConsensus(callback){
             var spread;
             var spreadPicks = _.filter(picks, function(pick){
@@ -129,7 +130,12 @@ function getGamecenterConsensus(event, callback){
         todo.push(getMoneylineConsensus);
         todo.push(getTotalsConsensus);
 
-        async.parallel(todo, callback);
+        function cb(err, results){
+            results = _.pull(results, undefined);
+            callback(err, results);
+        }
+
+        async.parallel(todo, cb);
 
     }
 

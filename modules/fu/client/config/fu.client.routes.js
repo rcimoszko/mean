@@ -9,7 +9,10 @@ angular.module('fu').config(['$stateProvider',
             })
             .state('hub', {
                 url: '/hub',
-                templateUrl: 'modules/fu/client/views/hub.client.view.html'
+                templateUrl: 'modules/fu/client/views/hub.client.view.html',
+                data: {
+                    roles: ['user']
+                }
             })
             .state('profile', {
                 url: '/profile/:username',

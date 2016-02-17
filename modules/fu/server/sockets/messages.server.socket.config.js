@@ -1,0 +1,44 @@
+'use strict';
+
+var mongoose = require('mongoose'),
+    ChatBl = require('../bl/chat.server.bl');
+
+module.exports = function (io) {
+
+    var nsp = io.of('/channel');
+
+    nsp.on('connection', function(socket) {
+
+        socket.on('join conversation', function(conversationId){
+            socket.join(conversationId);
+
+            /*
+            function cb(err, messages){
+                messages.reverse();
+                nsp.to(channelId).emit('new message', messages);
+            }
+
+            ChatBl.getChannelChat(channelId, cb);
+            */
+        });
+
+
+
+        socket.on('new message', function(chat){
+            /*
+            function cb(err, chat){
+                nsp.to(chat.channel.ref).emit('new message', chat);
+            }
+
+            ChatBl.create(chat, cb);
+            */
+        });
+
+        socket.on('disconnect', function(){
+
+        });
+    });
+};
+
+
+

@@ -1,3 +1,5 @@
+
+
 <div data-ng-controller="TopMenuController">
     <div class="logo-container" data-ng-if="!authentication.user">
         <a ui-sref="home">
@@ -5,11 +7,28 @@
         </a>
     </div>
 
-    <div class="search-container">
 
-        <i class="fa fa-search">
-        </i>
-        <input type="text">
+    <div class="search-container">
+        <script type="text/ng-template" id="customTemplate.html">
+            <div class="typeahead-group-header" ng-if="match.model.first">{{match.model.type}}</div>
+            <a href>
+                <span ng-bind-html="match.label | typeaheadHighlight:query"></span>
+                <span data-ng-if="match.model.type === 'event'" class="league-name">{{match.model.leagueName}}</span>
+                <span data-ng-if="match.model.type === 'event'" class="start-time">{{match.model.startTime| date : 'mediumDate'}}</span>
+            </a>
+        </script>
+
+        <div class="search-box">
+            <i class="fa fa-search">
+            </i>
+            <input type="text" placeholder="Search for Users, Games or Channels" data-ng-model="searchText"
+                   typeahead-template-url="customTemplate.html"
+                   typeahead-min-length="3"
+                   typeahead-on-select ="searchSelected($model)"
+                   typeahead="result as result.name for result in getResults($viewValue)">
+        </div>
+
+
     </div>
 
     <div class="menu-links pull-right">
@@ -23,4 +42,8 @@
             <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
         </ul>
     </div>
+
 </div>
+
+
+

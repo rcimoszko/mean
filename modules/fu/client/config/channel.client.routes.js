@@ -13,8 +13,8 @@ angular.module('fu').config(['$stateProvider',
                     abstract: true,
                     templateUrl: 'modules/fu/client/views/channel.client.view.html',
                     data: {
-                        roles: ['user']
-                    }
+                    roles: ['user']
+                }
                 })
                     .state('channel.main.home', {
                         url: '',

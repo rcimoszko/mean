@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$stateParams', 'Users', 'Authentication', '$filter',
-    function ($scope, $stateParams, Users, Authentication, $filter) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter) {
         $scope.username = $stateParams.username;
+        if(!$scope.username) $state.go('hub');
 
         function cbGetProfile(err, profile){
             if(!err) $scope.profile = profile;

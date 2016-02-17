@@ -1,0 +1,35 @@
+.search-container{
+  .dropdown-menu{
+    li{
+      .typeahead-group-header{
+        padding-left:10px;
+        text-transform:uppercase;
+        height:30px;
+        line-height:3;
+      }
+      .league-name{
+        color:@color-text-light;
+        font-size:11px;
+        text-transform:uppercase;
+        padding-left:10px;
+      }
+      .start-time{
+        color:@color-text-light;
+        font-size:11px;
+        padding-left:10px;
+      }
+      &:hover{
+        a{
+          background-image:none;
+          .league-name{
+            color:white;
+          }
+          .start-time{
+            color:white;
+          }
+        }
+      }
+    }
+
+  }
+}

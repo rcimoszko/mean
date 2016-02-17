@@ -45,11 +45,19 @@
           padding:0 3px;
           font-size:11px;
         }
+        .copy-pick{
+          font-size:11px;
+          color:@color-text-light;
+          .fa{
+            margin-right:3px;
+          }
+        }
       }
       .bet-duration{
         font-size:11px;
         color:@color-text;
         display:inline-block;
+        margin-right:5px;
       }
       .statistics{
         width:100%;
@@ -93,7 +101,7 @@
       .actions{
         width:100%;
         padding-top:8px;
-        text-align:center;
+        text-align:left;
         font-size:10px;
         .action-btn{
           display:inline-block;
@@ -101,10 +109,15 @@
           margin-right:15px;
           a{
             color:lighten(@color-text,40%);
+            &.disabled{
+              cursor:default;
+              color:lighten(@color-text,50%);
+            }
           }
           .fa{
             margin-right:5px;
           }
+
         }
       }
     }

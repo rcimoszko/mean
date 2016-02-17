@@ -71,6 +71,10 @@ function getOneByQuery(query, callback){
 function getByLeague(league, callback){
     getByQuery({'league.ref': league._id}, callback);
 }
+function getForSearch(query, callback){
+    m_Event.find(query).sort('-startTime').limit(5).populate('league.ref').exec(callback);
+}
+
 
 function populateBy(events, populate, callback){
     m_Event.populate(events, populate, callback);
@@ -165,6 +169,7 @@ exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
 exports.getByLeague  = getByLeague;
+exports.getForSearch  = getForSearch;
 exports.populateBy  = populateBy;
 
 exports.cancel      = cancel;

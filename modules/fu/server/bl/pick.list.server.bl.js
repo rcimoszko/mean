@@ -125,12 +125,12 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
     var todo = [];
 
     function populateEvents(callback){
-        var populate = [{path: 'event', model:'Event'}, {path:'picks.user.ref', model: 'User', select: 'username avatarUrl'}];
+        var populate = [{path: 'event', model:'Event'}, {path:'picks.user.ref', model: 'User', select: 'username avatarUrl'}, {path:'picks.bet', model:'Bet'}];  //had to populate bets for copying bets
         PickBl.populateBy(events, populate, callback);
     }
 
     function populateBets(events, callback){
-        var populate = {path: 'event.pinnacleBets', model:'Bet'};
+        var populate = [{path: 'event.pinnacleBets', model:'Bet'}, {path: 'event.sport.ref', model:'Sport'}]; //had to populate sport for copying bets
         EventBl.populateBy(events, populate, callback);
     }
 
@@ -145,6 +145,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
 
             function createEvent(callback){
                 pEvent = {
+                    _id:            event._id,
                     sport:          event.sport,
                     league:         event.league,
                     startTime:      event.startTime,

@@ -288,6 +288,10 @@ function create(event, bet, user, callback){
     var todo = [];
     var pick = {};
 
+    console.log(event);
+    console.log(bet);
+
+
     function createPick(callback){
         pick = {
             event: event._id,

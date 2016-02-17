@@ -8,6 +8,7 @@ var _ = require('lodash'),
     FollowBl = require('./follow.server.bl'),
     SubscriptionBl = require('./subscription.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
+    NotificationBl = require('./notification.server.bl'),
     User = mongoose.model('User');
 
 
@@ -299,6 +300,10 @@ function getInfo(user, callback){
 }
 
 
+function getForSearch(query, callback){
+    User.find(query).sort('name').limit(5).exec(callback);
+}
+
 exports.getByUsername       = getByUsername;
 exports.getFollowing        = getFollowing;
 exports.getHub              = getHub;
@@ -308,3 +313,4 @@ exports.getPendingPicks     = getPendingPicks;
 exports.getCompletedPicks   = getCompletedPicks;
 exports.getTracker          = getTracker;
 exports.getInfo             = getInfo;
+exports.getForSearch        = getForSearch;

@@ -13,7 +13,11 @@
                 <btn-follow user-id="pick.user.ref._id"></btn-follow>
             </div>
             <div class="pick-container">
-                <div class="bet-name"><span class="pro-label" data-ng-if="pick.premium">PRO</span> {{pick|betName:event}} <span class="bet-duration">{{pick.betDuration}}</span></div>
+                <div class="bet-name">
+                    <span class="pro-label" data-ng-if="pick.premium">PRO</span>
+                    {{pick|betName:event}} <span class="bet-duration">{{pick.betDuration}}</span>
+                    <span class="copy-pick" data-ng-if="pick.copiedFrom"><span class="fa fa-retweet"></span>copied from <a ui-sref="profile({username: pick.copiedFrom.user.name})">{{pick.copiedFrom.user.name}}</a></span>
+                </div>
                 <div class="statistics clearfix statistic-result-{{pick.result|formatResult}}">
                     <div class="stat-container">
                         <div class="stat-value">{{pick.units}}</div>
@@ -41,9 +45,20 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <div class="action-btn"><a href><i class="fa fa-commenting"></i>COMMENT</a></div>
-                    <div class="action-btn"><a href><i class="fa fa-retweet"></i>COPY</a></div>
-                    <div class="action-btn"><a href><i class="fa fa-share-alt"></i>SHARE</a></div>
+                    <div class="action-btn">
+                        <a href>
+                            <i class="fa fa-commenting"></i>COMMENT
+                        </a>
+                    </div>
+                    <div class="action-btn"  data-ng-if="!userPicks.hasStarted(event)">
+                        <a href data-ng-click="copyPick(pick, event)" data-ng-class="{disabled: (userPicks.isOwn(pick) || userPicks.isPicked(pick)), copied: userPicks.isCopied(pick)}">
+                            <span class="fa fa-retweet"></span>
+                            <span data-ng-if="!userPicks.isCopied(pick)">COPY</span><span data-ng-if="userPicks.isCopied(pick)">COPIED</span>
+                        </a>
+                    </div>
+                    <div class="action-btn" data-ng-if="userPicks.isOwn(pick)">
+                        <a href><i class="fa fa-share-alt"></i>SHARE</a>
+                    </div>
                 </div>
             </div>
         </div>

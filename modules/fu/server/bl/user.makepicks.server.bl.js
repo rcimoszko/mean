@@ -161,6 +161,7 @@ function submit(user, eventGroups, callback){
     }
 
     function cb(err){
+        console.log(err);
         callback(err, {user: user, picks: picks});
     }
 
