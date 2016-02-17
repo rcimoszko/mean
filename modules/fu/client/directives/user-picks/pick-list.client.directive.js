@@ -13,7 +13,6 @@ angular.module('fu').directive('pickList', function () {
 
             $scope.userPicks = UserPicks;
 
-
             $scope.copyPick = function(pick, event){
 
                 if(!$scope.userPicks.hasStarted(event) && !$scope.userPicks.isOwn(pick) && !$scope.userPicks.isCopied(pick) && !$scope.userPicks.isPicked(pick)){
@@ -45,6 +44,18 @@ angular.module('fu').directive('pickList', function () {
                 }, 'share');
             };
 
+
+            $scope.showCommentModal = function(pick){
+                Modal.showModal(
+                    '/modules/fu/client/views/pick/modal/modal-pick-comment.client.view.html',
+                    'ModalPickCommentController',{
+                        pick: function (){
+                            return pick;
+                        }
+                    },
+                    'pick-comment'
+                );
+            };
 
         }]
     };
