@@ -1,14 +1,13 @@
 <section class="panel hub-trending">
     <div class="panel-body">
         <h1>
-            LEADERS <span class="time-heading">LAST 30 DAYS</span>
+            REV SHARE LEADERS <span class="time-heading">THIS MONTH</span>
         </h1>
         <table class="table leaderboard-sm table-condensed">
             <thead>
                 <th class="rank">#</th>
                 <th class="username">USERNAME</th>
                 <th class="text-center profit">PROFIT</a></th>
-                <th class="text-center roi">ROI</th>
                 <th class="text-center actions">ACTIONS</th>
             </thead>
             <tbody>
@@ -16,7 +15,6 @@
                 <td class="rank">{{$index+1}}</td>
                 <td class="username"><a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a></td>
                 <td class="text-center profit">{{user.profit| number:1}}</td>
-                <td class="text-center roi">{{user.roi|number:1}}%</td>
                 <td class="actions">
                     <btn-follow user-id="user.user._id"></btn-follow>
                     <btn-pending-picks username="user.user.username" pick-count="user.pending"></btn-pending-picks>
@@ -24,8 +22,5 @@
             </tr>
             </tbody>
         </table>
-        <div class="btn-container text-right">
-            <a class="btn btn-blue-2-empty btn-xs" ui-sref="discover">VIEW ALL</a>
-        </div>
     </div>
 </section>

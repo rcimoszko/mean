@@ -4,6 +4,7 @@
         <div class="category">
             {{event.sport.name}} // {{event.league.name}}
         </div>
+        <a ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.leagueSlug})">
         <table class="contestant-table">
             <tbody>
                 <tr>
@@ -28,17 +29,22 @@
                 </tr>
             </tbody>
         </table>
+        </a>
     </div>
     <pick-list picks="event.picks" event="event" include-user="includeUser"></pick-list>
     <div class="event-footer clearfix">
         <div class="col-xs-4">
-            <i class="fa fa-star"></i> {{event.proCount}} PRO PICKS
+            <a ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.leagueSlug})">
+                <i class="fa fa-star"></i> {{event.proCount}} PRO PICKS
+            </a>
         </div>
         <div class="col-xs-4">
-            <i class="fa fa-star-o"></i>  {{event.pickCount}} PICKS
+            <a ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.leagueSlug})">
+                <i class="fa fa-star-o"></i>  {{event.pickCount}} PICKS
+            </a>
         </div>
         <div class="col-xs-4">
-            <a ui-sref="gamecenter">VIEW ALL</a>
+            <a ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.leagueSlug})">VIEW ALL</a>
         </div>
     </div>
 </div>

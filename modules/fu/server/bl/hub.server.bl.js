@@ -23,7 +23,7 @@ function getPopularGames(callback){
 }
 
 function getLeaderboard(callback){
-    LeaderboardBl.buildLeaderboard('last30Days', 'all', 'all', 'all', 'both', 'all', 'all', null, null, 5, callback);
+    LeaderboardBl.buildLeaderboard('thisMonth', 'all', 'all', 'all', 'both', 'all', 'all', null, null, 5, callback);
 }
 
 function getTrending(callback){
@@ -41,7 +41,7 @@ function get(callback){
         hotPick: getHotPick,
         consensus: getConsensus,
         popular: getPopularGames,
-        //leaderboard: getLeaderboard,
+        leaderboard: getLeaderboard,
         trending: getTrending
     };
 

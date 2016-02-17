@@ -124,13 +124,18 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
 
     var todo = [];
 
-    function populateEvents(callback){
-        var populate = [{path: 'event', model:'Event'}, {path:'picks.user.ref', model: 'User', select: 'username avatarUrl'}, {path:'picks.bet', model:'Bet'}];  //had to populate bets for copying bets
+    function populatePicks(callback){
+        var populate = [{path: 'event', model:'Event'},
+                        {path:'picks.user.ref', model: 'User', select: 'username avatarUrl'},
+                        {path:'picks.bet', model:'Bet'},];  //had to populate bets for copying bets
         PickBl.populateBy(events, populate, callback);
     }
 
-    function populateBets(events, callback){
-        var populate = [{path: 'event.pinnacleBets', model:'Bet'}, {path: 'event.sport.ref', model:'Sport'}]; //had to populate sport for copying bets
+    function populateEvents(events, callback){
+        var populate = [{path: 'event.pinnacleBets', model:'Bet'},
+                        {path: 'event.sport.ref', model:'Sport'}, //had to populate sport for copying bets
+                        {path: 'event.league.ref', model:'League'}
+                        ];
         EventBl.populateBy(events, populate, callback);
     }
 
@@ -147,10 +152,12 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
                 pEvent = {
                     _id:            event._id,
                     sport:          event.sport,
-                    league:         event.league,
+                    league:         {name: event.league.name, ref: event.league._id}, //had to un populate for copying bets
                     startTime:      event.startTime,
                     commentCount:   event.commentCount,
                     cancelled:      event.cancelled,
+                    slug:           event.slug,
+                    leagueSlug:     event.league.ref.slug,
                     over:           event.over
                 };
 
@@ -325,8 +332,8 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
     }
 
 
+    todo.push(populatePicks);
     todo.push(populateEvents);
-    todo.push(populateBets);
     todo.push(processEvents);
 
 

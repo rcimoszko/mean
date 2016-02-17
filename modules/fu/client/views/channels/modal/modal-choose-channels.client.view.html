@@ -4,8 +4,8 @@
 </div>
 
 <div class="modal-body clearfix">
-    <div class="col-xs-4 text-center" data-ng-repeat="channel in channels">
-        <div>
+    <div class="col-xs-4 text-center channel-container" data-ng-repeat="channel in channels">
+        <div class="channel-name">
             <a ui-sref="channel.main.home({channelSlug:channel.slug})" data-ng-click="modal.closeModal(modalInstance)" >{{channel.name}}</a>
         </div>
         <btn-subscribe channel-id="channel._id"></btn-subscribe>

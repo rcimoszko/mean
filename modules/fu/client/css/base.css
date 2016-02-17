@@ -228,6 +228,15 @@ p {
   background-color: #1ccf31;
   color: white;
   font-size: 13px;
+  -moz-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn-follow-rect:hover {
+  background-color: #1ac22e;
+  color: white;
 }
 .btn-follow-lg {
   padding: 4px 18px;
@@ -240,6 +249,15 @@ p {
   color: white;
   font-size: 13px;
   padding: 4px 18px;
+  -moz-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn-subscribe:hover {
+  background-color: #1ac22e;
+  color: white;
 }
 .btn-twitter .fa,
 .btn-facebook .fa,
@@ -1217,6 +1235,12 @@ input.toggle:checked + label:after {
   .modal-splash-video {
     width: 900px;
   }
+}
+.modal-choose-channels .channel-container {
+  padding: 10px 0px;
+}
+.modal-choose-channels .channel-name {
+  font-size: 16px;
 }
 #auth-side-menu {
   position: fixed;
