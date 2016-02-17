@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <div class="action-btn" data-ng-if="userPicks.isOwn(pick)">
-                        <a href><i class="fa fa-share-alt"></i>SHARE</a>
+                        <a href data-ng-click="sharePick(pick, event)"><i class="fa fa-share-alt"></i>SHARE</a>
                     </div>
                 </div>
             </div>

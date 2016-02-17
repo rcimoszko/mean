@@ -9,7 +9,7 @@ angular.module('fu').directive('pickList', function () {
             includeUser: '='
         },
         templateUrl: 'modules/fu/client/templates/user-picks/pick-list.client.template.html',
-        controller: ['$scope', 'UserPicks', 'BetSlip', function ($scope, UserPicks, BetSlip){
+        controller: ['$scope', 'UserPicks', 'BetSlip', 'Modal', function ($scope, UserPicks, BetSlip, Modal){
 
             $scope.userPicks = UserPicks;
 
@@ -24,10 +24,27 @@ angular.module('fu').directive('pickList', function () {
                     } else {
                         newPick.copiedOrigin = newPick.copiedFrom;
                     }
-                    console.log(newPick);
                     BetSlip.addRemove(newPick, event);
                 }
             };
+
+
+            $scope.sharePick = function(pick, event){
+                Modal.showModal(
+                    '/modules/fu/client/views/share/modal/modal-share.client.view.html',
+                    'ModalShareController', {
+                    type: function () {
+                        return 'pick';
+                    },
+                    pick: function () {
+                        return pick;
+                    },
+                    event: function(){
+                        return event;
+                    }
+                }, 'share');
+            };
+
 
         }]
     };

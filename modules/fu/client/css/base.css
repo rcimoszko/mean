@@ -4080,3 +4080,62 @@ input.toggle:checked + label:after {
 .chat .chat-full .btn {
   border-radius: 0;
 }
+.share .share-box-container {
+  border: 1px solid #eaeaea;
+  background-color: #eeeeee;
+  padding: 20px;
+  margin-top: 20px;
+}
+.share .share-box-container .arrow-left {
+  width: 0;
+  height: 0;
+  border-bottom: 15px solid transparent;
+  /* left arrow slant */
+  border-top: 15px solid transparent;
+  /* right arrow slant */
+  border-right: 20px solid white;
+  /* bottom, add background color here */
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  z-index: 9999;
+}
+.share .share-box-container .share-container .avatar-container {
+  float: left;
+  padding-left: 20px;
+}
+.share .share-box-container .share-container .share-text-container {
+  overflow: hidden;
+  position: relative;
+}
+.share .share-box-container .share-container .share-text-container .share-text {
+  font-size: 16px;
+  margin-left: 20px;
+  background-color: white;
+  padding: 10px 0 10px 20px;
+  border-radius: 3px;
+}
+.share .share-box-container .share-authenticate-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.share .share-box-container .share-authenticate-container .authenticate-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+.share .share-box-container .share-authenticate-container .btn {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.share .share-box-container .response-container {
+  padding: 5px;
+  text-align: center;
+}
+.share .share-box-container .response-container .success {
+  color: #1ccf31;
+}
+.share .share-box-container .response-container .error {
+  color: #f44336;
+}

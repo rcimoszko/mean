@@ -1,0 +1,38 @@
+<div class="share-box-container">
+    <div class="share-container">
+        <div class="avatar-container">
+            <avatar url="authentication.user.avatarUrl" size="'md'"></avatar>
+        </div>
+        <div class="share-text-container">
+            <div class="share-text" data-ng-bind="shareText"></div>
+            <span class="arrow-left"></span>
+        </div>
+    </div>
+
+    <div class="share-authenticate-container">
+        <button class="btn btn-blue-empty" data-ng-click="share()" data-ng-disabled="(!twitterShare && !facebookShare) || shareLoading">
+            <span data-ng-show="!shareLoading">Share</span>
+            <loading loading="shareLoading" class="loading-sm loading-orange"></loading>
+        </button>
+        <div class="authenticate-container">
+            <div>
+                <input type="checkbox" data-ng-model="twitterShare"  data-ng-disabled="!isAuthenticated('twitter')"/>
+                Twitter
+                <span data-ng-if="isAuthenticated('twitter')">(Authenticated)</span>
+                <a href="/auth/twitter" target="_blank" data-ng-if="!isAuthenticated('twitter')">Authenticate</a>
+            </div>
+            <!--
+            <div>
+                <input type="checkbox" data-ng-model="facebookShare" data-ng-disabled="!isAuthenticated('facebook')"/>
+                Facebook
+                <span data-ng-if="isAuthenticated('facebook')">(Authenticated)</span>
+                <a href="/auth/facebook" target="_blank" data-ng-if="!isAuthenticated('facebook')">Authenticate</a>
+            </div>
+            -->
+        </div>
+        <div class="response-container">
+            <span class="success" data-ng-bind="success" data-ng-show="success"></span>
+            <span class="error" data-ng-bind="error" data-ng-show="error"></span>
+        </div>
+    </div>
+</div>

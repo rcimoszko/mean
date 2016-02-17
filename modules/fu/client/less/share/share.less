@@ -1,0 +1,62 @@
+.share{
+
+  .share-box-container{
+    border:1px solid @color-gray-divider;
+    background-color:@color-bg;
+    padding:20px;
+    margin-top:20px;
+    .arrow-left {
+      width: 0;
+      height: 0;
+      border-bottom: 15px solid transparent;  /* left arrow slant */
+      border-top: 15px solid transparent; /* right arrow slant */
+      border-right: 20px solid white; /* bottom, add background color here */
+      font-size: 0;
+      line-height: 0;
+      position:absolute;
+      top: 5px;
+      left:6px;
+      z-index: 9999;
+    }
+    .share-container{
+      .avatar-container{
+        float:left;
+        padding-left:20px;
+      }
+      .share-text-container{
+        overflow:hidden;
+        position:relative;
+        .share-text{
+          font-size:16px;
+          margin-left:20px;
+          background-color:white;
+          padding:10px 0 10px 20px;
+          border-radius:3px;
+        }
+      }
+    }
+
+    .share-authenticate-container{
+      text-align:center;
+      margin-top:20px;
+      .authenticate-container{
+        display:inline-block;
+        vertical-align:middle;
+      }
+      .btn{
+        vertical-align:middle;
+        margin-right:5px;
+      }
+    }
+    .response-container{
+      padding:5px;
+      text-align:center;
+      .success{
+        color:@color-green-light;
+      }
+      .error{
+        color:@color-red;
+      }
+    }
+  }
+}
