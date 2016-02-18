@@ -7,14 +7,14 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/user/conversations',
-            permissions: ['get', 'post']
+            resources: '/api/search/users',
+            permissions: ['get']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/user/conversations',
-            permissions: ['get', 'post']
+            resources: '/api/search/users',
+            permissions: ['get']
         }]
     }]);
 };

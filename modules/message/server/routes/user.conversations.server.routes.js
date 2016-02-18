@@ -6,6 +6,7 @@ var policy = require('../policies/user.conversations.server.policies'),
 module.exports = function (app) {
 
     app.route('/api/user/conversations').all(policy.isAllowed)
-        .get(ctrl.get);
+        .get(ctrl.get)
+        .post(ctrl.create);
 
 };

@@ -54,6 +54,18 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserConversation.query({}, cbSuccess, cbError);
         };
 
+        var createConversation = function(conversation, callback){
+            function cbSuccess(conversation){
+                callback(null, conversation);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUserConversation.save(conversation, cbSuccess, cbError);
+        };
+
 
         function updateActiveUnits(){
             var unitCount = 0;
@@ -103,7 +115,9 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             getCompletedPicks: getCompletedPicks,
             getConversations: getConversations,
             getFollowing: getFollowing,
-            initialize: initialize
+            initialize: initialize,
+
+            createConversation: createConversation
         };
 
     }

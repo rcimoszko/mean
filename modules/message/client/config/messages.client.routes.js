@@ -22,7 +22,7 @@ angular.module('message').config(['$stateProvider',
             .state('messages.new', {
                 url: '/new',
                 templateUrl: 'modules/message/client/views/new-message.client.view.html',
-                controller: 'MessageController',
+                controller: 'NewMessageController',
                 data: {
                     roles: ['user']
                 }
@@ -30,7 +30,7 @@ angular.module('message').config(['$stateProvider',
             .state('messages.newWithUser', {
                 url: '/new/:username',
                 templateUrl: 'modules/message/client/views/new-message.client.view.html',
-                controller: 'MessageController',
+                controller: 'NewMessageController',
                 data: {
                     roles: ['user']
                 }

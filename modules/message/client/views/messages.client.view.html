@@ -8,7 +8,7 @@
                     </div>
                     <div class="message-list-container">
                         <div data-ng-repeat="conversation in conversations" class="message-list" ui-sref-active="active" ui-sref="messages.view({conversationId: conversation._id})" data-ng-class="{new: isNew(conversation)}">
-                            <img class="avatar-circle" data-ng-src="{{conversation.lastMessage.user.ref.avatarUrl}}"/>
+                            <avatar url="conversation.lastMessage.user.ref.avatarUrl" size="'sm'"></avatar>
                             <div class="message-summary-container">
                                 <div class="recipients">
                                     {{recipientList(conversation)}}
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="conversation-container" class="col-sm-8">
+                <div class="conversation-container col-sm-8">
                     <div data-ui-view></div>
                 </div>
             </div>

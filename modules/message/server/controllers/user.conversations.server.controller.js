@@ -20,5 +20,23 @@ function get(req, res) {
     ConversationBl.getByUser(user, cb);
 }
 
+function create(req, res) {
+    function cb(err, conversation){
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(conversation);
+        }
+    }
 
-exports.get     = get;
+    var data = req.body;
+    var user = req.user;
+
+    ConversationBl.createConversation(data, user, cb);
+}
+
+
+exports.get        = get;
+exports.create     = create;

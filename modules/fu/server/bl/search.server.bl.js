@@ -142,4 +142,10 @@ function get(text, callback){
 
 }
 
+function getUsers(username, callback){
+    var query = {username: { $regex: new RegExp(username, 'i') }};
+    UserBl.getForSearch(query, callback);
+}
+
 exports.get         = get;
+exports.getUsers    = getUsers;

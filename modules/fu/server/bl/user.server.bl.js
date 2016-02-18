@@ -303,7 +303,7 @@ function getInfo(user, callback){
 }
 
 function getForSearch(query, callback){
-    User.find(query).sort('name').limit(5).exec(callback);
+    User.find(query).sort('username').select('username').limit(5).exec(callback);
 }
 
 function uploadProfilePicture(req, callback){

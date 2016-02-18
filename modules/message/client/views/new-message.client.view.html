@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<h3 class="text-center">New Message</h3>
+<form ng-submit="submitNewMessage()" class="new-message">
+    <input class="recipient form-control" type="text" data-ng-model="selectedUser" typeahead-min-length="3" typeahead="user as user.username for user in getUsers($viewValue) | filter:$viewValue | filter:removeSelected | filter: '!'+authentication.user.username" data-typeahead-editable="false" data-typeahead-on-select="addRecipient(selectedUser)"  placeholder="Add recipient(s)">
 
-</body>
-</html>
+    <div class="recipient-list">
+        <span class="new-recipient" data-ng-repeat="user in newRecipients | filter: '!'+authentication.user.username">
+        <span class="label"> {{ user.name }} </span>
+            <span class="btn btn-medium btn-xs"  data-ng-click="removeRecipient(user)">x</span>
+        </span>
+    </div>
+
+    <input class="subject form-control" data-ng-model="subject" maxlength="50" placeholder="Subject" />
+
+    <textarea maxlength="5000" class="message form-control" rows="5" data-ng-model="text" name="text" placeholder="Enter message" required></textarea>
+
+    <input type="submit" class="btn btn-blue" id="submit" value="Submit" />
+
+</form>
