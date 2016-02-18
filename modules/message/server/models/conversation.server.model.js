@@ -18,7 +18,7 @@ var ConversationSchema = new Schema({
     lastMessage:    {timestamp: {type: Date, default: Date.now}, message: {type: String, default: '', trim: true}, user: {name: String, ref: {type: Schema.ObjectId,ref: 'User'}}},
     timestamp:      {type: Date, default: Date.now},
     oldId:          {type: Number}
-}) ;
+});
 
 ConversationSchema.pre('save', function (next) {
     this.timestamp = Date.now();

@@ -1,0 +1,239 @@
+.messages{
+  margin-top:20px;
+  textarea{
+    border:1px solid @color-gray-divider;
+  }
+  .new-recipient{
+    background-color:@color-blue-2;
+    padding:3px;
+    margin-right:3px;
+    .label{
+      border-radius:0;
+      font-size:12px;
+      padding:3px;
+    }
+    .btn{
+      color:white;
+    }
+  }
+
+  .dropdown-menu{
+    .active{
+      a{
+        background-image:none;
+        background-color:@color-blue-2;
+      }
+    }
+  }
+
+  .messages-list{
+    border-right:1px solid @color-gray-divider;
+    height:100%;
+    padding:0;
+    min-height:300px;
+    @media (min-width: @screen-sm-min) {
+      min-height:600px;
+    }
+    .new-button-container{
+      padding:10px 0;
+      text-align:center;
+    }
+    .message-list-container{
+      overflow-y:scroll;
+      height:220px;
+      @media (min-width: @screen-sm-min) {
+        height:520px;
+      }
+      .message-list{
+        padding:5px;
+        background-color:white;
+        position:relative;
+        height:70px;
+        border-top:1px solid @color-gray-divider;
+        &:last-of-type{
+          border-bottom:1px solid @color-gray-divider;
+        }
+        cursor:pointer;
+        &.new{
+          font-weight:bold;
+        }
+        &.active{
+          border-left:5px solid @color-blue-2;
+          cursor:default;
+        }
+        .avatar{
+          position:absolute;
+          left:10px;
+          top:10px;
+        }
+        .message-summary-container{
+          position:absolute;
+          left:70px;
+          right:90px;
+          top:5px;
+
+          .recipients{
+            color:@color-blue-2;
+          }
+        }
+        .timestamp{
+          position:absolute;
+          right:10px;
+          top:10px;
+          width:70px;
+          font-size:10px;
+          text-align:right;
+        }
+      }
+    }
+  }
+  .conversation-container{
+    min-height:300px;
+    @media (min-width: @screen-sm-min) {
+      min-height:600px;
+    }
+    padding-top:10px;
+    .new-message{
+      .recipient{
+        width:100%;
+        height:30px;
+      }
+      .recipient-list{
+        min-height:30px;
+        margin-top:5px;
+        .btn-xs{
+          border-radius:0;
+        }
+      }
+      .subject{
+        min-height:30px;
+        width:100%;
+
+      }
+      .message{
+        margin-top:30px;
+        width:100%;
+
+      }
+    }
+
+    .conversation{
+      .subject{
+        text-align:center;
+        font-size:16px;
+        font-weight:bold;
+      }
+      .recipients{
+        font-size:14px;
+        text-align:center;
+        color:@color-blue-2;
+        margin-bottom:10px;
+      }
+      .add-recipients{
+        margin:10px 0;
+        .btn-xs{
+          border-radius:0;
+          height:23px;
+        }
+        input{
+          height:30px;
+          margin-right:5px;
+        }
+
+
+      }
+
+      .conversation-window{
+        background-color:white;
+        height:330px;
+        overflow-y:scroll;
+        padding:10px;
+        border:1px solid lightgray;
+
+        .message-container{
+          margin-bottom:10px;
+          &.user{
+
+            .username{
+              float:right;
+            }
+
+            .timestamp-container{
+              padding-right: 60px;
+              width:100%;
+
+              .timestamp{
+                float:right;
+                margin-right:5px;
+                margin-left:0;
+              }
+            }
+            .avatar{
+              float:right;
+            }
+            .message-box{
+              float:right;
+
+              margin-right:10px;
+            }
+          }
+
+          .timestamp-container{
+            margin:3px 0;
+            padding-left: 60px;
+            width:100%;
+            .timestamp{
+              font-size:10px;
+              background-color:@color-gray-divider;
+              padding:3px;
+              border-radius:2px;
+              margin-left:5px;
+              margin-right:0;
+            }
+          }
+          .avatar{
+            float:left;
+
+          }
+          .message-box{
+            float:left;
+            background-color:@color-gray-divider;
+            padding:5px;
+            margin-left:10px;
+            border-radius:3px;
+            max-width:80%;
+
+            .username{
+              color:@color-blue-2;
+              text-transform:uppercase;
+            }
+            .message{
+              color:@color-text-light;
+            }
+
+          }
+
+          &.user{
+            .message-box {
+              background-color: lighten(@color-bg, 20%);
+            }
+
+          }
+        }
+      }
+
+      .reply-container{
+        padding:10px;
+        background-color:white;
+        border:1px solid @color-gray-divider;
+        border-top:0;
+        textarea{
+          width:100%;
+          border:1px solid @color-gray-divider;
+        }
+
+      }
+
+    }
+  }
+}

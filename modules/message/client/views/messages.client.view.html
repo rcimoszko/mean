@@ -1,0 +1,29 @@
+<section class="content messages content-padding-top">
+    <div class="panel">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="messages-list col-sm-4">
+                    <div class="new-button-container">
+                        <a class="btn btn-blue-empty" ui-sref="messages.new">New Message</a>
+                    </div>
+                    <div class="message-list-container">
+                        <div data-ng-repeat="conversation in conversations" class="message-list" ui-sref-active="active" ui-sref="messages.view({conversationId: conversation._id})" data-ng-class="{new: isNew(conversation)}">
+                            <img class="avatar-circle" data-ng-src="{{conversation.lastMessage.user.ref.avatarUrl}}"/>
+                            <div class="message-summary-container">
+                                <div class="recipients">
+                                    {{recipientList(conversation)}}
+                                </div>
+                                <div class="subject">{{conversation.subject}}</div>
+                            </div>
+
+                            <div class="timestamp" am-time-ago="conversation.timestamp"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="conversation-container" class="col-sm-8">
+                    <div data-ui-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
