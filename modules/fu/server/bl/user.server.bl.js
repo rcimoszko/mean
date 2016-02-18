@@ -3,11 +3,14 @@
 var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
+    cloudinary = require('cloudinary'),
+    multiparty = require('multiparty'),
     PickBl = require('./pick.server.bl'),
     PickListBl = require('./pick.list.server.bl'),
     FollowBl = require('./follow.server.bl'),
     SubscriptionBl = require('./subscription.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
+    config = require('../../../../config/config'),
     NotificationBl = require('./notification.server.bl'),
     User = mongoose.model('User');
 
@@ -299,9 +302,43 @@ function getInfo(user, callback){
     async.parallel(todo, callback);
 }
 
-
 function getForSearch(query, callback){
     User.find(query).sort('name').limit(5).exec(callback);
+}
+
+function uploadProfilePicture(req, callback){
+    var form = new multiparty.Form();
+    var user = req.user;
+
+    function cb(err, fields, files){
+
+        var todo = [];
+
+        cloudinary.config(config.cloudinary);
+
+        function uploadFile(callback){
+            function cb(result) {
+                callback(err, result);
+            }
+
+            cloudinary.uploader.upload(files.file[0].path, cb, {public_id: user.username.toLowerCase(), secure: true, overwrite:true, width:128, height:128, crop:'fill'});
+        }
+
+        function updateUser(result, callback){
+            user.updated = Date.now();
+            user.profileUrl = result.secure_url;
+            user.avatarUrl = cloudinary.url(user.username.toLowerCase()+'.'+result.format, { width: 50, secure:true, height: 50, crop: 'fill', version: result.version });
+            user.save(callback);
+        }
+        todo.push(uploadFile);
+        todo.push(updateUser);
+
+        async.waterfall(todo, callback);
+
+    }
+
+    form.parse(req, cb);
+
 }
 
 exports.getByUsername       = getByUsername;
@@ -314,3 +351,4 @@ exports.getCompletedPicks   = getCompletedPicks;
 exports.getTracker          = getTracker;
 exports.getInfo             = getInfo;
 exports.getForSearch        = getForSearch;
+exports.uploadProfilePicture = uploadProfilePicture;

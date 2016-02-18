@@ -1,0 +1,6 @@
+<label for="FileUpload">Profile Picture</label>
+<div class="profile-picture-upload">
+    <img class="profile-picture" data-ng-click="openUpload()" data-ng-src="{{profileUrl}}"/>
+</div>
+<input id="FileUpload" type="file" data-ng-model="formData.profile" style="display:none" onchange="angular.element(this).scope().uploadFile(this.files)">
+<div data-ng-show="invalidImageType">Profile image must be a jpg, gif, png or bmp.</div>
