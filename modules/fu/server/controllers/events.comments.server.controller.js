@@ -16,8 +16,8 @@ function get(req, res) {
         }
     }
 
-    var pick = req.pick;
-    CommentBl.getByPick(pick, cb);
+    var event = req.event;
+    CommentBl.getByEvent(event, cb);
 }
 
 function create(req, res){
@@ -32,10 +32,9 @@ function create(req, res){
         }
     }
 
-    var pick = req.pick;
+    var event = req.event;
 
-    CommentBl.createPickComment(req.body.text, pick, req.user, cb);
-
+    CommentBl.createEventComment(req.body.text, event, req.user, cb);
 }
 
 function update(req, res){
@@ -51,12 +50,13 @@ function update(req, res){
     }
 
     var comment = req.comment;
-    var pick = req.pick;
+    var event = req.event;
     var user = req.user;
     var text = req.body.text;
     var replyIndex = req.body.replyIndex;
 
-    CommentBl.pickCommentReply(comment, pick, user, text, replyIndex, cb);
+    CommentBl.eventCommentReply(comment, event, user, text, replyIndex, cb);
+
 }
 
 exports.get  = get;

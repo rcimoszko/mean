@@ -9,19 +9,19 @@
                 </a>
             </div>
             <div class="timestamp" am-time-ago="comment.timestamp"></div>
-            <div class="pick" data-ng-if="comment.pick">RE: {{comment.pick|betName:comment.event}}</div>
+            <div class="pick" data-ng-if="comment.pick">RE: {{comment.pick.user.name}} - {{comment.pick|betName:comment.event}}</div>
             <div class="text" ta-bind data-ng-model="comment.text"></div>
             <div class="actions">
                 <a href data-ng-click="showReply = !showReply" class="btn-reply">
                     <i class="fa fa-reply"></i> Reply
                 </a>
             </div>
-            <comment-form text="reply" data-ng-show="showReply"></comment-form>
-            <replies replies="comment.replies" users="comment.user"></replies>
+            <comment-form show-reply="showReply" reply-index="'0'" comments="comments" pick="pick || comment.pick" event="event" comment="comment" reply="comment" text="reply" data-ng-show="showReply"></comment-form>
+            <replies reply-index="'0'" comment="comment" pick="pick || comment.pick" event="event"  replies="comment.replies"></replies>
         </div>
     </div>
 
     <div class="comment-form-container">
-        <comment-form text="newComment"></comment-form>
+        <comment-form  comments="comments" pick="pick" event="event" text="newComment"></comment-form>
     </div>
 </div>

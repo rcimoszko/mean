@@ -5,11 +5,10 @@ angular.module('fu').directive('replies', function(RecursionHelper) {
         restrict: 'E',
         scope: {
             replies: '=',
-            commentId: '=',
+            event: '=',
+            pick: '=',
             replyIndex: '=',
-            discussionId: '=',
-            users: '=',
-            type: '='
+            comment: '='
         },
         compile: function(element) {
             return RecursionHelper.compile(element);
@@ -18,33 +17,9 @@ angular.module('fu').directive('replies', function(RecursionHelper) {
         controller: ['$scope', '$filter', function($scope, $filter) {
 
             $scope.getAvatarUrl = function(user){
-                var userFound = $filter('filter')($scope.users, {_id: user.ref});
-                return userFound.ref.avatarUrl;
+                var userFound = $filter('filter')($scope.comment.users, {_id: user.ref});
+                return userFound[0].avatarUrl;
             };
-
-
-            /*
-             $scope.authentication = Authentication;
-            $scope.commentReply = function(comment, text, commentIndex){
-                if(text){
-                    var path = [];
-                    if($scope.replyIndex === '0'){
-                        path.push(commentIndex);
-                    } else {
-                        path = $scope.replyIndex.split(',');
-                        path.push(commentIndex);
-                        path.shift();
-                    }
-                    var parentComment = {user: {name: comment.user.name, ref: comment.user.ref}, text: comment.text};
-                    var newComment = {user:{name: $scope.authentication.user.username, ref: $scope.authentication.user._id}, text: text};
-                    var commentReply = {path:path, commentId: $scope.commentId, comment: newComment, parentComment: parentComment, discussionId: $scope.discussionId, type:$scope.type};
-
-                    CommentSocket.emit('comment reply', commentReply);
-                    $scope.text = '';
-                }
-            };
-
-            */
         }]
     };
 });

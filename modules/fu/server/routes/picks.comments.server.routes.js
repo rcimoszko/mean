@@ -6,6 +6,10 @@ var policy = require('../policies/picks.comments.server.policies'),
 module.exports = function (app) {
 
     app.route('/api/picks/:pickId/comments').all(policy.isAllowed)
-        .get(ctrl.get);
+        .get(ctrl.get)
+        .post(ctrl.create);
+
+    app.route('/api/picks/:pickId/comments/:commentId').all(policy.isAllowed)
+        .put(ctrl.update);
 
 };

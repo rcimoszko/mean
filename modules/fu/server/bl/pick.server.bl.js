@@ -73,8 +73,6 @@ function getByQuery(query, callback){
 }
 
 function getByQueryWithOptions(query, options, callback){
-    console.log(query);
-    console.log(options);
     Pick.find(query, null, options).populate(populate).sort('eventStartTime').exec(callback);
 }
 

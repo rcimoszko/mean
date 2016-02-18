@@ -80,6 +80,10 @@ function populateBy(events, populate, callback){
     m_Event.populate(events, populate, callback);
 }
 
+function updateBy(query, update, callback){
+    m_Event.update(query, update, callback);
+}
+
 
 function cancel(event, callback){
     var todo = [];
@@ -171,6 +175,7 @@ exports.getOneByQuery  = getOneByQuery;
 exports.getByLeague  = getByLeague;
 exports.getForSearch  = getForSearch;
 exports.populateBy  = populateBy;
+exports.updateBy  = updateBy;
 
 exports.cancel      = cancel;
 exports.report      = report;

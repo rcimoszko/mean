@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('fu').factory('Picks', ['ApiPicksComments',
-    function(ApiPicksComments) {
+angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
+    function(ApiEventsComments, Authentication) {
 
-        var getComments = function(pick, callback){
+        var getComments = function(event, callback){
             function cbSuccess(comments){
                 callback(null, comments);
             }
@@ -12,10 +12,10 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
                 callback(response.data.message);
             }
 
-            ApiPicksComments.query({pick:pick._id}, cbSuccess, cbError);
+            ApiEventsComments.query({eventId:event._id}, cbSuccess, cbError);
         };
 
-        var newComment = function(pick, text, callback){
+        var newComment = function(event, text, callback){
             function cbSuccess(comments){
                 callback(null, comments);
             }
@@ -24,13 +24,12 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
                 callback(response.data.message);
             }
 
+            var eventComment = new ApiEventsComments({event:event._id, text:text});
 
-            var pickComment = new ApiPicksComments({pick:pick._id, text:text});
-
-            pickComment.$save(cbSuccess, cbError);
+            eventComment.$save(cbSuccess, cbError);
         };
 
-        var commentReply = function(pick, comment, replyIndex, text, callback){
+        var commentReply = function(event, comment, replyIndex, text, callback){
             function cbSuccess(comments){
                 callback(null, comments);
             }
@@ -38,19 +37,17 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
             function cbError(response){
                 callback(response.data.message);
             }
-
 
             var commentReply = {
                 _id: comment._id,
-                pick: pick._id,
+                event: event._id,
                 text: text,
                 replyIndex: replyIndex
             };
 
-            commentReply = new ApiPicksComments(commentReply);
+            commentReply = new ApiEventsComments(commentReply);
             commentReply.$update(cbSuccess, cbError);
         };
-
 
         return {
             getComments: getComments,

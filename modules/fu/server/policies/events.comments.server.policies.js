@@ -7,19 +7,19 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/picks/:pickId/comments',
+            resources: '/api/events/:eventId/comments',
             permissions: ['get', 'post']
         },{
-            resources: '/api/picks/:pickId/comments/:commentId',
+            resources: '/api/events/:eventId/comments/:commentId',
             permissions: ['put']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/picks/:pickId/comments',
+            resources: '/api/events/:eventId/comments',
             permissions: ['get', 'post']
         },{
-            resources: '/api/picks/:pickId/comments/:commentId',
+            resources: '/api/events/:eventId/comments/:commentId',
             permissions: ['put']
         }]
     }]);

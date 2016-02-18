@@ -1,4 +1,4 @@
-<div class="reply-container" data-ng-repeat="reply in replies">
+<div class="reply-container" data-ng-repeat="reply in replies|orderBy:'timestamp':true">
     <avatar size="'sm'" url="getAvatarUrl(reply.user)"></avatar>
     <div class="content-container">
         <div class="username">
@@ -13,7 +13,8 @@
                 <i class="fa fa-reply"></i> Reply
             </a>
         </div>
-        <comment-form text="replyText" data-ng-show="showReply"></comment-form>
+        <comment-form show-reply="showReply" reply-index="replyIndex+','+$index" comment="comment" reply="reply" comments="replies" pick="pick" event="event" text="replyText" data-ng-show="showReply"></comment-form>
+
+        <replies reply-index="replyIndex+','+$index" comment="comment" pick="pick" event="event" replies="reply.replies"></replies>
     </div>
-    <replies replies="reply.replies"></replies>
 </div>

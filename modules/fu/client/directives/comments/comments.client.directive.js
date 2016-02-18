@@ -4,11 +4,12 @@ angular.module('fu').directive('comments', function() {
     return {
         restrict: 'E',
         scope: {
-            comments: '='
+            comments: '=',
+            pick: '=',
+            event: '='
         },
         templateUrl: 'modules/fu/client/templates/comments/comments.client.template.html',
         controller: ['$scope', 'Authentication',  function($scope, Authentication) {
-            console.log($scope.comments);
 
             $scope.authentication = Authentication;
             $scope.newComment = '';
