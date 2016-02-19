@@ -4,6 +4,7 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     EventBl = require('./event.server.bl'),
+    NotificationBl = require('./notification.server.bl'),
     m_Comment = mongoose.model('Comment');
 
 var populate = [
@@ -88,7 +89,7 @@ function createEventComment(text, event, user, callback){
     async.waterfall(todo, cb);
 }
 
-function eventCommentReply(comment, event, user, text, replyIndex, callback){
+function eventCommentReply(comment, event, user, text, replyIndex, replyToUser, callback){
     var todo = [];
 
     var reply = {
@@ -120,6 +121,16 @@ function eventCommentReply(comment, event, user, text, replyIndex, callback){
         m_Comment.update(query, update, cb);
     }
 
+    function createCommentReplyNotification(callback){
+        if(typeof replyToUser.ref === 'object') {
+            replyToUser = {_id: replyToUser.ref._id, username: replyToUser.ref.username};
+        } else {
+            replyToUser = {_id: replyToUser.ref, username: replyToUser.name};
+        }
+        if(String(replyToUser._id) === String(user._id)) return callback();
+        NotificationBl.createCommentReplyNotification(replyToUser, user, comment, callback);
+    }
+
     function updateCommentCount(callback){
         event.commentCount++;
         function cb(err, event){
@@ -133,7 +144,6 @@ function eventCommentReply(comment, event, user, text, replyIndex, callback){
         var update = {$addToSet: {users: user._id}};
 
         function cb(err, comment){
-            console.log(comment);
             callback(err, comment);
         }
 
@@ -153,6 +163,7 @@ function eventCommentReply(comment, event, user, text, replyIndex, callback){
     }
 
     todo.push(insertReply);
+    todo.push(createCommentReplyNotification);
     todo.push(updateCommentCount);
     todo.push(updateUserList);
     todo.push(populateComment);
@@ -160,7 +171,7 @@ function eventCommentReply(comment, event, user, text, replyIndex, callback){
     async.waterfall(todo, cb);
 }
 
-function pickCommentReply(comment, pick, user, text, replyIndex, callback){
+function pickCommentReply(comment, pick, user, text, replyIndex, replyToUser, callback){
     var todo = [];
 
     var reply = {
@@ -192,6 +203,15 @@ function pickCommentReply(comment, pick, user, text, replyIndex, callback){
         m_Comment.update(query, update, cb);
     }
 
+    function createPickCommentNotification(comment, callback){
+        NotificationBl.createCommentPickNotification(pick.user, user, comment, callback);
+    }
+
+    function createCommentReplyNotification(comment, callback){
+        if(String(replyToUser.ref._id) === String(user._id)) return callback();
+        NotificationBl.createCommentReplyNotification(replyToUser.ref, user, comment, callback);
+    }
+
     function updatePickCommentCount(callback){
         pick.commentCount++;
         function cb(err, pick){
@@ -233,6 +253,8 @@ function pickCommentReply(comment, pick, user, text, replyIndex, callback){
     }
 
     todo.push(insertReply);
+    todo.push(createPickCommentNotification);
+    todo.push(createCommentReplyNotification);
     todo.push(updatePickCommentCount);
     todo.push(updateEventCommentCount);
     todo.push(updateUserList);
@@ -257,10 +279,14 @@ function createPickComment(text, pick, user, callback){
 
     function createComment(callback){
         comment = new m_Comment(comment);
-        function cb(err, comment){
-            callback(err);
+        function cb(err){
+            callback(err, comment);
         }
         comment.save(cb);
+    }
+
+    function createNotification(comment, callback){
+        NotificationBl.createCommentPickNotification(pick.user, user, pick, comment, callback);
     }
 
     function updatePickCommentCount(callback){
@@ -286,6 +312,7 @@ function createPickComment(text, pick, user, callback){
     }
 
     todo.push(createComment);
+    todo.push(createNotification);
     todo.push(updatePickCommentCount);
     todo.push(updateEventCommentCount);
     todo.push(populateComment);
@@ -293,7 +320,6 @@ function createPickComment(text, pick, user, callback){
 
     async.waterfall(todo, callback);
 }
-
 
 function del(comment, callback){
 

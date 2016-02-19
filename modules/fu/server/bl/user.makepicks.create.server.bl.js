@@ -5,6 +5,7 @@ var _ = require('lodash'),
     async = require('async'),
     slug = require('speakingurl'),
     PickBl = require('./pick.server.bl'),
+    NotificationBl = require('./notification.server.bl'),
     LeaderboardQueryBl = require('./leaderboard.query.server.bl');
 
 
@@ -236,7 +237,7 @@ function isPremium(event, user, callback){
     var filterType = 'league';
     var filterId = event.league.ref;
 
-    if(event.sport.name.toLowerCase() === 'tennis' || event.sport.name.toLowerCase() === 'e sports' || event.sport.name.toLowerCase() === 'golf'){
+    if(event.sport.name.toLowerCase() === 'tennis' || event.sport.name.toLowerCase() === 'e sports' || event.sport.name.toLowerCase() === 'golf' || event.sport.name.toLowerCase() === 'boxing'){
         filterType = 'sport';
         filterId = event.sport.ref._id;
     }
@@ -289,8 +290,6 @@ function create(event, bet, user, callback){
     var pick = {};
 
     console.log(event);
-    console.log(bet);
-
 
     function createPick(callback){
         pick = {
@@ -419,13 +418,13 @@ function create(event, bet, user, callback){
                 pick.premiumStats = premiumStats;
             }
 
-            function cb_pickSave(err){
+            function cb_pickSave(err, pick){
                 if(err) return callback(err, null);
 
                 if('copiedFrom' in bet){
                     addCopy(user, bet.copiedFrom.pick);
                     addCopy(user, bet.copiedOrigin.pick);
-                    //notification.newNotification('pick copied', pick);
+                    NotificationBl.createCopyPickNotification(bet.copiedFrom.user, user, pick, function(err){console.log(err);});
                 }
                 callback(err, pick);
 

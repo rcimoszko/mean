@@ -79,16 +79,27 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             info.stats.activePicks = info.picks.pending.length;
         }
 
+        function initiliazeSocket(){
+
+            SocketUser.connect();
+            SocketUser.emit('user join', Authentication.user._id);
+
+            SocketUser.on('new notification', function(notification){
+                info.notifications.push(notification);
+            });
+        }
+
         var initialize = function(){
             function cbSuccess(userInfo){
+                console.log(userInfo);
                 info.initialized = true;
                 info.following = userInfo.following;
                 info.picks.pending = userInfo.pendingPicks;
                 info.channels = userInfo.channels;
+                info.notifications = userInfo.notifications;
                 updateActiveUnits();
                 updateActivePicks();
-                SocketUser.connect();
-                SocketUser.emit('user join', Authentication.user._id);
+                initiliazeSocket();
 
             }
 
@@ -103,6 +114,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
                     following: [],
                     channels: [],
                     picks: {pending:[]},
+                    notifications: [],
                     stats: {activeUnits:null, activePicks:null}};
 
         var picks = {pending:[]};

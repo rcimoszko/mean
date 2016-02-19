@@ -117,8 +117,8 @@ function getMessages(user, callback){
     callback(null);
 }
 
-function getNotifications(user, callback){
-    callback(null);
+function getNotifications(userId, callback){
+    NotificationBl.getByUser(userId, callback);
 }
 
 function getPendingPicks(user, callback){
@@ -292,10 +292,15 @@ function getInfo(user, callback){
         SubscriptionBl.getByUser(user, cb);
     }
 
+    function getNotifications_todo(callback){
+        getNotifications(user._id, callback);
+    }
+
     var todo = {
         pendingPicks: getPendingPicks_todo,
         stats: getUserStats,
         following: getFollowing_todo,
+        notifications: getNotifications_todo,
         channels: getSubscriptions_todo
     };
 

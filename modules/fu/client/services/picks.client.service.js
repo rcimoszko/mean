@@ -30,7 +30,7 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
             pickComment.$save(cbSuccess, cbError);
         };
 
-        var commentReply = function(pick, comment, replyIndex, text, callback){
+        var commentReply = function(pick, comment, replyIndex, replyUser, text, callback){
             function cbSuccess(comments){
                 callback(null, comments);
             }
@@ -44,8 +44,10 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
                 _id: comment._id,
                 pick: pick._id,
                 text: text,
-                replyIndex: replyIndex
+                replyIndex: replyIndex,
+                replyUser: replyUser
             };
+            console.log(commentReply);
 
             commentReply = new ApiPicksComments(commentReply);
             commentReply.$update(cbSuccess, cbError);

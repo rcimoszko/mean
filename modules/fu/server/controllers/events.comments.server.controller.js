@@ -54,8 +54,9 @@ function update(req, res){
     var user = req.user;
     var text = req.body.text;
     var replyIndex = req.body.replyIndex;
+    var replyUser = req.body.replyUser;
 
-    CommentBl.eventCommentReply(comment, event, user, text, replyIndex, cb);
+    CommentBl.eventCommentReply(comment, event, user, text, replyIndex, replyUser, cb);
 
 }
 

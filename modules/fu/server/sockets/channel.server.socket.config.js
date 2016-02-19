@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     ChatBl = require('../bl/chat.server.bl');
 
-module.exports = function (io) {
+function config(io) {
 
     var nsp = io.of('/channel');
 
@@ -34,7 +34,9 @@ module.exports = function (io) {
 
         });
     });
-};
+}
+
+exports.config = config;
 
 
 

@@ -45,7 +45,7 @@ angular.module('fu').directive('commentForm', function() {
                     $scope.reply.replies.push(comment.reply);
                     $scope.comment = comment.comment;
                 }
-                Picks.commentReply($scope.pick, $scope.comment, $scope.replyIndex, $scope.text, cb);
+                Picks.commentReply($scope.pick, $scope.comment, $scope.replyIndex, $scope.reply.user, $scope.text, cb);
             }
 
             function eventCommentReply(){
@@ -54,7 +54,7 @@ angular.module('fu').directive('commentForm', function() {
                     $scope.reply.replies.push(comment.reply);
                     $scope.comment = comment.comment;
                 }
-                Events.commentReply($scope.event, $scope.comment, $scope.replyIndex, $scope.text, cb);
+                Events.commentReply($scope.event, $scope.comment, $scope.replyIndex, $scope.reply.user, $scope.text, cb);
             }
 
             $scope.submit = function(){

@@ -5,32 +5,24 @@ var mongoose = require('mongoose'),
 
 var nsp;
 
-module.exports = function (io) {
-
+function config(io){
     nsp = io.of('/user');
 
     nsp.on('connection', function(socket) {
 
         socket.on('user join', function(userId){
             socket.join(userId);
-
-            function cb(err, notifications){
-                nsp.to(userId).emit('new notification', notifications);
-            }
-
-            UserBl.getNotifications(userId, cb);
         });
 
         socket.on('disconnect', function(){
         });
     });
+}
 
-};
-
-
-exports.sendNotification = function(notification){
+function sendNotification(notification){
     nsp.to(notification.user.ref).emit('new notification', notification);
-};
+}
 
-
+exports.config = config;
+exports.sendNotification = sendNotification;
 

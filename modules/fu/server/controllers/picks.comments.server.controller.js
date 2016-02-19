@@ -55,8 +55,9 @@ function update(req, res){
     var user = req.user;
     var text = req.body.text;
     var replyIndex = req.body.replyIndex;
+    var replyUser = req.body.replyUser;
 
-    CommentBl.pickCommentReply(comment, pick, user, text, replyIndex, cb);
+    CommentBl.pickCommentReply(comment, pick, user, text, replyIndex, replyUser, cb);
 }
 
 exports.get  = get;

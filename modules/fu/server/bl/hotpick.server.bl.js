@@ -103,7 +103,6 @@ function getHotPick(sportId, leagueId, callback){
 
     function findHotPick(hotPickInfo, callback){
         if(!Object.keys(hotPickInfo).length) return callback(null, null);
-        console.log(hotPickInfo);
         var event =  hotPickInfo.event;
         var hotPick = {
             event: event,

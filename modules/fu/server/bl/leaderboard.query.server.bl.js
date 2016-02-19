@@ -16,7 +16,6 @@ function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, bet
             query = {$match: {result: 'Pending' }};
             break;
     }
-
     if (filterType !== 'all')    query.$match[filterType] = mongoose.Types.ObjectId(filterId);
     if (betType !== 'all')       query.$match.betType = betType;
     if (homeAway !== 'both')     query.$match['contestant.homeAway'] = homeAway;

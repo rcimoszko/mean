@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash'),
     Conversation = mongoose.model('Conversation');
 
-module.exports = function (io) {
+function config(io) {
 
     var nsp = io.of('/messages');
 
@@ -123,10 +123,6 @@ module.exports = function (io) {
             socket.leave(conversationId);
         });
     });
-};
-
-function newMessage(message){
-    nsp.to(message.conversation).emit('message reply', message);
 }
 
-exports.newMessage = newMessage;
+exports.config = config;

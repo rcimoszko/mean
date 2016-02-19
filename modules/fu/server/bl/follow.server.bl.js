@@ -4,10 +4,15 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
+    NotificationBl = require('./notification.server.bl'),
     Follow = mongoose.model('Follow');
 
 
 var populate = [];
+
+function findOneByQuery(query, callback){
+    Follow.findOne(query, callback);
+}
 
 function getFollowCount(user, callback){
     var userId = new mongoose.Types.ObjectId(user._id);
@@ -74,17 +79,64 @@ function updateFollowCount(user, userFollow, callback){
     async.waterfall(todo, callback);
 }
 
-function follow(user, userFollow, callback){
+function createFollow(user, userFollow, callback){
     var todo = [];
 
-    function followUser(callback){
-        var update = {
+    function create(callback){
+        var data = {
             follower: {name: user.username, ref:user._id},
             following: {name: userFollow.username, ref:userFollow._id},
             startDate: new Date(),
             endDate: null
         };
-        Follow.findOneAndUpdate({'follower.ref':user._id, 'following.ref':userFollow._id}, update, {new:true, upsert:true}, callback);
+
+        var follow = new Follow(data);
+
+        function cb(err){
+            callback(err, follow);
+        }
+
+        follow.save(cb);
+    }
+
+    function createNotification(follow, callback){
+        function cb(err){
+            callback(err, follow);
+        }
+        NotificationBl.createFollowNotification(userFollow, user, follow, cb);
+    }
+
+    todo.push(create);
+    todo.push(createNotification);
+
+    async.waterfall(todo, callback);
+}
+
+function updateFollow(follow, callback){
+    follow.startDate = new Date();
+    follow.endDate = null;
+
+    function cb(err){
+        callback(err, follow);
+    }
+
+    follow.save(cb);
+}
+
+function follow(user, userFollow, callback){
+    var todo = [];
+
+    function findFollow(callback){
+        var query = {'follower.ref':user._id, 'following.ref':userFollow._id};
+        findOneByQuery(query, callback);
+    }
+
+    function followUser(follow, callback){
+        if(follow){
+            updateFollow(follow, callback);
+        } else {
+            createFollow(user, userFollow, callback);
+        }
     }
 
     function updateCount(follow, callback){
@@ -103,6 +155,7 @@ function follow(user, userFollow, callback){
         callback(null, json);
     }
 
+    todo.push(findFollow);
     todo.push(followUser);
     todo.push(updateCount);
     todo.push(processReturnData);
@@ -139,7 +192,6 @@ function unfollow(user, userUnfollow, callback){
     async.waterfall(todo, callback);
 
 }
-
 
 function getFollowingList(userId, callback){
     function cb(err, follows){

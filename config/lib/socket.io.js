@@ -99,7 +99,7 @@ module.exports = function (app, db) {
 
   // Add an event listener to the 'connection' event
     config.files.server.sockets.forEach(function (socketConfiguration) {
-        require(path.resolve(socketConfiguration))(io);
+        require(path.resolve(socketConfiguration)).config(io);
     });
 
   /*

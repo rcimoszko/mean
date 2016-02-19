@@ -29,7 +29,7 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
             eventComment.$save(cbSuccess, cbError);
         };
 
-        var commentReply = function(event, comment, replyIndex, text, callback){
+        var commentReply = function(event, comment, replyIndex, replyUser, text, callback){
             function cbSuccess(comments){
                 callback(null, comments);
             }
@@ -42,7 +42,8 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
                 _id: comment._id,
                 event: event._id,
                 text: text,
-                replyIndex: replyIndex
+                replyIndex: replyIndex,
+                replyUser: replyUser
             };
 
             commentReply = new ApiEventsComments(commentReply);
