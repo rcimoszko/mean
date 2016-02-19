@@ -38,7 +38,7 @@ angular.module('message').config(['$stateProvider',
             .state('messages.view', {
                 url: '/:conversationId',
                 templateUrl: 'modules/message/client/views/view-message.client.view.html',
-                controller: 'MessageController',
+                controller: 'ViewMessageController',
                 data: {
                     roles: ['user']
                 }

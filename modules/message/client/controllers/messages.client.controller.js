@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('message').controller('MessagesController', ['$scope', '$filter', 'Authentication', 'User',
-    function($scope, $filter, Authentication, User) {
+angular.module('message').controller('MessagesController', ['$scope', '$filter', 'Authentication', 'User', 'SocketMessages',
+    function($scope, $filter, Authentication, User, SocketMessages) {
 
 
         $scope.authentication = Authentication;
@@ -13,8 +13,8 @@ angular.module('message').controller('MessagesController', ['$scope', '$filter',
 
             User.getConversations(cb);
         };
-        $scope.getConversationList();
 
+        $scope.getConversationList();
 
         $scope.recipientList = function(message){
             var recipientList = '';
@@ -35,11 +35,15 @@ angular.module('message').controller('MessagesController', ['$scope', '$filter',
         };
 
 
-        /*
-        MessageSocket.on('update message list', function(){
-            getConversationList();
+
+        $scope.$on('menuSet', function() {
+            $scope.getEvents();
         });
-        */
+
+        $scope.$on('updateConversationList', function(){
+            console.log('test');
+            $scope.getConversationList();
+        });
 
     }
 ]);

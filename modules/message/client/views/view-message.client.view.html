@@ -1,0 +1,40 @@
+<div data-ng-init="init();" class="conversation">
+    <div class="subject">{{conversation.subject}}</div>
+    <div class="recipients">
+        <span data-ng-repeat="recipient in conversation.recipients | filter: '!'+authentication.user.username">{{recipient.name}}<span ng-show=" ! $last ">, </span></span>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-blue-empty btn-xs" data-ng-click="leaveConversation()">Leave Conversation</a>
+    </div>
+    <!--
+    <div class="add-recipients">
+        <input type="text" data-ng-model="selectedUser" typeahead-min-length="3" typeahead="user as user.username for user in getUsers($viewValue) | filter:$viewValue | filter:removeSelected | filter: '!'+authentication.user.username | filter:removeExisting" data-typeahead-editable="false" data-typeahead-on-select="addRecipient(selectedUser)"  placeholder="Add recipient(s)">
+        <button class="btn btn-medium-white btn-sm" data-ng-click="addNewRecipients()">Add Users</button>
+        <span class="new-recipient" data-ng-repeat="user in newRecipients | filter: '!'+authentication.user.username">
+            <span class="label"> {{ user.name }} </span>
+            <span class="btn  btn-xs"  data-ng-click="removeRecipient(user)">x</span>
+        </span>
+    </div>
+    -->
+
+    <div class="conversation-window" scroll-glue>
+        <div data-ng-repeat="message in conversation.messages" class="message-container clearfix" data-ng-class="{user: message.user.name === authentication.user.username}">
+            <div class="timestamp-container clearfix"><a ui-sref="profile({username: message.user.name})" class="username">{{message.user.name}}</a><span class="timestamp" am-time-ago="message.timestamp"></span></div>
+            <div class="avatar"><avatar url="message.user.ref.avatarUrl" size="'sm'"></avatar></div>
+            <div class="message-box">
+                <div class="message">{{message.message}}</div>
+            </div>
+        </div>
+    </div>
+
+    <form data-ng-submit="replySubmit()">
+        <div class="reply-container">
+            <textarea maxlength="5000" rows="3" data-ng-model="text" name="text" placeholder="Enter message reply" required></textarea>
+            <div class="text-center">
+                <input type="submit" class="btn btn-blue-empty submit" value="Reply" />
+            </div>
+        </div>
+
+    </form>
+</div>

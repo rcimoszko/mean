@@ -20,7 +20,6 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
                 recipients: $scope.newRecipients,
                 message:    message
             };
-            console.log(conversation);
             if($scope.subject) conversation.subject = $scope.subject;
 
             User.createConversation(conversation, cb);
@@ -36,6 +35,7 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
             });
 
         };
+
 
         $scope.removeSelected = function(currentUser){
             var index = -1;
@@ -56,6 +56,7 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
             $scope.selectedUser = '';
         };
 
+
         $scope.removeRecipient = function(currentUser) {
             var index = -1;
             for (var i = 0; i < $scope.newRecipients.length; i++) {
@@ -68,6 +69,8 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
                 $scope.newRecipients.splice(index, 1);
             }
         };
+
+
 
     }
 ]);

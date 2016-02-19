@@ -188,7 +188,6 @@
             width:100%;
             .timestamp{
               font-size:10px;
-              background-color:@color-gray-divider;
               padding:3px;
               border-radius:2px;
               margin-left:5px;
@@ -212,16 +211,19 @@
               text-transform:uppercase;
             }
             .message{
-              color:@color-text-light;
+              color:@color-text;
             }
 
           }
 
           &.user{
             .message-box {
-              background-color: lighten(@color-bg, 20%);
+              background-color: @color-blue-2;
             }
 
+            .message{
+              color:white;
+            }
           }
         }
       }

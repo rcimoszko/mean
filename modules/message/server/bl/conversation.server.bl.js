@@ -4,19 +4,45 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     Message = mongoose.model('Message'),
+    MessageBl = require('./message.server.bl'),
     Conversation = mongoose.model('Conversation');
 
 
+function get(id, callback){
+
+    function cb(err, bet){
+        callback(err, bet);
+    }
+
+    Conversation.findById(id).exec(cb);
+}
+
+function create(data, callback) {
+
+    function cb(err){
+        callback(err, conversation);
+    }
+
+    var conversation = new Conversation(data);
+
+    conversation.save(cb);
+}
+
+function getByQuery(query, callback){
+    Conversation.find(query).sort('-timestamp').limit(200).populate('lastMessage.user.ref', 'username avatarUrl').exec(callback);
+}
+function getOneByQuery(query, callback){
+    Conversation.findOne(query).populate('lastMessage.user.ref', 'username avatarUrl').exec(callback);
+}
+
 function getByUser(user, callback){
     var query = {'recipients.ref': user._id};
-    Conversation.find(query).sort('timestamp').limit(200).populate('lastMessage.user.ref').exec(callback);
-
+    getByQuery(query, callback);
 }
 
 function createConversation(data, user, callback) {
 
     var todo = [];
-    console.log(data);
 
     function findExistingConversation(callback) {
 
@@ -29,22 +55,25 @@ function createConversation(data, user, callback) {
         });
 
         var query = {recipients: {$all: userQueryArray, $size: data.recipients.length}};
+        console.log(userQueryArray);
         console.log(query);
-        Conversation.findOne(query, callback);
+        getOneByQuery(query, callback);
 
     }
 
     function updateOrCreateConversation(conversation, callback) {
-        console.log(conversation);
 
         if (conversation) {
             var message = new Message(data.message);
             message.conversation = conversation._id;
-            message.save();
-            callback(null, conversation);
-            //socket.join(conversation._id);
-            //nsp.to(conversation._id).emit('new conversation', conversation);
-            //userSocket.newMessage(conversation.recipients);
+
+            MessageBl.create(message, function(err, message){
+                callback(null, conversation);
+                //socket.join(conversation._id);
+                //nsp.to(conversation._id).emit('new conversation', conversation);
+                //userSocket.newMessage(conversation.recipients);
+            });
+
         } else {
             conversation = {
                 recipients:     data.recipients,
@@ -53,15 +82,16 @@ function createConversation(data, user, callback) {
                 lastMessage:    data.message
             };
 
-            conversation = new Conversation(conversation);
-            conversation.save(function (err) {
-                var message = new Message(data.message);
+            create(conversation, function (err) {
+                var message = data.message;
                 message.conversation = conversation._id;
-                message.save();
-                callback(null, conversation);
-                //socket.join(newConverationDb._id);
-                //nsp.to(newConverationDb._id).emit('new conversation', newConverationDb);
-                //userSocket.newMessage(newConverationDb.recipients);
+
+                MessageBl.create(message, function(err){
+                    callback(null, conversation);
+                    //socket.join(newConverationDb._id);
+                    //nsp.to(newConverationDb._id).emit('new conversation', newConverationDb);
+                    //userSocket.newMessage(newConverationDb.recipients);
+                });
             });
         }
     }
@@ -72,5 +102,40 @@ function createConversation(data, user, callback) {
     async.waterfall(todo, callback);
 }
 
+
+function getConversation(user, conversation, callback){
+
+
+    var todo = [];
+
+    function checkPermissions(callback){
+        var found = _.filter(conversation.recipients, function(recipient){
+            return String(recipient.ref) === String(user._id);
+        });
+
+        if(found.length === 0) return callback('No Permissions');
+        callback();
+    }
+
+    function getMessages(callback){
+        conversation = conversation.toJSON();
+        function cb(err, messages){
+            conversation.messages = messages;
+            callback(err, conversation);
+        }
+
+        Message.find({conversation:conversation._id}).populate('user.ref').sort('timestamp').exec(cb);
+
+    }
+
+    todo.push(checkPermissions);
+    todo.push(getMessages);
+
+    async.waterfall(todo, callback);
+
+}
+
 exports.getByUser           = getByUser;
 exports.createConversation  = createConversation;
+exports.getConversation     = getConversation;
+exports.get                 = get;
