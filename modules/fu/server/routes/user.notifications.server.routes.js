@@ -8,4 +8,5 @@ module.exports = function (app) {
     app.route('/api/user/notifications').all(policy.isAllowed)
         .get(ctrl.get);
 
+    app.param('notificationId', ctrl.byId);
 };

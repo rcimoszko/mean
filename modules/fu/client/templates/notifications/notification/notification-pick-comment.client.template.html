@@ -1,1 +1,5 @@
-pick commet
+<div class="notification notification-pick-comment" data-ng-click="readNotification(notification)" data-ng-class="{new: notification.new}">
+    <avatar url="notification.userFrom.ref.avatarUrl" size="'xs'"></avatar>
+    <a ui-sref="profile({username:notification.userFrom.ref.username})">{{notification.userFrom.ref.username}}</a> commented on your pick.
+    <span class="timestamp" am-time-ago="notification.timestamp"></span>
+</div>

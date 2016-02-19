@@ -173,7 +173,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
             });
           });
         } else {
-          return done(err, user);
+            user.checkPremium(function(){
+                return done(err, user);
+            });
         }
       }
     });

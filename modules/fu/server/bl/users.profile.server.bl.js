@@ -236,7 +236,7 @@ function get(user, callback){
             profile.pendingPicks = pendingPicks;
             callback(err);
         }
-        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', user.premium, cb);
+        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', user.premium || user.trial, cb);
     }
 
     function getTrackerPicks_todo(callback){

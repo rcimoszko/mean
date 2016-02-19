@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -89,6 +89,20 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             });
         }
 
+        function readNotification(notification, callback){
+
+            function cbSuccess(notification){
+                console.log(notification);
+                callback(null, notification);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUserNotification.update(notification, cbSuccess, cbError);
+        }
+
         var initialize = function(){
             function cbSuccess(userInfo){
                 console.log(userInfo);
@@ -97,6 +111,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
                 info.picks.pending = userInfo.pendingPicks;
                 info.channels = userInfo.channels;
                 info.notifications = userInfo.notifications;
+                info.messageCount = userInfo.messageCount;
                 updateActiveUnits();
                 updateActivePicks();
                 initiliazeSocket();
@@ -113,6 +128,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
         var info = {initialized: false,
                     following: [],
                     channels: [],
+                    messageCount: 0,
                     picks: {pending:[]},
                     notifications: [],
                     stats: {activeUnits:null, activePicks:null}};
@@ -129,7 +145,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             getFollowing: getFollowing,
             initialize: initialize,
 
-            createConversation: createConversation
+            createConversation: createConversation,
+            readNotification: readNotification
         };
 
     }

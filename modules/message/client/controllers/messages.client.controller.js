@@ -41,7 +41,6 @@ angular.module('message').controller('MessagesController', ['$scope', '$filter',
         });
 
         $scope.$on('updateConversationList', function(){
-            console.log('test');
             $scope.getConversationList();
         });
 

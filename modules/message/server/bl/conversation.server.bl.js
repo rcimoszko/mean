@@ -102,7 +102,6 @@ function createConversation(data, user, callback) {
     async.waterfall(todo, callback);
 }
 
-
 function getConversation(user, conversation, callback){
 
 
@@ -135,7 +134,12 @@ function getConversation(user, conversation, callback){
 
 }
 
+function getNewMessageCount(userId, callback){
+    Conversation.count({'recipients.ref': userId, 'recipients.new':true }).exec(callback);
+}
+
 exports.getByUser           = getByUser;
 exports.createConversation  = createConversation;
 exports.getConversation     = getConversation;
 exports.get                 = get;
+exports.getNewMessageCount  = getNewMessageCount;

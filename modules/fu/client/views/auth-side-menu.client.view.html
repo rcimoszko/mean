@@ -14,7 +14,8 @@
                 <a href data-ng-click="showNotifications()"><i class="fa fa-bell-o"></i>
                 </a>
             </div>
-            <span class="notification-count">{{notificationCount()}}</span>
+            <span class="notification-count" data-ng-if="notificationCount()>0">{{notificationCount()}}</span>
+            <span class="message-count" data-ng-if="user.info.messageCount>0">{{user.info.messageCount}}</span>
         </div>
     </div>
     <div class="stats-container">

@@ -4,5 +4,5 @@
 </div>
 
 <div class="modal-body">
-    <notification notification="notification" data-ng-repeat="notification in notifications"> </notification>
+    <notification notification="notification" data-ng-repeat="notification in notifications|orderBy:'timestamp':true"> </notification>
 </div>

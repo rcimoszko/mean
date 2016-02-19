@@ -79,7 +79,7 @@ p {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -88,12 +88,12 @@ p {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: white;
+  color: #ffffff;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -102,12 +102,12 @@ p {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: white;
+  color: #ffffff;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -116,12 +116,12 @@ p {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: white;
+  color: #ffffff;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -130,12 +130,12 @@ p {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: white;
+  color: #ffffff;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -144,12 +144,12 @@ p {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: white;
+  color: #ffffff;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -158,7 +158,7 @@ p {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: white;
+  color: #ffffff;
   background-color: #449d48;
 }
 .btn-blue-empty {
@@ -222,7 +222,7 @@ p {
   text-align: center;
 }
 .btn-tracker .fa {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .btn-follow-rect {
   background-color: #1ccf31;
@@ -256,6 +256,21 @@ p {
   transition: all 0.1s ease-in-out;
 }
 .btn-subscribe:hover {
+  background-color: #1ac22e;
+  color: white;
+}
+.btn-upgrade {
+  background-color: #1ccf31;
+  color: white;
+  font-size: 13px;
+  padding: 4px 18px;
+  -moz-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn-upgrade:hover {
   background-color: #1ac22e;
   color: white;
 }
@@ -349,10 +364,10 @@ p {
   background: #eeeeee;
 }
 .loading-bg-white:before {
-  background: white;
+  background: #ffffff;
 }
 .loading-bg-white:after {
-  background: white;
+  background: #ffffff;
 }
 .loading.loading-blue {
   box-shadow: inset 0 0 0 1em #104673;
@@ -367,7 +382,7 @@ p {
   box-shadow: inset 0 0 0 1em #eeeeee;
 }
 .loading.loading-white {
-  box-shadow: inset 0 0 0 1em white;
+  box-shadow: inset 0 0 0 1em #ffffff;
 }
 .loading-sm {
   font-size: 2px;
@@ -782,7 +797,7 @@ input.toggle:checked + label:after {
   margin: 0 -20px;
 }
 #splash .btn-premium {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   padding: 15px 30px;
   font-size: 20px;
   text-transform: uppercase;
@@ -831,7 +846,7 @@ input.toggle:checked + label:after {
   -moz-background-size: cover;
   -ms-background-size: cover;
   padding: 21% 0;
-  border-bottom: 20px solid #4CAF50;
+  border-bottom: 20px solid #4caf50;
 }
 @media (min-width: 1200px) {
   #splash #section-one {
@@ -970,7 +985,7 @@ input.toggle:checked + label:after {
 }
 #splash .bottom-cta p {
   margin: 0px auto 40px;
-  color: black;
+  color: #000000;
 }
 #splash #section-three {
   background: white;
@@ -1151,17 +1166,17 @@ input.toggle:checked + label:after {
   }
 }
 .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   margin-right: 5px;
   padding: 0 3px;
   font-size: 12px;
 }
 .color-green {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .color-red {
-  color: #F44336;
+  color: #f44336;
 }
 .search-container .dropdown-menu li .typeahead-group-header {
   padding-left: 10px;
@@ -1188,6 +1203,23 @@ input.toggle:checked + label:after {
 }
 .search-container .dropdown-menu li:hover a .start-time {
   color: white;
+}
+.notification {
+  padding: 5px 5px;
+  border-bottom: 1px solid #eaeaea;
+}
+.notification .avatar {
+  margin-right: 3px;
+}
+.notification .timestamp {
+  color: #aaabac;
+  font-size: 10px;
+}
+.notification.new {
+  background-color: #fbfbfb;
+}
+notification:last-of-type .notification {
+  border-bottom: 0;
 }
 .modal-prompt {
   width: 300px;
@@ -1242,6 +1274,20 @@ input.toggle:checked + label:after {
 .modal-choose-channels .channel-name {
   font-size: 16px;
 }
+@media (min-width: 768px) {
+  .modal-stripe {
+    width: 900px;
+  }
+}
+.modal-stripe .modal-body {
+  min-height: 300px;
+}
+.modal-stripe .modal-body h3 {
+  color: #21759b;
+}
+.modal-stripe .btn-upgrade {
+  margin-top: 10px;
+}
 #auth-side-menu {
   position: fixed;
   top: 0;
@@ -1270,9 +1316,31 @@ input.toggle:checked + label:after {
 #auth-side-menu .user-container {
   height: 95px;
   padding: 30px 10px 30px 20px;
+  position: relative;
 }
 #auth-side-menu .user-container .avatar {
   float: left;
+}
+#auth-side-menu .user-container .notification-count {
+  background-color: #e9893a;
+  color: white;
+  border-radius: 7px;
+  padding: 1px 2px;
+  font-size: 11px;
+  position: absolute;
+  right: 38px;
+  top: 65px;
+}
+#auth-side-menu .user-container .message-count {
+  background-color: #e9893a;
+  color: white;
+  border-radius: 7px;
+  padding: 1px 2px;
+  font-size: 11px;
+  position: absolute;
+  text-align: center;
+  right: 63px;
+  top: 65px;
 }
 #auth-side-menu .user-container .username-container {
   overflow: hidden;
@@ -1292,16 +1360,6 @@ input.toggle:checked + label:after {
   color: White;
   margin-right: 10px;
   font-size: 14px;
-}
-#auth-side-menu .user-container .username-container .notification-count {
-  background-color: #e9893a;
-  color: white;
-  border-radius: 7px;
-  padding: 1px 2px;
-  font-size: 11px;
-  position: relative;
-  top: -10px;
-  right: -57px;
 }
 #auth-side-menu .stats-container {
   height: 130px;
@@ -1373,7 +1431,7 @@ input.toggle:checked + label:after {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -2767,7 +2825,7 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 .channel-event .stats .stats-container.results-loss .value {
-  color: #F44336;
+  color: #f44336;
 }
 .channel-event .stats .stats-container .stat-section-header {
   padding-bottom: 5px;
@@ -3012,11 +3070,11 @@ input.toggle:checked + label:after {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -3283,13 +3341,13 @@ input.toggle:checked + label:after {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #F44336;
+  color: #f44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
@@ -3471,7 +3529,7 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 #tracker .loss {
-  color: #F44336;
+  color: #f44336;
 }
 #tracker .push {
   color: #104673;
@@ -3845,11 +3903,18 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 .gamecenter-consensus .consensus-container .fa-arrow-circle-o-down {
-  color: #F44336;
+  color: #f44336;
 }
 .gamecenter-picks .tab-pane {
   height: 500px;
   overflow-y: scroll;
+}
+.gamecenter-picks .pro-picks-upgrade {
+  text-align: center;
+  padding-top: 20px;
+}
+.gamecenter-picks .pro-picks-upgrade h2 {
+  font-size: 16px;
 }
 .pick-list .pick {
   margin: 0 15px;
@@ -3872,7 +3937,12 @@ input.toggle:checked + label:after {
   right: 0;
   top: 23px;
 }
-.pick-list .pick:last-of-type .pick-container {
+.pick-list .pick .upgrade-container {
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+.pick-list .pick:last-of-type .pick-container,
+.pick-list .pick:last-of-type .upgrade-container {
   border-bottom: 0;
 }
 .pick-list .pick .pick-container {
@@ -3889,7 +3959,7 @@ input.toggle:checked + label:after {
   margin-right: 8px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   display: inline-block;
   margin-right: 3px;
   color: white;
@@ -3933,7 +4003,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
@@ -3941,7 +4011,7 @@ input.toggle:checked + label:after {
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,
@@ -4195,7 +4265,7 @@ input.toggle:checked + label:after {
   color: #1ccf31;
 }
 .share .share-box-container .response-container .error {
-  color: #F44336;
+  color: #f44336;
 }
 .messages {
   margin-top: 20px;

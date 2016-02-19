@@ -14,6 +14,9 @@ var mongoose = require('mongoose'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
 
+
+var stripe = require('stripe')(config.stripe.secretKey);
+
 /**
  * A Validation function for local strategy properties
  */
@@ -349,6 +352,34 @@ UserSchema.statics.generateRandomPassphrase = function () {
       resolve(password);
     }
   });
+};
+
+UserSchema.methods.checkPremium = function(callback) {
+    var _this = this;
+    if(_this.stripeId && _this.subscriptionId){
+        stripe.customers.retrieveSubscription(this.stripeId, this.subscriptionId, function(err, subscription) {
+            if(subscription){
+                var endDate = new Date(subscription.current_period_end*1000);
+                var now = Date();
+                if(endDate < now) {
+                    _this.premium = false;
+                    _this.save(function(err, user){
+                        callback();
+                    });
+                } else {
+                    callback();
+                }
+            } else {
+                //cancel subscription
+                _this.premium = false;
+                _this.save(function(err, user){
+                    callback();
+                });
+            }
+        });
+    } else {
+        callback();
+    }
 };
 
 mongoose.model('User', UserSchema);

@@ -20,7 +20,7 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
         $scope.allActive = false;
 
         function initilizePicksTab(){
-            if($scope.proPicks && $scope.proPicks.length){
+            if($scope.proCount > 0){
                 $scope.proActive = true;
             }  else {
                 $scope.proPicks = [];
@@ -40,6 +40,8 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             $scope.bets         = gamecenter.bets;
             $scope.allPicks     = gamecenter.picks.general;
             $scope.proPicks     = gamecenter.picks.pro;
+            $scope.proCount     = gamecenter.picks.proCount;
+            $scope.proHidden     = gamecenter.picks.proHidden;
             $scope.event        = gamecenter.event;
             initializeMakePicks();
             initilizePicksTab();

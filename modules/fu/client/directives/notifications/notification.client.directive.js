@@ -7,14 +7,15 @@ angular.module('fu').directive('notification', function ($compile) {
             notification: '='
         },
         template: '',
-        controller:  ['$scope', '$element',  function ( $scope, $element) {
+        controller:  ['$scope', '$element', 'User',  function ( $scope, $element, User) {
             var directive;
-            console.log($scope.notification);
+
             switch($scope.notification.type){
                 case 'follow':
                     directive = '<notification-follow notification="notification"></notification-follow>';
                     break;
                 case 'copy pick':
+                case 'copy':
                     directive = '<notification-copy-pick notification="notification"></notification-copy-pick>';
                     break;
                 case 'pick comment':
@@ -23,6 +24,9 @@ angular.module('fu').directive('notification', function ($compile) {
                 case 'comment reply':
                     directive = '<notification-comment-reply notification="notification"></notification-comment-reply>';
                     break;
+                case 'activity':
+                    directive = '<notification-activity notification="notification"></notification-activity>';
+                    break;
             }
 
 
@@ -30,7 +34,11 @@ angular.module('fu').directive('notification', function ($compile) {
             $element.append(el);
 
             $scope.readNotification = function(notification){
-                console.log('read');
+                function cb(err, updatedNotif){
+                    if(!err) notification.new = false;
+                }
+
+                User.readNotification(notification, cb);
             };
 
         }]

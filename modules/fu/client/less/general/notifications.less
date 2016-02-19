@@ -1,0 +1,20 @@
+.notification{
+  padding:5px 5px;
+  border-bottom:1px solid @color-gray-divider;
+  .avatar{
+    margin-right:3px;
+  }
+  .timestamp{
+    color:@color-text-light;
+    font-size:10px;
+  }
+  &.new{
+    background-color:lighten(@color-bg, 5%);
+  }
+
+}
+notification:last-of-type{
+  .notification{
+    border-bottom:0;
+  }
+}

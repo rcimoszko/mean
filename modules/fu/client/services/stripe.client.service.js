@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('fu').factory('StripeService', ['$resource', 'Authentication', '$http',
-    function($resource, Authentication, $http) {
+angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal',
+    function($resource, $state, Authentication, $http, Modal) {
 
         var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
         var image ='/modules/fu/client/img/stripe/fansunite-logo-square.png';
 
 
         //stripe resource
-        var stripe = $resource('/newSubscription', {
+        var stripe = $resource('/pro/new', {
             save: {
                 method:'POST',
                 params:{stripeToken: '@_stripeToken', plan: '@_plan'}
@@ -87,7 +87,7 @@ angular.module('fu').factory('StripeService', ['$resource', 'Authentication', '$
 
         var resumeSubscription =  function(callback){
             if (confirm('Are you sure you want to renew your pro subscription?')) {
-                $http({method: 'GET', url: '/resumeSubscription'}).
+                $http({method: 'GET', url: '/pro/resume'}).
                     success(function(user) {
                         Authentication.user = user;
                         callback({type: 'success', user: user});
@@ -100,7 +100,7 @@ angular.module('fu').factory('StripeService', ['$resource', 'Authentication', '$
 
         var cancelSubscription = function(callback){
             if (confirm('Are you sure you want to cancel your pro subscription?')) {
-                $http({method: 'GET', url: '/cancelSubscription'}).
+                $http({method: 'GET', url: '/pro/cancel'}).
                     success(function (user, status) {
                         Authentication.user = user;
                         callback({type: 'success', user:user});
@@ -108,6 +108,19 @@ angular.module('fu').factory('StripeService', ['$resource', 'Authentication', '$
                     error(function (data, status) {
                         callback({type:'error', message: data.message});
                     });
+            }
+        };
+
+        var showSubscriptionModal = function(){
+            if(Authentication.user){
+                Modal.showModal(
+                    'modules/fu/client/views/stripe/modal/modal-stripe.client.view.html',
+                    'ModalStripeController',
+                    null,
+                    'stripe'
+                );
+            } else {
+                $state.go('signup');
             }
         };
 
@@ -119,7 +132,8 @@ angular.module('fu').factory('StripeService', ['$resource', 'Authentication', '$
 
             new1MonthSubscription: new1MonthSubscription,
             new6MonthSubscription: new6MonthSubscription,
-            new12MonthSubscription : new12MonthSubscription
+            new12MonthSubscription : new12MonthSubscription,
+            showSubscriptionModal: showSubscriptionModal
         };
 
     }

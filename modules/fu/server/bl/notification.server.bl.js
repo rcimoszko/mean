@@ -12,6 +12,16 @@ var populate = [
         {path:'pick', model: 'Pick'}
     ];
 
+
+function get(id, callback){
+
+    function cb(err, sport){
+        callback(err, sport);
+    }
+
+    m_Notification.findById(id).exec(cb);
+}
+
 function create(data, callback) {
 
     function cb(err){
@@ -125,9 +135,12 @@ function createCommentReplyNotification(user, userFrom, comment, callback){
             type: 'comment reply',
             comment: comment
         };
-        console.log(notification);
 
         create(notification, callback);
+    }
+
+    function populateNotification(notification, callback){
+        m_Notification(notification, populate, callback);
     }
 
     function sendNotification(notification, callback){
@@ -136,11 +149,41 @@ function createCommentReplyNotification(user, userFrom, comment, callback){
     }
 
     todo.push(createNotification);
+    todo.push(populateNotification);
     todo.push(sendNotification);
 
     async.waterfall(todo, callback);
 }
 
+function read(user, notification, callback){
+    var todo = [];
+
+    function checkPermission(callback){
+        if(String(user._id) !== String(notification.user.ref)) return callback('no permission');
+        callback();
+    }
+
+    function updateNotification(callback){
+        function cb(err){
+            callback(err);
+        }
+
+        notification.new = false;
+        notification.save(cb);
+
+    }
+    function populateNotification(callback){
+       m_Notification.populate(notification, populate, callback);
+    }
+
+    todo.push(checkPermission);
+    todo.push(updateNotification);
+    todo.push(populateNotification);
+
+    async.waterfall(todo, callback);
+}
+
+exports.get = get;
 exports.getByUser = getByUser;
 exports.getByQuery = getByQuery;
 
@@ -148,4 +191,6 @@ exports.createFollowNotification        = createFollowNotification;
 exports.createCopyPickNotification      = createCopyPickNotification;
 exports.createCommentPickNotification   = createCommentPickNotification;
 exports.createCommentReplyNotification   = createCommentReplyNotification;
+
+exports.read   = read;
 

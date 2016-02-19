@@ -8,6 +8,7 @@ angular.module('fu').directive('notificationCommentReply', function () {
         },
         templateUrl: 'modules/fu/client/templates/notifications/notification/notification-comment-reply.client.template.html',
         controller: ['$scope', function ($scope){
+
             $scope.readNotification = $scope.$parent.readNotification;
         }]
     };

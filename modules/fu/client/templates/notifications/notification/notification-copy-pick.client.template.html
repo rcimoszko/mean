@@ -1,1 +1,5 @@
-copy pick
+<div class="notification notification-copy-pick" data-ng-click="readNotification(notification)" data-ng-class="{new: notification.new}">
+    <avatar url="notification.userFrom.ref.avatarUrl" size="'xs'"></avatar>
+    <a ui-sref="profile({username:notification.userFrom.ref.username})">{{notification.userFrom.ref.username}}</a> copied your pick.
+    <span class="timestamp" am-time-ago="notification.timestamp"></span>
+</div>

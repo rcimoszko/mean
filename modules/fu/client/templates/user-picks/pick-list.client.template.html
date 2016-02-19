@@ -1,8 +1,8 @@
 
 <div class="pick-list">
     <div class="pick clearfix" data-ng-repeat="pick in picks">
-        <div data-ng-if="pick.hidden">
-            HIDDEN
+        <div class="text-center upgrade-container" data-ng-if="pick.hidden">
+            <btn-upgrade></btn-upgrade>
         </div>
         <div data-ng-if="!pick.hidden">
             <div class="avatar-container" data-ng-if="includeUser">

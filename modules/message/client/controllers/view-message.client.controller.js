@@ -19,7 +19,6 @@ angular.module('message').controller('ViewMessageController', ['$scope', '$state
 
         $scope.joinRoom = function(){
             var joinRoom = {conversationId: $scope.conversationId, userId: $scope.authentication.user._id };
-            console.log(joinRoom);
             SocketMessages.emit('join room', joinRoom);
             $rootScope.$broadcast('updateConversationList');
         };

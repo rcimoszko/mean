@@ -4,8 +4,12 @@
     </div>
     <tabset class="tabs-full tabs-3">
         <tab active="proActive">
-            <tab-heading>PRO ({{proPicks.length}})</tab-heading>
-            <pick-list include-user="true" picks="proPicks" event="event"></pick-list>
+            <tab-heading>PRO ({{proCount}})</tab-heading>
+            <pick-list include-user="true" picks="proPicks" event="event" data-ng-if="!proHidden"></pick-list>
+            <div class="pro-picks-upgrade" data-ng-if="proHidden">
+                <h2>{{proCount}} Pro Picks</h2>
+                <btn-upgrade></btn-upgrade>
+            </div>
         </tab>
         <tab active="allActive">
             <tab-heading>ALL ({{allPicks.length}})</tab-heading>

@@ -5,13 +5,14 @@ var _ = require('lodash'),
     async = require('async'),
     cloudinary = require('cloudinary'),
     multiparty = require('multiparty'),
+    config = require('../../../../config/config'),
     PickBl = require('./pick.server.bl'),
     PickListBl = require('./pick.list.server.bl'),
     FollowBl = require('./follow.server.bl'),
     SubscriptionBl = require('./subscription.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
-    config = require('../../../../config/config'),
     NotificationBl = require('./notification.server.bl'),
+    ConversationBl = require('../../../message/server/bl/conversation.server.bl'),
     User = mongoose.model('User');
 
 
@@ -84,7 +85,7 @@ function getFollowing(user, query, callback){
     }
 
     function getFollowingPicks(callback){
-        PickListBl.getUserEventPickList(sportId, leagueId, followingIdArray, user.premium, callback);
+        PickListBl.getUserEventPickList(sportId, leagueId, followingIdArray, user.premium || user.trial, callback);
     }
 
     function addPicksToList(userPickList, callback){
@@ -265,7 +266,11 @@ function getTracker(user, callback){
 }
 
 function getSubscriptions(user, callback){
+    callback(null);
+}
 
+function getNewMessageCount(userId, callback){
+    ConversationBl.getNewMessageCount(userId, callback);
 }
 
 function getInfo(user, callback){
@@ -296,12 +301,17 @@ function getInfo(user, callback){
         getNotifications(user._id, callback);
     }
 
+    function getNewMessageCount_todo(callback){
+        getNewMessageCount(user._id, callback);
+    }
+
     var todo = {
         pendingPicks: getPendingPicks_todo,
         stats: getUserStats,
         following: getFollowing_todo,
         notifications: getNotifications_todo,
-        channels: getSubscriptions_todo
+        channels: getSubscriptions_todo,
+        messageCount: getNewMessageCount_todo
     };
 
     async.parallel(todo, callback);
