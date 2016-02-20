@@ -569,6 +569,9 @@ p {
     border-right: 1px solid #eaeaea;
   }
 }
+.panel-default .panel-heading {
+  background-image: none;
+}
 h1 {
   color: #2b2b2c;
 }
@@ -1221,6 +1224,32 @@ input.toggle:checked + label:after {
 notification:last-of-type .notification {
   border-bottom: 0;
 }
+.footer {
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+}
+.footer .header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.footer ul li a {
+  color: #6a6b6c;
+}
+.footer .footer-bottom {
+  border-top: 1px solid #e9893a;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+.footer .footer-bottom span {
+  margin-right: 10px;
+}
+.footer .footer-bottom span a {
+  color: #6a6b6c;
+}
 .modal-prompt {
   width: 300px;
   margin: 50px auto;
@@ -1509,9 +1538,11 @@ notification:last-of-type .notification {
   color: #2b2b2c;
 }
 #make-picks {
-  position: absolute;
-  left: 0;
-  right: 0;
+  /*
+  position:absolute;
+  left:0;
+  right:0;
+  */
 }
 #make-picks #menu-container {
   position: fixed;
@@ -1760,6 +1791,12 @@ notification:last-of-type .notification {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  color: white;
+}
+@media (min-width: 768px) {
+  .make-picks-sub-menu h1 .heading {
+    color: #6a6b6c;
+  }
 }
 .make-picks-sub-menu h1 .bet-duration-filter {
   position: absolute;
@@ -3804,13 +3841,16 @@ notification:last-of-type .notification {
 #top-sportsbooks .sportsbook-table.sportsbook-table-heading thead th {
   border-bottom: 0;
 }
-#user-guide .left-container {
+.user-guide .left-container {
   float: left;
   max-width: 25%;
 }
-#user-guide .right-container {
+.user-guide .right-container {
   padding-left: 30px;
   overflow: hidden;
+}
+.user-guide img {
+  max-width: 100%;
 }
 .gamecenter-header .color-header .color-section {
   float: left;

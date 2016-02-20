@@ -103,6 +103,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 title: 'Monthly Revenue Share | FansUnite',
                 description: 'About FansUnite monthly revenue share.',
                 keywords: 'make money betting on sports'
+            }).
+            state('static.whyGoPro', {
+                url: '/why-go-pro',
+                templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',
+                title: 'Why Go Pro | FansUnite',
+                description: 'About FansUnite monthly revenue share.',
+                keywords: 'make money betting on sports'
             });
     }
 ]);

@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading) {
         $scope.authentication = Authentication;
-        $scope.loading = true;
+        $scope.loading = Loading;
         $scope.socket = SocketHub;
         if($scope.socket){
             $scope.socket.connect();
@@ -14,11 +14,10 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
          */
 
         function cbGetHub(err, hub){
-            $scope.loading = false;
-            console.log(hub);
+            $scope.loading.isLoading.pageLoading = false;
             $scope.hub = hub;
         }
-
+        $scope.loading.isLoading.pageLoading = true;
         Hub.getHub(cbGetHub);
 
         /**

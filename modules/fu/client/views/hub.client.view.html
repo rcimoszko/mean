@@ -1,8 +1,8 @@
 <section data-ng-controller="HubController" class="hub content-padding-top">
     <div class="loading-container">
-        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading"></loading>
+        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
     </div>
-    <div class="container-fluid" data-ng-hide="loading">
+    <div class="container-fluid" data-ng-hide="loading.isLoading.pageLoading">
         <div class="row">
             <div class="col-sm-4">
                 <ng-include src="'/modules/fu/client/views/hub/hub-picks-feed.client.view.html'"></ng-include>

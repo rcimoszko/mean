@@ -7,6 +7,7 @@
 .panel-heading{
   border-color:@color-gray-divider;
 }
+
 .panel{
   .box-shadow(1);
   h1{
@@ -44,5 +45,11 @@
 .border-right-divider-md{
   @media (min-width: @screen-md-min) {
     border-right:1px solid @color-gray-divider;
+  }
+}
+
+.panel-default{
+  .panel-heading{
+    background-image:none;
   }
 }
