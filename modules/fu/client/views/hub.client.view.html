@@ -1,5 +1,5 @@
 <section data-ng-controller="HubController" class="hub content-padding-top">
-    <div class="loading-container">
+    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
         <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
     </div>
     <div class="container-fluid" data-ng-hide="loading.isLoading.pageLoading">
