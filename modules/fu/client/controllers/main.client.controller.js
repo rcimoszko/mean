@@ -7,6 +7,6 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
         if($scope.authentication.user && !User.info.initialized) User.initialize();
         $scope.isPicksPage = function(){
             return $state.current.name.indexOf('makePicks') !== -1;
-        }
+        };
     }
 ]);
