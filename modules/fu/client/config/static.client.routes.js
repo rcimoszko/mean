@@ -104,6 +104,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 description: 'About FansUnite monthly revenue share.',
                 keywords: 'make money betting on sports'
             }).
+            state('static.press', {
+                url: '/press',
+                templateUrl: '/modules/fu/client/views/static/static.press.client.view.html',
+                title: 'Press | FansUnite',
+                description: 'Sports betting community for handicappers looking to get free picks, practice their betting strategy and see where the top guys are actually putting their money.',
+                keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
+            }).
             state('static.whyGoPro', {
                 url: '/why-go-pro',
                 templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',

@@ -3856,6 +3856,26 @@ notification:last-of-type .notification {
 .user-guide img {
   max-width: 100%;
 }
+#press .panel:hover {
+  border-color: rgba(232, 126, 4, 0.1);
+  cursor: pointer;
+}
+#press .panel img {
+  max-width: 100%;
+}
+#press .panel h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+#press .panel h3 {
+  margin-top: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+#press .panel h4 {
+  color: #aaabac;
+  font-size: 14px;
+}
 .gamecenter-header .color-header .color-section {
   float: left;
   width: 50%;
