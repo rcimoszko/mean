@@ -17,7 +17,7 @@
       </table>
       <div data-ng-repeat="sportsbook in sportsbooks">
           <div class="sportsbook-logo-sm">
-              <a href="#" data-ng-click="location.redirect(sportsbook.affiliateUrl)">
+              <a href="#" target="_blank" data-ng-click="location.redirect(sportsbook.affiliateUrl)">
                   <img data-ng-src="/modules/fu/client/img/sportsbook/{{sportsbook.name.toLowerCase().replace(' ', '-')}}.png" class="sportsbook-logo">
               </a>
           </div>

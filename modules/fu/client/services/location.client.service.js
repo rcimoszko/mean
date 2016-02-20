@@ -37,10 +37,10 @@ angular.module('fu').factory('Location', ['$resource', '$state',  function($reso
                 if(restrictedCountries.indexOf(country) !== -1){
                     $state.go('static.offer-not-available');
                 } else {
-                    window.location.replace(affiliateUrl);
+                    window.open(affiliateUrl, '_blank');
                 }
             } else {
-                window.location.replace(affiliateUrl);
+                window.open(affiliateUrl, '_blank');
             }
         });
     };
