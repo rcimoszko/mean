@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels', 'SocketChannel',
-    function ($scope, $state, $stateParams, $location, Authentication, Channels, SocketChannel) {
+angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels', 'SocketChannel', 'Loading',
+    function ($scope, $state, $stateParams, $location, Authentication, Channels, SocketChannel, Loading) {
 
         $scope.date = $stateParams.date;
         $scope.channelSlug = $stateParams.channelSlug;
         $scope.authentication = Authentication;
-        $scope.loading = true;
+        $scope.loading = Loading;
 
         function setDate(date){
             $scope.currentDate = new Date(date);
@@ -32,7 +32,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
 
         function cb(err, channelContent){
             console.log(channelContent);
-            $scope.loading = false;
+            $scope.loading.isLoading.pageLoading = false;
             $scope.channelContent = channelContent;
             $scope.channel = channelContent.channel;
             setupSocket();
@@ -53,6 +53,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
 
         }
 
+        $scope.loading.isLoading.pageLoading = true;
         Channels.getContent($scope.channelSlug, $scope.currentDate, cb);
 
         $scope.updateDate = function(date){

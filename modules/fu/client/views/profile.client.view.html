@@ -1,5 +1,8 @@
 <section class="container-fluid" id="profile" data-ng-controller="ProfileController">
-    <div class="row">
+    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
+        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
+    </div>
+    <div class="row" data-ng-hide="loading.isLoading.pageLoading">
         <div class="col-sm-4">
             <ng-include src="'/modules/fu/client/templates/profile/profile-info.client.template.html'"></ng-include>
             <ng-include src="'/modules/fu/client/templates/profile/profile-all-time-stats.client.template.html'"></ng-include>

@@ -1,15 +1,17 @@
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter',
-    function ($scope, $state, $stateParams, Users, Authentication, $filter) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading) {
         $scope.username = $stateParams.username;
+        $scope.loading = Loading;
         if(!$scope.username) $state.go('hub');
 
         function cbGetProfile(err, profile){
+            $scope.loading.isLoading.pageLoading = false;
             if(!err) $scope.profile = profile;
             $scope.initializeTracker($scope.profile.trackerPicks);
         }
-
+        $scope.loading.isLoading.pageLoading = true;
         Users.getProfile($scope.username, cbGetProfile);
 
         /**

@@ -1,8 +1,8 @@
 <section data-ng-controller="ChannelController" class="channel content-padding-top">
-    <div class="loading-container" data-ng-hide="!loading">
-        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading"></loading>
+    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
+        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
     </div>
-    <div data-ng-hide="loading">
+    <div data-ng-hide="loading.isLoading.pageLoading">
         <ng-include src="'/modules/fu/client/views/channels/channel-top-menu.client.view.html'"></ng-include>
 
         <div class="row">

@@ -1,5 +1,10 @@
 <section class="my-following content-padding-top" data-ng-controller="MyFollowingController">
-    <ng-include src="'/modules/fu/client/templates/following/following-filters.client.template.html'"></ng-include>
-    <ng-include src="'/modules/fu/client/templates/following/following-leaderboard.client.template.html'"></ng-include>
-    <ng-include src="'/modules/fu/client/templates/following/following-list.client.template.html'"></ng-include>
+    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
+        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
+    </div>
+    <div data-ng-hide="loading.isLoading.pageLoading">
+        <ng-include src="'/modules/fu/client/templates/following/following-filters.client.template.html'"></ng-include>
+        <ng-include src="'/modules/fu/client/templates/following/following-leaderboard.client.template.html'"></ng-include>
+        <ng-include src="'/modules/fu/client/templates/following/following-list.client.template.html'"></ng-include>
+    </div>
 </section>
