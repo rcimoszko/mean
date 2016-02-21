@@ -5,7 +5,9 @@
         </a>
     </div>
     <div class="user-container">
-        <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
+        <a ui-sref="profile({username:authentication.user.username})">
+            <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
+        </a>
         <div class="username-container">
             <a ui-sref="profile({username:authentication.user.username})" class="username">{{authentication.user.username}}</a>
             <div class="icon-container">

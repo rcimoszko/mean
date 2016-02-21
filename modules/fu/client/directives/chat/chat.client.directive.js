@@ -8,7 +8,7 @@ angular.module('fu').directive('chat', function() {
             channel: '='
         },
         templateUrl: 'modules/fu/client/templates/chat/chat.client.template.html',
-        controller: ['$scope', 'Authentication',  function($scope, Authentication) {
+        controller: ['$scope', 'Authentication', function($scope, Authentication) {
             $scope.messages = [];
             $scope.authentication = Authentication;
             $scope.showFullChat = false;
@@ -21,12 +21,19 @@ angular.module('fu').directive('chat', function() {
                 if($scope.channel) chat.channel = {name: $scope.channel.name, ref: $scope.channel._id};
                 $scope.socket.emit('new message', chat);
                 this.text = '';
+
+
             };
 
 
             $scope.socket.on('new message', function(messages){
                 $scope.messages = $scope.messages.concat(messages);
             });
+
+            $scope.goToBottom = function() {
+                 var chatBox = document.getElementById('chat-box');
+                 chatBox.scrollTop = 99999;
+            };
 
 
             $scope.$on('$destroy', function () {

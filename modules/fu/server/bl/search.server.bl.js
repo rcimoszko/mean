@@ -16,7 +16,7 @@ function get(text, callback){
         var todo = [];
 
         function getEvents(callback){
-            var query = {$or:[{'contestant1.name': { $regex: new RegExp(text, 'i') }},{'contestant2.name': { $regex: new RegExp(text, 'i') }}]};
+            var query = {$or:[{'contestant1.name': '/^'+text+'/'},{'contestant2.name':  '/^'+text+'/'}]};
             EventBl.getForSearch(query, callback);
         }
 

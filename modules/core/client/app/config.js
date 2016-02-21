@@ -17,7 +17,7 @@ var ApplicationConfiguration = (function () {
       'lrInfiniteScroll',
       'textAngular',
       'angularMoment',
-      'ngScrollGlue',
+      'luegg.directives',
       'angular.filter'];
 
   // Add a new vertical module

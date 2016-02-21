@@ -2950,13 +2950,13 @@ notification:last-of-type .notification {
 }
 .channel-event .consensus .consensus-container .value-container {
   float: left;
-  width: 10%;
+  width: 11%;
   color: #2b2b2c;
   text-align: center;
 }
 .channel-event .consensus .consensus-container .bar-container {
   float: left;
-  width: 30%;
+  width: 29%;
   height: 12px;
   margin-top: 3px;
   background-color: #eaeaea;
@@ -4596,6 +4596,7 @@ notification:last-of-type .notification {
   bottom: 0;
   z-index: 1;
   border: 0;
+  padding: 7px 10px;
 }
 .chat .chat-full .message-list-container {
   position: absolute;
@@ -4633,7 +4634,7 @@ notification:last-of-type .notification {
   position: absolute;
   right: 33px;
   bottom: 0;
-  border: 0;
+  padding: 5px 10px;
 }
 .chat .chat-full .btn {
   border-radius: 0;

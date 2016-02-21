@@ -2,13 +2,13 @@
     <div class="panel-body">
         <div class="channel-consensus-section channel-hot-picks-container" data-ng-if="channelContent.hotPick">
             <h1>
-                HOT PICK
+                HOT PICK <span class="time-heading" tooltip="Current prediction with the most pro picks on the given side."><i class="fa fa-info-circle"></i></span>
             </h1>
             <hot-pick hot-pick="channelContent.hotPick" data-ng-if="channelContent.hotPick"></hot-pick>
         </div>
         <div class="channel-consensus-section channel-consensus-picks-container" data-ng-if="channelContent.consensus.length">
             <h1>
-                CONSENSUS PICK
+                CONSENSUS PICK <span class="time-heading">MONEYLINE</span>
             </h1>
             <consensus-pick consensus-pick="pick" data-ng-repeat="pick in channelContent.consensus"></consensus-pick>
         </div>

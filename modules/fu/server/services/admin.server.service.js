@@ -260,7 +260,7 @@ function assignBetDurations(callback){
 }
 
 function createChannels(callback){
-    var excludeSports = ['Basketball', 'Hockey', 'Football'];
+    var excludeSports = ['Basketball', 'Hockey', 'Football', 'Futsal', 'Horse Racing'];
     var leagueChannels = ['NBA', 'NFL', 'NHL', 'NCAAB', 'NCAAF', 'MLB'];
     var otherChannels = ['Other Hockey', 'Other Basketball', 'Other Baseball'];
     var todo = [];
