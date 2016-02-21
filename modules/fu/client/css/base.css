@@ -4235,16 +4235,22 @@ notification:last-of-type .notification {
 }
 .gamecenter-header .event-info-container .contestant-container {
   text-transform: uppercase;
-  width: 39%;
+  width: 38%;
   text-align: center;
   display: inline-block;
   vertical-align: middle;
   font-size: 18px;
   color: #2b2b2c;
+  padding: 10px;
+}
+.gamecenter-header .event-info-container .contestant-container img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .gamecenter-header .event-info-container .contestant-container .contestant-name {
   height: 48px;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .gamecenter-header .event-info-container .event-details-container {
   vertical-align: middle;
@@ -4278,6 +4284,14 @@ notification:last-of-type .notification {
 .gamecenter-make-picks .picks-event-container {
   box-shadow: none;
   margin-bottom: 0;
+}
+.gamecenter-make-picks .make-picks-filters {
+  margin-top: 5px;
+  padding: 5px;
+  text-align: center;
+}
+.gamecenter-make-picks .make-picks-filters li {
+  margin-top: 5px;
 }
 .gamecenter-consensus.consensus-1 .consensus-container {
   width: 100%;
@@ -4356,6 +4370,15 @@ notification:last-of-type .notification {
   overflow: hidden;
   border-bottom: 1px solid #eaeaea;
   padding-bottom: 15px;
+  min-height: 75px;
+}
+.pick-list .pick .pick-container .hidden-pick {
+  background-image: url('/modules/fu/client/img/picks/hidden-pick.png');
+  text-align: center;
+  height: 65px;
+}
+.pick-list .pick .pick-container .hidden-pick .btn-upgrade {
+  margin-top: 15px;
 }
 .pick-list .pick .pick-container .bet-name {
   padding-left: 5px;

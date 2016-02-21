@@ -1,7 +1,7 @@
 <div class="panel gamecenter-consensus consensus-{{consensus.length}}" data-ng-if="consensus.length > 0">
     <div class="panel-body">
         <h1>CONSENSUS</h1>
-        <div class="consensus-container" data-ng-repeat="con in consensus">
+        <div class="consensus-container" data-ng-repeat="con in consensus" tooltip="{{con.count}} Pick(s)">
             <div class="header">{{con.header}}</div>
             <div data-ng-if="con.betType !== 'total points'">
                 <div class="logo-container" data-ng-if="con.logoUrl"> <logo size="'md'" url="con.logoUrl"></logo></div>

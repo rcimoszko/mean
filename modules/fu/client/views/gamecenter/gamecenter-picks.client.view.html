@@ -7,7 +7,7 @@
             <tab-heading>PRO ({{proCount}})</tab-heading>
             <pick-list include-user="true" picks="proPicks" event="event" data-ng-if="!proHidden"></pick-list>
             <div class="pro-picks-upgrade" data-ng-if="proHidden">
-                <h2>{{proCount}} Pro Picks</h2>
+                <h2>{{proCount}} Pro Pick(s)</h2>
                 <btn-upgrade></btn-upgrade>
             </div>
         </tab>
@@ -16,8 +16,8 @@
             <pick-list include-user="true" picks="allPicks" event="event"></pick-list>
         </tab>
         <tab>
-            <tab-heading>FOLLOWING</tab-heading>
-            <pick-list include-user="true" picks="allPicks" event="event"></pick-list>
+            <tab-heading>FOLLOWING ({{followingPicks.length}})</tab-heading>
+            <pick-list include-user="true" picks="followingPicks" event="event"></pick-list>
         </tab>
     </tabset>
 </div>

@@ -1,5 +1,5 @@
 <div class="panel gamecenter-make-picks">
-    <tabset justified="true">
+    <tabset class="tabs-full tabs-{{bets.betDurations.length}}">
         <tab data-ng-repeat="betDuration in bets.betDurations" data-ng-click="updateActiveBetDuration(betDuration)">
             <tab-heading>{{betDuration|uppercase}}</tab-heading>
             <div class="make-picks-filters">

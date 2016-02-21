@@ -218,7 +218,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
                 for(var i=0; i<pEvent.picks.length; i++){
                     if(String(pEvent.picks[i].user.ref._id) !== String(userId)){
                         if(pEvent.picks[i].premium && !userPremium){
-                            pEvent.picks[i] = {hidden: true};
+                            pEvent.picks[i] = {hidden: true, user:pEvent.picks[i].user};
 
                         }
                     }

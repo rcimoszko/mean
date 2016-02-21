@@ -1,18 +1,19 @@
 
 <div class="pick-list">
     <div class="pick clearfix" data-ng-repeat="pick in picks">
-        <div class="text-center upgrade-container" data-ng-if="pick.hidden">
-            <btn-upgrade></btn-upgrade>
-        </div>
-        <div data-ng-if="!pick.hidden">
-            <div class="avatar-container" data-ng-if="includeUser">
-                <avatar size="'sm'" url="pick.user.ref.avatarUrl"></avatar>
-                <div class="username">
-                    <a ui-sref="profile({username:pick.user.ref.username})">{{pick.user.ref.username}}</a>
-                </div>
-                <btn-follow user-id="pick.user.ref._id"></btn-follow>
+        <div class="avatar-container" data-ng-if="includeUser">
+            <avatar size="'sm'" url="pick.user.ref.avatarUrl"></avatar>
+            <div class="username">
+                <a ui-sref="profile({username:pick.user.ref.username})">{{pick.user.ref.username}}</a>
             </div>
-            <div class="pick-container">
+            <btn-follow user-id="pick.user.ref._id"></btn-follow>
+        </div>
+        <div class="pick-container">
+            <div data-ng-if="pick.hidden" class="hidden-pick">
+                <btn-upgrade></btn-upgrade>
+            </div>
+
+            <div data-ng-if="!pick.hidden">
                 <div class="bet-name">
                     <span class="pro-label" data-ng-if="pick.premium">PRO</span>
                     {{pick|betName:event}} <span class="bet-duration">{{pick.betDuration}}</span>
@@ -61,6 +62,8 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>

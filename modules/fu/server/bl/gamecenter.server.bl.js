@@ -55,11 +55,15 @@ function get(event, league, user, callback){
         function getProPicks(generalPicks, callback){
             var proPicks = _.remove(generalPicks, {premium: true});
             picks = {general: generalPicks};
+            picks.proCount = 0;
             if(proPicks.length){
                 if(!user || (!user.premium && !user.trial)){
                     picks.proCount = proPicks.length;
                     picks.proHidden = true;
                     picks.pro = [];
+                    for(var i=0; i<proPicks.length; i++){
+                        picks.pro.push({hidden:true, user:proPicks[i].user});
+                    }
                 } else {
                     picks.proCount = proPicks.length;
                     picks.pro = proPicks;

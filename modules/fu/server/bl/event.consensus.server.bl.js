@@ -41,15 +41,18 @@ function getGamecenterConsensus(event, callback){
                     if(contestant1.logoUrl) spread.logoUrl = contestant1.logoUrl;
                     spread.name = contestant1.name;
                     spread.percent = percent1;
+                    spread.count = contestant1Picks.length;
 
                 } else if (percent2 > percent1){
                     if(contestant2.logoUrl) spread.logoUrl = contestant2.logoUrl;
                     spread.name = contestant2.name;
                     spread.percent = percent2;
+                    spread.count = spreadPicks.length - contestant1Picks.length;
                 } else {
                     if(contestant1.logoUrl) spread.logoUrl = contestant1.logoUrl;
                     spread.name = contestant1.name;
                     spread.percent = 50;
+                    spread.count = contestant1Picks.length;
                 }
             }
             callback(null, spread);
@@ -78,15 +81,18 @@ function getGamecenterConsensus(event, callback){
                     if(contestant1.logoUrl) moneyline.logoUrl = contestant1.logoUrl;
                     moneyline.name = contestant1.name;
                     moneyline.percent = percent1;
+                    moneyline.count = contestant1Picks.length;
 
                 } else if (percent2 > percent1){
                     if(contestant2.logoUrl) moneyline.logoUrl = contestant2.logoUrl;
                     moneyline.name = contestant2.name;
                     moneyline.percent = percent2;
+                    moneyline.count = moneylinePicks.length - contestant1Picks.length;
                 } else {
                     if(contestant1.logoUrl) moneyline.logoUrl = contestant1.logoUrl;
                     moneyline.name = contestant1.name;
                     moneyline.percent = 50;
+                    moneyline.count = contestant1Picks.length;
                 }
             }
             callback(null, moneyline);
@@ -113,14 +119,17 @@ function getGamecenterConsensus(event, callback){
                     totals.overUnder = 'over';
                     totals.name = 'Over';
                     totals.percent = percent1;
+                    totals.count = overPicks.length;
                 } else if (percent2 > percent1){
                     totals.overUnder = 'over';
                     totals.name = 'Under';
                     totals.percent = percent2;
+                    totals.count = totalsPicks.length - overPicks.length;
                 } else {
                     totals.overUnder = 'over';
                     totals.name = 'Over';
                     totals.percent = 50;
+                    totals.count = overPicks.length;
                 }
             }
             callback(null, totals);

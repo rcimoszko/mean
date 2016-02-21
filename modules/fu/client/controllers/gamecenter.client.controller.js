@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter',
-    function ($scope, $stateParams, $filter, Gamecenter) {
+angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter', 'User',
+    function ($scope, $stateParams, $filter, Gamecenter, User) {
         $scope.eventSlug = $stateParams.eventSlug;
         $scope.leagueSlug = $stateParams.leagueSlug;
 
@@ -29,6 +29,17 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
 
         }
 
+        $scope.followingPicks = [];
+        function initializeFollowingPicks(){
+            var allPicks =  $scope.allPicks.concat($scope.proPicks);
+            $scope.followingPicks = $filter('filter')(allPicks, function(pick){
+                var following = $filter('filter')(User.info.following, function(following){
+                    return pick.user.ref._id === following._id;
+                });
+                return following.length;
+            });
+        }
+
 
         function cb(err, gamecenter){
             console.log(gamecenter);
@@ -41,8 +52,9 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             $scope.allPicks     = gamecenter.picks.general;
             $scope.proPicks     = gamecenter.picks.pro;
             $scope.proCount     = gamecenter.picks.proCount;
-            $scope.proHidden     = gamecenter.picks.proHidden;
+            $scope.proHidden    = gamecenter.picks.proHidden;
             $scope.event        = gamecenter.event;
+            initializeFollowingPicks();
             initializeMakePicks();
             initilizePicksTab();
         }
@@ -54,7 +66,7 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
         };
 
         $scope.setActiveBetType = function(betType){
-            $scope.activeBetDuration = betType;
+            $scope.activeBetType = betType;
         };
 
     }
