@@ -48,9 +48,10 @@
                 </fieldset>
             </form>
             <div class="text-center">
-                <button data-ng-if="!user.premium && !user.trial" class="btn btn-premium btn-large" ng-click="newSubscription()">Upgrade to Pro</button>
+
+                <btn-upgrade data-ng-if="!user.premium && !user.trial" ></btn-upgrade>
                 <a data-ng-if="user.premium && !user.lifetimePremium && !user.cancelledPremium" href="#" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
-                <button data-ng-if="user.premium && user.cancelledPremium" class="btn btn-premium btn-large" ng-click="resumeSubscription()">Resume Pro Subscription</button>
+                <button data-ng-if="user.premium && user.cancelledPremium" class="btn btn-upgrade btn-large" ng-click="resumeSubscription()">Resume Pro Subscription</button>
                 <div data-ng-if="user.premium && user.cancelledPremium" class="subscription-note">Your pro subscription has been cancelled and will end on {{user.premiumEndDate|date:'longDate'}}.</div>
                 <div data-ng-if="user.premium && !user.cancelledPremium && !user.lifetimePremium" class="subscription-note">Your pro subscription will auto renew on  {{user.premiumRenewDate|date:'longDate'}}.</div>
             </div>

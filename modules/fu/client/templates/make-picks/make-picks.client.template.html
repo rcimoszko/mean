@@ -4,10 +4,12 @@
             <div class="contestant-section">
                 <div class="heading">{{::event.startTime|date:'shortTime'}}</div>
                 <div class="contestants-container">
+                    <a ui-sref="gamecenter({eventSlug:event.slug, leagueSlug:event.league.ref.slug})">
                     <div>
-                        <div class="contestant-name bet-row">{{::contestant1.name}}</div>
+                        <div class="contestant-name bet-row"><logo url="contestant1.ref.logoUrl" size="'xs'"></logo>{{::contestant1.name}}</div>
                     </div>
-                    <div class="contestant-name bet-row">{{::contestant2.name}}</div>
+                    <div class="contestant-name bet-row"><logo url="contestant2.ref.logoUrl" size="'xs'"></logo>{{::contestant2.name}}</div>
+                    </a>
                 </div>
             </div>
             <div class="bet-section-container bet-section-container-{{betType}}" data-ng-repeat="betType in betTypes" data-ng-class="{active: activeBetType === betType}">

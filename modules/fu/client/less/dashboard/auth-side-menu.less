@@ -104,6 +104,11 @@
   .menu-container{
     padding:20px;
     overflow-y:scroll;
+    position:absolute;
+    bottom:30px;
+    top:285px;
+    left:0;
+    right:0;
     .add-btn{
       border:1px solid fade(white,50%);
       border-radius:13px;
@@ -142,5 +147,20 @@
       }
     }
     }
+  }
+
+  .logout-container{
+    position:absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    background-color:@color-bg-auth-side-menu;
+    padding:10px 0;
+    text-align:center;
+    a{
+      color:fade(white,60%);
+      text-transform:uppercase;
+    }
+
   }
 }

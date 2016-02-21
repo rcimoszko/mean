@@ -10,15 +10,22 @@
 </div>
 <div class="modal-footer">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" data-ng-if="!betSlip.status.submitted">
             <div class="col-xs-6">
                 <button class="btn btn-blue" type="button" ng-click="confirmYes()" data-ng-disabled="loading.isLoading.pickSubmit">
                     <span data-ng-if="!loading.isLoading.pickSubmit">YES</span>
                     <loading is-loading="loading.isLoading.pickSubmit" size="'sm'" bg-color="'blue'" color="'white'"></loading>
                 </button>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6" data-ng-if="!betSlip.status.submitted">
                 <button class="btn btn-white" type="button" ng-click="modal.closeModal(modalInstance)" data-ng-disabled="loading.isLoading.pickSubmit">NO</button>
+            </div>
+        </div>
+        <div class="row" data-ng-if="betSlip.status.submitted">
+            <div class="col-xs-12">
+                <button class="btn btn-blue" type="button" ng-click="modal.closeModal(modalInstance)">
+                    CLOSE
+                </button>
             </div>
         </div>
     </div>

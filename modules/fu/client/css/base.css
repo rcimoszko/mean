@@ -1440,6 +1440,11 @@ notification:last-of-type .notification {
 #auth-side-menu .menu-container {
   padding: 20px;
   overflow-y: scroll;
+  position: absolute;
+  bottom: 30px;
+  top: 285px;
+  left: 0;
+  right: 0;
 }
 #auth-side-menu .menu-container .add-btn {
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -1475,6 +1480,19 @@ notification:last-of-type .notification {
 }
 #auth-side-menu .menu-container ul.channel-list > li a {
   color: rgba(255, 255, 255, 0.95);
+}
+#auth-side-menu .logout-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #21759b;
+  padding: 10px 0;
+  text-align: center;
+}
+#auth-side-menu .logout-container a {
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
 }
 #top-menu {
   position: fixed;

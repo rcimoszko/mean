@@ -198,9 +198,10 @@ function getPicks(query, callback){
         var sort = 'startTime';
         var populate = [
             {path:'sport.ref', select: 'name slug'},
+            {path:'league.ref', select: 'name slug'},
             {path:'pinnacleBets', select: 'betType betDuration otIncluded odds altLine altNumber spread contestant points overUnder draw underdog openingOdds openingSpread openingPoints'},
-            {path:'contestant1.ref', select: 'name darkColor lightColor name1 name2 record'},
-            {path:'contestant2.ref', select: 'name darkColor lightColor name1 name2 record'}];
+            {path:'contestant1.ref', select: 'name darkColor lightColor name1 name2 record logoUrl'},
+            {path:'contestant2.ref', select: 'name darkColor lightColor name1 name2 record logoUrl'}];
 
         m_Event.find(query).select(select).sort(sort).populate(populate).exec(callback);
     }
