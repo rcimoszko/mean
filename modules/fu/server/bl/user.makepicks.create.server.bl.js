@@ -235,7 +235,7 @@ function isPremium(event, user, callback){
     var premiumTypes = [];
     var premiumStats = {};
     var filterType = 'league';
-    var filterId = event.league.ref;
+    var filterId = event.league.ref._id;
 
     if(event.sport.name.toLowerCase() === 'tennis' || event.sport.name.toLowerCase() === 'e sports' || event.sport.name.toLowerCase() === 'golf' || event.sport.name.toLowerCase() === 'boxing'){
         filterType = 'sport';
@@ -294,7 +294,7 @@ function create(event, bet, user, callback){
         pick = {
             event: event._id,
             sport: event.sport.ref._id,
-            league: event.league.ref,
+            league: event.league.ref._id,
             bet: bet._id,
             user: {name: user.username, ref: user._id},
             altLine: bet.altLine,
