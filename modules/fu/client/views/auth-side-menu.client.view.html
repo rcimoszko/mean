@@ -48,19 +48,19 @@
     </div>
     <div class="menu-container">
         <ul class="user-menu">
-            <li><a ui-sref="myHub">HUB</a></li>
+            <li><a ui-sref="myHub" data-ng-class="{active: isActive('/hub')}">HUB</a></li>
             <li>
                 <a>CHANNELS</a>
                 <a href class="pull-right add-btn" data-ng-click="showChannelSelect()">+</a>
                 <ul class="channel-list">
                     <li data-ng-repeat="channel in user.info.channels">
-                        <a ui-sref="channel.main.home({channelSlug: channel.slug})">{{channel.name}}</a>
+                        <a ui-sref="channel.main.home({channelSlug: channel.slug})" data-ng-class="{active: isActive('/channel/'+channel.slug)}">{{channel.name}}</a>
                     </li>
                 </ul>
             </li>
-            <li><a ui-sref="profile({username:authentication.user.username})">PROFILE</a></li>
-            <li><a href data-ng-click="showMyPicks()">MY PICKS</a></li>
-            <li><a ui-sref="myFollowing">FOLLOWING</a></li>
+            <li><a ui-sref="profile({username:authentication.user.username})" data-ng-class="{active: isActive('/profile/'+authentication.user.username)}">PROFILE</a></li>
+            <li><a href data-ng-click="showMyPicks()" >MY PICKS</a></li>
+            <li><a ui-sref="myFollowing" data-ng-class="{active: isActive('/my-following')}">FOLLOWING</a></li>
         </ul>
     </div>
     <div class="logout-container">

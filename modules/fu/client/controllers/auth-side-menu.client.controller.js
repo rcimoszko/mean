@@ -1,9 +1,13 @@
 'use strict';
 
-angular.module('fu').controller('AuthSideMenuController', ['$scope', '$filter', 'Modal', 'Authentication', 'User',
-    function ($scope, $filter, Modal, Authentication, User) {
+angular.module('fu').controller('AuthSideMenuController', ['$scope', '$filter', '$location', 'Modal', 'Authentication', 'User',
+    function ($scope, $filter, $location, Modal, Authentication, User) {
         $scope.authentication = Authentication;
         $scope.user = User;
+
+        $scope.isActive = function(page){
+            return page === $location.url();
+        };
 
         $scope.notificationCount = function(){
             return $filter('filter')($scope.user.info.notifications, {'new':true}).length;

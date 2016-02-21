@@ -1468,6 +1468,9 @@ notification:last-of-type .notification {
 #auth-side-menu .menu-container ul.user-menu > li a {
   color: rgba(255, 255, 255, 0.6);
 }
+#auth-side-menu .menu-container ul.user-menu > li a.active {
+  color: white;
+}
 #auth-side-menu .menu-container ul.channel-list {
   list-style-type: none;
   padding-left: 20px;
@@ -1475,11 +1478,13 @@ notification:last-of-type .notification {
 }
 #auth-side-menu .menu-container ul.channel-list > li {
   font-size: 12px;
-  font-weight: 700;
   margin-bottom: 5px;
 }
 #auth-side-menu .menu-container ul.channel-list > li a {
   color: rgba(255, 255, 255, 0.95);
+}
+#auth-side-menu .menu-container ul.channel-list > li a.active {
+  font-weight: 700;
 }
 #auth-side-menu .logout-container {
   position: absolute;
@@ -1843,6 +1848,14 @@ notification:last-of-type .notification {
   right: 0;
   width: 120px;
   text-align: right;
+}
+.make-picks-sub-menu h1 .bet-duration-filter a {
+  color: white;
+}
+@media (min-width: 768px) {
+  .make-picks-sub-menu h1 .bet-duration-filter a {
+    color: #6a6b6c;
+  }
 }
 .bet-section-container {
   display: none;

@@ -131,6 +131,9 @@
 
         a{
           color:fade(white,60%);
+          &.active{
+            color:white;
+        }
         }
       }
     }
@@ -140,10 +143,12 @@
       margin-top:10px;
       > li{
         font-size:12px;
-        font-weight:@font-weight-bold;
         margin-bottom:5px;
       a{
         color:fade(white,95%);
+        &.active{
+          font-weight:@font-weight-bold;
+        }
       }
     }
     }
