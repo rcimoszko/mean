@@ -15,7 +15,6 @@ angular.module('fu').directive('notification', function ($compile) {
                     directive = '<notification-follow notification="notification"></notification-follow>';
                     break;
                 case 'copy pick':
-                case 'copy':
                     directive = '<notification-copy-pick notification="notification"></notification-copy-pick>';
                     break;
                 case 'pick comment':

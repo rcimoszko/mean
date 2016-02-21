@@ -152,7 +152,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
                 pEvent = {
                     _id:            event._id,
                     sport:          event.sport,
-                    league:         {name: event.league.ref.name, ref: event.league.ref._id}, //had to un populate for copying bets
+                    league:         event.league,
                     startTime:      event.startTime,
                     commentCount:   event.commentCount,
                     cancelled:      event.cancelled,
