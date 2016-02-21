@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('fu').controller('ModalMyPicksController', ['$scope', '$modalInstance', 'Modal', 'User',
-    function ($scope, $modalInstance, Modal, User) {
+angular.module('fu').controller('ModalMyPicksController', ['$scope', '$modalInstance', 'Modal', 'User', 'Authentication',
+    function ($scope, $modalInstance, Modal, User, Authentication) {
 
         $scope.show = 'pending';
         $scope.user = User;
         $scope.completedPicks = [];
         $scope.pendingPicks = [];
         $scope.page = 1;
+        $scope.authentication = Authentication;
 
         function getCompletedPicks(){
             function cb(err, picks){
@@ -31,6 +32,7 @@ angular.module('fu').controller('ModalMyPicksController', ['$scope', '$modalInst
             if(type === 'completed') getCompletedPicks();
             if(type === 'pending') getPendingPicks();
         };
+
 
     }
 ]);

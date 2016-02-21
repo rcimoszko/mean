@@ -81,7 +81,7 @@ function getPending(query, callback){
 }
 
 function getCompleted(query, callback){
-    Pick.find(query).populate(populate).sort('-eventStartTime').exec(callback);
+    Pick.find(query).populate(populate).sort('-eventStartTime').limit(20).exec(callback); //limit to 20 on last 10 pics
 }
 
 function getOneByQuery(query, callback){

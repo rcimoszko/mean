@@ -20,7 +20,7 @@
             <td class="units text-center">{{pick.units}}</td>
             <td class="profit text-center">{{pick.profit.toFixed(2)}}</td>
             <td class="roi text-center">{{pick.roi.toFixed(0)}}%</td>
-            <td class="text-center actions"><btn-comment></btn-comment><btn-share pick="pick"></btn-share></td>
+            <td class="text-center actions"><btn-comment pick="pick"></btn-comment><btn-share event="pick.event" pick="pick"></btn-share></td>
         </tr>
     </tbody>
 </table>

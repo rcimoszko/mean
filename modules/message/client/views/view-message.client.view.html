@@ -4,7 +4,7 @@
         <span data-ng-repeat="recipient in conversation.recipients | filter: '!'+authentication.user.username">{{recipient.name}}<span ng-show=" ! $last ">, </span></span>
     </div>
 
-    <div class="text-center">
+    <div class="text-center btn-container">
         <a class="btn btn-blue-empty btn-xs" data-ng-click="leaveConversation()">Leave Conversation</a>
     </div>
     <!--

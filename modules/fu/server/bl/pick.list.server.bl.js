@@ -133,7 +133,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
 
     function populateEvents(events, callback){
         var populate = [{path: 'event.pinnacleBets', model:'Bet'},
-                        {path: 'event.sport.ref', model:'Sport'}, //had to populate sport for copying bets
+                        {path: 'event.sport.ref', model:'Sport'}, //had to populate sport/league for copying bets
                         {path: 'event.league.ref', model:'League'}
                         ];
         EventBl.populateBy(events, populate, callback);

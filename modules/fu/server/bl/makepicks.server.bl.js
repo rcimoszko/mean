@@ -354,8 +354,16 @@ function getMenu(callback){
     }
 
     function populateSports(sports, callback){
-        League.populate(sports, {path: '_id', select: 'name _id slug iconUrl', model:'Sport'}, callback);
+        League.populate(sports, {path: '_id', select: 'name _id slug iconUrl disabled', model:'Sport'}, callback);
     }
+
+    function removeDisabledSports(sports, callback){
+        sports = _.filter(sports, function(sport){
+            return !sport._id.disabled;
+        });
+        callback(null, sports);
+    }
+
     function populateGroups(sports, callback){
         League.populate(sports, {path: 'leagues.group.ref', select: 'name _id slug', model:'Group'}, callback);
 
@@ -367,6 +375,7 @@ function getMenu(callback){
 
     todo.push(groupLeagues);
     todo.push(populateSports);
+    todo.push(removeDisabledSports);
     todo.push(populateGroups);
 
     async.waterfall(todo, cb);

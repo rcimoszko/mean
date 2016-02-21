@@ -18,4 +18,7 @@
         <pick-table type="'pending'" picks="pendingPicks" data-ng-show="show === 'pending'"></pick-table>
         <pick-table type="'completed'" picks="completedPicks"  data-ng-show="show === 'completed'"></pick-table>
     </div>
+    <div class="btn-container text-center">
+        <a class="btn btn-blue-empty" ui-sref="profile({username:authentication.user.username})" data-ng-click="modal.closeModal(modalInstance)">SEE ALL PICKS</a>
+    </div>
 </div>

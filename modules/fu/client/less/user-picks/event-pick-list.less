@@ -1,10 +1,12 @@
 .event-pick-list{
   .event-header{
     border-top:1px solid @color-gray-divider;
-    padding:0 10px;
+    //padding:0 10px;
+    background-color:#FDFDFD;
     .category{
       text-transform:uppercase;
       color:@color-text-dark;
+      padding:3px 5px;
     }
     .contestant-table{
       border-top:1px solid @color-gray-divider;
@@ -14,7 +16,7 @@
       .time{
         text-align:center;
         border-right:1px solid @color-gray-divider;
-        width:70px;
+        width:80px;
       }
       .contestant-1, .value-1{
         border-bottom:1px solid @color-gray-divider;
@@ -30,9 +32,14 @@
     }
   }
   .event-footer{
-    padding:3px 5px;
+    padding:5px 5px;
     border-top:1px solid @color-gray-divider;
     text-align:center;
+
+    a{
+      color:@color-text;
+      font-size:10px;
+    }
     .fa{
       color:@color-orange;
       margin-right:5px;

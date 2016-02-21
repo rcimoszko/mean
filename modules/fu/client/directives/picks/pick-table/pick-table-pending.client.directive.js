@@ -8,7 +8,6 @@ angular.module('fu').directive('pickTablePending', function () {
         },
         templateUrl: 'modules/fu/client/templates/picks/pick-table/pick-table-pending.client.template.html',
         controller: ['$scope', function ($scope){
-            console.log($scope.picks);
         }]
     };
 });

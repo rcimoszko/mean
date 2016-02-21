@@ -4371,6 +4371,7 @@ notification:last-of-type .notification {
   border-bottom: 1px solid #eaeaea;
   padding-bottom: 15px;
   min-height: 75px;
+  padding-left: 10px;
 }
 .pick-list .pick .pick-container .hidden-pick {
   background-image: url('/modules/fu/client/img/picks/hidden-pick.png');
@@ -4476,11 +4477,12 @@ notification:last-of-type .notification {
 }
 .event-pick-list .event-header {
   border-top: 1px solid #eaeaea;
-  padding: 0 10px;
+  background-color: #FDFDFD;
 }
 .event-pick-list .event-header .category {
   text-transform: uppercase;
   color: #2b2b2c;
+  padding: 3px 5px;
 }
 .event-pick-list .event-header .contestant-table {
   border-top: 1px solid #eaeaea;
@@ -4491,7 +4493,7 @@ notification:last-of-type .notification {
 .event-pick-list .event-header .contestant-table .time {
   text-align: center;
   border-right: 1px solid #eaeaea;
-  width: 70px;
+  width: 80px;
 }
 .event-pick-list .event-header .contestant-table .contestant-1,
 .event-pick-list .event-header .contestant-table .value-1 {
@@ -4507,9 +4509,13 @@ notification:last-of-type .notification {
   text-align: center;
 }
 .event-pick-list .event-footer {
-  padding: 3px 5px;
+  padding: 5px 5px;
   border-top: 1px solid #eaeaea;
   text-align: center;
+}
+.event-pick-list .event-footer a {
+  color: #6a6b6c;
+  font-size: 10px;
 }
 .event-pick-list .event-footer .fa {
   color: #e9893a;

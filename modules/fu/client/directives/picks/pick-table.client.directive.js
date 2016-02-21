@@ -25,6 +25,9 @@ angular.module('fu').directive('pickTable', function ($compile) {
             var el = $compile(directive)($scope);
             $element.append(el);
 
+
+
+
         }]
     };
 });
