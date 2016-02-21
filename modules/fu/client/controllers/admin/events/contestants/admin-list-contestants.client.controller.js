@@ -13,7 +13,7 @@ angular.module('fu.admin').controller('AdminListContestantsController', ['$scope
             function cb(err, leagues){
                 $scope.leagues = leagues;
             }
-            Sports.getLeagues($scope.sport, cb);
+            Sports.getLeagues($scope.sport._id, cb);
         };
 
         $scope.getLeagueContestants = function(){

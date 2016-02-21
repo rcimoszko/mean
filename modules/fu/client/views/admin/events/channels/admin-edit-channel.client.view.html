@@ -1,6 +1,8 @@
-<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.channels">Channels</a> > {{channel.name}}</h2>
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.channels">Channels</a> > {{channel.name}}</h2>
 
-<form data-ng-submit="submit()">
-    <admin-select label="'Date Group'" model="channel.dateGroup" options="dateGroups"></admin-select>
-    <admin-submit error="error"></admin-submit>
-</form>
+    <form data-ng-submit="submit()">
+        <admin-select label="'Date Group'" model="channel.dateGroup" options="dateGroups"></admin-select>
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>

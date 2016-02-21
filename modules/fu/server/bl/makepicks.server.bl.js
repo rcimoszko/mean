@@ -197,14 +197,36 @@ function getPicks(query, callback){
         var select = 'sport league neutral contestant1 contestant2 startTime pinnacleBets contestant1Pitcher contestant2Pitcher gameNo commentCount slug';
         var sort = 'startTime';
         var populate = [
-            {path:'sport.ref', select: 'name slug'},
-            {path:'league.ref', select: 'name slug'},
+            {path:'sport.ref', select: 'name slug disabled'},
+            {path:'league.ref', select: 'name slug disabled'},
             {path:'pinnacleBets', select: 'betType betDuration otIncluded odds altLine altNumber spread contestant points overUnder draw underdog openingOdds openingSpread openingPoints'},
-            {path:'contestant1.ref', select: 'name darkColor lightColor name1 name2 record logoUrl'},
-            {path:'contestant2.ref', select: 'name darkColor lightColor name1 name2 record logoUrl'}];
+            {path:'contestant1.ref', select: 'name darkColor lightColor name1 name2 record logoUrl disabled'},
+            {path:'contestant2.ref', select: 'name darkColor lightColor name1 name2 record logoUrl disabled'}];
 
         m_Event.find(query).select(select).sort(sort).populate(populate).exec(callback);
     }
+
+    function filterOutDisabledSports(events, callback){
+        events = _.filter(events, function(event){
+            return !event.sport.ref.disabled;
+        });
+        callback(null, events);
+    }
+
+    function filterOutDisabledLeagues(events, callback){
+        events = _.filter(events, function(event){
+            return !event.league.ref.disabled;
+        });
+        callback(null, events);
+    }
+
+    function filterOutDisabledContestants(events, callback){
+        events = _.filter(events, function(event){
+            return !event.contestant1.ref.disabled && !event.contestant2.ref.disabled;
+        });
+        callback(null, events);
+    }
+
 
     function getBetTypes_todo(events, callback){
         getBetTypes(events, results, callback);
@@ -236,6 +258,9 @@ function getPicks(query, callback){
     }
 
     todo.push(getEvents);
+    todo.push(filterOutDisabledSports);
+    todo.push(filterOutDisabledLeagues);
+    todo.push(filterOutDisabledContestants);
     todo.push(getBetTypes_todo);
     todo.push(getBetDurations_todo);
     todo.push(processEventBets_todo);

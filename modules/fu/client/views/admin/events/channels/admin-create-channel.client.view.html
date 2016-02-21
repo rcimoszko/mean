@@ -1,7 +1,9 @@
-<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.channels">Channels</a> > New Channel</h2>
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.channels">Channels</a> > New Channel</h2>
 
-<form data-ng-submit="submit()">
-    <admin-string label="'Name'" model="channel.name"></admin-string>
-    <admin-select-ref label="'Sport'" model="channel.sport" options="sports" display-field="'name'"></admin-select-ref>
-    <admin-submit error="error"></admin-submit>
-</form>
+    <form data-ng-submit="submit()">
+        <admin-string label="'Name'" model="channel.name"></admin-string>
+        <admin-select-ref label="'Sport'" model="channel.sport" options="sports" display-field="'name'"></admin-select-ref>
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>

@@ -1,10 +1,12 @@
-<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.sports">Sports</a> > {{sport.name}}</h2>
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.sports">Sports</a> > {{sport.name}}</h2>
 
-<form data-ng-submit="submit()">
-    <admin-boolean label="'Active'" model="sport.active"></admin-boolean>
-    <admin-string label="'Icon'" model="sport.iconUrl"></admin-string>
-    <admin-boolean label="'Disabled'" model="sport.disabled"></admin-boolean>
-    <admin-boolean label="'Main'" model="sport.main"></admin-boolean>
-    <admin-boolean label="'Pick Made'" model="sport.pickMade"></admin-boolean>
-    <admin-submit error="error"></admin-submit>
-</form>
+    <form data-ng-submit="submit()">
+        <admin-boolean label="'Active'" model="sport.active"></admin-boolean>
+        <admin-string label="'Icon'" model="sport.iconUrl"></admin-string>
+        <admin-boolean label="'Disabled'" model="sport.disabled"></admin-boolean>
+        <admin-boolean label="'Main'" model="sport.main"></admin-boolean>
+        <admin-boolean label="'Pick Made'" model="sport.pickMade"></admin-boolean>
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>

@@ -14,6 +14,7 @@ var ContestantSchema = new Schema({
     fiveDimesId:    [String], //to remove
     darkColor:      {type: String, trim: true},
     lightColor:     {type: String, trim: true},
+    mainColor:      {type: String, trim: true},
     city:           {type: String, trim: true},
     stadium:        {type: String, trim: true},
     name1:          {type: String, trim: true},
@@ -27,6 +28,7 @@ var ContestantSchema = new Schema({
     record:         [{year:{type:Number}, wins:{type:Number}, losses:{type:Number}}],
     slug:           {type: String, trim: true},
     scraperId:      {type: Number},
+    disabled:       {type: Boolean, default: false},
     logoUrl:        {type: String, trim: true}
 });
 

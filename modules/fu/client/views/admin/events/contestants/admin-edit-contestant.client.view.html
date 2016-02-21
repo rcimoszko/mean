@@ -1,6 +1,18 @@
-<h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.contestnats">Contestants</a> > {{contestant.name}}</h2>
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.contestants">Contestants</a> > {{contestant.name}}</h2>
 
-<form data-ng-submit="submit()">
-    <!-- ADD GROUP FIELD -->
-    <admin-submit error="error"></admin-submit>
-</form>
+    <form data-ng-submit="submit()">
+        <!-- ADD GROUP FIELD -->
+        <admin-boolean label="'Disabled'" model="contestant.disabled"></admin-boolean>
+        <admin-string label="'Dark Color'" model="contestant.darkColor"></admin-string>
+        <admin-string label="'Light Color'" model="contestant.lightColor"></admin-string>
+        <admin-string label="'Main Color'" model="contestant.mainColor"></admin-string>
+        <admin-string label="'City'" model="contestant.city"></admin-string>
+        <admin-string label="'Stadium'" model="contestant.stadium"></admin-string>
+        <admin-string label="'Name 1'" model="contestant.name1"></admin-string>
+        <admin-string label="'Name 2'" model="contestant.name2"></admin-string>
+        <admin-string label="'Abbreviation'" model="contestant.abbrName"></admin-string>
+        <admin-string label="'Logo'" model="contestant.logoUrl"></admin-string>
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>

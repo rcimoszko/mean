@@ -1,27 +1,28 @@
-<h2><a ui-sref="admin.home">Home</a> > Leagues</h2>
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > Leagues</h2>
 
-<div class="row">
-    <div class="col-sm-3">
-        <select class="form-control" data-ng-model="sport" data-ng-options="sport._id as sport.name for sport in sports" data-ng-change="getLeagues()">
-        </select>
+    <div class="row">
+        <div class="col-sm-3">
+            <select class="form-control" data-ng-model="sport" data-ng-options="sport._id as sport.name for sport in sports" data-ng-change="getLeagues()">
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-default" data-ng-model="activeFilterEnabled" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                Active Leagues
+            </button>
+        </div>
     </div>
-    <div class="col-sm-3">
-        <button type="button" class="btn btn-default" data-ng-model="activeFilterEnabled" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-            Active Leagues
-        </button>
-    </div>
-</div>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
             <th>Name</th>
             <th>Active</th>
             <th>Disabled</th>
             <th>Main</th>
             <th>Group</th>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr data-ng-repeat="league in leagues|filter:activeFilter">
                 <td><a ui-sref="admin.editLeague({leagueId:league._id})">{{::league.name}}</a></td>
                 <td><admin-list-boolean model="::league.active"></admin-list-boolean></td>
@@ -29,6 +30,7 @@
                 <td><admin-list-boolean model="::league.main"></admin-list-boolean></td>
                 <td>{{::league.group.name}}</td>
             </tr>
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+</section>
