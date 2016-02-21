@@ -27,7 +27,7 @@ function submit(user, eventGroups, callback){
                 message: 'Not enough Units remaining, Please remove some picks from you Bet Slip.',
                 type: 'units'
             };
-            callback(err);
+            return callback(err);
         }
         callback();
     }
