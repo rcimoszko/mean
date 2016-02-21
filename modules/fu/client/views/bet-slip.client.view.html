@@ -35,18 +35,20 @@
                         <div class="remove-container">
                             <a href data-ng-click="betSlip.addRemove(pick, eventGroup.event);">&times;</a>
                         </div>
-                        <div class="row text-center values-container">
-                            <div class="col-xs-4">
-                                <div class="heading">Units</div>
-                                <input min="1" max="5" type="number" ng-model="pick.units" ng-init="pick.units = 1"  data-ng-class="{error: pick.invalidUnits}"/>
-                            </div>
-                            <div class="col-xs-4" data-ng-class="{changed: pick.oddsChanged}">
-                                <div class="heading">Odds</div>
-                                {{pick.odds|formatOdds}}
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="heading">Return</div>
-                                {{(pick.units * pick.odds)|number:2}}
+                        <div class="container-fluid">
+                            <div class="row text-center values-container">
+                                <div class="col-xs-4">
+                                    <div class="heading">Units</div>
+                                    <input min="1" max="5" type="number" ng-model="pick.units" ng-init="pick.units = 1"  data-ng-class="{error: pick.invalidUnits}"/>
+                                </div>
+                                <div class="col-xs-4" data-ng-class="{changed: pick.oddsChanged}">
+                                    <div class="heading">Odds</div>
+                                    {{pick.odds|formatOdds}}
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="heading">Return</div>
+                                    {{(pick.units * pick.odds)|number:2}}
+                                </div>
                             </div>
                         </div>
                     </div>
