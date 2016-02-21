@@ -16,15 +16,14 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
 
         function highlightPicks(values){
             for(var i=0; i<$scope.events.length; i++){
-                for(var j=0; j<values.length; j++){
-                    if(values[j].eventId === $scope.events[i].event._id){
-                        for(var k=0; k<$scope.events[i].picks.length; k++){
-                            if( $scope.events[i].picks[k]._id === values[j].betId){
-                                $scope.events[i].picks[k].error = true;
-                                if('odds' in values[j]){
-                                    $scope.events[i].picks[k].odds = values[j].odds;
-                                    $scope.events[i].picks[k].oddsChanged = true;
-                                }
+                for(var j=0; j<$scope.events[i].picks.length; j++){
+                    var pick = $scope.events[i].picks[j];
+                    for(var k=0; k<values.length; k++){
+                        if(pick._id === values[j].betId){
+                            pick.error = true;
+                            if('odds' in values[j]){
+                                pick.odds = values[j].odds;
+                                pick.oddsChanged = true;
                             }
                         }
                     }
@@ -45,8 +44,13 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
 
         function handleError(err){
             $scope.errorMessage = err.message;
-            console.log(err);
+            $scope.betSlip.status.error = true;
+            $scope.betSlip.status.submitted = false;
+
             switch (err.type){
+                case 'invalid units':
+                    highlightPicks(err.values);
+                    break;
                 case 'units':
                     break;
                 case 'started':
@@ -65,10 +69,13 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
 
         $scope.submitPicks = function(){
 
+            $scope.betSlip.status.error = false;
+            $scope.betSlip.status.submitted = false;
             $scope.errorMessage = null;
 
             function cb(err){
                 if(err) handleError(err);
+
             }
 
             Modal.showModal(

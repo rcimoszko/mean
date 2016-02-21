@@ -289,7 +289,6 @@ function create(event, bet, user, callback){
     var todo = [];
     var pick = {};
 
-    console.log(event);
 
     function createPick(callback){
         pick = {
@@ -443,7 +442,7 @@ function create(event, bet, user, callback){
     todo.push(addHomeAway);
     todo.push(createSlug);
     todo.push(checkCopiedFrom);
-    todo.push(getPickStats);
+    //todo.push(getPickStats);
     todo.push(checkPremium);
 
     async.waterfall(todo, callback);

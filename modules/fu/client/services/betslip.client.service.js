@@ -4,6 +4,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
     function($filter, ApiUserMakePicks, Loading, Authentication, User) {
         var events = [];
         var stats = {count:0};
+        var status = {submitted: false, error: false};
 
         function addEvent(event){
             events.push({event:event, date: event.startTime, picks: []});
@@ -36,9 +37,23 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
                 if(i===0){
                     stats.count = events[i].picks.length;
                 } else{
-                    stats = stats.count + events[i].picks.length;
+                    stats.count = stats.count + events[i].picks.length;
                 }
             }
+        }
+
+        function checkIfErrors(){
+            var hasError = false;
+            for(var i=0; i<events.length; i++){
+                for(var j=0; j<events[i].picks.length; j++){
+                    var pick = events[i].picks[j];
+                    if(pick.error === true){
+                        hasError = true;
+                        break;
+                    }
+                }
+            }
+            if(!hasError) status.error = false;
         }
 
 
@@ -57,6 +72,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
                 addPick(pick, events.length - 1);
             }
             calculatePickCount();
+            if(status.error) checkIfErrors();
         };
 
         function removeAllSelected(){
@@ -84,9 +100,11 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
             function cbSuccess(results){
                 removeAllSelected();
                 Loading.isLoading.pickSubmit = false;
+                status.submitted = true;
                 Authentication.user = results.user;
                 User.picks.pending.push(results.picks);
                 events.length = 0;
+                calculatePickCount();
                 callback(null, results);
             }
 
@@ -101,6 +119,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
         return {
             events:     events,
             stats:      stats,
+            status:     status,
             addRemove:  addRemove,
             submit:     submit
         };

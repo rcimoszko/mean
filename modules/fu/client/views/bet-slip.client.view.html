@@ -1,15 +1,22 @@
 <section class="bet-slip-container" data-ng-controller="BetSlipController"  data-ng-class="{'picks-page': isPicksPage, 'show': show}">
     <div class="bet-slip" data-ng-class="{show: show}">
-        <h1>
+        <h1 data-ng-click="toggleShow()">
             BET SLIP
-            <button type="button" class="close" data-ng-click="toggleShow()">
+            <button type="button" class="close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </h1>
         <div class="picks-container">
-            <h2 data-ng-if="betSlip.stats.count === 0">
-                No Picks
-            </h2>
+            <div data-ng-if="betSlip.stats.count === 0">
+                <h2>
+                    No Picks
+                </h2>
+
+                <div class="pick-button-container">
+                    <button class="btn btn-blue-empty" ui-sref="makePicks.home">Make Picks</button>
+                </div>
+            </div>
+
 
             <div data-ng-repeat="eventGroup in events|orderBy:'date'">
                 <div class="team-name-header">
@@ -44,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="error-message-container" data-ng-if="errorMessage">
+                <div class="error-message-container" data-ng-if="betSlip.status.error">
                     {{errorMessage}}
                 </div>
             </div>
@@ -52,7 +59,7 @@
         <div class="submit-btn-container" data-ng-show="betSlip.stats.count > 0">
             <button class="btn btn-blue" data-ng-click="submitPicks()" data-ng-disabled="loading.isLoading.pickSubmit">
                 <span data-ng-if="!loading.isLoading.pickSubmit">Submit</span>
-                <loading is-loading="loading.isLoading.pickSubmit" size="'sm'" color="'blue'"></loading>
+                <loading is-loading="loading.isLoading.pickSubmit" size="'sm'" bg-color="'blue'" color="'white'"></loading>
             </button>
         </div>
     </div>

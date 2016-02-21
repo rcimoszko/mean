@@ -19,6 +19,29 @@ function submit(user, eventGroups, callback){
     var picks = [];
     var bets = _.chain(eventGroups).pluck('picks').flatten().value();
     var events = _.pluck(eventGroups, 'event');
+    var validUnits = [1,2,3,4,5];
+
+    function checkInvalidUnits(callback){
+        var invalidUnits = [];
+
+        function checkBet(bet, callback){
+            if(validUnits.indexOf(bet.units) === -1) invalidUnits.push({betId: bet._id});
+            callback();
+        }
+
+        function cb(err){
+            if(invalidUnits.length > 0){
+                err = {
+                    message: 'Select between 1-5 units for the highlighted bet(s).',
+                    type: 'invalid units',
+                    values: invalidUnits
+                };
+            }
+            callback(err);
+        }
+
+        async.each(bets, checkBet, cb);
+    }
 
     function checkEnoughUnits(callback){
         totalAtRisk = _.chain(eventGroups).pluck('picks').flatten().pluck('units').sum().value();
@@ -42,7 +65,7 @@ function submit(user, eventGroups, callback){
         }
 
         function cb(err){
-            if(startedEvents.length){
+            if(startedEvents.length > 0){
                 err = {
                     message: 'The highlighted event(s) have started. Please remove them from your Bet Slip.',
                     type: 'started',
@@ -90,7 +113,7 @@ function submit(user, eventGroups, callback){
         }
 
         function cb(err){
-            if(changedValues.length){
+            if(changedValues.length > 0){
                 err = {
                     message: 'The highlighted values(s) have changed. Please submit again to accept these changes.',
                     type: 'changed',
@@ -118,7 +141,7 @@ function submit(user, eventGroups, callback){
         }
 
         function cb(err){
-            if(duplicates.length){
+            if(duplicates.length > 0){
                 err = {
                     message: 'The highlighted pick(s) have already been made. Please remove them from your Bet Slip.',
                     type: 'duplicate',
@@ -165,6 +188,7 @@ function submit(user, eventGroups, callback){
         callback(err, {user: user, picks: picks});
     }
 
+    todo.push(checkInvalidUnits);
     todo.push(checkEnoughUnits);
     todo.push(checkEventStarted);
     todo.push(checkValueChange);

@@ -45,6 +45,7 @@
       text-align:center;
       background-color:@color-blue;
       color:white;
+      cursor:pointer;
       .close{
         line-height:0.75;
         color:white;
@@ -59,6 +60,11 @@
       right: 20px;
       left: 20px;
       overflow-y: scroll;
+      .pick-button-container{
+        margin-top:50px;
+        text-align:center;
+      }
+
       h2{
         text-align:center;
         font-size:16px;
@@ -80,6 +86,9 @@
           }
           &:last-of-type{
             border-bottom:0;
+          }
+          .bet-type{
+            text-transform:capitalize;
           }
           .heading{
             text-transform:uppercase;
@@ -139,6 +148,10 @@
 
 .bet-slip-container.picks-page{
 
+  .pick-button-container{
+    display: none;
+  }
+
   @media (min-width: @screen-lgxl-min) {
     display:block !important;
     position:fixed;
@@ -157,6 +170,7 @@
 
       .picks-container{
         top: 60px;
+
       }
       .bet-slip-pick-container{
         background-color:white;

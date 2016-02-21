@@ -1277,6 +1277,13 @@ notification:last-of-type .notification {
 .modal-prompt .btn {
   width: 100%;
 }
+.modal-prompt .error {
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+  font-style: italic;
+  color: #e9893a;
+}
 .modal-my-picks {
   width: 900px;
 }
@@ -2986,6 +2993,7 @@ notification:last-of-type .notification {
   text-align: center;
   background-color: #104673;
   color: white;
+  cursor: pointer;
   border-bottom: 1px solid #eeeeee;
 }
 .bet-slip-container .bet-slip h1 .close {
@@ -2999,6 +3007,10 @@ notification:last-of-type .notification {
   right: 20px;
   left: 20px;
   overflow-y: scroll;
+}
+.bet-slip-container .bet-slip .picks-container .pick-button-container {
+  margin-top: 50px;
+  text-align: center;
 }
 .bet-slip-container .bet-slip .picks-container h2 {
   text-align: center;
@@ -3022,6 +3034,9 @@ notification:last-of-type .notification {
 }
 .bet-slip-container .bet-slip .picks-container .bet-slip-pick-container .bet-slip-pick:last-of-type {
   border-bottom: 0;
+}
+.bet-slip-container .bet-slip .picks-container .bet-slip-pick-container .bet-slip-pick .bet-type {
+  text-transform: capitalize;
 }
 .bet-slip-container .bet-slip .picks-container .bet-slip-pick-container .bet-slip-pick .heading {
   text-transform: uppercase;
@@ -3064,6 +3079,9 @@ notification:last-of-type .notification {
   margin-top: 10px;
   font-size: 14px;
   margin-bottom: 5px;
+}
+.bet-slip-container.picks-page .pick-button-container {
+  display: none;
 }
 @media (min-width: 1400px) {
   .bet-slip-container.picks-page {
