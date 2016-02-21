@@ -111,7 +111,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 description: 'Sports betting community for handicappers looking to get free picks, practice their betting strategy and see where the top guys are actually putting their money.',
                 keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
             }).
-            state('static.whyGoPro', {
+            state('whyGoPro', {
                 url: '/why-go-pro',
                 templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',
                 title: 'Why Go Pro | FansUnite',

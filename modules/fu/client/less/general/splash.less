@@ -1,8 +1,10 @@
 #splash{
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  margin:0 -20px;
-
+  margin:0 -10px;
+  @media (min-width: @screen-sm-min) {
+    margin:0 -20px;
+  }
   .btn-premium {
     background-color: @color-green;
     padding: 15px 30px;

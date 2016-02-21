@@ -11,6 +11,8 @@ body {
   padding-right: 10px;
   padding-left: 10px;
   padding-bottom: 20px;
+  margin-right: auto;
+  margin-left: auto;
 }
 @media (min-width: 768px) {
   #content {
@@ -284,6 +286,10 @@ p {
 }
 .btn-container {
   padding: 10px 0;
+}
+.btn-xl {
+  font-size: 18px;
+  padding: 8px 24px;
 }
 .loading,
 .loading:before,
@@ -800,7 +806,12 @@ input.toggle:checked + label:after {
 #splash {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  margin: 0 -20px;
+  margin: 0 -10px;
+}
+@media (min-width: 768px) {
+  #splash {
+    margin: 0 -20px;
+  }
 }
 #splash .btn-premium {
   background-color: #4CAF50;
@@ -3875,6 +3886,289 @@ notification:last-of-type .notification {
 #press .panel h4 {
   color: #aaabac;
   font-size: 14px;
+}
+#why-go-pro,
+.static-page {
+  margin: 0 -10px;
+}
+@media (min-width: 768px) {
+  #why-go-pro,
+  .static-page {
+    margin: 0 -20px;
+  }
+}
+#why-go-pro section,
+.static-page section {
+  margin-bottom: 0;
+}
+#why-go-pro section.white,
+.static-page section.white {
+  background-color: white;
+}
+#why-go-pro section.border-gray,
+.static-page section.border-gray {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+#why-go-pro section.gray,
+.static-page section.gray {
+  background-color: #eeeeee;
+}
+#why-go-pro section.border-green,
+.static-page section.border-green {
+  border-bottom: 20px solid #77BB50;
+}
+#why-go-pro section .section-heading,
+.static-page section .section-heading {
+  margin: 30px 0;
+}
+#why-go-pro #section-1,
+.static-page #section-1 {
+  padding-bottom: 40px;
+  background-color: white;
+  padding-top: 30px;
+}
+#why-go-pro #section-1 h1,
+.static-page #section-1 h1 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+#why-go-pro #section-1 p,
+.static-page #section-1 p {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 300;
+}
+#why-go-pro #section-1 h3,
+.static-page #section-1 h3 {
+  font-size: 20px;
+  padding: 0 10px;
+}
+#why-go-pro #section-2 h1,
+.static-page #section-2 h1 {
+  font-size: 24px;
+}
+#why-go-pro #section-2 #industry-win-percentage,
+.static-page #section-2 #industry-win-percentage {
+  max-width: 500px;
+  padding: 0 0 20px 0;
+}
+#why-go-pro #section-2 #industry-win-percentage h1,
+.static-page #section-2 #industry-win-percentage h1 {
+  margin-top: 0;
+}
+#why-go-pro #section-2 #industry-win-percentage h3,
+.static-page #section-2 #industry-win-percentage h3 {
+  height: 70px;
+  font-size: 20px;
+  margin: 0;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-2 #industry-win-percentage h3,
+  .static-page #section-2 #industry-win-percentage h3 {
+    height: 45px;
+  }
+}
+#why-go-pro #section-2 #industry-win-percentage .percent,
+.static-page #section-2 #industry-win-percentage .percent {
+  font-weight: bold;
+}
+#why-go-pro #section-2 h3,
+.static-page #section-2 h3 {
+  font-size: 20px;
+}
+#why-go-pro #section-2 .fansunite-handicappers,
+.static-page #section-2 .fansunite-handicappers {
+  color: #e9893a;
+}
+#why-go-pro #section-2 #win-percentage,
+.static-page #section-2 #win-percentage {
+  max-width: 900px;
+  text-align: center;
+  margin: 0 auto;
+}
+#why-go-pro #section-2 #win-percentage .fu-results,
+.static-page #section-2 #win-percentage .fu-results {
+  display: inline-block;
+  padding: 1%;
+  width: 49%;
+}
+#why-go-pro #section-2 #win-percentage .fu-results img,
+.static-page #section-2 #win-percentage .fu-results img {
+  max-width: 100%;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-2 #win-percentage .fu-results,
+  .static-page #section-2 #win-percentage .fu-results {
+    width: 33%;
+  }
+}
+@media (min-width: 768px) {
+  #why-go-pro #section-2 #win-percentage .fu-results,
+  .static-page #section-2 #win-percentage .fu-results {
+    width: 19%;
+  }
+}
+#why-go-pro #section-2 h3:last-of-type,
+.static-page #section-2 h3:last-of-type {
+  margin: 30px 0;
+}
+#why-go-pro #section-3,
+.static-page #section-3 {
+  padding-bottom: 20px;
+}
+#why-go-pro #section-3 h3,
+.static-page #section-3 h3 {
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 20px;
+}
+#why-go-pro #section-3 .container,
+.static-page #section-3 .container {
+  max-width: 900px;
+}
+#why-go-pro #section-4,
+.static-page #section-4 {
+  padding-top: 30px;
+  border-bottom: 0;
+}
+#why-go-pro #section-4 #subscription-plans,
+.static-page #section-4 #subscription-plans {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+#why-go-pro #section-4 #subscription-plans .btn-premium,
+.static-page #section-4 #subscription-plans .btn-premium {
+  margin: 10px 0;
+  padding: 3px 6px;
+  font-size: 10px;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-4 #subscription-plans .btn-premium,
+  .static-page #section-4 #subscription-plans .btn-premium {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+#why-go-pro #section-4 #subscription-plans .plans-left,
+.static-page #section-4 #subscription-plans .plans-left {
+  float: left;
+  width: 32%;
+  margin-top: 20px;
+  border-width: 1px 0 1px 1px;
+  border-color: #eee;
+  border-style: solid;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  background: white;
+}
+#why-go-pro #section-4 #subscription-plans .plans-right,
+.static-page #section-4 #subscription-plans .plans-right {
+  float: left;
+  width: 32%;
+  margin-top: 20px;
+  border-width: 1px 1px 1px 0;
+  border-color: #eee;
+  border-style: solid;
+  padding: 10px 0;
+  border-radius: 0 5px 5px 0;
+  background: white;
+}
+#why-go-pro #section-4 #subscription-plans .plans-center,
+.static-page #section-4 #subscription-plans .plans-center {
+  float: left;
+  width: 35%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  background: white;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-4 #subscription-plans .plans-center,
+  .static-page #section-4 #subscription-plans .plans-center {
+    font-size: 26px;
+  }
+}
+#why-go-pro #section-4 #subscription-plans .plans-center .category,
+.static-page #section-4 #subscription-plans .plans-center .category {
+  font-size: 1em;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-4 #subscription-plans .plans-center .category,
+  .static-page #section-4 #subscription-plans .plans-center .category {
+    font-size: 1.2em;
+  }
+}
+#why-go-pro #section-4 #subscription-plans .plans-center .price,
+.static-page #section-4 #subscription-plans .plans-center .price {
+  font-size: 1.6em;
+}
+#why-go-pro #section-4 #subscription-plans .price-container,
+.static-page #section-4 #subscription-plans .price-container {
+  float: left;
+  width: 100%;
+  padding: 0 5px;
+  margin-bottom: 15px;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-4 #subscription-plans .price-container,
+  .static-page #section-4 #subscription-plans .price-container {
+    width: 33%;
+  }
+}
+#why-go-pro #section-4 #subscription-plans .container-1,
+.static-page #section-4 #subscription-plans .container-1 {
+  margin-top: 24px;
+}
+#why-go-pro #section-4 #subscription-plans .container-3,
+.static-page #section-4 #subscription-plans .container-3 {
+  margin-top: 24px;
+}
+#why-go-pro #section-4 #subscription-plans .price,
+.static-page #section-4 #subscription-plans .price {
+  margin-bottom: 10px;
+}
+#why-go-pro #section-4 #subscription-plans .price img,
+.static-page #section-4 #subscription-plans .price img {
+  max-width: 100%;
+}
+#why-go-pro #section-4 #subscription-plans .category,
+.static-page #section-4 #subscription-plans .category {
+  font-size: 1.2em;
+}
+#why-go-pro #section-4 #subscription-plans .month-price,
+.static-page #section-4 #subscription-plans .month-price {
+  font-style: italic;
+  font-size: 12px;
+}
+#why-go-pro #section-4 #subscription-plans .price,
+.static-page #section-4 #subscription-plans .price {
+  color: #e9893a;
+}
+@media (min-width: 480px) {
+  #why-go-pro #section-4 #subscription-plans .price,
+  .static-page #section-4 #subscription-plans .price {
+    font-size: 24px;
+  }
+}
+@media (min-width: 768px) {
+  #why-go-pro #section-4 #subscription-plans .price,
+  .static-page #section-4 #subscription-plans .price {
+    font-size: 36px;
+  }
+}
+#why-go-pro #section-4 h2,
+.static-page #section-4 h2 {
+  font-size: 20px;
+}
+#why-go-pro #section-4 .container,
+.static-page #section-4 .container {
+  max-width: 900px;
 }
 .gamecenter-header .color-header .color-section {
   float: left;

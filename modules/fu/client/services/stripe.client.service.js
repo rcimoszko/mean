@@ -17,7 +17,6 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
 
 
         //Plan ID - Pro, 6month, 1year
-
         var new1MonthSubscription = function(callback){
             newSubscription('Pro', '30 day subscription - Auto Renew', 2000,  callback);
         };
@@ -29,6 +28,19 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
 
         var new12MonthSubscription = function(callback){
             newSubscription('1year', '1 year subscription - Auto Renew', 18000, callback);
+        };
+
+
+        var newBaseSubscription = function(callback){
+            newSubscription('Base Subscription', '30 day subscription - Auto Renew', 1000,  callback);
+        };
+
+        var newPremium1Subscription = function(callback){
+            newSubscription('1 Month Premium', '30 day subscription - Auto Renew', 5000,  callback);
+        };
+
+        var newPremium6Subscription = function(callback){
+            newSubscription('6 Months Premium', '6 month subscription - Auto Renew', 25000,  callback);
         };
 
 
@@ -133,6 +145,11 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
             new1MonthSubscription: new1MonthSubscription,
             new6MonthSubscription: new6MonthSubscription,
             new12MonthSubscription : new12MonthSubscription,
+
+            newBaseSubscription: newBaseSubscription,
+            newPremium1Subscription: newPremium1Subscription,
+            newPremium6Subscription: newPremium6Subscription,
+
             showSubscriptionModal: showSubscriptionModal
         };
 

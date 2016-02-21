@@ -1,0 +1,133 @@
+<div id="why-go-pro" data-ng-controller="ProController">
+    <section id="section-1" class="white">
+        <h1 class="text-center section-heading">Why go Pro?</h1>
+        <h3>
+            <p>
+                With crowd wisdom and our proprietary algorithm, FansUnite is producing top picks in hundreds of leagues around the world.
+            </p>
+            <p>
+                Get complete access to all our handicappers’ upcoming picks with a fully verified and transparent history of results.
+            </p>
+        </h3>
+        <div class="text-center">
+            <a class="btn btn-xl btn-upgrade" data-ng-click="gotoAnchor()">Go Pro Now!</a>
+        </div>
+    </section>
+
+    <section class="gray border-gray text-center" id="section-2">
+        <h1 class="section-heading">
+            Win Percentages
+        </h1>
+        <div class="container-fluid" id="industry-win-percentage">
+
+                <div class="col-xs-6">
+                    <h3>Industry Average</h3>
+                    <h1 class="percent">48%</h1>
+                </div>
+                <div class="col-xs-6">
+                    <h3>“Experts”</h3>
+                    <h1 class="percent">57%</h1>
+                </div>
+        </div>
+
+
+        <h1 class="fansunite-handicappers">FansUnite Handicappers</h1>
+
+        <div id="win-percentage" class="text-center">
+                <div class="fu-results">
+                    <img src="/modules/fu/client/img/why-go-pro/basketball.png">
+                </div>
+                <div class="fu-results">
+                    <img src="/modules/fu/client/img/why-go-pro/e-sports.png">
+                </div>
+                <div class="fu-results">
+                    <img src="/modules/fu/client/img/why-go-pro/basketball.png">
+                </div>
+                <div class="fu-results">
+                    <img src="/modules/fu/client/img/why-go-pro/nhl.png">
+                </div>
+                <div class="fu-results">
+                    <img src="/modules/fu/client/img/why-go-pro/soccer.png">
+                </div>
+        </div>
+
+
+        <h3 id="go-pro-now">As you can see, the cream of the crowd rises to the top!</h3>
+
+    </section>
+
+    <section id="section-3" class="white">
+        <div class="container">
+            <h3 class="text-center">Paying exorbitant fees for one handicapper and having to endure the hot and cold streaks is rough. We want to give you access to thousands of handicappers for a fraction of the price.</h3>
+        </div>
+
+    </section>
+
+    <section id="section-4" class="gray border-gray">
+        <div class="text-center">
+                <div id="subscription-plans" class="clearfix">
+                    <div class="price-container">
+                        <div class="price container-1">
+                            <img src="/modules/fu/client/img/why-go-pro/base.png">
+                         </div>
+                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('base');" >Upgrade To Pro</button>
+                    </div>
+                    <div class="price-container">
+                        <div class="price container-2">
+                            <img src="/modules/fu/client/img/why-go-pro/pro.png">
+                        </div>
+                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-1');">Upgrade To Pro</button>
+                    </div>
+                    <div class="price-container">
+                        <div class="price container-3">
+                            <img src="/modules/fu/client/img/why-go-pro/6-month.png">
+                        </div>
+                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial"  data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-6');">Upgrade To Pro</button>
+
+                    </div>
+                    <!--
+                    <div class="plans-left">
+                        <div class="category">1 Month</div>
+                        <div class="price">20$</div>
+                        <div class="month-price">($20/month)</div>
+                    </div>
+                    <div class="plans-center">
+                        <div class="category">6 months</div>
+                        <div class="price">$100</div>
+                        <div class="month-price">($16.67/month)</div>
+                    </div>
+                    <div class="plans-right">
+                        <div class="category">12 months</div>
+                        <div class="price">$180</div>
+                        <div class="month-price">($15/month)</div>
+                     </div>
+                    -->
+                </div>
+            </div>
+
+        <div class="container">
+            <h2>
+                What makes a Pro?
+            </h2>
+            <p>
+                Each pick made on FansUnite runs through our system and must hit a number of requirements in our algorithm before being deemed a Pro Pick. We are looking at both recent results and long-term success, in that specific league, bet type as well as that specific team. We look for handicappers that have shown high win percentages, ROI and consistency before we classify them as a pro. We want to make sure you are getting the best results.
+            </p>
+
+            <h2>
+                Still not sure?
+            </h2>
+
+            <p>
+                Shoot us an email at info@fansunite.com and we’d love to give you a free trial to see what we are all about. With 100% verification and accuracy of our handicappers’ results, we have nothing to hide. Follow the top guys in your favorite sport and start winning more.
+            </p>
+
+            <p>
+                As always, best of luck out there!
+            </p>
+            <p>
+                - FansUnite
+            </p>
+        </div>
+
+    </section>
+</div>

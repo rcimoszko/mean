@@ -14,7 +14,7 @@
                         <a ui-sref="static.userguide">User Guide</a>
                     </li>
                     <li>
-                        <a ui-sref="static.whyGoPro">Why Go Pro?</a>
+                        <a ui-sref="whyGoPro">Why Go Pro?</a>
                     </li>
                     <li>
                         <a ui-sref="static.monthlyRevenueShare">Revenue Share</a>
@@ -46,17 +46,16 @@
                 <div class="header">SPORTS BETTING</div>
                 <ul>
                     <li>
-                        <a href>NFL Betting</a>
-                    </li>
-
-                    <li>
-                        <a href>E-Sport Tips</a>
+                        <a ui-sref="discover.league({sportSlug:'football', leagueSlug:'nfl'})">NFL Betting</a>
                     </li>
                     <li>
-                        <a href>NBA Tips</a>
+                        <a ui-sref="discover.sport({sportSlug:'e-sports'})">E-Sport Tips</a>
                     </li>
                     <li>
-                        <a href>Soccer Picks</a>
+                        <a ui-sref="discover.league({sportSlug:'basketball', leagueSlug:'nba'})">NBA Tips</a>
+                    </li>
+                    <li>
+                        <a ui-sref="discover.sport({sportSlug:'soccer'})">Soccer Picks</a>
                     </li>
                 </ul>
             </div>

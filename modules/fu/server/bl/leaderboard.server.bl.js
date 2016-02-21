@@ -138,5 +138,6 @@ function get(query, callback){
 exports.get            = get;
 exports.getSports      = getSports;
 exports.getLeagues     = getLeagues;
+exports.getContestants = getContestants;
 
 exports.buildLeaderboard = buildLeaderboard;
