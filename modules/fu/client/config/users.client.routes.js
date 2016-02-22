@@ -45,7 +45,27 @@ angular.module('fu').config(['$stateProvider',
                     data: {
                         roles: ['user']
                     }
-                });
+                }).
+            state('signupSuccess', {
+                url: '/signup-success',
+                templateUrl: 'modules/users/views/signup/signup-success.client.view.html'
+            }).
+            state('signupSuccessUsername', {
+                url: '/signup-success/:username',
+                templateUrl: 'modules/users/views/signup/signup-success.client.view.html'
+            }).
+            state('verifyEmailSuccess', {
+                url: '/verify-email-success',
+                templateUrl: 'modules/users/views/email/verify-email-success.client.view.html'
+            }).
+            state('verifyEmailSuccessUsername', {
+                url: '/verify-email-success/:username',
+                templateUrl: 'modules/users/views/email/verify-email-success.client.view.html'
+            }).
+            state('verifyEmailFailure', {
+                url: '/verify-email-failure',
+                templateUrl: 'modules/users/views/email/verify-email-failure.client.view.html'
+            });
 
     }
 ]);

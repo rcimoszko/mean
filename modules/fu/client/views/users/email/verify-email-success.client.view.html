@@ -1,0 +1,12 @@
+<section class="row text-center full-height" data-ng-controller="VerifyEmailController">
+    <h3 class="col-md-12">Email successfully verified</h3>
+    <div class="col-md-12" data-ng-if="username" style="margin-top:20px;">
+        Re-directing back to {{username}}'s Profile in {{counter}} seconds.
+        <div>
+            <a ui-sref="profile({username:username})" class="col-md-12">Go to {{username}}'s Profile</a>
+        </div>
+    </div>
+    <div data-ng-if="!username">
+        <a ui-sref="login" class="col-md-12">Continue to login</a>
+    </div>
+</section>

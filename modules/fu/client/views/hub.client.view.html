@@ -4,17 +4,22 @@
     </div>
     <div class="container-fluid" data-ng-hide="loading.isLoading.pageLoading">
         <div class="row">
-            <div class="col-sm-4">
+
+            <div class="col-md-6 col-lg-4">
                 <ng-include src="'/modules/fu/client/views/hub/hub-picks-feed.client.view.html'"></ng-include>
             </div>
-            <div class="col-sm-4">
-                <ng-include src="'/modules/fu/client/views/hub/hub-consensus.client.view.html'"></ng-include>
-                <ng-include src="'/modules/fu/client/views/hub/hub-discussion.client.view.html'"></ng-include>
-            </div>
-            <div class="col-sm-4">
-                <ng-include src="'/modules/fu/client/views/hub/hub-chat.client.view.html'"></ng-include>
-                <ng-include src="'/modules/fu/client/views/hub/hub-trending.client.view.html'"></ng-include>
-                <ng-include src="'/modules/fu/client/views/hub/hub-leaderboard.client.view.html'"></ng-include>
+            <div class="col-md-6 col-lg-8">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ng-include src="'/modules/fu/client/views/hub/hub-consensus.client.view.html'"></ng-include>
+                        <ng-include src="'/modules/fu/client/views/hub/hub-discussion.client.view.html'"></ng-include>
+                    </div>
+                    <div class="col-lg-6">
+                        <ng-include src="'/modules/fu/client/views/hub/hub-chat.client.view.html'"></ng-include>
+                        <ng-include src="'/modules/fu/client/views/hub/hub-trending.client.view.html'"></ng-include>
+                        <ng-include src="'/modules/fu/client/views/hub/hub-leaderboard.client.view.html'"></ng-include>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -79,7 +79,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
                 type: $scope.pickFilter
             };
             if($scope.tab === 'pro') query.pro = true;
-
+            $scope.disableScroll = true;
             Hub.getPicks(query, cbGetPicks);
         };
 

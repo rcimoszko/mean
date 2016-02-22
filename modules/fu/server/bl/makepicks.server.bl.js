@@ -222,7 +222,9 @@ function getPicks(query, callback){
 
     function filterOutDisabledContestants(events, callback){
         events = _.filter(events, function(event){
-            return !event.contestant1.ref.disabled && !event.contestant2.ref.disabled;
+            if(event.contestant1.ref && event.contestant2.ref){
+                return !event.contestant1.ref.disabled && !event.contestant2.ref.disabled;
+            }
         });
         callback(null, events);
     }

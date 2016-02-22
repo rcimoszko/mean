@@ -14,17 +14,21 @@
         </span>
     </div>
     <tabset>
-        <tab select="tabChange('all')"  >
+        <tab select="tabChange('all')">
             <tab-heading>
                 ALL PICKS
             </tab-heading>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'pending'">
                 <event-pick-list events="picks.all.pending" include-user="true"></event-pick-list>
-                <loading is-loading="disableScroll" color="'white'"></loading>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
             </div>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'completed'">
                 <event-pick-list events="picks.all.completed" include-user="true" ></event-pick-list>
-                <loading is-loading="disableScroll" color="'white'"></loading>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
             </div>
         </tab>
         <tab select="tabChange('pro')">
@@ -33,11 +37,15 @@
             </tab-heading>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container"  data-ng-if="pickFilter === 'pending'">
                 <event-pick-list events="picks.pro.pending" include-user="true"></event-pick-list>
-                <loading is-loading="disableScroll" color="'white'"></loading>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
             </div>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'completed'">
                 <event-pick-list events="picks.pro.completed" include-user="true" ></event-pick-list>
-                <loading is-loading="disableScroll" color="'white'"></loading>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
             </div>
         </tab>
     </tabset>
