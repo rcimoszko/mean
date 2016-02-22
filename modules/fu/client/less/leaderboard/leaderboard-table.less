@@ -3,7 +3,7 @@
   margin-top:20px;
   border-radius:5px;
   width:100%;
-  @media (min-width: @screen-xs-min) {
+  @media (min-width: @screen-md-min) {
     table-layout:fixed;
   }
   thead{
@@ -102,7 +102,8 @@
       max-width: 140px;
     }
     @media (min-width: @screen-sm-min) {
-      max-width: auto;
+      width: auto;
+      max-width:auto;
     }
     @media (min-width: @screen-md-min) {
       max-width: auto;
@@ -176,9 +177,11 @@
       width:90px;
     }
     @media (min-width: @screen-sm-min) {
+      display:none;
       width:80px;
     }
     @media (min-width: @screen-md-min) {
+      display:table-cell;
       width:85px;
     }
     @media (min-width: @screen-lg-min) {
@@ -195,9 +198,11 @@
       width:90px;
     }
     @media (min-width: @screen-sm-min) {
+      display:none;
       width:70px;
     }
     @media (min-width: @screen-md-min) {
+      display:table-cell;
       width:75px;
     }
     @media (min-width: @screen-lg-min) {
