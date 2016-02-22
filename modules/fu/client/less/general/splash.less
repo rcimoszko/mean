@@ -5,6 +5,215 @@
   @media (min-width: @screen-sm-min) {
     margin:0 -20px;
   }
+
+
+  .section-1{
+    background-image: url('/modules/fu/client/img/splash/splash.png');
+    background-position: top;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    padding:60px 0;
+
+
+    .column-1{
+      padding-left:40px;
+    }
+
+    h1{
+      color:white;
+      text-transform:uppercase;
+      font-size:30px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size:36px;
+        margin-top:95px;
+      }
+    }
+    h2{
+      color:white;
+      margin-top:35px;
+      font-weight:100;
+      margin-bottom:20px;
+      font-size:20px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size:26px;
+      }
+    }
+
+    .signup-form-container{
+      .auth-form-container{
+        border-radius:5px;
+        max-width:400px;
+        margin:0 auto;
+        padding:30px;
+        background-color:rgba(0,0,0,0.5);
+
+
+        .divider-text{
+          color:white;
+          padding:15px 0;
+          text-align:center;
+        }
+        .button-container{
+          .btn{
+            width:32.66666667%;
+            float:left;
+            margin-right:1%;
+            &:last-of-type{
+              margin-right:0;
+            }
+            .text{
+              display:none;
+            }
+          }
+        }
+        .terms{
+          a{
+            color:white;
+            text-transform:uppercase;
+          }
+        }
+      }
+      .bottom-text{
+        color:white;
+      }
+    }
+
+  }
+
+  .section-2{
+    background-color:@color-blue-2;
+    color:white;
+    padding:30px 0;
+
+
+    @media (min-width: @screen-sm-min) {
+      padding:60px 0;
+    }
+
+    .icon-container{
+      text-align:center;
+      font-size:50px;
+      display:inline-block;
+      float:left;
+      width:60px;
+      vertical-align:top;
+
+      @media (min-width: @screen-sm-min) {
+        float:none;
+        display:block;
+        width:auto;
+      }
+
+    }
+    .text-container{
+      vertical-align:top;
+      padding:0 20px;
+      margin-bottom:30px;
+      overflow:hidden;
+      .heading{
+        font-size:20px;
+        font-weight:bold;
+        @media (min-width: @screen-sm-min) {
+          font-size:24px;
+        }
+      }
+      .text{
+        font-size:14px;
+        @media (min-width: @screen-sm-min) {
+          font-size:18px;
+        }
+      }
+    }
+  }
+
+  .section-3{
+    background-color:white;
+    padding:30px 0;
+    h3{
+      font-size:16px;
+      line-height:1.8;
+
+      @media (min-width: @screen-sm-min) {
+        font-size:20px;
+        margin-top:90px;
+      }
+
+    }
+    .fa{
+      margin-right:3px;
+    }
+    .leaderboard-table{
+      border:1px solid @color-gray-divider;
+      border-radius:5px;
+    }
+
+  }
+
+  .section-4{
+    background-color:@color-bg;
+    padding:40px 0;
+    img{
+      border:1px solid @color-gray-divider;
+      max-width:100%;
+      margin-bottom:20px;
+    }
+    .text-container{
+      .heading{
+        font-size:26px;
+        margin-bottom:10px;
+      }
+      .text{
+        font-size:16px;
+        line-height:1.8;
+      }
+    }
+  }
+
+  .section-5{
+    padding:50px 0;
+    background-color:white;
+    .testimonial-container{
+      margin-bottom:30px;
+      .testimonial{
+        font-style:italic;
+        font-size:16px;
+      }
+      .user{
+        margin-top:10px;
+        font-size:18px;
+      }
+    }
+
+  }
+
+  .section-6{
+    padding:30px 0;
+    background-color:@color-bg;
+    h2{
+      padding:0 50px;
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-bottom:30px;
+      line-height:1.4;
+      font-size: 20px;
+
+      @media (min-width: @screen-sm-min) {
+        font-size: 26px;
+      }
+    }
+
+  }
+
+
+  /*
+  @media (min-width: @screen-sm-min) {
+    margin:0 -20px;
+  }
   .btn-premium {
     background-color: @color-green;
     padding: 15px 30px;
@@ -296,6 +505,7 @@
       font-size: 18px;
     }
   }
+  */
 }
 
 
@@ -321,4 +531,5 @@
   @media (min-width: @screen-xl-min) {
     height:500px;
   }
+
 }

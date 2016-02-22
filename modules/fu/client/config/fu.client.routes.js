@@ -5,7 +5,7 @@ angular.module('fu').config(['$stateProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: 'modules/fu/client/views/home.client.view.html'
+                templateUrl: 'modules/fu/client/views/splash.client.view.html'
             })
             .state('hub', {
                 url: '/hub',

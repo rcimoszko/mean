@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('SplashController', ['$scope', 'Modal', '$state', 'Authentication', 'Page', 'Mixpanel',
-    function($scope, Modal, $state, Authentication, Page, Mixpanel) {
+angular.module('core').controller('SplashController', ['$scope', 'Modal', '$state', 'Authentication', 'Page', 'Mixpanel', 'Leaderboard',
+    function($scope, Modal, $state, Authentication, Page, Mixpanel, Leaderboard) {
         $scope.authentication = Authentication;
         if($scope.authentication.user) $state.go('hub');
 
@@ -21,5 +21,26 @@ angular.module('core').controller('SplashController', ['$scope', 'Modal', '$stat
                 'splash-video'
             );
         };
+
+
+        $scope.query = {
+            sportId:        'all',
+            leagueId:       'all',
+            contestantId:   'all',
+            homeAway:       'both',
+            betDuration:    'all',
+            betType:        'all',
+            minBets:        'all',
+            dateId:         'allTime',
+            count:          5
+        };
+
+        function cb(err, leaderboard){
+            $scope.leaderboard = leaderboard;
+            console.log($scope.leaderboard);
+        }
+
+        Leaderboard.getLeaderboard($scope.query, cb);
+
     }
 ]);

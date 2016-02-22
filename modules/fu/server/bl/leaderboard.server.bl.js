@@ -130,8 +130,9 @@ function get(query, callback){
     var homeAway     = query.homeAway;
     var betDuration  = query.betDuration;
     var betType      = query.betType;
+    var count        = query.count;
 
-    buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, null, null, callback);
+    buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, betDuration, betType, minBets, null, count, callback);
 
 }
 

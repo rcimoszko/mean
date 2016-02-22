@@ -1,0 +1,250 @@
+<div data-ng-controller="SplashController" id="splash">
+    <div class="section-1">
+        <div class="container">
+            <div class="row">
+                <div class="column-1 col-sm-6 text-center">
+                    <h1>Winning Made Easy</h1>
+                    <h2>Get access to thousands of handicappers with 100% verified records and transparent results.</h2>
+                </div>
+                <div class="column-2 col-sm-6">
+                    <div class="signup-form-container">
+                        <signup-form></signup-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="icon-container">
+                        <i class="fa fa-check-square"></i>
+                    </div>
+                    <div class="text-container">
+                        <div class="heading">
+                            Track Your Performance
+                        </div>
+                        <div class="text">
+                            Get a detailed breakdown of your betting history and every tipster in the FansUnite community
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="icon-container">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="text-container">
+                        <div class="heading">
+                            Tipsters you can Trust
+                        </div>
+                        <div class="text">
+                            Discover and follow thousands of tipsters in hundreds of leagues around the world
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="icon-container">
+                        <i class="fa fa-usd"></i>
+                    </div>
+                    <div class="text-container">
+                        <div class="heading">
+                            Become more Profitable
+                        </div>
+                        <div class="text">
+                            Win ore with our community of tipsters
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>
+                        Paying exorbitant fees for one handicapper and having to endure the hot and cold streaks is rough. We give you access to thousands of handicappers for a fraction of the price.
+                    </h3>
+                    <div class="btn-container text-center">
+                        <a class="btn btn-blue-2-empty" href data-ng-click="showVideoModal()"><i class="fa fa-play-circle"></i>Watch Video</a>
+                    </div>
+                  </div>
+                <div class="col-sm-6">
+                    <table class="table leaderboard-table table-condensed">
+                        <thead>
+                        <th class="rank">#</th>
+                        <th class="username">USERNAME</th>
+                        <th class="text-center">ROI</a></th>
+                        <th class="text-center profit">PROFIT</a></th>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="user in leaderboard">
+                            <td class="rank">{{$index+1}}</td>
+                            <td class="username">
+                                <a ui-sref="profile({username:user.user.username})">
+                                <avatar url="user.user.avatarUrl" size="'xs'"></avatar>
+                                    {{user.user.username}}
+                                </a>
+                            </td>
+                            <td class="text-center roi">{{user.roi| number:1}}%</td>
+                            <td class="text-center profit">{{user.profit| number:1}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <img src="modules/fu/client/img/splash/line-chart.png">
+                </div>
+                <div class="col-sm-6 text-container">
+                    <div class="heading">PickTracker</div>
+                    <div class="text">
+                        The FansUnite PickTracker will quickly show you what leagues and teams you should be concentrating on, and which ones are costing you money.  The PickTracker analyzes your betting patterns and history and identifies your strengths and weaknesses, displayed in an easy graphical format. Everything can be filtered to show the information you need to make better decisions.
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="testimonial-container">
+
+                        <div class="testimonial">
+                            "The thing that drew me to FansUnite, right off the bat, was the engaging community.  Now, I have access to these members to bounce ideas off of, the PickTracker to find where I'm leaking profit, and other users I can follow to make some more money"
+                        </div>
+                        <div class="user">
+                            - <a ui-sref="profile({username:'TMussolani'})">TMussolani</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="testimonial-container">
+                        <div class="testimonial">
+                            "I’m basically in love with FansUnite. It took me just a few hours to find some great handicappers in my favorite sports. I’m already seeing results!"
+                        </div>
+                        <div class="user">
+                            - <a ui-sref="profile({username:'QuickPickSix'})">QuickPickSix</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="testimonial-container">
+                        <div class="testimonial">
+                            "I’m basically in love with FansUnite. It took me just a few hours to find some great handicappers in my favorite sports. I’m already seeing results!"
+                        </div>
+                        <div class="user">
+                            - TMussolani
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="section-6 text-center">
+        <h2>
+            Discover how FansUnite and its community of expert handicappers can make you more profitable.
+        </h2>
+        <div class="btn-container">
+            <a class="btn btn-lg btn-premium btn-green" ui-sref="signup" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Create Free Account - 2')">Create Free Account</a>
+        </div>
+    </div>
+
+
+
+    <!--
+    <div class="hero" id="section-one">
+        <div class="text-center">
+            <h1>Winning made easy.</h1>
+            <h2>Get access to thousands of handicappers with 100% verified records and transparent results.</h2>
+            <p class="text-center">
+                <a class="btn btn-lg btn-premium btn-green" ui-sref="signup" id="create-button" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Create Free Account - 1')">Create Free Account</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="section-two" class="picks">
+        <div class="text-center picks-moveup">
+            <div id="pro-picks" class="clearfix">
+                <div class="pro-picks-left">
+                    <div class="category">Hockey Pro Picks</div>
+                    <div class="units">+84</div>
+                    <div class="unit-text">units</div>
+                </div>
+                <div class="pro-picks-center">
+                    <div class="category"><a href="/profile/Synch">Synch</a></div>
+                    <div class="date">January 2015</div>
+                    <div class="units">+102</div>
+                    <div class="unit-text"></div>
+                </div>
+                <div class="pro-picks-right">
+                    <div class="category">Soccer Pro Picks</div>
+                    <div class="units">+45</div>
+                    <div class="unit-text">units</div>
+                </div>
+            </div>
+            <h3>
+                Revolutionizing the way people place wagers and making their gaming experience more social, enjoyable and transparent.
+            </h3>
+            <hr>
+        </div>
+    </div>
+
+    <div class="yt-vid" id="section-three">
+        <div class="video-content">
+            <h4>Upgrade your life with FansUnite.</h4>
+            <p>Don't be a Mitch, release your inner Dan</p>
+            <a href="#" data-ng-click="showVideoModal()" class="playvid">Watch the video</a>
+        </div>
+
+    </div>
+
+    <section id="section-four">
+        <div class="container">
+            <h3 class="text-center">Paying exorbitant fees for one handicapper and having to endure the hot and cold streaks is rough. We give you access to thousands of handicappers for a fraction of the price.</h3>
+        </div>
+        <p class="text-center">
+            <a class="btn btn-lg btn-premium btn-green" ui-sref="whyGoPro" data-ng-click="mixpanel.getPremiumClicked(page.getUrl(), 'Get Access Now')">Get Access Now</a>
+        </p>
+    </section>
+
+
+    <div id ="section-five">
+        <div class="container">
+            <h2 class="text-center">Win percentage of FansUnite's Top 5 Handicappers in:</h2>
+            <div class="row">
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/nhl-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/nba-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/ncaa-playoffs.jpg"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <img src="/modules/fu/client/img/splash/world-cup.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    -->
+</div>

@@ -1,81 +1,51 @@
-<div class="panel auth-panel panel-square">
-    <div class="panel-heading">
-        <h3 class="text-center">Sign Up</h3>
+<div class="auth-form-container">
+    <div class="button-container clearfix">
+        <a class="btn btn-facebook" href="/api/auth/facebook" target="_self">
+            <i class="fa fa-facebook"></i>
+        </a>
+        <a class="btn btn-twitter" href="/api/auth/twitter" target="_self">
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a class="btn btn-google" href="/api/auth/google" target="_self">
+            <i class="fa fa-google"></i>
+        </a>
     </div>
-    <div class="panel-body">
-
-        <form name="userForm" ng-submit="signup(userForm.$valid)" class="auth-form" novalidate autocomplete="off">
-            <fieldset>
-                <div class="form-group" show-errors>
-                    <input type="email" id="email" name="email" class="form-control" ng-model="form.email" placeholder="Email" lowercase required>
-                    <div ng-messages="userForm.email.$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Email address is required.</p>
-                        <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-                    </div>
-                </div>
-                <div class="form-group" show-errors>
-                    <input type="text" id="username" name="username" class="form-control" ng-model="form.username" placeholder="Username" lowercase required>
-                    <div ng-messages="userForm.username.$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Username is required.</p>
-                    </div>
-                </div>
-                <div class="form-group" show-errors>
-                    <input type="password" id="password" name="password" class="form-control" ng-model="form.password" placeholder="Password" required ng-minlength="6">
-                    <div ng-messages="userForm.password.$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Password is required.</p>
-                        <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <select id="sport" name="sport" class="form-control"  data-ng-model="formData.favoriteSportField" data-ng-options="sport as sport.name for sport in sports" required>
-                        <option value="">Select Favorite Sport</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" id="referral" name="referral" class="form-control" data-ng-model="formData.referral" placeholder="Referral Code (Optional)">
-                </div>
-
-                <div class="form-group">
-                    <input type="checkbox" id="terms" ng-model="formData.terms" required> <a target='_blank' ui-sref="static.terms">I Accept the Terms & Conditions</a>
-                    <div data-ng-show="invalidForm">
-                        <p data-ng-show="!formData.terms" class="help-block">Please accept the terms and conditions.</p>
-                    </div>
-                </div>
-
-                <div class="text-center form-group">
-                    <button type="submit" class="btn btn-orange">Sign up</button>
-                    &nbsp; or&nbsp;
-                    <a ui-sref="signin" class="show-signup">Sign in</a>
-                </div>
-
-                <div ng-show="error" class="text-center text-danger">
-                    <strong ng-bind="error"></strong>
-                </div>
-            </fieldset>
-            <div class="divider">
-          <span>
-            OR SIGNUP WITH
-          </span>
+    <div class="divider-text">
+        OR SIGN UP WITH EMAIL
+    </div>
+    <form name="userForm" ng-submit="signup(userForm.$valid)" class="auth-form" novalidate autocomplete="off">
+        <div class="form-group" show-errors>
+            <input type="email" id="email" name="email" class="form-control" ng-model="form.email" placeholder="EMAIL" uppercase required>
+            <div ng-messages="userForm.email.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
             </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <a href="/api/auth/facebook" target="_self" class="btn btn-social btn-facebook">
-                        <i class="fa fa-facebook"></i> Facebook
-                    </a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="/api/auth/twitter" target="_self" class="btn btn-social btn-twitter">
-                        <i class="fa fa-twitter"></i> Twitter
-                    </a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="/api/auth/google" target="_self" class="btn btn-social btn-google">
-                        <i class="fa fa-google"></i>Google+
-                    </a>
-                </div>
+        </div>
+        <div class="form-group" show-errors>
+            <input type="text" id="username" name="username" class="form-control" ng-model="form.username" placeholder="USERNAME" uppercase required>
+            <div ng-messages="userForm.username.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Username is required.</p>
             </div>
-        </form>
+        </div>
+        <div class="form-group" show-errors>
+            <input type="password" id="password" name="password" class="form-control" ng-model="form.password" placeholder="PASSWORD" required uppercase ng-minlength="6">
+            <div ng-messages="userForm.password.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Password is required.</p>
+                <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+            </div>
+        </div>
+
+        <div class="form-group terms">
+            <input type="checkbox" id="terms" ng-model="form.terms" required> <a target='_blank' ui-sref="static.terms">I Accept the Terms & Conditions</a>
+            <div data-ng-show="invalidForm">
+                <p data-ng-show="!form.terms" class="help-block">Please accept the terms and conditions.</p>
+            </div>
+        </div>
+        <div class="text-center form-group">
+            <button type="submit" class="btn btn-green">Create Free Account</button>
+        </div>
+    </form>
+    <div class="bottom-text">
+        FansUnite is free to use as long as you want with an unlimited number of tipsters.
     </div>
 </div>
