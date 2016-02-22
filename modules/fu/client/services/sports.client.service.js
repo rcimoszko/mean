@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Sports', ['ApiSports',
-    function(ApiSports) {
+angular.module('fu').factory('Sports', ['ApiSports', 'ApiSportsResolvelist',
+    function(ApiSports, ApiSportsResolvelist) {
 
         var create = function(form, callback){
 
@@ -108,6 +108,36 @@ angular.module('fu').factory('Sports', ['ApiSports',
 
         };
 
+        var getResolveList = function(callback){
+
+            function cbSuccess(sports){
+                callback(null, sports);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiSportsResolvelist.query(cbSuccess, cbError);
+
+        };
+
+        var getResolveEvents = function(sportId, callback){
+
+
+            function cbSuccess(sports){
+                callback(null, sports);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            console.log(sportId);
+            ApiSports.getResolveEvents({_id: sportId}, cbSuccess, cbError);
+
+        };
+
         return {
             get:    get,
             getAll: getAll,
@@ -117,7 +147,10 @@ angular.module('fu').factory('Sports', ['ApiSports',
 
             getLeagues: getLeagues,
             getContestants: getContestants,
-            getGroups: getGroups
+            getGroups: getGroups,
+
+            getResolveList: getResolveList,
+            getResolveEvents: getResolveEvents
         };
     }
 ]);

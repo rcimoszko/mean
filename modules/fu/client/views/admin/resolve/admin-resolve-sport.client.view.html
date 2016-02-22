@@ -1,0 +1,4 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.resolveSports">Resolve</a> > {{sport.name}}</h2>
+    <ng-include src="'modules/fu/client/templates/admin/scores/scores-table.'+sport.slug+'.html'" data-ng-if="sport"></ng-include>
+</section>

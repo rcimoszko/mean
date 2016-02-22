@@ -1,0 +1,27 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > Event</h2>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <select class="form-control" data-ng-model="sport" data-ng-options="sport.name for sport in sports" data-ng-change="getLeagues()">
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" data-ng-model="league" data-ng-options="league.name for league in leagues" data-ng-change="getLeagueEvent()">
+            </select>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="event in events">
+                <td><a ui-sref="admin.editContestant({eventId:event._id})">{{::event.contestant1.name}}/{{::event.contestant2.name}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

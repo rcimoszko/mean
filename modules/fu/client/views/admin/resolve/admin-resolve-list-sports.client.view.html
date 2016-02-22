@@ -1,0 +1,17 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > Resolve</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Pick Count</th>
+            </thead>
+            <body>
+            <tr data-ng-repeat="sport in sports|orderBy:'sport.sport.name'">
+                <td><a ui-sref="admin.resolveSport({sportId:sport.sport._id})">{{::sport.sport.name}}</a></td>
+                <td>{{::sport.count}}</td>
+            </tr>
+            </body>
+        </table>
+    </div>
+</section>

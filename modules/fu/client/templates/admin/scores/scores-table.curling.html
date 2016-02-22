@@ -1,0 +1,28 @@
+<table class="table resolve-table">
+    <thead>
+    <th>Start Time</th>
+    <th>League</th>
+    <th class="text-center">Picks</th>
+    <th>Match</th>
+    <th>Final Score</th>
+    <th>Draw</th>
+    <th>Save</th>
+    <th>Cancel</th>
+    </thead>
+    <tbody>
+    <tr class="first-contestant" data-ng-repeat-start="event in events">
+        <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
+        <td rowspan="2" class="valign">{{event.league.name}}</td>
+        <td class="text-center valign" rowspan="2">{{event.pickCount}}</td>
+        <td>{{event.contestant1.name}}</td>
+        <td><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
+        <td rowspan="2" class="valign text-center"><input type="checkbox" ng-model="event.draw"/></td>
+        <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">SAVE</button></td>
+        <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
+    </tr>
+    <tr class="second-contestant" data-ng-repeat-end>
+        <td>{{event.contestant2.name}}</td>
+        <td><input type="number" min="0" data-ng-model="event.contestant2FinalScore"/></td>
+    </tr>
+    </tbody>
+</table>

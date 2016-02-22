@@ -6,7 +6,8 @@ angular.module('fu').factory('ApiSports', ['$resource',
             update:         { method: 'PUT' },
             getLeagues:     { method: 'GET', params: {action: 'leagues'}, isArray:true },
             getContestants: { method: 'GET', params: {action: 'contestants'}, isArray:true },
-            getGroups: { method: 'GET', params: {action: 'groups'}, isArray:true }
+            getGroups: { method: 'GET', params: {action: 'groups'}, isArray:true },
+            getResolveEvents: { method: 'GET', params: {action: 'resolveevents'}, isArray:true }
         });
     }
 ]);

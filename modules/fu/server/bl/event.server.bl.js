@@ -21,6 +21,15 @@ function get(id, callback){
     m_Event.findById(id).exec(cb);
 }
 
+function getBySlug(slug, callback){
+
+    function cb(err, event){
+        callback(err, event);
+    }
+
+    m_Event.findOne({slug:slug}).exec(cb);
+}
+
 function getAll(callback){
 
     function cb(err, events){
@@ -162,10 +171,39 @@ function getUnresolvedEvents(callback){
     m_Event.find(query, callback);
 }
 
+function getResolveEvents(sport, callback){
+    var todo = [];
+
+    function groupPicks(callback){
+        var aggArray = [];
+        var query = {$match:{result:'Pending', sport: mongoose.Types.ObjectId(sport._id), eventStartTime: {$lte: new Date()}}};
+        var group = {$group:{_id: '$event', count: {$sum:1}}};
+        var project = {$project:{event: '$_id', count: 1}};
+
+        aggArray.push(query);
+        aggArray.push(group);
+        aggArray.push(project);
+
+        PickBl.aggregate(aggArray, callback);
+
+    }
+
+    function populateEvents(events, callback){
+        var populate = {path: 'event', model:'Event'};
+        populateBy(events, populate, callback);
+    }
+
+    todo.push(groupPicks);
+    todo.push(populateEvents);
+
+    async.waterfall(todo, callback);
+}
+
 
 
 exports.populate    = populate;
 exports.get         = get;
+exports.getBySlug   = getBySlug;
 exports.getAll      = getAll;
 exports.create      = create;
 exports.update      = update;
@@ -187,3 +225,4 @@ exports.getPicks        = getPicks;
 exports.addBet          = addBet;
 
 exports.getUnresolvedEvents = getUnresolvedEvents;
+exports.getResolveEvents = getResolveEvents;

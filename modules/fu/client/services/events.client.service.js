@@ -50,6 +50,7 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
             commentReply.$update(cbSuccess, cbError);
         };
 
+
         return {
             getComments: getComments,
             newComment: newComment,

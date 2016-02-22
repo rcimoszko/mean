@@ -1,0 +1,8 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.events">Events</a> > {{event.contestant1.name}}/{{event.contestant2.name}}</h2>
+
+    <form data-ng-submit="submit()">
+        <!-- ADD GROUP FIELD -->
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>
