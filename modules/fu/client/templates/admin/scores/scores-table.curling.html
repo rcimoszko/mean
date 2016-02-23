@@ -1,19 +1,19 @@
-<table class="table resolve-table">
+<table class="table scores-table">
     <thead>
-    <th>Start Time</th>
-    <th>League</th>
-    <th class="text-center">Picks</th>
-    <th>Match</th>
-    <th>Final Score</th>
-    <th>Draw</th>
-    <th>Save</th>
-    <th>Cancel</th>
+        <th>Start Time</th>
+        <th>League</th>
+        <th class="text-center">Picks</th>
+        <th>Match</th>
+        <th>Final Score</th>
+        <th>Draw</th>
+        <th>Save</th>
+        <th>Cancel</th>
     </thead>
     <tbody>
-    <tr class="first-contestant" data-ng-repeat-start="event in events">
+    <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event">
         <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
         <td rowspan="2" class="valign">{{event.league.name}}</td>
-        <td class="text-center valign" rowspan="2">{{event.pickCount}}</td>
+        <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>
         <td>{{event.contestant1.name}}</td>
         <td><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
         <td rowspan="2" class="valign text-center"><input type="checkbox" ng-model="event.draw"/></td>

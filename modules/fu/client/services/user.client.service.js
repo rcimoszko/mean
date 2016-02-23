@@ -85,7 +85,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             }
 
             function cbError(response){
-                console.log(repsonse);
+                console.log(response);
             }
 
             ApiUserMessagecount.get({}, cbSuccess, cbError);

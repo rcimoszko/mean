@@ -5230,3 +5230,15 @@ notification:last-of-type .notification {
   font-size: 18px !important;
   color: #2b2b2c;
 }
+.scores-table input {
+  width: 50px;
+}
+.scores-table th {
+  text-align: center;
+}
+.scores-table .extra {
+  border-left: 1px solid lightgray;
+}
+.scores-table .number {
+  text-align: center;
+}

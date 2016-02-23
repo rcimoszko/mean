@@ -1,4 +1,4 @@
-<table class="table resolve-table">
+<table class="table scores-table">
     <thead>
         <th>Start Time</th>
         <th>League</th>
@@ -8,19 +8,24 @@
         <th>2nd Half</th>
         <th>OT?</th>
         <th>OT Score</th>
+
+        <th>Final Score</th>
+
         <th>Save</th>
         <th>Cancel</th>
+        <th>Edit</th>
     </thead>
     <tbody>
-        <tr class="first-contestant" data-ng-repeat-start="event in events">
+        <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event">
             <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
             <td rowspan="2" class="valign">{{event.league.name}}</td>
-            <td class="text-center valign" rowspan="2">{{event.pickCount}}</td>
+            <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>
             <td>{{event.contestant1.name}}</td>
             <td><input type="number" min="0" data-ng-model="event.contestant1H1Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant1H2Score"/></td>
             <td class="text-center valign" rowspan="2"><input type="checkbox" data-ng-model="event.overtime"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant1OTScore" data-ng-disabled="!event.overtime"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">SAVE</button></td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
         </tr>
@@ -29,6 +34,7 @@
             <td><input type="number" min="0" data-ng-model="event.contestant2H1Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant2H2Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant2OTScore" data-ng-disabled="!event.overtime"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant2FinalScore"/></td>
         </tr>
     </tbody>
 </table>

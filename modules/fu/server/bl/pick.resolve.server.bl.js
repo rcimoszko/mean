@@ -575,7 +575,6 @@ function resolvePicks(event, callback) {
     }
 
     function updateEvent(callback){
-        console.log('updateEvent');
         event.resolved = true;
         event.save(callback);
     }

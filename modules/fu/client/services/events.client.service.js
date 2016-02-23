@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
-    function(ApiEventsComments, Authentication) {
+angular.module('fu').factory('Events', ['ApiEventsComments', 'ApiEvents', 'Authentication',
+    function(ApiEventsComments, ApiEvents, Authentication) {
 
         var getComments = function(event, callback){
             function cbSuccess(comments){
@@ -50,11 +50,56 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'Authentication',
             commentReply.$update(cbSuccess, cbError);
         };
 
+        var resolve = function(event, callback){
+
+            function cbSuccess(event){
+                callback(null, event);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            event = new ApiEvents(event);
+            event.$resolve(cbSuccess, cbError);
+        };
+
+        var cancel = function(event, callback){
+            function cbSuccess(event){
+                callback(null, event);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            event = new ApiEvents(event);
+            event.$cancel(cbSuccess, cbError);
+
+        };
+
+        var reResolve = function(event, callback){
+            function cbSuccess(event){
+                callback(null, event);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            event = new ApiEvents(event);
+            event.$reresolve(cbSuccess, cbError);
+        };
+
 
         return {
             getComments: getComments,
             newComment: newComment,
-            commentReply: commentReply
+            commentReply: commentReply,
+
+            resolve: resolve,
+            cancel: cancel,
+            reResolve: reResolve
         };
     }
 ]);
