@@ -20,7 +20,7 @@ angular.module('fu').directive('betSection', function ($compile) {
                     directive = '<bet-section-spread event="event" bets="bets"></bet-section-spread>';
                     break;
                 case 'sets':
-                    directive = '<bet-section-spread event="event" bets="bets"></bet-section-spread>';
+                    directive = '<bet-section-sets event="event" bets="bets"></bet-section-sets>';
                     break;
                 case 'total points':
                     directive = '<bet-section-total-points event="event"  bets="bets"></bet-section-total-points>';

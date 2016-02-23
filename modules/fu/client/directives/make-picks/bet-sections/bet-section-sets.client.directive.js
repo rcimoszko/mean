@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').directive('betSectionSpread', function () {
+angular.module('fu').directive('betSectionSets', function () {
     return {
         restrict: 'E',
         scope: {
