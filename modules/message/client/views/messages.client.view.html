@@ -7,7 +7,7 @@
                         <a class="btn btn-blue-empty" ui-sref="messages.new">New Message</a>
                     </div>
                     <div class="message-list-container">
-                        <div data-ng-repeat="conversation in conversations|orderBy:'timestamp':true|orderBy:isNew:true" class="message-list" ui-sref-active="active" ui-sref="messages.view({conversationId: conversation._id})" data-ng-class="{new: isNew(conversation)}">
+                        <div data-ng-repeat="conversation in conversations|orderBy:isNew:true|orderBy:'timestamp':true" class="message-list" ui-sref-active="active" ui-sref="messages.view({conversationId: conversation._id})" data-ng-class="{new: isNew(conversation)}">
                             <avatar url="conversation.lastMessage.user.ref.avatarUrl" size="'sm'"></avatar>
                             <div class="message-summary-container">
                                 <div class="recipients">

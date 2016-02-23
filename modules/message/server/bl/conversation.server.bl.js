@@ -55,8 +55,6 @@ function createConversation(data, user, callback) {
         });
 
         var query = {recipients: {$all: userQueryArray, $size: data.recipients.length}};
-        console.log(userQueryArray);
-        console.log(query);
         getOneByQuery(query, callback);
 
     }
@@ -135,7 +133,7 @@ function getConversation(user, conversation, callback){
 }
 
 function getNewMessageCount(userId, callback){
-    Conversation.count({'recipients.ref': userId, 'recipients.new':true }).exec(callback);
+    Conversation.count({recipients: {$elemMatch:{ref: userId, new: true}}}).exec(callback);
 }
 
 exports.getByUser           = getByUser;

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -79,6 +79,18 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             info.stats.activePicks = info.picks.pending.length;
         }
 
+        function updateMessageCount(){
+            function cbSuccess(count){
+                info.messageCount = count.count;
+            }
+
+            function cbError(response){
+                console.log(repsonse);
+            }
+
+            ApiUserMessagecount.get({}, cbSuccess, cbError);
+        }
+
         function initiliazeSocket(){
 
             SocketUser.connect();
@@ -87,12 +99,16 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             SocketUser.on('new notification', function(notification){
                 info.notifications.push(notification);
             });
+
+
+            SocketUser.on('new message', function(){
+                updateMessageCount();
+            });
         }
 
         function readNotification(notification, callback){
 
             function cbSuccess(notification){
-                console.log(notification);
                 callback(null, notification);
             }
 
@@ -105,7 +121,6 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
 
         var initialize = function(){
             function cbSuccess(userInfo){
-                console.log(userInfo);
                 info.initialized = true;
                 info.following = userInfo.following;
                 info.picks.pending = userInfo.pendingPicks;
@@ -146,7 +161,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             initialize: initialize,
 
             createConversation: createConversation,
-            readNotification: readNotification
+            readNotification: readNotification,
+            updateMessageCount: updateMessageCount
         };
 
     }

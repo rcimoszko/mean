@@ -50,7 +50,6 @@ angular.module('message').controller('ViewMessageController', ['$scope', '$state
                 var reply = {conversationId: $scope.conversationId,
                             message: replyMessage};
 
-                console.log(reply);
                 SocketMessages.emit('message reply', reply);
                 $scope.text = '';
             }

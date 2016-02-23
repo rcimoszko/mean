@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
     Message = mongoose.model('Message'),
     _ = require('lodash'),
+    UserSocket = require('../../../fu/server/sockets/user.server.socket.config'),
     Conversation = mongoose.model('Conversation');
 
 function config(io) {
@@ -30,7 +31,7 @@ function config(io) {
                     message.save();
                     socket.join(conversation._id);
                     nsp.to(conversation._id).emit('new conversation', conversation);
-                    //userSocket.newMessage(conversation.recipients);
+                    UserSocket.newMessage(conversation.recipients);
                 } else {
                     var newConverationDb = new Conversation({recipients:newConversation.recipients, owner:newConversation.owner, subject:newConversation.subject, lastMessage: newConversation.message });
                     newConverationDb.save(function(){
@@ -39,7 +40,7 @@ function config(io) {
                         message.save();
                         socket.join(newConverationDb._id);
                         nsp.to(newConverationDb._id).emit('new conversation', newConverationDb);
-                        //userSocket.newMessage(newConverationDb.recipients);
+                        UserSocket.newMessage(newConverationDb.recipients);
                     });
                 }
             });
@@ -52,7 +53,6 @@ function config(io) {
         socket.on('join room', function(joinRoom){
             socket.join(joinRoom.conversationId);
 
-            console.log(joinRoom);
 
             //Set message to read for specific user
             Conversation.update({_id: joinRoom.conversationId, 'recipients.ref': joinRoom.userId}, {$set:{'recipients.$.new': false}}, function(err, num){
@@ -64,7 +64,6 @@ function config(io) {
          * Reply
          */
         socket.on('message reply', function(reply){
-            console.log(reply);
             Conversation.findById(reply.conversationId).exec(function(err, conversation){
                 if (conversation){
                     var message = new Message(reply.message);
@@ -82,7 +81,7 @@ function config(io) {
                     // Populate User Info
                     Message.populate(message, {path: 'user.ref', model:'User', select: 'avatarUrl'},  function(err, message){
                         nsp.to(conversation._id).emit('message reply', message);
-                        //userSocket.newMessage(conversation.recipients);
+                        UserSocket.newMessage(conversation.recipients);
                     });
                 }
             });

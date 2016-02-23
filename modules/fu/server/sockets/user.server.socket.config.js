@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+    _ = require('lodash'),
     UserBl = require('../bl/user.server.bl');
 
 var nsp;
@@ -23,6 +24,14 @@ function sendNotification(notification){
     nsp.to(notification.user.ref).emit('new notification', notification);
 }
 
+function newMessage(recipients){
+    console.log('newMessage', recipients);
+    _.each(recipients, function(recipient){
+        nsp.to(recipient.ref).emit('new message');
+    });
+}
+
 exports.config = config;
 exports.sendNotification = sendNotification;
+exports.newMessage = newMessage;
 

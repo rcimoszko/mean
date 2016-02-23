@@ -367,3 +367,4 @@ exports.getTracker          = getTracker;
 exports.getInfo             = getInfo;
 exports.getForSearch        = getForSearch;
 exports.uploadProfilePicture = uploadProfilePicture;
+exports.getNewMessageCount = getNewMessageCount;

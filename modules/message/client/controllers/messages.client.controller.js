@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('message').controller('MessagesController', ['$scope', '$filter', 'Authentication', 'User', 'SocketMessages',
-    function($scope, $filter, Authentication, User, SocketMessages) {
+angular.module('message').controller('MessagesController', ['$scope', '$filter', 'Authentication', 'User',
+    function($scope, $filter, Authentication, User) {
 
 
         $scope.authentication = Authentication;
@@ -42,6 +42,7 @@ angular.module('message').controller('MessagesController', ['$scope', '$filter',
 
         $scope.$on('updateConversationList', function(){
             $scope.getConversationList();
+            User.updateMessageCount();
         });
 
     }
