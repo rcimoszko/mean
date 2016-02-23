@@ -2348,25 +2348,25 @@ notification:last-of-type .notification {
   }
   .picks-event-container.columns-6 .bet-section-container {
     float: left;
-    width: 17%;
+    width: 14%;
   }
   .picks-event-container.columns-6 .bet-section-container .bet-section {
     width: 100%;
   }
   .picks-event-container.columns-6 .bet-section-container.bet-section-container-moneyline {
-    width: 17%;
+    width: 14%;
   }
   .picks-event-container.columns-6 .bet-section-container.bet-section-container-spread {
-    width: 17%;
+    width: 14%;
   }
   .picks-event-container.columns-6 .bet-section-container.bet-section-container-team {
-    width: 25%;
+    width: 24%;
   }
   .picks-event-container.columns-6 .bet-section-container.bet-section-container-total {
-    width: 17%;
+    width: 14%;
   }
   .picks-event-container.columns-6 .bet-section-container.bet-section-container-sets {
-    width: 17%;
+    width: 14%;
   }
 }
 .make-picks-filters {
