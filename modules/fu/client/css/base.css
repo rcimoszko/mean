@@ -264,6 +264,23 @@ p {
   background-color: #1ac22e;
   color: white;
 }
+.btn-subscribe.subscribed {
+  background-color: #21759b;
+}
+.btn-message {
+  background-color: #21759b;
+  color: white;
+  font-size: 13px;
+  -moz-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn-message:hover {
+  background-color: #1e6b8e;
+  color: white;
+}
 .btn-upgrade {
   background-color: #1ccf31;
   color: white;
@@ -454,7 +471,7 @@ p {
   height: 25px;
 }
 .logo.logo-sm {
-  height: 40px;
+  height: 30px;
 }
 .logo.logo-md {
   height: 60px;
@@ -2321,6 +2338,37 @@ notification:last-of-type .notification {
     width: 17%;
   }
 }
+@media (min-width: 992px) {
+  .picks-event-container.columns-6 {
+    width: 100%;
+  }
+  .picks-event-container.columns-6 .contestant-section {
+    width: 20%;
+    float: left;
+  }
+  .picks-event-container.columns-6 .bet-section-container {
+    float: left;
+    width: 17%;
+  }
+  .picks-event-container.columns-6 .bet-section-container .bet-section {
+    width: 100%;
+  }
+  .picks-event-container.columns-6 .bet-section-container.bet-section-container-moneyline {
+    width: 17%;
+  }
+  .picks-event-container.columns-6 .bet-section-container.bet-section-container-spread {
+    width: 17%;
+  }
+  .picks-event-container.columns-6 .bet-section-container.bet-section-container-team {
+    width: 25%;
+  }
+  .picks-event-container.columns-6 .bet-section-container.bet-section-container-total {
+    width: 17%;
+  }
+  .picks-event-container.columns-6 .bet-section-container.bet-section-container-sets {
+    width: 17%;
+  }
+}
 .make-picks-filters {
   margin-top: 50px;
 }
@@ -3344,6 +3392,9 @@ notification:last-of-type .notification {
   font-size: 12px;
   width: 110px;
 }
+.pick-table tbody tr td.game-name a {
+  color: #6a6b6c;
+}
 .pick-table tbody tr td.game-name .selected {
   color: #21759b;
 }
@@ -3370,6 +3421,12 @@ notification:last-of-type .notification {
   display: inline-block;
   vertical-align: middle;
 }
+.hot-pick .pick-name .logo-container {
+  min-width: 55px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
 .hot-pick .pick-value {
   color: #2b2b2c;
   font-size: 14px;
@@ -3385,6 +3442,12 @@ notification:last-of-type .notification {
   width: 87%;
   display: inline-block;
   vertical-align: middle;
+}
+.consensus-pick .pick-name .logo-container {
+  min-width: 55px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
 }
 .consensus-pick .pick-value {
   color: #2b2b2c;
@@ -3594,8 +3657,10 @@ notification:last-of-type .notification {
 .profile-stats .performance-container {
   margin-top: 10px;
 }
-.profile-stats .trending-stats {
-  border-right: 1px solid #eaeaea;
+@media (min-width: 768px) {
+  .profile-stats .trending-stats {
+    border-right: 1px solid #eaeaea;
+  }
 }
 .profile-stats .statistic {
   width: 50%;

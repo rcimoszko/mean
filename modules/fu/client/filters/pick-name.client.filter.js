@@ -6,6 +6,7 @@ angular.module('fu').filter('pickName', ['$filter', '$sce', function($filter, $s
         switch(pick.betType){
             case 'moneyline':
                 pickName = 'ML';
+                if(pick.draw) pickName = 'Draw';
                 break;
             case 'spread':
                 pickName = 'Spread <div>' + $filter('formatSpread')(pick.spread) + '</div>';

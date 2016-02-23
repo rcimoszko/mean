@@ -18,6 +18,7 @@ var ApplicationConfiguration = (function () {
       'textAngular',
       'angularMoment',
       'luegg.directives',
+      'ngCsv',
       'angular.filter'];
 
   // Add a new vertical module

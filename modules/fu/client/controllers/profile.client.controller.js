@@ -3,6 +3,7 @@
 angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading',
     function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading) {
         $scope.username = $stateParams.username;
+        $scope.authentication = Authentication;
         $scope.loading = Loading;
         if(!$scope.username) $state.go('hub');
 

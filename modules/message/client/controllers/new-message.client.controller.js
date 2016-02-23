@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('message').controller('NewMessageController', ['$scope', '$state', '$stateParams', '$http', 'Authentication', 'SocketMessages', 'User',
-    function($scope, $state, $stateParams, $http, Authentication, SocketMessages, User) {
+angular.module('message').controller('NewMessageController', ['$scope', '$state', '$stateParams', '$http', 'Authentication', 'SocketMessages', 'User', '$filter',
+    function($scope, $state, $stateParams, $http, Authentication, SocketMessages, User, $filter) {
         $scope.authentication = Authentication;
         $scope.username = $stateParams.username;
         $scope.newRecipients = [];
+
 
         $scope.submitNewMessage = function() {
 
@@ -25,10 +26,10 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
             User.createConversation(conversation, cb);
         };
 
-        $scope.getUsers = function(usersname){
+        $scope.getUsers = function(username){
             return $http.get('/api/search/users', {
                 params: {
-                    username: usersname
+                    username: username
                 }
             }).then(function(response){
                 return response.data;
@@ -69,6 +70,21 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
                 $scope.newRecipients.splice(index, 1);
             }
         };
+
+
+
+        if($scope.username){
+            var users = $scope.getUsers($scope.username);
+            users.then(function(response){
+                if(response.length){
+                    for(var i=0; i<response.length; i++){
+                        if(response[i].username === $scope.username){
+                            $scope.newRecipients.push({name:response[i].username, ref:response[i]._id});
+                        }
+                    }
+                }
+            });
+        }
 
 
 

@@ -4,8 +4,9 @@
             <avatar size="'lg'" url="profile.user.profileUrl"></avatar>
         </div>
         <h2>{{profile.user.username}}</h2>
-        <div class="follow-btn-container">
+        <div class="follow-btn-container" data-ng-if="authentication.user._id !== profile.user._id">
             <btn-follow-rect user-id="profile.user._id"></btn-follow-rect>
+            <btn-message username="profile.user.username"></btn-message>
         </div>
         <!--<h2>{{profile.user.description}}</h2>-->
     </div>

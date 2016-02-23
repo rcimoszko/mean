@@ -233,6 +233,36 @@
         }
       }
     }
-
+  }
+  &.columns-6{
+    @media (min-width: @screen-md-min) {
+      width:100%;
+      .contestant-section{
+        width:20%;
+        float:left;
+      }
+      .bet-section-container{
+        float:left;
+        width:17%;
+        .bet-section{
+          width:100%;
+        }
+        &.bet-section-container-moneyline{
+          width:17%;
+        }
+        &.bet-section-container-spread{
+          width:17%;
+        }
+        &.bet-section-container-team{
+          width:25%;
+        }
+        &.bet-section-container-total{
+          width:17%;
+        }
+        &.bet-section-container-sets{
+          width:17%;
+        }
+      }
+    }
   }
 }

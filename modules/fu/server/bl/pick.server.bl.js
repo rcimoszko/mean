@@ -6,7 +6,7 @@ var _ = require('lodash'),
     EventBl = require('./event.server.bl'),
     Pick = mongoose.model('Pick');
 
-var populate = [{path: 'event', select: '-pinnacleBets'},{path:'user.ref', select:'avatarUrl username'}];
+var populate = [{path: 'event', select: '-pinnacleBets'},{path:'user.ref', select:'avatarUrl username'},{path:'league'}];
 
 function get(id, callback){
 

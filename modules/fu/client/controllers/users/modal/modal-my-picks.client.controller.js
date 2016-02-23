@@ -2,6 +2,8 @@
 
 angular.module('fu').controller('ModalMyPicksController', ['$scope', '$modalInstance', 'Modal', 'User', 'Authentication',
     function ($scope, $modalInstance, Modal, User, Authentication) {
+        $scope.modal = Modal;
+        $scope.modalInstance = $modalInstance;
 
         $scope.show = 'pending';
         $scope.user = User;
@@ -20,6 +22,7 @@ angular.module('fu').controller('ModalMyPicksController', ['$scope', '$modalInst
 
         function getPendingPicks(){
             function cb(err, picks){
+                console.log(picks);
                 if(!err) $scope.pendingPicks = picks;
             }
             User.getPendingPicks(cb);

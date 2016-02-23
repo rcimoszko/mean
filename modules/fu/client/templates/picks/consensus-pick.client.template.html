@@ -1,7 +1,9 @@
 <div class="consensus-pick clearfix">
     <div class="pick-name">
+        <div class="logo-container">
         <logo size="'xs'" url="consensusPick.pick.logoUrl"></logo>
-        <a href>{{consensusPick.pick.contestant}} ({{consensusPick.pick.league}})</a>
+        </div>
+        <a ui-sref="gamecenter({eventSlug:consensusPick.event.slug, leagueSlug:consensusPick.event.league.ref.slug})">{{consensusPick.pick.contestant}} ({{consensusPick.pick.league}})</a>
     </div>
     <div class="pick-value">
         {{consensusPick.pick.percent}}%

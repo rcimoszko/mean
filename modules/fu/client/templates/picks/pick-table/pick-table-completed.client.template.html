@@ -11,10 +11,12 @@
     <tbody>
         <tr data-ng-repeat="pick in picks" class="{{pick.result|lowercase}}">
             <td class="time text-center">{{pick.event.startTime|date:'MMM d'}}<br/>{{pick.event.startTime|date:'h:mm a'}}</td>
-            <td class="bet-duration text-center text-uppercase">{{pick.betDuration}}</td>
             <td class="game-name text-uppercase winner-{{pick.winner}}">
+                <a ui-sref="gamecenter({eventSlug:pick.event.slug, leagueSlug:pick.league.slug})">
                 <span ng-bind-html="pick|gameName:true"></span>
+                </a>
             </td>
+            <td class="bet-duration text-center text-uppercase">{{pick.betDuration}}</td>
             <td class="pick-name text-center text-uppercase"><span ng-bind-html="pick|pickName"></span></td>
             <td class="odds text-center">{{pick.odds|formatOdds}}</td>
             <td class="units text-center">{{pick.units}}</td>

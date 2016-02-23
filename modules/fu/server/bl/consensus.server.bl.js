@@ -4,6 +4,7 @@ var _ = require('lodash'),
     async = require('async'),
     PickBl = require('./pick.server.bl'),
     BetBl = require('./bet.server.bl'),
+    EventBl = require('./event.server.bl'),
     mongoose = require('mongoose');
 
 
@@ -36,6 +37,11 @@ function getConsensus(sportId, leagueId, count, callback){
     function populateEvents(events, callback){
         var populate = {path: '_id', model:'Event'};
         PickBl.populateBy(events, populate, callback);
+    }
+
+    function populateEventsLeagues(events, callback){
+        var populate = [{path: '_id.league.ref', model:'League'}];
+        EventBl.populateBy(events, populate, callback);
     }
 
     function calculateConsensus(events, callback){
@@ -130,6 +136,7 @@ function getConsensus(sportId, leagueId, count, callback){
     todo.push(groupPicks);
     todo.push(filterEvents);
     todo.push(populateEvents);
+    todo.push(populateEventsLeagues);
     todo.push(calculateConsensus);
     todo.push(filterConsensusData);
     todo.push(cleanConsensusData);

@@ -6,8 +6,6 @@ angular.module('fu').directive('signupForm', function () {
         templateUrl: 'modules/fu/client/templates/users/signup-form.client.template.html',
         controller: ['$scope', '$state', 'UserAuth', 'Sports', function ($scope, $state, UserAuth, Sports) {
 
-            $scope.form = {terms: true};
-
             $scope.signup = function() {
                 $scope.error = null;
 

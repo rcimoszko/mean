@@ -3,7 +3,10 @@
     margin-top:10px;
   }
   .trending-stats{
-    border-right:1px solid @color-gray-divider;
+
+    @media (min-width: @screen-sm-min) {
+      border-right:1px solid @color-gray-divider;
+    }
   }
   .statistic{
     width:50%;
