@@ -1,0 +1,16 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > Articles <a ui-sref="admin.createArticle" class="btn btn-default">Create</a></h2>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <th>Title</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="article in articles">
+                <td><a ui-sref="admin.editArticle({articleId:article._id})">{{::article.title}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

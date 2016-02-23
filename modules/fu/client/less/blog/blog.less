@@ -1,0 +1,71 @@
+.blog{
+  margin:0 -20px;
+}
+
+.article{
+  .header{
+    background-color:@color-blue-2;
+    padding:20px 0;
+    .header-content{
+      max-width:720px;
+      margin: 0 auto;
+      h1{
+        text-align:center;
+        color:white;
+        font-weight:bold;
+      }
+      h3{
+        text-align:center;
+        font-size:12px;
+        color:white;
+        text-transform:uppercase;
+      }
+    }
+
+  }
+  .social-button-container{
+    position:relative;
+    height:0;
+    .social-btn{
+      background-color:@color-bg;
+      border-radius:40px;
+      margin:10px;
+      width:40px;
+      height:40px;
+      position:relative;
+      text-align:center;
+      &:first-of-type{
+        margin-top:0;
+      }
+      .fa{
+        padding:10px;
+        font-size:20px;
+      }
+    }
+  }
+
+  .article-body{
+    background-color:white;
+    padding:30px 0;
+    .article-content{
+      max-width:720px;
+      margin: 0 auto;
+      h1{
+        font-size:32px !important;
+
+      }
+      h2{
+
+      }
+      h3{
+
+      }
+      p{
+        margin-bottom:10px !important;
+        font-size:18px !important;
+        color:@color-text-dark;
+      }
+    }
+
+  }
+}

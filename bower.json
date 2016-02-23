@@ -25,7 +25,8 @@
     "socket.io": "~1.4.5",
     "ng-scroll-glue": "~2.0.10",
     "angular-scroll-glue": "~2.0.6",
-    "ng-csv": "~0.3.6"
+    "ng-csv": "~0.3.6",
+    "angular-scrolltofixed": "~0.2.0"
   },
   "resolutions": {
     "angular": "~1.3"

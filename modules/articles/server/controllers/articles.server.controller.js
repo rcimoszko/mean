@@ -1,16 +1,137 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
+var path = require('path'),
+    mongoose = require('mongoose'),
+    ArticleBl = require('../bl/article.server.bl');
+
+
+function byId(req, res, next, id){
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send({
+            message: 'Article Id is invalid'
+        });
+    }
+
+    function cb (err, article){
+        if (err) return next(err);
+        if (!article) {
+            return res.status(404).send({
+                message: 'Article not found'
+            });
+        }
+        req.article = article;
+        next();
+    }
+
+    ArticleBl.get(id, cb);
+}
+
+
+function bySlug(req, res, next, slug){
+
+    function cb (err, article){
+        if (err) return next(err);
+        if (!article) {
+            return res.status(404).send({
+                message: 'Article not found'
+            });
+        }
+        req.article = article;
+        next();
+    }
+
+    ArticleBl.getBySlug(slug, cb);
+}
+
+function getAll(req, res, next){
+
+    function cb (err, articles){
+        if (err) return next(err);
+        if (!articles) {
+            return res.status(404).send({
+                message: 'Articles not found'
+            });
+        }
+        res.json(articles);
+    }
+
+
+    ArticleBl.getAll(cb);
+
+}
+
+function get(req, res, next){
+    res.json(req.article);
+}
+
+function update(req, res, next){
+    function cb (err,article){
+        if (err) return next(err);
+        if (!article) {
+            return res.status(500).send({
+                message: 'Failed to update Article'
+            });
+        }
+        res.json(article);
+
+    }
+
+    var article = req.article;
+    var data = req.body;
+    ArticleBl.update(data, article, cb);
+}
+
+function create(req, res, next){
+    function cb (err,article){
+        if (err) return next(err);
+        if (!article) {
+            return res.status(500).send({
+                message: 'Failed to create Article'
+            });
+        }
+        res.json(article);
+
+    }
+    var data = req.body;
+    var user = req.user;
+    ArticleBl.create(data, user, cb);
+}
+
+function del(req, res, next){
+
+    function cb (err, article){
+        if (err) return next(err);
+        if (!article) {
+            return res.status(500).send({
+                message: 'Failed to delete Article'
+            });
+        }
+        res.json(article);
+    }
+
+    var article = req.article;
+    ArticleBl.delete(article, cb);
+
+}
+
+exports.byId    = byId;
+exports.bySlug  = bySlug;
+exports.getAll  = getAll;
+exports.get     = get;
+exports.create  = create;
+exports.update  = update;
+exports.delete  = del;
+
+/*
+'use strict';
+
 var path = require('path'),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
+  ArticleBl = require('')
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-/**
- * Create a article
- */
+
 exports.create = function (req, res) {
   var article = new Article(req.body);
   article.user = req.user;
@@ -25,17 +146,10 @@ exports.create = function (req, res) {
     }
   });
 };
-
-/**
- * Show the current article
- */
 exports.read = function (req, res) {
   res.json(req.article);
 };
 
-/**
- * Update a article
- */
 exports.update = function (req, res) {
   var article = req.article;
 
@@ -53,9 +167,6 @@ exports.update = function (req, res) {
   });
 };
 
-/**
- * Delete an article
- */
 exports.delete = function (req, res) {
   var article = req.article;
 
@@ -70,9 +181,6 @@ exports.delete = function (req, res) {
   });
 };
 
-/**
- * List of Articles
- */
 exports.list = function (req, res) {
   Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
     if (err) {
@@ -85,9 +193,6 @@ exports.list = function (req, res) {
   });
 };
 
-/**
- * Article middleware
- */
 exports.articleByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -108,3 +213,4 @@ exports.articleByID = function (req, res, next, id) {
     next();
   });
 };
+*/

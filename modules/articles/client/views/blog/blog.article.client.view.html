@@ -1,0 +1,23 @@
+<div class="article">
+    <div class="header">
+        <div class="header-content">
+            <h1>{{article.title}}</h1>
+            <h3>{{article.author}} | {{article.datePublished|date:'longDate'}}</h3>
+        </div>
+    </div>
+    <div class="social-button-container" scroll-to-fixed>
+        <div class="social-btn">
+            <i class="fa fa-twitter"></i>
+        </div>
+        <div class="social-btn">
+            <i class="fa fa-facebook"></i>
+        </div><div class="social-btn">
+        <i class="fa fa-google-plus"></i>
+    </div><div class="social-btn">
+        <i class="fa fa-envelope"></i>
+    </div>
+    </div>
+    <div class="article-body">
+        <div class="article-content" ta-bind data-ng-model="article.content"></div>
+    </div>
+</div>

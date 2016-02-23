@@ -19,6 +19,7 @@ var ApplicationConfiguration = (function () {
       'angularMoment',
       'luegg.directives',
       'ngCsv',
+      'scrollToFixed',
       'angular.filter'];
 
   // Add a new vertical module

@@ -1,0 +1,15 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > <a ui-sref="admin.articles">Articles</a> > New Article</h2>
+
+    <form data-ng-submit="submit()">
+        <admin-string label="'Title'" model="article.title"></admin-string>
+        <admin-string label="'Author'" model="article.author"></admin-string>
+        <admin-datetime label="'Date Published'" model="article.datePublished"></admin-datetime>
+        <admin-textbox label="'Article'" model="article.content"></admin-textbox>
+        <admin-string label="'Image'" model="article.imageUrl"></admin-string>
+        <admin-string label="'Keywords'" model="article.keywords"></admin-string>
+        <admin-string label="'Slug'" model="article.slug"></admin-string>
+        <admin-boolean label="'Published'" model="article.published"></admin-boolean>
+        <admin-submit error="error"></admin-submit>
+    </form>
+</section>

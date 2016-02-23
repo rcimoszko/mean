@@ -260,8 +260,8 @@ function assignBetDurations(callback){
 }
 
 function createChannels(callback){
-    var excludeSports = ['Basketball', 'Hockey', 'Football', 'Futsal', 'Horse Racing'];
-    var leagueChannels = ['NBA', 'NFL', 'NHL', 'NCAAB', 'NCAAF', 'MLB'];
+    var excludeSports = ['Basketball', 'Hockey', 'Football', 'Futsal', 'Horse Racing','Soccer'];
+    var leagueChannels = ['NBA', 'NFL', 'NHL', 'NCAAB', 'NCAAF', 'MLB', 'ENG Premier League', 'ESP La Liga', 'FRA Ligue 1', 'GER Bundesliga', 'ITA Serie A', 'NLD Eredivisie', 'UEFA Champions League', 'UEFA Europa League', 'USA MLS'];
     var otherChannels = ['Other Hockey', 'Other Basketball', 'Other Baseball'];
     var todo = [];
 

@@ -3598,6 +3598,10 @@ notification:last-of-type .notification {
   margin: 0;
   float: none;
 }
+.auth-form-container .top-text {
+  padding-bottom: 15px;
+  text-align: center;
+}
 .auth-form-container .divider-text {
   padding: 15px 0;
   text-align: center;
@@ -5163,4 +5167,62 @@ notification:last-of-type .notification {
 .messages .conversation-container .conversation .reply-container textarea {
   width: 100%;
   border: 1px solid #eaeaea;
+}
+.blog {
+  margin: 0 -20px;
+}
+.article .header {
+  background-color: #21759b;
+  padding: 20px 0;
+}
+.article .header .header-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.article .header .header-content h1 {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.article .header .header-content h3 {
+  text-align: center;
+  font-size: 12px;
+  color: white;
+  text-transform: uppercase;
+}
+.article .social-button-container {
+  position: relative;
+  height: 0;
+}
+.article .social-button-container .social-btn {
+  background-color: #eeeeee;
+  border-radius: 40px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+}
+.article .social-button-container .social-btn:first-of-type {
+  margin-top: 0;
+}
+.article .social-button-container .social-btn .fa {
+  padding: 10px;
+  font-size: 20px;
+}
+.article .article-body {
+  background-color: white;
+  padding: 30px 0;
+}
+.article .article-body .article-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.article .article-body .article-content h1 {
+  font-size: 32px !important;
+}
+.article .article-body .article-content p {
+  margin-bottom: 10px !important;
+  font-size: 18px !important;
+  color: #2b2b2c;
 }
