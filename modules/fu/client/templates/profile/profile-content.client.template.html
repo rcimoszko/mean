@@ -2,7 +2,9 @@
     <tabset class="tabs-2 tabs-full" >
         <tab>
             <tab-heading>PICKS</tab-heading>
-            <event-pick-list include-user="false" events="profile.pendingPicks"></event-pick-list>
+            <div class="profile-picks">
+                <event-pick-list include-user="false" events="profile.pendingPicks"></event-pick-list>
+            </div>
         </tab>
         <tab data-ng-click="initialClick()">
             <tab-heading>TRACKER</tab-heading>

@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
     datePublished:  {type: Date, default: Date.now},
     imageUrl:       {type: String, trim:true},
+    imageCredit:    {type: String, trim:true},
     title:          {type: String, default: '', trim: true,required: 'Title cannot be blank'},
     content:        {type: String, default: '', trim: true},
     user:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}},
