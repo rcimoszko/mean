@@ -53,6 +53,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     }
 
     function insertWinner(event, callback){
+        console.log('insert winner');
         function cb(){
             callback(null, event);
         }

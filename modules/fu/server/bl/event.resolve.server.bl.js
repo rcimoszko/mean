@@ -13,10 +13,18 @@ function assignWinner(event, callback){
         }
     } else {
         if(event.sport.name === 'Tennis'){
-            if(event.contestant1SetsWon > event.contestant2SetsWon){
-                event.contestantWinner = event.contestant1;
-            } else if (event.contestant2SetsWon > event.contestant1SetsWon){
-                event.contestantWinner = event.contestant2;
+            if(event.contestant1SetsWon &&  event.contestant2SetsWon){
+                if(event.contestant1SetsWon > event.contestant2SetsWon){
+                    event.contestantWinner = event.contestant1;
+                } else if (event.contestant2SetsWon > event.contestant1SetsWon){
+                    event.contestantWinner = event.contestant2;
+                }
+            } else {
+                if(event.contestant1RegulationScore > event.contestant2RegulationScore){
+                    event.contestantWinner = event.contestant1;
+                } else if (event.contestant2RegulationScore > event.contestant1RegulationScore){
+                    event.contestantWinner = event.contestant2;
+                }
             }
         } else {
             if(event.contestant1RegulationScore && event.contestant2RegulationScore){
