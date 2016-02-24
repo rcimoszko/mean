@@ -34,6 +34,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         function cb(err){
             callback(err, event, scores);
         }
+        console.log(scoreApi.periods);
 
         async.eachSeries(scoreApi.periods, processPeriod_loop, cb);
     }

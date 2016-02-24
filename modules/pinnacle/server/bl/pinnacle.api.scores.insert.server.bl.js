@@ -731,21 +731,19 @@ function insertScores_tableTennis(event, scores, callback){
 }
 
 function insertScores_tennis(event, scores, scoreType, callback){
-
+    console.log('scores', scores, 'scoreType', scoreType);
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
                 case '+1.5 sets':
-                    console.log(scores);
                     break;
                 case '-1.5 sets':
-                    console.log(scores);
                     break;
             }
         } else {
             if('1st set winner' in scores){
                 event.contestant1Set1Score = scores['1st set winner'].team1;
-                event.contestant2Set2Score = scores['1st set winner'].team2;
+                event.contestant2Set1Score = scores['1st set winner'].team2;
             }
             if('2nd set winner' in scores){
                 event.contestant1Set2Score = scores['2nd set winner'].team1;
