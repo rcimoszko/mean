@@ -258,60 +258,74 @@ function insertScores_dartsLegs(event, scores, callback){
 function insertScores_eSports(event, scores, scoreType, callback){
     if('match' in scores){
         if(scoreType){
-            switch(scoreType){
+            switch(scoreType.toLowerCase()){
                 case 'map 1':
+                case '1st map':
                     event.contestant1Set1Score = scores.match.team1;
                     event.contestant2Set1Score = scores.match.team2;
                     break;
                 case 'map 2':
+                case '2nd map':
                     event.contestant1Set2Score = scores.match.team1;
                     event.contestant2Set2Score = scores.match.team2;
                     break;
                 case 'map 3':
+                case '3rd map':
                     event.contestant1Set3Score = scores.match.team1;
                     event.contestant2Set3Score = scores.match.team2;
                     break;
                 case 'map 4':
+                case '4th map':
                     event.contestant1Set4Score = scores.match.team1;
                     event.contestant2Set4Score = scores.match.team2;
                     break;
                 case 'map 5':
+                case '5th map':
                     event.contestant1Set5Score = scores.match.team1;
                     event.contestant2Set5Score = scores.match.team2;
                     break;
-                case 'map 1, 1st to 10 Kills':
+                case 'map 1, 1st to 10 kills':
+                case '1st map, 1st to 10 kills':
                     event.contestant1Set1KillsFirst = scores.match.team1;
                     event.contestant2Set1KillsFirst = scores.match.team2;
                     break;
-                case 'map 2, 1st to 10 Kills':
+                case 'map 2, 1st to 10 kills':
+                case '2nd map, 1st to 10 kills':
                     event.contestant1Set2KillsFirst = scores.match.team1;
                     event.contestant2Set2KillsFirst = scores.match.team2;
                     break;
-                case 'map 3, 1st to 10 Kills':
+                case 'map 3, 1st to 10 kills':
+                case '3rd map, 1st to 10 kills':
                     event.contestant1Set3KillsFirst = scores.match.team1;
                     event.contestant2Set3KillsFirst = scores.match.team2;
                     break;
                 case 'map 1, 1st blood':
+                case '1st map, 1st blood':
                     event.contestant1Set1FirstBlood = scores.match.team1;
                     event.contestant2Set1FirstBlood = scores.match.team2;
                     break;
                 case 'map 2, 1st blood':
+                case '2nd map, 1st blood':
                     event.contestant1Set2FirstBlood = scores.match.team1;
                     event.contestant2Set2FirstBlood = scores.match.team2;
                     break;
                 case 'map 3, 1st blood':
+                case '3rd map, 1st blood':
                     event.contestant1Set3FirstBlood = scores.match.team1;
                     event.contestant2Set3FirstBlood = scores.match.team2;
                     break;
-                case 'map 1, Kills':
+                case 'map 1, kills':
+                case '1st map, kills':
                     event.contestant1Set1Score = scores.match.team1;
                     event.contestant2Set1Score = scores.match.team2;
                     break;
-                case 'map 2, Kills':
+                case 'map 2, kills':
+                case '2nd map, kills':
                     event.contestant1Set2Score = scores.match.team1;
                     event.contestant2Set2Score = scores.match.team2;
                     break;
-                case 'map 3, Kills':
+                case 'map 3, kills':
+                case '3rd map, kills':
                     event.contestant1Set3Score = scores.match.team1;
                     event.contestant2Set3Score = scores.match.team2;
                     break;

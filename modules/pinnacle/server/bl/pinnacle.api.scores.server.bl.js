@@ -47,8 +47,6 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         if(event.pinnacleEventType && scoreApi.id in event.pinnacleEventType){
             scoreType = event.pinnacleEventType[scoreApi.id];
         }
-        console.log(scores);
-        console.log(scoreType);
 
         PinnacleApiScoresInsertBl.insertScores(event, scores, sportName, leagueName, scoreType, cb);
     }
