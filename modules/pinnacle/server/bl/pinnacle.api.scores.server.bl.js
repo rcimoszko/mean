@@ -116,7 +116,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Dota 2 - WePlay League'}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Poland - Plus Liga Men'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
@@ -138,7 +138,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name: 'E Sports'}, callback);
+        PinnacleSportBl.getByQuery({active:true, name: 'Volleyball'}, callback);
     }
 
     function processSports(pinnacleSports, callback){
