@@ -116,7 +116,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Poland - Plus Liga Men'}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'WTA Acapulco - R16'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
@@ -138,7 +138,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name: 'Volleyball'}, callback);
+        PinnacleSportBl.getByQuery({active:true, name: 'Tennis'}, callback);
     }
 
     function processSports(pinnacleSports, callback){
