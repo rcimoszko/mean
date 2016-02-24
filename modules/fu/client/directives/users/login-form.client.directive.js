@@ -12,7 +12,7 @@ angular.module('fu').directive('loginForm', function () {
                     if(err){
                         $scope.error = err;
                     } else {
-                        $state.go('home');
+                        $state.go('hub');
                     }
                 }
 

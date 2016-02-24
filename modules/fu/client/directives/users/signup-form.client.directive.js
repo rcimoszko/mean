@@ -13,7 +13,7 @@ angular.module('fu').directive('signupForm', function () {
                     if(err){
                         $scope.error = err;
                     } else {
-                        $state.go('home');
+                        $state.go('hub');
                     }
                 }
                 UserAuth.signup($scope.form, cb);

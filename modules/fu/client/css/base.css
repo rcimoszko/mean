@@ -3630,14 +3630,14 @@ notification:last-of-type .notification {
   color: #6a6b6c;
   text-transform: uppercase;
 }
-.auth-form-container .divider {
+.auth-form .divider {
   height: 1px;
   text-align: center;
   margin-bottom: 30px;
   background-color: #eaeaea;
   margin-top: 20px;
 }
-.auth-form-container .divider span {
+.auth-form .divider span {
   position: relative;
   top: -0.6em;
   padding: 0 20px;
