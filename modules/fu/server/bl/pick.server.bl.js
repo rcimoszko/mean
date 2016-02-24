@@ -4,6 +4,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
     EventBl = require('./event.server.bl'),
+    PickResolveBl = require('./pick.resolve.server.bl'),
     Pick = mongoose.model('Pick');
 
 var populate = [{path: 'event', select: '-pinnacleBets'},{path:'user.ref', select:'avatarUrl username'},{path:'league'}];
@@ -116,8 +117,9 @@ function cancelPicksByEvent(event, callback){
     Pick.update({event:event}, update, {multi:true}, callback);
 }
 
-function resolve(pick, callback){
-    callback(null);
+function resolve(pick, data, callback){
+    var result = data.result;
+    PickResolveBl.resolve(pick, result, callback);
 }
 
 function report(pick, callback){

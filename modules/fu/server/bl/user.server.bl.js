@@ -356,6 +356,83 @@ function uploadProfilePicture(req, callback){
 
 }
 
+
+function updateStreak(userId, callback){
+    var todo = [];
+
+    function getUserPicks(callback){
+        var query = {'user.ref':userId, result: { $ne: 'Pending' }};
+        var options =  {sort: {eventStartTime: -1, timeResolved: 1}, limit: 5};
+        PickBl.getByQueryWithOptions(query, options, callback);
+    }
+
+    function calculateStreak(picks, callback){
+        var currentStreakType;
+        var winStreak;
+        var loseStreak;
+        for(var i=0; i<picks.length; i++){
+            if(i === 0){
+                if(picks[i].result.toLowerCase().indexOf('win') !== -1){
+                    winStreak = 1;
+                    loseStreak = 0;
+                    currentStreakType = 'win';
+                } else if (picks[i].result.toLowerCase().indexOf('loss') !== -1){
+                    loseStreak = 1;
+                    winStreak = 0;
+                    currentStreakType = 'lose';
+                } else {
+                    for(var j=0; j<picks.length; j++){
+                        if(picks[j].result.toLowerCase().indexOf('win') !== -1){
+                            winStreak = 1;
+                            loseStreak = 0;
+                            currentStreakType = 'win';
+                            i = j;
+                            break;
+                        } else if (picks[j].result.toLowerCase().indexOf('loss') !== -1){
+                            loseStreak = 1;
+                            winStreak = 0;
+                            currentStreakType = 'lose';
+                            i = j;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if(currentStreakType === 'win'){
+                    if(picks[i].result.toLowerCase().indexOf('win') !== -1){
+                        winStreak++;
+                    } else {
+                        break;
+                    }
+                } else if (currentStreakType === 'lose'){
+                    if(picks[i].result.toLowerCase().indexOf('loss') !== -1){
+                        loseStreak++;
+                    } else {
+                        break;
+                    }
+                }
+
+            }
+        }
+        callback(null, winStreak, loseStreak);
+    }
+
+    function updateUser(winStreak, loseStreak, callback){
+        function cb(err){
+            callback(err);
+        }
+
+        User.update({_id:userId}, {winStreak:winStreak, loseStreak:loseStreak}, cb);
+    }
+
+    todo.push(getUserPicks);
+    todo.push(calculateStreak);
+    todo.push(updateUser);
+
+    async.waterfall(todo, callback);
+}
+
+
 exports.getByUsername       = getByUsername;
 exports.getFollowing        = getFollowing;
 exports.getHub              = getHub;
@@ -366,5 +443,6 @@ exports.getCompletedPicks   = getCompletedPicks;
 exports.getTracker          = getTracker;
 exports.getInfo             = getInfo;
 exports.getForSearch        = getForSearch;
-exports.uploadProfilePicture = uploadProfilePicture;
-exports.getNewMessageCount = getNewMessageCount;
+exports.uploadProfilePicture    = uploadProfilePicture;
+exports.getNewMessageCount      = getNewMessageCount;
+exports.updateStreak         = updateStreak;

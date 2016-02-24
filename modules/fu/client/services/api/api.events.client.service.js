@@ -7,7 +7,8 @@ angular.module('fu').factory('ApiEvents', ['$resource',
             cancel:     { method: 'PUT', params: {action: 'cancel'}},
             report:     { method: 'POST', params: {action: 'report'}},
             reresolve:  { method: 'POST', params: {action: 'reresolve'}},
-            resolve:    { method: 'PUT', params: {action: 'resolve'}}
+            resolve:    { method: 'PUT', params: {action: 'resolve'}},
+            getPicks:   { method: 'GET', params: {action: 'picks'}, isArray: true}
         });
     }
 ]);

@@ -167,7 +167,7 @@ function getDiscussion(event, callback){
 }
 
 function getPicks(event, callback){
-
+    PickBl.getByQuery({event:event}, callback);
 }
 
 function addBet(bet, event, callback){

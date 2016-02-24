@@ -91,11 +91,23 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'ApiEvents', 'Authe
             event.$reresolve(cbSuccess, cbError);
         };
 
+        var getPicks = function(event, callback){
+            function cbSuccess(picks){
+                callback(null, picks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiEvents.getPicks({_id: event._id}, cbSuccess, cbError);
+        };
 
         return {
             getComments: getComments,
             newComment: newComment,
             commentReply: commentReply,
+            getPicks: getPicks,
 
             resolve: resolve,
             cancel: cancel,

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('Picks', ['ApiPicksComments',
-    function(ApiPicksComments) {
+angular.module('fu').factory('Picks', ['ApiPicksComments', 'ApiPicks',
+    function(ApiPicksComments, ApiPicks) {
 
         var getComments = function(pick, callback){
             function cbSuccess(comments){
@@ -53,11 +53,28 @@ angular.module('fu').factory('Picks', ['ApiPicksComments',
             commentReply.$update(cbSuccess, cbError);
         };
 
+        var resolve = function(pick, callback){
+            function cbSuccess(pick){
+                callback(null, pick);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            pick = new ApiPicks(pick);
+            pick.$resolve(cbSuccess, cbError);
+        };
+
+
+
 
         return {
             getComments: getComments,
             newComment: newComment,
-            commentReply: commentReply
+            commentReply: commentReply,
+
+            resolve: resolve
         };
     }
 ]);

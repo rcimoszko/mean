@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     Pick = mongoose.model('Pick'),
+    UserBl = require('./user.server.bl'),
     _ = require('lodash'),
     async = require('async');
 
@@ -471,6 +472,10 @@ function resolve(pick, result, callback){
         callback(null);
     }
 
+    function updateStreak(callback){
+        UserBl.updateStreak(pick.user.ref, callback);
+    }
+
     function savePick_todo(callback){
         function cb(err){
             callback(err);
@@ -478,15 +483,15 @@ function resolve(pick, result, callback){
 
         pick.timeResolved = Date.now();
         console.log(pick.slug, pick.result);
-        //cb(null);
         pick.save(cb);
     }
 
     function done(err){
-        callback(err);
+        callback(err, pick);
     }
 
     todo.push(updateResult_todo);
+    todo.push(updateStreak);
     todo.push(savePick_todo);
 
     async.waterfall(todo, done);
@@ -582,6 +587,7 @@ function resolvePicks(event, callback) {
     function updateEvent(callback){
         event.resolved = true;
         event.over = true;
+        event.endTime = new Date();
         event.save(callback);
     }
 
@@ -600,3 +606,4 @@ function resolvePicks(event, callback) {
 
 exports.resolvePicks = resolvePicks;
 exports.resolvePick = resolvePick;
+exports.resolve = resolve;

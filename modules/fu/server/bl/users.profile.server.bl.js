@@ -262,9 +262,15 @@ function get(user, auth, callback){
         }
 
         function sortPicks(picks, callback){
+
+            picks = _.sortBy(picks, function(pick){
+                return new Date(pick.timeResolved);
+            }).reverse();
+
             picks = _.sortBy(picks, function(pick){
                 return new Date(pick.event.startTime);
             }).reverse();
+
             callback(null, picks);
         }
 
