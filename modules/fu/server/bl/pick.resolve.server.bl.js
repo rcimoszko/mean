@@ -581,6 +581,7 @@ function resolvePicks(event, callback) {
 
     function updateEvent(callback){
         event.resolved = true;
+        event.over = true;
         event.save(callback);
     }
 
