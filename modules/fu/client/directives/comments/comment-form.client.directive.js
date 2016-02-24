@@ -24,6 +24,7 @@ angular.module('fu').directive('commentForm', function() {
             function newPickComment(){
                 function cb(err, comment){
                     $scope.showReply = false;
+                    $scope.text = '';
                     $scope.comments.push(comment);
                 }
 
@@ -33,6 +34,7 @@ angular.module('fu').directive('commentForm', function() {
             function newEventComment(){
                 function cb(err, comment){
                     $scope.showReply = false;
+                    $scope.text = '';
                     $scope.comments.push(comment);
                 }
 
@@ -42,6 +44,7 @@ angular.module('fu').directive('commentForm', function() {
             function pickCommentReply(){
                 function cb(err, comment){
                     $scope.showReply = false;
+                    $scope.text = '';
                     $scope.reply.replies.push(comment.reply);
                     $scope.comment = comment.comment;
                 }
@@ -51,6 +54,7 @@ angular.module('fu').directive('commentForm', function() {
             function eventCommentReply(){
                 function cb(err, comment){
                     $scope.showReply = false;
+                    $scope.text = '';
                     $scope.reply.replies.push(comment.reply);
                     $scope.comment = comment.comment;
                 }

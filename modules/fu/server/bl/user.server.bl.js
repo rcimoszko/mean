@@ -22,7 +22,7 @@ function getByUsername(username, callback){
         callback(err, user);
     }
 
-    User.findOne({'username':{ $regex: new RegExp(username, 'i')}}).exec(cb);
+    User.findOne({'username':{ $regex: new RegExp('^' + username +'$', 'i')}}).exec(cb);
 }
 
 function getFollowing(user, query, callback){

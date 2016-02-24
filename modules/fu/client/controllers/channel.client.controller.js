@@ -35,7 +35,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         function cb(err, channelContent){
-            console.log(channelContent);
+            if(!channelContent) $state.go('not-found');
             $scope.loading.isLoading.pageLoading = false;
             $scope.channelContent = channelContent;
             $scope.channel = channelContent.channel;

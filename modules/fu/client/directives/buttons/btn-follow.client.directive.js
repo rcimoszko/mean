@@ -7,8 +7,9 @@ angular.module('fu').directive('btnFollow', function () {
             userId:'='
         },
         templateUrl: 'modules/fu/client/templates/buttons/btn-follow.client.template.html',
-        controller: ['$scope', 'User', '$filter', 'Follow', function($scope, User, $filter, Follow){
+        controller: ['$scope', 'User', '$filter', 'Follow', 'Authentication', function($scope, User, $filter, Follow, Authentication){
             var following = User.info.following;
+            $scope.authentication = Authentication;
 
             $scope.isFollowing = function(){
                 var found = $filter('filter')(following, {_id: $scope.userId});

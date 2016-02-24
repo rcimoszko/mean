@@ -12,6 +12,7 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
         Page.meta.keywords = $scope.username + ', betting history';
 
         function cbGetProfile(err, profile){
+            if(!profile) $state.go('not-found');
             $scope.loading.isLoading.pageLoading = false;
             if(!err) $scope.profile = profile;
             $scope.initializeTracker($scope.profile.trackerPicks);
