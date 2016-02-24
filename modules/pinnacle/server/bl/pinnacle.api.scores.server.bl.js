@@ -116,7 +116,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Sweden - Elitserien Men'}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
@@ -138,7 +138,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name: 'Handball'}, callback);
+        PinnacleSportBl.getByQuery({active:true}, callback);
     }
 
     function processSports(pinnacleSports, callback){
