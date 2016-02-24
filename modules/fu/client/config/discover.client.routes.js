@@ -10,19 +10,28 @@ angular.module('fu').config(['$stateProvider',
             })
             .state('discover.home', {
                 url: '',
-                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html'
+                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
+                title: 'Leaderboard | Record, ROI and Profit',
+                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
+                keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.sport', {
                 url: '/:sportSlug',
-                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html'
+                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
+                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
+                keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.league', {
                 url: '/:sportSlug/:leagueSlug',
-                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html'
+                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
+                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
+                keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.contestant', {
                 url: '/:sportSlug/:leagueSlug/:contestantSlug',
-                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html'
+                templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
+                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
+                keywords: 'best tipsters, top handicappers, profit, roi'
             });
     }
 ]);

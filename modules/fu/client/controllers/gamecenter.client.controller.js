@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter', 'User',
-    function ($scope, $stateParams, $filter, Gamecenter, User) {
+angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter', 'User', 'Page',
+    function ($scope, $stateParams, $filter, Gamecenter, User, Page) {
         $scope.eventSlug = $stateParams.eventSlug;
         $scope.leagueSlug = $stateParams.leagueSlug;
 
@@ -40,6 +40,12 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             });
         }
 
+        function setMetaData(){
+            Page.meta.title = $scope.event.contestant1.name +' vs. '+$scope.event.contestant2.name+' | Odds, Score and Consensus';
+            Page.meta.description = 'Find expert picks and the most up to date odds for '+$scope.event.contestant1.name +' vs. '+$scope.event.contestant2.name+' - '+new Date($scope.event.startTime).toDateString();
+            Page.meta.keywords = $scope.event.contestant1.name+', '+$scope.event.contestant2.name+', odds, scores, free bets';
+        }
+
 
         function cb(err, gamecenter){
             console.log(gamecenter);
@@ -54,6 +60,7 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             $scope.proCount     = gamecenter.picks.proCount;
             $scope.proHidden    = gamecenter.picks.proHidden;
             $scope.event        = gamecenter.event;
+            setMetaData();
             initializeFollowingPicks();
             initializeMakePicks();
             initilizePicksTab();

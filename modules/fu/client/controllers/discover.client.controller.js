@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard',
-    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard) {
+angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard', 'Page',
+    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard, Page) {
         $scope.authentication   = Authentication;
         $scope.sportSlug        = $stateParams.sportSlug;
         $scope.leagueSlug       = $stateParams.leagueSlug;
@@ -130,7 +130,31 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             }
         };
 
+
+        $scope.filter = {
+            sport:       $scope.filters.sports[0],
+            league:      $scope.filters.leagues[0],
+            contestant:  $scope.filters.contestants[0],
+            homeAway:    $scope.filters.homeAway[0],
+            betDuration: $scope.filters.betDurations[0],
+            betType:     $scope.filters.betTypes[0],
+            minBets:     $scope.filters.minBets[0],
+            date:        $scope.filters.dates[1]
+        };
+
+        function updatePageMeta(){
+            var titleEnd = ' Leaderboard | Record, ROI and Profit';
+            if($scope.filter.contestant._id !== 'all'){
+                $scope.page.meta.title = $scope.filter.contestant.name+titleEnd;
+            } else if ($scope.filter.league._id !== 'all' ){
+                $scope.page.meta.title = $scope.filter.league.name+titleEnd;
+            } else if ($scope.filter.sport._id !== 'all'){
+                $scope.page.meta.title = $scope.filter.sport.name+titleEnd;
+            }
+        }
+
         $scope.updateLeaderboard = function(){
+            updatePageMeta();
 
             var query = {
                 dateId:  $scope.filter.date.id,

@@ -10,6 +10,7 @@ angular.module('fu').config(['$stateProvider',
             .state('hub', {
                 url: '/hub',
                 templateUrl: 'modules/fu/client/views/hub.client.view.html',
+                title: 'Hub | Betting Tips, Free Picks, Odds and Scores',
                 data: {
                     roles: ['user']
                 }

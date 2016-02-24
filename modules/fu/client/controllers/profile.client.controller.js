@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading',
-    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page) {
         $scope.username = $stateParams.username;
         $scope.authentication = Authentication;
         $scope.loading = Loading;
         if(!$scope.username) $state.go('hub');
+
+        Page.meta.title = $scope.username + ' Profile | Verified Record and History';
+        Page.meta.description = 'Get an unedited look into the complete history FansUnite’s top handicappers';
+        Page.meta.keywords = $scope.username + ', betting history';
 
         function cbGetProfile(err, profile){
             $scope.loading.isLoading.pageLoading = false;

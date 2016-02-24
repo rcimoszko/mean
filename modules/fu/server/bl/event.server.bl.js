@@ -176,8 +176,8 @@ function getResolveEvents(sport, callback){
 
     function groupPicks(callback){
         var aggArray = [];
-        var query = {$match:{result:'Pending', sport: mongoose.Types.ObjectId(sport._id), eventStartTime: {$lte: new Date()}}};
-        var group = {$group:{_id: '$event', count: {$sum:1}}};
+        var query =   {$match:{result:'Pending', sport: mongoose.Types.ObjectId(sport._id), eventStartTime: {$lte: new Date()}}};
+        var group =   {$group:{_id: '$event', count: {$sum:1}}};
         var project = {$project:{event: '$_id', count: 1}};
 
         aggArray.push(query);
@@ -193,8 +193,16 @@ function getResolveEvents(sport, callback){
         populateBy(events, populate, callback);
     }
 
+    function sortEvents(events, callback){
+        events = _.sortBy(events, function(event){
+            return new Date(event.event.startTime);
+        });
+        callback(null, events);
+    }
+
     todo.push(groupPicks);
     todo.push(populateEvents);
+    todo.push(sortEvents);
 
     async.waterfall(todo, callback);
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks', '$rootScope',
-    function ($scope, $stateParams, $filter, Authentication, MakePicks, $rootScope) {
+angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks', '$rootScope', 'Page',
+    function ($scope, $stateParams, $filter, Authentication, MakePicks, $rootScope, Page) {
         $scope.authentication = Authentication;
         $scope.leagueSlug = $stateParams.leagueSlug;
         $scope.sportSlug = $stateParams.sportSlug;
@@ -29,6 +29,7 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
         $scope.updateSub2 = function(sub2){
             $scope.activeSub2 = sub2;
             MakePicks.active.league = $scope.activeSub2;
+            Page.meta.title = MakePicks.active.league.name+' Odds | Best Odds, Spread, Futures and Moneyline Bets';
         };
 
         $scope.setActiveMenu = function(){
