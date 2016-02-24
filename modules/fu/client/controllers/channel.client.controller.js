@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels', 'SocketChannel', 'Loading',
-    function ($scope, $state, $stateParams, $location, Authentication, Channels, SocketChannel, Loading) {
+angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Channels', 'SocketChannel', 'Loading', 'Page',
+    function ($scope, $state, $stateParams, $location, Authentication, Channels, SocketChannel, Loading, Page) {
 
         $scope.date = $stateParams.date;
         $scope.channelSlug = $stateParams.channelSlug;
@@ -30,12 +30,17 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
             $scope.socket.emit('join channel', $scope.channel._id);
         }
 
+        function updateMetaData(){
+            Page.meta.title = $scope.channel.name + ' Channel | Betting Tips, Free Picks, Odds and Scores';
+        }
+
         function cb(err, channelContent){
             console.log(channelContent);
             $scope.loading.isLoading.pageLoading = false;
             $scope.channelContent = channelContent;
             $scope.channel = channelContent.channel;
             setupSocket();
+            updateMetaData();
 
             if(!$scope.date){
                 switch($scope.channel.dateGroup){

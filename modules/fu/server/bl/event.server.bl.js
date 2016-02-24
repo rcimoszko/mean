@@ -125,6 +125,14 @@ function resolve(event, data, callback){
 
     var todo = [];
 
+    function assignScores(){
+
+    }
+
+    function assingWinner(){
+
+    }
+
     function saveScores(callback){
         event.over = true;
         event.endTime = Date.now();

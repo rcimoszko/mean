@@ -506,6 +506,7 @@ function resolvePick(event, pick, callback){
     function getScores_todo(callback){
 
         function cb(contestantScore, opponentScore){
+            console.log('getScores_todo', contestantScore, opponentScore);
             callback(null, contestantScore, opponentScore);
         }
 
@@ -515,6 +516,7 @@ function resolvePick(event, pick, callback){
     function getWinner_todo(contestantScore, opponentScore, callback){
 
         function cb(durationWinner){
+            console.log('getWinner_todo', durationWinner);
             callback(null, contestantScore, opponentScore, durationWinner);
         }
 
@@ -525,6 +527,7 @@ function resolvePick(event, pick, callback){
     function getResult_todo(contestantScore, opponentScore, durationWinner, callback){
 
         function cb(durationResult){
+            console.log('getResult_todo', durationResult);
             callback(null, durationResult);
         }
 

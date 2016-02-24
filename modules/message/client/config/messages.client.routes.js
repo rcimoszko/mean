@@ -1,6 +1,5 @@
 'use strict';
 
-// Setting up route
 angular.module('message').config(['$stateProvider',
     function($stateProvider) {
         $stateProvider.
@@ -8,6 +7,8 @@ angular.module('message').config(['$stateProvider',
                 url: '/messages',
                 templateUrl: 'modules/message/client/views/messages.client.view.html',
                 controller: 'MessagesController',
+                title: 'Messages | FansUnite',
+                description: 'Private Messages',
                 abstract: true,
                 data: {
                     roles: ['user']

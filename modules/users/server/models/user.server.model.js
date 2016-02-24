@@ -138,6 +138,7 @@ var UserSchema = new Schema({
   },
 
     verified:               {type: Boolean,default: false},
+    base:                   {type: Boolean,default: false},
     premium:                {type: Boolean,default: false},
     lifetimePremium:        {type: Boolean,default: false},
     trial:                  {type: Boolean,default: false},
