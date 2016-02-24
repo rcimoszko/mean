@@ -110,6 +110,7 @@ function updateInsertScoresForLeague(pinnacleLeague, callback){
 }
 
 function updateInsertScoresForSport(pinnacleSport, callback){
+    console.log(pinnacleSport.name);
 
     var todo = [];
 
@@ -119,6 +120,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
 
     function processLeagues(pinnacleLeagues, callback){
         function proccessLeague(pinnacleLeague, callback){
+            console.log(pinnacleLeague.name);
             if(pinnacleLeague.useScraper) return callback(null);
             updateInsertScoresForLeague(pinnacleLeague, callback);
         }
@@ -135,7 +137,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name: 'E Sports'}, callback);
     }
 
     function processSports(pinnacleSports, callback){
