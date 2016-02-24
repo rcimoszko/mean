@@ -73,7 +73,7 @@ function getByQuery(query, callback){
 }
 
 function getByQueryWithOptions(query, options, callback){
-    Pick.find(query, null, options).populate(populate).sort('eventStartTime').exec(callback);
+    Pick.find(query, null, options).populate(populate).exec(callback);
 }
 
 function getPending(query, callback){
@@ -81,7 +81,7 @@ function getPending(query, callback){
 }
 
 function getCompleted(query, callback){
-    Pick.find(query).populate(populate).sort('-eventStartTime').limit(20).exec(callback); //limit to 20 on last 10 pics
+    Pick.find(query).populate(populate).sort('-eventStartTime').limit(20).exec(callback); //limit to 20 on last 10 picks
 }
 
 function getOneByQuery(query, callback){
@@ -214,6 +214,7 @@ exports.getBySlug   = getBySlug;
 
 exports.getByQuery      = getByQuery;
 exports.getOneByQuery   = getOneByQuery;
+exports.getByQueryWithOptions   = getByQueryWithOptions;
 
 exports.getPending = getPending;
 exports.getCompleted = getCompleted;

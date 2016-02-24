@@ -4,8 +4,8 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
     function($scope, $http, $location, $state, Users, Authentication, Sports, StripeService, Page, Modal) {
         $scope.user = Authentication.user;
         $scope.stripe = StripeService;
-        Page.setTitle($scope.user.username+' Settings | FansUnite');
-        Page.setDescription($scope.user.username+' settings.');
+        Page.meta.title = $scope.user.username+' Settings | FansUnite';
+        Page.meta.description = $scope.user.username+' settings.';
 
         // If user is not signed in then redirect back home
         if (!$scope.user) $state.go('home');

@@ -256,9 +256,17 @@ function get(user, callback){
             EventBl.populateBy(picks, populate, callback);
         }
 
+        function sortPicks(picks, callback){
+            picks = _.sortBy(picks, function(pick){
+                return new Date(pick.event.startTime);
+            }).reverse();
+            callback(null, picks);
+        }
+
         todo.push(getPicks);
         todo.push(populatePicks);
         todo.push(populateEvents);
+        todo.push(sortPicks);
 
         function cb(err, picks){
             profile.trackerPicks = picks;
