@@ -15,9 +15,11 @@ function get(req, res) {
             res.json(profile);
         }
     }
+    var userProfile = req.userProfile;
     var user = req.user;
 
-    UsersProfileBl.get(user, cb);
+
+    UsersProfileBl.get(userProfile, user, cb);
 }
 
 

@@ -68,6 +68,12 @@ function get(event, league, user, callback){
                     picks.pro = proPicks;
                 }
             }
+            if(!user){
+                picks.general = [];
+                picks.generalCount = generalPicks.length;
+                picks.generalHidden = true;
+            }
+
             callback();
         }
 

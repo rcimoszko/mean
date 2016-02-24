@@ -181,7 +181,7 @@ function getTopPerformances(user, callback){
 
 }
 
-function get(user, callback){
+function get(user, auth, callback){
     var todo = [];
     var profile = {};
 
@@ -233,7 +233,12 @@ function get(user, callback){
 
     function getProfilePicks_todo(callback){
         function cb(err, pendingPicks){
-            profile.pendingPicks = pendingPicks;
+            if(auth){
+                profile.pendingPicks = pendingPicks;
+            } else {
+                profile.pendingPicks = [];
+                profile.pendingPicksCount = pendingPicks.length;
+            }
             callback(err);
         }
         PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', user.premium || user.trial, cb);

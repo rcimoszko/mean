@@ -14,7 +14,7 @@ function byUsername(req, res, next, username){
                 message: 'User not found'
             });
         }
-        req.user = user;
+        req.userProfile = user;
         next();
     }
 
