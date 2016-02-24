@@ -116,7 +116,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'WTA Acapulco - R16'}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'WTA Doha - R16'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
