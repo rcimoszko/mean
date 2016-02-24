@@ -79,6 +79,20 @@ var EventSchema = new Schema({
     contestant1OTScore:         {type: Number},
     contestant2OTScore:         {type: Number},
 
+    contestant1Set1KillsFirst:  {type: Number},
+    contestant2Set1KillsFirst:  {type: Number},
+    contestant1Set2KillsFirst:  {type: Number},
+    contestant2Set2KillsFirst:  {type: Number},
+    contestant1Set3KillsFirst:  {type: Number},
+    contestant2Set3KillsFirst:  {type: Number},
+    contestant1Set1FirstBlood:  {type: Number},
+    contestant2Set1FirstBlood:  {type: Number},
+    contestant1Set2FirstBlood:  {type: Number},
+    contestant2Set2FirstBlood:  {type: Number},
+    contestant1Set3FirstBlood:  {type: Number},
+    contestant2Set3FirstBlood:  {type: Number},
+
+
     contestantWinner:           {name: String, ref: {type: Schema.ObjectId, ref: 'Contestant'}},
 
     boxingMethodOfVictory:      {type: String, enum: ['Decision', 'Knockout', 'Draw', 'Disqualification', 'No Contest']},

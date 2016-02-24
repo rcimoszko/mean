@@ -256,6 +256,8 @@ function insertScores_dartsLegs(event, scores, callback){
 }
 
 function insertScores_eSports(event, scores, scoreType, callback){
+    console.log(scores);
+    console.log(scoreType);
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
