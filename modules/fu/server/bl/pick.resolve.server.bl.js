@@ -156,6 +156,7 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
 function getWinner(event, pick, contestantNo, opponentNo, contestantScore, opponentScore, callback){
 
     var durationWinner;
+    console.log(pick.betDuration);
 
     switch(pick.betDuration){
         case 'matchups':
@@ -181,9 +182,9 @@ function getWinner(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 case 'Tennis':
                     if(pick.betDuration === '1st set winner'){
                         if(contestantScore > opponentScore){
-                            durationWinner = String(event['contestant'+contestantNo].ref._id);
+                            durationWinner = String(event['contestant'+contestantNo].ref);
                         } else if (contestantScore < opponentScore) {
-                            durationWinner = String(event['contestant'+opponentNo].ref._id);
+                            durationWinner = String(event['contestant'+opponentNo].ref);
                         }
                     } else {
                         if(event.draw){
@@ -194,10 +195,11 @@ function getWinner(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     }
                     break;
                 default:
+                    console.log('default');
                     if(contestantScore > opponentScore){
-                        durationWinner = String(event['contestant'+contestantNo].ref._id);
+                        durationWinner = String(event['contestant'+contestantNo].ref);
                     } else if (contestantScore < opponentScore) {
-                        durationWinner = String(event['contestant'+opponentNo].ref._id);
+                        durationWinner = String(event['contestant'+opponentNo].ref);
                     } else {
                         durationWinner = 'draw';
                     }
@@ -496,7 +498,7 @@ function resolvePick(event, pick, callback){
     var contestantNo = 1;
     var opponentNo = 2;
 
-    if(pick.contestant.ref && pick.contestant.ref.equals(event.contestant2.ref._id)){
+    if(pick.contestant.ref && pick.contestant.ref.equals(event.contestant2.ref)){
         contestantNo = 2;
         opponentNo = 1;
     }
