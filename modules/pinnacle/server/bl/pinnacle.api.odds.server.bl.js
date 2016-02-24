@@ -32,7 +32,12 @@ function createBet(betData, callback){
                 break;
         }
 
-        BetBl.create(betData, callback);
+        function cb(err){
+            if(err) console.log(err);
+            callback(null);
+        }
+
+        BetBl.create(betData, cb);
     }
 
     function addBetToEvent(bet, callback){

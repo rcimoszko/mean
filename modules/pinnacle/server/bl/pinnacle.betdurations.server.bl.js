@@ -216,6 +216,15 @@ var betDurations = {
         2: '2nd set winner',
         3: '3rd set winner'
     },
+    'Aussie Rules':{
+        0: 'game',
+        1: '1st half',
+        2: '2nd half',
+        3: '1st quarter',
+        4: '2nd quarter',
+        5: '3rd quarter',
+        6: '4th quarter'
+    },
     'Aussie Rules Football':{
         0: 'game',
         1: '1st half',
