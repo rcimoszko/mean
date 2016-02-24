@@ -10,6 +10,10 @@ var async = require('async'),
     PinScoresBl = require('../bl/pinnacle.api.scores.server.bl');
 
 
+function getScores(callback){
+    PinScoresBl.updateInsertAllScores(callback);
+}
+
 function runFeed(callback){
     var todo = [];
 
@@ -97,4 +101,5 @@ function assignPinnacleSports(callback){
 }
 
 exports.runFeed = runFeed;
+exports.getScores = getScores;
 exports.assignPinnacleSports = assignPinnacleSports;

@@ -4,6 +4,7 @@ var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
     PickResolveBl = require('./pick.resolve.server.bl'),
+    EventResolveBl = require('./event.resolve.server.bl'),
     LeagueBl = require('./league.server.bl'),
     PickBl = require('./pick.server.bl'),
     m_Event = mongoose.model('Event');
@@ -125,11 +126,12 @@ function resolve(event, data, callback){
 
     var todo = [];
 
-    function assignScores(){
-
+    function assignScores(callback){
+        EventResolveBl.insertScores(event, data, callback);
     }
 
-    function assingWinner(){
+    function assingWinner(callback){
+
 
     }
 

@@ -5,41 +5,10 @@ var mongoose = require('mongoose'),
     PinnacleSportBl = require('./pinnacleSport.server.bl'),
     PinBetDuration = require('./pinnacle.betdurations.server.bl'),
     EventBl = require('../../../fu/server/bl/event.server.bl'),
+    EventResolveBl = require('../../../fu/server/bl/event.resolve.server.bl'),
     PinnacleApiScoresInsertBl = require('./pinnacle.api.scores.insert.server.bl'),
     PinnacleLeagueBl = require('./pinnacleLeague.server.bl'),
     async = require('async');
-
-function assignWinner(event, callback){
-
-    if(event.overtime){
-        if(event.contestant1OTScore === event.contestant2OTScore){
-            event.draw = true;
-        } else if (event.contestant1OTScore > event.contestant2OTScore) {
-            event.contestantWinner = event.contestant1;
-        } else if (event.contestant2OTScore > event.contestant1OTScore){
-            event.contestantWinner = event.contestant2;
-        }
-    } else {
-        if(event.sport.name === 'Tennis'){
-            if(event.contestant1SetsWon > event.contestant2SetsWon){
-                event.contestantWinner = event.contestant1;
-            } else if (event.contestant2SetsWon > event.contestant1SetsWon){
-                event.contestantWinner = event.contestant2;
-            }
-        } else {
-            if(event.contestant1RegulationScore && event.contestant2RegulationScore){
-                if (event.contestant1RegulationScore === event.contestant2RegulationScore){
-                    event.draw = true;
-                } else if(event.contestant1RegulationScore > event.contestant2RegulationScore){
-                    event.contestantWinner = event.contestant1;
-                } else if (event.contestant2RegulationScore > event.contestant1RegulationScore){
-                    event.contestantWinner = event.contestant2;
-                }
-            }
-        }
-    }
-    callback();
-}
 
 function processEvent(scoreApi, pinnacleLeague, callback){
     var todo = [];
@@ -85,7 +54,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         function cb(){
             callback(null, event);
         }
-        assignWinner(event, cb);
+        EventResolveBl.assignWinner(event, cb);
     }
 
     function saveEvent(event, callback){
@@ -145,7 +114,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Dota 2 - WePlay'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
