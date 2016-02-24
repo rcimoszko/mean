@@ -115,7 +115,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Dota 2 - WePlay'}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'Dota 2 - WePlay League'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
