@@ -189,7 +189,8 @@ function updateEvent(eventData, event, callback){
     function updateField(field, callback){
         if(!(field in eventData)) return callback();
         if(event[field] === eventData[field]) return callback();
-        event[field] = event;
+        event[field] = eventData[field];
+        fieldChange = true;
         callback();
     }
 
