@@ -18,6 +18,7 @@ var overUnders = [{overUnder: 'over', opponentOverUnder: 'under'},{overUnder: 'u
 
 function createBet(betData, callback){
     var todo = [];
+    console.log(betData);
 
     function createBet_todo(callback){
         betData.openingOdds = betData.odds;
