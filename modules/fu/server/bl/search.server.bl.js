@@ -16,7 +16,10 @@ function get(text, callback){
         var todo = [];
 
         function getEvents(callback){
-            var query = {$or:[{'contestant1.name': '/^'+text+'/'},{'contestant2.name':  '/^'+text+'/'}]};
+            var today = new Date();
+            var startDate = today.setDate(today.getDate() - 10);
+            var dateQuery = {$gte: startDate};
+            var query = {startTime: dateQuery, $or:[{'contestant2.name':{ $regex: new RegExp(text, 'i') }}, {'contestant2.name':  { $regex: new RegExp(text, 'i') }}]};
             EventBl.getForSearch(query, callback);
         }
 
