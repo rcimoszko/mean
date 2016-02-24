@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/fu4-dev';
+    require('../modules/users/server/models/user.server.model.js');
     require('../modules/fu/server/models/event.server.model.js');
 
 process.env.NODE_ENV = 'production';
