@@ -251,7 +251,9 @@ function getPicks(query, callback){
 
         var events = [];
         for(var date in eventsByDate){
-            events.push({date:new Date(date), events:eventsByDate[date]});
+            var dateAdjust = new Date(date);
+            dateAdjust.setHours(dateAdjust.getHours()+TimezoneBl.timezoneAdjust);
+            events.push({date:dateAdjust, events:eventsByDate[date]});
         }
 
         results.events = _.sortBy(events, 'date');
