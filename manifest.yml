@@ -4,9 +4,9 @@ declared-services:
     label: mongodb
     plan: 100
 applications:
-- name: mean
-  host: mean-${random-word}
-  memory: 128M
+- name: fu4-test
+  host: fu4-test
+  memory: 512M
   services:
   - mean-mongo
   env:
