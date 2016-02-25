@@ -189,6 +189,44 @@ function insertScores_darts(event, scores, callback){
 }
 
 function insertScores_eSports(event, scores, callback){
+    var contestant1SetsWon = 0;
+    var contestant2SetsWon = 0;
+    var contestant1FinalScore = 0;
+    var contestant2FinalScore = 0;
+
+    for(var i=1; i<=5; i++){
+        if(scores['contestant1Set'+i+'Score'] && scores['contestant2Set'+i+'Score']){
+            event['contestant1Set'+i+'Score'] = scores['contestant1Set'+i+'Score'];
+            event['contestant2Set'+i+'Score'] = scores['contestant2Set'+i+'Score'];
+            if(scores['contestant1Set'+i+'Score'] > scores['contestant2Set'+i+'Score']){
+                contestant1SetsWon++;
+            } else if(scores['contestant2Set'+i+'Score'] > scores['contestant1Set'+i+'Score']){
+                contestant2SetsWon++;
+            }
+            contestant1FinalScore = contestant1FinalScore + scores['contestant1Set'+i+'Score'];
+            contestant2FinalScore = contestant2FinalScore + scores['contestant2Set'+i+'Score'];
+        }
+    }
+
+    if(contestant1FinalScore !== 0 && contestant2FinalScore !==0){
+        event.contestant1FinalScore = contestant1FinalScore;
+        event.contestant2FinalScore = contestant2FinalScore;
+        event.contestant1RegulationScore = contestant1FinalScore;
+        event.contestant2RegulationScore = contestant2FinalScore;
+    }
+
+    if(scores.contestant1FinalScore && scores.contestant2FinalScore){
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+        event.contestant1RegulationScore = scores.contestant1FinalScore;
+        event.contestant2RegulationScore = scores.contestant2FinalScore;
+    }
+    if(contestant1SetsWon !== 0 && contestant2SetsWon !== 0){
+        event.contestant1SetsWon = contestant1SetsWon;
+        event.contestant2SetsWon = contestant2SetsWon;
+    }
+
+    callback();
 
 }
 
@@ -336,7 +374,13 @@ function insertScores_hockey(event, scores, callback){
 }
 
 function insertScores_mma(event, scores, callback){
-
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
+    if(scores.draw) event.draw = scores.draw;
+    if(scores.noContest) event.noContest = scores.noContest;
+    if(scores.round) event.round = scores.round;
+    if(scores.time.minutes) event.time.minutes = scores.time.minutes;
+    if(scores.time.seconds) event.time.seconds = scores.time.seconds;
+    callback();
 }
 
 function insertScores_rugby(event, scores, callback){
@@ -410,19 +454,89 @@ function insertScores_soccer(event, scores, callback){
 }
 
 function insertScores_tableTennis(event, scores, callback){
-
+    if(scores.contestant1FinalScore && scores.contestant2FinalScore) {
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+    }
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
 }
 
 function insertScores_tennis(event, scores, callback){
+    var contestant1SetsWon = 0;
+    var contestant2SetsWon = 0;
+    var contestant1FinalScore = 0;
+    var contestant2FinalScore = 0;
+
+    for(var i=1; i<=5; i++){
+        if(scores['contestant1Set'+i+'Score'] && scores['contestant2Set'+i+'Score']){
+            event['contestant1Set'+i+'Score'] = scores['contestant1Set'+i+'Score'];
+            event['contestant2Set'+i+'Score'] = scores['contestant2Set'+i+'Score'];
+            if(scores['contestant1Set'+i+'Score'] > scores['contestant2Set'+i+'Score']){
+                contestant1SetsWon++;
+            } else if(scores['contestant2Set'+i+'Score'] > scores['contestant1Set'+i+'Score']){
+                contestant2SetsWon++;
+            }
+            contestant1FinalScore = contestant1FinalScore + scores['contestant1Set'+i+'Score'];
+            contestant2FinalScore = contestant2FinalScore + scores['contestant2Set'+i+'Score'];
+        }
+    }
+
+    if(contestant1FinalScore !== 0 && contestant2FinalScore !==0){
+        event.contestant1FinalScore = contestant1FinalScore;
+        event.contestant2FinalScore = contestant2FinalScore;
+        event.contestant1RegulationScore = contestant1FinalScore;
+        event.contestant2RegulationScore = contestant2FinalScore;
+    }
+
+    if(scores.contestant1FinalScore && scores.contestant2FinalScore){
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+        event.contestant1RegulationScore = scores.contestant1FinalScore;
+        event.contestant2RegulationScore = scores.contestant2FinalScore;
+    }
+    if(contestant1SetsWon !== 0 && contestant2SetsWon !== 0){
+        event.contestant1SetsWon = contestant1SetsWon;
+        event.contestant2SetsWon = contestant2SetsWon;
+    }
+
+    callback();
 
 }
 
 function insertScores_volleyball(event, scores, callback){
-
+    if(scores.contestant1H1Score && scores.contestant2H1Score){
+        event.contestant1H1Score = scores.contestant1H1Score;
+        event.contestant2H1Score = scores.contestant2H1Score;
+        if(scores.contestant1H2Score &&  scores.contestant2H2Score){
+            event.contestant1H2Score = scores.contestant1H2Score;
+            event.contestant2H2Score = scores.contestant2H2Score;
+            event.contestant1RegulationScore = scores.contestant1H1Score +  scores.contestant1H2Score;
+            event.contestant2RegulationScore = scores.contestant2H1Score +  scores.contestant2H2Score;
+            if(scores.overtime){
+                event.overtime = true;
+                event.contestant1OTScore = scores.contestant1OTScore;
+                event.contestant2OTScore = scores.contestant2OTScore;
+                event.contestant1FinalScore = event.contestant1RegulationScore + event.contestant1OTScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore + event.contestant2OTScore;
+            } else {
+                event.contestant1FinalScore = event.contestant1RegulationScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore;
+            }
+        }
+    }
+    if(scores.contestant1FinalScore && scores.contestant2FinalScore){
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+        if(!event.overtime){
+            event.contestant1RegulationScore = event.contestant1FinalScore;
+            event.contestant2RegulationScore = event.contestant2FinalScore;
+        }
+    }
+    callback();
 }
 
 function insertScores_matchups(event, scores, callback){
-
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
 }
 
 

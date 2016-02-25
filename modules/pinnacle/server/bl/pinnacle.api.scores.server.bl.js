@@ -34,7 +34,6 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         function cb(err){
             callback(err, event, scores);
         }
-        console.log('processPeriods - scoreApi.period', scoreApi.periods);
         async.eachSeries(scoreApi.periods, processPeriod_loop, cb);
     }
 
@@ -46,12 +45,10 @@ function processEvent(scoreApi, pinnacleLeague, callback){
         if(event.pinnacleEventType && scoreApi.id in event.pinnacleEventType){
             scoreType = event.pinnacleEventType[scoreApi.id];
         }
-        console.log('processScores - scores', scores);
         PinnacleApiScoresInsertBl.insertScores(event, scores, sportName, leagueName, scoreType, cb);
     }
 
     function insertWinner(event, callback){
-        console.log('insert winner');
         function cb(){
             callback(null, event);
         }
@@ -121,7 +118,6 @@ function updateInsertScoresForSport(pinnacleSport, callback){
 
     function processLeagues(pinnacleLeagues, callback){
         function proccessLeague(pinnacleLeague, callback){
-            console.log(pinnacleLeague.name);
             if(pinnacleLeague.useScraper) return callback(null);
             updateInsertScoresForLeague(pinnacleLeague, callback);
         }
