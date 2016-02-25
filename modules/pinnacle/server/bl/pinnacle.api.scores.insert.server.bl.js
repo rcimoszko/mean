@@ -1046,6 +1046,9 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
         case 'Aussie Rules Football':
             insertScores_aussieRules(event, scores, callback);
             break;
+        case 'Aussie Rules':
+            insertScores_aussieRules(event, scores, callback);
+            break;
         case 'Golf':
         case 'Alpine Skiing':
         case 'Biathlon':

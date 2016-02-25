@@ -51,6 +51,7 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
         $scope.saveEvent = function(event){
 
             function cb(err, updatedEvent){
+                console.log(updatedEvent);
                 if(err){
                     alert(err);
                 } else {
@@ -62,6 +63,10 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
                Events.resolve(event, cb);
             }
 
+        };
+
+        $scope.setContestants = function(event){
+            return [event.contestant1, event.contestant2];
         };
 
 

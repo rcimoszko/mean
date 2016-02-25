@@ -10,11 +10,12 @@
         <th>4th Set</th>
         <th>5th Set</th>
         <th>Final Score</th>
+        <th>Winner</th>
         <th>Save</th>
         <th>Cancel</th>
     </thead>
     <tbody>
-        <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event">
+        <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event)">
             <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
             <td rowspan="2" class="valign">{{event.league.name}}</td>
             <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>
@@ -25,6 +26,10 @@
             <td><input type="number" min="0" data-ng-model="event.contestant1Set4Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant1Set5Score"/></td>
             <td class="extra"><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
+            <td rowspan="2">
+                <select class="form-control" data-ng-model="event.contestantWinner" data-ng-options=" contestant.name for contestant in contestants ">
+                </select>
+            </td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">SAVE</button></td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
         </tr>

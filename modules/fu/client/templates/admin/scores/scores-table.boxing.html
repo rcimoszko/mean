@@ -15,12 +15,15 @@
         <th>Cancel</th>
     </thead>
     <tbody>
-    <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event">
+    <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event)">
         <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
         <td rowspan="2" class="valign">{{event.league.name}}</td>
         <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>
         <td>{{event.contestant1.name}}</td>
-        <td class="text-center"><input type="checkbox" data-ng-model="event.contestant1Winner"/></td>
+        <td rowspan="2">
+            <select class="form-control" data-ng-model="event.contestantWinner" data-ng-options=" contestant.name for contestant in contestants ">
+            </select>
+        </td>
         <td rowspan="2" class="valign text-center"><input type="checkbox" data-ng-model="event.draw"/></td>
         <td rowspan="2" class="valign text-center"><input type="checkbox" data-ng-model="event.noContest"/></td>
         <td rowspan="2" class="valign"><input type="number" min="0" data-ng-model="event.round"/></td>
@@ -35,7 +38,6 @@
     </tr>
     <tr class="second-contestant" data-ng-repeat-end>
         <td>{{event.contestant2.name}}</td>
-        <td class="text-center"><input type="checkbox" data-ng-model="event.contestant2Winner"/></td>
     </tr>
     </tbody>
 </table>

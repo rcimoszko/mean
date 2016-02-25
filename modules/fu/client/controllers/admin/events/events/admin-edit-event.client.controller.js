@@ -41,5 +41,10 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
             }
             Picks.resolve(pick, cb);
         };
+
+
+        $scope.setContestants = function(event){
+            return [event.contestant1, event.contestant2];
+        };
     }
 ]);

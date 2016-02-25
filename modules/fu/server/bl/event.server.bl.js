@@ -130,25 +130,25 @@ function resolve(event, data, callback){
         EventResolveBl.insertScores(event, data, callback);
     }
 
-    function assingWinner(callback){
-
-
+    function assignWinner(callback){
+        EventResolveBl.assignWinner(event, callback);
     }
 
     function saveScores(callback){
-        event.over = true;
-        event.endTime = Date.now();
-        update(event, data, callback);
+        event.scores = true;
+        update(data, event, callback);
     }
 
     function resolvePicks(event, callback){
         PickResolveBl.resolvePicks(event, callback);
     }
 
-    function cb(err){
+    function cb(err, event){
         callback(err, event);
     }
 
+    todo.push(assignScores);
+    todo.push(assignWinner);
     todo.push(saveScores);
     todo.push(resolvePicks);
 

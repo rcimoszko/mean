@@ -157,7 +157,6 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
 function getWinner(event, pick, contestantNo, opponentNo, contestantScore, opponentScore, callback){
 
     var durationWinner;
-    console.log(pick.betDuration);
 
     switch(pick.betDuration){
         case 'matchups':
@@ -196,7 +195,6 @@ function getWinner(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     }
                     break;
                 default:
-                    console.log('default');
                     if(contestantScore > opponentScore){
                         durationWinner = String(event['contestant'+contestantNo].ref);
                     } else if (contestantScore < opponentScore) {
@@ -499,7 +497,6 @@ function resolve(pick, result, callback){
 }
 
 function resolvePick(event, pick, callback){
-
     var contestantNo = 1;
     var opponentNo = 2;
 
@@ -593,8 +590,7 @@ function resolvePicks(event, callback) {
 
 
     function done(err){
-        console.log(err);
-        callback(err);
+        callback(err, event);
     }
 
     todo.push(getPicks_todo);

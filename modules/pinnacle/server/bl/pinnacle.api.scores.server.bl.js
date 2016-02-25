@@ -116,7 +116,7 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name:'Brazil - Carioca'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
@@ -138,7 +138,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name: 'Soccer'}, callback);
     }
 
     function processSports(pinnacleSports, callback){
