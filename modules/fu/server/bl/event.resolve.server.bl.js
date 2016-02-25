@@ -177,11 +177,15 @@ function insertScores_basketball(event, scores, callback){
 }
 
 function insertScores_cricket(event, scores, callback){
-
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
+    if(scores.draw) event.draw = true;
+    callback();
 }
 
 function insertScores_darts(event, scores, callback){
-
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
+    if(scores.draw) event.draw = true;
+    callback();
 }
 
 function insertScores_eSports(event, scores, callback){
@@ -292,7 +296,43 @@ function insertScores_handball(event, scores, callback){
 }
 
 function insertScores_hockey(event, scores, callback){
+    if(scores.contestant1P1Score && scores.contestant2P1Score){
+        event.contestant1P1Score = scores.contestant1P1Score;
+        event.contestant2P1Score = scores.contestant2P1Score;
 
+        if(scores.contestant1P2Score && scores.contestant2P2Score){
+            event.contestant1P2Score = scores.contestant1P2Score;
+            event.contestant2P2Score = scores.contestant2P2Score;
+
+            if(scores.contestant1P3Score && scores.contestant2P3Score){
+                event.contestant1P3Score = scores.contestant1P3Score;
+                event.contestant2P3Score = scores.contestant2P3Score;
+                event.contestant1RegulationScore = scores.contestant1P1Score + scores.contestant1P2Score + scores.contestant1P3Score;
+                event.contestant2RegulationScore = scores.contestant2P1Score + scores.contestant2P2Score + scores.contestant2P3Score;
+
+                if(scores.overtime){
+                    event.overtime = true;
+                    event.contestant1OTScore = scores.contestant1OTScore;
+                    event.contestant2OTScore = scores.contestant2OTScore;
+                    event.contestant1FinalScore = event.contestant1RegulationScore + event.contestant1OTScore;
+                    event.contestant2FinalScore = event.contestant2RegulationScore + event.contestant2OTScore;
+                } else {
+                    event.contestant1FinalScore = event.contestant1RegulationScore;
+                    event.contestant2FinalScore = event.contestant2RegulationScore;
+                }
+            }
+        }
+    }
+
+    if(scores.contestant1FinalScore && scores.contestant2FinalScore){
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+        if(!event.overtime){
+            event.contestant1RegulationScore = event.contestant1FinalScore;
+            event.contestant2RegulationScore = event.contestant2FinalScore;
+        }
+    }
+    callback();
 }
 
 function insertScores_mma(event, scores, callback){
@@ -332,7 +372,9 @@ function insertScores_rugby(event, scores, callback){
 }
 
 function insertScores_snooker(event, scores, callback){
-
+    if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
+    if(scores.draw) event.draw = true;
+    callback();
 }
 
 function insertScores_soccer(event, scores, callback){

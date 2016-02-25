@@ -307,6 +307,7 @@ function create(event, bet, user, callback){
             units: bet.units,
             eventStartTime: event.startTime
         };
+        if('contestant' in bet) pick.contestant = {name: bet.contestant.name, ref: bet.contestant.ref}; //added for esports
         callback();
     }
 

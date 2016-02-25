@@ -367,6 +367,7 @@ function updateStreak(userId, callback){
     }
 
     function calculateStreak(picks, callback){
+        if(!picks.length) return callback(null, 0, 0);
         var currentStreakType;
         var winStreak;
         var loseStreak;
