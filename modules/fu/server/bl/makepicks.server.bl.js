@@ -245,15 +245,13 @@ function getPicks(query, callback){
     function groupEventsByDay(callback){
         var eventsByDate = _.groupBy(processedEvents, function(event){
             var date = new Date(event.startTime);
-            date.setHours(date.getHours()+TimezoneBl.timezoneAdjust);
+            date.setHours(date.getHours()-TimezoneBl.timezoneAdjust);
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         });
 
         var events = [];
         for(var date in eventsByDate){
-            var dateAdjust = new Date(date);
-            dateAdjust.setHours(dateAdjust.getHours()-TimezoneBl.timezoneAdjust);
-            events.push({date:dateAdjust, events:eventsByDate[date]});
+            events.push({date:new Date(date), events:eventsByDate[date]});
         }
 
         results.events = _.sortBy(events, 'date');
