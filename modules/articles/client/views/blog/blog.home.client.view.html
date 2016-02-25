@@ -11,7 +11,7 @@
     <div class="articles-list">
         <div class="container">
             <div class="col-sm-4" data-ng-repeat="article in articles">
-                <a ui-sref="blog.view({articleId:article._id})">
+                <a ui-sref="blog.article({articleSlug:article.slug})">
                     <div class="article-container">
                         <div class="image">
                             <img data-ng-src="{{article.imageUrl}}" data-ng-if="article.imageUrl">
@@ -26,6 +26,5 @@
                 </a>
             </div>
         </div>
-
     </div>
 </div>

@@ -20,7 +20,7 @@ var ArticleSchema = new Schema({
 });
 
 ArticleSchema.pre('save', function(next) {
-    if(this.name && this.isModified('title')){
+    if(this.title && this.isModified('title')){
         this.slug = slug(this.title);
     }
     next();
