@@ -2311,6 +2311,19 @@ notification:last-of-type .notification {
   }
 }
 @media (min-width: 992px) {
+  .picks-event-container.columns-5.e-sports {
+    width: 100%;
+  }
+  .picks-event-container.columns-5.e-sports .contestant-section {
+    width: 20%;
+    float: left;
+  }
+  .picks-event-container.columns-5.e-sports .bet-section-container {
+    float: left;
+    width: 15%;
+  }
+}
+@media (min-width: 992px) {
   .picks-event-container.columns-5 {
     width: 100%;
   }
