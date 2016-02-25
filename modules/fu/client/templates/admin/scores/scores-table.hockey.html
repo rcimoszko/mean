@@ -9,9 +9,8 @@
         <th>3rd P</th>
         <th>OT?</th>
         <th>OT Score</th>
-
+        <th>1st P</th>
         <th>Final Score</th>
-
         <th>Resolve</th>
         <th>Cancel</th>
     </thead>
@@ -26,7 +25,8 @@
             <td><input type="number" min="0" data-ng-model="event.contestant1P3Score"/></td>
             <td class="text-center valign" rowspan="2"><input type="checkbox" data-ng-model="event.overtime"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant1OTScore" data-ng-disabled="!event.overtime"/></td>
-            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant1P1Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">RESOLVE</button></td>
             <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
         </tr>
@@ -36,7 +36,8 @@
             <td><input type="number" min="0" data-ng-model="event.contestant2P2Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant2P3Score"/></td>
             <td><input type="number" min="0" data-ng-model="event.contestant2OTScore" data-ng-disabled="!event.overtime"/></td>
-            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant2FinalScore"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant2P1Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2FinalScore"/></td>
         </tr>
     </tbody>
 </table>

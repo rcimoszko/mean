@@ -245,7 +245,7 @@ function getPicks(query, callback){
     function groupEventsByDay(callback){
         var eventsByDate = _.groupBy(processedEvents, function(event){
             var date = new Date(event.startTime);
-            date.setHours(date.getHours());
+            date.setHours(date.getHours()+TimezoneBl.timezoneAdjust);
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         });
 
