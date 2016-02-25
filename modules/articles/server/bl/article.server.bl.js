@@ -29,7 +29,7 @@ function getAll(callback){
         callback(err, articles);
     }
 
-    Article.find().exec(cb);
+    Article.find().sort('-datePublished').exec(cb);
 
 }
 

@@ -3,7 +3,7 @@
 }
 
 .article{
-  .header{
+  .header, .featured-article{
     background-color:@color-blue-2;
     padding:20px 0;
     .header-content{
@@ -67,5 +67,42 @@
       }
     }
 
+  }
+}
+
+.articles-list{
+  background-color:white;
+  padding:40px 0;
+  .article-container{
+    border-radius:5px;
+    border:1px solid @color-gray-divider;
+    margin-bottom:20px;
+    &:hover{
+      .article-content{
+        background-color:white;
+      }
+    }
+    .image{
+      text-align:center;
+      height:180px;
+      overflow:hidden;
+      img{
+        max-width:100%;
+        &.article-logo{
+          margin-top:40px;
+        }
+      }
+    }
+    .article-content{
+      padding:20px;
+      text-align:center;
+      background-color:@color-bg;
+      .transition(background-color, 0.1s);
+      .title{
+        color:@color-text-dark;
+        font-size:16px;
+        text-transform:uppercase;
+      }
+    }
   }
 }

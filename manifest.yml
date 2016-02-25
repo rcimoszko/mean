@@ -4,8 +4,8 @@ declared-services:
     label: mongodb
     plan: 100
 applications:
-- name: fu
-  host: fu
+- name: fu-production
+  host: fu-production
   memory: 512M
   services:
   - mean-mongo

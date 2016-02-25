@@ -8,7 +8,11 @@ angular.module('articles').config(['$stateProvider',
                 url: '/blog',
                 templateUrl: 'modules/articles/client/views/blog.client.view.html'
             })
-            .state('blog.view', {
+            .state('blog.home', {
+                url: '',
+                templateUrl: 'modules/articles/client/views/blog/blog.home.client.view.html'
+            })
+            .state('blog.article', {
                 url: '/:articleSlug',
                 templateUrl: 'modules/articles/client/views/blog/blog.article.client.view.html'
             });

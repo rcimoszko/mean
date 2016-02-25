@@ -10,6 +10,9 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
         $scope.isPicksPage = function(){
             return $state.current.name.indexOf('makePicks') !== -1;
         };
+        $scope.isBlog = function(){
+            return $state.current.name.indexOf('blog') !== -1;
+        };
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
             if($state.current.title){
