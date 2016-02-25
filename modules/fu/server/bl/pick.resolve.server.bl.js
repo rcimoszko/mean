@@ -488,7 +488,8 @@ function resolve(pick, result, callback){
 
     function savePick_todo(callback){
         function cb(err){
-            callback(err);
+            if(err) console.log(err);
+            callback(null);
         }
 
         pick.timeResolved = Date.now();
