@@ -33,7 +33,7 @@ function createBet(betData, callback){
 
         function cb(err){
             if(err) console.log(err);
-            callback(null);
+            callback(null, null);
         }
 
         BetBl.create(betData, cb);
