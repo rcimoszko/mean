@@ -4,10 +4,10 @@ declared-services:
     label: mongodb
     plan: 100
 applications:
-- name: fu
-  host: fu
+- name: fu-stage
+  host: fu-stage
   memory: 512M
   services:
   - mean-mongo
   env:
-    NODE_ENV: cloud-foundry
+    NODE_ENV: cloud-foundry-stage
