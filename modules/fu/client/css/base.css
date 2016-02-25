@@ -2322,6 +2322,18 @@ notification:last-of-type .notification {
     float: left;
     width: 15%;
   }
+  .picks-event-container.columns-5.e-sports .bet-section-container .bet-section {
+    width: 100%;
+  }
+  .picks-event-container.columns-5.e-sports .bet-section-container.bet-section-container-moneyline {
+    width: 15%;
+  }
+  .picks-event-container.columns-5.e-sports .bet-section-container.bet-section-container-spread {
+    width: 15%;
+  }
+  .picks-event-container.columns-5.e-sports .bet-section-container.bet-section-container-total {
+    width: 15%;
+  }
 }
 @media (min-width: 992px) {
   .picks-event-container.columns-5 {
