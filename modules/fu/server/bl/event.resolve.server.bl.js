@@ -112,8 +112,8 @@ function insertScores_basketball(event, scores, callback){
         if(scores.contestant1Q2Score && scores.contestant2Q2Score){
             event.contestant1Q2Score = scores.contestant1Q2Score;
             event.contestant2Q2Score = scores.contestant2Q2Score;
-            event.contestant1H2Score = scores.contestant1Q1Score + scores.contestant1Q2Score;
-            event.contestant2H2Score = scores.contestant2Q1Score + scores.contestant2Q2Score;
+            event.contestant1H1Score = scores.contestant1Q1Score + scores.contestant1Q2Score;
+            event.contestant2H1Score = scores.contestant2Q1Score + scores.contestant2Q2Score;
 
             if(scores.contestant1Q3Score && scores.contestant2Q3Score){
                 event.contestant1Q3Score = scores.contestant1Q3Score;
@@ -124,8 +124,8 @@ function insertScores_basketball(event, scores, callback){
                     event.contestant1Q4Score = scores.contestant1Q4Score;
                     event.contestant2Q4Score = scores.contestant2Q4Score;
 
-                    event.contestant1RegulationScore =  event.contestant1H2Score +  scores.contestant1Q3Score + scores.contestant1Q4Score;
-                    event.contestant2RegulationScore =  event.contestant2H2Score +  scores.contestant2Q3Score + scores.contestant2Q4Score;
+                    event.contestant1RegulationScore =  event.contestant1H1Score +  scores.contestant1Q3Score + scores.contestant1Q4Score;
+                    event.contestant2RegulationScore =  event.contestant2H1Score +  scores.contestant2Q3Score + scores.contestant2Q4Score;
 
                     if(scores.overtime){
                         event.overtime = true;
@@ -142,9 +142,26 @@ function insertScores_basketball(event, scores, callback){
             }
         }
     }
-    if(scores.contestant1H1Score && scores.contestant1H2Score){
+    if(scores.contestant1H1Score && scores.contestant2H1Score){
         event.contestant1H1Score = scores.contestant1H1Score;
-        event.contestant1H2Score = scores.contestant1H2Score;
+        event.contestant2H1Score = scores.contestant2H1Score;
+        if(scores.contestant1H2Score && scores.contestant1H2Score){
+            event.contestant1H2Score = scores.contestant1H2Score;
+            event.contestant2H2Score = scores.contestant2H2Score;
+            event.contestant1RegulationScore = scores.contestant1H1Score + scores.contestant1H2Score;
+            event.contestant2RegulationScore = scores.contestant2H1Score + scores.contestant2H2Score;
+
+            if(scores.overtime){
+                event.overtime = true;
+                event.contestant1OTScore = scores.contestant1OTScore;
+                event.contestant2OTScore = scores.contestant2OTScore;
+                event.contestant1FinalScore = event.contestant1RegulationScore + scores.contestant1OTScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore + scores.contestant2OTScore;
+            } else {
+                event.contestant1FinalScore = event.contestant1RegulationScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore;
+            }
+        }
     }
 
     if(scores.contestant1FinalScore && scores.contestant1FinalScore){
@@ -172,7 +189,74 @@ function insertScores_eSports(event, scores, callback){
 }
 
 function insertScores_football(event, scores, callback){
+    if(scores.contestant1Q1Score && scores.contestant2Q1Score){
+        event.contestant1Q1Score = scores.contestant1Q1Score;
+        event.contestant1Q2Score = scores.contestant2Q1Score;
 
+        if(scores.contestant1Q2Score && scores.contestant2Q2Score){
+            event.contestant1Q2Score = scores.contestant1Q2Score;
+            event.contestant2Q2Score = scores.contestant2Q2Score;
+            event.contestant1H1Score = scores.contestant1Q1Score + scores.contestant1Q2Score;
+            event.contestant2H1Score = scores.contestant2Q1Score + scores.contestant2Q2Score;
+
+            if(scores.contestant1Q3Score && scores.contestant2Q3Score){
+                event.contestant1Q3Score = scores.contestant1Q3Score;
+                event.contestant2Q3Score = scores.contestant2Q3Score;
+
+                if(scores.contestant1Q4Score && scores.contestant2Q4Score){
+
+                    event.contestant1Q4Score = scores.contestant1Q4Score;
+                    event.contestant2Q4Score = scores.contestant2Q4Score;
+
+                    event.contestant1RegulationScore =  event.contestant1H1Score +  scores.contestant1Q3Score + scores.contestant1Q4Score;
+                    event.contestant2RegulationScore =  event.contestant2H1Score +  scores.contestant2Q3Score + scores.contestant2Q4Score;
+
+                    if(scores.overtime){
+                        event.overtime = true;
+                        event.contestant1OTScore =  scores.contestant1OTScore;
+                        event.contestant2OTScore =  scores.contestant2OTScore;
+                        event.contestant1FinalScore = event.contestant1RegulationScore + scores.contestant1OTScore;
+                        event.contestant2FinalScore = event.contestant2RegulationScore + scores.contestant2OTScore;
+                    } else {
+                        event.contestant1FinalScore = event.contestant1RegulationScore;
+                        event.contestant2FinalScore = event.contestant2RegulationScore;
+                    }
+
+                }
+            }
+        }
+    }
+    if(scores.contestant1H1Score && scores.contestant2H1Score){
+        event.contestant1H1Score = scores.contestant1H1Score;
+        event.contestant2H1Score = scores.contestant2H1Score;
+        if(scores.contestant1H2Score && scores.contestant1H2Score){
+            event.contestant1H2Score = scores.contestant1H2Score;
+            event.contestant2H2Score = scores.contestant2H2Score;
+            event.contestant1RegulationScore = scores.contestant1H1Score + scores.contestant1H2Score;
+            event.contestant2RegulationScore = scores.contestant2H1Score + scores.contestant2H2Score;
+
+            if(scores.overtime){
+                event.overtime = true;
+                event.contestant1OTScore = scores.contestant1OTScore;
+                event.contestant2OTScore = scores.contestant2OTScore;
+                event.contestant1FinalScore = event.contestant1RegulationScore + scores.contestant1OTScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore + scores.contestant2OTScore;
+            } else {
+                event.contestant1FinalScore = event.contestant1RegulationScore;
+                event.contestant2FinalScore = event.contestant2RegulationScore;
+            }
+        }
+    }
+
+    if(scores.contestant1FinalScore && scores.contestant1FinalScore){
+        event.contestant1FinalScore = scores.contestant1FinalScore;
+        event.contestant2FinalScore = scores.contestant2FinalScore;
+        if(!event.overtime){
+            event.contestant1RegulationScore = event.contestant1FinalScore;
+            event.contestant2RegulationScore = event.contestant2FinalScore;
+        }
+    }
+    callback();
 }
 
 function insertScores_handball(event, scores, callback){

@@ -56,43 +56,55 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             break;
         case '1st set winner':
         case 'map 1':
-        case 'map 1, Kills':
-            contestantScore = event['contestant'+contestantNo+'Set1Score'];
-            opponentScore = event['contestant'+opponentNo+'Set1Score'];
+        case '1st map':
+            switch(pick.betType.toLowerCase()){
+                case '1st blood':
+                    contestantScore = event['contestant'+contestantNo+'Set1FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Set1FirstBlood'];
+                    break;
+                case '1st to 10 kills':
+                    contestantScore = event['contestant'+contestantNo+'Set1KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Set1KillsFirst'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Set1Score'];
+                    opponentScore = event['contestant'+opponentNo+'Set1Score'];
+                    break;
+            }
             break;
         case 'map 2':
-        case 'map 2, Kills':
-            contestantScore = event['contestant'+contestantNo+'Set2Score'];
-            opponentScore = event['contestant'+opponentNo+'Set2Score'];
+        case '2nd map':
+            switch(pick.betType.toLowerCase()){
+                case '1st blood':
+                    contestantScore = event['contestant'+contestantNo+'Set2FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Set2FirstBlood'];
+                    break;
+                case '1st to 10 kills':
+                    contestantScore = event['contestant'+contestantNo+'Set2KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Set2KillsFirst'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Set2Score'];
+                    opponentScore = event['contestant'+opponentNo+'Set2Score'];
+                    break;
+            }
             break;
         case 'map 3':
-        case 'map 3, Kills':
-            contestantScore = event['contestant'+contestantNo+'Set3Score'];
-            opponentScore = event['contestant'+opponentNo+'Set3Score'];
-            break;
-        case 'map 1, 1st to 10 Kills':
-            contestantScore = event['contestant'+contestantNo+'Set1KillsFirst'];
-            opponentScore = event['contestant'+contestantNo+'Set1KillsFirst'];
-            break;
-        case 'map 2, 1st to 10 Kills':
-            contestantScore = event['contestant'+contestantNo+'Set2KillsFirst'];
-            opponentScore = event['contestant'+contestantNo+'Set2KillsFirst'];
-            break;
-        case 'map 3, 1st to 10 Kills':
-            contestantScore = event['contestant'+contestantNo+'Set3KillsFirst'];
-            opponentScore = event['contestant'+contestantNo+'Set3KillsFirst'];
-            break;
-        case 'map 1, 1st blood':
-            contestantScore = event['contestant'+contestantNo+'Set1FirstBlood'];
-            opponentScore = event['contestant'+contestantNo+'Set1FirstBlood'];
-            break;
-        case 'map 2, 1st blood':
-            contestantScore = event['contestant'+contestantNo+'Set2FirstBlood'];
-            opponentScore = event['contestant'+contestantNo+'Set2FirstBlood'];
-            break;
-        case 'map 3, 1st blood':
-            contestantScore = event['contestant'+contestantNo+'Set3FirstBlood'];
-            opponentScore = event['contestant'+contestantNo+'Set3FirstBlood'];
+        case '3rd map':
+            switch(pick.betType.toLowerCase()){
+                case '1st blood':
+                    contestantScore = event['contestant'+contestantNo+'Set3FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Set3FirstBlood'];
+                    break;
+                case '1st to 10 kills':
+                    contestantScore = event['contestant'+contestantNo+'Set3KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Set3KillsFirst'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Set3Score'];
+                    opponentScore = event['contestant'+opponentNo+'Set3Score'];
+                    break;
+            }
             break;
         case '2nd half':
             switch(event.sport.name.toLowerCase()){

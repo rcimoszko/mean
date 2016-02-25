@@ -55,7 +55,12 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
                 if(err){
                     alert(err);
                 } else {
-                    event = updatedEvent;
+                    for(var field in updatedEvent){
+                        if(field.indexOf('Score') !== -1 || field === 'contestantWinner'){
+                            event[field] = updatedEvent[field];
+                        }
+                    }
+                    console.log(event);
                 }
             }
 
