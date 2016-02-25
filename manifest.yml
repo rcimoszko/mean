@@ -11,3 +11,4 @@ applications:
   - mean-mongo
   env:
     NODE_ENV: cloud-foundry
+  no-route: true
