@@ -179,7 +179,7 @@ function addBet(bet, event, callback){
 
 function getUnresolvedEvents(callback){
     var query = {resolved:false, scores:true};
-    m_Event.find(query, callback);
+    m_Event.find(query).populate('pinnacleBets').exec(callback);
 }
 
 function getResolveEvents(sport, callback){

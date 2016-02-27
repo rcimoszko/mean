@@ -252,7 +252,7 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                             result = 'Push';
                         } else{
                             //If draw is not an option and event is draw, ML bets are push
-                            drawExists = _.find(event.betsAvailable, {draw:true, betDuration: pick.betDuration});
+                            drawExists = _.find(event.pinnacleBets, {draw:true, betDuration: pick.betDuration});
                             if(drawExists){
                                 if(durationWinner === 'draw' && pick.draw){
                                     result = 'Win';
@@ -279,7 +279,7 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                         result = 'Push';
                     } else{
                         //If draw is not an option and event is draw, ML bets are push
-                        drawExists = _.find(event.betsAvailable, {draw:true, betDuration: pick.betDuration});
+                        drawExists = _.find(event.pinnacleBets, {draw:true, betDuration: pick.betDuration});
                         if(drawExists){
                             if(durationWinner === 'draw' && pick.draw){
                                 result = 'Win';
