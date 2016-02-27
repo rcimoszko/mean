@@ -32,7 +32,7 @@ function get(event, league, user, callback){
         };
         if(event.contestant2.ref.lightColor) header.contestant1Color = event.contestant2.ref.darkColor;
         if(event.contestant1.ref.lightColor) header.contestant2Color = event.contestant1.ref.darkColor;
-        if(event.contestant1FinalScore) header.hasScores = true;
+        if(typeof event.contestant1FinalScore !== 'undefined') header.hasScores = true;
         if(event.contestantWinner){
             if(String(event.contestantWinner.ref) === String(event.contestant1.ref._id)){
                 header.winner = 2;
