@@ -1,11 +1,14 @@
 .blog{
-  margin:0 -20px;
+  margin:0 -10px;
+  @media (min-width: @screen-sm-min) {
+    margin:0 -20px;
+  }
 }
 
 .article{
   .header, .featured-article{
     background-color:@color-blue-2;
-    padding:20px 0;
+    padding:20px;
     .header-content{
       max-width:720px;
       margin: 0 auto;
@@ -26,44 +29,83 @@
   .social-button-container{
     position:relative;
     height:0;
+    top:20px;
+
+    a{
+      color:@color-text;
+    }
     .social-btn{
       background-color:@color-bg;
-      border-radius:40px;
-      margin:10px;
-      width:40px;
-      height:40px;
+      border-radius:25px;
+      margin:5px;
+      width:25px;
+      height:25px;
       position:relative;
       text-align:center;
+
+      @media (min-width: @screen-sm-min) {
+        border-radius:40px;
+        margin:10px;
+        width:40px;
+        height:40px;
+      }
+      .transition(all, 0.2s);
+      &:hover{
+        background-color:@color-blue;
+        a{
+          color:white;
+        }
+      }
       &:first-of-type{
         margin-top:0;
       }
       .fa{
-        padding:10px;
-        font-size:20px;
+        padding:6px;
+        font-size:12px;
+        @media (min-width: @screen-sm-min) {
+          padding:10px;
+          font-size:20px;
+        }
       }
     }
   }
 
   .article-body{
     background-color:white;
-    padding:30px 0;
+    padding:30px 20px 30px 33px;
+    @media (min-width: @screen-sm-min) {
+      padding-left:20px;
+    }
     .article-content{
       max-width:720px;
       margin: 0 auto;
       h1{
-        font-size:32px !important;
+        font-size:24px !important;
+        @media (min-width: @screen-sm-min) {
+          font-size:32px !important;
+        }
 
       }
       h2{
 
+        font-size:20px !important;
+        @media (min-width: @screen-sm-min) {
+          font-size:28px !important;
+        }
       }
       h3{
-
+        font-size:16px !important;
+        @media (min-width: @screen-sm-min) {
+          font-size:28px !important;
+        }
       }
       p{
         margin-bottom:10px !important;
-        font-size:18px !important;
+        font-size:14px !important;
         color:@color-text-dark;
+        @media (min-width: @screen-sm-min) {
+          font-size:18px !important;
+        }
       }
     }
 

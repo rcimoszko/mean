@@ -99,7 +99,7 @@ var UserSchema = new Schema({
   password: {
     type: String,
     default: '',
-    validate: [validateLocalStrategyPassword, 'Password should be longer']
+    validate: [validateLocalStrategyPassword, 'Password must be greater than 6 characters.']
   },
   salt: {
     type: String

@@ -11,9 +11,19 @@
     @media (min-width: @screen-sm-min) {
       left:@width-auth-side-menu;
     }
+    &.is-blog{
+      left:0;
+    }
   }
 
 
+  .avatar-container{
+    display:inline-block;
+    padding:10px;
+    @media (min-width: @screen-sm-min) {
+      display:none;
+    }
+  }
 
   .logo-container{
     line-height:60px;
@@ -29,14 +39,11 @@
   }
 
   .search-container{
-    display:none;
-    @media (min-width: @screen-md-min) {
-      display:inline-block;
-    }
+    display:inline-block;
     .search-box{
       line-height:60px;
       padding-left:20px;
-      width:300px;
+      width:280px;
       .fa-search{
         color:fade(@color-text, 50%);
         font-size:16px;
@@ -45,7 +52,7 @@
         margin-left:10px;
         border:none;
         line-height:40px;
-        width:90%;
+        width:75%;
         &:focus{
           outline:none;
         }
@@ -54,30 +61,76 @@
   }
 
   .menu-links{
-    display:none;
-    margin-right:20px;
-    @media (min-width: @screen-md-min) {
+    background-color:white;
+    width:200px;
+    float:right;
+    top:@height-top-menu + 2px;
+    position:absolute;
+    right:0;
+    border-left:1px solid @color-gray-divider;
+    border-bottom:1px solid @color-gray-divider;
+    text-align:right;
+    padding-left:0;
+    @media (min-width: @screen-sm-min) {
+      position:static;
       display:inline-block;
+      float:right;
+      background-color:transparent;
+      width:auto;
+      margin-top:0;
+      margin-right:20px;
+      border:0;
+      text-align:center;
     }
     ul{
-      float:right;
-      height:@height-top-menu;
+      padding-left:20px;
+      @media (min-width: @screen-sm-min) {
+        float:right;
+        height:@height-top-menu;
+      }
+      &.general{
+        padding-left:0;
+      }
       li{
-        display:inline-block;
-        line-height:@height-top-menu;
-
+        &:hover{
+          background-color: transparent;
+        }
+        @media (min-width: @screen-sm-min) {
+          display:inline-block;
+          line-height:@height-top-menu;
+        }
         a{
-          height:@height-top-menu;
           display:inline-block;
           text-transform:uppercase;
-          padding:0 20px;
+          padding:0 13px;
           color:@color-text;
           font-size:14px;
-          &:hover, &.active{
+          line-height:50px;
+          text-shadow:none;
+          @media (min-width: @screen-sm-min) {
+            line-height:none;
+            height:@height-top-menu;
+          }
+
+          &:hover, &.active, &:focus{
+            background-color:transparent;
             color: @color-text-dark;
           }
 
         }
+      }
+    }
+  }
+
+  .navbar-header{
+    position:fixed;
+    top:0;
+    right:0;
+    .navbar-toggle{
+      margin-top:13px;
+      margin-bottom:13px;
+      .icon-bar{
+        background-color:@color-blue;
       }
     }
   }

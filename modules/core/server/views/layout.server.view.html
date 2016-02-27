@@ -67,9 +67,10 @@
 </head>
 
 <body>
-    <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user}"></header>
+    <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user,  'is-blog': isBlog()}"></header>
     <ng-include src="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user" data-ng-hide="isBlog()"></ng-include>
-    <section id="content"  data-ng-class="{auth: authentication.user}">
+    <section id="content"  data-ng-class="{auth: authentication.user, blog: isBlog() }">
+        <ng-include src="'/modules/fu/client/views/unverifed.client.view.html'" data-ng-if="authentication.user && !authentication.user.verified"></ng-include>
         {% block content %}{% endblock %}
 
         <ng-include src="'/modules/fu/client/views/footer.client.view.html'" data-ng-hide="isPicksPage()" data-ng-if="!loading.isLoading.pageLoading"></ng-include>

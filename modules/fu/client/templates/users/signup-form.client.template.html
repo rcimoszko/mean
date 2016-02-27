@@ -16,37 +16,44 @@
     <div class="divider-text">
         OR SIGN UP WITH EMAIL
     </div>
-    <form name="userForm" ng-submit="signup(userForm.$valid)" class="auth-form" novalidate autocomplete="off">
-        <div class="form-group" show-errors>
-            <input type="email" id="email" name="email" class="form-control" ng-model="form.email" placeholder="EMAIL" uppercase required>
-            <div ng-messages="userForm.email.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Email address is required.</p>
-                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-            </div>
-        </div>
-        <div class="form-group" show-errors>
-            <input type="text" id="username" name="username" class="form-control" ng-model="form.username" placeholder="USERNAME" uppercase required>
-            <div ng-messages="userForm.username.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Username is required.</p>
-            </div>
-        </div>
-        <div class="form-group" show-errors>
-            <input type="password" id="password" name="password" class="form-control" ng-model="form.password" placeholder="PASSWORD" required uppercase ng-minlength="6">
-            <div ng-messages="userForm.password.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Password is required.</p>
-                <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
-            </div>
-        </div>
 
-        <div class="form-group terms">
-            <input type="checkbox" id="terms" ng-model="form.terms" required> <a target='_blank' ui-sref="static.terms">I Accept the Terms & Conditions</a>
-            <div data-ng-show="invalidForm">
-                <p data-ng-show="!form.terms" class="help-block">Please accept the terms and conditions.</p>
+
+    <form name="userForm" ng-submit="signup(userForm.$valid)" class="auth-form" novalidate autocomplete="off">
+        <fieldset>
+            <div class="form-group" show-errors>
+                <input type="email" id="email" name="email" class="form-control" ng-model="form.email" placeholder="EMAIL" required>
+                <div ng-messages="userForm.email.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                    <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+                </div>
             </div>
-        </div>
-        <div class="text-center form-group">
-            <button type="submit" class="btn btn-green">Create Free Account</button>
-        </div>
+            <div class="form-group" show-errors>
+                <input type="text" id="username" name="username" class="form-control" ng-model="form.username" placeholder="USERNAME" required>
+                <div ng-messages="userForm.username.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Username is required.</p>
+                </div>
+            </div>
+            <div class="form-group" show-errors>
+                <input type="password" id="password" name="password" class="form-control" ng-model="form.password" placeholder="PASSWORD" required ng-minlength="6">
+                <div ng-messages="userForm.password.$error" role="alert">
+                    <p class="help-block error-text" ng-message="required">Password is required.</p>
+                    <p class="help-block error-text" ng-message="minlength">Password is too short.</p>
+                </div>
+            </div>
+
+            <div class="form-group terms" show-errors>
+                <input type="checkbox" name="terms" id="terms" ng-model="form.terms" required> <a target='_blank' ui-sref="static.terms">I Accept the Terms & Conditions</a>
+                <div data-ng-show="invalid && !form.terms" role="alert">
+                    <p class="help-block">Please accept the terms and conditions.</p>
+                </div>
+            </div>
+            <div class="text-center form-group">
+                <button type="submit" class="btn btn-green" data-ng-disabled="loading.isLoading.formSubmit">Create Free Account</button>
+            </div>
+            <alert type="danger" ng-show="error" class="text-center text-danger">
+                <span data-ng-bind="error"></span>
+            </alert>
+        <fieldset>
     </form>
     <div class="bottom-text">
         FansUnite is free to use as long as you want with an unlimited number of tipsters.

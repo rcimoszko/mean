@@ -31,9 +31,9 @@ function createBet(betData, callback){
                 break;
         }
 
-        function cb(err){
+        function cb(err, bet){
             if(err) console.log(err);
-            callback(null, null);
+            callback(null, bet);
         }
 
         BetBl.create(betData, cb);

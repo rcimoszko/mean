@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authentication', 'Search', '$http',
-    function ($scope, $state, Authentication, Search, $http) {
+angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authentication', 'Search', '$http', '$rootScope', '$location',
+    function ($scope, $state, Authentication, Search, $http, $rootScope, $location) {
         $scope.authentication = Authentication;
         $scope.state = $state;
+        $scope.location = $location;
         $scope.searchLoading = false;
 
         $scope.getResults = function() {
@@ -14,6 +15,16 @@ angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authe
             }).then(function(response){
                 return response.data;
             });
+        };
+
+        var excludeRedirect = ['/login', '/', '/blog'];
+        $scope.signupUrl = function(){
+            if(excludeRedirect.indexOf($scope.location.path()) !== -1) return '/signup';
+            return '/signup?redirect='+$scope.location.path();
+        };
+
+        $scope.toggleSideMenu = function(){
+            $rootScope.$emit('toggleSideMenu');
         };
 
         $scope.searchSelected = function($model){
@@ -28,8 +39,17 @@ angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authe
                     $state.go('profile', {username: $model.name});
                     break;
             }
-            console.log($model);
         };
+
+
+        $scope.isCollapsed = false;
+        $scope.toggleCollapsibleMenu = function () {
+            $scope.isCollapsed = !$scope.isCollapsed;
+        };
+
+        $scope.$on('$stateChangeSuccess', function () {
+            $scope.isCollapsed = false;
+        });
 
     }
 ]);

@@ -7,7 +7,7 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
 
             function cbSuccess(response){
                 Authentication.user = response;
-                User.info.inialized = true;
+                User.initialize();
                 callback(null);
             }
 

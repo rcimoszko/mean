@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('fu').controller('AuthSideMenuController', ['$scope', '$filter', '$location', 'Modal', 'Authentication', 'User',
-    function ($scope, $filter, $location, Modal, Authentication, User) {
+angular.module('fu').controller('AuthSideMenuController', ['$scope', '$filter', '$location', 'Modal', 'Authentication', 'User', '$rootScope',
+    function ($scope, $filter, $location, Modal, Authentication, User, $rootScope) {
         $scope.authentication = Authentication;
         $scope.user = User;
+        $scope.showSideMenu = false;
 
         $scope.isActive = function(page){
             return page === $location.url();
@@ -38,6 +39,14 @@ angular.module('fu').controller('AuthSideMenuController', ['$scope', '$filter', 
                 {},
                 'notifications'
             );
+        };
+
+        $rootScope.$on('toggleSideMenu', function(){
+            $scope.toggleSideMenu();
+        });
+
+        $scope.toggleSideMenu = function(){
+            $scope.showSideMenu = !$scope.showSideMenu;
         };
 
     }

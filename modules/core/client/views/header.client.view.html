@@ -1,13 +1,14 @@
 <div class="container" ng-controller="HeaderController">
     <div class="navbar-header">
-        <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a ui-sref="home" class="navbar-brand">FansUnite</a>
+        <a class="navbar-brand" href="#">Brand</a>
     </div>
+
     <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
         <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
             <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">

@@ -14,7 +14,15 @@ angular.module('articles').config(['$stateProvider',
             })
             .state('blog.article', {
                 url: '/:articleSlug',
-                templateUrl: 'modules/articles/client/views/blog/blog.article.client.view.html'
+                templateUrl: 'modules/articles/client/views/blog/blog.article.client.view.html',
+                controller: 'BlogArticleController',
+                resolve: {
+                    articleResolve: ['$stateParams', 'ApiArticlesSlug', function ($stateParams, ApiArticlesSlug) {
+                        return ApiArticlesSlug.get({
+                            articleSlug: $stateParams.articleSlug
+                        });
+                    }]
+                }
             });
     }
 ]);

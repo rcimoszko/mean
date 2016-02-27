@@ -31,6 +31,10 @@
                                     <select id="odds" name="odds" class="form-control" data-ng-model="user.oddsFormat" data-ng-options="oddsFormat for oddsFormat in oddsFormats"></select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="sport">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control" data-ng-model="user.email">
+                                </div>
+                                <div class="form-group">
                                     <label for="sport">Favourite Sport</label>
                                     <select id="sport" name="sport" class="form-control" data-ng-model="user.favoriteSport" data-ng-options="sport._id as sport.name for sport in sports"></select>
                                 </div>

@@ -29,8 +29,8 @@ module.exports = {
         'public/lib/angular-filter/dist/angular-filter.min.js',
         'public/lib/angular-scroll-glue/src/scrollglue.js',
         'public/lib/ng-csv/build/ng-csv.min.js',
-        'public/lib/angular-scrolltofixed/dist/angular-scrolltofixed.min.js'
-        //'public/lib/ngSticky/dist/sticky.min.js'
+        //'public/lib/angular-scrolltofixed/dist/angular-scrolltofixed.min.js'
+        'public/lib/ngSticky/dist/sticky.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

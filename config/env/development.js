@@ -59,6 +59,20 @@ module.exports = {
             }
         }
     },
+    maaxMarket:{
+        mailer: {
+            from: process.env.MAILER_FROM || 'FansUnite <info@fansunite.com>',
+            options:{
+                //auth: 'smtps://info%40fansunite.com:fansunite123$@smtp.sendgrid.net',
+                host: 'smtp.sendgrid.net',
+                port: 587,
+                auth: {
+                    user: 'info@fansunite.com',
+                    pass: 'fansunite123$'
+                }
+            }
+        }
+    },
     linkedin: {
         clientID: process.env.LINKEDIN_ID || 'APP_ID',
         clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',

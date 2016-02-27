@@ -1,4 +1,5 @@
-<section id="auth-side-menu" data-ng-controller="AuthSideMenuController">
+<div data-ng-controller="AuthSideMenuController">
+<section id="auth-side-menu" data-ng-class="{show: showSideMenu}">
     <div class="logo-container">
         <a ui-sref="home">
             <img data-ng-src="/modules/fu/client/img/general/logo-text.png">
@@ -69,3 +70,5 @@
         <a href="/api/auth/signout" target="_self" >Sign Out</a>
     </div>
 </section>
+<div class="auth-menu-overlay-container" data-ng-class="{show: showSideMenu}" data-ng-click="toggleSideMenu()"></div>
+</div>

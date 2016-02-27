@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page',
-    function ($scope, $state, Authentication, User, Loading, $rootScope, Page) {
+angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page', '$http',
+    function ($scope, $state, Authentication, User, Loading, $rootScope, Page, $http) {
         $scope.authentication = Authentication;
         $scope.loading = Loading;
         $scope.page = Page;
@@ -21,5 +21,15 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
                 $scope.page.meta.keywords = $state.current.keywords;
             }
         });
+
+
+        $scope.resendVerificationEmail = function() {
+            $scope.resendSuccess = $scope.resendError = null;
+            $http.post('/api/verification/send').success(function(response) {
+                $scope.resendSuccess = response.message;
+            }).error(function(response) {
+                $scope.resendError = response.message;
+            });
+        };
     }
 ]);

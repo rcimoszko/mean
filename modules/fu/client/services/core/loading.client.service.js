@@ -5,6 +5,7 @@ angular.module('fu').factory('Loading',
 
         var isLoading = {
             pickSubmit: false,
+            formSubmit: false,
             pageLoading: false
         };
 

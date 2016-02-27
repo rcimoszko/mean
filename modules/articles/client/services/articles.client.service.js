@@ -69,6 +69,8 @@ angular.module('articles').factory('Articles', ['ApiArticles',
             article.$delete(cbSuccess, cbError);
         };
 
+
+
         return {
             get:    get,
             getAll: getAll,

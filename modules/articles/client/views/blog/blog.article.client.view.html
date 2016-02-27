@@ -5,17 +5,27 @@
             <h3>{{article.author}} | {{article.datePublished|date:'longDate'}}</h3>
         </div>
     </div>
-    <div class="social-button-container" scroll-to-fixed>
+    <div class="social-button-container" sticky offset="90">
         <div class="social-btn">
+            <a class="icon-twitter" href="https://twitter.com/share?text={{article.title}}%20via%20@fansunite&amp;url={{location.url()}}" rel="nofollow" target="_blank" title="Share on Twitter">
             <i class="fa fa-twitter"></i>
+            </a>
         </div>
         <div class="social-btn">
+            <a class="icon-facebook" href="https://facebook.com/sharer.php?u={{location.url()}}" rel="nofollow" target="_blank" title="Share on Facebook">
             <i class="fa fa-facebook"></i>
-        </div><div class="social-btn">
-        <i class="fa fa-google-plus"></i>
-    </div><div class="social-btn">
-        <i class="fa fa-envelope"></i>
-    </div>
+            </a>
+        </div>
+        <div class="social-btn">
+            <a class="icon-gplus" href="https://plus.google.com/share?url={{location.url()}}" rel="nofollow" target="_blank" title="Share on Google+">
+            <i class="fa fa-google-plus"></i>
+            </a>
+        </div>
+        <div class="social-btn">
+            <a class="icon-email" href="mailto:?subject={{article.title}}&amp;body=Check out this article I found on the FansUnite blog {{location.url()}}." title="Share via Email">
+            <i class="fa fa-envelope"></i>
+            </a>
+        </div>
     </div>
     <div class="article-body">
         <div class="article-content" ta-bind data-ng-model="article.content"></div>
