@@ -56,11 +56,12 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                         //success
                         function(user) {
                             Authentication.user = user;
-                            callback({type: 'success', user: user});
+                            User.updateStatus();
+                            callback(null);
                         },
                         //error
                         function(data){
-                            callback({type: 'error', message: data.message});
+                            callback(data);
                         });
                 }
             });

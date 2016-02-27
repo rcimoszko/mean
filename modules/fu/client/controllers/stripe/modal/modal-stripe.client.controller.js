@@ -1,16 +1,39 @@
 'use strict';
 
-angular.module('fu').controller('ModalStripeController', ['$scope', '$modalInstance', '$state', 'Modal', 'StripeService', 'Authentication',
-    function($scope, $modalInstance, $state, Modal, StripeService, Authentication) {
+angular.module('fu').controller('ModalStripeController', ['$scope', '$modalInstance', '$state', 'Modal', 'StripeService', 'Authentication', '$location',
+    function($scope, $modalInstance, $state, Modal, StripeService, Authentication, $location) {
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
         $scope.stripeService = StripeService;
+        $scope.modal.closeModal($scope.modalInstance);
+        $scope.location = $location;
 
-        function cb(err){
 
-        }
 
         $scope.newSubscription = function(plan){
+
+
+            function cb(err){
+                if(!err){
+                    $scope.error = err;
+                } else {
+                    $scope.modal.closeModal($scope.modalInstance);
+                    switch(plan){
+                        case 'base':
+                            $state.go('basePurchaseSuccess', {redirect:$scope.location.path()});
+                            break;
+                        case 'premium-1':
+                            $state.go('proPurchaseSuccess', {redirect:$scope.location.path()});
+                            break;
+                        case 'premium-6':
+                            $state.go('6monthProPurchaseSuccess', {redirect:$scope.location.path()});
+                            break;
+                    }
+                }
+            }
+
+
+
             if(Authentication.user){
                 switch (plan){
                     case 'base':

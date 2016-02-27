@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -91,6 +91,19 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserMessagecount.get({}, cbSuccess, cbError);
         }
 
+        function updateUserStatus(){
+
+            function cbSuccess(response){
+                info.status = response.status;
+            }
+
+            function cbError(response){
+                console.log(response);
+            }
+
+            ApiUserStatus.get({}, cbSuccess, cbError);
+        }
+
         function initiliazeSocket(){
 
             SocketUser.connect();
@@ -127,6 +140,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
                 info.channels = userInfo.channels;
                 info.notifications = userInfo.notifications;
                 info.messageCount = userInfo.messageCount;
+                info.status = userInfo.status;
                 updateActiveUnits();
                 updateActivePicks();
                 initiliazeSocket();
@@ -146,6 +160,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
                     messageCount: 0,
                     picks: {pending:[]},
                     notifications: [],
+                    status: '',
                     stats: {activeUnits:null, activePicks:null}};
 
         var picks = {pending:[]};
@@ -162,7 +177,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
 
             createConversation: createConversation,
             readNotification: readNotification,
-            updateMessageCount: updateMessageCount
+            updateMessageCount: updateMessageCount,
+            updateUserStatus: updateUserStatus
         };
 
     }

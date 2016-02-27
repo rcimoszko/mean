@@ -13,7 +13,7 @@ angular.module('fu').config(['$stateProvider',
             })
             .state('proPurchaseSuccess', {
                 url: '/pro-purchase-success?redirect',
-                templateUrl: 'modules/fu/client/views/purchase/base-purchase-success.client.view.html',
+                templateUrl: 'modules/fu/client/views/purchase/pro-purchase-success.client.view.html',
                 title: 'Thank You for Purchasing FansUnite Pro | FansUnite',
                 data: {
                     roles: ['user']
@@ -21,7 +21,7 @@ angular.module('fu').config(['$stateProvider',
             })
             .state('6monthProPurchaseSuccess', {
                 url: '/six-pro-purchase-success?redirect',
-                templateUrl: 'modules/fu/client/views/purchase/base-purchase-success.client.view.html',
+                templateUrl: 'modules/fu/client/views/purchase/6-purchase-success.client.view.html',
                 title: 'Thank You for Purchasing 6 Months FansUnite Pro | FansUnite',
                 data: {
                     roles: ['user']

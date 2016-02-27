@@ -274,13 +274,37 @@ function getNewMessageCount(userId, callback){
 }
 
 function getUserStatus(user, callback){
+    var status = 'free';
+
     if(user.trial){
-        return callback(null, 'trial');
+        status = 'trial';
     }
-    if(user.lifetimePremium){
+    else if(user.lifetimePremium){
+        if(user.base){
+            status = 'lifetime premium with base';
+        } else {
+            status = 'lifetime premium';
+        }
+    }
+    else if(user.premium){
+        switch (user.subscriptionPlan){
+            case '1 Month Premium':
+            case '6 Months Premium':
+                status = 'premium';
+                break;
+            case '1year':
+            case '6month':
+            case 'Pro':
+                status = 'old premium';
+                if(user.base) status = 'old premium with base';
+                break;
+        }
 
     }
-
+    else if(user.base){
+        status = 'base';
+    }
+    callback(null, status);
 }
 
 function getInfo(user, callback){
@@ -315,11 +339,9 @@ function getInfo(user, callback){
         getNewMessageCount(user._id, callback);
     }
 
-    /*
     function getUserStatus_todo(callback){
         getUserStatus(user, callback);
     }
-    */
 
     var todo = {
         pendingPicks: getPendingPicks_todo,
@@ -327,7 +349,8 @@ function getInfo(user, callback){
         following: getFollowing_todo,
         notifications: getNotifications_todo,
         channels: getSubscriptions_todo,
-        messageCount: getNewMessageCount_todo
+        messageCount: getNewMessageCount_todo,
+        status: getUserStatus_todo
     };
 
     async.parallel(todo, callback);
@@ -459,6 +482,7 @@ exports.getPendingPicks     = getPendingPicks;
 exports.getCompletedPicks   = getCompletedPicks;
 exports.getTracker          = getTracker;
 exports.getInfo             = getInfo;
+exports.getUserStatus       = getUserStatus;
 exports.getForSearch        = getForSearch;
 exports.uploadProfilePicture    = uploadProfilePicture;
 exports.getNewMessageCount      = getNewMessageCount;

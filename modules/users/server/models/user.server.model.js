@@ -140,8 +140,8 @@ var UserSchema = new Schema({
     verified:               {type: Boolean,default: false},
     base:                   {type: Boolean,default: false},
     premium:                {type: Boolean,default: false},
-    lifetimePremium:        {type: Boolean,default: false},
     trial:                  {type: Boolean,default: false},
+    lifetimePremium:        {type: Boolean,default: false},
     cancelledPremium:       {type: Boolean},
     premiumEndDate:         {type: Date},
     premiumRenewDate:       {type: Date},
@@ -160,6 +160,7 @@ var UserSchema = new Schema({
 
     stripeId:               {type: String},
     subscriptionId:         {type: String},
+    subscriptionPlan:       {type: String},
     oldId:                  {type: Number},
     updatePassword:         {type: Boolean},
     active:                 {type: Boolean, default: true},
@@ -179,7 +180,7 @@ var UserSchema = new Schema({
     pickMade:               {type: Boolean,default: false},
     userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}},
 
-    description:            {type: String, trim:true}
+    description:            {type: String, trim:true},
 });
 
 UserSchema.path('description').validate(function (v) {
@@ -363,6 +364,7 @@ UserSchema.methods.checkPremium = function(callback) {
                 var plan = subscription.plan;
                 var endDate = new Date(subscription.current_period_end*1000);
                 var now = Date();
+                _this.subscriptionPlan = plan.id;
                 if(endDate < now) {
                     switch(plan.id){
                         case 'Base Subscription':
@@ -376,12 +378,10 @@ UserSchema.methods.checkPremium = function(callback) {
                             _this.premium = false;
                             break;
                     }
-                    _this.save(function(err, user){
-                        callback();
-                    });
-                } else {
-                    callback();
                 }
+                _this.save(function(err, user){
+                    callback();
+                });
             } else {
                 //cancel subscription
                 _this.premium = false;
