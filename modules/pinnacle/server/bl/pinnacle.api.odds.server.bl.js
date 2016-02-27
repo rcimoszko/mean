@@ -211,6 +211,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
     function addUpdateDraw(callback){
         var todo = [];
+        betData.contestant = undefined;
         betData.odds = oddsApi.moneyline.draw;
         betData.draw = true;
 
