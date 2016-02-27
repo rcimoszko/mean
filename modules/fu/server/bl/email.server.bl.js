@@ -16,7 +16,6 @@ function renderTemplate(templatePath, json, callback){
     renderer.renderFile(path.resolve(templatePath), json, cb);
 }
 
-
 function sendEmail(emailHTML, subject, emailTo, callback){
 
     function cb(err){
@@ -76,6 +75,18 @@ function sendVerificationEmail(token, user, hostName, callback) {
     todo.push(send);
 
     async.waterfall(todo, cb);
+
+}
+
+function sendPicksEmail(){
+
+}
+
+function sendFollowerEmail(){
+
+}
+
+function sendMessageEmail(){
 
 }
 

@@ -34,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="picks"  data-ng-if="event.picks.length > 0">
+                    <div class="picks" data-ng-if="event.picks.length > 0">
                         <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
                         <table class="table-striped table table-condensed">
                                 <tbody>
@@ -45,6 +45,13 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="picks" data-ng-if="event.picksHidden">
+                        <div class="text-center" data-ng-if="event.pickCount === 0"><em>No Picks</em></div>
+                        <div class="text-center" data-ng-if="event.pickCount > 0">
+                            <div><strong>{{event.pickCount}} Pick(s)</strong></div>
+                            <a class="btn btn-green btn-xs" href="signup?redirect={{location.path()}}">CREATE FREE ACCOUNT</a>
+                        </div>
                     </div>
                     <div class="consensus clearfix" data-ng-if="event.consensus">
                         <div class="pick-count">{{event.consensus.pickCount}} PICKS</div>

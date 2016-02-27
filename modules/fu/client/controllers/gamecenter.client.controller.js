@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter', 'User', 'Page',
-    function ($scope, $stateParams, $filter, Gamecenter, User, Page) {
+angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams', '$filter', 'Gamecenter', 'User', 'Page', '$location',
+    function ($scope, $stateParams, $filter, Gamecenter, User, Page, $location) {
         $scope.eventSlug = $stateParams.eventSlug;
         $scope.leagueSlug = $stateParams.leagueSlug;
+        $scope.location = $location;
 
 
         function initializeMakePicks(){
@@ -59,6 +60,8 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             $scope.proPicks     = gamecenter.picks.pro;
             $scope.proCount     = gamecenter.picks.proCount;
             $scope.proHidden    = gamecenter.picks.proHidden;
+            $scope.generalCount  = gamecenter.picks.generalCount;
+            $scope.generalHidden = gamecenter.picks.generalHidden;
             $scope.event        = gamecenter.event;
             setMetaData();
             initializeFollowingPicks();

@@ -3,12 +3,21 @@
 </div>
 <div class="modal-body">
     <h4 class="text-center">
-        <span data-ng-if="!betSlip.status.submitted">Are you sure you want to submit these picks?</span>
-        <span data-ng-if="betSlip.status.submitted">Picks have been submitted</span>
-        <span data-ng-if="betSlip.status.error" class="error">There was an issue with submitting your picks. Please check your Bet Slip.</span>
-    </h4>
+        <div data-ng-if="!authentication.user">
+            Sign up for a Free Account to Start Making Picks.
+            <div class="btn-container">
+                <a class="btn btn-green" href="signup?redirect={{location.path()}}">CREATE FREE ACCOUNT</a>
+            </div>
+        </div>
+        <div data-ng-if="authentication.user">
+            <span data-ng-if="!betSlip.status.submitted">Are you sure you want to submit these picks?</span>
+            <span data-ng-if="betSlip.status.submitted">Picks have been submitted</span>
+            <span data-ng-if="betSlip.status.error" class="error">There was an issue with submitting your picks. Please check your Bet Slip.</span>
+
+        </div>
+      </h4>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" data-ng-if="authentication.user">
     <div class="container-fluid">
         <div class="row" data-ng-if="!betSlip.status.submitted && !betSlip.status.error">
             <div class="col-xs-6">

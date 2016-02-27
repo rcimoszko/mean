@@ -274,6 +274,11 @@ function processPendingEvent(event, pEvent, picks, user, callback){
             var generalPicks = _.filter(picks, {premium: false});
             pEvent.picks = pEvent.picks.concat(generalPicks.splice(0,3-pEvent.picks.length));
         }
+        if(!user){
+            pEvent.picksHidden = true;
+            pEvent.pickCount = pEvent.picks.length;
+            pEvent.picks = [];
+        }
         callback();
     }
 

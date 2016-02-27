@@ -14,6 +14,10 @@
         <tab active="allActive">
             <tab-heading>ALL ({{allPicks.length}})</tab-heading>
             <pick-list include-user="true" picks="allPicks" event="event"></pick-list>
+            <div class="pro-picks-upgrade" data-ng-if="generalHidden">
+                <h2 data-ng-if="generalCount">{{generalCount}} Pick(s)</h2>
+                <a class="btn btn-green" href="signup?redirect={{location.path()}}">CREATE FREE ACCOUNT</a>
+            </div>
         </tab>
         <tab>
             <tab-heading>FOLLOWING ({{followingPicks.length}})</tab-heading>

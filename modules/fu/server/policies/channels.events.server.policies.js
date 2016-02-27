@@ -16,6 +16,12 @@ exports.invokeRolesPolicies = function () {
             resources: '/api/channels/:channelSlug/events',
             permissions: ['get']
         }]
+    },{
+        roles: ['guest'],
+        allows: [{
+            resources: '/api/channels/:channelSlug/events',
+            permissions: ['get']
+        }]
     }]);
 };
 

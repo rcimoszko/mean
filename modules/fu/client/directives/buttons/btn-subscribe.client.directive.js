@@ -7,8 +7,9 @@ angular.module('fu').directive('btnSubscribe', function () {
             channelId:'='
         },
         templateUrl: 'modules/fu/client/templates/buttons/btn-subscribe.client.template.html',
-        controller: ['$scope', '$filter', 'User', 'Channels', function($scope, $filter, User, Channels){
+        controller: ['$scope', '$state', '$filter', 'User', 'Channels', 'Authentication', function($scope, $state, $filter, User, Channels, Authentication){
             var channels = User.info.channels;
+            $scope.authentication = Authentication;
 
             $scope.isSubscribed = function(){
                 var found = $filter('filter')(channels, {_id: $scope.channelId });
@@ -25,6 +26,7 @@ angular.module('fu').directive('btnSubscribe', function () {
             };
 
             $scope.toggleSubscribe = function(){
+                if(!$scope.authentication.user) $state.go('signup');
                 if($scope.isSubscribed()){
                     Channels.unsubscribe($scope.channelId);
                 } else {

@@ -7,6 +7,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         $scope.channelSlug = $stateParams.channelSlug;
         $scope.authentication = Authentication;
         $scope.loading = Loading;
+        $scope.location = $location;
 
         function setDate(date){
             $scope.currentDate = new Date(date);
@@ -35,6 +36,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         function cb(err, channelContent){
+            console.log(channelContent);
             if(!channelContent) $state.go('not-found');
             $scope.loading.isLoading.pageLoading = false;
             $scope.channelContent = channelContent;
