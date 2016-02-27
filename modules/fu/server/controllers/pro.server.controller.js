@@ -24,7 +24,7 @@ exports.newPro = function(req, res, next){
             });
         } else {
             var user = req.user;
-            var plan = customer.subscriptions.data[0];
+            var plan = customer.subscriptions.data[0].plan;
             switch (plan.id){
                 case 'Base Subscription':
                     user.base = true;
@@ -36,6 +36,7 @@ exports.newPro = function(req, res, next){
             }
             user.stripeId = customer.id;
             user.subscriptionId = customer.subscriptions.data[0].id;
+            user.subscriptionPlan = plan.id;
             user.premiumRenewDate = new Date(customer.subscriptions.data[0].current_period_end*1000);
             user.save();
             res.jsonp(user);

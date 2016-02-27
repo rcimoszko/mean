@@ -18,7 +18,7 @@ function filterMainLine(bet){
 }
 
 function groupContestantName(bet){
-    return bet.contestant.name;
+    if(bet.contestant) return bet.contestant.name;
 }
 function filterMoneylines(bet){
     return bet.draw === undefined;

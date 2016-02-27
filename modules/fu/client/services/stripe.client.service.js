@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal',
-    function($resource, $state, Authentication, $http, Modal) {
+angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal', 'User',
+    function($resource, $state, Authentication, $http, Modal, User) {
 
         //var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
         var key = 'pk_test_AkvAU2W7WvoGI5ehchaxF7sM';
@@ -56,7 +56,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                         //success
                         function(user) {
                             Authentication.user = user;
-                            User.updateStatus();
+                            User.updateUserStatus();
                             callback(null);
                         },
                         //error

@@ -94,6 +94,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
         function updateUserStatus(){
 
             function cbSuccess(response){
+                console.log(response);
                 info.status = response.status;
             }
 
