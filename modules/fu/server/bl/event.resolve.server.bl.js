@@ -15,7 +15,7 @@ function assignWinner(event, callback){
         }
     } else {
         if(event.sport.name === 'Tennis'){
-            if(event.contestant1SetsWon &&  event.contestant2SetsWon){
+            if(typeof event.contestant1SetsWon !== 'undefined' &&  typeof event.contestant2SetsWon !== 'undefined'){
                 if(event.contestant1SetsWon > event.contestant2SetsWon){
                     event.contestantWinner = contestant1;
                 } else if (event.contestant2SetsWon > event.contestant1SetsWon){
@@ -29,7 +29,7 @@ function assignWinner(event, callback){
                 }
             }
         } else {
-            if(event.contestant1RegulationScore && event.contestant2RegulationScore){
+            if(typeof event.contestant1RegulationScore !== 'undefined' && typeof event.contestant2RegulationScore !== 'undefined'){
                 if (event.contestant1RegulationScore === event.contestant2RegulationScore){
                     event.draw = true;
                 } else if(event.contestant1RegulationScore > event.contestant2RegulationScore){
