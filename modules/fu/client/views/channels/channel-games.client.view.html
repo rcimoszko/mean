@@ -11,7 +11,7 @@
                     <div class="team-header clearfix team-winner-{{event.winnerNo}}">
                         <div class="logo1">
                             <logo size="'sm'" url="event.contestant2.logoUrl" data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl"></logo>
-                            <div class="score score-2" data-ng-if="event.score2">{{event.score2}}</div>
+                            <div class="score score-2">{{event.score2}}</div>
                         </div>
                         <div class="team-names">
                             {{event.header}}</br>
@@ -19,7 +19,7 @@
                         </div>
                         <div class="logo2">
                             <logo size="'sm'" url="event.contestant1.logoUrl"  data-ng-if="event.contestant1.logoUrl && event.contestant2.logoUrl"></logo>
-                            <div class="score score-1" data-ng-if="event.score1">{{event.score1}}</div>
+                            <div class="score score-1">{{event.score1}}</div>
                         </div>
                     </div>
                     <div class="odds odds-{{event.lines.length}}">
