@@ -3,27 +3,29 @@
 
 function assignWinner(event, callback){
 
+    var contestant1 = {name: event.contestant1.name, ref: event.contestant1.ref};
+    var contestant2 = {name: event.contestant2.name, ref: event.contestant2.ref};
     if(event.overtime){
         if(event.contestant1OTScore === event.contestant2OTScore){
             event.draw = true;
         } else if (event.contestant1OTScore > event.contestant2OTScore) {
-            event.contestantWinner = event.contestant1;
+            event.contestantWinner = contestant1;
         } else if (event.contestant2OTScore > event.contestant1OTScore){
-            event.contestantWinner = event.contestant2;
+            event.contestantWinner = contestant2;
         }
     } else {
         if(event.sport.name === 'Tennis'){
             if(event.contestant1SetsWon &&  event.contestant2SetsWon){
                 if(event.contestant1SetsWon > event.contestant2SetsWon){
-                    event.contestantWinner = event.contestant1;
+                    event.contestantWinner = contestant1;
                 } else if (event.contestant2SetsWon > event.contestant1SetsWon){
-                    event.contestantWinner = event.contestant2;
+                    event.contestantWinner = contestant2;
                 }
             } else {
                 if(event.contestant1RegulationScore > event.contestant2RegulationScore){
-                    event.contestantWinner = event.contestant1;
+                    event.contestantWinner = contestant1;
                 } else if (event.contestant2RegulationScore > event.contestant1RegulationScore){
-                    event.contestantWinner = event.contestant2;
+                    event.contestantWinner = contestant2;
                 }
             }
         } else {
@@ -31,9 +33,9 @@ function assignWinner(event, callback){
                 if (event.contestant1RegulationScore === event.contestant2RegulationScore){
                     event.draw = true;
                 } else if(event.contestant1RegulationScore > event.contestant2RegulationScore){
-                    event.contestantWinner = event.contestant1;
+                    event.contestantWinner = contestant1;
                 } else if (event.contestant2RegulationScore > event.contestant1RegulationScore){
-                    event.contestantWinner = event.contestant2;
+                    event.contestantWinner = contestant2;
                 }
             }
         }

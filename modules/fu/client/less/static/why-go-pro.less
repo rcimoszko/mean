@@ -1,4 +1,105 @@
 
+#subscription-plans{
+  width:100%;
+  max-width:900px;
+  margin:20px auto;
+  .btn-premium{
+    margin:10px 0;
+    padding:3px 6px;
+    font-size:10px;
+    @media (min-width: @screen-xs-min) {
+      font-size:14px;
+      padding:6px 12px;
+    }
+
+  }
+  .plans-left{
+    float:left;
+    width:32%;
+    margin-top:20px;
+    border-width:1px 0 1px 1px;
+    border-color: #eee;
+    border-style:solid;
+    padding:10px;
+    border-radius:5px 0 0 5px;
+    background: white;
+  }
+  .plans-right{
+    float:left;
+    width:32%;
+    margin-top:20px;
+    border-width:1px 1px 1px 0;
+    border-color: #eee;
+    border-style:solid;
+    padding:10px 0;
+    border-radius:0 5px 5px 0;
+    background: white;
+  }
+  .plans-center{
+    float:left;
+    width:35%;
+    border:1px solid lightgray;
+    border-radius:5px;
+    padding:10px;
+    box-shadow:0 6px 12px rgba(0, 0, 0, .1);
+    font-size:20px;
+    background: white;
+    @media (min-width: @screen-xs-min) {
+      font-size:26px;
+    }
+    .category{
+      font-size:1em;
+      @media (min-width: @screen-xs-min) {
+        font-size:1.2em;
+      }
+    }
+    .price{
+      font-size:1.6em;
+    }
+  }
+  .price-container{
+    float:left;
+    width:100%;
+    padding:0 5px;
+    @media (min-width: @screen-xs-min) {
+      width:33%;
+    }
+    margin-bottom:15px;
+  }
+  .container-1{
+    margin-top:24px;
+  }
+  .container-2{
+
+  }
+  .container-3{
+    margin-top:24px;
+  }
+  .price{
+    margin-bottom:10px;
+    img{
+      max-width:100%
+    }
+  }
+
+  .category{
+    font-size:1.2em;
+  }
+  .month-price{
+    font-style:italic;
+    font-size:12px;
+  }
+  .price{
+    color:@color-orange;
+    @media (min-width: @screen-xs-min) {
+      font-size:24px;
+    }
+    @media (min-width: @screen-sm-min) {
+      font-size:36px;
+    }
+  }
+}
+
 #why-go-pro, .static-page{
   margin:0 -10px;
   @media (min-width: @screen-sm-min) {
@@ -123,106 +224,7 @@
   #section-4{
     padding-top:30px;
     border-bottom:0;
-    #subscription-plans{
-      width:100%;
-      max-width:900px;
-      margin:20px auto;
-      .btn-premium{
-        margin:10px 0;
-        padding:3px 6px;
-        font-size:10px;
-        @media (min-width: @screen-xs-min) {
-          font-size:14px;
-          padding:6px 12px;
-        }
 
-      }
-      .plans-left{
-        float:left;
-        width:32%;
-        margin-top:20px;
-        border-width:1px 0 1px 1px;
-        border-color: #eee;
-        border-style:solid;
-        padding:10px;
-        border-radius:5px 0 0 5px;
-        background: white;
-      }
-      .plans-right{
-        float:left;
-        width:32%;
-        margin-top:20px;
-        border-width:1px 1px 1px 0;
-        border-color: #eee;
-        border-style:solid;
-        padding:10px 0;
-        border-radius:0 5px 5px 0;
-        background: white;
-      }
-      .plans-center{
-        float:left;
-        width:35%;
-        border:1px solid lightgray;
-        border-radius:5px;
-        padding:10px;
-        box-shadow:0 6px 12px rgba(0, 0, 0, .1);
-        font-size:20px;
-        background: white;
-        @media (min-width: @screen-xs-min) {
-          font-size:26px;
-        }
-        .category{
-          font-size:1em;
-          @media (min-width: @screen-xs-min) {
-            font-size:1.2em;
-          }
-        }
-        .price{
-          font-size:1.6em;
-        }
-      }
-      .price-container{
-        float:left;
-        width:100%;
-        padding:0 5px;
-        @media (min-width: @screen-xs-min) {
-          width:33%;
-        }
-        margin-bottom:15px;
-      }
-      .container-1{
-        margin-top:24px;
-      }
-      .container-2{
-
-      }
-      .container-3{
-        margin-top:24px;
-      }
-      .price{
-        margin-bottom:10px;
-        img{
-          max-width:100%
-        }
-      }
-
-      .category{
-        font-size:1.2em;
-      }
-      .month-price{
-        font-style:italic;
-        font-size:12px;
-      }
-      .price{
-        color:@color-orange;
-        @media (min-width: @screen-xs-min) {
-          font-size:24px;
-        }
-        @media (min-width: @screen-sm-min) {
-          font-size:36px;
-        }
-      }
-    }
 
     h2{
       font-size:20px;

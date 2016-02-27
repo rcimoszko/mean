@@ -1,10 +1,33 @@
 'use strict';
 
-angular.module('fu').controller('ModalStripeController', ['$scope', '$modalInstance', 'Modal', 'StripeService', 'Authentication',
-    function($scope, $modalInstance, Modal, StripeService, Authentication) {
+angular.module('fu').controller('ModalStripeController', ['$scope', '$modalInstance', '$state', 'Modal', 'StripeService', 'Authentication',
+    function($scope, $modalInstance, $state, Modal, StripeService, Authentication) {
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
+        $scope.stripeService = StripeService;
 
+        function cb(err){
+
+        }
+
+        $scope.newSubscription = function(plan){
+            if(Authentication.user){
+                switch (plan){
+                    case 'base':
+                        $scope.stripeService.newBaseSubscription(cb);
+                        break;
+                    case 'premium-1':
+                        $scope.stripeService.newPremium1Subscription(cb);
+                        break;
+                    case 'premium-6':
+                        $scope.stripeService.newPremium6Subscription(cb);
+                        break;
+                }
+            } else {
+                $state.go('signup');
+            }
+        };
+        /*
         $scope.newSubscription = function(months){
             switch(months){
                 case 1:
@@ -41,6 +64,7 @@ angular.module('fu').controller('ModalStripeController', ['$scope', '$modalInsta
             }
 
         };
+        */
 
         $scope.close = function(){
             $modalInstance.dismiss();

@@ -24,9 +24,18 @@ exports.newPro = function(req, res, next){
             });
         } else {
             var user = req.user;
+            var plan = customer.subscriptions.data[0];
+            switch (plan.id){
+                case 'Base Subscription':
+                    user.base = true;
+                    break;
+                case '1 Month Premium':
+                case '6 Months Premium':
+                    user.premium = true;
+                    break;
+            }
             user.stripeId = customer.id;
             user.subscriptionId = customer.subscriptions.data[0].id;
-            user.premium = true;
             user.premiumRenewDate = new Date(customer.subscriptions.data[0].current_period_end*1000);
             user.save();
             res.jsonp(user);
@@ -72,4 +81,8 @@ exports.cancel = function(req, res) {
             res.jsonp(req.user);
         }
     });
+};
+
+exports.changeSubscription = function(req, res){
+
 };

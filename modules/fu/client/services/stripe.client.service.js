@@ -3,7 +3,8 @@
 angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal',
     function($resource, $state, Authentication, $http, Modal) {
 
-        var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
+        //var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
+        var key = 'pk_test_AkvAU2W7WvoGI5ehchaxF7sM';
         var image ='/modules/fu/client/img/stripe/fansunite-logo-square.png';
 
 
@@ -17,6 +18,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
 
 
         //Plan ID - Pro, 6month, 1year
+        /*
         var new1MonthSubscription = function(callback){
             newSubscription('Pro', '30 day subscription - Auto Renew', 2000,  callback);
         };
@@ -29,6 +31,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         var new12MonthSubscription = function(callback){
             newSubscription('1year', '1 year subscription - Auto Renew', 18000, callback);
         };
+        */
 
 
         var newBaseSubscription = function(callback){
@@ -70,32 +73,6 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         };
 
 
-        /*
-         var newSubscription = function (callback){
-         var handler = StripeCheckout.configure({
-         key: key,
-         image: image,
-         token: function(stripeToken) {
-         stripe.save({stripeToken: stripeToken.id},
-         //success
-         function(user) {
-         Authentication.user = user;
-         callback({type: 'success', user: user});
-         },
-         //error
-         function(data){
-         callback({type: 'error', message: data.message});
-         });
-         }
-         });
-
-         handler.open({
-         name: 'FansUnite Pro',
-         description: '30 day subscription - Auto Renew',
-         amount: 2000
-         });
-         };
-         */
 
         var resumeSubscription =  function(callback){
             if (confirm('Are you sure you want to renew your pro subscription?')) {
@@ -123,6 +100,10 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
             }
         };
 
+        var changeSubscription = function(callback){
+
+        };
+
         var showSubscriptionModal = function(){
             if(Authentication.user){
                 Modal.showModal(
@@ -141,10 +122,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
             newSubscription: newSubscription,
             cancelSubscription: cancelSubscription,
             resumeSubscription: resumeSubscription,
-
-            new1MonthSubscription: new1MonthSubscription,
-            new6MonthSubscription: new6MonthSubscription,
-            new12MonthSubscription : new12MonthSubscription,
+            changeSubscription: changeSubscription,
 
             newBaseSubscription: newBaseSubscription,
             newPremium1Subscription: newPremium1Subscription,

@@ -1,35 +1,30 @@
 <div class="modal-header">
-    <h4 class="modal-title">Pro Subscriptions</h4>
+    <button type="button" class="close" data-ng-click="modal.closeModal(modalInstance)"><span aria-hidden="true">&times;</span></button>
 </div>
 
-<div class="clearfix modal-body">
-    <div class="container-fluid text-center">
-        <div class="row">
-            <div class="col-xs-4">
-                <h2>1 Month</h2>
-                <h3>$20</h3>
-                <p>($20/month)</p>
-                <button class="btn btn-upgrade" data-ng-click="newSubscription(1)">Upgrade To Pro</button>
+<div class="modal-body text-center">
+    <div id="subscription-plans" class="clearfix">
+        <div class="price-container">
+            <div class="price container-1">
+                <img src="/modules/fu/client/img/why-go-pro/base.png">
             </div>
-            <div class="col-xs-4">
-                <h2>6 Months</h2>
-                <h3>$100</h3>
-                <p>($16.67/month)</p>
-                <button class="btn btn-upgrade" data-ng-click="newSubscription(6)">Upgrade To Pro</button>
+            <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('base');" >Upgrade To Pro</button>
+        </div>
+        <div class="price-container">
+            <div class="price container-2">
+                <img src="/modules/fu/client/img/why-go-pro/pro.png">
             </div>
-            <div class="col-xs-4">
-                <h2>12 Months</h2>
-                <h3>$180</h3>
-                <p>($15.00/month)</p>
-                <button class="btn btn-upgrade" data-ng-click="newSubscription(12)">Upgrade To Pro</button>
+            <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-1');">Upgrade To Pro</button>
+        </div>
+        <div class="price-container">
+            <div class="price container-3">
+                <img src="/modules/fu/client/img/why-go-pro/6-month.png">
             </div>
+            <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial"  data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-6');">Upgrade To Pro</button>
         </div>
-        <div class="text-center" style="padding:10px 0;">
-            <span data-ng-show="success" data-ng-bind="success"></span>
-            <span data-ng-show="error" data-ng-bind="error"></span>
-        </div>
-        <div class="text-center" style="padding:10px 0;">
-            <a ui-sref="whyGoPro" data-ng-click="close()">Why go Pro?</a>
-        </div>
+    </div>
+
+    <div class="text-center" style="padding:10px 0;">
+        <a ui-sref="whyGoPro" data-ng-click="close()">Why go Pro?</a>
     </div>
 </div>

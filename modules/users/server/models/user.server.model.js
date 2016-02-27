@@ -360,10 +360,22 @@ UserSchema.methods.checkPremium = function(callback) {
     if(_this.stripeId && _this.subscriptionId){
         stripe.customers.retrieveSubscription(this.stripeId, this.subscriptionId, function(err, subscription) {
             if(subscription){
+                var plan = subscription.plan;
                 var endDate = new Date(subscription.current_period_end*1000);
                 var now = Date();
                 if(endDate < now) {
-                    _this.premium = false;
+                    switch(plan.id){
+                        case 'Base Subscription':
+                            _this.base = false;
+                            break;
+                        case '1 Month Premium':
+                        case '6 Months Premium':
+                        case '1year':
+                        case '6month':
+                        case 'Pro':
+                            _this.premium = false;
+                            break;
+                    }
                     _this.save(function(err, user){
                         callback();
                     });
@@ -373,6 +385,7 @@ UserSchema.methods.checkPremium = function(callback) {
             } else {
                 //cancel subscription
                 _this.premium = false;
+                _this.base = false;
                 _this.save(function(err, user){
                     callback();
                 });

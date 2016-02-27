@@ -273,6 +273,16 @@ function getNewMessageCount(userId, callback){
     ConversationBl.getNewMessageCount(userId, callback);
 }
 
+function getUserStatus(user, callback){
+    if(user.trial){
+        return callback(null, 'trial');
+    }
+    if(user.lifetimePremium){
+
+    }
+
+}
+
 function getInfo(user, callback){
 
     function getPendingPicks_todo(callback){
@@ -304,6 +314,12 @@ function getInfo(user, callback){
     function getNewMessageCount_todo(callback){
         getNewMessageCount(user._id, callback);
     }
+
+    /*
+    function getUserStatus_todo(callback){
+        getUserStatus(user, callback);
+    }
+    */
 
     var todo = {
         pendingPicks: getPendingPicks_todo,

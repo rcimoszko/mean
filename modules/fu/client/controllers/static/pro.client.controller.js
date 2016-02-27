@@ -2,9 +2,6 @@
 
 angular.module('core').controller('ProController', ['$scope', '$state', '$anchorScroll', '$location', 'Page', 'StripeService', 'Authentication', 'Mixpanel',
     function($scope, $state, $anchorScroll, $location, Page, StripeService, Authentication, Mixpanel) {
-        Page.setTitle('Why Go Pro | FansUnite');
-        Page.setDescription('About FansUnite pro account.');
-        Page.setKeywords('handicapping service');
 
         $anchorScroll();
 
@@ -29,7 +26,6 @@ angular.module('core').controller('ProController', ['$scope', '$state', '$anchor
             } else {
                 $state.go('signup');
             }
-
         };
 
         $scope.gotoAnchor = function() {
