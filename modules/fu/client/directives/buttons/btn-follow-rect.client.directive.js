@@ -8,7 +8,7 @@ angular.module('fu').directive('btnFollowRect', function () {
             size: '='
         },
         templateUrl: 'modules/fu/client/templates/buttons/btn-follow-rect.client.template.html',
-        controller: ['$scope', 'User', '$filter', 'Follow', 'Authentication', function($scope, User, $filter, Follow, Authentication){
+        controller: ['$scope', 'User', '$filter', 'Follow', 'Authentication', '$state', function($scope, User, $filter, Follow, Authentication, $state){
             var following = User.info.following;
             $scope.authentication = Authentication;
 
@@ -26,10 +26,14 @@ angular.module('fu').directive('btnFollowRect', function () {
             };
 
             $scope.toggleFollow = function(){
-                if($scope.isFollowing()){
-                    Follow.unfollow($scope.userId);
+                if(!$scope.authentication.user) {
+                    $state.go('signup');
                 } else {
-                    Follow.follow($scope.userId);
+                    if($scope.isFollowing()){
+                        Follow.unfollow($scope.userId);
+                    } else {
+                        Follow.follow($scope.userId);
+                    }
                 }
             };
         }]

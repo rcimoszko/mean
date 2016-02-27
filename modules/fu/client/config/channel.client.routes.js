@@ -11,24 +11,15 @@ angular.module('fu').config(['$stateProvider',
                 .state('channel.main', {
                     url: '',
                     abstract: true,
-                    templateUrl: 'modules/fu/client/views/channel.client.view.html',
-                    data: {
-                    roles: ['user']
-                }
+                    templateUrl: 'modules/fu/client/views/channel.client.view.html'
                 })
                     .state('channel.main.home', {
                         url: '',
-                        templateUrl: 'modules/fu/client/views/channels/channel-games.client.view.html',
-                        data: {
-                            roles: ['user']
-                        }
+                        templateUrl: 'modules/fu/client/views/channels/channel-games.client.view.html'
                     })
                     .state('channel.main.date', {
                         url: '/:date',
-                        templateUrl: 'modules/fu/client/views/channels/channel-games.client.view.html',
-                        data: {
-                            roles: ['user']
-                        }
+                        templateUrl: 'modules/fu/client/views/channels/channel-games.client.view.html'
                     });
 
     }

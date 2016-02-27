@@ -3,6 +3,10 @@
         <tab>
             <tab-heading>PICKS</tab-heading>
             <div class="profile-picks">
+                <div style="margin-top:80px; text-align:center;" data-ng-if="profile.pendingPicksHidden">
+                    <h4 data-ng-if="profile.pendingPicksCount > 0">{{profile.pendingPicksCount}} Pending Pick(s)</h4>
+                    <a class="btn btn-green" href="signup?redirect={{location.path()}}">Create Free Account</a>
+                </div>
                 <event-pick-list include-user="false" events="profile.pendingPicks"></event-pick-list>
             </div>
         </tab>

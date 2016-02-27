@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page',
-    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page', '$location',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page, $location) {
         $scope.username = $stateParams.username;
         $scope.authentication = Authentication;
         $scope.loading = Loading;
+        $scope.location = $location;
         if(!$scope.username) $state.go('hub');
 
         Page.meta.title = $scope.username + ' Profile | Verified Record and History';
@@ -12,6 +13,7 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
         Page.meta.keywords = $scope.username + ', betting history';
 
         function cbGetProfile(err, profile){
+            console.log(profile);
             if(!profile) $state.go('not-found');
             $scope.loading.isLoading.pageLoading = false;
             if(!err) $scope.profile = profile;
@@ -434,7 +436,9 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
             }
 
             //Add last value
-            values[values.length - 1].c[1].v = values[values.length - 1].c[1].v + durationValue;
+            if(values.length){
+                values[values.length - 1].c[1].v = values[values.length - 1].c[1].v + durationValue;
+            }
 
             chart.data.rows = values;
             return chart;

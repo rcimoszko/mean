@@ -238,6 +238,7 @@ function get(user, auth, callback){
             } else {
                 profile.pendingPicks = [];
                 profile.pendingPicksCount = pendingPicks.length;
+                profile.pendingPicksHidden = true;
             }
             callback(err);
         }
