@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authentication', 'Search', '$http', '$rootScope', '$location',
-    function ($scope, $state, Authentication, Search, $http, $rootScope, $location) {
+angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authentication', 'Search', '$http', '$rootScope', '$location', 'Modal', 'User',
+    function ($scope, $state, Authentication, Search, $http, $rootScope, $location, Modal, User) {
         $scope.authentication = Authentication;
         $scope.state = $state;
         $scope.location = $location;
+        $scope.user = User;
         $scope.searchLoading = false;
 
         $scope.getResults = function() {
@@ -50,6 +51,14 @@ angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authe
         $scope.$on('$stateChangeSuccess', function () {
             $scope.isCollapsed = false;
         });
+
+        $scope.showTrialModal = function(){
+            Modal.showModal(
+                'modules/fu/client/views/trial/modal/modal-trial.client.view.html',
+                'ModalTrialController',
+                null
+            );
+        };
 
     }
 ]);

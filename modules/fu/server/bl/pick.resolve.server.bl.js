@@ -557,7 +557,7 @@ function resolvePick(event, pick, callback){
     }
 
     function getWinner_todo(contestantScore, opponentScore, callback){
-
+        if(typeof contestantScore === 'undefined' || typeof opponentScore === 'undefined') return callback('Scores Undefined');
         function cb(durationWinner){
             callback(null, contestantScore, opponentScore, durationWinner);
         }
@@ -567,7 +567,7 @@ function resolvePick(event, pick, callback){
     }
 
     function getResult_todo(contestantScore, opponentScore, durationWinner, callback){
-
+        if(typeof durationWinner === 'undefined') return callback('Winner Undefined');
         function cb(durationResult){
             callback(null, durationResult);
         }
@@ -612,7 +612,12 @@ function resolvePicks(event, callback) {
         if(picks.length === 0) return callback(null);
 
         function resolve(pick, callback){
-            resolvePick(event, pick, callback);
+            function cb(err){
+                if(err) console.log(err);
+                callback();
+            }
+
+            resolvePick(event, pick, cb);
         }
 
         async.eachSeries(picks, resolve, callback);

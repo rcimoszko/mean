@@ -28,14 +28,22 @@
   .logo-container{
     line-height:60px;
     width:55px;
-    display:inline-block;
     padding-left:@padding-mobile;
     overflow:hidden;
+    display:none;
+    @media (min-width: @screen-sm-min) {
+      float:left;
+      display:inline-block;
+    }
+
     @media (min-width: @screen-md-min) {
       padding-left:@padding-desktop;
       overflow:visible;
       width:200px;
     }
+  }
+  .trial-btn-container{
+    padding:15px;
   }
 
   .search-container{

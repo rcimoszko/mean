@@ -87,7 +87,7 @@ p {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -96,12 +96,12 @@ p {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: white;
+  color: #ffffff;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -110,12 +110,12 @@ p {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: white;
+  color: #ffffff;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -124,12 +124,12 @@ p {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: white;
+  color: #ffffff;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -138,12 +138,12 @@ p {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: white;
+  color: #ffffff;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -152,12 +152,12 @@ p {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: white;
+  color: #ffffff;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -166,7 +166,7 @@ p {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: white;
+  color: #ffffff;
   background-color: #449d48;
 }
 .btn-blue-empty {
@@ -230,7 +230,7 @@ p {
   text-align: center;
 }
 .btn-tracker .fa {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .btn-follow-rect {
   background-color: #1ccf31;
@@ -396,10 +396,10 @@ p {
   background: #eeeeee;
 }
 .loading-bg-white:before {
-  background: white;
+  background: #ffffff;
 }
 .loading-bg-white:after {
-  background: white;
+  background: #ffffff;
 }
 .loading.loading-blue {
   box-shadow: inset 0 0 0 1em #104673;
@@ -414,7 +414,7 @@ p {
   box-shadow: inset 0 0 0 1em #eeeeee;
 }
 .loading.loading-white {
-  box-shadow: inset 0 0 0 1em white;
+  box-shadow: inset 0 0 0 1em #ffffff;
 }
 .loading-sm {
   font-size: 2px;
@@ -1139,7 +1139,7 @@ input.toggle:checked + label:after {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
-  padding: 60px 0;
+  padding: 100px 0;
 }
 #splash .section-1 .column-1 {
   padding-left: 40px;
@@ -1350,17 +1350,17 @@ input.toggle:checked + label:after {
   }
 }
 .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   margin-right: 5px;
   padding: 0 3px;
   font-size: 12px;
 }
 .color-green {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .color-red {
-  color: #F44336;
+  color: #f44336;
 }
 .search-container .dropdown-menu li .typeahead-group-header {
   padding-left: 10px;
@@ -1698,7 +1698,7 @@ notification:last-of-type .notification {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -1722,9 +1722,15 @@ notification:last-of-type .notification {
 #top-menu .logo-container {
   line-height: 60px;
   width: 55px;
-  display: inline-block;
   padding-left: 10px;
   overflow: hidden;
+  display: none;
+}
+@media (min-width: 768px) {
+  #top-menu .logo-container {
+    float: left;
+    display: inline-block;
+  }
 }
 @media (min-width: 992px) {
   #top-menu .logo-container {
@@ -1732,6 +1738,9 @@ notification:last-of-type .notification {
     overflow: visible;
     width: 200px;
   }
+}
+#top-menu .trial-btn-container {
+  padding: 15px;
 }
 #top-menu .search-container {
   display: inline-block;
@@ -3243,7 +3252,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .channel-event .stats .stats-container.results-loss .value {
-  color: #F44336;
+  color: #f44336;
 }
 .channel-event .stats .stats-container .stat-section-header {
   padding-bottom: 5px;
@@ -3499,11 +3508,11 @@ notification:last-of-type .notification {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -3807,13 +3816,13 @@ notification:last-of-type .notification {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #F44336;
+  color: #f44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
@@ -3999,7 +4008,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 #tracker .loss {
-  color: #F44336;
+  color: #f44336;
 }
 #tracker .push {
   color: #104673;
@@ -4680,7 +4689,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .gamecenter-consensus .consensus-container .fa-arrow-circle-o-down {
-  color: #F44336;
+  color: #f44336;
 }
 .gamecenter-picks .tab-pane {
   height: 500px;
@@ -4746,7 +4755,7 @@ notification:last-of-type .notification {
   margin-right: 8px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   display: inline-block;
   margin-right: 3px;
   color: white;
@@ -4790,7 +4799,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
@@ -4798,7 +4807,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,
@@ -5059,7 +5068,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .share .share-box-container .response-container .error {
-  color: #F44336;
+  color: #f44336;
 }
 .messages {
   margin-top: 20px;
@@ -5288,7 +5297,12 @@ notification:last-of-type .notification {
 .article .header,
 .article .featured-article {
   background-color: #21759b;
-  padding: 20px;
+  background-position: top;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  padding: 50px;
 }
 .article .header .header-content,
 .article .featured-article .header-content {
@@ -5369,6 +5383,12 @@ notification:last-of-type .notification {
 .article .article-body .article-content {
   max-width: 720px;
   margin: 0 auto;
+  font-size: 14px !important;
+}
+@media (min-width: 768px) {
+  .article .article-body .article-content {
+    font-size: 18px !important;
+  }
 }
 .article .article-body .article-content h1 {
   font-size: 24px !important;

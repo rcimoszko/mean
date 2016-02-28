@@ -10,9 +10,10 @@
             <div class="score-1" data-ng-if="header.hasScores">{{header.contestant1FinalScore}}</div>
         </div>
         <div class="event-details-container">
-           <div class="league-name">{{header.leagueName}}</div>
-           <div>{{header.startTime|date:'MMM d'}}</div>
-           <div>{{header.startTime|date:'h:mma'}}</div>
+            <div class="league-name">{{header.leagueName}}</div>
+            <div>{{header.startTime|date:'MMM d'}}</div>
+            <div>{{header.startTime|date:'h:mma'}}</div>
+            <div data-ng-if="isAdmin()"><a class="btn btn-default btn-xs" ui-sref="adminEditEvent({eventSlug:eventSlug, leagueSlug:leagueSlug})">EDIT</a></div>
         </div>
         <div class="contestant-container">
             <div class="contestant-name">{{header.contestant2Name}}</div>

@@ -5,9 +5,9 @@ var policy = require('../policies/gamecenter.server.policies'),
 
 module.exports = function (app) {
 
-    app.route('/api/gamecenter/:eventSlug/:leagueSlug').all(policy.isAllowed)
+    app.route('/api/gamecenter/:gcEventSlug/:leagueSlug').all(policy.isAllowed)
         .get(ctrl.get);
 
-    app.param('eventSlug', ctrl.bySlug);
+    app.param('gcEventSlug', ctrl.bySlug);
 
 };

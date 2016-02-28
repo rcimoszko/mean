@@ -7,19 +7,19 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/gamecenter/:eventSlug/:leagueSlug',
+            resources: '/api/gamecenter/:gcEventSlug/:leagueSlug',
             permissions: ['get']
         }]
     },{
         roles: ['user'],
         allows: [{
-            resources: '/api/gamecenter/:eventSlug/:leagueSlug',
+            resources: '/api/gamecenter/:gcEventSlug/:leagueSlug',
             permissions: ['get']
         }]
     },{
         roles: ['guest'],
         allows: [{
-            resources: '/api/gamecenter/:eventSlug/:leagueSlug',
+            resources: '/api/gamecenter/:gcEventSlug/:leagueSlug',
             permissions: ['get']
         }]
     }]);

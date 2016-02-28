@@ -16,7 +16,7 @@
         <th>Cancel</th>
     </thead>
     <tbody>
-        <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event)">
+        <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event; setContestants(eventGroup.event); setWinner(event);">
             <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
             <td rowspan="2" class="valign">{{event.league.name}}</td>
             <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>

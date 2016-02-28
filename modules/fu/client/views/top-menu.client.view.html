@@ -1,5 +1,5 @@
 <div data-ng-controller="TopMenuController">
-    <div class="logo-container" data-ng-if="!authentication.user">
+    <div class="logo-container" data-ng-if="!authentication.user || isBlog()" >
         <a ui-sref="home">
             <img data-ng-src="/modules/fu/client/img/general/logo-full.png">
         </a>
@@ -46,6 +46,9 @@
 
 
     <nav class="collapse navbar-collapse menu-links" collapse="!isCollapsed" role="navigation">
+        <div class="pull-right trial-btn-container" data-ng-if="user.info.status === 'free' && !authentication.user.trialUsed">
+            <button class="btn btn-upgrade" data-ng-click="showTrialModal()">FREE TRIAL</button>
+        </div>
         <ul class="auth nav navbar-nav" data-ng-if="!authentication.user">
             <li><a ui-sref="login" data-ng-class="{active: $scope.state.current.name === 'login'}">Login</a></li>
             <li><a href="{{signupUrl()}}" data-ng-class="{active: $scope.state.current.name === 'signup'}">Sign Up</a></li>
@@ -56,6 +59,8 @@
             <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
         </ul>
     </nav>
+
+
 
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">

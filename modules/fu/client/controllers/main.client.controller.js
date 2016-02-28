@@ -7,11 +7,15 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
         $scope.page = Page;
 
         if($scope.authentication.user && !User.info.initialized) User.initialize();
+
         $scope.isPicksPage = function(){
             return $state.current.name.indexOf('makePicks') !== -1;
         };
         $scope.isBlog = function(){
             return $state.current.name.indexOf('blog') !== -1;
+        };
+        $scope.isAdmin = function(){
+            return  $scope.authentication.user.roles.indexOf('admin') !== -1;
         };
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){

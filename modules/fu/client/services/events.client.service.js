@@ -103,6 +103,23 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'ApiEvents', 'Authe
             ApiEvents.getPicks({_id: event._id}, cbSuccess, cbError);
         };
 
+
+        var update = function(event, callback){
+
+            function cbSuccess(event){
+                callback(null, event);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            var event = new ApiEvents(event);
+
+            event.$update({_id: event._id}, cbSuccess, cbError);
+        };
+
+
         return {
             getComments: getComments,
             newComment: newComment,
@@ -111,7 +128,8 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'ApiEvents', 'Authe
 
             resolve: resolve,
             cancel: cancel,
-            reResolve: reResolve
+            reResolve: reResolve,
+            update: update
         };
     }
 ]);

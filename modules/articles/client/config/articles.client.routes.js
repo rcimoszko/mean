@@ -10,7 +10,9 @@ angular.module('articles').config(['$stateProvider',
             })
             .state('blog.home', {
                 url: '',
-                templateUrl: 'modules/articles/client/views/blog/blog.home.client.view.html'
+                templateUrl: 'modules/articles/client/views/blog/blog.home.client.view.html',
+                title: 'FansUnite Blog | Betting Tips, Free Picks, Odds and Scores',
+                description: 'FansUnite blog'
             })
             .state('blog.article', {
                 url: '/:articleSlug',

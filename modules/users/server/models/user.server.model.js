@@ -140,7 +140,6 @@ var UserSchema = new Schema({
     verified:               {type: Boolean,default: false},
     base:                   {type: Boolean,default: false},
     premium:                {type: Boolean,default: false},
-    trial:                  {type: Boolean,default: false},
     lifetimePremium:        {type: Boolean,default: false},
     cancelledPremium:       {type: Boolean},
     premiumEndDate:         {type: Date},
@@ -181,6 +180,11 @@ var UserSchema = new Schema({
     userReferred:           {name: String, ref: {type: Schema.ObjectId, ref: 'User'}},
 
     description:            {type: String, trim:true},
+
+    trial:                  {type: Boolean, default: false},
+    trialStartDate:         {type: Date},
+    trialEndDate:           {type: Date},
+    trialUsed:              {type: Boolean, default: false}
 });
 
 UserSchema.path('description').validate(function (v) {

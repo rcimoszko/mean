@@ -64,6 +64,7 @@
             <li><a ui-sref="profile({username:authentication.user.username})" data-ng-class="{active: isActive('/profile/'+authentication.user.username)}">PROFILE</a></li>
             <li><a href data-ng-click="showMyPicks()" >MY PICKS</a></li>
             <li><a ui-sref="myFollowing" data-ng-class="{active: isActive('/my-following')}">FOLLOWING</a></li>
+            <li data-ng-if="isAdmin()"><a ui-sref="admin.home">ADMIN</a></li>
         </ul>
     </div>
     <div class="logout-container">
