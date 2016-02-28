@@ -135,8 +135,12 @@ function resolve(event, data, callback){
     }
 
     function saveScores(callback){
+        function cb(err){
+            callback(err, event);
+        }
+
         event.scores = true;
-        update(data, event, callback);
+        event.save(cb);
     }
 
     function resolvePicks(event, callback){

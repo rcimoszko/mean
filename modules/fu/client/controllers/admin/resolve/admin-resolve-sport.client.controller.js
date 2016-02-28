@@ -78,10 +78,12 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
         };
 
         $scope.setWinner = function(event){
-            var found = $filter('filter')($scope.contestants, function(contestant){
-                return contestant.ref === event.contestantWinner.ref;
-            });
-            if(found.length) event.contestantWinner =  $scope.contestants[$scope.contestants.indexOf(found[0])];
+            if(event.contestantWinner){
+                var found = $filter('filter')($scope.contestants, function(contestant){
+                    return contestant.ref === event.contestantWinner.ref;
+                });
+                if(found.length) event.contestantWinner =  $scope.contestants[$scope.contestants.indexOf(found[0])];
+            }
         };
 
 

@@ -8,15 +8,20 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
         $scope.event.$promise.then(function(event) {
             $scope.events = [{count:0, event: event}];
 
+            $scope.sportSlug = $filter('slugify')(event.sport.name);
+            $scope.getPicks();
+
+        });
+
+        $scope.getPicks = function(){
+
             function cbGetPicks(err, picks){
                 $scope.picks = picks;
                 $scope.events[0].count = picks.length;
             }
 
-            Events.getPicks(event, cbGetPicks);
-            $scope.sportSlug = $filter('slugify')(event.sport.name);
-
-        });
+            Events.getPicks($scope.event, cbGetPicks);
+        };
 
         $scope.submit = function(){
             function cb(err, event){
@@ -32,6 +37,13 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
         };
 
 
+        $scope.isNCAAB = function(event){
+            return event.event.league.name === 'NCAAB';
+        };
+        $scope.isNotNCAAB = function(event){
+            return event.event.league.name !== 'NCAAB';
+        };
+
         $scope.saveEvent = function(event){
 
             function cb(err, updatedEvent){
@@ -43,7 +55,8 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
                             event[field] = updatedEvent[field];
                         }
                     }
-                    console.log(event);
+                    $scope.setWinner(updatedEvent);
+                    $scope.getPicks();
                 }
             }
 
@@ -67,6 +80,7 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
 
         $scope.setContestants = function(event){
             $scope.contestants = [
+                undefined,
                 {name: event.contestant1.name, ref:event.contestant1.ref},
                 {name: event.contestant2.name, ref:event.contestant2.ref}
             ];
@@ -74,10 +88,14 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
 
 
         $scope.setWinner = function(event){
-            var found = $filter('filter')($scope.contestants, function(contestant){
-                return contestant.ref === event.contestantWinner.ref;
-            });
-            if(found.length) event.contestantWinner =  $scope.contestants[$scope.contestants.indexOf(found[0])];
+            console.log(event);
+            if(event.contestantWinner) {
+                var found = $filter('filter')($scope.contestants, function (contestant) {
+                    if(contestant) return contestant.ref === event.contestantWinner.ref;
+                });
+                console.log(found);
+                if (found.length) $scope.event.contestantWinner = $scope.contestants[$scope.contestants.indexOf(found[0])];
+            }
         };
 
 
