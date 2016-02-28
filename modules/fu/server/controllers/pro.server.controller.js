@@ -89,6 +89,9 @@ exports.change = function(req, res){
                     user.premium = true;
                     break;
             }
+
+            user.cancelledPremium = false;
+            user.premiumEndDate = null;
             user.subscriptionPlan = plan.id;
             user.premiumRenewDate = new Date(subscription.current_period_end*1000);
             user.save();

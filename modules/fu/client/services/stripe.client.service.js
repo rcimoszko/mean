@@ -104,9 +104,10 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         };
 
         var cancelSubscription = function(callback){
-            if (confirm('Are you sure you want to cancel your Pro subscription?')) {
+            if (confirm('Are you sure you want to cancel your subscription?')) {
                 $http({method: 'GET', url: '/pro/cancel'}).
                     success(function (user, status) {
+                        console.log(user);
                         Authentication.user = user;
                         User.updateUserStatus();
                         callback(null);
@@ -119,7 +120,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
 
 
         var changeSubscription = function(plan, callback){
-            if (confirm('Are you sure you want to upgrade to Pro subscription?')) {
+            if (confirm('Are you sure you want to upgrade to subscription?')) {
                 $http({method: 'POST', url: '/pro/change', data: {plan:plan}}).
                     success(function (user, status) {
                         Authentication.user = user;

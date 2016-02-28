@@ -46,41 +46,54 @@
                     </div>
                 </fieldset>
             </form>
-            <div class="text-center">
+            <div class="text-center" style="margin-bottom:20px;">
                 <btn-upgrade data-ng-if="user.info.status === 'free' || user.info.status === 'trial'"></btn-upgrade>
                 <div data-ng-if="user.info.status === 'base'">
-                    <div class="btn-container">
-                        <a href class="btn btn-blue-empty btn-sm"  ng-click="cancelSubscription()">Cancel Base Subscription</a>
+                    <div data-ng-if="!authentication.user.cancelledPremium">
+                        <div class="btn-container">
+                            <a href class="btn btn-blue-empty btn-sm"  ng-click="cancelSubscription()">Cancel Base Subscription</a>
+                        </div>
+                        <div class="subscription-note">Your base subscription will auto renew on {{authentication.user.premiumRenewDate|date:'longDate'}}.</div>
                     </div>
-                    <div class="subscription-note">Your base subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
+                    <div class="btn-container">
+                        <btn-upgrade></btn-upgrade>
+                    </div>
+                </div>
+                <div data-ng-if="user.info.status === 'lifetime premium'">
                     <div class="btn-container">
                         <btn-upgrade></btn-upgrade>
                     </div>
                 </div>
                 <div data-ng-if="user.info.status === 'lifetime premium with base'">
-                    <div class="btn-container">
-                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Add On Subscription</a>
+                    <div data-ng-if="!authentication.user.cancelledPremium">
+                        <div class="btn-container">
+                            <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Add On Subscription</a>
+                        </div>
+                        <div class="subscription-note">Your add on subscription will auto renew on {{authentication.user.premiumRenewDate|date:'longDate'}}.</div>
                     </div>
-                    <div class="subscription-note">Your add on subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
                 </div>
                 <div data-ng-if="user.info.status === 'old premium'">
-                    <div class="btn-container">
-                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                    <div data-ng-if="!authentication.user.cancelledPremium">
+                        <div class="btn-container">
+                            <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                        </div>
+                        <div class="subscription-note">Your Pro subscription will auto renew on {{authentication.user.premiumRenewDate|date:'longDate'}}.</div>
+                        <div class="subscription-note"><em>Please note we have changed our pricing structure, if you would like to re-activate your FansUnite Pro account the current plan you are on will no longer be offered</em></div>
                     </div>
-                    <div class="subscription-note">Your Pro subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
-                    <div class="subscription-note"><em>Please note we have changed our pricing structure, if you would like to re-activate your FansUnite Pro account the current plan you are on will no longer be offered</em></div>
                 </div>
                 <div data-ng-if="user.info.status === 'premium'">
-                    <div class="btn-container">
-                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                    <div data-ng-if="!authentication.user.cancelledPremium">
+                        <div class="btn-container">
+                            <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                        </div>
+                        <div class="subscription-note">Your Pro subscription will auto renew on {{authentication.user.premiumRenewDate|date:'longDate'}}.</div>
                     </div>
-                    <div class="subscription-note">Your Pro subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
                 </div>
-                <button data-ng-if="user.premium && user.cancelledPremium" class="btn btn-upgrade btn-large" ng-click="resumeSubscription()">Resume Pro Subscription</button>
-                <div data-ng-if="user.premium && user.cancelledPremium" class="subscription-note">Your pro subscription has been cancelled and will end on {{user.premiumEndDate|date:'longDate'}}.</div>
+                <button data-ng-if="authentication.user.cancelledPremium" class="btn btn-upgrade btn-large" ng-click="resumeSubscription()">Resume Subscription</button>
+                <div data-ng-if="authentication.user.cancelledPremium" class="subscription-note">Your subscription has been cancelled and will end on {{authentication.user.premiumEndDate|date:'longDate'}}.</div>
             </div>
 
-            <div class="status-messages">
+            <div class="status-messages" style="margin:20px;">
                 <div data-ng-show="success" class="text-center text-success">
                     <strong data-ng-bind="success"></strong>
                     <strong></strong>

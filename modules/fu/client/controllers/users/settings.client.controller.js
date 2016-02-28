@@ -74,23 +74,21 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
         };
 
         $scope.cancelSubscription = function(){
-            $scope.stripe.cancelSubscription(function(response){
-                if(response.type === 'error'){
-                    $scope.error = response.message;
-                } else if (response.type === 'success'){
+            $scope.stripe.cancelSubscription(function(err){
+                if(err){
+                    $scope.error = err;
+                } else {
                     $scope.success = 'Your subscription has been cancelled.';
-                    $scope.authentication.user = response.user;
                 }
             });
         };
 
         $scope.resumeSubscription = function(){
-            $scope.stripe.resumeSubscription(function(response){
-                if(response.type === 'error'){
-                    $scope.error = response.message;
-                } else if (response.type === 'success'){
+            $scope.stripe.resumeSubscription(function(err){
+                if(err){
+                    $scope.error = err;
+                } else {
                     $scope.success = 'Your subscription has been renewed.';
-                    $scope.authentication.user = response.user;
                 }
             });
         };

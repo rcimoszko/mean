@@ -744,31 +744,31 @@ function insertScores_tennis(event, scores, scoreType, callback){
             }
         } else {
             if('1st set winner' in scores){
-                event.contestant1Set1Score = scores['1st set winner'].team1;
-                event.contestant2Set1Score = scores['1st set winner'].team2;
+                event.contestant1Set1Score = scores['1st set winner'].team2;
+                event.contestant2Set1Score = scores['1st set winner'].team1;
             }
             if('2nd set winner' in scores){
-                event.contestant1Set2Score = scores['2nd set winner'].team1;
-                event.contestant2Set2Score = scores['2nd set winner'].team2;
+                event.contestant1Set2Score = scores['2nd set winner'].team2;
+                event.contestant2Set2Score = scores['2nd set winner'].team1;
             }
             if('3rd set winner' in scores){
-                event.contestant1Set3Score = scores['3rd set winner'].team1;
-                event.contestant2Set3Score = scores['3rd set winner'].team2;
+                event.contestant1Set3Score = scores['3rd set winner'].team2;
+                event.contestant2Set3Score = scores['3rd set winner'].team1;
             }
             if('4th set winner' in scores){
-                event.contestant1Set4Score = scores['4th set winner'].team1;
-                event.contestant2Set4Score = scores['4th set winner'].team2;
+                event.contestant1Set4Score = scores['4th set winner'].team2;
+                event.contestant2Set4Score = scores['4th set winner'].team1;
             }
             if('5th set winner' in scores){
-                event.contestant1Set5Score = scores['5th set winner'].team1;
-                event.contestant2Set5Score = scores['5th set winner'].team2;
+                event.contestant1Set5Score = scores['5th set winner'].team2;
+                event.contestant2Set5Score = scores['5th set winner'].team1;
             }
             if('match' in scores){
-                event.contestant1RegulationScore = scores.match.team1;
-                event.contestant2RegulationScore = scores.match.team2;
+                event.contestant1RegulationScore = scores.match.team2;
+                event.contestant2RegulationScore = scores.match.team1;
 
-                event.contestant1FinalScore = scores.match.team1;
-                event.contestant2FinalScore = scores.match.team2;
+                event.contestant1FinalScore = scores.match.team2;
+                event.contestant2FinalScore = scores.match.team1;
                 event.scores = true;
             }
         }
