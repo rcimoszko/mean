@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('core').controller('ProController', ['$scope', '$state', '$anchorScroll', '$location', 'Page', 'StripeService', 'Authentication', 'Mixpanel',
-    function($scope, $state, $anchorScroll, $location, Page, StripeService, Authentication, Mixpanel) {
+angular.module('core').controller('ProController', ['$scope', '$state', '$anchorScroll', '$location', 'Page', 'StripeService', 'Authentication', 'Mixpanel', 'User',
+    function($scope, $state, $anchorScroll, $location, Page, StripeService, Authentication, Mixpanel, User) {
 
         $anchorScroll();
 
         $scope.stripeService = StripeService;
         $scope.page = Page;
         $scope.mixpanel = Mixpanel;
+        $scope.user = User;
 
 
         $scope.newSubscription = function(plan){
