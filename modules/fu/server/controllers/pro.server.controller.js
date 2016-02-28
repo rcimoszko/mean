@@ -66,6 +66,39 @@ exports.resume = function(req, res){
 };
 
 
+exports.change = function(req, res){
+    if(!req.user) res.send(403);
+
+    var planId = req.body.plan;
+    if(!planId) res.send(403);
+    stripe.customers.updateSubscription(req.user.stripeId, req.user.subscriptionId, {plan: planId}, function(err, subscription){
+        if(err){
+
+            return res.send(400, {
+                message: 'An error occurred when updating your subscription. Please email info@fansunite.com to update your subscription.'
+            });
+        } else {
+            console.log(subscription);
+
+            var plan = subscription.plan;
+            switch (plan.id){
+                case 'Base Subscription':
+                    user.base = true;
+                    break;
+                case '1 Month Premium':
+                case '6 Months Premium':
+                    user.premium = true;
+                    break;
+            }
+            user.subscriptionPlan = plan.id;
+            user.premiumRenewDate = new Date(subscription.current_period_end*1000);
+            console.log(user);
+            user.save();
+            res.jsonp(user);
+        }
+    });
+};
+
 exports.cancel = function(req, res) {
 
     if (!req.user) res.send(403);

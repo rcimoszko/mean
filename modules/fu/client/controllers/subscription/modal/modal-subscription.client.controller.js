@@ -1,34 +1,34 @@
 'use strict';
 
-angular.module('core').controller('ProController', ['$scope', '$state', '$anchorScroll', '$location', 'Page', 'StripeService', 'Authentication', 'Mixpanel',
-    function($scope, $state, $anchorScroll, $location, Page, StripeService, Authentication, Mixpanel) {
-
-        $anchorScroll();
-
+angular.module('fu').controller('ModalSubscriptionController', ['$scope', '$modalInstance', '$state', 'Modal', 'StripeService', 'Authentication', '$location', 'User',
+    function($scope, $modalInstance, $state, Modal, StripeService, Authentication, $location, User) {
+        $scope.modal = Modal;
+        $scope.modalInstance = $modalInstance;
         $scope.stripeService = StripeService;
-        $scope.page = Page;
-        $scope.mixpanel = Mixpanel;
-
+        $scope.modal.closeModal($scope.modalInstance);
+        $scope.location = $location;
+        $scope.user = User;
+        console.log($scope.user.info.status);
 
         $scope.newSubscription = function(plan){
             function cb(err){
                 if(err){
                     $scope.error = err;
                 } else {
+                    $scope.modal.closeModal($scope.modalInstance);
                     switch(plan){
                         case 'base':
-                            $state.go('basePurchaseSuccess');
+                            $state.go('basePurchaseSuccess', {redirect:$scope.location.path()});
                             break;
                         case 'premium-1':
-                            $state.go('proPurchaseSuccess');
+                            $state.go('proPurchaseSuccess', {redirect:$scope.location.path()});
                             break;
                         case 'premium-6':
-                            $state.go('6monthProPurchaseSuccess');
+                            $state.go('6monthProPurchaseSuccess', {redirect:$scope.location.path()});
                             break;
                     }
                 }
             }
-
 
             if(Authentication.user){
                 switch (plan){
@@ -47,20 +47,12 @@ angular.module('core').controller('ProController', ['$scope', '$state', '$anchor
             }
         };
 
-        $scope.gotoAnchor = function() {
-            var newHash = 'go-pro-now';
-            if ($location.hash() !== newHash) {
-                // set the $location.hash to `newHash` and
-                // $anchorScroll will automatically scroll to it
-                $location.hash('go-pro-now');
-            } else {
-                // call $anchorScroll() explicitly,
-                // since $location.hash hasn't changed
-                $anchorScroll();
-            }
+        $scope.changeSubscription = function(plan){
+
         };
 
-        $scope.authentication = Authentication;
-
+        $scope.close = function(){
+            $modalInstance.dismiss();
+        };
     }
 ]);

@@ -12,8 +12,7 @@ function get(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            console.log(status);
-            res.json(status);
+            res.json({status:status});
         }
     }
 

@@ -129,10 +129,10 @@ function insertScores_beachVolleyball(event, scores, callback){
 
 function insertScores_boxing(event, scores, callback){
     if('match' in scores){
-        event.contestant1FinalScore = scores.match.team1;
-        event.contestant2FinalScore = scores.match.team2;
-        event.contestant1RegulationScore = scores.match.team1;
-        event.contestant2RegulationScore = scores.match.team2;
+        event.contestant1FinalScore = scores.match.team2;
+        event.contestant2FinalScore = scores.match.team1;
+        event.contestant1RegulationScore = scores.match.team2;
+        event.contestant2RegulationScore = scores.match.team1;
         event.scores = true;
     }
     callback();
@@ -261,80 +261,80 @@ function insertScores_eSports(event, scores, scoreType, callback){
             switch(scoreType.toLowerCase()){
                 case 'map 1':
                 case '1st map':
-                    event.contestant1Set1Score = scores.match.team1;
-                    event.contestant2Set1Score = scores.match.team2;
+                    event.contestant1Set1Score = scores.match.team2;
+                    event.contestant2Set1Score = scores.match.team1;
                     break;
                 case 'map 2':
                 case '2nd map':
-                    event.contestant1Set2Score = scores.match.team1;
-                    event.contestant2Set2Score = scores.match.team2;
+                    event.contestant1Set2Score = scores.match.team2;
+                    event.contestant2Set2Score = scores.match.team1;
                     break;
                 case 'map 3':
                 case '3rd map':
-                    event.contestant1Set3Score = scores.match.team1;
-                    event.contestant2Set3Score = scores.match.team2;
+                    event.contestant1Set3Score = scores.match.team2;
+                    event.contestant2Set3Score = scores.match.team1;
                     break;
                 case 'map 4':
                 case '4th map':
-                    event.contestant1Set4Score = scores.match.team1;
-                    event.contestant2Set4Score = scores.match.team2;
+                    event.contestant1Set4Score = scores.match.team2;
+                    event.contestant2Set4Score = scores.match.team1;
                     break;
                 case 'map 5':
                 case '5th map':
-                    event.contestant1Set5Score = scores.match.team1;
-                    event.contestant2Set5Score = scores.match.team2;
+                    event.contestant1Set5Score = scores.match.team2;
+                    event.contestant2Set5Score = scores.match.team1;
                     break;
                 case 'map 1, 1st to 10 kills':
                 case '1st map, 1st to 10 kills':
-                    event.contestant1Set1KillsFirst = scores.match.team1;
-                    event.contestant2Set1KillsFirst = scores.match.team2;
+                    event.contestant1Set1KillsFirst = scores.match.team2;
+                    event.contestant2Set1KillsFirst = scores.match.team1;
                     break;
                 case 'map 2, 1st to 10 kills':
                 case '2nd map, 1st to 10 kills':
-                    event.contestant1Set2KillsFirst = scores.match.team1;
-                    event.contestant2Set2KillsFirst = scores.match.team2;
+                    event.contestant1Set2KillsFirst = scores.match.team2;
+                    event.contestant2Set2KillsFirst = scores.match.team1;
                     break;
                 case 'map 3, 1st to 10 kills':
                 case '3rd map, 1st to 10 kills':
-                    event.contestant1Set3KillsFirst = scores.match.team1;
-                    event.contestant2Set3KillsFirst = scores.match.team2;
+                    event.contestant1Set3KillsFirst = scores.match.team2;
+                    event.contestant2Set3KillsFirst = scores.match.team1;
                     break;
                 case 'map 1, 1st blood':
                 case '1st map, 1st blood':
-                    event.contestant1Set1FirstBlood = scores.match.team1;
-                    event.contestant2Set1FirstBlood = scores.match.team2;
+                    event.contestant1Set1FirstBlood = scores.match.team2;
+                    event.contestant2Set1FirstBlood = scores.match.team1;
                     break;
                 case 'map 2, 1st blood':
                 case '2nd map, 1st blood':
-                    event.contestant1Set2FirstBlood = scores.match.team1;
-                    event.contestant2Set2FirstBlood = scores.match.team2;
+                    event.contestant1Set2FirstBlood = scores.match.team2;
+                    event.contestant2Set2FirstBlood = scores.match.team1;
                     break;
                 case 'map 3, 1st blood':
                 case '3rd map, 1st blood':
-                    event.contestant1Set3FirstBlood = scores.match.team1;
-                    event.contestant2Set3FirstBlood = scores.match.team2;
+                    event.contestant1Set3FirstBlood = scores.match.team2;
+                    event.contestant2Set3FirstBlood = scores.match.team1;
                     break;
                 case 'map 1, kills':
                 case '1st map, kills':
-                    event.contestant1Set1Score = scores.match.team1;
-                    event.contestant2Set1Score = scores.match.team2;
+                    event.contestant1Set1Score = scores.match.team2;
+                    event.contestant2Set1Score = scores.match.team1;
                     break;
                 case 'map 2, kills':
                 case '2nd map, kills':
-                    event.contestant1Set2Score = scores.match.team1;
-                    event.contestant2Set2Score = scores.match.team2;
+                    event.contestant1Set2Score = scores.match.team2;
+                    event.contestant2Set2Score = scores.match.team1;
                     break;
                 case 'map 3, kills':
                 case '3rd map, kills':
-                    event.contestant1Set3Score = scores.match.team1;
-                    event.contestant2Set3Score = scores.match.team2;
+                    event.contestant1Set3Score = scores.match.team2;
+                    event.contestant2Set3Score = scores.match.team1;
                     break;
             }
         } else {
-            event.contestant1RegulationScore = scores.match.team1;
-            event.contestant2RegulationScore = scores.match.team2;
-            event.contestant1FinalScore = scores.match.team1;
-            event.contestant2FinalScore = scores.match.team2;
+            event.contestant1RegulationScore = scores.match.team2;
+            event.contestant2RegulationScore = scores.match.team1;
+            event.contestant1FinalScore = scores.match.team2;
+            event.contestant2FinalScore = scores.match.team1;
             event.scores = true;
         }
     }
@@ -529,10 +529,10 @@ function insertScores_lacrosse(event, scores, callback){
 
 function insertScores_mma(event, scores, callback){
     if('fight' in scores){
-        event.contestant1FinalScore = scores.fight.team1;
-        event.contestant2FinalScore = scores.fight.team2;
-        event.contestant1RegulationScore = scores.fight.team1;
-        event.contestant2RegulationScore = scores.fight.team2;
+        event.contestant1FinalScore = scores.fight.team2;
+        event.contestant2FinalScore = scores.fight.team1;
+        event.contestant1RegulationScore = scores.fight.team2;
+        event.contestant2RegulationScore = scores.fight.team1;
         event.scores = true;
     }
     callback();
@@ -899,25 +899,25 @@ function insertScores_padelTennis(event, scores, callback){
 
 function insertScores_aussieRules(event, scores, callback){
     if('1st quarter' in scores){
-        event.contestant1Q1Score = scores['1st quarter'].team1;
-        event.contestant2Q1Score = scores['1st quarter'].team2;
+        event.contestant1Q1Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team1;
 
         if('1st half' in scores){
-            event.contestant1Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
-            event.contestant2Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant2Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
         }
     }
 
     if('1st half' in scores){
-        event.contestant1H1Score = scores['1st half'].team1;
-        event.contestant2H1Score = scores['1st half'].team2;
+        event.contestant1H1Score = scores['1st half'].team2;
+        event.contestant2H1Score = scores['1st half'].team1;
     }
 
     if('game' in scores){
-        event.contestant1RegulationScore = scores.game.team1;
-        event.contestant2RegulationScore = scores.game.team2;
-        event.contestant1FinalScore = scores.game.team1;
-        event.contestant2FinalScore = scores.game.team2;
+        event.contestant1RegulationScore = scores.game.team2;
+        event.contestant2RegulationScore = scores.game.team1;
+        event.contestant1FinalScore = scores.game.team2;
+        event.contestant2FinalScore = scores.game.team1;
         event.scores = true;
     }
 

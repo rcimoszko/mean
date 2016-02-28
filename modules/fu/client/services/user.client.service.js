@@ -135,6 +135,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
 
         var initialize = function(){
             function cbSuccess(userInfo){
+                console.log(userInfo);
                 info.initialized = true;
                 info.following = userInfo.following;
                 info.picks.pending = userInfo.pendingPicks;

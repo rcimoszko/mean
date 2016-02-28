@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('fu').controller('PurchaseSuccessController', ['$scope', '$timeout', '$stateParams', '$state',
-    function($scope, $timeout, $stateParams, $state) {
+angular.module('fu').controller('PurchaseSuccessController', ['$scope', '$timeout', '$stateParams', '$state', '$location',
+    function($scope, $timeout, $stateParams, $state, $location) {
 
+        $scope.redirectUrl = $stateParams.redirect;
 
-        $scope.counter = 5;
+        $scope.counter = 10;
         $scope.onTimeout = function(){
             $scope.counter--;
             if($scope.counter === 0){
-                if($scope.username){
-                    $state.go('profile',{username:$scope.username});
+                if($scope.redirectUrl){
+                    $location.url($scope.redirectUrl);
                 } else{
                     $state.go('hub');
                 }

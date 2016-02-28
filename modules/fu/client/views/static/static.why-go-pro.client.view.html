@@ -50,45 +50,8 @@
 
     <section id="section-4" class="gray border-gray">
         <div class="text-center">
-                <div id="subscription-plans" class="clearfix">
-                    <div class="price-container">
-                        <div class="price container-1">
-                            <img src="/modules/fu/client/img/why-go-pro/base.png">
-                         </div>
-                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('base');" >Upgrade To Pro</button>
-                    </div>
-                    <div class="price-container">
-                        <div class="price container-2">
-                            <img src="/modules/fu/client/img/why-go-pro/pro.png">
-                        </div>
-                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-1');">Upgrade To Pro</button>
-                    </div>
-                    <div class="price-container">
-                        <div class="price container-3">
-                            <img src="/modules/fu/client/img/why-go-pro/6-month.png">
-                        </div>
-                        <button class="btn-upgrade btn" data-ng-show="!authentication.user.premium && !authentication.user.trial"  data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('premium-6');">Upgrade To Pro</button>
-
-                    </div>
-                    <!--
-                    <div class="plans-left">
-                        <div class="category">1 Month</div>
-                        <div class="price">20$</div>
-                        <div class="month-price">($20/month)</div>
-                    </div>
-                    <div class="plans-center">
-                        <div class="category">6 months</div>
-                        <div class="price">$100</div>
-                        <div class="month-price">($16.67/month)</div>
-                    </div>
-                    <div class="plans-right">
-                        <div class="category">12 months</div>
-                        <div class="price">$180</div>
-                        <div class="month-price">($15/month)</div>
-                     </div>
-                    -->
-                </div>
-            </div>
+            <ng-include src="'modules/fu/client/templates/subscription/subscription.client.template.html'"></ng-include>
+        </div>
 
         <div class="container">
             <h2>

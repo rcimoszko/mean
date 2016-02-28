@@ -296,7 +296,6 @@ function getUserStatus(user, callback){
             case '6month':
             case 'Pro':
                 status = 'old premium';
-                if(user.base) status = 'old premium with base';
                 break;
         }
 

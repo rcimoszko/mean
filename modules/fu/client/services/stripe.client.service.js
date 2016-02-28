@@ -47,6 +47,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         };
 
 
+
         var newSubscription = function(plan, description, amount, callback){
             var handler = StripeCheckout.configure({
                 key: key,
@@ -76,7 +77,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
 
 
         var resumeSubscription =  function(callback){
-            if (confirm('Are you sure you want to renew your pro subscription?')) {
+            if (confirm('Are you sure you want to renew your Pro subscription?')) {
                 $http({method: 'GET', url: '/pro/resume'}).
                     success(function(user) {
                         Authentication.user = user;
@@ -89,7 +90,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         };
 
         var cancelSubscription = function(callback){
-            if (confirm('Are you sure you want to cancel your pro subscription?')) {
+            if (confirm('Are you sure you want to cancel your Pro subscription?')) {
                 $http({method: 'GET', url: '/pro/cancel'}).
                     success(function (user, status) {
                         Authentication.user = user;
@@ -101,15 +102,25 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
             }
         };
 
-        var changeSubscription = function(callback){
 
+        var changeSubscription = function(){
+            if (confirm('Are you sure you want to upgrade to Pro subscription?')) {
+                $http({method: 'POST', url: '/pro/update'}).
+                    success(function (user, status) {
+                        Authentication.user = user;
+                        callback({type: 'success', user:user});
+                    }).
+                    error(function (data, status) {
+                        callback({type:'error', message: data.message});
+                    });
+            }
         };
 
         var showSubscriptionModal = function(){
             if(Authentication.user){
                 Modal.showModal(
-                    'modules/fu/client/views/stripe/modal/modal-stripe.client.view.html',
-                    'ModalStripeController',
+                    'modules/fu/client/views/subscription/modal/modal-subscription.client.view.html',
+                    'ModalSubscriptionController',
                     null,
                     'stripe'
                 );

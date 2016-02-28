@@ -1,0 +1,20 @@
+<div id="subscription-plans" class="clearfix">
+    <div class="price-container">
+        <div class="price container-1">
+            <img src="/modules/fu/client/img/why-go-pro/base.png">
+        </div>
+        <button class="btn-upgrade btn" data-ng-disabled="true" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); newSubscription('base');" >Upgrade To Base</button>
+    </div>
+    <div class="price-container">
+        <div class="price container-2">
+            <img src="/modules/fu/client/img/why-go-pro/pro.png">
+        </div>
+        <button class="btn-upgrade btn" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); changeSubscription('premium-1');">Upgrade To Pro</button>
+    </div>
+    <div class="price-container">
+        <div class="price container-3">
+            <img src="/modules/fu/client/img/why-go-pro/6-month.png">
+        </div>
+        <button class="btn-upgrade btn" data-ng-click="mixpanel.joinClicked(page.getUrl(), 'Upgrade to Pro'); changeSubscription('premium-6');">Upgrade To Pro</button>
+    </div>
+</div>

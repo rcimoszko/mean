@@ -1,0 +1,7 @@
+<ng-include src="'modules/fu/client/views/subscription/subscription-free.client.view.html'" data-ng-if="user.info.status === 'free'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-base.client.view.html'" data-ng-if="user.info.status === 'base'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-lifetime-premium.client.view.html'" data-ng-if="user.info.status === 'lifetime premium'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-lifetime-premium-with-base.client.view.html'" data-ng-if="user.info.status === 'lifetime premium with base'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-trial.client.view.html'" data-ng-if="user.info.status === 'trial'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-old-premium.client.view.html'" data-ng-if="user.info.status === 'old premium'"></ng-include>
+<ng-include src="'modules/fu/client/views/subscription/subscription-premium.client.view.html'" data-ng-if="user.info.status === 'premium'"></ng-include>

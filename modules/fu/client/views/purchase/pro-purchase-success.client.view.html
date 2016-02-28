@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<section data-ng-controller="PurchaseSuccessController" class=" full-height content-padding-top">
 
-</body>
-</html>
+    <h4 style="margin-top:50px;">Thank you for upgrading to the 6 Month FansUnite Pro Subscription</h4>
+
+    <h5 style="line-height:1.5">
+        If you have any questions or feedback, please don't hesitate to contact us. Here is my personal email nshuster@fansunite.com.
+    </h5>
+
+    <div data-ng-if="redirectUrl" style="margin-top:20px;">
+        Re-directing back to previous page in {{counter}} seconds.
+        <div>
+            <a href="{{redirectUrl}}">Go to previous page</a>
+        </div>
+    </div>
+    <div data-ng-if="!redirectUrl">
+        Directing to hub in {{counter}} seconds.
+        <a ui-sref="hub">Continue to Hub</a>
+    </div>
+</section>
