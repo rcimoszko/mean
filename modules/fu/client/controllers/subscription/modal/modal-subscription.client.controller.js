@@ -48,7 +48,12 @@ angular.module('fu').controller('ModalSubscriptionController', ['$scope', '$moda
         };
 
         $scope.changeSubscription = function(plan){
+            function cb(err){
+                if(!err) $scope.success = 'Thank you for updating your subscription to '+ plan;
+                if(err) $scope.error = err;
+            }
 
+            $scope.stripeService.changeSubscription(plan, cb);
         };
 
         $scope.close = function(){

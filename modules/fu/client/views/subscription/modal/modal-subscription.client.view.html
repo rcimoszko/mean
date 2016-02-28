@@ -4,6 +4,12 @@
 
 <div class="modal-body text-center">
     <ng-include src="'modules/fu/client/views/subscription/subscription.client.view.html'"></ng-include>
+    <alert type="success" ng-show="success" class="text-center text-success">
+        <span data-ng-bind="success"></span>
+    </alert>
+    <alert type="danger" ng-show="error" class="text-center text-danger">
+        <span data-ng-bind="error"></span>
+    </alert>
     <div class="text-center" style="padding:10px 0;">
         <a ui-sref="whyGoPro" data-ng-click="close()">Why go Pro?</a>
     </div>

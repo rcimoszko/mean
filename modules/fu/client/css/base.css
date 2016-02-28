@@ -242,7 +242,8 @@ p {
   -ms-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
-.btn-follow-rect:hover {
+.btn-follow-rect:hover,
+.btn-follow-rect:focus {
   background-color: #1ac22e;
   color: white;
 }
@@ -263,7 +264,8 @@ p {
   -ms-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
-.btn-subscribe:hover {
+.btn-subscribe:hover,
+.btn-subscribe:focus {
   background-color: #1ac22e;
   color: white;
 }
@@ -295,7 +297,8 @@ p {
   -ms-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
-.btn-upgrade:hover {
+.btn-upgrade:hover,
+.btn-upgrade:focus {
   background-color: #1ac22e;
   color: white;
 }

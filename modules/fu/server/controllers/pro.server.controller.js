@@ -10,7 +10,7 @@ exports.newPro = function(req, res, next){
     var stripeToken = req.body.stripeToken;
     var plan = req.body.plan;
 
-    if (!req.user) res.send(403);
+    if (!req.user) return res.send(403);
 
     stripe.customers.create({
         card: stripeToken,
@@ -46,7 +46,7 @@ exports.newPro = function(req, res, next){
 
 
 exports.resume = function(req, res){
-    if(!req.user) res.send(403);
+    if(!req.user) return res.send(403);
     stripe.customers.updateSubscription(req.user.stripeId, req.user.subscriptionId,
         function(err, subscription) {
             if (err) {
@@ -67,18 +67,17 @@ exports.resume = function(req, res){
 
 
 exports.change = function(req, res){
-    if(!req.user) res.send(403);
+    if(!req.user) return res.send(403);
 
     var planId = req.body.plan;
-    if(!planId) res.send(403);
-    stripe.customers.updateSubscription(req.user.stripeId, req.user.subscriptionId, {plan: planId}, function(err, subscription){
+    var user = req.user;
+    if(!planId) return res.send(403);
+    stripe.customers.updateSubscription(user.stripeId, user.subscriptionId, {plan: planId}, function(err, subscription){
         if(err){
-
             return res.send(400, {
                 message: 'An error occurred when updating your subscription. Please email info@fansunite.com to update your subscription.'
             });
         } else {
-            console.log(subscription);
 
             var plan = subscription.plan;
             switch (plan.id){
@@ -92,7 +91,6 @@ exports.change = function(req, res){
             }
             user.subscriptionPlan = plan.id;
             user.premiumRenewDate = new Date(subscription.current_period_end*1000);
-            console.log(user);
             user.save();
             res.jsonp(user);
         }
@@ -101,7 +99,7 @@ exports.change = function(req, res){
 
 exports.cancel = function(req, res) {
 
-    if (!req.user) res.send(403);
+    if (!req.user) return res.send(403);
     stripe.customers.cancelSubscription(req.user.stripeId, req.user.subscriptionId, { at_period_end: true }, function(err, confirmation) {
         if (err) {
             // err handling
@@ -115,8 +113,4 @@ exports.cancel = function(req, res) {
             res.jsonp(req.user);
         }
     });
-};
-
-exports.changeSubscription = function(req, res){
-
 };

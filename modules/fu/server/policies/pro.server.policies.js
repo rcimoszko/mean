@@ -10,6 +10,9 @@ exports.invokeRolesPolicies = function () {
             resources: '/pro/new',
             permissions: ['post']
         }, {
+            resources: '/pro/change',
+            permissions: ['post']
+        }, {
             resources: '/pro/cancel',
             permissions: ['get']
         }, {

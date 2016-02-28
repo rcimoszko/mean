@@ -47,6 +47,17 @@ angular.module('core').controller('ProController', ['$scope', '$state', '$anchor
             }
         };
 
+
+        $scope.changeSubscription = function(plan){
+            function cb(err){
+                if(!err) $scope.success = 'Updated Subscription';
+                console.log(err);
+            }
+
+            $scope.stripeService.changeSubscription(plan, cb);
+        };
+
+
         $scope.gotoAnchor = function() {
             var newHash = 'go-pro-now';
             if ($location.hash() !== newHash) {

@@ -81,10 +81,11 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                 $http({method: 'GET', url: '/pro/resume'}).
                     success(function(user) {
                         Authentication.user = user;
-                        callback({type: 'success', user: user});
+                        User.updateUserStatus();
+                        callback(null);
                     }).
                     error(function (data) {
-                        callback({type: 'error', message: data.message});
+                        callback(data.message);
                     });
             }
         };
@@ -94,24 +95,26 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                 $http({method: 'GET', url: '/pro/cancel'}).
                     success(function (user, status) {
                         Authentication.user = user;
-                        callback({type: 'success', user:user});
+                        User.updateUserStatus();
+                        callback(null);
                     }).
                     error(function (data, status) {
-                        callback({type:'error', message: data.message});
+                        callback(data.message);
                     });
             }
         };
 
 
-        var changeSubscription = function(){
+        var changeSubscription = function(plan, callback){
             if (confirm('Are you sure you want to upgrade to Pro subscription?')) {
-                $http({method: 'POST', url: '/pro/update'}).
+                $http({method: 'POST', url: '/pro/change', data: {plan:plan}}).
                     success(function (user, status) {
                         Authentication.user = user;
-                        callback({type: 'success', user:user});
+                        User.updateUserStatus();
+                        callback(null);
                     }).
                     error(function (data, status) {
-                        callback({type:'error', message: data.message});
+                        callback(data.message);
                     });
             }
         };
