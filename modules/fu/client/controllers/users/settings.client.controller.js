@@ -1,25 +1,26 @@
 'use strict';
 
-angular.module('fu').controller('SettingsController', ['$scope', '$http', '$location', '$state', 'Users', 'Authentication', 'Sports', 'StripeService', 'Page', 'Modal',
-    function($scope, $http, $location, $state, Users, Authentication, Sports, StripeService, Page, Modal) {
-        $scope.user = Authentication.user;
+angular.module('fu').controller('SettingsController', ['$scope', '$http', '$location', '$state', 'Users', 'Authentication', 'Sports', 'StripeService', 'Page', 'Modal', 'User',
+    function($scope, $http, $location, $state, Users, Authentication, Sports, StripeService, Page, Modal, User) {
+        $scope.authentication = Authentication;
         $scope.stripe = StripeService;
-        Page.meta.title = $scope.user.username+' Settings | FansUnite';
-        Page.meta.description = $scope.user.username+' settings.';
+        $scope.user = User;
+        Page.meta.title = $scope.authentication.user.username+' Settings | FansUnite';
+        Page.meta.description = $scope.authentication.user.username+' settings.';
 
         // If user is not signed in then redirect back home
-        if (!$scope.user) $state.go('home');
+        if (!$scope.authentication.user) $state.go('home');
 
         // Check if there are additional accounts
         $scope.hasConnectedAdditionalSocialAccounts = function(provider) {
-            for (var i in $scope.user.additionalProvidersData) {
+            for (var i in $scope.authentication.user.additionalProvidersData) {
                 return true;
             }
             return false;
         };
         // Check if provider is already in use with current user
         $scope.isConnectedSocialAccount = function(provider) {
-            return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+            return $scope.authentication.user.provider === provider || ($scope.authentication.user.additionalProvidersData && $scope.authentication.user.additionalProvidersData[provider]);
         };
 
         // Remove a user social account
@@ -33,7 +34,7 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
             }).success(function(response) {
                 // If successful show success message and clear form
                 $scope.success = true;
-                $scope.user = Authentication.user = response;
+                $scope.authentication.user = Authentication.user = response;
             }).error(function(response) {
                 $scope.error = response.message;
             });
@@ -42,14 +43,13 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
         // Update a user profile
         $scope.updateUserProfile = function() {
             $scope.success = $scope.error = null;
-            delete $scope.user.profileUrl; // controlled by upload-image-url directive
-            delete $scope.user.avatarUrl; // controlled by upload-image-url directive
-            var user = new Users($scope.user);
+            delete $scope.authentication.user.profileUrl; // controlled by upload-image-url directive
+            delete $scope.authentication.user.avatarUrl; // controlled by upload-image-url directive
+            var user = new Users($scope.authentication.user);
 
             user.$update(function(response) {
                 $scope.success = 'Profile Saved Successfully';
                 Authentication.user = response;
-                console.log(response);
             }, function(response) {
                 $scope.error = response.data.message;
             });
@@ -79,7 +79,7 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
                     $scope.error = response.message;
                 } else if (response.type === 'success'){
                     $scope.success = 'Your subscription has been cancelled.';
-                    $scope.user = response.user;
+                    $scope.authentication.user = response.user;
                 }
             });
         };
@@ -90,7 +90,7 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
                     $scope.error = response.message;
                 } else if (response.type === 'success'){
                     $scope.success = 'Your subscription has been renewed.';
-                    $scope.user = response.user;
+                    $scope.authentication.user = response.user;
                 }
             });
         };

@@ -178,7 +178,7 @@ function addBet(bet, event, callback){
 }
 
 function getUnresolvedEvents(callback){
-    var query = {resolved:false, scores:true};
+    var query = {resolved:false, scores:true, startTime: {$lt: new Date()}};
     m_Event.find(query).populate('pinnacleBets').exec(callback);
 }
 

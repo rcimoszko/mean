@@ -18,33 +18,28 @@
                             <div class="col-xs-7">
                                 <div class="form-group">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName">
+                                    <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="authentication.user.firstName">
                                 </div>
                                 <div class="form-group">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName">
+                                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="authentication.user.lastName">
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="odds">Odds Format</label>
-                                    <select id="odds" name="odds" class="form-control" data-ng-model="user.oddsFormat" data-ng-options="oddsFormat for oddsFormat in oddsFormats"></select>
+                                    <select id="odds" name="odds" class="form-control" data-ng-model="authentication.user.oddsFormat" data-ng-options="oddsFormat for oddsFormat in oddsFormats"></select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="sport">Email</label>
-                                    <input type="text" id="email" name="email" class="form-control" data-ng-model="user.email">
+                                    <label for="email">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control" data-ng-model="authentication.user.email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="sport">Favourite Sport</label>
-                                    <select id="sport" name="sport" class="form-control" data-ng-model="user.favoriteSport" data-ng-options="sport._id as sport.name for sport in sports"></select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="twitter">Twitter</label>
-                                    <input type="twitter" id="twitter" name="twitter" class="form-control" data-ng-model="user.twitterHandle" data-ng-minlength="1" data-ng-maxlength="20">
+                                    <label for="twitter">Twitte r</label>
+                                    <input type="twitter" id="twitter" name="twitter" class="form-control" data-ng-model="authentication.user.twitterHandle" data-ng-minlength="1" data-ng-maxlength="20">
                                 </div>
                                 <div class="text-center form-group">
                                     <button type="submit" class="btn btn-large btn-blue">Save Profile</button>
-
                                 </div>
                             </div>
                         </div>
@@ -52,12 +47,37 @@
                 </fieldset>
             </form>
             <div class="text-center">
-
-                <btn-upgrade data-ng-if="!user.premium && !user.trial" ></btn-upgrade>
-                <a data-ng-if="user.premium && !user.lifetimePremium && !user.cancelledPremium" href="#" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                <btn-upgrade data-ng-if="user.info.status === 'free' || user.info.status === 'trial'"></btn-upgrade>
+                <div data-ng-if="user.info.status === 'base'">
+                    <div class="btn-container">
+                        <a href class="btn btn-blue-empty btn-sm"  ng-click="cancelSubscription()">Cancel Base Subscription</a>
+                    </div>
+                    <div class="subscription-note">Your base subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
+                    <div class="btn-container">
+                        <btn-upgrade></btn-upgrade>
+                    </div>
+                </div>
+                <div data-ng-if="user.info.status === 'lifetime premium with base'">
+                    <div class="btn-container">
+                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Add On Subscription</a>
+                    </div>
+                    <div class="subscription-note">Your add on subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
+                </div>
+                <div data-ng-if="user.info.status === 'old premium'">
+                    <div class="btn-container">
+                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                    </div>
+                    <div class="subscription-note">Your Pro subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
+                    <div class="subscription-note"><em>Please note we have changed our pricing structure, if you would like to re-activate your FansUnite Pro account the current plan you are on will no longer be offered</em></div>
+                </div>
+                <div data-ng-if="user.info.status === 'premium'">
+                    <div class="btn-container">
+                        <a href class="btn btn-blue-empty btn-sm" ng-click="cancelSubscription()">Cancel Pro Subscription</a>
+                    </div>
+                    <div class="subscription-note">Your Pro subscription will auto renew on {{user.premiumRenewDate|date:'longDate'}}.</div>
+                </div>
                 <button data-ng-if="user.premium && user.cancelledPremium" class="btn btn-upgrade btn-large" ng-click="resumeSubscription()">Resume Pro Subscription</button>
                 <div data-ng-if="user.premium && user.cancelledPremium" class="subscription-note">Your pro subscription has been cancelled and will end on {{user.premiumEndDate|date:'longDate'}}.</div>
-                <div data-ng-if="user.premium && !user.cancelledPremium && !user.lifetimePremium" class="subscription-note">Your pro subscription will auto renew on  {{user.premiumRenewDate|date:'longDate'}}.</div>
             </div>
 
             <div class="status-messages">
