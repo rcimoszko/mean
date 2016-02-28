@@ -160,11 +160,35 @@ function getCompletedPicks(user, callback){
                 case '1st set':
                 case '1st inning':
                 case '1st leg':
-                case '1st map':
                 case '1st frame':
                 case '1st set winner':
                     pick.contestant1Score = pick.event.contestant1Set1Score;
                     pick.contestant2Score = pick.event.contestant2Set1Score;
+                    break;
+                case '1st map':
+                case 'map 1':
+                    switch(pick.betType.toLowerCase()){
+                        case '1st to 10 kills':
+                            pick.contestant1Score = pick.event.contestant1Set1KillsFirst;
+                            pick.contestant2Score = pick.event.contestant2Set1KillsFirst;
+                            break;
+                        case '1st blood':
+                            pick.contestant1Score = pick.event.contestant1Set1FirstBlood;
+                            pick.contestant2Score = pick.event.contestant2Set1FirstBlood;
+                            break;
+                        case '1st round':
+                            pick.contestant1Score = pick.event.contestant1Set1FirstRd;
+                            pick.contestant2Score = pick.event.contestant2Set1FirstRd;
+                            break;
+                        case '1st to 5 rounds':
+                            pick.contestant1Score = pick.event.contestant1Set1FirstTo5Rds;
+                            pick.contestant2Score = pick.event.contestant2Set1FirstTo5Rds;
+                            break;
+                        default:
+                            pick.contestant1Score = pick.event.contestant1Set1Score;
+                            pick.contestant2Score = pick.event.contestant2Set1Score;
+                            break;
+                    }
                     break;
                 case '1st period':
                     pick.contestant1Score = pick.event.contestant1P1Score;
@@ -185,6 +209,31 @@ function getCompletedPicks(user, callback){
                     pick.contestant1Score = pick.event.contestant1Set2Score;
                     pick.contestant2Score = pick.event.contestant2Set2Score;
                     break;
+                case '2nd map':
+                case 'map 2':
+                    switch(pick.betType.toLowerCase()){
+                        case '1st to 10 kills':
+                            pick.contestant1Score = pick.event.contestant1Set2KillsFirst;
+                            pick.contestant2Score = pick.event.contestant2Set2KillsFirst;
+                            break;
+                        case '1st blood':
+                            pick.contestant1Score = pick.event.contestant1Set2FirstBlood;
+                            pick.contestant2Score = pick.event.contestant2Set2FirstBlood;
+                            break;
+                        case '1st round':
+                            pick.contestant1Score = pick.event.contestant1Set2FirstRd;
+                            pick.contestant2Score = pick.event.contestant2Set2FirstRd;
+                            break;
+                        case '1st to 5 rounds':
+                            pick.contestant1Score = pick.event.contestant1Set2FirstTo5Rds;
+                            pick.contestant2Score = pick.event.contestant2Set2FirstTo5Rds;
+                            break;
+                        default:
+                            pick.contestant1Score = pick.event.contestant1Set2Score;
+                            pick.contestant2Score = pick.event.contestant2Set2Score;
+                            break;
+                    }
+                    break;
                 case '2nd quarter':
                     pick.contestant1Score = pick.event.contestant1Q2Score;
                     pick.contestant2Score = pick.event.contestant2Q2Score;
@@ -204,6 +253,31 @@ function getCompletedPicks(user, callback){
                 case '3rd set winner':
                     pick.contestant1Score = pick.event.contestant1Set3Score;
                     pick.contestant2Score = pick.event.contestant2Set3Score;
+                    break;
+                case '3rd map':
+                case 'map 3':
+                    switch(pick.betType.toLowerCase()){
+                        case '1st to 10 kills':
+                            pick.contestant1Score = pick.event.contestant1Set3KillsFirst;
+                            pick.contestant2Score = pick.event.contestant2Set3KillsFirst;
+                            break;
+                        case '1st blood':
+                            pick.contestant1Score = pick.event.contestant1Set3FirstBlood;
+                            pick.contestant2Score = pick.event.contestant2Set3FirstBlood;
+                            break;
+                        case '1st round':
+                            pick.contestant1Score = pick.event.contestant1Set3FirstRd;
+                            pick.contestant2Score = pick.event.contestant2Set3FirstRd;
+                            break;
+                        case '1st to 5 rounds':
+                            pick.contestant1Score = pick.event.contestant1Set3FirstTo5Rds;
+                            pick.contestant2Score = pick.event.contestant2Set3FirstTo5Rds;
+                            break;
+                        default:
+                            pick.contestant1Score = pick.event.contestant1Set3Score;
+                            pick.contestant2Score = pick.event.contestant2Set3Score;
+                            break;
+                    }
                     break;
                 case '3rd quarter':
                     pick.contestant1Score = pick.event.contestant1Q3Score;

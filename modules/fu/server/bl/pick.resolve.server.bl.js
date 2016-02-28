@@ -623,8 +623,15 @@ function resolvePicks(event, callback) {
         async.eachSeries(picks, resolve, callback);
     }
 
+    function checkUnresolvedPicks(callback){
+        function cb(err, count){
+            if(count === 0) event.resolved = true;
+            callback(err);
+        }
+        Pick.count({event: event._id, result:'Pending'}).exec(cb);
+    }
+
     function updateEvent(callback){
-        event.resolved = true;
         event.over = true;
         event.endTime = new Date();
         event.save(callback);
@@ -637,6 +644,7 @@ function resolvePicks(event, callback) {
 
     todo.push(getPicks_todo);
     todo.push(resolvePicks_todo);
+    todo.push(checkUnresolvedPicks);
     todo.push(updateEvent);
 
     async.waterfall(todo, done);
