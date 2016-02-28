@@ -308,13 +308,29 @@ function getCompletedPicks(user, callback){
                     break;
 
             }
-            if(pick.contestant1Score > pick.contestant2Score){
-                pick.winner = 1;
-            } else if(pick.contestant2Score > pick.contestant1Score){
-                pick.winner = 2;
-            } else {
-                pick.winner = 'draw';
+            if(typeof pick.contestant1Score !== 'undefined' && typeof pick.contestant1Score !== 'undefined'){
+                if(pick.contestant1Score > pick.contestant2Score){
+                    pick.winner = 1;
+                } else if(pick.contestant2Score > pick.contestant1Score){
+                    pick.winner = 2;
+                } else {
+                    pick.winner = 'draw';
+                }
+            } else if (pick.event.contestantWinner){
+                if(String(pick.event.contestantWinner.ref) === String(pick.event.contestant1.ref)){
+                    pick.winner = 1;
+                    pick.contestant1Score = 1;
+                    pick.contestant2Score = 0;
+
+                } else if(String(pick.event.contestantWinner.ref) === String(pick.event.contestant2.ref)){
+                    pick.winner = 2;
+                    pick.contestant1Score = 0;
+                    pick.contestant2Score = 1;
+
+                }
             }
+
+
 
             processedPicks.push(pick);
 
