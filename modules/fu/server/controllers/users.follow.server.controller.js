@@ -18,7 +18,7 @@ function follow(req, res) {
     var followUser = req.profile;
     var user = req.user;
 
-    FollowBl.follow(user, followUser, cb);
+    FollowBl.follow(user, followUser, req.headers.host, cb);
 }
 
 

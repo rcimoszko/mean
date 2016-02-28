@@ -261,6 +261,7 @@ function insertScores_eSports(event, scores, scoreType, callback){
             switch(scoreType.toLowerCase()){
                 case 'map 1':
                 case '1st map':
+                case '1st round':
                     event.contestant1Set1Score = scores.match.team2;
                     event.contestant2Set1Score = scores.match.team1;
                     break;

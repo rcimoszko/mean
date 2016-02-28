@@ -5,6 +5,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     User = mongoose.model('User'),
     NotificationBl = require('./notification.server.bl'),
+    EmailBl = require('./email.server.bl'),
     Follow = mongoose.model('Follow');
 
 
@@ -79,7 +80,7 @@ function updateFollowCount(user, userFollow, callback){
     async.waterfall(todo, callback);
 }
 
-function createFollow(user, userFollow, callback){
+function createFollow(user, userFollow, hostName, callback){
     var todo = [];
 
     function create(callback){
@@ -99,6 +100,7 @@ function createFollow(user, userFollow, callback){
         follow.save(cb);
     }
 
+
     function createNotification(follow, callback){
         function cb(err){
             callback(err, follow);
@@ -106,8 +108,15 @@ function createFollow(user, userFollow, callback){
         NotificationBl.createFollowNotification(userFollow, user, follow, cb);
     }
 
+    function sendEmail(follow, callback){
+        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
+        EmailBl.sendFollowerEmail(userFollow, user.username, hostName, function cb(err){});
+        return callback(null, follow);
+    }
+
     todo.push(create);
     todo.push(createNotification);
+    todo.push(sendEmail);
 
     async.waterfall(todo, callback);
 }
@@ -123,7 +132,7 @@ function updateFollow(follow, callback){
     follow.save(cb);
 }
 
-function follow(user, userFollow, callback){
+function follow(user, userFollow, hostName, callback){
     var todo = [];
 
     function findFollow(callback){
@@ -135,7 +144,7 @@ function follow(user, userFollow, callback){
         if(follow){
             updateFollow(follow, callback);
         } else {
-            createFollow(user, userFollow, callback);
+            createFollow(user, userFollow, hostName, callback);
         }
     }
 

@@ -183,8 +183,17 @@ function submit(user, eventGroups, callback){
         user.save(callback);
     }
 
+    /*
+    function sendEmailNotifications(callback){
+        //TO FINISH
+        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
+        EmailBl.sendFollowerEmail(userFollow, user.username, hostName, function cb(err){});
+        return callback(null, follow);
+    }
+    */
+
+
     function cb(err){
-        console.log(err);
         callback(err, {user: user, picks: picks});
     }
 

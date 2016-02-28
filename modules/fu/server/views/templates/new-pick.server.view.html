@@ -142,7 +142,7 @@ body {
         padding: 50px 15px 0 15px !important;
     }
 }</style><!-- ONE COLUMN SECTION -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align: center;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody>
     <tr>
         <td bgcolor="#ffffff" align="center" style="padding: 15px;" class="section-padding">
@@ -161,34 +161,57 @@ body {
                                                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
                                                 class="padding-copy"><p><img
                                                 src="http://app.maaxmarket.com/app/email_templates/de60472030170043bab53a1261ea1f69/Logo.png"
-                                                style="width: 230px;"><span
-                                                style="text-align: center; background-color: transparent;"><br></span>
-                                            </p>
-
-                                                <p><span style="text-align: center; background-color: transparent;"><br></span>
-                                                </p>
-
-                                                <p><span style="text-align: center; background-color: transparent;">Hey {{user}},</span><br>
-                                                </p></td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left"
-                                                style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                                class="padding-copy"><p>Welcome to FansUnite!</p>
-
-                                                <p><span style="background-color: transparent;">We're really excited to have you join the FansUnite community. Before we become best friends, we just need you to confirm your account below:</span><br>
-                                                </p>
+                                                style="width: 230px;"></p>
 
                                                 <p><br></p>
 
-                                                <p style="text-align: center; "><a href="{{url}}"><img
-                                                    src="http://app.maaxmarket.com/app/email_templates/de60472030170043bab53a1261ea1f69/activate-account-button.png"
-                                                    style="width: 200px;"></a><br></p></td>
+                                                <p>Hey {{user}},</p></td>
                                         </tr>
                                         <tr>
                                             <td align="left"
                                                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                                class="padding-copy"><p><br></p></td>
+                                                class="padding-copy"><p>{{userFollowing}} has made a new
+                                                pick.</p>
+
+                                                <p><br></p>
+
+                                                <table>
+                                                    <thead>
+                                                        <th>Sport</th>
+                                                        <th>League</th>
+                                                        <th>Event</th>
+                                                        <th>Pick</th>
+                                                        <th>Odds</th>
+                                                        <th>Units</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for pick in picks %}
+                                                    <tr>
+                                                        <td>{{pick.sport.name}}</td>
+                                                        <td>{{pick.league.name}}</td>
+                                                        <td>{{pick.contestant2.name}} @ {{pick.contestant1.name}}</td>
+                                                        <td>{{pick.name}}</td>
+                                                        <td>{{pick.odds}}</td>
+                                                        <td>{{pick.units}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+
+                                                <p>{*Pick Made, odds, units, start time*}</p>
+
+                                                <p><br></p>
+
+                                                <p><br></p>
+
+                                                <p style="text-align: center; "><img
+                                                    src="http://app.maaxmarket.com/app/email_templates/de60472030170043bab53a1261ea1f69/copy-pick-button.png"
+                                                    style="width: 200px;"><br></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left"
+                                                style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
+                                                class="padding-copy"><br></td>
                                         </tr>
                                         <tr>
                                             <td align="left"
@@ -223,14 +246,12 @@ body {
                             <tr>
                                 <td align="left"
                                     style="padding: 20px 0 0 0; font-size: 12px; line-height: 16px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                    class="padding-copy"><p><span class="appleFooter" style="color:#666666;">Copyright 2016 | FansUnite Media Inc |All Rights Reserved.</span>
-                                </p>
-
-                                    <p><a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a><span
-                                        class="original-only"
-                                        style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
-                                        style="color: #666666; text-decoration: none;">View this email in your
-                                        browser</a></p></td>
+                                    class="padding-copy"><span class="appleFooter" style="color:#666666;">Copyright 2016 | FansUnite Media Inc |All Rights Reserved.</span><br><a
+                                    class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a><span
+                                    class="original-only"
+                                    style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
+                                    style="color: #666666; text-decoration: none;">View this email in your browser</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
