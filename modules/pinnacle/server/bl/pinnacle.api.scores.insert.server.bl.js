@@ -259,9 +259,12 @@ function insertScores_eSports(event, scores, scoreType, callback){
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
+                case 'ace':
+                    event.contestant1AceScore = scores.match.team2;
+                    event.contestant2AceScore = scores.match.team1;
+                    break;
                 case 'map 1':
                 case '1st map':
-                case '1st round':
                     event.contestant1Set1Score = scores.match.team2;
                     event.contestant2Set1Score = scores.match.team1;
                     break;
@@ -329,6 +332,30 @@ function insertScores_eSports(event, scores, scoreType, callback){
                 case '3rd map, kills':
                     event.contestant1Set3Score = scores.match.team2;
                     event.contestant2Set3Score = scores.match.team1;
+                    break;
+                case 'map 1, 1st round':
+                    event.contestant1Set1FirstRd = scores.match.team2;
+                    event.contestant2Set1FirstRd = scores.match.team1;
+                    break;
+                case 'map 2, 1st round':
+                    event.contestant1Set2FirstRd = scores.match.team2;
+                    event.contestant2Set2FirstRd = scores.match.team1;
+                    break;
+                case 'map 3, 1st round':
+                    event.contestant1Set3FirstRd = scores.match.team2;
+                    event.contestant2Set3FirstRd = scores.match.team1;
+                    break;
+                case 'map 1, 1st to 5 rounds':
+                    event.contestant1Set1FirstTo5Rds = scores.match.team2;
+                    event.contestant2Set1FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 2, 1st to 5 rounds':
+                    event.contestant1Set2FirstTo5Rds = scores.match.team2;
+                    event.contestant2Set2FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 3, 1st to 5 rounds':
+                    event.contestant1Set3FirstTo5Rds = scores.match.team2;
+                    event.contestant2Set3FirstTo5Rds = scores.match.team1;
                     break;
             }
         } else {

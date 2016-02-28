@@ -92,6 +92,22 @@ var EventSchema = new Schema({
     contestant1Set3FirstBlood:  {type: Number},
     contestant2Set3FirstBlood:  {type: Number},
 
+    contestant1Set1FirstTo5Rds:  {type: Number},
+    contestant2Set1FirstTo5Rds:  {type: Number},
+    contestant1Set2FirstTo5Rds:  {type: Number},
+    contestant2Set2FirstTo5Rds:  {type: Number},
+    contestant1Set3FirstTo5Rds:  {type: Number},
+    contestant2Set3FirstTo5Rds:  {type: Number},
+    contestant1Set1FirstRd:  {type: Number},
+    contestant2Set1FirstRd:  {type: Number},
+    contestant1Set2FirstRd:  {type: Number},
+    contestant2Set2FirstRd:  {type: Number},
+    contestant1Set3FirstRd:  {type: Number},
+    contestant2Set3FirstRd:  {type: Number},
+
+    contestant1AceScore:  {type: Number},
+    contestant2AceScore:  {type: Number},
+
 
     contestantWinner:           {name: String, ref: {type: Schema.ObjectId, ref: 'Contestant'}},
 

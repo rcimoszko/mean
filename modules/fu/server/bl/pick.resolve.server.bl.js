@@ -12,6 +12,10 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
     var opponentScore;
 
     switch(pick.betDuration){
+        case 'ace':
+            contestantScore = event['contestant'+contestantNo+'AceScore'];
+            opponentScore = event['contestant'+opponentNo+'AceScore'];
+            break;
         case 'match':
         case 'game':
             switch(event.sport.name.toLowerCase()){
@@ -52,7 +56,6 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     opponentScore = event['contestant'+opponentNo+'H1Score'];
                     break;
             }
-
             break;
         case '1st set winner':
         case 'map 1':
@@ -65,6 +68,14 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                 case '1st to 10 kills':
                     contestantScore = event['contestant'+contestantNo+'Set1KillsFirst'];
                     opponentScore = event['contestant'+opponentNo+'Set1KillsFirst'];
+                    break;
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Set1FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Set1FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Set1FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Set1FirstTo5Rds'];
                     break;
                 default:
                     contestantScore = event['contestant'+contestantNo+'Set1Score'];
@@ -83,6 +94,14 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Set2KillsFirst'];
                     opponentScore = event['contestant'+opponentNo+'Set2KillsFirst'];
                     break;
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Set2FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Set2FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Set2FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Set2FirstTo5Rds'];
+                    break;
                 default:
                     contestantScore = event['contestant'+contestantNo+'Set2Score'];
                     opponentScore = event['contestant'+opponentNo+'Set2Score'];
@@ -99,6 +118,14 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                 case '1st to 10 kills':
                     contestantScore = event['contestant'+contestantNo+'Set3KillsFirst'];
                     opponentScore = event['contestant'+opponentNo+'Set3KillsFirst'];
+                    break;
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Set3FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Set3FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Set3FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Set3FirstTo5Rds'];
                     break;
                 default:
                     contestantScore = event['contestant'+contestantNo+'Set3Score'];
