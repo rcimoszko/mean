@@ -375,7 +375,9 @@ UserSchema.methods.checkPremium = function(callback) {
                         case '1year':
                         case '6month':
                         case 'Pro':
-                            _this.premium = false;
+                            if(!_this.lifetimePremium){
+                                _this.premium = false;
+                            }
                             break;
                     }
                 }
@@ -383,8 +385,9 @@ UserSchema.methods.checkPremium = function(callback) {
                     callback();
                 });
             } else {
-                //cancel subscription
-                _this.premium = false;
+                if(!_this.lifetimePremium){
+                    _this.premium = false;
+                }
                 _this.base = false;
                 _this.save(function(err, user){
                     callback();

@@ -67,8 +67,21 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                 }
             });
 
+            var name;
+            switch(plan){
+                case 'Base Subscription':
+                    name = 'FansUnite Base';
+                    break;
+                case '1 Month Premium':
+                    name = 'FansUnite Pro';
+                    break;
+                case '6 Months Premium':
+                    name = 'FansUnite Pro';
+                    break;
+            }
+
             handler.open({
-                name: 'FansUnite Pro',
+                name: name,
                 description: description,
                 amount: amount
             });

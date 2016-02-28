@@ -438,21 +438,21 @@ function insertScores_futsal(event, scores, callback){
 
 function insertScores_handball(event, scores, callback){
     if('1st half' in scores){
-        event.contestant1H1Score = scores['1st half'].team1;
-        event.contestant2H1Score = scores['1st half'].team2;
+        event.contestant1H1Score = scores['1st half'].team2;
+        event.contestant2H1Score = scores['1st half'].team1;
 
         if('match' in scores){
-            event.contestant1H2Score = scores.match.team1 - scores['1st half'].team1;
-            event.contestant2H2Score = scores.match.team2 - scores['1st half'].team2;
+            event.contestant1H2Score = scores.match.team2 - scores['1st half'].team2;
+            event.contestant2H2Score = scores.match.team1 - scores['1st half'].team1;
         }
     }
 
     if('match' in scores){
-        event.contestant1RegulationScore = scores.match.team1;
-        event.contestant2RegulationScore = scores.match.team2;
+        event.contestant1RegulationScore = scores.match.team2;
+        event.contestant2RegulationScore = scores.match.team1;
 
-        event.contestant1FinalScore = scores.match.team1;
-        event.contestant2FinalScore = scores.match.team2;
+        event.contestant1FinalScore = scores.match.team2;
+        event.contestant2FinalScore = scores.match.team1;
         event.scores = true;
     }
     callback();
@@ -935,6 +935,17 @@ function insertScores_matchups(event, scores, callback){
     callback();
 }
 
+function insertScores_golf(event, scores, callback){
+    if('matchups' in scores){
+        event.contestant1FinalScore = scores.matchups.team2;
+        event.contestant2FinalScore = scores.matchups.team1;
+        event.contestant1RegulationScore = scores.matchups.team2;
+        event.contestant2RegulationScore = scores.matchups.team1;
+        event.scores = true;
+    }
+    callback();
+}
+
 function insertScores(event, scores, sportName, leagueName, scoreType, callback){
     console.log('scores', scores);
     console.log('scoreType', scoreType);
@@ -1052,6 +1063,8 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
             insertScores_aussieRules(event, scores, callback);
             break;
         case 'Golf':
+            insertScores_golf(event, scores, callback);
+            break;
         case 'Alpine Skiing':
         case 'Biathlon':
         case 'Ski Jumping':
