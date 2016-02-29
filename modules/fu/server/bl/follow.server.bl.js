@@ -132,7 +132,7 @@ function createFollow(user, userFollow, hostName, callback){
 
     function sendEmail(follow, callback){
         if(!userFollow.newFollowerEmail) return callback(null, follow);
-        //if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
+        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
 
         EmailBl.sendFollowerEmail(userFollow, user.username, hostName, function cb(err){});
         return callback(null, follow);
