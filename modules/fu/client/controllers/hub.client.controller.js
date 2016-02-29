@@ -83,7 +83,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             Hub.getPicks(query, cbGetPicks);
         };
 
-        $scope.getPicks();
+        //$scope.getPicks();
         $scope.disableScroll = true;
 
         $scope.getMorePicks = function(){
@@ -106,7 +106,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             };
 
             function cb(err, previews){
-                console.log(previews);
                 $scope.previews = previews;
             }
 
