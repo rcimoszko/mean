@@ -78,6 +78,7 @@ function getOneByQuery(query, callback){
 function getRecentActiveLeagues(callback){
     var query = {};
     var group = {};
+
 }
 
 exports.populate    = populate;
