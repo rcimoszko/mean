@@ -80,7 +80,7 @@ function createConversation(data, user, callback) {
                 lastMessage:    data.message
             };
 
-            create(conversation, function (err) {
+            create(conversation, function (err, conversation) {
                 var message = data.message;
                 message.conversation = conversation._id;
 

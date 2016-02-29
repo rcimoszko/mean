@@ -12,7 +12,9 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
             if (!$scope.text) return;
 
             function cb(err, conversation){
-                $state.go('messages.view',{conversationId: conversation._id});
+                console.log(err);
+                console.log(conversation);
+                if(!err) $state.go('messages.view',{conversationId: conversation._id});
             }
 
             $scope.newRecipients.push({name:$scope.authentication.user.username, ref:$scope.authentication.user._id});
@@ -22,6 +24,8 @@ angular.module('message').controller('NewMessageController', ['$scope', '$state'
                 message:    message
             };
             if($scope.subject) conversation.subject = $scope.subject;
+
+            console.log(conversation);
 
             User.createConversation(conversation, cb);
         };
