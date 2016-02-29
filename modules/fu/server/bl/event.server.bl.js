@@ -126,6 +126,15 @@ function resolve(event, data, callback){
 
     var todo = [];
 
+    function populateBets(callback){
+        function cb(err, populatedEvent){
+            event = populatedEvent;
+            callback(err);
+
+        }
+        populateBy(event, {path: 'pinnacleBets', model: 'Bet'}, cb);
+    }
+
     function assignScores(callback){
         EventResolveBl.insertScores(event, data, callback);
     }
@@ -152,6 +161,7 @@ function resolve(event, data, callback){
         callback(err, event);
     }
 
+    todo.push(populateBets);
     todo.push(assignScores);
     todo.push(assignWinner);
     todo.push(saveScores);
