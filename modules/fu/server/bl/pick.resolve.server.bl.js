@@ -405,9 +405,14 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 case 'volleyball':
                     if(pick.betType === 'total points'){
                         var totalSets = 0;
-                        for(sets = 1; sets<=5; sets++){
-                            if(event['contestant'+contestantNo+'Set'+sets+'Score'] && event['contestant'+opponentNo+'Set'+sets+'Score']) totalSets++;
+                        if(typeof event['contestant'+contestantNo+'Set1Score'] !== 'undefined'){
+                            for(sets = 1; sets<=5; sets++){
+                                if(event['contestant'+contestantNo+'Set'+sets+'Score'] && event['contestant'+opponentNo+'Set'+sets+'Score']) totalSets++;
+                            }
+                        } else {
+                            totalSets = event['contestant'+contestantNo+'FinalScore'] + event['contestant'+opponentNo+'FinalScore'];
                         }
+
                         comparison = totalSets - pick.points;
 
                         if (pick.overUnder === 'over') {
