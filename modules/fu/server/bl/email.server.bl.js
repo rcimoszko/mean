@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer'),
     async = require('async'),
     _ = require('lodash'),
     renderer = require('swig'),
-    FollowBl = require('./follow.makepicks.create.server.bl'),
+    FollowBl = require('./follow.server.bl'),
     UserBl = require('./user.server.bl'),
     path = require('path'),
     config = require('../../../../config/config');
@@ -79,8 +79,11 @@ function sendVerificationEmail(token, user, hostName, callback) {
 
 }
 
-function sendPicksEmail(picks, user, hostName, callback){
+function sendPicksEmails(picks, user, hostName, callback){
+
     var todo = [];
+    var baseFollowerList = [];
+    var premiumFollowerList = [];
 
     function getFollowers(callback){
         console.log('getFollowers');
@@ -99,8 +102,6 @@ function sendPicksEmail(picks, user, hostName, callback){
     function filterFollowersWithCorrectStatus(followers, callback){
         console.log('filterFollowersWithCorrectStatus');
 
-        var baseFollowerList = [];
-        var baseFollowerList = [];
 
         function checkStatus(follower){
             function cb(err, status){
@@ -109,11 +110,10 @@ function sendPicksEmail(picks, user, hostName, callback){
                     case 'premium':
                     case 'old premium':
                     case 'trial':
-
+                        premiumFollowerList.push(follower.follower.ref);
                         break;
-
                     case 'base':
-
+                        baseFollowerList.push(follower.follower.ref);
                         break;
 
                 }
@@ -121,19 +121,82 @@ function sendPicksEmail(picks, user, hostName, callback){
             UserBl.getUserStatus(follower.follower.ref, cb);
         }
 
+        async.eachSeries(followers, checkStatus, callback);
+    }
 
-        async.eachSeries(followers, checkStatus, callback)
+    function sendBaseEmails(callback){
 
+        function sendEmails(follower, callback){
+            sendPicksEmail_base(follower, user.username, picks, hostName, callback);
+        }
 
+        async.eachSeries(baseFollowerList, sendEmails, callback);
+    }
+
+    function sendPremiumEmails(callback){
+
+        function sendEmails(follower, callback){
+            sendPicksEmail_premium(follower, user.username, picks, hostName, callback);
+        }
+
+        async.eachSeries(baseFollowerList, sendEmails, callback);
     }
 
 
+    todo.push(getFollowers);
+    todo.push(filterFollowerWithNotificationsOn);
+    todo.push(filterFollowersWithCorrectStatus);
+    todo.push(sendBaseEmails);
+    todo.push(sendPremiumEmails);
 
+    async.waterfall(todo, callback);
 
 }
 
-function sendPickEmail(user, pickUser, picks, hostName, callback){
+function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
 
+}
+
+function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
+    var todo = [];
+
+    function render(callback){
+        function cb(err, emailHTML){
+            callback(err, emailHTML);
+        }
+
+        var templatePath = 'modules/fu/server/views/templates/new-picks.server.view.html';
+        var json = {
+            user: user.username,
+            pickUser: pickUserName,
+            url: 'https://' + hostName + '/make-picks'
+        };
+        renderTemplate(templatePath, json, cb);
+    }
+
+    function send(emailHTML, callback){
+        function cb(err){
+            callback(err);
+        }
+        var subject = 'You Have a New Follower';
+        sendEmail(emailHTML, subject, user.email, cb);
+    }
+
+    function cb(err){
+        console.log(err);
+        if (err){
+            var e = new Error('Error sending email - sendVerificationEmail');
+            e.error = err;
+            callback(e);
+            return;
+        }
+        callback();
+    }
+
+    todo.push(render);
+    todo.push(send);
+
+    async.waterfall(todo, cb);
 }
 
 function sendFollowerEmail(user, followUserName, hostName, callback){
@@ -222,4 +285,4 @@ function sendMessageEmail(user, userMessageName, hostName, callback){
 exports.sendVerificationEmail   = sendVerificationEmail;
 exports.sendFollowerEmail       = sendFollowerEmail;
 exports.sendMessageEmail        = sendMessageEmail;
-exports.sendPicksEmail        = sendPicksEmail;
+exports.sendPicksEmails        = sendPicksEmails;

@@ -185,9 +185,9 @@ function submit(user, eventGroups, hostName, callback){
     }
 
     function sendEmailNotifications(callback){
-        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
+        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(); //don't send emails if not in production
         EmailBl.sendPicksEmails(picks, user, hostName, function cb(err){});
-        return callback(null, follow);
+        return callback();
     }
 
     function cb(err){
