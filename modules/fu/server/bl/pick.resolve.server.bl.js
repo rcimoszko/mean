@@ -259,6 +259,7 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
     var opponentSetsWon;
     var setSpread;
     var setCount;
+    var gameSpread;
 
 
     switch(pick.betType){
@@ -342,8 +343,15 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                             opponentSetsWon++;
                         }
                     }
-                    setSpread = contestantSetsWon - opponentSetsWon;
-                    comparison = setSpread + pick.spread;
+                    if(contestantSetsWon !== 0 && opponentSetsWon !== 0){
+                        //for set spread
+                        setSpread = contestantSetsWon - opponentSetsWon;
+                        comparison = setSpread + pick.spread;
+                    } else {
+                        //for final score spread
+                        gameSpread = contestantScore - opponentScore;
+                        comparison = gameSpread + pick.spread;
+                    }
                     if(comparison > 0){
                         result = 'Win';
                     } else if (comparison < 0){
@@ -351,10 +359,8 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     }
                     break;
                 default:
-                    var gameSpread;
                     gameSpread = contestantScore - opponentScore;
                     comparison = gameSpread + pick.spread;
-
                     if(comparison === 0.25){
                         result = 'Half-Win';
                     } else if (comparison === -0.25){

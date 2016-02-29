@@ -74,7 +74,7 @@ module.exports.initMiddleware = function (app) {
   if (process.env.NODE_ENV === 'development') {
     // Disable views cache
     app.set('view cache', false);
-  } else if (process.env.NODE_ENV === 'production') {
+  } else if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry') {
     app.locals.cache = 'memory';
   }
 
