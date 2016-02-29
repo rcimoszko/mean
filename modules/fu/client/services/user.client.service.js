@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus', 'ApiUserFollowingSettings',
+    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus, ApiUserFollowingSettings) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -133,6 +133,32 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserNotification.update(notification, cbSuccess, cbError);
         }
 
+        function getFollowingSettings(callback){
+
+            function cbSuccess(followingSettings){
+                callback(null, followingSettings);
+            }
+
+            function cbError(err){
+                callback(err);
+            }
+
+            ApiUserFollowingSettings.query(cbSuccess, cbError);
+        }
+
+        function updateFollowingSettings(followingSettings, callback){
+
+            function cbSuccess(followingSettings){
+                callback(null, followingSettings);
+            }
+
+            function cbError(err){
+                callback(err);
+            }
+
+            ApiUserFollowingSettings.update(followingSettings, cbSuccess, cbError);
+        }
+
         var initialize = function(){
             function cbSuccess(userInfo){
                 console.log(userInfo);
@@ -175,6 +201,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             getCompletedPicks: getCompletedPicks,
             getConversations: getConversations,
             getFollowing: getFollowing,
+            getFollowingSettings: getFollowingSettings,
+            updateFollowingSettings: updateFollowingSettings,
             initialize: initialize,
 
             createConversation: createConversation,

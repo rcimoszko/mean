@@ -1,29 +1,26 @@
 'use strict';
 
-angular.module('fu').controller('SettingsController', ['$scope', '$http', '$location', '$state', 'Users', 'Authentication', 'Sports', 'StripeService', 'Page', 'Modal', 'User',
-    function($scope, $http, $location, $state, Users, Authentication, Sports, StripeService, Page, Modal, User) {
+angular.module('fu').controller('SettingsController', ['$scope', '$http', '$location', '$state', 'Users', 'Authentication', 'Sports', 'StripeService', 'Page', 'Modal', 'User', 'ApiUsers',
+    function($scope, $http, $location, $state, Users, Authentication, Sports, StripeService, Page, Modal, User, ApiUsers) {
         $scope.authentication = Authentication;
         $scope.stripe = StripeService;
         $scope.user = User;
         Page.meta.title = $scope.authentication.user.username+' Settings | FansUnite';
         Page.meta.description = $scope.authentication.user.username+' settings.';
 
-        // If user is not signed in then redirect back home
         if (!$scope.authentication.user) $state.go('home');
 
-        // Check if there are additional accounts
         $scope.hasConnectedAdditionalSocialAccounts = function(provider) {
             for (var i in $scope.authentication.user.additionalProvidersData) {
                 return true;
             }
             return false;
         };
-        // Check if provider is already in use with current user
+
         $scope.isConnectedSocialAccount = function(provider) {
             return $scope.authentication.user.provider === provider || ($scope.authentication.user.additionalProvidersData && $scope.authentication.user.additionalProvidersData[provider]);
         };
 
-        // Remove a user social account
         $scope.removeUserSocialAccount = function(provider) {
             $scope.success = $scope.error = null;
 
@@ -40,12 +37,11 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
             });
         };
 
-        // Update a user profile
         $scope.updateUserProfile = function() {
             $scope.success = $scope.error = null;
             delete $scope.authentication.user.profileUrl; // controlled by upload-image-url directive
             delete $scope.authentication.user.avatarUrl; // controlled by upload-image-url directive
-            var user = new Users($scope.authentication.user);
+            var user = new ApiUsers($scope.authentication.user);
 
             user.$update(function(response) {
                 $scope.success = 'Profile Saved Successfully';
@@ -55,7 +51,6 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
             });
         };
 
-        // Change user password
         $scope.changeUserPassword = function() {
             $scope.success = $scope.error = null;
 
@@ -99,6 +94,23 @@ angular.module('fu').controller('SettingsController', ['$scope', '$http', '$loca
             $scope.sports = sports;
         });
         $scope.profileImage = '../../modules/users/img/signup/profile.png';
+
+
+        /**
+         * Notifications
+         */
+
+        function cb(err, followingSettings){
+            console.log(followingSettings);
+            if(!err) $scope.followingSettings = followingSettings;
+        }
+
+        User.getFollowingSettings(cb);
+
+
+        $scope.toggleFollowingSettings = function(followingSettings){
+            followingSettings.$update();
+        };
 
     }
 ]);

@@ -1,13 +1,13 @@
-<section class="content-padding-top" data-ng-controller="SettingsController">
+<section class="content-padding-top settings" data-ng-controller="SettingsController">
     <div class="panel panel-settings">
         <div class="panel-heading">
             <h3>SETTINGS</h3>
         </div>
         <div class="panel-body">
+            <h3>Profile</h3>
             <form data-ng-submit="updateUserProfile()" class="signin form-horizontal" autocomplete="off">
                 <fieldset>
                     <div class="container-fluid">
-
                         <div class="row">
                             <div class="col-xs-5 text-center">
                                 <div class="form-group">
@@ -46,6 +46,9 @@
                     </div>
                 </fieldset>
             </form>
+
+            <h3>Subscription</h3>
+
             <div class="text-center" style="margin-bottom:20px;">
                 <btn-upgrade data-ng-if="user.info.status === 'free' || user.info.status === 'trial'"></btn-upgrade>
                 <div data-ng-if="user.info.status === 'base'">
@@ -100,6 +103,31 @@
                 </div>
                 <div data-ng-show="error" class="text-center text-danger">
                     <strong data-ng-bind="error"></strong>
+                </div>
+            </div>
+
+            <h3 class="col-md-12 text-center">Email Notifications</h3>
+
+            <div class="email-settings-container">
+                <label class="control-label">New Follower</label>
+                <div class="toggle-container">
+                    <input id="new-follower" data-ng-model="authentication.user.newFollowerEmail" data-ng-click="updateUserProfile()" class="toggle" type="checkbox">
+                    <label for="new-follower"></label>
+                </div>
+            </div>
+
+            <div data-ng-if="user.info.status === 'old premium' || user.info.status === 'premium' || user.info.status === 'trial' || user.info.status === 'lifetime premium with base'|| user.info.status === 'base'">
+                <h4>Pick Notifications</h4>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-4" data-ng-repeat="following in followingSettings|orderBy:'following.name'">
+                            <label class="control-label">{{following.following.ref.username}}</label>
+                            <div class="toggle-container pull-right">
+                                <input id="{{following.following.ref.username}}" data-ng-model="following.notify" data-ng-click="toggleFollowingSettings(following)" class="toggle" type="checkbox">
+                                <label for="{{following.following.ref.username}}"></label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

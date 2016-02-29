@@ -170,8 +170,8 @@ body {
                                         <tr>
                                             <td align="left"
                                                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                                class="padding-copy"><p>{{userFollowing}} has made a new
-                                                pick.</p>
+                                                class="padding-copy"><p><a href="{{url}}">{{pickUser}}</a> has made new
+                                                pick(s).</p>
 
                                                 <p><br></p>
 
@@ -197,8 +197,9 @@ body {
                                                     {% endfor %}
                                                     </tbody>
                                                 </table>
-
-                                                <p>{*Pick Made, odds, units, start time*}</p>
+                                                {% if proPickCount > 0 %}
+                                                + {{proPickCount}} Pro Picks
+                                                {% endif %}
 
                                                 <p><br></p>
 

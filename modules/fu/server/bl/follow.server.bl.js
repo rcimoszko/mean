@@ -11,6 +11,28 @@ var _ = require('lodash'),
 
 var populate = [];
 
+function get(id, callback){
+
+    function cb(err, sport){
+        callback(err, sport);
+    }
+
+    Follow.findById(id).exec(cb);
+}
+
+
+function update(data, follow, callback) {
+
+    function cb(err){
+        callback(err, follow);
+    }
+
+    follow = _.extend(follow, data);
+
+    follow.save(cb);
+}
+
+
 function findOneByQuery(query, callback){
     Follow.findOne(query, callback);
 }
@@ -109,7 +131,9 @@ function createFollow(user, userFollow, hostName, callback){
     }
 
     function sendEmail(follow, callback){
+        if(!userFollow.newFollowerEmail) return callback(null, follow);
         if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
+
         EmailBl.sendFollowerEmail(userFollow, user.username, hostName, function cb(err){});
         return callback(null, follow);
     }
@@ -219,6 +243,10 @@ function getFollowerListForEmails(userId, callback){
     Follow.find({'following.ref':userId, endDate: null, 'follower.ref':{$exists: true}}).populate({path: 'follower.ref'}).exec(callback);
 }
 
+function getFollowingListSettings(userId, callback){
+    Follow.find({'follower.ref':userId, endDate: null, 'following.ref':{$exists: true}}).populate({path: 'following.ref'}).exec(callback);
+}
+
 
 function aggregate(array, callback){
     Follow.aggregate(array).exec(callback);
@@ -228,10 +256,36 @@ function populateBy(follows, populate, callback){
     Follow.populate(follows, populate, callback);
 }
 
+
+
+function updateNotify(data, follow, callback) {
+
+    var todo = [];
+
+    function update_todo(callback){
+        update(data, follow, callback);
+    }
+
+    function populate_todo(follow, callback){
+        Follow.populate(follow, {path: 'following.ref', model: 'User'}, callback);
+    }
+
+    todo.push(update_todo);
+    todo.push(populate_todo);
+
+    async.waterfall(todo, callback);
+}
+
+
+exports.get                 = get;
+exports.update              = update;
 exports.follow              = follow;
 exports.unfollow            = unfollow;
 exports.getFollowingList    = getFollowingList;
 exports.getFollowerList     = getFollowerList;
+exports.getFollowerList     = getFollowerList;
+exports.getFollowingListSettings     = getFollowingListSettings;
 exports.getFollowerListForEmails     = getFollowerListForEmails;
+exports.updateNotify     = updateNotify;
 exports.aggregate       = aggregate;
 exports.populateBy       = populateBy;

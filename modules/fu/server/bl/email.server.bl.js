@@ -154,7 +154,49 @@ function sendPicksEmails(picks, user, hostName, callback){
 }
 
 function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
+    var todo = [];
 
+    var proPicks = _.remove(picks, {premium:true});
+
+    function render(callback){
+        function cb(err, emailHTML){
+            callback(err, emailHTML);
+        }
+
+        var templatePath = 'modules/fu/server/views/templates/new-picks-base.server.view.html';
+        var json = {
+            user: user.username,
+            pickUser: pickUserName,
+            picks: picks,
+            proPickCount: proPicks.length,
+            url: 'https://' + hostName + '/profile/'+pickUserName
+        };
+        renderTemplate(templatePath, json, cb);
+    }
+
+    function send(emailHTML, callback){
+        function cb(err){
+            callback(err);
+        }
+        var subject = pickUserName+ ' has made New Picks';
+        sendEmail(emailHTML, subject, user.email, cb);
+    }
+
+    function cb(err){
+        console.log(err);
+        if (err){
+            var e = new Error('Error sending email - sendVerificationEmail');
+            e.error = err;
+            callback(e);
+            return;
+        }
+        callback();
+    }
+
+    todo.push(render);
+    todo.push(send);
+
+    async.waterfall(todo, cb);
 }
 
 function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
@@ -165,11 +207,12 @@ function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
             callback(err, emailHTML);
         }
 
-        var templatePath = 'modules/fu/server/views/templates/new-picks.server.view.html';
+        var templatePath = 'modules/fu/server/views/templates/new-picks-premium.server.view.html';
         var json = {
             user: user.username,
             pickUser: pickUserName,
-            url: 'https://' + hostName + '/make-picks'
+            picks: picks,
+            url: 'https://' + hostName + '/profile/'+pickUserName
         };
         renderTemplate(templatePath, json, cb);
     }
@@ -178,7 +221,7 @@ function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
         function cb(err){
             callback(err);
         }
-        var subject = 'You Have a New Follower';
+        var subject = pickUserName+ ' has made New Picks';
         sendEmail(emailHTML, subject, user.email, cb);
     }
 

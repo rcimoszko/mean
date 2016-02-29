@@ -5481,3 +5481,7 @@ notification:last-of-type .notification {
 .scores-table .number {
   text-align: center;
 }
+.settings .panel-body h3 {
+  margin: 20px 0;
+  text-align: center;
+}

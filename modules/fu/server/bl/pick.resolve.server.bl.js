@@ -258,6 +258,7 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
     var contestantSetsWon;
     var opponentSetsWon;
     var setSpread;
+    var setCount;
 
 
     switch(pick.betType){
@@ -458,20 +459,26 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
         case 'sets':
             contestantSetsWon = 0;
             opponentSetsWon = 0;
+            setCount = 0;
             for(sets = 1; sets<=5; sets++){
                 if(event['contestant'+contestantNo+'Set'+sets+'Score'] > event['contestant'+opponentNo+'Set'+sets+'Score']){
                     contestantSetsWon++;
+                    setCount++;
                 } else if (event['contestant'+contestantNo+'Set'+sets+'Score'] < event['contestant'+opponentNo+'Set'+sets+'Score']) {
                     opponentSetsWon++;
+                    setCount++;
                 }
             }
-            setSpread = contestantSetsWon - opponentSetsWon;
-            comparison = setSpread + pick.spread;
-            if(comparison > 0){
-                result = 'Win';
-            } else if (comparison < 0){
-                result = 'Loss';
+            if(setCount > 1) {
+                setSpread = contestantSetsWon - opponentSetsWon;
+                comparison = setSpread + pick.spread;
+                if (comparison > 0) {
+                    result = 'Win';
+                } else if (comparison < 0) {
+                    result = 'Loss';
+                }
             }
+
             break;
     }
 
@@ -577,6 +584,7 @@ function resolvePick(event, pick, callback){
     }
 
     function resolve_todo(result, callback){
+        if(typeof result === 'undefined') return callback(null);
         function cb(err){
             callback(err);
         }
