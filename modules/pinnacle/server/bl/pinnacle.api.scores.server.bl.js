@@ -138,7 +138,7 @@ function updateInsertAllScores(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({}, callback);
     }
 
     function processSports(pinnacleSports, callback){

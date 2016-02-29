@@ -75,6 +75,11 @@ function getOneByQuery(query, callback){
     PinnacleLeague.findOne(query, callback);
 }
 
+function getRecentActiveLeagues(callback){
+    var query = {};
+    var group = {};
+}
+
 exports.populate    = populate;
 exports.get         = get;
 exports.getAll      = getAll;
