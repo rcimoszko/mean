@@ -4,5 +4,6 @@ angular.module('fu').controller('ModalTrialController', ['$scope', '$modalInstan
     function($scope, $modalInstance, $state, Modal) {
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
+
     }
 ]);

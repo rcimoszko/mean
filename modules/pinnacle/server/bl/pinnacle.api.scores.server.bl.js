@@ -74,6 +74,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
 
 }
 
+
 function updateInsertScoresForLeague(pinnacleLeague, callback){
     var todo = [];
 
@@ -107,12 +108,15 @@ function updateInsertScoresForLeague(pinnacleLeague, callback){
     async.waterfall(todo, callback);
 }
 
+
+
 function updateInsertScoresForSport(pinnacleSport, callback){
     console.log(pinnacleSport.name);
 
     var todo = [];
 
     function getActiveLeagues(callback){
+        //
         PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
     }
 

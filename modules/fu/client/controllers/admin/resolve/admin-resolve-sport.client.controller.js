@@ -60,7 +60,6 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
                             event[field] = updatedEvent[field];
                         }
                     }
-                    console.log(event);
                 }
             }
 
@@ -71,23 +70,20 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
         };
 
         $scope.setContestants = function(event){
-            $scope.contestants = [
+            return [
+                undefined,
                 {name: event.contestant1.name, ref:event.contestant1.ref},
                 {name: event.contestant2.name, ref:event.contestant2.ref}
             ];
         };
 
-        $scope.setWinner = function(event){
-            if(event.contestantWinner){
-                var found = $filter('filter')($scope.contestants, function(contestant){
-                    return contestant.ref === event.contestantWinner.ref;
+        $scope.setWinner = function(contestants, event){
+            if(event.contestantWinner) {
+                var found = $filter('filter')(contestants, function (contestant) {
+                    if(contestant) return contestant.ref === event.contestantWinner.ref;
                 });
-                if(found.length) event.contestantWinner =  $scope.contestants[$scope.contestants.indexOf(found[0])];
+                if (found.length) event.contestantWinner = contestants[contestants.indexOf(found[0])];
             }
         };
-
-
-
-
     }
 ]);

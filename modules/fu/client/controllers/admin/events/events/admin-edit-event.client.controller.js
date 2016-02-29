@@ -84,6 +84,7 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
                 {name: event.contestant1.name, ref:event.contestant1.ref},
                 {name: event.contestant2.name, ref:event.contestant2.ref}
             ];
+            return $scope.contestants;
         };
 
 
