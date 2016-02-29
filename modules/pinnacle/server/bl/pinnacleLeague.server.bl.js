@@ -2,6 +2,8 @@
 
 var _ = require('lodash'),
     mongoose = require('mongoose'),
+    async = require('async'),
+    EventBl = require('../../../fu/server/bl/event.server.bl'),
     PinnacleLeague = mongoose.model('PinnacleLeague');
 
 function populate(pinnacleLeague, callback){
@@ -76,16 +78,36 @@ function getOneByQuery(query, callback){
 }
 
 function getRecentActiveLeagues(pinnacleSport, callback){
-    var match = {
+    var todo = [];
 
-    };
+    function groupRecentLeagues(callback){
+        var dayDiff = 1;
+        switch (pinnacleSport.sport.name){
+            case 'Cricket':
+                dayDiff = 5;
+                break;
+        }
+        var startTime = new Date();
+        startTime = startTime.setDate(startTime.getDate() - dayDiff);
 
-    var group = {
+        var aggArray = [];
 
-    };
+        var match = {$match: { 'sport.ref': pinnacleSport.sport.ref, startTime: {$gte: startTime}}};
+        var group = {$group:{ _id: '$sport', leagues: {$addToSet: '$league.ref'}}};
+        aggArray.push(match);
+        aggArray.push(group);
+        EventBl.aggregate(aggArray, callback);
+    }
 
+    function getPinnacleLeagues(leagueArray, callback){
+        console.log(leagueArray);
+        PinnacleLeague.find({league:{$in:leagueArray}}, callback);
+    }
 
+    todo.push(groupRecentLeagues);
+    todo.push(getPinnacleLeagues);
 
+    async.waterfall(todo, callback);
 
 }
 

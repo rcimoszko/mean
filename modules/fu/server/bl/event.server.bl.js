@@ -233,6 +233,10 @@ function getResolveEvents(sport, callback){
 }
 
 
+function aggregate(array, callback){
+    m_Event.aggregate(array).exec(callback);
+}
+
 
 exports.populate    = populate;
 exports.get         = get;
@@ -247,6 +251,7 @@ exports.getByLeague  = getByLeague;
 exports.getForSearch  = getForSearch;
 exports.populateBy  = populateBy;
 exports.updateBy  = updateBy;
+exports.aggregate  = aggregate;
 
 exports.cancel      = cancel;
 exports.report      = report;

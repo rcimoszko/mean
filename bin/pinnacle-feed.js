@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var mongoose = require('mongoose'),
     uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/fu4-dev';
 require('../modules/pinnacle/server/models/pinnacleContestant.server.model.js');
@@ -17,7 +16,6 @@ require('../modules/fu/server/models/chat.server.model.js');
 require('../modules/fu/server/models/verificationtoken.server.model.js');
 require('../modules/fu/server/models/event.server.model.js');
 
-process.env.NODE_ENV = 'production';
 
 mongoose.connect(uristring, function (err, res) {
     if (err) {

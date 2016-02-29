@@ -116,8 +116,8 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        //
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
+        PinnacleLeagueBl.getRecentActiveLeagues(pinnacleSport, callback);
+        //PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
