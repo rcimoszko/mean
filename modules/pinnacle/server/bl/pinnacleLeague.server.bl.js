@@ -81,7 +81,7 @@ function getRecentActiveLeagues(pinnacleSport, callback){
     var todo = [];
 
     function groupRecentLeagues(callback){
-        var dayDiff = 10;
+        var dayDiff = 3;
         switch (pinnacleSport.sport.name){
             case 'Cricket':
                 dayDiff = 5;
@@ -100,7 +100,6 @@ function getRecentActiveLeagues(pinnacleSport, callback){
     }
 
     function getPinnacleLeagues(leagueArray, callback){
-        console.log(leagueArray);
         if(leagueArray.length === 0) return callback(null, []);
         PinnacleLeague.find({'league.ref':{$in:leagueArray[0].leagues}}, callback);
     }

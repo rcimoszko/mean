@@ -121,7 +121,6 @@ function updateInsertScoresForSport(pinnacleSport, callback){
     }
 
     function processLeagues(pinnacleLeagues, callback){
-        console.log(pinnacleLeagues);
         function proccessLeague(pinnacleLeague, callback){
             if(pinnacleLeague.useScraper) return callback(null);
             updateInsertScoresForLeague(pinnacleLeague, callback);
