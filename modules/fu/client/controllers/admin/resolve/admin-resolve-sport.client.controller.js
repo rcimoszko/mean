@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', '$stateParams', 'Sports', 'Events',
-    function ($scope, $stateParams, Sports, Events) {
+angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', '$stateParams', 'Sports', 'Events', '$filter',
+    function ($scope, $stateParams, Sports, Events, $filter) {
         $scope.sportId = $stateParams.sportId;
 
         function cb(err, events){

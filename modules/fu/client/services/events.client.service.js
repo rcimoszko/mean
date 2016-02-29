@@ -114,7 +114,7 @@ angular.module('fu').factory('Events', ['ApiEventsComments', 'ApiEvents', 'Authe
                 callback(response.data.message);
             }
 
-            var event = new ApiEvents(event);
+            event = new ApiEvents(event);
 
             event.$update({_id: event._id}, cbSuccess, cbError);
         };
