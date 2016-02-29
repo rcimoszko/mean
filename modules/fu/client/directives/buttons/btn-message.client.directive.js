@@ -13,7 +13,7 @@ angular.module('fu').directive('btnMessage', function () {
                 if(!$scope.authentication.user) {
                     $state.go('signup');
                 } else {
-                    $state.go('message.newWithUser', {username:$scope.username});
+                    $state.go('messages.newWithUser', {username:$scope.username});
                 }
             };
         }]
