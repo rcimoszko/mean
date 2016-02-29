@@ -102,8 +102,8 @@ function getRecentActiveLeagues(pinnacleSport, callback){
     }
 
     function getPinnacleLeagues(leagueArray, callback){
-        console.log(leagueArray);
-        PinnacleLeague.find({league:{$in:leagueArray}}, callback);
+        if(leagueArray.length === 0) return callback(null, []);
+        PinnacleLeague.find({league:{$in:leagueArray[0].leagues}}, callback);
     }
 
     todo.push(groupRecentLeagues);
