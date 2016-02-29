@@ -3,7 +3,7 @@
 angular.module('fu').factory('Trial', ['ApiTrialActivate', 'Authentication', 'User',
     function(ApiTrialActivate, Authentication, User) {
 
-        var activate = function(query, callback){
+        var activate = function(callback){
             function cbSuccess(user){
                 Authentication.user = user;
                 User.updateUserStatus();

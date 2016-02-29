@@ -366,10 +366,7 @@ function getNewMessageCount(userId, callback){
 function getUserStatus(user, callback){
     var status = 'free';
 
-    if(user.trial){
-        status = 'trial';
-    }
-    else if(user.lifetimePremium){
+    if(user.lifetimePremium){
         if(user.base){
             status = 'lifetime premium with base';
         } else {
@@ -392,6 +389,8 @@ function getUserStatus(user, callback){
     }
     else if(user.base){
         status = 'base';
+    } else if(user.trial){
+        status = 'trial';
     }
     callback(null, status);
 }

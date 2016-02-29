@@ -56,7 +56,8 @@ angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authe
             Modal.showModal(
                 'modules/fu/client/views/trial/modal/modal-trial.client.view.html',
                 'ModalTrialController',
-                null
+                null,
+                'trial'
             );
         };
 

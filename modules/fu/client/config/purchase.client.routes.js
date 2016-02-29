@@ -29,7 +29,7 @@ angular.module('fu').config(['$stateProvider',
             })
             .state('trialSuccess', {
                 url: '/trial-pro-purchase-success?redirect',
-                templateUrl: 'modules/fu/client/views/purchase/base-purchase-success.client.view.html',
+                templateUrl: 'modules/fu/client/views/purchase/trial-purchase-success.client.view.html',
                 title: 'Thank You for Signing up for a Free Trial | FansUnite',
                 data: {
                     roles: ['user']

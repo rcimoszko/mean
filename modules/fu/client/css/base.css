@@ -1513,6 +1513,11 @@ notification:last-of-type .notification {
 .modal-stripe .btn-upgrade {
   margin-top: 10px;
 }
+@media (min-width: 768px) {
+  .modal-trial {
+    width: 400px;
+  }
+}
 #auth-side-menu {
   position: fixed;
   top: 0;
