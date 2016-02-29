@@ -17,7 +17,7 @@ function submit(req, res) {
     var user = req.user;
     var eventGroup = req.body;
 
-    UserMakePicksBl.submit(user, eventGroup, cb);
+    UserMakePicksBl.submit(user, eventGroup, req.headers.host, cb);
 }
 
 

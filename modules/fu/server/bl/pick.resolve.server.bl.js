@@ -18,6 +18,7 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             break;
         case 'match':
         case 'game':
+        case 'matchups':
             switch(event.sport.name.toLowerCase()){
                 case 'soccer':
                 case 'handball':

@@ -215,6 +215,10 @@ function getFollowerList(userId, callback){
     Follow.find({'following.ref':userId, endDate: null, 'follower.ref':{$exists: true}}).populate({path: 'follower.ref', select: 'avatarUrl username'}).exec(callback);
 }
 
+function getFollowerListForEmails(userId, callback){
+    Follow.find({'following.ref':userId, endDate: null, 'follower.ref':{$exists: true}}).populate({path: 'follower.ref'}).exec(callback);
+}
+
 
 function aggregate(array, callback){
     Follow.aggregate(array).exec(callback);
@@ -228,5 +232,6 @@ exports.follow              = follow;
 exports.unfollow            = unfollow;
 exports.getFollowingList    = getFollowingList;
 exports.getFollowerList     = getFollowerList;
+exports.getFollowerListForEmails     = getFollowerListForEmails;
 exports.aggregate       = aggregate;
 exports.populateBy       = populateBy;

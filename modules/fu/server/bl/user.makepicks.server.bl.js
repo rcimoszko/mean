@@ -8,11 +8,12 @@ var _ = require('lodash'),
     BetBl = require('./bet.server.bl'),
     PickBl = require('./pick.server.bl'),
     UserMakePicksCreate = require('./user.makepicks.create.server.bl'),
+    EmailBl = require('./email.server.bl'),
     User = mongoose.model('User');
 
 
 
-function submit(user, eventGroups, callback){
+function submit(user, eventGroups, hostName, callback){
 
     var todo = [];
     var totalAtRisk = 0;
@@ -183,15 +184,11 @@ function submit(user, eventGroups, callback){
         user.save(callback);
     }
 
-    /*
     function sendEmailNotifications(callback){
-        //TO FINISH
         if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'cloud-foundry' ) return callback(null, follow); //don't send emails if not in production
-        EmailBl.sendFollowerEmail(userFollow, user.username, hostName, function cb(err){});
+        EmailBl.sendPicksEmails(picks, user, hostName, function cb(err){});
         return callback(null, follow);
     }
-    */
-
 
     function cb(err){
         callback(err, {user: user, picks: picks});
@@ -204,6 +201,7 @@ function submit(user, eventGroups, callback){
     todo.push(checkPickMade);
     todo.push(submitPicks);
     todo.push(updateUser);
+    todo.push(sendEmailNotifications);
 
     async.waterfall(todo, cb);
 
