@@ -181,7 +181,10 @@ function submit(user, eventGroups, hostName, callback){
 
         user.units = user.units - totalAtRisk;
         user.pickMade = true;
-        user.save(callback);
+        function cb(err){
+            callback(err);
+        }
+        user.save(cb);
     }
 
     function sendEmailNotifications(callback){

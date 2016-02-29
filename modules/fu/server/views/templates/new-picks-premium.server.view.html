@@ -1,5 +1,3 @@
-<title>A Responsive Email
-    Template</title><!--    An email present from your friends at Litmus (@litmusapp)    Email is surprisingly hard. While this has been thoroughly tested, your mileage may vary.    It's highly recommended that you test using a service like Litmus (http://litmus.com) and your own devices.    Enjoy! -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -170,41 +168,26 @@ body {
                                         <tr>
                                             <td align="left"
                                                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                                class="padding-copy"><p><a href="{{url}}">{{pickUser}}</a> has made a new
+                                                class="padding-copy"><p><a style="text-decoration:none;" href="{{userUrl}}">{{pickUser}}</a> has made new
                                                 pick(s).</p>
 
                                                 <p><br></p>
 
-                                                <table>
-                                                    <thead>
-                                                        <th>Sport</th>
-                                                        <th>League</th>
-                                                        <th>Event</th>
-                                                        <th>Pick</th>
-                                                        <th>Odds</th>
-                                                        <th>Units</th>
-                                                    </thead>
-                                                    <tbody>
-                                                    {% for pick in picks %}
-                                                    <tr>
-                                                        <td>{{pick.sport.name}}</td>
-                                                        <td>{{pick.league.name}}</td>
-                                                        <td>{{pick.contestant2.name}} @ {{pick.contestant1.name}}</td>
-                                                        <td>{{pick.name}}</td>
-                                                        <td>{{pick.odds}}</td>
-                                                        <td>{{pick.units}}</td>
-                                                    </tr>
+                                                {% for event in events %}
+                                                    <h4>{{event.header}}</h4>
+                                                    {% for pick in event.picks %}
+                                                    <div>{{pick.name}}</div>
                                                     {% endfor %}
-                                                    </tbody>
-                                                </table>
+                                                {% endfor %}
+
 
                                                 <p><br></p>
 
                                                 <p><br></p>
 
-                                                <p style="text-align: center; "><img
+                                                <p style="text-align: center; "><a href="{{userUrl}}"><img
                                                     src="http://app.maaxmarket.com/app/email_templates/de60472030170043bab53a1261ea1f69/copy-pick-button.png"
-                                                    style="width: 200px;"><br></p></td>
+                                                    style="width: 200px;"></a></p><br></p></td>
                                         </tr>
                                         <tr>
                                             <td align="left"
@@ -244,8 +227,8 @@ body {
                             <tr>
                                 <td align="left"
                                     style="padding: 20px 0 0 0; font-size: 12px; line-height: 16px; font-family: Helvetica, Arial, sans-serif; color: #666666;"
-                                    class="padding-copy"><span class="appleFooter" style="color:#666666;">Copyright 2016 | FansUnite Media Inc |All Rights Reserved.</span><br><a
-                                    class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a><span
+                                    class="padding-copy"><span class="appleFooter" style="color:#666666;">Copyright 2016 | FansUnite Media Inc | All Rights Reserved.</span><br><a
+                                    href="{{manageUrl}}" class="original-only" style="color: #666666; text-decoration: none;">Mange Email Settings</a><span
                                     class="original-only"
                                     style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
                                     style="color: #666666; text-decoration: none;">View this email in your browser</a>

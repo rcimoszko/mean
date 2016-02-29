@@ -58,13 +58,17 @@ function createFollowNotification(user, userFrom, follow, callback){
         create(notification, callback);
     }
 
-    function sendNotification(notification, callback){
+    function populateNotification(notification, callback){
+        m_Notification.populate(notification, {path: 'userFrom.ref', model:'User', select:'username avatarUrl'}, callback);
+    }
 
+    function sendNotification(notification, callback){
         UserSocket.sendNotification(notification);
         callback();
     }
 
     todo.push(createNotification);
+    todo.push(populateNotification);
     todo.push(sendNotification);
 
     async.waterfall(todo, callback);

@@ -6,6 +6,7 @@ var nodemailer = require('nodemailer'),
     renderer = require('swig'),
     FollowBl = require('./follow.server.bl'),
     UserBl = require('./user.server.bl'),
+    PickBl = require('./pick.server.bl'),
     path = require('path'),
     config = require('../../../../config/config');
 
@@ -62,7 +63,6 @@ function sendVerificationEmail(token, user, hostName, callback) {
     }
 
     function cb(err){
-        console.log(err);
         if (err){
             var e = new Error('Error sending email - sendVerificationEmail');
             e.error = err;
@@ -79,31 +79,95 @@ function sendVerificationEmail(token, user, hostName, callback) {
 
 }
 
+
+function betName(pick){
+    var text;
+    switch(pick.betType){
+        case 'spread':
+            text = pick.contestant.name+' '+pick.spread;
+            break;
+        case 'total points':
+            text = pick.overUnder+' '+pick.points;
+            break;
+        case 'team totals':
+            text = pick.contestant.name+' '+pick.overUnder+' '+pick.points;
+            break;
+        case 'moneyline':
+            if(pick.draw){
+                text = 'Draw';
+            } else {
+                text = pick.contestant.name;
+            }
+            break;
+        case 'sets':
+            text = pick.contestant.name+' '+pick.spread+' sets';
+            break;
+        default:
+            text = pick.contestant.name;
+            break;
+
+    }
+    text = text +' ('+pick.betType + ' - '+pick.betDuration+') - '+pick.units+'unit(s) @ '+pick.odds;
+    return text;
+}
+
 function sendPicksEmails(picks, user, hostName, callback){
 
     var todo = [];
     var baseFollowerList = [];
     var premiumFollowerList = [];
+    var processedEvents = [];
+
+    function populatePicks(callback){
+        var populate = [
+            {path: 'event', model:'Event', select: '-pinnacleBets'}
+        ];
+
+        PickBl.populateBy(picks, populate, callback);
+    }
+
+    function processPicks(picks, callback){
+
+        picks = _.sortBy(picks, 'event.startTime');
+
+        function processPick(pick, callback){
+            var eventHeader = pick.event.sport.name+' // '+pick.event.league.name+' // '+pick.event.contestant2.name+' @ '+pick.event.contestant1.name + ' // '+new Date(pick.event.startTime).toUTCString();
+            var exists = false;
+            for(var i=0; i<processedEvents.length; i++){
+                if(processedEvents[i].header === eventHeader) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            var pPick = pick.toJSON();
+            pPick.name = betName(pPick) ;
+
+            if(!exists){
+                processedEvents.push({header:eventHeader, picks:[pPick]});
+            } else {
+                processedEvents[i].picks.push(pPick);
+            }
+            callback();
+        }
+
+        async.eachSeries(picks, processPick, callback);
+
+    }
 
     function getFollowers(callback){
-        console.log('getFollowers');
         FollowBl.getFollowerListForEmails(user._id, callback);
     }
 
     function filterFollowerWithNotificationsOn(followers, callback){
-        console.log('filterNotifications');
         followers = _.filter(followers, function(follow){
             return follow.notify === true || typeof follow.notify === 'undefined';
         });
-
         callback(null, followers);
     }
 
     function filterFollowersWithCorrectStatus(followers, callback){
-        console.log('filterFollowersWithCorrectStatus');
-
-
-        function checkStatus(follower){
+        function checkStatus(follower, callback){
             function cb(err, status){
                 switch(status){
                     case 'lifetime premium with base':
@@ -115,9 +179,10 @@ function sendPicksEmails(picks, user, hostName, callback){
                     case 'base':
                         baseFollowerList.push(follower.follower.ref);
                         break;
-
                 }
+                callback();
             }
+            if(!follower.follower.ref) return callback();
             UserBl.getUserStatus(follower.follower.ref, cb);
         }
 
@@ -127,7 +192,7 @@ function sendPicksEmails(picks, user, hostName, callback){
     function sendBaseEmails(callback){
 
         function sendEmails(follower, callback){
-            sendPicksEmail_base(follower, user.username, picks, hostName, callback);
+            sendPicksEmail_base(follower, user.username, processedEvents, hostName, callback);
         }
 
         async.eachSeries(baseFollowerList, sendEmails, callback);
@@ -136,13 +201,15 @@ function sendPicksEmails(picks, user, hostName, callback){
     function sendPremiumEmails(callback){
 
         function sendEmails(follower, callback){
-            sendPicksEmail_premium(follower, user.username, picks, hostName, callback);
+            sendPicksEmail_premium(follower, user.username, processedEvents, hostName, callback);
         }
 
-        async.eachSeries(baseFollowerList, sendEmails, callback);
+        async.eachSeries(premiumFollowerList, sendEmails, callback);
     }
 
 
+    todo.push(populatePicks);
+    todo.push(processPicks);
     todo.push(getFollowers);
     todo.push(filterFollowerWithNotificationsOn);
     todo.push(filterFollowersWithCorrectStatus);
@@ -153,10 +220,15 @@ function sendPicksEmails(picks, user, hostName, callback){
 
 }
 
-function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
+function sendPicksEmail_base(user, pickUserName, events, hostName, callback){
     var todo = [];
 
-    var proPicks = _.remove(picks, {premium:true});
+    for(var i=0; i<events.length; i++){
+        events[i].generalPicks = _.filter(events[i].picks, {premium:false});
+        events[i].proPicks = _.filter(events[i].picks, {premium:true});
+        events[i].proCount = events[i].proPicks.length;
+        events[i].generalPickCount = events[i].generalPicks.length;
+    }
 
     function render(callback){
         function cb(err, emailHTML){
@@ -167,9 +239,9 @@ function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
         var json = {
             user: user.username,
             pickUser: pickUserName,
-            picks: picks,
-            proPickCount: proPicks.length,
-            url: 'https://' + hostName + '/profile/'+pickUserName
+            events: events,
+            userUrl: 'https://' + hostName + '/profile/'+pickUserName,
+            manageUrl: 'https://' + hostName + '/settings'
         };
         renderTemplate(templatePath, json, cb);
     }
@@ -183,7 +255,6 @@ function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
     }
 
     function cb(err){
-        console.log(err);
         if (err){
             var e = new Error('Error sending email - sendVerificationEmail');
             e.error = err;
@@ -199,7 +270,7 @@ function sendPicksEmail_base(user, pickUserName, picks, hostName, callback){
     async.waterfall(todo, cb);
 }
 
-function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
+function sendPicksEmail_premium(user, pickUserName, events, hostName, callback){
     var todo = [];
 
     function render(callback){
@@ -211,8 +282,9 @@ function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
         var json = {
             user: user.username,
             pickUser: pickUserName,
-            picks: picks,
-            url: 'https://' + hostName + '/profile/'+pickUserName
+            events: events,
+            userUrl: 'https://' + hostName + '/profile/'+pickUserName,
+            manageUrl: 'https://' + hostName + '/settings'
         };
         renderTemplate(templatePath, json, cb);
     }
@@ -226,7 +298,6 @@ function sendPicksEmail_premium(user, pickUserName, picks, hostName, callback){
     }
 
     function cb(err){
-        console.log(err);
         if (err){
             var e = new Error('Error sending email - sendVerificationEmail');
             e.error = err;
@@ -255,7 +326,9 @@ function sendFollowerEmail(user, followUserName, hostName, callback){
         var json = {
             user: user.username,
             followUser: followUserName,
-            url: 'https://' + hostName + '/make-picks'
+            picksUrl: 'https://' + hostName + '/make-picks',
+            userUrl: 'https://' + hostName + '/profile/'+followUserName,
+            manageUrl: 'https://' + hostName + '/settings'
         };
         renderTemplate(templatePath, json, cb);
     }
@@ -269,7 +342,6 @@ function sendFollowerEmail(user, followUserName, hostName, callback){
     }
 
     function cb(err){
-        console.log(err);
         if (err){
             var e = new Error('Error sending email - sendVerificationEmail');
             e.error = err;
@@ -311,7 +383,6 @@ function sendMessageEmail(user, userMessageName, hostName, callback){
     }
 
     function cb(err){
-        console.log(err);
         if (err){
             var e = new Error('Error sending email - sendVerificationEmail');
             e.error = err;

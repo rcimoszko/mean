@@ -2,6 +2,7 @@
 
 var cfenv = require('cfenv'),
     appEnv = cfenv.getAppEnv();
+/*
 var cfMongoUrl = (function() {
     if (appEnv.getService('mean-mongo')) {
         var mongoCreds = appEnv.getService('mean-mongo').credentials;
@@ -10,6 +11,7 @@ var cfMongoUrl = (function() {
         throw new Error('No service names "mean-mongo" bound to the application.');
     }
 }());
+*/
 
 var getCred = function (serviceName, credProp) {
     return appEnv.getService(serviceName) ?
@@ -19,7 +21,7 @@ var getCred = function (serviceName, credProp) {
 module.exports = {
     port: appEnv.port,
     db: {
-        uri: cfMongoUrl,
+        uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI,
         options: {
             user: '',
             pass: ''

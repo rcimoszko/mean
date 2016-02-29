@@ -151,19 +151,19 @@ function insertScores_chess(event, scores, callback){
 
 function insertScores_cricket(event, scores, callback){
     if('1st inning' in scores){
-        event.contestant1Set1Score = scores['1st inning'].team1;
-        event.contestant2Set1Score = scores['1st inning'].team2;
+        event.contestant1Set1Score = scores['1st inning'].team2;
+        event.contestant2Set1Score = scores['1st inning'].team1;
     }
     if('2nd inning' in scores){
-        event.contestant1Set2Score = scores['2nd inning'].team1;
-        event.contestant2Set2Score = scores['2nd inning'].team2;
+        event.contestant1Set2Score = scores['2nd inning'].team2;
+        event.contestant2Set2Score = scores['2nd inning'].team1;
     }
 
     if('match' in scores){
-        event.contestant1FinalScore = scores.match.team1;
-        event.contestant2FinalScore = scores.match.team2;
-        event.contestant1RegulationScore = scores.match.team1;
-        event.contestant2RegulationScore = scores.match.team2;
+        event.contestant1FinalScore = scores.match.team2;
+        event.contestant2FinalScore = scores.match.team1;
+        event.contestant1RegulationScore = scores.match.team2;
+        event.contestant2RegulationScore = scores.match.team1;
         event.scores = true;
     }
     callback();
@@ -954,10 +954,10 @@ function insertScores_aussieRules(event, scores, callback){
 
 function insertScores_matchups(event, scores, callback){
     if('matchups' in scores){
-        event.contestant1FinalScore = scores.matchups.team1;
-        event.contestant2FinalScore = scores.matchups.team2;
-        event.contestant1RegulationScore = scores.matchups.team1;
-        event.contestant2RegulationScore = scores.matchups.team2;
+        event.contestant1FinalScore = scores.matchups.team2;
+        event.contestant2FinalScore = scores.matchups.team1;
+        event.contestant1RegulationScore = scores.matchups.team2;
+        event.contestant2RegulationScore = scores.matchups.team1;
         event.scores = true;
     }
     callback();
