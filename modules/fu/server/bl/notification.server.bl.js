@@ -25,6 +25,7 @@ function get(id, callback){
 function create(data, callback) {
 
     function cb(err){
+        console.log(err);
         callback(err, notification);
     }
 
@@ -72,10 +73,6 @@ function createFollowNotification(user, userFrom, follow, callback){
 function createCopyPickNotification(user, userFrom, pick, callback){
     var todo = [];
 
-    console.log(user);
-    console.log(userFrom);
-    console.log(pick);
-
     function createNotification(callback){
         var notification = {
             user: {name: user.name, ref: user.ref},
@@ -99,7 +96,6 @@ function createCopyPickNotification(user, userFrom, pick, callback){
 }
 
 function createCommentPickNotification(user, userFrom, pick, comment, callback){
-
     var todo = [];
 
     function createNotification(callback){
@@ -108,7 +104,7 @@ function createCommentPickNotification(user, userFrom, pick, comment, callback){
             userFrom: {name: userFrom.username, ref: userFrom._id},
             type: 'pick comment',
             comment: comment,
-            pick: pick
+            pick: pick._id
         };
 
         create(notification, callback);

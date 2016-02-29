@@ -43,6 +43,7 @@ angular.module('fu').directive('commentForm', function() {
 
             function pickCommentReply(){
                 function cb(err, comment){
+                    console.log(comment);
                     $scope.showReply = false;
                     $scope.text = '';
                     $scope.reply.replies.push(comment.reply);

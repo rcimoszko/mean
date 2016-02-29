@@ -182,7 +182,6 @@ function pickCommentReply(comment, pick, user, text, replyIndex, replyToUser, ca
     };
 
     function insertReply(callback){
-
         var path = replyIndex.split(',');
         var strPath = 'replies';
         if(path.length > 0) {
@@ -195,20 +194,19 @@ function pickCommentReply(comment, pick, user, text, replyIndex, replyToUser, ca
         var update = {preview:text, $push: {}};
         update.$push[strPath] = reply;
 
-
         function cb(err, comment){
-            callback(err);
+            callback(err, comment);
         }
 
-        m_Comment.update(query, update, cb);
+        m_Comment.findOneAndUpdate(query, update, cb);
     }
 
     function createPickCommentNotification(comment, callback){
-        NotificationBl.createCommentPickNotification(pick.user, user, comment, callback);
+        NotificationBl.createCommentPickNotification(pick.user, user, pick, comment, callback);
     }
 
-    function createCommentReplyNotification(comment, callback){
-        if(String(replyToUser.ref._id) === String(user._id)) return callback();
+    function createCommentReplyNotification(callback){
+        if(String(replyToUser.ref._id) === String(user._id) || String(replyToUser.ref) === String(user._id)) return callback();
         NotificationBl.createCommentReplyNotification(replyToUser.ref, user, comment, callback);
     }
 

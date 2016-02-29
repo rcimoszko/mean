@@ -32,6 +32,7 @@ angular.module('fu').factory('Picks', ['ApiPicksComments', 'ApiPicks',
 
         var commentReply = function(pick, comment, replyIndex, replyUser, text, callback){
             function cbSuccess(comments){
+                console.log(comments);
                 callback(null, comments);
             }
 
