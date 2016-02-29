@@ -96,6 +96,9 @@ function getRecentActiveLeagues(pinnacleSport, callback){
         var group = {$group:{ _id: '$sport', leagues: {$addToSet: '$league.ref'}}};
         aggArray.push(match);
         aggArray.push(group);
+        console.log(match);
+        console.log(group);
+        console.log(aggArray);
         EventBl.aggregate(aggArray, callback);
     }
 
