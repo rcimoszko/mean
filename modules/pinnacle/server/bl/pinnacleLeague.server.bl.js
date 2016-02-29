@@ -81,19 +81,19 @@ function getRecentActiveLeagues(pinnacleSport, callback){
     var todo = [];
 
     function groupRecentLeagues(callback){
-        var dayDiff = 1;
+        var dayDiff = 10;
         switch (pinnacleSport.sport.name){
             case 'Cricket':
                 dayDiff = 5;
                 break;
         }
         var startTime = new Date();
-        startTime = startTime.setDate(startTime.getDate() - dayDiff);
         console.log(startTime);
+        startTime = startTime.setDate(startTime.getDate() - dayDiff);
         var aggArray = [];
 
-        var match = {$match: { 'sport.ref': mongoose.Types.ObjectId(pinnacleSport.sport.ref), startTime: {$gte: startTime}}};
-        var group = {$group:{ _id: '$sport', leagues: {$addToSet: '$league.ref'}}};
+        var match = {$match: {'sport.ref': mongoose.Types.ObjectId(pinnacleSport.sport.ref), startTime: {$gte: startTime}}};
+        var group = {$group: {_id: '$sport', leagues: {$addToSet: '$league.ref'}}};
         aggArray.push(match);
         aggArray.push(group);
         console.log(match);
