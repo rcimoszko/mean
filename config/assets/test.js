@@ -2,8 +2,8 @@
 
 module.exports = {
     client: {
-        css: 'public/dist/application.min.css',
-        js: 'public/dist/application.min.js'
+        css: 'public/lib/dist/application.min.css',
+        js: 'public/lib/dist/application.min.js'
     },
     tests: {
         client: ['modules/*/tests/client/**/*.js'],
