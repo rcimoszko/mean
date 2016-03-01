@@ -31,20 +31,25 @@ module.exports = {
         'public/lib/ng-csv/build/ng-csv.min.js',
         //'public/lib/angular-scrolltofixed/dist/angular-scrolltofixed.min.js'
         'public/lib/ngSticky/dist/sticky.min.js',
-        'public/lib/angulartics/dist/angulartics.min.js',
-        'public/lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js'
+        'public/lib/angulartics/dist/angulartics.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
+    css: [
+      'modules/*/client/css/*.css'
+    ],
     less: [
       'modules/*/client/less/*.less'
     ],
     sass: [
       'modules/*/client/scss/*.scss'
     ],
-
-    css: 'public/dist/application.min.css',
-    js: 'public/dist/application.min.js',
+    js: [
+      'modules/core/client/app/config.js',
+      'modules/core/client/app/init.js',
+      'modules/*/client/*.js',
+      'modules/*/client/**/*.js'
+    ],
     views: ['modules/*/client/views/**/*.html'],
     templates: ['build/templates.js']
   },
