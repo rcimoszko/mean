@@ -34,8 +34,8 @@ module.exports = {
         'public/lib/angulartics/dist/angulartics.min.js',
         'public/lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js'
       ]
-    },
-    css: 'public/dist/application.min.css',
-    js: 'public/dist/application.min.js'
+    }
+    //css: 'public/dist/application.min.css',
+    //js: 'public/dist/application.min.js'
   }
 };
