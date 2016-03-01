@@ -46,7 +46,7 @@
 
     <!-- Application CSS Files -->
     {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
-    <link rel="stylesheet" href="public/dist/application.min.css">
+    <link rel="stylesheet" href="/public/dist/application.min.css">
 
     {% if process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry'%}
     <script>
@@ -111,7 +111,7 @@
     {% endif %}
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    <script type="text/javascript" src="public/dist/application.min.js"></script>
+    <script type="text/javascript" src="/public/dist/application.min.js"></script>
 
 
     <script type="text/javascript">

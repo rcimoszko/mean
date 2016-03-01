@@ -76,7 +76,7 @@ module.exports.initMiddleware = function (app) {
     // Disable views cache
     app.set('view cache', false);
   } else if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry') {
-    //app.locals.cache = 'memory';
+    app.locals.cache = 'memory';
   }
 
   // Request body parsing middleware should be above methodOverride
@@ -114,8 +114,8 @@ module.exports.initSession = function (app, db) {
     secret: config.sessionSecret,
     cookie: {
       maxAge: config.sessionCookie.maxAge,
-      httpOnly: config.sessionCookie.httpOnly
-      //secure: config.sessionCookie.secure && config.secure.ssl
+      httpOnly: config.sessionCookie.httpOnly,
+      secure: config.sessionCookie.secure && config.secure.ssl
     },
     key: config.sessionKey,
     store: new MongoStore({
@@ -142,7 +142,7 @@ module.exports.initHelmetHeaders = function (app) {
   var SIX_MONTHS = 15778476000;
   app.use(helmet.xframe());
   app.use(helmet.xssFilter());
-  //app.use(helmet.nosniff());
+  app.use(helmet.nosniff());
   app.use(helmet.ienoopen());
   app.use(helmet.hsts({
     maxAge: SIX_MONTHS,
@@ -220,6 +220,13 @@ module.exports.configureSocketIO = function (app, db) {
 module.exports.initScheduler = function () {
     console.log('initialize scheduler');
     var wsConn = ws.createConnection();
+
+    var wp = new ws.WAProcess();
+    wp.addStep( step );
+    wp.addTrigger( ws.TriggerFactory.repeatDaily(1) );
+
+    var s = ; // HTTP Method
+    p.addStep( s );
 
     var pinnacleFeed = new ws.WAProcess('Pinnacle Feed','pulling pinnacle feed');
     pinnacleFeed.addStep(new ws.steps.RestfulStep('FP_CLOUD',// The agent where to run the REST call
