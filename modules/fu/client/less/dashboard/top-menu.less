@@ -50,8 +50,11 @@
     display:inline-block;
     .search-box{
       line-height:60px;
-      padding-left:20px;
-      width:280px;
+      width:240px;
+      @media (min-width: @screen-sm-min) {
+        width:280px;
+        padding-left:20px;
+      }
       .fa-search{
         color:fade(@color-text, 50%);
         font-size:16px;

@@ -89,6 +89,65 @@ module.exports.initMiddleware = function (app) {
   app.use(cookieParser());
   app.use(flash());
 };
+/**
+ * Init
+ */
+
+module.exports.initUrl = function(app){
+
+    var forceNoWww = function(req, res, next) {
+        var protocol = 'http' + (req.connection.encrypted ? 's' : '') + '://';
+        var host = req.headers.host;
+        var href;
+
+        // no www. present, nothing to do here
+        if (!/^www\./i.test(host)) {
+            next();
+            return;
+        }
+
+        // remove www.
+        host = host.replace(/^www\./i, '');
+        href = protocol + host + req.url;
+        res.statusCode = 301;
+        res.setHeader('Location', href);
+        res.write('Redirecting to ' + host + req.url + '');
+        res.end();
+    };
+
+    var forceSsl = function (req, res, next) {
+        if (req.headers['x-forwarded-proto'] !== 'https') {
+            return res.redirect(['https://', req.get('Host'), req.url].join(''));
+        } else {
+            next();
+        }
+    };
+
+
+    var seo = require('mean-seo');
+
+    if (process.env.NODE_ENV === 'production') {
+        app.use(forceNoWww);
+        app.use(forceSsl);
+
+        app.use(seo({
+            cacheClient: 'redis',
+            redisURL: process.env.REDISCLOUD_URL
+        }));
+
+    } else {
+        app.use(forceNoWww);
+        seo = require('mean-seo');
+
+        app.use(seo({
+            cacheClient: 'disk',
+            cacheDuration: 2 * 60 * 60 * 24 * 1000
+        }));
+    }
+};
+
+
+
 
 /**
  * Configure view engine
@@ -223,6 +282,9 @@ module.exports.init = function (db) {
 
   // Initialize local variables
   this.initLocalVariables(app);
+
+  // Initialize error routes
+  this.initUrl(app);
 
   // Initialize Express middleware
   this.initMiddleware(app);

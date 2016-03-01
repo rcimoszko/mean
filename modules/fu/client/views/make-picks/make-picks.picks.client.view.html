@@ -1,9 +1,9 @@
 <section id="make-picks-picks" data-ng-controller="MakePicksPicksController">
     <div class="make-picks-sub-menu">
-        <h1 data-ng-if="makePicks.active.league">
+        <h1>
             <div class="heading">
                 <i class="fa fa-bars" data-ng-click="toggleMenu()"></i>
-                {{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}
+                <span data-ng-if="makePicks.active.league">{{makePicks.active.league.sport.name}} <i class="fa fa-angle-right"></i> {{makePicks.active.league.name}}</span>
             </div>
             <div class="bet-duration-filter" data-ng-if="activeBetDuration">
                 <span class="dropdown" dropdown>

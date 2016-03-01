@@ -47,6 +47,7 @@
     "jasmine-core": "^2.3.4",
     "lodash": "^3.10.0",
     "mailchimp": "^1.1.4",
+    "mean-seo": "0.0.8",
     "method-override": "^2.3.3",
     "mocha": "~1.20.0",
     "mongoose": "~4.2.3",

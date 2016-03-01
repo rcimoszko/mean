@@ -1754,8 +1754,13 @@ notification:last-of-type .notification {
 }
 #top-menu .search-container .search-box {
   line-height: 60px;
-  padding-left: 20px;
-  width: 280px;
+  width: 240px;
+}
+@media (min-width: 768px) {
+  #top-menu .search-container .search-box {
+    width: 280px;
+    padding-left: 20px;
+  }
 }
 #top-menu .search-container .search-box .fa-search {
   color: rgba(106, 107, 108, 0.5);
