@@ -38,17 +38,17 @@ module.exports = {
     facebook: {
         clientID: process.env.FACEBOOK_ID || '208601072671209',
         clientSecret: process.env.FACEBOOK_SECRET || '4bd32fdd07b1481066905d730d20d625',
-        callbackURL: 'https://fansunite.com/auth/facebook/callback'
+        callbackURL: 'https://fansunite.com/api/auth/facebook/callback'
     },
     twitter: {
         clientID: process.env.TWITTER_KEY || 'AEcenyobBLBhPRhYCscaw',
         clientSecret: process.env.TWITTER_SECRET || 'mwiBG42jVbjxtaVx7MQBFsUXfA1RvJyzPfL2EJQpXQU',
-        callbackURL: 'https://fansunite.com/auth/twitter/callback'
+        callbackURL: 'https://fansunite.com/api/auth/twitter/callback'
     },
     google: {
         clientID: process.env.GOOGLE_ID || '499181171419-q96qpde2lldurcm0th238tdlpefibiop.apps.googleusercontent.com',
         clientSecret: process.env.GOOGLE_SECRET || 'xaQUkh_qnPKvW7OPCszj-Adf',
-        callbackURL: 'https://fansunite.com/auth/google/callback'
+        callbackURL: 'https://fansunite.com/api/auth/google/callback'
     },
     mailer: {
         from: process.env.MAILER_FROM || 'FansUnite <info@fansunite.com>',
