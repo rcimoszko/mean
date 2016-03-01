@@ -3,8 +3,8 @@
 angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal', 'User',
     function($resource, $state, Authentication, $http, Modal, User) {
 
-        //var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
-        var key = 'pk_test_AkvAU2W7WvoGI5ehchaxF7sM';
+        var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
+        //var key = 'pk_test_AkvAU2W7WvoGI5ehchaxF7sM';
         var image ='/modules/fu/client/img/stripe/fansunite-logo-square.png';
 
 

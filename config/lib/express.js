@@ -221,13 +221,11 @@ module.exports.initScheduler = function () {
     console.log('initialize scheduler');
     var wsConn = ws.createConnection();
 
-    var wp = new ws.WAProcess();
-    wp.addStep( step );
-    wp.addTrigger( ws.TriggerFactory.repeatDaily(1) );
-
     var pinnacleFeed = new ws.WAProcess('Pinnacle Feed','pulling pinnacle feed');
-    pinnacleFeed.addStep(new ws.steps.CommandStep("bin/pinnacle-feed.js",'FP_CLOUD'));
-    pinnacleFeed.addTrigger( ws.TriggerFactory.fromCron('*/10 * * * *'));
+    pinnacleFeed.addStep(new ws.steps.RestfulStep('FP_CLOUD',// The agent where to run the REST call
+        "http://fu-prod-sched.au-syd.mybluemix.net/api/service/feed",  // URL to test
+        "GET"));
+    pinnacleFeed.addTrigger(ws.TriggerFactory.fromCron('*/10 * * * *'));
     wsConn.createAndEnableProcess(pinnacleFeed, function(err, process){
         console.log(err);
         if(!err){

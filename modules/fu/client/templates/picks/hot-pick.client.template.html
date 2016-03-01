@@ -1,6 +1,6 @@
 <div class="hot-pick clearfix">
     <div class="pick-name">
-        <div class="logo-container"><logo size="'sm'" url="hotPick.pick.logoUrl"></logo></div>
+        <div class="logo-container" data-ng-if="hotPick.pick.logoUrl"><logo size="'sm'" url="hotPick.pick.logoUrl"></logo></div>
          <a ui-sref="gamecenter({eventSlug: hotPick.event.slug, leagueSlug: hotPick.event.league.ref.slug})">{{hotPick.pick.betName}} ({{hotPick.pick.league}})</a>
     </div>
     <div class="pick-value">
