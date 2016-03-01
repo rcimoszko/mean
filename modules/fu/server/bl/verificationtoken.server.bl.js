@@ -5,7 +5,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     uuid = require('node-uuid'),
     User = mongoose.model('User'),
-    EmailBl = require('./bet.bettype.server.bl'),
+    EmailBl = require('./email.server.bl'),
     VerificationToken = mongoose.model('VerificationToken');
 
 function createToken(user, callback){
