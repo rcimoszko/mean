@@ -16,7 +16,6 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
-  ws = require('iws-light'),
   consolidate = require('consolidate'),
   path = require('path');
 
