@@ -214,33 +214,6 @@ module.exports.configureSocketIO = function (app, db) {
   return server;
 };
 
-/**
- * Configure Scheduler
- */
-module.exports.initScheduler = function () {
-    console.log('initialize scheduler');
-    var wsConn = ws.createConnection();
-
-    var wp = new ws.WAProcess();
-    wp.addStep( step );
-    wp.addTrigger( ws.TriggerFactory.repeatDaily(1) );
-
-    var s = ; // HTTP Method
-    p.addStep( s );
-
-    var pinnacleFeed = new ws.WAProcess('Pinnacle Feed','pulling pinnacle feed');
-    pinnacleFeed.addStep(new ws.steps.RestfulStep('FP_CLOUD',// The agent where to run the REST call
-        "http://fu-prod-sched.au-syd.mybluemix.net/api/service/feed",  // URL to test
-        "GET"));
-    pinnacleFeed.addTrigger(ws.TriggerFactory.fromCron('*/10 * * * *'));
-    wsConn.createAndEnableProcess(pinnacleFeed, function(err, process){
-        console.log(err);
-        if(!err){
-            console.log('process created');
-            console.log(process);
-        }
-    });
-};
 
 /**
  * Initialize the Express application
@@ -279,10 +252,6 @@ module.exports.init = function (db) {
   // Initialize error routes
   this.initErrorRoutes(app);
 
-  // Initialize scheduler
-  if (process.env.NODE_ENV === 'cloud-foundry-scheduler') {
-      this.initScheduler();
-  }
 
   // Configure Socket.io
   app = this.configureSocketIO(app, db);
