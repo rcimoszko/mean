@@ -47,8 +47,8 @@ function runFeed(callback){
     todo.push(updateScores);
     todo.push(updateSports);
     todo.push(updateLeagues);
-    todo.push(updateEvents);
     todo.push(updateOdds);
+    todo.push(updateEvents);
 
     async.waterfall(todo, callback);
 }
