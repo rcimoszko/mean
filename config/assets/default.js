@@ -36,21 +36,15 @@ module.exports = {
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
-    css: [
-      'modules/*/client/css/*.css'
-    ],
     less: [
       'modules/*/client/less/*.less'
     ],
     sass: [
       'modules/*/client/scss/*.scss'
     ],
-    js: [
-      'modules/core/client/app/config.js',
-      'modules/core/client/app/init.js',
-      'modules/*/client/*.js',
-      'modules/*/client/**/*.js'
-    ],
+
+    css: 'public/dist/application.min.css',
+    js: 'public/dist/application.min.js',
     views: ['modules/*/client/views/**/*.html'],
     templates: ['build/templates.js']
   },
