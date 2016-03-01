@@ -21,7 +21,9 @@ var ApplicationConfiguration = (function () {
       'ngCsv',
       'sticky',
       //'scrollToFixed',
-      'angular.filter'];
+      'angular.filter',
+      'angulartics',
+      'angulartics.google.analytics'];
 
   // Add a new vertical module
   var registerModule = function (moduleName, dependencies) {

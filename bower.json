@@ -26,7 +26,8 @@
     "ng-scroll-glue": "~2.0.10",
     "angular-scroll-glue": "~2.0.6",
     "ng-csv": "~0.3.6",
-    "angular-scrolltofixed": "~0.2.0"
+    "angular-scrolltofixed": "~0.2.0",
+    "angulartics-google-analytics": "~0.1.4"
   },
   "resolutions": {
     "angular": "~1.3"

@@ -49,7 +49,6 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
 
 
         function cb(err, gamecenter){
-            console.log(gamecenter);
             $scope.gamecenter   = gamecenter;
             $scope.consensus    = gamecenter.consensus;
             $scope.header       = gamecenter.header;
