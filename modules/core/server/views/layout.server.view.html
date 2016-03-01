@@ -47,9 +47,6 @@
     <!-- Application CSS Files -->
     {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 
-    {% if process.env.NODE_ENV === 'test' %}
-    <linkrel="stylesheet" src="dist/application.min.css"></link>
-    {% endif %}
 
     {% if process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry'%}
     <script>
@@ -111,9 +108,6 @@
     {% if livereload %}
     <!--Livereload script rendered -->
     <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
-    {% endif %}
-    {% if process.env.NODE_ENV === 'test' %}
-    <script type="text/javascript" src="dist/application.min.js"></script>
     {% endif %}
 
 
