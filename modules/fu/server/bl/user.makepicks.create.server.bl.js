@@ -236,7 +236,6 @@ function isPremium(event, user, callback){
     var premiumStats = {};
     var filterType = 'league';
     var filterId = event.league.ref._id;
-    console.log(event.league);
 
     if(event.sport.name.toLowerCase() === 'tennis' || event.sport.name.toLowerCase() === 'e sports' || event.sport.name.toLowerCase() === 'golf' || event.sport.name.toLowerCase() === 'boxing'){
         filterType = 'sport';

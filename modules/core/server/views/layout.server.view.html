@@ -1,4 +1,4 @@
-﻿
+﻿<!DOCTYPE html>
 <html lang="en" data-ng-controller="MainController" class="ng-cloak">
 <head>
     <meta charset="utf-8">
@@ -46,7 +46,6 @@
 
     <!-- Application CSS Files -->
     {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
-
 
     {% if process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry'%}
     <script>
@@ -110,9 +109,7 @@
     <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
     {% endif %}
 
-
     <script src="https://checkout.stripe.com/checkout.js"></script>
-
 
     <script type="text/javascript">
 
