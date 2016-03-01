@@ -16,6 +16,7 @@ var config = require('../config'),
   cookieParser = require('cookie-parser'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
+  ws = require('iws-light'),
   consolidate = require('consolidate'),
   path = require('path');
 
@@ -214,6 +215,29 @@ module.exports.configureSocketIO = function (app, db) {
 };
 
 /**
+ * Configure Scheduler
+ */
+module.exports.initScheduler = function () {
+    console.log('initialize scheduler');
+    var wsConn = ws.createConnection();
+
+    var wp = new ws.WAProcess();
+    wp.addStep( step );
+    wp.addTrigger( ws.TriggerFactory.repeatDaily(1) );
+
+    var pinnacleFeed = new ws.WAProcess('Pinnacle Feed','pulling pinnacle feed');
+    pinnacleFeed.addStep(new ws.steps.CommandStep("bin/pinnacle-feed.js",'FP_CLOUD'));
+    pinnacleFeed.addTrigger( ws.TriggerFactory.fromCron('*/10 * * * *'));
+    wsConn.createAndEnableProcess(pinnacleFeed, function(err, process){
+        console.log(err);
+        if(!err){
+            console.log('process created');
+            console.log(process);
+        }
+    });
+};
+
+/**
  * Initialize the Express application
  */
 module.exports.init = function (db) {
@@ -249,6 +273,11 @@ module.exports.init = function (db) {
 
   // Initialize error routes
   this.initErrorRoutes(app);
+
+  // Initialize scheduler
+  if (process.env.NODE_ENV === 'cloud-foundry-scheduler') {
+      this.initScheduler();
+  }
 
   // Configure Socket.io
   app = this.configureSocketIO(app, db);

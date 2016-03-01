@@ -7,8 +7,8 @@ var nodemailer = require('nodemailer'),
     FollowBl = require('./follow.server.bl'),
     UserBl = require('./user.server.bl'),
     PickBl = require('./pick.server.bl'),
-    path = require('path'),
-    config = require('../../../../config/config');
+    config = require('../../../../config/config'),
+    path = require('path');
 
 
 

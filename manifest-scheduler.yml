@@ -1,0 +1,11 @@
+---
+applications:
+- name: fu-prod-sched
+  host: fu-prod-sched
+  memory: 512M
+  services:
+   - MongoDB by Compose-qf
+  env:
+    NODE_ENV: cloud-foundry-scheduler
+    MONGOHQ_URL: mongodb://heroku:Montana16@lamppost.6.mongolayer.com:10167,lamppost.7.mongolayer.com:10167/app28048414
+  no-route: true

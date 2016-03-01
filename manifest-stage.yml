@@ -1,13 +1,9 @@
 ---
-declared-services:
-  mean-mongo:
-    label: mongodb
-    plan: 100
 applications:
 - name: fu-stage
   host: fu-stage
   memory: 512M
-  service:
+  services:
    - MongoDB by Compose-oh
   env:
     NODE_ENV: cloud-foundry-stage

@@ -1,0 +1,10 @@
+---
+applications:
+- name: fu-prod-a
+  host: fu-prod-a
+  memory: 512M
+  services:
+   - MongoDB by Compose-oh
+  env:
+    NODE_ENV: cloud-foundry
+    MONGOHQ_URL: mongodb://fansunite:Mokadoggie5@aws-us-east-1-portal.14.dblayer.com:10267,aws-us-east-1-portal.13.dblayer.com:10197/fu-prod
