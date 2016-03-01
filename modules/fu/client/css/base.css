@@ -3350,12 +3350,13 @@ notification:last-of-type .notification {
   }
 }
 .bet-slip-container.show {
-  min-height: 500px;
   width: 100%;
+  min-height: 300px;
 }
 @media (min-width: 480px) {
   .bet-slip-container.show {
     width: 300px;
+    min-height: 500px;
   }
 }
 .bet-slip-container .bet-slip {
