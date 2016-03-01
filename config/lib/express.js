@@ -76,7 +76,7 @@ module.exports.initMiddleware = function (app) {
     // Disable views cache
     app.set('view cache', false);
   } else if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'cloud-foundry') {
-    app.locals.cache = 'memory';
+    //app.locals.cache = 'memory';
   }
 
   // Request body parsing middleware should be above methodOverride
@@ -142,7 +142,7 @@ module.exports.initHelmetHeaders = function (app) {
   var SIX_MONTHS = 15778476000;
   app.use(helmet.xframe());
   app.use(helmet.xssFilter());
-  app.use(helmet.nosniff());
+  //app.use(helmet.nosniff());
   app.use(helmet.ienoopen());
   app.use(helmet.hsts({
     maxAge: SIX_MONTHS,
