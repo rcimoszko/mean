@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-    
     secure: {
         ssl: true,
         privateKey: './config/sslcerts/key.pem',
