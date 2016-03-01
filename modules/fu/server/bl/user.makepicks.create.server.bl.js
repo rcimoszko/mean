@@ -424,7 +424,7 @@ function create(event, bet, user, callback){
                 if('copiedFrom' in bet){
                     addCopy(user, bet.copiedFrom.pick);
                     addCopy(user, bet.copiedOrigin.pick);
-                    NotificationBl.createCopyPickNotification(bet.copiedFrom.user, user, pick, function(err){console.log(err);});
+                    NotificationBl.createCopyPickNotification(bet.copiedFrom.user, user, pick, function(err){if(err)console.log(err);});
                 }
                 callback(err, pick);
 

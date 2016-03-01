@@ -25,7 +25,6 @@ function sendNotification(notification){
 }
 
 function newMessage(recipients){
-    console.log('newMessage', recipients);
     _.each(recipients, function(recipient){
         nsp.to(recipient.ref).emit('new message');
     });

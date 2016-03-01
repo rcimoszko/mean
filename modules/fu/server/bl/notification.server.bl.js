@@ -25,7 +25,6 @@ function get(id, callback){
 function create(data, callback) {
 
     function cb(err){
-        console.log(err);
         callback(err, notification);
     }
 

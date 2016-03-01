@@ -157,7 +157,6 @@ function resolve(event, data, callback){
     }
 
     function cb(err, event){
-        console.log(err);
         callback(err, event);
     }
 
