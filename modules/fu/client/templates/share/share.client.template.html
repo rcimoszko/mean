@@ -19,7 +19,7 @@
                 <input type="checkbox" data-ng-model="twitterShare"  data-ng-disabled="!isAuthenticated('twitter')"/>
                 Twitter
                 <span data-ng-if="isAuthenticated('twitter')">(Authenticated)</span>
-                <a href="/auth/twitter" target="_blank" data-ng-if="!isAuthenticated('twitter')">Authenticate</a>
+                <a href="/api/auth/twitter" target="_blank" data-ng-if="!isAuthenticated('twitter')">Authenticate</a>
             </div>
             <!--
             <div>
