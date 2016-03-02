@@ -10,6 +10,7 @@ var PinnacleLeagueSchema = new Schema({
     sportId:        {type: Schema.Types.Mixed},
     pinnacleSport:  {name: String, ref: {type: Schema.ObjectId, ref: 'PinnacleSport'}},
     last:           {type: String},
+    lastScores:     {type: String},
 
     league:         {name: String, ref: {type: Schema.ObjectId, ref: 'League'}},
     sport:          {name: String, ref: {type: Schema.ObjectId, ref: 'Sport'}},
