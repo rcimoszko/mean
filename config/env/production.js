@@ -70,7 +70,6 @@ module.exports = {
             options:{
                 //auth: 'smtps://info%40fansunite.com:fansunite123$@smtp.sendgrid.net',
                 host: 'smtp.sendgrid.net',
-                secure: true,
                 port: 587,
                 auth: {
                     user: 'info@fansunite.com',
