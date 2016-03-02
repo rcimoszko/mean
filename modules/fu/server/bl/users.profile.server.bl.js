@@ -242,7 +242,9 @@ function get(user, auth, callback){
             }
             callback(err);
         }
-        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', auth._id, auth.premium || auth.trial, cb);
+
+        if(auth) var authId = auth._id;
+        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', authId, auth.premium || auth.trial, cb);
     }
 
     function getTrackerPicks_todo(callback){
