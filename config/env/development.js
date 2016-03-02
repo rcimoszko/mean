@@ -37,17 +37,17 @@ module.exports = {
     facebook: {
         clientID: process.env.FACEBOOK_ID || '208601072671209',
         clientSecret: process.env.FACEBOOK_SECRET || '4bd32fdd07b1481066905d730d20d625',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback'
+        callbackURL: 'http://localhost:3000/api/auth/facebook/callback'
     },
     twitter: {
         clientID: process.env.TWITTER_KEY || 'AEcenyobBLBhPRhYCscaw',
         clientSecret: process.env.TWITTER_SECRET || 'mwiBG42jVbjxtaVx7MQBFsUXfA1RvJyzPfL2EJQpXQU',
-        callbackURL: 'http://localhost:3000/auth/twitter/callback'
+        callbackURL: 'http://localhost:3000/api/auth/twitter/callback'
     },
     google: {
         clientID: process.env.GOOGLE_ID || '499181171419-jgem12275ibugpge1ljp5qptd1d24dm8.apps.googleusercontent.com',
         clientSecret: process.env.GOOGLE_SECRET || 'BokVCpx3pAvAND4MkFbR835m',
-        callbackURL: 'http://localhost:3000/auth/google/callback'
+        callbackURL: 'http://localhost:3000/api/auth/google/callback'
     },
     mailer: {
         from: process.env.MAILER_FROM || 'FansUnite <info@fansunite.com>',

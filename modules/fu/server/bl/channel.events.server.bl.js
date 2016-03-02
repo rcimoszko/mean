@@ -115,8 +115,8 @@ function processOverEvent(event, pEvent, picks, user, callback){
             var lossCount = getLossCount(proPicks);
             var unitWagered = getUnitsWagered(proPicks);
             var totalProfit = getTotalProfit(proPicks);
-            if(winCount > lossCount) pEvent.proResult = 'win';
-            if(winCount < lossCount) pEvent.proResult = 'loss';
+            if(totalProfit > 0) pEvent.proResult = 'win';
+            if(totalProfit < 0) pEvent.proResult = 'loss';
             pEvent.proStats = {wins:winCount, losses: lossCount, profit: totalProfit, roi: Math.round((totalProfit/unitWagered)*100,2)+'%' };
         }
         callback();
