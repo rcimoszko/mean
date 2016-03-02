@@ -29,7 +29,7 @@ function getConsensus(sportId, leagueId, count, callback){
 
     function filterEvents(events, callback){
         events = _.filter(events, function(event){
-            return event.pickCount > 5;
+            return event.pickCount > 3;
         });
         callback(null, events);
     }
