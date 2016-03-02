@@ -11,7 +11,7 @@ function config(io) {
 
         function cb(err, messages){
             messages.reverse();
-            nsp.emit('new message', messages);
+            nsp.emit('initialize message', messages);
         }
 
         ChatBl.getHubChat(cb);

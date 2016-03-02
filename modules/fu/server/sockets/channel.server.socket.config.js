@@ -14,7 +14,7 @@ function config(io) {
 
             function cb(err, messages){
                 messages.reverse();
-                nsp.to(channelId).emit('new message', messages);
+                nsp.to(channelId).emit('initialize message', messages);
             }
 
             ChatBl.getChannelChat(channelId, cb);

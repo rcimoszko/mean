@@ -2763,7 +2763,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
          */
 
         function cbGetHub(err, hub){
-            console.log(hub);
             $scope.loading.isLoading.pageLoading = false;
             $scope.hub = hub;
             $scope.disableScroll = false;
@@ -5006,6 +5005,9 @@ angular.module('fu').directive('chat', function() {
 
             };
 
+            $scope.socket.on('initialize message', function(messages){
+                $scope.messages = messages;
+            });
 
             $scope.socket.on('new message', function(messages){
                 $scope.messages = $scope.messages.concat(messages);
