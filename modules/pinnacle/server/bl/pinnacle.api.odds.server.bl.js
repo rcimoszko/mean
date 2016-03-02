@@ -368,7 +368,7 @@ function processTeamTotals(oddsApi, initialBetData, event, callback){
             function initializeValues(callback){
                 betData.contestant = {name: event[contestantField].name, ref: event[contestantField].ref, number: contestantNum.num};
                 betData.overUnder = overUnder.overUnder;
-                if(!(homeAway in oddsApi.teamTotal)) console.log(oddsApi.teamTotal); // for debugging missing error
+                if(!(betData.overUnder in oddsApi.teamTotal[homeAway])) console.log(oddsApi.teamTotal); // for debugging missing error
                 betData.odds = oddsApi.teamTotal[homeAway][betData.overUnder];
                 betData.points = oddsApi.teamTotal[homeAway].points;
                 if(!betData.betType) betData.betType = 'team totals';
