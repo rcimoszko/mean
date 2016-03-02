@@ -16,16 +16,14 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     var leagueName = pinnacleLeague.name;
 
     function getEvent(callback){
-        var query = {pinnacleIds:scoreApi.id}; //, $or:[{scores: false}, { scores: { $exists: false} }]
+        var query = {pinnacleIds:scoreApi.id, startDate: {$lte: new Date()}}; //, $or:[{scores: false}, { scores: { $exists: false} }]
         EventBl.getOneByQuery(query, callback);
     }
 
     function processPeriods(event, callback){
         var scores = {};
-
-        console.log(event.contestant1.name + ' '+ event.contestant2.name);
-
         if(!event) return callback('event not found or resolved');
+        console.log(event.contestant1.name + ' '+ event.contestant2.name);
         function processPeriod_loop(periodApi, callback){
             var betDuration = PinBetDuration.getBetDuration(sportName, periodApi.number);
             scores[betDuration] = {team1: periodApi.team2Score, team2: periodApi.team1Score};
