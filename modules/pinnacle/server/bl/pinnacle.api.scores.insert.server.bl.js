@@ -508,11 +508,19 @@ function insertScores_hockey(event, scores, scoreType, callback){
             }
         }
     } else {
-        event.contestant1RegulationScore = scores.game.team1;
-        event.contestant2RegulationScore = scores.game.team2;
-        event.contestant1FinalScore = scores.game.team1;
-        event.contestant2FinalScore = scores.game.team2;
-        event.scores = true;
+        if('1st period' in scores) {
+            event.contestant1P1Score = scores['1st period'].team1;
+            event.contestant2P1Score = scores['1st period'].team2;
+        }
+
+        if('game' in scores){
+            event.contestant1RegulationScore = scores.game.team1;
+            event.contestant2RegulationScore = scores.game.team2;
+            event.contestant1FinalScore = scores.game.team1;
+            event.contestant2FinalScore = scores.game.team2;
+            event.scores = true;
+        }
+
     }
     callback();
 }

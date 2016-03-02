@@ -343,7 +343,7 @@ function sendFollowerEmail(user, followUserName, hostName, callback){
 
     function cb(err){
         if (err){
-            var e = new Error('Error sending email - sendVerificationEmail');
+            var e = new Error('Error sending email - sendFollowerEmail');
             e.error = err;
             callback(e);
             return;
@@ -384,7 +384,7 @@ function sendMessageEmail(user, userMessageName, hostName, callback){
 
     function cb(err){
         if (err){
-            var e = new Error('Error sending email - sendVerificationEmail');
+            var e = new Error('Error sending email - sendMessageEmail');
             e.error = err;
             callback(e);
             return;
