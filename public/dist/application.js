@@ -2899,10 +2899,13 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
 
 
         $scope.resendVerificationEmail = function() {
+            $scope.loading.isLoading.formSubmit = true;
             $scope.resendSuccess = $scope.resendError = null;
             $http.post('/api/verification/send').success(function(response) {
+                $scope.loading.isLoading.formSubmit = false;
                 $scope.resendSuccess = response.message;
             }).error(function(response) {
+                $scope.loading.isLoading.formSubmit = false;
                 $scope.resendError = response.message;
             });
         };
