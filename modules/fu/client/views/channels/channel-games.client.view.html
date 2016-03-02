@@ -36,7 +36,7 @@
                     </div>
                     <div class="picks" data-ng-if="event.picks.length > 0">
                         <div class="text-center" data-ng-if="event.picks.length === 0"><em>No Picks</em></div>
-                        <table class="table-striped table table-condensed">
+                        <table class="table-striped table table-condensed" data-ng-if="!event.hiddenPicks">
                                 <tbody>
                                 <tr data-ng-repeat="pick in event.picks" data-ng-if="!pick.hidden">
                                     <td data-ng-if="!pick.hidden"><span class="pro-label" data-ng-if="pick.premium">PRO</span><a ui-sref="profile({username:pick.user.name})">{{pick.user.name}}</a></td>
@@ -45,6 +45,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div data-ng-if="event.hiddenPicks" class="text-center">
+                            <div class="">{{event.hiddenCount}} Pro Pick(s)</div>
+                            <btn-upgrade></btn-upgrade>
+                        </div>
                     </div>
                     <div class="picks" data-ng-if="event.picksHidden">
                         <div class="text-center" data-ng-if="event.pickCount === 0"><em>No Picks</em></div>
