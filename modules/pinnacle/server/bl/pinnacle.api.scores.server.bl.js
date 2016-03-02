@@ -85,6 +85,7 @@ function updateInsertScoresForLeague(pinnacleLeague, callback){
     function processEvents(results, callback){
         if(!results) return callback(null);
         if(Object.keys(results).length === 0) return callback(null);
+        console.log(pinnacleLeague.name);
         pinnacleLeague.last = results.last;
 
         var scoresApi = results.leagues[0].events;
