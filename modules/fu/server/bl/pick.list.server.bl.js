@@ -6,7 +6,7 @@ var _ = require('lodash'),
     EventBl = require('./event.server.bl'),
     PickBl = require('./pick.server.bl');
 
-function getUserEventPickList(sportId, leagueId, userIdArray, userPremium, callback){
+function getUserEventPickList(sportId, leagueId, userIdArray, authUser, authUserPremium, callback){
     var todo = [];
 
 
@@ -45,7 +45,7 @@ function getUserEventPickList(sportId, leagueId, userIdArray, userPremium, callb
                 callback(err);
             }
 
-            processEventList(eventList, null, 'pending', null,  userPremium,  cb);
+            processEventList(eventList, null, 'pending', null,  authUser, authUserPremium,  cb);
         }
 
         function cb(err){
@@ -69,7 +69,7 @@ function getUserEventPickList(sportId, leagueId, userIdArray, userPremium, callb
 
 }
 
-function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickLimit, pendingCompleted, userPremium, callback){
+function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickLimit, pendingCompleted, authUserId, authUserPremium, callback){
 
     var todo = [];
 
@@ -110,7 +110,7 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
     }
 
     function processEvents(events, callback){
-        processEventList(events, userId, pendingCompleted, pickLimit,  userPremium,  callback);
+        processEventList(events, userId, pendingCompleted, pickLimit,  authUserId, authUserPremium, callback);
     }
 
     todo.push(getPicksGroupedByEvent);
@@ -120,7 +120,7 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
 
 }
 
-function processEventList(events, userId, pendingCompleted, pickLimit,  userPremium,  callback){
+function processEventList(events, userId, pendingCompleted, pickLimit,  authUserId, authUserPremium, callback){
 
     var todo = [];
 
@@ -216,8 +216,8 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  userPrem
 
             function hideProPicks(callback){
                 for(var i=0; i<pEvent.picks.length; i++){
-                    if(String(pEvent.picks[i].user.ref._id) !== String(userId)){
-                        if(pEvent.picks[i].premium && !userPremium){
+                    if(String(pEvent.picks[i].user.ref._id) !== String(authUserId)){
+                        if(pEvent.picks[i].premium && !authUserPremium){
                             pEvent.picks[i] = {hidden: true, user:pEvent.picks[i].user};
 
                         }

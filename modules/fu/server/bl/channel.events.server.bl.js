@@ -283,9 +283,9 @@ function processPendingEvent(event, pEvent, picks, user, callback){
     }
 
     function hideProPicks(callback){
-        for(var i=0; i<pEvent.picks; i++){
+        for(var i=0; i<pEvent.picks.length; i++){
             if(String(pEvent.picks[i].user.ref._id) !== String(user._id)){
-                if(pEvent.picks[i].premium && !user.premium){
+                if(pEvent.picks[i].premium && (!user.premium && !user.trial)){
                     pEvent.picks[i] = {hidden: true};
                 }
             }

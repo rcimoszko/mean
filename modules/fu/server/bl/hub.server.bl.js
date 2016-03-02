@@ -55,7 +55,7 @@ function getPicks(query, user, callback){
     var pendingCompleted = query.type;
     var pro = query.pro;
 
-    PickListBl.getEventPickList('all', 'all', null, pro, page, pageLimit, 2, pendingCompleted, user.premium || user.trial, callback);
+    PickListBl.getEventPickList('all', 'all', null, pro, page, pageLimit, 2, pendingCompleted, user._id, user.premium || user.trial, callback);
 
 }
 

@@ -85,7 +85,7 @@ function getFollowing(user, query, callback){
     }
 
     function getFollowingPicks(callback){
-        PickListBl.getUserEventPickList(sportId, leagueId, followingIdArray, user.premium || user.trial, callback);
+        PickListBl.getUserEventPickList(sportId, leagueId, followingIdArray, user._id, user.premium || user.trial, callback);
     }
 
     function addPicksToList(userPickList, callback){
