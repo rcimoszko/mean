@@ -243,8 +243,13 @@ function get(user, auth, callback){
             callback(err);
         }
 
-        if(auth) var authId = auth._id;
-        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', authId, auth.premium || auth.trial, cb);
+        var authId;
+        var authPremium;
+        if(auth){
+            authId = auth._id;
+            authPremium = auth.premium || auth.trial;
+        }
+        PickListBl.getEventPickList('all', 'all', user._id, false, 0, 100, 100, 'pending', authId, authPremium, cb);
     }
 
     function getTrackerPicks_todo(callback){
