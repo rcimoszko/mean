@@ -134,6 +134,56 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     break;
             }
             break;
+        case 'map 4':
+        case '4th map':
+            switch(pick.betType.toLowerCase()){
+                case '1st blood':
+                    contestantScore = event['contestant'+contestantNo+'Set4FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Set4FirstBlood'];
+                    break;
+                case '1st to 10 kills':
+                    contestantScore = event['contestant'+contestantNo+'Set4KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Set4KillsFirst'];
+                    break;
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Set4FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Set4FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Set4FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Set4FirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Set4Score'];
+                    opponentScore = event['contestant'+opponentNo+'Set4Score'];
+                    break;
+            }
+            break;
+        case 'map 5':
+        case '5th map':
+            switch(pick.betType.toLowerCase()){
+                case '1st blood':
+                    contestantScore = event['contestant'+contestantNo+'Set5FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Set5FirstBlood'];
+                    break;
+                case '1st to 10 kills':
+                    contestantScore = event['contestant'+contestantNo+'Set5KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Set5KillsFirst'];
+                    break;
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Set5FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Set5FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Set5FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Set5FirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Set5Score'];
+                    opponentScore = event['contestant'+opponentNo+'Set5Score'];
+                    break;
+            }
+            break;
         case '2nd half':
             switch(event.sport.name.toLowerCase()){
                 case 'basketball':
