@@ -77,7 +77,7 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
 
         var aggArray = [];
 
-        var query = {};
+        var query = {eventStartTime: {$lte:new Date()}};
         if(sportId !== 'all')                 query.sport = mongoose.Types.ObjectId(sportId);
         if(leagueId !== 'all')                query.league = mongoose.Types.ObjectId(leagueId);
         if(pendingCompleted === 'pending')    query.result = 'Pending';
