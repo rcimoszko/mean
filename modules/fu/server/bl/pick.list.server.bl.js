@@ -77,10 +77,13 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
 
         var aggArray = [];
 
-        var query = {eventStartTime: {$gte:new Date()}};
+        var query = {};
         if(sportId !== 'all')                 query.sport = mongoose.Types.ObjectId(sportId);
         if(leagueId !== 'all')                query.league = mongoose.Types.ObjectId(leagueId);
-        if(pendingCompleted === 'pending')    query.result = 'Pending';
+        if(pendingCompleted === 'pending'){
+            query.result = 'Pending';
+            query.eventStartTime = {$gte:new Date()};
+        }
         if(pendingCompleted === 'completed')  query.result = {$ne: 'Pending'};
         if(userId)                            query['user.ref'] = mongoose.Types.ObjectId(userId);
         if(pro)                               query.premium = true;
