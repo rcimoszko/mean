@@ -1122,15 +1122,12 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
                 case 'NCAA':
                 case 'NCAA OT Included':
                 case 'NCAA Regular Time':
-                    insertScores_basketball(event, scores, callback);
+                    insertScores_hockey(event, scores, scoreType, callback);
                     break;
                 default:
-                    insertScores_euroBasketball(event, scores, callback);
+                    insertScores_euroHockey(event, scores, callback);
                     break;
             }
-            break;
-
-            insertScores_hockey(event, scores, scoreType, callback);
             break;
         case 'Horse Racing':
             insertScores_horseRacing(event, scores, callback);
