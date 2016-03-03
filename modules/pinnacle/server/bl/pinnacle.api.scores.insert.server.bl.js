@@ -553,6 +553,45 @@ function insertScores_hockey(event, scores, scoreType, callback){
     callback();
 }
 
+function insertScores_euroHockey(event, scores, scoreType, callback){
+    if(scoreType === 'regular time'){
+        event.contestant1RegulationScore = scores.game.team2;
+        event.contestant2RegulationScore = scores.game.team1;
+    } else if(scoreType === 'ot included') {
+        if('1st period' in scores){
+            event.contestant1P1Score = scores['1st period'].team2;
+            event.contestant2P1Score = scores['1st period'].team1;
+            if('game' in scores){
+                event.contestant1RegulationScore = scores.game.team2;
+                event.contestant2RegulationScore = scores.game.team1;
+                event.contestant1FinalScore = scores.game.team2;
+                event.contestant2FinalScore = scores.game.team1;
+                event.contestant1OTScore = event.contestant1FinalScore - event.contestant1RegulationScore;
+                event.contestant2OTScore = event.contestant2FinalScore - event.contestant2RegulationScore;
+                if(event.contestant1OTScore !== 0 || event.contestant2OTScore !== 0){
+                    event.overtime = true;
+                }
+                event.scores = true;
+            }
+        }
+    } else {
+        if('1st period' in scores) {
+            event.contestant1P1Score = scores['1st period'].team2;
+            event.contestant2P1Score = scores['1st period'].team1;
+        }
+
+        if('game' in scores){
+            event.contestant1RegulationScore = scores.game.team2;
+            event.contestant2RegulationScore = scores.game.team1;
+            event.contestant1FinalScore = scores.game.team2;
+            event.contestant2FinalScore = scores.game.team1;
+            event.scores = true;
+        }
+
+    }
+    callback();
+}
+
 function insertScores_horseRacing(event, scores, callback){
     if('race' in scores){
         event.contestant1FinalScore = scores.race.team1;
@@ -1033,8 +1072,6 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
                 default:
                     insertScores_euroBasketball(event, scores, callback);
                     break;
-
-
             }
             break;
         case 'Beach Volleyball':
@@ -1077,6 +1114,22 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
             insertScores_handball(event, scores, callback);
             break;
         case 'Hockey':
+            switch(leagueName){
+                case 'NHL':
+                case 'NHL Preseason':
+                case 'NHL Regular Time':
+                case 'NHL - Regulation Time':
+                case 'NCAA':
+                case 'NCAA OT Included':
+                case 'NCAA Regular Time':
+                    insertScores_basketball(event, scores, callback);
+                    break;
+                default:
+                    insertScores_euroBasketball(event, scores, callback);
+                    break;
+            }
+            break;
+
             insertScores_hockey(event, scores, scoreType, callback);
             break;
         case 'Horse Racing':
