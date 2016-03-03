@@ -16,7 +16,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     var leagueName = pinnacleLeague.name;
 
     function getEvent(callback){
-        var query = {pinnacleIds:scoreApi.id, startTime: {$lte: new Date()}, $or:[{scores: false}, { scores: { $exists: false} }]};
+        var query = {pinnacleIds:scoreApi.id, startTime: {$lte: new Date()}}; //, $or:[{scores: false}, { scores: { $exists: false} }]
         EventBl.getOneByQuery(query, callback);
     }
 
