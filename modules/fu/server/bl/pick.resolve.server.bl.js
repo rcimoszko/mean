@@ -22,7 +22,7 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             switch(event.sport.name.toLowerCase()){
                 case 'soccer':
                 case 'handball':
-                case 'hockey';
+                case 'hockey':
                     contestantScore = event['contestant'+contestantNo+'RegulationScore'];
                     opponentScore = event['contestant'+opponentNo+'RegulationScore'];
                     break;
