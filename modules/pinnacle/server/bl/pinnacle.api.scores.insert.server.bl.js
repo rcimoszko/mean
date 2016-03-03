@@ -63,7 +63,7 @@ function insertScores_baseball(event, scores, callback){
         }
     }
 
-    if('gmae' in scores){
+    if('game' in scores){
         event.contestant1RegulationScore = scores.match.team1;
         event.contestant2RegulationScore = scores.match.team2;
 
