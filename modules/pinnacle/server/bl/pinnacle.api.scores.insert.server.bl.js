@@ -57,13 +57,13 @@ function insertScores_baseball(event, scores, callback){
         event.contestant1H1Score = scores['1st half'].team1;
         event.contestant2H1Score = scores['1st half'].team2;
 
-        if('match' in scores){
+        if('game' in scores){
             event.contestant1H2Score = scores.match.team1 - scores['1st half'].team1;
             event.contestant2H2Score = scores.match.team2 - scores['1st half'].team2;
         }
     }
 
-    if('match' in scores){
+    if('gmae' in scores){
         event.contestant1RegulationScore = scores.match.team1;
         event.contestant2RegulationScore = scores.match.team2;
 
