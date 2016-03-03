@@ -114,7 +114,7 @@ angular.module('fu').directive('share', function(){
                 $scope.shareLoading = true;
                 $scope.success = null;
                 $scope.error = null;
-                $http.post('/api/socialshare', {
+                $http.post('/api/user/share', {
                     facebookShare: $scope.facebookShare,
                     twitterShare: $scope.twitterShare,
                     shareText: $scope.shareText,
