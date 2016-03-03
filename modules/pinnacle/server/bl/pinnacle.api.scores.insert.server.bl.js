@@ -102,6 +102,34 @@ function insertScores_basketball(event, scores, callback){
     callback();
 }
 
+function insertScores_euroBasketball(event, scores, callback){
+
+    if('1st quarter' in scores){
+        event.contestant1Q1Score = scores['1st quarter'].team2;
+        event.contestant2Q1Score = scores['1st quarter'].team1;
+
+        if('1st half' in scores){
+            event.contestant1Q2Score = scores['1st half'].team2 -  scores['1st quarter'].team2;
+            event.contestant2Q2Score = scores['1st half'].team1 -  scores['1st quarter'].team1;
+        }
+    }
+
+    if('1st half' in scores){
+        event.contestant1H1Score = scores['1st half'].team2;
+        event.contestant2H1Score = scores['1st half'].team1;
+    }
+
+    if('game' in scores){
+        event.contestant1RegulationScore = scores.game.team2;
+        event.contestant2RegulationScore = scores.game.team1;
+        event.contestant1FinalScore = scores.game.team2;
+        event.contestant2FinalScore = scores.game.team1;
+        event.scores = true;
+    }
+
+    callback();
+}
+
 function insertScores_beachVolleyball(event, scores, callback){
     if('1st set' in scores){
         event.contestant1Set1Score = scores['1st set'].team1;
@@ -996,7 +1024,18 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
             insertScores_baseball(event, scores, callback);
             break;
         case 'Basketball':
-            insertScores_basketball(event, scores, callback);
+            switch(leagueName){
+                case 'NCAAB':
+                case 'NBA':
+                case 'NBA Preseason':
+                    insertScores_basketball(event, scores, callback);
+                    break;
+                default:
+                    insertScores_euroBasketball(event, scores, callback);
+                    break;
+
+
+            }
             break;
         case 'Beach Volleyball':
             insertScores_beachVolleyball(event, scores, callback);
