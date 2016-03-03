@@ -53,7 +53,7 @@ function insertScores_bandy(event, scores, callback){
 }
 
 function insertScores_baseball(event, scores, callback){
-    if('1st 5 innings' in scores){
+    if('1st half' in scores){
         event.contestant1H1Score = scores['1st half'].team1;
         event.contestant2H1Score = scores['1st half'].team2;
 
