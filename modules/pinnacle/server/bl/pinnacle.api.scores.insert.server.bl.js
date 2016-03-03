@@ -58,17 +58,17 @@ function insertScores_baseball(event, scores, callback){
         event.contestant2H1Score = scores['1st half'].team2;
 
         if('game' in scores){
-            event.contestant1H2Score = scores.match.team1 - scores['1st half'].team1;
-            event.contestant2H2Score = scores.match.team2 - scores['1st half'].team2;
+            event.contestant1H2Score = scores.game.team1 - scores['1st half'].team1;
+            event.contestant2H2Score = scores.game.team2 - scores['1st half'].team2;
         }
     }
 
     if('game' in scores){
-        event.contestant1RegulationScore = scores.match.team1;
-        event.contestant2RegulationScore = scores.match.team2;
+        event.contestant1RegulationScore = scores.game.team1;
+        event.contestant2RegulationScore = scores.game.team2;
 
-        event.contestant1FinalScore = scores.match.team1;
-        event.contestant2FinalScore = scores.match.team2;
+        event.contestant1FinalScore = scores.game.team1;
+        event.contestant2FinalScore = scores.game.team2;
         event.scores = true;
     }
     callback();
