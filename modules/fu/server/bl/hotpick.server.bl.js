@@ -12,7 +12,7 @@ function getHotPick(sportId, leagueId, callback){
     var todo = [];
 
     function groupProPicks(callback){
-        var query =  {result: 'Pending', premium: true};
+        var query =  {result: 'Pending', premium: true, eventStartTime: {$gte: new Date()}};
         if(sportId !== 'all') query.sport = mongoose.Types.ObjectId(sportId);
         if(leagueId !== 'all') query.league = mongoose.Types.ObjectId(leagueId);
 

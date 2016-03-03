@@ -109,7 +109,6 @@ angular.module('fu').directive('share', function(){
 
             $scope.facebookShare = false;
             $scope.twitterShare = false;
-
             $scope.share = function(){
                 $scope.shareLoading = true;
                 $scope.success = null;
