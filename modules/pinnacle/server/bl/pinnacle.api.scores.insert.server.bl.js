@@ -219,30 +219,30 @@ function insertScores_curling(event, scores, callback){
 
 function insertScores_darts(event, scores, callback){
     if('1st set' in scores){
-        event.contestant1Set1Score = scores['1st set'].team1;
-        event.contestant2Set1Score = scores['1st set'].team2;
+        event.contestant1Set1Score = scores['1st set'].team2;
+        event.contestant2Set1Score = scores['1st set'].team1;
     }
     if('2nd set' in scores){
-        event.contestant1Set2Score = scores['2nd set'].team1;
-        event.contestant2Set2Score = scores['2nd set'].team2;
+        event.contestant1Set2Score = scores['2nd set'].team2;
+        event.contestant2Set2Score = scores['2nd set'].team1;
     }
     if('3rd set' in scores){
-        event.contestant1Set3Score = scores['3rd set'].team1;
-        event.contestant2Set3Score = scores['3rd set'].team2;
+        event.contestant1Set3Score = scores['3rd set'].team2;
+        event.contestant2Set3Score = scores['3rd set'].team1;
     }
     if('4th set' in scores){
-        event.contestant1Set4Score = scores['4th set'].team1;
-        event.contestant2Set4Score = scores['4th set'].team2;
+        event.contestant1Set4Score = scores['4th set'].team2;
+        event.contestant2Set4Score = scores['4th set'].team1;
     }
     if('5th set' in scores){
-        event.contestant1Set5Score = scores['5th set'].team1;
-        event.contestant2Set5Score = scores['5th set'].team2;
+        event.contestant1Set5Score = scores['5th set'].team2;
+        event.contestant2Set5Score = scores['5th set'].team1;
     }
     if('match' in scores){
-        event.contestant1FinalScore = scores.match.team1;
-        event.contestant2FinalScore = scores.match.team2;
-        event.contestant1RegulationScore = scores.match.team1;
-        event.contestant2RegulationScore = scores.match.team2;
+        event.contestant1FinalScore = scores.match.team2;
+        event.contestant2FinalScore = scores.match.team1;
+        event.contestant1RegulationScore = scores.match.team2;
+        event.contestant2RegulationScore = scores.match.team1;
         event.scores = true;
     }
     callback();
