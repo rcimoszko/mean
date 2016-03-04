@@ -375,7 +375,7 @@ function getMenu(callback){
 
     function groupLeagues(callback){
 
-        var match = {$match: {active: true}};
+        var match = {$match: {active: true, $or:[{disabled: false}, {disabled:{$exists:false}}]}};
         var group = {$group: {_id: '$sport.ref', leagues: {$addToSet: '$$ROOT'}}};
         var sort =  {$sort: {_id: 1}};
 
