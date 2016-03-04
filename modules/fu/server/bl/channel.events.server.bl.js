@@ -348,7 +348,7 @@ function get(channel, user, date, callback){
 
     function getEvents(callback) {
         var dateQuery = getDateQuery(channel.dateGroup, date);
-        var query = {startTime: dateQuery};
+        var query = {startTime: dateQuery, $or:[{cancelled:false}, {cancelled:{$exists:false}}]};
         if(channel.type === 'sport') query['sport.ref'] = channel.sport.ref;
         if(channel.type === 'league') query['league.ref'] = channel.league.ref;
         EventBl.getByQuery(query, callback);
