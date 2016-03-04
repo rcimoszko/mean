@@ -19,7 +19,7 @@
                         {{sub1.name}}
                     </a>
 
-                    <ul class="sub-2-list" data-ng-show="sub1 === activeSub1" data-ng-repeat="sub2 in sub1.main">
+                    <ul class="sub-2-list" data-ng-show="sub1 === activeSub1" data-ng-repeat="sub2 in sub1.main|orderBy:'name'">
                         <li>
                             <a class="sub-2-item" data-ng-click="updateSub2(sub2)" data-ng-class="{'active': sub2 === activeSub2 }" ui-sref="makePicks.league({sportSlug: sport.slug, leagueSlug: sub2.slug})">{{sub2.name}}</a>
                         </li>
