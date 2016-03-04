@@ -74,6 +74,7 @@ function createFollowNotification(user, userFrom, follow, callback){
 }
 
 function createCopyPickNotification(user, userFrom, pick, callback){
+    if(String(user.ref) === String(userFrom._id)) return callback(); // return if comment on own pick
     var todo = [];
 
     function createNotification(callback){
@@ -99,6 +100,7 @@ function createCopyPickNotification(user, userFrom, pick, callback){
 }
 
 function createCommentPickNotification(user, userFrom, pick, comment, callback){
+    if(String(user.ref) === String(userFrom._id)) return callback(null); // return if comment on own pick
     var todo = [];
 
     function createNotification(callback){
@@ -125,6 +127,7 @@ function createCommentPickNotification(user, userFrom, pick, comment, callback){
 }
 
 function createCommentReplyNotification(user, userFrom, comment, callback){
+    if(String(user._id) === String(userFrom._id)) return callback(); // return if comment on own pick
     var todo = [];
 
     function createNotification(callback){

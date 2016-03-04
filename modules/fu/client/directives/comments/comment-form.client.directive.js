@@ -63,6 +63,11 @@ angular.module('fu').directive('commentForm', function() {
             }
 
             $scope.submit = function(){
+                $scope.error = null;
+                if($scope.text === '' || !$scope.text) {
+                    $scope.error = 'Nothing to comment' ;
+                    return;
+                }
                 if($scope.pick){
                     if($scope.comment){
                         pickCommentReply();
