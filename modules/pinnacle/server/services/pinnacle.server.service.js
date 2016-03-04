@@ -14,6 +14,40 @@ function getScores(callback){
     PinScoresBl.updateInsertAllScores(callback);
 }
 
+function sportsFeed(callback){
+    var todo = [];
+
+    function updateSports(callback){
+        console.log('updateSports');
+        PinSportsBl.updateInsertSports(callback);
+    }
+
+    function updateLeagues(callback){
+        console.log('updateLeagues');
+        PinLeaguesBl.updateInsertAllLeagues(callback);
+    }
+
+    todo.push(updateSports);
+    todo.push(updateLeagues);
+
+    async.waterfall(todo, callback);
+}
+
+function eventsFeed(callback){
+    console.log('updateEvents');
+    PinEventsBl.updateInsertAllEvents(callback);
+}
+
+function scoresFeed(callback){
+    console.log('updateScores');
+    PinScoresBl.updateInsertAllScores(callback);
+}
+
+function oddsFeed(callback){
+    console.log('updateOdds');
+    PinOddsBl.updateInsertAllOdds(callback);
+}
+
 function runFeed(callback){
     var todo = [];
 
@@ -103,3 +137,8 @@ function assignPinnacleSports(callback){
 exports.runFeed = runFeed;
 exports.getScores = getScores;
 exports.assignPinnacleSports = assignPinnacleSports;
+
+exports.sportsFeed = sportsFeed;
+exports.eventsFeed = eventsFeed;
+exports.scoresFeed = scoresFeed;
+exports.oddsFeed = oddsFeed;
