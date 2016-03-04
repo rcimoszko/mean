@@ -10,6 +10,8 @@ angular.module('fu').factory('GaEcommerce', [
                 'revenue': amount
             });
             ga('ecommerce:send');
+            console.log(id, plan, amount);
+            console.log('sent');
         }
 
         return {

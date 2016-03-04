@@ -8467,6 +8467,27 @@ angular.module('fu').factory('Follow', ['Authentication', 'ApiUsersFollow', 'Api
 ]);
 'use strict';
 
+angular.module('fu').factory('GaEcommerce', [
+    function() {
+
+        function sendTransaction(id, plan, amount){
+            ga('ecommerce:addTransaction', {
+                'id': id,
+                'affiliation': plan,
+                'revenue': amount
+            });
+            ga('ecommerce:send');
+            console.log(id, plan, amount);
+            console.log('sent');
+        }
+
+        return {
+            sendTransaction:   sendTransaction
+        };
+    }
+]);
+'use strict';
+
 angular.module('fu').factory('Gamecenter', ['ApiGamecenter',
     function(ApiGamecenter) {
 
@@ -9885,8 +9906,8 @@ angular.module('fu').factory('SportsbookService', ['$resource', '$sce', '$filter
 ]);
 'use strict';
 
-angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal', 'User',
-    function($resource, $state, Authentication, $http, Modal, User) {
+angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentication', '$http', 'Modal', 'User', 'GaEcommerce',
+    function($resource, $state, Authentication, $http, Modal, User, GaEcommerce) {
 
         var key = 'pk_live_73Q2l4S0RJOJ2jKXtmBOeH45';
         //var key = 'pk_test_AkvAU2W7WvoGI5ehchaxF7sM';
@@ -9914,7 +9935,6 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
             newSubscription('6 Months Premium', '6 month subscription - Auto Renew', 25000,  callback);
         };
 
-
         function sendGaTransaction(id, plan){
             var amount;
             switch(plan){
@@ -9928,12 +9948,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                     amount = '250.00';
                     break;
             }
-
-            ga('ecommerce:addTransaction', {
-                'id': id,
-                'affiliation': plan,
-                'revenue': amount
-            });
+            GaEcommerce.sendTransaction(id, plan, amount);
         }
 
 
@@ -10094,12 +10109,13 @@ angular.module('fu').factory('Trending', ['ApiTrending',
 ]);
 'use strict';
 
-angular.module('fu').factory('Trial', ['ApiTrialActivate', 'Authentication', 'User',
-    function(ApiTrialActivate, Authentication, User) {
+angular.module('fu').factory('Trial', ['ApiTrialActivate', 'Authentication', 'User', 'GaEcommerce',
+    function(ApiTrialActivate, Authentication, User, GaEcommerce) {
 
         var activate = function(callback){
             function cbSuccess(user){
                 Authentication.user = user;
+                GaEcommerce.sendTransaction(user._id, 'Trial', '0.00');
                 User.updateUserStatus();
                 callback(null);
             }
