@@ -1578,6 +1578,7 @@ notification:last-of-type .notification {
   overflow: hidden;
   padding-left: 15px;
   text-overflow: ellipsis;
+  color: #e9893a;
 }
 #auth-side-menu .user-container .username-container .username {
   font-size: 16px;
