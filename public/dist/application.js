@@ -6059,7 +6059,6 @@ angular.module('fu').directive('share', function(){
 
             $scope.facebookShare = false;
             $scope.twitterShare = false;
-
             $scope.share = function(){
                 $scope.shareLoading = true;
                 $scope.success = null;
@@ -9903,23 +9902,6 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         });
 
 
-        //Plan ID - Pro, 6month, 1year
-        /*
-        var new1MonthSubscription = function(callback){
-            newSubscription('Pro', '30 day subscription - Auto Renew', 2000,  callback);
-        };
-
-        var new6MonthSubscription = function(callback){
-            newSubscription('6month', '6 month subscription - Auto Renew', 10000, callback);
-
-        };
-
-        var new12MonthSubscription = function(callback){
-            newSubscription('1year', '1 year subscription - Auto Renew', 18000, callback);
-        };
-        */
-
-
         var newBaseSubscription = function(callback){
             newSubscription('Base Subscription', '30 day subscription - Auto Renew', 1000,  callback);
         };
@@ -9933,6 +9915,27 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
         };
 
 
+        function sendGaTransaction(id, plan){
+            var amount;
+            switch(plan){
+                case 'Base Subscription':
+                    amount = '10.00';
+                    break;
+                case '1 Month Premium':
+                    amount = '50.00';
+                    break;
+                case '6 Months Premium':
+                    amount = '250.00';
+                    break;
+            }
+
+            ga('ecommerce:addTransaction', {
+                'id': id,
+                'affiliation': plan,
+                'revenue': amount
+            });
+        }
+
 
         var newSubscription = function(plan, description, amount, callback){
             var handler = StripeCheckout.configure({
@@ -9943,6 +9946,7 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                         //success
                         function(user) {
                             Authentication.user = user;
+                            if(user.subscriptionId) sendGaTransaction(user.subscriptionId, plan);
                             User.updateUserStatus();
                             callback(null);
                         },
@@ -10031,6 +10035,25 @@ angular.module('fu').factory('StripeService', ['$resource', '$state', 'Authentic
                 $state.go('signup');
             }
         };
+
+
+
+
+        //Plan ID - Pro, 6month, 1year
+        /*
+         var new1MonthSubscription = function(callback){
+         newSubscription('Pro', '30 day subscription - Auto Renew', 2000,  callback);
+         };
+
+         var new6MonthSubscription = function(callback){
+         newSubscription('6month', '6 month subscription - Auto Renew', 10000, callback);
+
+         };
+
+         var new12MonthSubscription = function(callback){
+         newSubscription('1year', '1 year subscription - Auto Renew', 18000, callback);
+         };
+         */
 
 
         return {

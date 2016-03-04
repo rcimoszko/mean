@@ -170,6 +170,7 @@ exports.oauthCallback = function (strategy) {
         delete req.session.redirect_to;
 
         passport.authenticate(strategy, function (err, user, redirectURL) {
+            console.log(err);
             if (err) {
                 return res.redirect('/login?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
             }
@@ -181,7 +182,7 @@ exports.oauthCallback = function (strategy) {
                     return res.redirect('/signin');
                 }
 
-                return res.redirect('/');
+                return res.redirect(redirectURL);
             });
         })(req, res, next);
     };
@@ -226,17 +227,18 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                             email: providerUserProfile.email,
                             profileImageURL: providerUserProfile.profileImageURL,
                             provider: providerUserProfile.provider,
-                            providerData: providerUserProfile.providerData
+                            providerData: providerUserProfile.providerData,
+                            verified: true
                         });
 
                         // And save the user
                         user.save(function (err) {
-                            return done(err, user);
+                            return done(err, user, '/signup-success');
                         });
                     });
                 } else {
                     user.checkPremium(function(){
-                        return done(err, user);
+                        return done(err, user, '/');
                     });
                 }
             }

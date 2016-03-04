@@ -19,6 +19,7 @@
     "FileUpload": true,
     "moment": true,
     "StripeCheckout": true,
+    "ga": true,
     "ApplicationConfiguration": true
   },
   "predef": [ // Extra globals.
