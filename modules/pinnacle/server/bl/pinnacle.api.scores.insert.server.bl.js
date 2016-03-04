@@ -239,10 +239,10 @@ function insertScores_darts(event, scores, callback){
         event.contestant2Set5Score = scores['5th set'].team2;
     }
     if('match' in scores){
-        event.contestant1FinalScore = scores.game.team1;
-        event.contestant2FinalScore = scores.game.team2;
-        event.contestant1RegulationScore = scores.game.team1;
-        event.contestant2RegulationScore = scores.game.team2;
+        event.contestant1FinalScore = scores.match.team1;
+        event.contestant2FinalScore = scores.match.team2;
+        event.contestant1RegulationScore = scores.match.team1;
+        event.contestant2RegulationScore = scores.match.team2;
         event.scores = true;
     }
     callback();

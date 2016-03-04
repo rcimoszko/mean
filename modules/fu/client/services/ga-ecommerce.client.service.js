@@ -16,7 +16,7 @@ angular.module('fu').factory('GaEcommerce', [
             });
 
             ga('ecommerce:send');
-            console.log(id, plan, amount);g
+            console.log(id, plan, amount);
             console.log('sent');
         }
 
