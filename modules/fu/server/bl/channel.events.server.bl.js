@@ -354,7 +354,6 @@ function get(channel, user, date, callback){
         EventBl.getByQuery(query, callback);
     }
 
-
     function populateBets(events, callback) {
         var populate = [{path: 'pinnacleBets', model: 'Bet'},
                         {path:'contestant1.ref', model: 'Contestant'},
@@ -363,6 +362,17 @@ function get(channel, user, date, callback){
 
         EventBl.populateBy(events, populate, callback);
     }
+
+
+    function filterDisabledContestants(events, callback){
+        events = _.filter(events, function(event){
+            if(event.contestant1.ref && event.contestant2.ref){
+                return !event.contestant1.ref.disabled && !event.contestant2.ref.disabled;
+            }
+        });
+        callback(null, events);
+    }
+
 
     function getPicks(events, callback){
         var eventIdArray = _.chain(events).pluck('_id').value();
@@ -435,6 +445,7 @@ function get(channel, user, date, callback){
 
     todo.push(getEvents);
     todo.push(populateBets);
+    todo.push(filterDisabledContestants);
     todo.push(getPicks);
     todo.push(processEvents);
     todo.push(groupEventsByDay);
