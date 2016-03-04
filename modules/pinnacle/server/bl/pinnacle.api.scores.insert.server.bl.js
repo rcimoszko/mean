@@ -461,10 +461,10 @@ function insertScores_floorball(event, scores, callback){
         event.contestant2P3Score = scores['3rd period'].team2;
     }
     if('match' in scores){
-        event.contestant1FinalScore = scores.game.team1;
-        event.contestant2FinalScore = scores.game.team2;
-        event.contestant1RegulationScore = scores.game.team1;
-        event.contestant2RegulationScore = scores.game.team2;
+        event.contestant1FinalScore = scores.match.team1;
+        event.contestant2FinalScore = scores.match.team2;
+        event.contestant1RegulationScore = scores.match.team1;
+        event.contestant2RegulationScore = scores.match.team2;
         event.scores = true;
     }
     callback();
@@ -673,10 +673,10 @@ function insertScores_rinkHockey(event, scores, callback){
         event.contestant2P2Score = scores['2nd period'].team2;
     }
     if('match' in scores){
-        event.contestant1FinalScore = scores.game.team1;
-        event.contestant2FinalScore = scores.game.team2;
-        event.contestant1RegulationScore = scores.game.team1;
-        event.contestant2RegulationScore = scores.game.team2;
+        event.contestant1FinalScore = scores.match.team1;
+        event.contestant2FinalScore = scores.match.team2;
+        event.contestant1RegulationScore = scores.match.team1;
+        event.contestant2RegulationScore = scores.match.team2;
         event.scores = true;
     }
     callback();
@@ -1125,7 +1125,7 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
                     insertScores_hockey(event, scores, scoreType, callback);
                     break;
                 default:
-                    insertScores_euroHockey(event, scores, callback);
+                    insertScores_euroHockey(event, scores, scoreType, callback);
                     break;
             }
             break;
