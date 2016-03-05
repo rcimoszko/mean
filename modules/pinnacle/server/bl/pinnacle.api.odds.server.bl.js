@@ -194,6 +194,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
             function updateOrCreateBet(bet, callback){
                 if(bet){
+                    console.log('UPDATE ', bet, betData);
                     updateBet(bet, betData, callback);
                 }else{
                     createBet(betData, callback);
@@ -412,7 +413,6 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
         betDuration: betDuration,
         cutOffTime: cutoffTime
     };
-    console.log(betData);
 
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
         switch (event.pinnacleEventType[eventPinId]){
