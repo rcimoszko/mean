@@ -194,7 +194,6 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
 
             function updateOrCreateBet(bet, callback){
                 if(bet){
-                    console.log('UPDATE ', bet, betData);
                     updateBet(bet, betData, callback);
                 }else{
                     createBet(betData, callback);
@@ -280,6 +279,7 @@ function processSpreads(oddsApi, initialBetData, event, callback){
 
             function updateOrCreateBet(bet, callback){
                 if(bet){
+                    console.log('UPDATE ', bet, betData);
                     updateBet(bet, betData, callback);
                 } else {
                     createBet(betData, callback);
