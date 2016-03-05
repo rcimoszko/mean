@@ -133,6 +133,7 @@ function getHotPick(sportId, leagueId, callback){
                     break;
                 case 'total points':
                     query.overUnder = hotPickInfo.overUnder;
+                    query.contestant = {$exists: false};
                     break;
                 default:
                     break;
