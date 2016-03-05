@@ -10,7 +10,6 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
 
     var contestantScore;
     var opponentScore;
-    console.log(pick.betDuration);
 
     switch(pick.betDuration){
         case 'ace':
@@ -313,9 +312,6 @@ function getWinner(event, pick, contestantNo, opponentNo, contestantScore, oppon
 }
 
 function getResult(event, pick, contestantNo, opponentNo, contestantScore, opponentScore, durationWinner, callback){
-
-    console.log(durationWinner);
-    console.log(pick.contestant.ref);
 
     var comparison;
     var result = null;
@@ -642,7 +638,6 @@ function resolvePick(event, pick, callback){
     }
 
     function getWinner_todo(contestantScore, opponentScore, callback){
-        console.log(contestantScore, opponentScore);
         if(typeof contestantScore === 'undefined' || typeof opponentScore === 'undefined') return callback('Scores Undefined');
         function cb(durationWinner){
             callback(null, contestantScore, opponentScore, durationWinner);

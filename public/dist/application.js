@@ -1724,6 +1724,9 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
 
         };
 
+        $scope.boxingMethodOfVictory = ['Decision', 'Knockout', 'Draw', 'Disqualification', 'No Contest'];
+        $scope.mmaMethodOfVictory = ['Decision', 'Knockout', 'Submission', 'Draw', 'Disqualification', 'No Contest'];
+
 
         $scope.results = ['Pending', 'Win', 'Loss', 'Push', 'Cancelled', 'Half-Win', 'Half-Loss'];
 
