@@ -157,13 +157,13 @@ function getMoneylines(event, bets, contestantSwitch){
     if(contestantSwitch){
         line.line1.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
         line.line2.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
-        line.line1.value = betsByUser[event.contestant2.ref._id][0].odds;
-        line.line2.value = betsByUser[event.contestant1.ref._id][0].odds;
+        if(betsByUser[event.contestant2.ref._id]) line.line1.value = betsByUser[event.contestant2.ref._id][0].odds;
+        if(betsByUser[event.contestant1.ref._id]) line.line2.value = betsByUser[event.contestant1.ref._id][0].odds;
     } else {
         line.line1.text = ContestantNameBl.getAbbreviation(event.contestant1.ref);
         line.line2.text = ContestantNameBl.getAbbreviation(event.contestant2.ref);
-        line.line1.value = betsByUser[event.contestant1.ref._id][0].odds;
-        line.line2.value = betsByUser[event.contestant2.ref._id][0].odds;
+        if(betsByUser[event.contestant1.ref._id]) line.line1.value = betsByUser[event.contestant1.ref._id][0].odds;
+        if(betsByUser[event.contestant2.ref._id]) line.line2.value = betsByUser[event.contestant2.ref._id][0].odds;
     }
     return line;
 }
