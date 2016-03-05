@@ -405,9 +405,9 @@ function insertScores_mma(event, scores, callback){
     if(scores.contestantWinner) event.contestantWinner = scores.contestantWinner;
     if(scores.draw) event.draw = scores.draw;
     if(scores.noContest) event.noContest = scores.noContest;
-    if(scores.round) event.round = scores.round;
-    if(scores.time.minutes) event.time.minutes = scores.time.minutes;
-    if(scores.time.seconds) event.time.seconds = scores.time.seconds;
+    if(typeof scores.round !== 'undefined') event.round = scores.round;
+    if(typeof scores.time.minutes !== 'undefined') event.time.minutes = scores.time.minutes;
+    if(typeof scores.time.seconds !== 'undefined') event.time.seconds = scores.time.seconds;
     callback();
 }
 
