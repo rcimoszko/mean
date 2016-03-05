@@ -412,6 +412,7 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
         betDuration: betDuration,
         cutOffTime: cutoffTime
     };
+    console.log(betData);
 
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
         switch (event.pinnacleEventType[eventPinId]){
@@ -507,7 +508,6 @@ function updateInsertOddsForLeague(pinnacleLeague, callback){
     }
 
     function processEventOddsFeed(results, callback){
-        console.log(results);
         if(!results) return callback(null);
 
         pinnacleLeague.last = results.last;
