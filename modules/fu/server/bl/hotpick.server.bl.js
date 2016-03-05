@@ -124,9 +124,7 @@ function getHotPick(sportId, leagueId, callback){
 
         function findBet(callback){
             var betType = hotPickInfo.betType;
-            var betDuration = hotPickInfo.betDuration;
-
-            var query = {betType: betType, betDuration: betDuration, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id};
+            var query = {betType: betType, betDuration: $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id};
 
             switch (hotPickInfo.betType){
                 case 'moneyline':
@@ -135,6 +133,7 @@ function getHotPick(sportId, leagueId, callback){
                     break;
                 case 'total points':
                     query.overUnder = hotPickInfo.overUnder;
+                    query.contestant = {$exists: false};
                     break;
                 default:
                     break;
