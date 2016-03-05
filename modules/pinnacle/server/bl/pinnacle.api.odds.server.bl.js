@@ -507,6 +507,7 @@ function updateInsertOddsForLeague(pinnacleLeague, callback){
     }
 
     function processEventOddsFeed(results, callback){
+        console.log(results);
         if(!results) return callback(null);
 
         pinnacleLeague.last = results.last;
@@ -537,7 +538,7 @@ function updateInsertOddsForSport(pinnacleSport, callback){
     var todo = [];
 
     function getActiveLeagues(callback){
-        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id}, callback);
+        PinnacleLeagueBl.getByQuery({active:true, 'pinnacleSport.ref': pinnacleSport._id, name: 'NBA'}, callback);
     }
 
     function processLeagues(pinnacleLeagues, callback){
@@ -558,7 +559,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name: 'Basketball'}, callback);
     }
 
     function processSports(pinnacleSports, callback){
