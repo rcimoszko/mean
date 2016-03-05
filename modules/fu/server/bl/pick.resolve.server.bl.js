@@ -19,6 +19,7 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case 'match':
         case 'game':
         case 'matchups':
+        case 'fight':
             switch(event.sport.name.toLowerCase()){
                 case 'soccer':
                 case 'handball':
@@ -250,8 +251,18 @@ function getWinner(event, pick, contestantNo, opponentNo, contestantScore, oppon
     var durationWinner;
 
     switch(pick.betDuration){
-        case 'matchups':
         case 'fight':
+            if(event.draw){
+                durationWinner = 'draw';
+            } else if (event.contestantWinner.ref) {
+                durationWinner = String(event.contestantWinner.ref);
+            } else if(contestantScore > opponentScore){
+                durationWinner = String(event['contestant'+contestantNo].ref);
+            } else if (contestantScore < opponentScore) {
+                durationWinner = String(event['contestant'+opponentNo].ref);
+            }
+            break;
+        case 'matchups':
         case 'race':
         case 'election':
             if(event.draw){
