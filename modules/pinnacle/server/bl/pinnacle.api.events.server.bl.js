@@ -79,7 +79,6 @@ function parseEventApi(eventApi, pinnacleLeague, callback){
     callback(null, event);
 }
 
-
 function createEvent(pinnacleLeague, eventData, callback){
     var todo = [];
 
