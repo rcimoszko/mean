@@ -100,7 +100,7 @@ function updateValues(type, value, bet, callback){
     function updateBetValue(callback){
         var update = {};
         update[type] = value;
-        BetBl.update(bet, update, callback);
+        BetBl.update(update, bet, callback);
     }
 
     function addToHistoricalValue(callback){
