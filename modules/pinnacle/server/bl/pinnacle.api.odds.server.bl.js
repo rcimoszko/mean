@@ -130,7 +130,7 @@ function updateBet(bet, betData, callback){
 
     if(betData.odds !== bet.odds)  todo.push(updateOdds);
     if(bet.betType === 'spread' && betData.spread !== bet.spread)  todo.push(updateSpread);
-    if((bet.betType === 'team totals' || bet.betType === 'total points')  && betData.spread !== bet.spread)  todo.push(updatePoints);
+    if((bet.betType === 'team totals' || bet.betType === 'total points')  && betData.points !== bet.points)  todo.push(updatePoints);
 
 
     async.parallel(todo, callback);
@@ -279,7 +279,6 @@ function processSpreads(oddsApi, initialBetData, event, callback){
 
             function updateOrCreateBet(bet, callback){
                 if(bet){
-                    console.log('UPDATE ', bet, betData);
                     updateBet(bet, betData, callback);
                 } else {
                     createBet(betData, callback);
