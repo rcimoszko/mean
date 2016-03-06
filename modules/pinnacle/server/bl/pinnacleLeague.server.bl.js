@@ -84,6 +84,7 @@ function getRecentActiveLeagues(pinnacleSport, callback){
         var dayDiff = 3;
         switch (pinnacleSport.sport.name){
             case 'Cricket':
+            case 'Golf':
                 dayDiff = 5;
                 break;
         }
