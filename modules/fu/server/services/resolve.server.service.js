@@ -15,6 +15,7 @@ function checkEventTime(event, callback){
     console.log(diffMins);
     console.log(event.sport.name);
     console.log(event.startTime);
+    console.log(event.slug);
 
     switch (event.sport.name){
         case 'Basketball':
@@ -145,7 +146,6 @@ function checkIfResolve(event, callback){
 
     function checkEventTime_todo(callback){
         function cb(noResolve){
-            console.log(noResolve);
             if(noResolve) return callback('No Resolve - start time');
             callback();
         }
