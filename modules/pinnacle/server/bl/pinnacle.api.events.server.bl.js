@@ -102,8 +102,8 @@ function createEvent(pinnacleLeague, eventData, callback){
         if(!contestants.pinnacleContestant1.contestant || !contestants.pinnacleContestant2.contestant) return callback(null, contestants);
         if(!contestants.pinnacleContestant1.contestant.ref || !contestants.pinnacleContestant2.contestant.ref) return callback(null, contestants);
 
-        var dateQueryEnd = new Date(eventData.startTime.getFullYear(), eventData.startTime.getMonth(), eventData.startTime.getDate(), eventData.startTime.getHours()+1);
-        var dateQueryStart = new Date(eventData.startTime.getFullYear(), eventData.startTime.getMonth(), eventData.startTime.getDate(), eventData.startTime.getHours()-1);
+        var dateQueryEnd = new Date(eventData.startTime.getFullYear(), eventData.startTime.getMonth(), eventData.startTime.getDate(), eventData.startTime.getHours()+5);
+        var dateQueryStart = new Date(eventData.startTime.getFullYear(), eventData.startTime.getMonth(), eventData.startTime.getDate(), eventData.startTime.getHours()-5);
 
         var query = {startTime: {$gte: dateQueryStart, $lt: dateQueryEnd},
             $or:[{'contestant1.ref': contestants.pinnacleContestant1.contestant.ref, 'contestant2.ref':contestants.pinnacleContestant2.contestant.ref},
