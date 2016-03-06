@@ -434,7 +434,6 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                     betData.betType = betTypeInfo.split(', ')[1];
                     betData.betDuration = betTypeInfo.split(', ')[0];
                 } else {
-                    betData.betType = 'moneyline';
                     betData.betDuration = betTypeInfo;
                 }
                 if(betData.betType.toLowerCase() === 'kills'){
