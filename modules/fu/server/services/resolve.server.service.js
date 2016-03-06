@@ -14,11 +14,6 @@ function checkEventTime(event, callback){
     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     diffMins = diffMins + (60*diffHrs);
     var noResolve = false;
-    console.log(event.slug);
-    console.log(event.sport.name);
-    console.log(event.startTime);
-    console.log(now);
-    console.log(diffMins);
 
     switch (event.sport.name){
         case 'Basketball':
