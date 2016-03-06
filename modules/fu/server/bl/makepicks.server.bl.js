@@ -189,7 +189,7 @@ function getPicks(query, callback){
 
     function getEvents(callback){
         var now = new Date();
-        var query = {'league.ref': leagueId};
+        var query = {'league.ref': leagueId , $or:[{cancelled:false}, {cancelled:{$exists:false}}]};
 
         query.startTime = { $gte: now };
         query.pinnacleBets = { $not: {$size: 0} };
