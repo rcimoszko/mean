@@ -3,7 +3,7 @@
     <div data-ng-repeat="eventGroup in channelContent.eventGroups">
         <h2 data-ng-if="channelContent.eventGroups.length > 1"> {{eventGroup.date|date:"MMM d"}}</h2>
         <ul class="dynamic-grid" angular-grid="eventGroup" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
-            <li data-ng-repeat="event in eventGroup.events|orderBy:'-profit'" class="grid">
+            <li data-ng-repeat="event in eventGroup.events|orderBy:'startTime':false" class="grid">
                 <div class="channel-event">
                     <div class="league" data-ng-if="channel.type === 'sport'">
                         {{event.league.name}}
