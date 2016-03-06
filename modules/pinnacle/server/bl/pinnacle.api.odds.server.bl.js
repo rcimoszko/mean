@@ -436,12 +436,14 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                 } else {
                     betData.betDuration = betTypeInfo;
                 }
-                if(betData.betType.toLowerCase() === 'kills'){
-                    if('spreads' in oddsApi)  betData.betType = 'spread';
-                    if('totals' in oddsApi)     betData.betType = 'totals';
-                }
-                if(betData.betDuration.toLowerCase() === 'series'){
-                    betData.betType = 'sets';
+                if(betData.betType){
+                    if(betData.betType.toLowerCase() === 'kills'){
+                        if('spreads' in oddsApi)  betData.betType = 'spread';
+                        if('totals' in oddsApi)     betData.betType = 'totals';
+                    }
+                    if(betData.betDuration.toLowerCase() === 'series'){
+                        betData.betType = 'sets';
+                    }
                 }
                 break;
         }
