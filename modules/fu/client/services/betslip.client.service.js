@@ -58,17 +58,20 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
 
 
         var addRemove = function(pick, event){
-            if(new Date(event.startTime) < new Date()) return;
-            pick.selected = !pick.selected;
             var eventIndex = getEventIndex(event);
             if(eventIndex !== undefined){
                 var pickIndex = events[eventIndex].picks.indexOf(pick);
                 if(pickIndex === -1){
+                    if(new Date(event.startTime) < new Date()) return;
+                    pick.selected = !pick.selected;
                     addPick(pick, eventIndex);
                 } else {
+                    pick.selected = !pick.selected;
                     removePick(eventIndex, pickIndex);
                 }
             } else {
+                if(new Date(event.startTime) < new Date()) return;
+                pick.selected = !pick.selected;
                 addEvent(event);
                 addPick(pick, events.length - 1);
             }

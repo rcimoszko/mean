@@ -59,8 +59,11 @@ function submit(user, eventGroups, hostName, callback){
     function checkEventStarted(callback){
         var startedEvents = [];
         var now = new Date();
+        now.setMinutes(now.getMinutes()+5);
 
         function checkEvent(event, callback){
+            console.log(now);
+            console.log(new Date(event.startTime));
             if(now > new Date(event.startTime)) startedEvents.push({eventId: event._id});
             callback();
         }
@@ -68,7 +71,7 @@ function submit(user, eventGroups, hostName, callback){
         function cb(err){
             if(startedEvents.length > 0){
                 err = {
-                    message: 'The highlighted event(s) have started. Please remove them from your Bet Slip.',
+                    message: 'The highlighted event(s) are within 5 minutes of starting. Please remove them from your Bet Slip.',
                     type: 'started',
                     values: startedEvents
                 };
