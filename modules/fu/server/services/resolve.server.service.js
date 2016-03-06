@@ -185,6 +185,7 @@ function resolve(callback){
             }
 
             function resolvePicks(callback){
+                console.log(event.slug);
                 PickResolveBl.resolvePicks(event, callback);
             }
 

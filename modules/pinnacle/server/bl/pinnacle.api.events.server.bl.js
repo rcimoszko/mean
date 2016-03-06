@@ -182,7 +182,7 @@ function createEvent(pinnacleLeague, eventData, callback){
 }
 
 function updateEvent(eventData, event, callback){
-    if(eventData.type) return callback();
+    if(eventData.type && eventData.type !== 'series') return callback();
     var fieldsToUpdate = ['startTime', 'contestant1Pitcher', 'contestant2Pitcher'];
 
     var fieldChange = false;
