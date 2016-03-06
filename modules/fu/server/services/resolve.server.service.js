@@ -10,7 +10,9 @@ function checkEventTime(event, callback){
     var eventStartTime = new Date(event.startTime);
     var now = new Date();
     var diffMs = (now - eventStartTime);
+    var diffHrs = Math.round((diffMs % 86400000) / 3600000);
     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+    diffMins = diffMins + (60*diffHrs);
     var noResolve = false;
     console.log(event.slug);
     console.log(event.sport.name);
