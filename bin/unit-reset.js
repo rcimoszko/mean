@@ -32,8 +32,9 @@ function unitReset() {
     var today = new Date();
     if(today.getDay() === 1){
         console.log('unit reset');
-        mongoose.model('User').update({}, {$set: {units:150}}, {'multi':true}, function(err, done){
-
+        mongoose.model('User').update({}, {$set: {units:150}}, {multi:true}, function(err, done){
+            console.log(err);
+            console.log(done);
         });
     }
 }

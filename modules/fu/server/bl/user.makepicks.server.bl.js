@@ -62,8 +62,6 @@ function submit(user, eventGroups, hostName, callback){
         now.setMinutes(now.getMinutes()+5);
 
         function checkEvent(event, callback){
-            console.log(now);
-            console.log(new Date(event.startTime));
             if(now > new Date(event.startTime)) startedEvents.push({eventId: event._id});
             callback();
         }

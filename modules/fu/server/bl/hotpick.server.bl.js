@@ -124,8 +124,6 @@ function getHotPick(sportId, leagueId, callback){
 
         function findBet(callback){
             var betType = hotPickInfo.betType;
-            console.log(hotPickInfo);
-            console.log(hotPickInfo.betDuration);
             var query = {betType: betType, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id};
 
             switch (hotPickInfo.betType){
