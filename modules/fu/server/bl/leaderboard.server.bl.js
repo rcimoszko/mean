@@ -63,6 +63,7 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
         function getPendingPicks(callback){
             var match = {$match: leaderboardQuery};
             match.$match.result = 'Pending';
+            match.$match.eventStartTime =  {$gte: new Date()};
             var group = {$group:{ _id: '$user.ref',  pending: { $sum: 1 }}};
 
             var aggregate = [];
@@ -75,6 +76,7 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
         function done(err, results){
             var leaderboard = results.leaderboard;
             var pendingPicks = results.pendingPicks;
+            console.log(pendingPicks);
             for(var i=0; i<leaderboard.length; i++){
                 for(var j=0; j<pendingPicks.length; j++){
                     if(String(leaderboard[i]._id) === String(pendingPicks[j]._id)){
