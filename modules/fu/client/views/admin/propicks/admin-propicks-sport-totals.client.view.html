@@ -1,0 +1,28 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > Sport Pro Picks</h2>
+
+    <table class="table">
+        <colgroup width="10%">
+        <colgroup width="10%">
+        <colgroup width="20%">
+        <colgroup width="20%">
+        <colgroup width="20%">
+        <colgroup width="20%">
+        <thead>
+            <th>Sport</th>
+            <th># Picks</th>
+            <th>Record</th>
+            <th>Profit</th>
+            <th>Roi</th>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="proPick in proPicks|orderBy:'sport'">
+            <td>{{proPick.sport}}</td>
+            <td>{{proPick.count}}</td>
+            <td>{{proPick.wins}}-{{proPick.losses}}</td>
+            <td data-ng-class="{'color-green':proPick.profit>0, 'color-red':proPick.profit<0}">{{proPick.profit|formatProfit}}</td>
+            <td data-ng-class="{'color-green':proPick.profit>0, 'color-red':proPick.profit<0}">{{proPick.roi|formatRoi}}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>

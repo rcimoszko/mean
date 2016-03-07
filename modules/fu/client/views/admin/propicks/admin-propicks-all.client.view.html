@@ -1,0 +1,22 @@
+<section class="content-padding-top">
+    <h2><a ui-sref="admin.home">Home</a> > All Pro Picks</h2>
+
+    <table class="table">
+        <thead>
+            <th>Date</th>
+            <th># Picks</th>
+            <th>Record</th>
+            <th>Profit</th>
+            <th>Roi</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="proPick in proPicks|orderBy:'date':true">
+                <td>{{proPick.date|date:'MMMM yyyy'}}</td>
+                <td>{{proPick.count}}</td>
+                <td>{{proPick.wins}}-{{proPick.losses}}</td>
+                <td data-ng-class="{'color-green':proPick.profit>0, 'color-red':proPick.profit<0}">{{proPick.profit|formatProfit}}</td>
+                <td data-ng-class="{'color-green':proPick.profit>0, 'color-red':proPick.profit<0}">{{proPick.roi|formatRoi}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

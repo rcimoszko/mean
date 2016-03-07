@@ -1153,6 +1153,56 @@ angular.module('fu.admin').config(['$stateProvider',
 
 angular.module('fu.admin').config(['$stateProvider',
     function ($stateProvider) {
+
+        $stateProvider
+            .state('admin.allProPicks', {
+                url: '/propicks/all',
+                templateUrl: 'modules/fu/client/views/admin/propicks/admin-propicks-all.client.view.html',
+                controller: 'AdminPropicksAllController',
+                data: {
+                    roles: ['admin']
+                }
+            })
+            .state('admin.sportProPicksMonth', {
+                url: '/propicks/sport/mont',
+                templateUrl: 'modules/fu/client/views/admin/propicks/admin-propicks-sport-month.client.view.html',
+                controller: 'AdminPropicksSportMonthController',
+                data: {
+                    roles: ['admin']
+                }
+            })
+            .state('admin.leagueProPicksMonth', {
+                url: '/propicks/league/month',
+                templateUrl: 'modules/fu/client/views/admin/propicks/admin-propicks-league-month.client.view.html',
+                controller: 'AdminPropicksLeagueMonthController',
+                data: {
+                    roles: ['admin']
+                }
+            })
+            .state('admin.sportProPicksTotals', {
+                url: '/propicks/sport/totals',
+                templateUrl: 'modules/fu/client/views/admin/propicks/admin-propicks-sport-totals.client.view.html',
+                controller: 'AdminPropicksSportTotalsController',
+                data: {
+                    roles: ['admin']
+                }
+            })
+            .state('admin.leagueProPicksTotals', {
+                url: '/propicks/league/totals',
+                templateUrl: 'modules/fu/client/views/admin/propicks/admin-propicks-league-totals.client.view.html',
+                controller: 'AdminPropicksLeagueTotalsController',
+                data: {
+                    roles: ['admin']
+                }
+            });
+
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').config(['$stateProvider',
+    function ($stateProvider) {
         $stateProvider
             .state('admin.resolveSports', {
                 url: '/resolve',
@@ -1968,6 +2018,70 @@ angular.module('fu.admin').controller('AdminListSportsController', ['$scope', 'S
         }
 
         Sports.getAll(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminPropicksAllController', ['$scope', 'Propicks',
+    function ($scope, Propicks) {
+        function cb(err, proPicks){
+            $scope.proPicks = proPicks;
+        }
+
+        Propicks.getAll(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminPropicksLeagueMonthController', ['$scope', 'Propicks',
+    function ($scope, Propicks) {
+
+        function cb(err, proPicks){
+            $scope.proPicks = proPicks;
+        }
+
+        Propicks.getByLeague(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminPropicksLeagueTotalsController', ['$scope', 'Propicks',
+    function ($scope, Propicks) {
+
+        function cb(err, proPicks){
+            $scope.proPicks = proPicks;
+        }
+
+        Propicks.getTotalsByLeague(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminPropicksSportMonthController', ['$scope', 'Propicks',
+    function ($scope, Propicks) {
+
+        function cb(err, proPicks){
+            $scope.proPicks = proPicks;
+        }
+
+        Propicks.getBySport(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminPropicksSportTotalsController', ['$scope', 'Propicks',
+    function ($scope, Propicks) {
+
+        function cb(err, proPicks){
+            $scope.proPicks = proPicks;
+        }
+
+        Propicks.getTotalsBySport(cb);
     }
 ]);
 
@@ -7646,6 +7760,41 @@ angular.module('fu').factory('ApiPicksComments', ['$resource',
 ]);
 'use strict';
 
+angular.module('fu').factory('ApiPropicksAll', ['$resource',
+    function ($resource) {
+        return $resource('api/propicks/all', {});
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('ApiPropicksLeague', ['$resource',
+    function ($resource) {
+        return $resource('api/propicks/league', {});
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('ApiPropicksLeagueTotals', ['$resource',
+    function ($resource) {
+        return $resource('api/propicks/league/totals', {});
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('ApiPropicksSport', ['$resource',
+    function ($resource) {
+        return $resource('api/propicks/sport', {});
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('ApiPropicksSportTotals', ['$resource',
+    function ($resource) {
+        return $resource('api/propicks/sport/totals', {});
+    }
+]);
+'use strict';
+
 angular.module('fu').factory('ApiSearch', ['$resource',
     function ($resource) {
         return $resource('api/search', {});
@@ -9264,6 +9413,89 @@ angular.module('fu').factory('Picks', ['ApiPicksComments', 'ApiPicks',
             commentReply: commentReply,
 
             resolve: resolve
+        };
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('Propicks', ['ApiPropicksSport', 'ApiPropicksLeague', 'ApiPropicksAll', 'ApiPropicksSportTotals', 'ApiPropicksLeagueTotals',
+    function(ApiPropicksSport, ApiPropicksLeague, ApiPropicksAll, ApiPropicksSportTotals, ApiPropicksLeagueTotals) {
+
+        var getAll = function(callback){
+            function cbSuccess(proPicks){
+                callback(null, proPicks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiPropicksAll.query({}, cbSuccess, cbError);
+        };
+
+        var getBySport = function(callback){
+
+            function cbSuccess(proPicks){
+                callback(null, proPicks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiPropicksSport.get({}, cbSuccess, cbError);
+
+        };
+
+        var getByLeague = function(callback){
+
+            function cbSuccess(proPicks){
+                callback(null, proPicks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiPropicksLeague.get({}, cbSuccess, cbError);
+
+        };
+
+
+        var getTotalsBySport = function(callback){
+
+            function cbSuccess(proPicks){
+                callback(null, proPicks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiPropicksSportTotals.query({}, cbSuccess, cbError);
+
+        };
+
+        var getTotalsByLeague = function(callback){
+
+            function cbSuccess(proPicks){
+                callback(null, proPicks);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiPropicksLeagueTotals.query({}, cbSuccess, cbError);
+
+        };
+
+        return {
+            getAll:      getAll,
+            getBySport:  getBySport,
+            getByLeague: getByLeague,
+            getTotalsBySport: getTotalsBySport,
+            getTotalsByLeague: getTotalsByLeague
         };
     }
 ]);
