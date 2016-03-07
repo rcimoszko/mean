@@ -58,7 +58,6 @@ angular.module('fu').directive('commentForm', function() {
                     $scope.text = '';
                     $scope.reply.replies.push(comment.reply);
                     $scope.comment = comment.comment;
-                    console.log(comment);
                 }
                 Events.commentReply($scope.event, $scope.comment, $scope.replyIndex, $scope.reply.user, $scope.text, cb);
             }
