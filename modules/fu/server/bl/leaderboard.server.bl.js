@@ -61,7 +61,7 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
         }
 
         function getPendingPicks(callback){
-            var match = {$match: leaderboardQuery, eventStartTime: {$gte: new Date()}};
+            var match = {$match: leaderboardQuery};
             match.$match.result = 'Pending';
             var group = {$group:{ _id: '$user.ref',  pending: { $sum: 1 }}};
 
