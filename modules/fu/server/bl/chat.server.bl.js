@@ -6,11 +6,21 @@ var _ = require('lodash'),
     Chat = mongoose.model('Chat');
 
 function getHubChat(callback){
-    Chat.find({channel:{$exists:false}}).sort('-timestamp').limit(40).exec(callback);
+    function cb(err, messages){
+        messages.reverse();
+        callback(err, messages);
+    }
+
+    Chat.find({channel:{$exists:false}}).sort('-timestamp').limit(40).exec(cb);
 }
 
 function getChannelChat(channelId, callback){
-    Chat.find({'channel.ref':channelId}).sort('-timestamp').limit(40).exec(callback);
+    function cb(err, messages){
+        messages.reverse();
+        callback(err, messages);
+    }
+
+    Chat.find({'channel.ref':channelId}).sort('-timestamp').limit(40).exec(cb);
 }
 
 function create(data, callback){

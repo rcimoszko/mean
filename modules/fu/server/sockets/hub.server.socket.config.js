@@ -9,13 +9,6 @@ function config(io) {
 
     nsp.on('connection', function(socket) {
 
-        function cb(err, messages){
-            messages.reverse();
-            nsp.emit('initialize message', messages);
-        }
-
-        ChatBl.getHubChat(cb);
-
         socket.on('new message', function(chat){
             function cb(err, chat){
                 nsp.emit('new message', chat);

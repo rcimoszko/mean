@@ -11,13 +11,6 @@ function config(io) {
 
         socket.on('join channel', function(channelId){
             socket.join(channelId);
-
-            function cb(err, messages){
-                messages.reverse();
-                nsp.to(channelId).emit('initialize message', messages);
-            }
-
-            ChatBl.getChannelChat(channelId, cb);
         });
 
 

@@ -5,6 +5,7 @@ var _ = require('lodash'),
     HotpickBl = require('./hotpick.server.bl'),
     ConsensusBl = require('./consensus.server.bl'),
     PopularBl = require('./popular.server.bl'),
+    ChatBl = require('./chat.server.bl'),
     LeaderboardBl = require('./leaderboard.server.bl'),
     PickListBl = require('./pick.list.server.bl'),
     TrendingBl = require('./trending.server.bl'),
@@ -36,12 +37,17 @@ function getTrending(callback){
     TrendingBl.get(query, callback);
 }
 
+function getChat(callback){
+    ChatBl.getHubChat(callback);
+}
+
 function get(callback){
     var todo = {
         hotPick: getHotPick,
         consensus: getConsensus,
         popular: getPopularGames,
         leaderboard: getLeaderboard,
+        chat: getChat,
         trending: getTrending
     };
 

@@ -2382,7 +2382,6 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         function cb(err, channelContent){
-            console.log(channelContent);
             if(!channelContent) $state.go('not-found');
             $scope.loading.isLoading.pageLoading = false;
             $scope.channelContent = channelContent;
@@ -5101,11 +5100,12 @@ angular.module('fu').directive('chat', function() {
         restrict: 'E',
         scope: {
             socket: '=',
+            messages: '=',
             channel: '='
         },
         templateUrl: 'modules/fu/client/templates/chat/chat.client.template.html',
         controller: ['$scope', 'Authentication', function($scope, Authentication) {
-            $scope.messages = [];
+            
             $scope.authentication = Authentication;
             $scope.showFullChat = false;
 
@@ -5120,10 +5120,6 @@ angular.module('fu').directive('chat', function() {
 
 
             };
-
-            $scope.socket.on('initialize message', function(messages){
-                $scope.messages = messages;
-            });
 
             $scope.socket.on('new message', function(messages){
                 $scope.messages = $scope.messages.concat(messages);

@@ -7,6 +7,7 @@ var _ = require('lodash'),
     LeaderboardBl = require('./leaderboard.server.bl'),
     CommentPreviewsBl = require('./comment.previews.server.bl'),
     ChannelEventsBl = require('./channel.events.server.bl'),
+    ChatBl = require('./chat.server.bl'),
     TrendingBl = require('./trending.server.bl'),
     mongoose = require('mongoose');
 
@@ -74,6 +75,10 @@ function get(channel, user, date, callback){
         ChannelEventsBl.get(channel, user, date, callback);
     }
 
+    function getChat_todo(callback){
+        ChatBl.getChannelChat(channel._id, callback);
+    }
+
     var todo = {
         channel: getChannel_todo,
         hotPick: getHotPick_todo,
@@ -81,7 +86,8 @@ function get(channel, user, date, callback){
         leaderboard: getLeaderboard_todo,
         trending: getTrending_todo,
         discussion: getDiscussion_todo,
-        eventGroups: getChannelEvents_todo
+        eventGroups: getChannelEvents_todo,
+        chat: getChat_todo
     };
 
     async.parallel(todo, callback);
