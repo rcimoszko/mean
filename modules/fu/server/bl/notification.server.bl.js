@@ -125,12 +125,13 @@ function createCommentPickNotification(user, userFrom, pick, comment, callback){
 
     async.waterfall(todo, callback);
 }
-
+///createCommentReplyNotification(replyToUser, user, comment, callback);
 function createCommentReplyNotification(user, userFrom, comment, callback){
     if(String(user._id) === String(userFrom._id)) return callback(); // return if comment on own pick
     var todo = [];
 
     function createNotification(callback){
+        console.log('createNotification');
         var notification = {
             user: {name: user.username, ref: user._id},
             userFrom: {name: userFrom.username, ref: userFrom._id},
@@ -142,7 +143,7 @@ function createCommentReplyNotification(user, userFrom, comment, callback){
     }
 
     function populateNotification(notification, callback){
-        m_Notification(notification, populate, callback);
+        m_Notification.populate(notification, populate, callback);
     }
 
     function sendNotification(notification, callback){

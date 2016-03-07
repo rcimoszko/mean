@@ -143,11 +143,12 @@ function eventCommentReply(comment, event, user, text, replyIndex, replyToUser, 
         var query = {_id: comment._id};
         var update = {$addToSet: {users: user._id}};
 
+
         function cb(err, comment){
             callback(err, comment);
         }
 
-        m_Comment.findOneAndUpdate(query, update, cb);
+        m_Comment.findOneAndUpdate(query, update, {new: true}, cb);
     }
 
     function populateComment(comment, callback){
@@ -198,7 +199,7 @@ function pickCommentReply(comment, pick, user, text, replyIndex, replyToUser, ca
             callback(err, comment);
         }
 
-        m_Comment.findOneAndUpdate(query, update, cb);
+        m_Comment.findOneAndUpdate(query, update, {new: true}, cb);
     }
 
     function createPickCommentNotification(comment, callback){
@@ -235,7 +236,7 @@ function pickCommentReply(comment, pick, user, text, replyIndex, replyToUser, ca
             callback(err, comment);
         }
 
-        m_Comment.findOneAndUpdate(query, update, cb);
+        m_Comment.findOneAndUpdate(query, update, {new: true}, cb);
     }
 
     function populateComment(comment, callback){
