@@ -2769,7 +2769,7 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             var rankFound = false;
             $scope.leaderboard = $filter('orderBy')($scope.leaderboard, $scope.currentOrder);
             for(var i=0; i<$scope.leaderboard.length; i++){
-                if($scope.authentication.user._id === $scope.leaderboard[i]._id._id){
+                if($scope.authentication.user._id === $scope.leaderboard[i].user._id){
                     $scope.rank = i+1;
                     rankFound = true;
                 }
@@ -4117,13 +4117,12 @@ angular.module('core').controller('SplashController', ['$scope', 'Modal', '$stat
             betDuration:    'all',
             betType:        'all',
             minBets:        'all',
-            dateId:         'allTime',
+            dateId:         'last30Days',
             count:          5
         };
 
         function cb(err, leaderboard){
             $scope.leaderboard = leaderboard;
-            console.log($scope.leaderboard);
         }
 
         Leaderboard.getLeaderboard($scope.query, cb);

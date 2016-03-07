@@ -27,13 +27,12 @@ angular.module('core').controller('SplashController', ['$scope', 'Modal', '$stat
             betDuration:    'all',
             betType:        'all',
             minBets:        'all',
-            dateId:         'allTime',
+            dateId:         'last30Days',
             count:          5
         };
 
         function cb(err, leaderboard){
             $scope.leaderboard = leaderboard;
-            console.log($scope.leaderboard);
         }
 
         Leaderboard.getLeaderboard($scope.query, cb);

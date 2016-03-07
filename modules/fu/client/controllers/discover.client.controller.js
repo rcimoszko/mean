@@ -311,7 +311,7 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             var rankFound = false;
             $scope.leaderboard = $filter('orderBy')($scope.leaderboard, $scope.currentOrder);
             for(var i=0; i<$scope.leaderboard.length; i++){
-                if($scope.authentication.user._id === $scope.leaderboard[i]._id._id){
+                if($scope.authentication.user._id === $scope.leaderboard[i].user._id){
                     $scope.rank = i+1;
                     rankFound = true;
                 }

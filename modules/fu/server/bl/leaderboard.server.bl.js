@@ -70,7 +70,6 @@ function buildLeaderboard(dateId, sportId, leagueId, contestantId, homeAway, bet
             aggregate.push(group);
 
             PickBl.aggregate(aggregate, callback);
-
         }
 
         function done(err, results){
