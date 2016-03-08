@@ -225,7 +225,6 @@ function getHotPick(sportId, leagueId, callback){
                 return pick.betType;
             });
             var margin;
-            console.log(groupedBets);
 
             for(var betType in groupedBets){
                 switch (betType){

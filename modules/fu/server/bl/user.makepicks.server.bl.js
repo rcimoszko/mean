@@ -205,7 +205,6 @@ function submit(user, eventGroups, hostName, callback){
     }
 
     function cb(err){
-        console.log('testing');
         callback(err, {user: user, picks: picks});
     }
 
