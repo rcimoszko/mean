@@ -31,6 +31,7 @@ var AdminService = require('../modules/fu/server/services/admin.server.service.j
 
 function checkTrial() {
     function cb(err){
+        console.log('done');
         if(err)console.log(err);
         mongoose.connection.close();
     }
