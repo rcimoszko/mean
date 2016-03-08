@@ -5,8 +5,11 @@ var _ = require('lodash'),
     PickBl = require('./pick.server.bl'),
     EventBl = require('./event.server.bl'),
     BetBl = require('./bet.server.bl'),
-    mongoose = require('mongoose');
-
+    UserBl = require('./user.server.bl'),
+    EmailBl =  require('./email.server.bl'),
+    BetDurationBl = require('./bet.betduration.server.bl'),
+    mongoose = require('mongoose'),
+    HotPick = mongoose.model('HotPick');
 
 function updateHotPick(callback){
 
@@ -14,6 +17,8 @@ function updateHotPick(callback){
 
     function groupProPicks(callback){
         var query =  {result: 'Pending', premium: true, eventStartTime: {$gte: new Date()}};
+        query.betDuration = {$in:BetDurationBl.mainBetDurations};
+
         var match = {$match: query};
         var group = {$group: {'_id': '$event', picks: {$addToSet: '$$ROOT'}}};
         var sort =  {$sort: {'eventStartTime': -1}};
@@ -39,13 +44,15 @@ function updateHotPick(callback){
     function calculateCounts(events, callback){
         var overUnder = ['over', 'under'];
         var bestMargin = 0;
-        var hotPick = { };
+        var hotPick = {};
 
         function calculateCount(event, callback){
             var groupedBets = _.groupBy(event.picks, function(pick){
                 return pick.betType;
             });
             var margin;
+
+            console.log(groupedBets);
 
             for(var betType in groupedBets){
                 switch (betType){
@@ -64,9 +71,9 @@ function updateHotPick(callback){
                         if(Math.abs(margin) > bestMargin){
                             bestMargin = Math.abs(margin);
                             if(margin > 0){
-                                hotPick = {betType: betType, contestantId: event._id.contestant1.ref, event: event._id};
+                                hotPick = {betType: betType, contestantId: event._id.contestant1.ref, event: event._id, proPicks: contestantGroup[event._id.contestant1.ref], proCount: contestantGroup[event._id.contestant1.ref].length};
                             } else {
-                                hotPick = {betType: betType, contestantId: event._id.contestant2.ref , event: event._id};
+                                hotPick = {betType: betType, contestantId: event._id.contestant2.ref, event: event._id, proPicks: contestantGroup[event._id.contestant2.ref], proCount: contestantGroup[event._id.contestant2.ref].length};
                             }
                         }
                         break;
@@ -109,19 +116,17 @@ function updateHotPick(callback){
         var event =  hotPickInfo.event;
         var hotPick = {
             event: event,
-            bet: null,
-            pick: {
-                betName: null,
-                league:  event.league.name,
-                value: null
-            }
+            sport: event.sport,
+            league: event.league,
+            proCount: hotPickInfo.proCount,
+            proPicks: hotPickInfo.proPicks
         };
 
         var todo = [];
 
         function findBet(callback){
             var betType = hotPickInfo.betType;
-            var query = {betType: betType, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id};
+            var query = {betType: betType, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id, betDuration: {$in:BetDurationBl.mainBetDurations}};
 
             switch (hotPickInfo.betType){
                 case 'moneyline':
@@ -130,7 +135,6 @@ function updateHotPick(callback){
                     break;
                 case 'total points':
                     query.overUnder = hotPickInfo.overUnder;
-                    query.contestant = {$exists: false};
                     break;
                 default:
                     break;
@@ -141,38 +145,50 @@ function updateHotPick(callback){
             BetBl.getOneAndPopulate(query, populate, callback);
         }
 
+        function checkIfBetIsNew(bet, callback){
+            function cb(err, hotPick){
+                if(!hotPick) return callback(err, bet);
+                callback('Hot Pick Unchanged');
+            }
+
+            HotPick.findOne({bet:bet}, cb);
+        }
+
         function getPick(bet, callback){
             hotPick.bet = bet;
-
-            switch (bet.betType){
-                case 'moneyline':
-                    hotPick.pick.betName = bet.contestant.name;
-                    hotPick.pick.value = bet.odds;
-                    hotPick.pick.betType  = bet.betType;
-                    hotPick.pick.logoUrl  = bet.contestant.ref.logoUrl;
-                    break;
-                case 'spread':
-                    hotPick.pick.betName = bet.contestant.name;
-                    hotPick.pick.value = bet.spread;
-                    hotPick.pick.betType  = bet.betType;
-                    hotPick.pick.logoUrl  = bet.contestant.ref.logoUrl;
-                    break;
-                case 'total points':
-                    hotPick.pick.betName = event.contestant1.name +'/'+event.contestant2.name + ' Total Points';
-                    hotPick.pick.value = bet.points;
-                    hotPick.pick.betType  = bet.betType;
-                    break;
-                default:
-                    break;
-            }
             callback(null, hotPick);
         }
 
         todo.push(findBet);
+        todo.push(checkIfBetIsNew);
         todo.push(getPick);
 
         async.waterfall(todo, callback);
 
+    }
+
+    function createHotPick(hotPick, callback){
+        HotPick.create(hotPick, callback);
+    }
+
+    function sendEmails(hotPick, callback){
+
+        EmailBl.sendHotPickEmail(hotPick, 'fansunite.com', callback);
+
+        var todo = [];
+
+        function getUsers(callback){
+            UserBl.getByQuery({roles:['admin']}, callback);
+        }
+
+        function sendEmailsToUser(users, callback){
+
+        }
+
+        todo.push(getUsers);
+        todo.push(sendEmailsToUser);
+
+        async.waterfall(todo, callback);
     }
 
     todo.push(groupProPicks);
@@ -180,6 +196,8 @@ function updateHotPick(callback){
     todo.push(populateEventsLeagues);
     todo.push(calculateCounts);
     todo.push(findHotPick);
+    todo.push(createHotPick);
+    todo.push(sendEmails);
 
     async.waterfall(todo, callback);
 
@@ -192,6 +210,7 @@ function getHotPick(sportId, leagueId, callback){
         var query =  {result: 'Pending', premium: true, eventStartTime: {$gte: new Date()}};
         if(sportId !== 'all') query.sport = mongoose.Types.ObjectId(sportId);
         if(leagueId !== 'all') query.league = mongoose.Types.ObjectId(leagueId);
+        query.betDuration = {$in:BetDurationBl.mainBetDurations};
 
         var match = {$match: query};
         var group = {$group: {'_id': '$event', picks: {$addToSet: '$$ROOT'}}};
@@ -300,7 +319,7 @@ function getHotPick(sportId, leagueId, callback){
 
         function findBet(callback){
             var betType = hotPickInfo.betType;
-            var query = {betType: betType, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id};
+            var query = {betType: betType, $or:[{altLine: {$exists:false}},{altLine: false}], event: event._id, betDuration: {$in:BetDurationBl.mainBetDurations}};
 
             switch (hotPickInfo.betType){
                 case 'moneyline':
@@ -338,7 +357,7 @@ function getHotPick(sportId, leagueId, callback){
                     break;
                 case 'total points':
                     hotPick.pick.betName = event.contestant1.name +'/'+event.contestant2.name + ' Total Points';
-                    hotPick.pick.value = bet.points;
+                    hotPick.pick.value = bet.overUnder.charAt(0)+bet.points;
                     hotPick.pick.betType  = bet.betType;
                     break;
                 default:

@@ -16,7 +16,7 @@ angular.module('fu').directive('hotPick', function () {
                     $scope.value = $filter('formatSpread')($scope.hotPick.pick.value);
                     break;
                 case 'total points':
-                    $scope.value = $filter('formatPoints')($scope.hotPick.pick.value);
+                    $scope.value = $scope.hotPick.pick.value;
                     break;
             }
         }]

@@ -13,6 +13,7 @@ var _ = require('lodash'),
     LeagueBl = require('../bl/league.server.bl'),
     CommentBl = require('../bl/comment.server.bl'),
     EmailBl = require('../bl/email.server.bl'),
+    HotpickBl = require('../bl/hotpick.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
     slug = require('speakingurl');
 
@@ -488,6 +489,10 @@ function checkTrial(callback){
 
 }
 
+function updateHotPick(callback){
+    HotpickBl.updateHotPick(callback);
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -500,3 +505,4 @@ exports.assignCommentIds    = assignCommentIds;
 
 exports.assignLogos = assignLogos;
 exports.checkTrial  = checkTrial;
+exports.updateHotPick  = updateHotPick;

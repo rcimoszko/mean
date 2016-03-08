@@ -9,6 +9,7 @@ angular.module('core').controller('ProController', ['$scope', '$state', '$anchor
         $scope.page = Page;
         $scope.mixpanel = Mixpanel;
         $scope.user = User;
+        $scope.authentication = Authentication;
 
 
         $scope.newSubscription = function(plan){

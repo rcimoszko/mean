@@ -436,8 +436,68 @@ function sendTrialOverEmail(user, hostName, callback){
     async.waterfall(todo, cb);
 }
 
+function sendHotPickEmail(hotPick, hostName, callback){
+    var todo = [];
+
+    function processHotPick(callback){
+    }
+
+    function getUsers(calback){
+        var query = {roles:'admin'};
+        UserBl.getByQuery(query, callback);
+    }
+
+    function sendEmails(user, callback){
+
+        var todo = [];
+
+        function render(callback){
+            function cb(err, emailHTML){
+                callback(err, emailHTML);
+            }
+
+            var templatePath = 'modules/fu/server/views/templates/new-picks-premium.server.view.html';
+            var json = {
+            };
+            renderTemplate(templatePath, json, cb);
+        }
+
+        function send(emailHTML, callback){
+            function cb(err){
+                callback(err);
+            }
+            var subject = ' has made New Picks';
+            sendEmail(emailHTML, subject, user.email, cb);
+        }
+
+        function cb(err){
+            if (err){
+                var e = new Error('Error sending email - sendVerificationEmail');
+                e.error = err;
+                callback(e);
+                return;
+            }
+            callback();
+        }
+
+        todo.push(render);
+        todo.push(send);
+
+        async.waterfall(todo, cb);
+
+    }
+
+    todo.push(processHotPick);
+    todo.push(getUsers);
+    todo.push(sendEmails);
+
+    async.waterfall(todo, callback);
+
+}
+
 exports.sendVerificationEmail   = sendVerificationEmail;
 exports.sendFollowerEmail       = sendFollowerEmail;
 exports.sendMessageEmail        = sendMessageEmail;
 exports.sendPicksEmails         = sendPicksEmails;
 exports.sendTrialOverEmail      = sendTrialOverEmail;
+exports.sendHotPickEmail        = sendHotPickEmail;
