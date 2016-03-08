@@ -5,12 +5,14 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     ContestantLogo = mongoose.model('ContestantLogo'),
     SportBl = require('../bl/sport.server.bl'),
+    UserBl = require('../bl/user.server.bl'),
     LoopBl = require('../bl/loop.server.bl'),
     BetBl = require('../bl/bet.server.bl'),
     ChannelBl = require('../bl/channel.server.bl'),
     PickBl = require('../bl/pick.server.bl'),
     LeagueBl = require('../bl/league.server.bl'),
     CommentBl = require('../bl/comment.server.bl'),
+    EmailBl = require('../bl/email.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
     slug = require('speakingurl');
 
@@ -422,6 +424,69 @@ function assignLogos(callback){
     async.waterfall(todo, callback);
 }
 
+function checkTrial(callback){
+
+    var todo = [];
+
+    function getTrialUsers(callback){
+        var now = new Date();
+        var startDate = now.setDate(now.getDate()-7);
+        var query = {trial:true, trialStartDate: {$gte:startDate}};
+        UserBl.getByQuery(query, callback);
+    }
+
+    function updateTrialUsers(users, callback){
+
+        function processUser(user, callback){
+            console.log(user.username);
+            console.log(user.trial);
+            console.log(user.trialStartDate);
+
+            var todo = [];
+
+            function sendEmail(callback){
+                /*
+                EmailBl.sendTrialOverEmail(user, 'fansunite.com', function(err){
+                    if(err)console.log(err)
+                });
+                */
+                callback();
+            }
+
+            function updateUser(callback){
+                callback();
+
+
+                /*
+                user.trail = false;
+                user.trialEndDate = new Date();
+                user.trialUsed = true;
+
+                function cb(err){
+                    callback(err);
+                }
+
+                user.save(cb);
+                */
+            }
+
+            todo.push(sendEmail);
+            todo.push(updateUser);
+
+            async.waterfall(todo, callback);
+
+        }
+        async.eachSeries(users, processUser, callback);
+    }
+
+
+    todo.push(getTrialUsers);
+    todo.push(updateTrialUsers);
+
+    async.waterfall(todo, callback);
+
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -433,4 +498,4 @@ exports.createChannels    = createChannels;
 exports.assignCommentIds    = assignCommentIds;
 
 exports.assignLogos = assignLogos;
-
+exports.checkTrial  = checkTrial;

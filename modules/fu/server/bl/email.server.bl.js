@@ -79,7 +79,6 @@ function sendVerificationEmail(token, user, hostName, callback) {
 
 }
 
-
 function betName(pick){
     var text;
     switch(pick.betType){
@@ -396,7 +395,46 @@ function sendMessageEmail(user, userMessageName, hostName, callback){
     todo.push(send);
 }
 
+function sendTrialOverEmail(user, hostName, callback){
+    var todo = [];
+
+    function render(callback){
+        function cb(err, emailHTML){
+            callback(err, emailHTML);
+        }
+
+        var templatePath = 'modules/fu/server/views/templates/trial-over-email.server.view.html';
+        var json = {
+            user: user.username,
+            url: 'https://' + hostName + '/why-go-pro'
+        };
+        renderTemplate(templatePath, json, cb);
+    }
+
+    function send(emailHTML, callback){
+        function cb(err){
+            callback(err);
+        }
+        var subject = 'Your 7 Day Trial of FansUnite Pro has Ended';
+        sendEmail(emailHTML, subject, user.email, cb);
+    }
+
+    function cb(err){
+        if (err){
+            var e = new Error('Error sending email - sendTrialOverEmail');
+            e.error = err;
+            callback(e);
+            return;
+        }
+        callback();
+    }
+
+    todo.push(render);
+    todo.push(send);
+}
+
 exports.sendVerificationEmail   = sendVerificationEmail;
 exports.sendFollowerEmail       = sendFollowerEmail;
 exports.sendMessageEmail        = sendMessageEmail;
-exports.sendPicksEmails        = sendPicksEmails;
+exports.sendPicksEmails         = sendPicksEmails;
+exports.sendTrialOverEmail      = sendTrialOverEmail;
