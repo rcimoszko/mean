@@ -46,7 +46,6 @@ function updateHotPick(callback){
                 return pick.betType;
             });
             var margin;
-            console.log(groupedBets);
 
             for(var betType in groupedBets){
                 switch (betType){
