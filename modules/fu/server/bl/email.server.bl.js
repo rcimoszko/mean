@@ -7,6 +7,7 @@ var nodemailer = require('nodemailer'),
     FollowBl = require('./follow.server.bl'),
     UserBl = require('./user.server.bl'),
     PickBl = require('./pick.server.bl'),
+    HotPickBl = require('./hotpick.server.bl'),
     config = require('../../../../config/config'),
     path = require('path');
 
@@ -79,7 +80,38 @@ function sendVerificationEmail(token, user, hostName, callback) {
 
 }
 
-function betName(pick){
+function betName(bet){
+    var text;
+    switch(bet.betType){
+        case 'spread':
+            text = bet.contestant.name+' '+bet.spread;
+            break;
+        case 'total points':
+            text = bet.overUnder+' '+bet.points;
+            break;
+        case 'team totals':
+            text = bet.contestant.name+' '+bet.overUnder+' '+bet.points;
+            break;
+        case 'moneyline':
+            if(bet.draw){
+                text = 'Draw';
+            } else {
+                text = bet.contestant.name;
+            }
+            break;
+        case 'sets':
+            text = bet.contestant.name+' '+bet.spread+' sets';
+            break;
+        default:
+            text = bet.contestant.name;
+            break;
+
+    }
+    text = text +' ('+bet.betType + ' - '+bet.betDuration+') - '+bet.odds;
+    return text;
+}
+
+function pickName(pick){
     var text;
     switch(pick.betType){
         case 'spread':
@@ -140,7 +172,7 @@ function sendPicksEmails(picks, user, hostName, callback){
             }
 
             var pPick = pick.toJSON();
-            pPick.name = betName(pPick) ;
+            pPick.name = pickName(pPick) ;
 
             if(!exists){
                 processedEvents.push({header:eventHeader, picks:[pPick]});
@@ -438,61 +470,85 @@ function sendTrialOverEmail(user, hostName, callback){
 
 function sendHotPickEmail(hotPick, hostName, callback){
     var todo = [];
+    var hotPickInfo = {};
 
-    function processHotPick(callback){
+    function populateHotPick(callback){
+        var populate = [
+            {path: 'event', model:'Event', select: '-pinnacleBets'},
+            {path: 'bet', model:'Bet'}
+        ];
+        HotPickBl.populateBy(hotPick, populate, callback);
     }
 
-    function getUsers(calback){
-        var query = {roles:'admin'};
+    function processHotPick(hotPick, callback){
+        hotPickInfo.header = hotPick.sport.name+' // '+hotPick.league.name+' // '+hotPick.event.contestant2.name+' @ '+hotPick.event.contestant1.name + ' // '+new Date(hotPick.event.startTime).toUTCString();
+        hotPickInfo.betName = betName(hotPick.bet.toJSON());
+        callback();
+    }
+
+    function getUsers(callback){
+        var query = {roles:'admin', username: {$in:['nshuster', 'deghdami', 'rcimoszko']}};
         UserBl.getByQuery(query, callback);
     }
 
-    function sendEmails(user, callback){
+    function sendEmails(users, callback){
+        console.log(users);
+        return callback(null);
 
-        var todo = [];
 
-        function render(callback){
-            function cb(err, emailHTML){
-                callback(err, emailHTML);
+        function sendEmail_todo(user, callback){
+            if(!user.email) return callback();
+            var todo = [];
+
+            function render(callback){
+                function cb(err, emailHTML){
+                    callback(err, emailHTML);
+                }
+
+                var templatePath = 'modules/fu/server/views/templates/new-hotpick.server.view.html';
+                var json = {
+                    user: user.username,
+                    hotPickInfo: hotPickInfo,
+                    url: 'https://' + hostName + '/make-picks'
+                };
+                renderTemplate(templatePath, json, cb);
             }
 
-            var templatePath = 'modules/fu/server/views/templates/new-picks-premium.server.view.html';
-            var json = {
-            };
-            renderTemplate(templatePath, json, cb);
-        }
+            function send(emailHTML, callback){
+                function cb(err){
+                    callback(err);
+                }
+                var subject = 'New Hot Pick';
+                sendEmail(emailHTML, subject, user.email, cb);
+            }
 
-        function send(emailHTML, callback){
             function cb(err){
-                callback(err);
+                if (err){
+                    var e = new Error('Error sending email - sendHotPickEmail');
+                    e.error = err;
+                    callback(e);
+                    return;
+                }
+                callback();
             }
-            var subject = ' has made New Picks';
-            sendEmail(emailHTML, subject, user.email, cb);
+
+            todo.push(render);
+            todo.push(send);
+
+            async.waterfall(todo, cb);
         }
 
-        function cb(err){
-            if (err){
-                var e = new Error('Error sending email - sendVerificationEmail');
-                e.error = err;
-                callback(e);
-                return;
-            }
-            callback();
-        }
 
-        todo.push(render);
-        todo.push(send);
-
-        async.waterfall(todo, cb);
+        async.eachSeries(users, sendEmail_todo, callback);
 
     }
 
+    todo.push(populateHotPick);
     todo.push(processHotPick);
     todo.push(getUsers);
     todo.push(sendEmails);
 
     async.waterfall(todo, callback);
-
 }
 
 exports.sendVerificationEmail   = sendVerificationEmail;

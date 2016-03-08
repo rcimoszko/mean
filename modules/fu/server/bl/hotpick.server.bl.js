@@ -11,6 +11,10 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     HotPick = mongoose.model('HotPick');
 
+function populateBy(hotPick, populate, callback){
+    HotPick.populate(hotPick, populate, callback);
+}
+
 function updateHotPick(callback){
 
     var todo = [];
@@ -52,8 +56,6 @@ function updateHotPick(callback){
             });
             var margin;
 
-            console.log(groupedBets);
-
             for(var betType in groupedBets){
                 switch (betType){
                     case 'moneyline':
@@ -90,9 +92,9 @@ function updateHotPick(callback){
                         if(Math.abs(margin) > bestMargin){
                             bestMargin = Math.abs(margin);
                             if(margin > 0){
-                                hotPick = {betType: betType, overUnder: 'over' , event: event._id};
+                                hotPick = {betType: betType, overUnder: 'over', event: event._id, proPicks: overUnderGroup.over, proCount: overUnderGroup.over.length};
                             } else {
-                                hotPick = {betType: betType, overUnder: 'under', event: event._id};
+                                hotPick = {betType: betType, overUnder: 'under', event: event._id, proPicks: overUnderGroup.under, proCount: overUnderGroup.under.length};
                             }
                         }
                         break;
@@ -146,9 +148,14 @@ function updateHotPick(callback){
         }
 
         function checkIfBetIsNew(bet, callback){
-            function cb(err, hotPick){
-                if(!hotPick) return callback(err, bet);
-                callback('Hot Pick Unchanged');
+            function cb(err, hotPickFound){
+                if(!hotPickFound) return callback(err, bet);
+
+                //update hot pick
+                function cb_update(err){
+                    callback('Hot Pick Unchanged');
+                }
+                HotPick.update(hotPickFound, hotPick, cb_update);
             }
 
             HotPick.findOne({bet:bet}, cb);
@@ -172,23 +179,7 @@ function updateHotPick(callback){
     }
 
     function sendEmails(hotPick, callback){
-
         EmailBl.sendHotPickEmail(hotPick, 'fansunite.com', callback);
-
-        var todo = [];
-
-        function getUsers(callback){
-            UserBl.getByQuery({roles:['admin']}, callback);
-        }
-
-        function sendEmailsToUser(users, callback){
-
-        }
-
-        todo.push(getUsers);
-        todo.push(sendEmailsToUser);
-
-        async.waterfall(todo, callback);
     }
 
     todo.push(groupProPicks);
@@ -386,4 +377,5 @@ function getHotPick(sportId, leagueId, callback){
 
 exports.getHotPick    = getHotPick;
 exports.updateHotPick = updateHotPick;
+exports.populateBy    = populateBy;
 
