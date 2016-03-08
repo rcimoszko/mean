@@ -59,7 +59,17 @@ function submit(user, eventGroups, hostName, callback){
     function checkEventStarted(callback){
         var startedEvents = [];
         var now = new Date();
-        now.setMinutes(now.getMinutes()+5);
+        var message;
+
+        var username = user.username;
+        var specialCaseUsers = ['aggieclams', 'synch'];
+        if(specialCaseUsers.indexOf(username.toLowerCase()) !== -1){
+            message = 'The highlighted event(s) have already started. Please remove them from your Bet Slip.';
+        } else {
+            now.setMinutes(now.getMinutes()+5);
+            message = 'The highlighted event(s) are within 5 minutes of starting. Please remove them from your Bet Slip.';
+        }
+
 
         function checkEvent(event, callback){
             if(now > new Date(event.startTime)) startedEvents.push({eventId: event._id});
@@ -69,7 +79,7 @@ function submit(user, eventGroups, hostName, callback){
         function cb(err){
             if(startedEvents.length > 0){
                 err = {
-                    message: 'The highlighted event(s) are within 5 minutes of starting. Please remove them from your Bet Slip.',
+                    message: message,
                     type: 'started',
                     values: startedEvents
                 };
@@ -195,6 +205,7 @@ function submit(user, eventGroups, hostName, callback){
     }
 
     function cb(err){
+        console.log('testing');
         callback(err, {user: user, picks: picks});
     }
 

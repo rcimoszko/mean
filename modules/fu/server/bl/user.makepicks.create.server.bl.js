@@ -429,7 +429,6 @@ function create(event, bet, user, callback){
                 callback(err, pick);
 
             }
-
             PickBl.create(pick, cb_pickSave);
         }
 
