@@ -396,6 +396,7 @@ function sendMessageEmail(user, userMessageName, hostName, callback){
 }
 
 function sendTrialOverEmail(user, hostName, callback){
+    if(!user.email) return callback(null);
     var todo = [];
 
     function render(callback){
@@ -431,6 +432,8 @@ function sendTrialOverEmail(user, hostName, callback){
 
     todo.push(render);
     todo.push(send);
+
+    async.waterfall(todo, cb);
 }
 
 exports.sendVerificationEmail   = sendVerificationEmail;

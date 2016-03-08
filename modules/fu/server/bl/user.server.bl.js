@@ -560,8 +560,13 @@ function updateStreak(userId, callback){
     async.waterfall(todo, callback);
 }
 
+function getByQuery(query, callback){
+    User.find(query, callback);
+}
+
 
 exports.getByUsername       = getByUsername;
+exports.getByQuery          = getByQuery;
 exports.getFollowing        = getFollowing;
 exports.getHub              = getHub;
 exports.getMessages         = getMessages;
