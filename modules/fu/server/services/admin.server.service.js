@@ -451,7 +451,7 @@ function checkTrial(callback){
             }
 
             function updateUser(callback){
-                user.trail = false;
+                user.trial = false;
                 user.trialEndDate = new Date();
                 user.trialUsed = true;
 
