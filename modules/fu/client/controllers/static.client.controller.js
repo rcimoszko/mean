@@ -5,9 +5,9 @@ angular.module('fu').controller('StaticController', ['$scope', '$location', '$an
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
             if($state.current.title){
-                Page.setTitle($state.current.title);
-                Page.setDescription($state.current.description);
-                Page.setKeywords($state.current.keywords);
+                Page.meta.title = $state.current.title;
+                Page.meta.description = $state.current.description;
+                Page.meta.keywords = $state.current.keywords;
             }
         });
 
