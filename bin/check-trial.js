@@ -17,6 +17,8 @@ require('../modules/fu/server/models/verificationtoken.server.model.js');
 require('../modules/fu/server/models/event.server.model.js');
 
 
+var AdminService = require('../modules/fu/server/services/admin.server.service.js');
+
 mongoose.connect(uristring, function (err, res) {
     if (err) {
         console.log ('ERROR connecting to: ' + uristring + '. ' + err);
@@ -36,7 +38,4 @@ mongoose.connect(uristring, function (err, res) {
         checkTrial();
     }
 });
-
-
-var AdminService = require('../modules/fu/server/services/admin.server.service.js');
 
