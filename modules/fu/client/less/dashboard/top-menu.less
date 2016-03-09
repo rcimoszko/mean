@@ -50,11 +50,8 @@
     display:inline-block;
     .search-box{
       line-height:60px;
-      width:240px;
-      @media (min-width: @screen-sm-min) {
-        width:280px;
-        padding-left:20px;
-      }
+      width:250px;
+      padding-left:20px;
       .fa-search{
         color:fade(@color-text, 50%);
         font-size:16px;
@@ -63,7 +60,7 @@
         margin-left:10px;
         border:none;
         line-height:40px;
-        width:75%;
+        width:198px;
         &:focus{
           outline:none;
         }
@@ -89,9 +86,13 @@
       background-color:transparent;
       width:auto;
       margin-top:0;
-      margin-right:20px;
+      margin-right:5px;
       border:0;
       text-align:center;
+    }
+
+    @media (min-width: @screen-md-min) {
+      margin-right:20px;
     }
     ul{
       padding-left:20px;

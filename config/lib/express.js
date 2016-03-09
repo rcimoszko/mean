@@ -124,8 +124,7 @@ module.exports.initUrl = function(app){
     };
 
     app.use(forceNoWww);
-    app.use(forceSsl);
-
+    if (process.env.NODE_ENV === 'production') app.use(forceSsl);
 };
 
 

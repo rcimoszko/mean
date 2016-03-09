@@ -1755,13 +1755,8 @@ notification:last-of-type .notification {
 }
 #top-menu .search-container .search-box {
   line-height: 60px;
-  width: 240px;
-}
-@media (min-width: 768px) {
-  #top-menu .search-container .search-box {
-    width: 280px;
-    padding-left: 20px;
-  }
+  width: 250px;
+  padding-left: 20px;
 }
 #top-menu .search-container .search-box .fa-search {
   color: rgba(106, 107, 108, 0.5);
@@ -1771,7 +1766,7 @@ notification:last-of-type .notification {
   margin-left: 10px;
   border: none;
   line-height: 40px;
-  width: 75%;
+  width: 198px;
 }
 #top-menu .search-container .search-box input:focus {
   outline: none;
@@ -1796,9 +1791,14 @@ notification:last-of-type .notification {
     background-color: transparent;
     width: auto;
     margin-top: 0;
-    margin-right: 20px;
+    margin-right: 5px;
     border: 0;
     text-align: center;
+  }
+}
+@media (min-width: 992px) {
+  #top-menu .menu-links {
+    margin-right: 20px;
   }
 }
 #top-menu .menu-links ul {
