@@ -4276,9 +4276,9 @@ angular.module('core').controller('SportsbookController', ['$scope', '$statePara
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
             if($scope.sportsbookName){
-                Page.setTitle($scope.sportsbookName.replace('-', ' ')+' Review | FansUnite');
-                Page.setDescription($scope.sportsbookName.replace('-', ' ')+' review from FansUnite.');
-                Page.setKeywords($scope.sportsbookName+' review, '+$scope.sportsbookName+' betting offers, '+$scope.sportsbookName+' free bets');
+                Page.meta.title($scope.sportsbookName.replace('-', ' ')+' Review | FansUnite');
+                Page.meta.description($scope.sportsbookName.replace('-', ' ')+' review from FansUnite.');
+                Page.meta.keywords($scope.sportsbookName+' review, '+$scope.sportsbookName+' betting offers, '+$scope.sportsbookName+' free bets');
             }
         });
 
