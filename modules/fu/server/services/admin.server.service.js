@@ -438,6 +438,7 @@ function checkTrial(callback){
     }
 
     function updateTrialUsers(users, callback){
+        console.log(users);
 
         function processUser(user, callback){
             console.log(user.username);
