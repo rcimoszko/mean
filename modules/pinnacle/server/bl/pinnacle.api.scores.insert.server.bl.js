@@ -385,6 +385,13 @@ function insertScores_eSports(event, scores, scoreType, callback){
                     event.contestant1Set3FirstTo5Rds = scores.match.team2;
                     event.contestant2Set3FirstTo5Rds = scores.match.team1;
                     break;
+                case 'series':
+                    event.contestant1RegulationScore = scores.match.team2;
+                    event.contestant2RegulationScore = scores.match.team1;
+                    event.contestant1FinalScore = scores.match.team2;
+                    event.contestant2FinalScore = scores.match.team1;
+                    event.scores = true;
+                    break;
             }
         } else {
             event.contestant1RegulationScore = scores.match.team2;
