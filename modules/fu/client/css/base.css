@@ -3492,7 +3492,7 @@ notification:last-of-type .notification {
   .bet-slip-container.picks-page .bet-slip .bet-slip-pick-container .bet-slip-pick {
     border-bottom: 1px solid #eaeaea;
   }
-  .bet-slip-container.picks-page h1 {
+  .bet-slip-container.picks-page h4 {
     text-align: center;
     background-color: transparent;
     color: #6a6b6c;
@@ -3503,7 +3503,7 @@ notification:last-of-type .notification {
     display: block;
     margin: 20px 20px 0 20px;
   }
-  .bet-slip-container.picks-page h1 .close {
+  .bet-slip-container.picks-page h4 .close {
     display: none;
   }
   .bet-slip-container.picks-page .btn-bet-slip {
