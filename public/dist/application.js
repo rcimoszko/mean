@@ -1266,26 +1266,23 @@ angular.module('fu').config(['$stateProvider',
             .state('discover.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                title: 'Leaderboard | Record, ROI and Profit',
+                title: 'Top Handicappers | Free Picks',
                 description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
                 keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.sport', {
                 url: '/:sportSlug',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
                 keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.league', {
                 url: '/:sportSlug/:leagueSlug',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
                 keywords: 'best tipsters, top handicappers, profit, roi'
             })
             .state('discover.contestant', {
                 url: '/:sportSlug/:leagueSlug/:contestantSlug',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
                 keywords: 'best tipsters, top handicappers, profit, roi'
             });
     }
@@ -2462,12 +2459,14 @@ angular.module('fu').controller('ModalChooseChannelsController', ['$scope', '$mo
 
 'use strict';
 
-angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard', 'Page',
-    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard, Page) {
+angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard', 'Page', 'Keywords',
+    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard, Page, Keywords) {
         $scope.authentication   = Authentication;
         $scope.sportSlug        = $stateParams.sportSlug;
         $scope.leagueSlug       = $stateParams.leagueSlug;
         $scope.contestantSlug   = $stateParams.contestantSlug;
+        $scope.page = Page;
+
 
 
         $scope.filters = {
@@ -2605,18 +2604,35 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
         };
 
         function updatePageMeta(){
-            var titleEnd = ' Leaderboard | Record, ROI and Profit';
+            var capperTextCap = 'Handicappers';
+            var picksTextCap = 'Picks';
+            var capperText = 'handicappers';
+            var picksText = 'picks';
+            if($scope.filter.sport._id !== 'all'){
+                capperTextCap = Keywords.getCapperText($scope.filter.sport.name, true);
+                picksTextCap = Keywords.getPicksText($scope.filter.sport.name, true);
+                capperText = Keywords.getCapperText($scope.filter.sport.name, false);
+                picksText = Keywords.getPicksText($scope.filter.sport.name, false);
+            }
+
+            console.log($scope.filter);
+
             if($scope.filter.contestant._id !== 'all'){
-                $scope.page.meta.title = $scope.filter.contestant.name+titleEnd;
+                $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
+                $scope.page.meta.description = 'Find the best '+$scope.filter.contestant.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.keywords = 'Top '+$scope.filter.contestant.name+' '+capperText+', Best '+$scope.filter.contestant.name+' '+capperText;
             } else if ($scope.filter.league._id !== 'all' ){
-                $scope.page.meta.title = $scope.filter.league.name+titleEnd;
+                $scope.page.meta.title = 'Top '+$scope.filter.league.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
+                $scope.page.meta.description = 'Find the best '+$scope.filter.league.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.keywords = 'Top '+$scope.filter.league.name+' '+capperText+', Best '+$scope.filter.league.name+' '+capperText;
             } else if ($scope.filter.sport._id !== 'all'){
-                $scope.page.meta.title = $scope.filter.sport.name+titleEnd;
+                $scope.page.meta.title = 'Top '+$scope.filter.sport.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
+                $scope.page.meta.description = 'Find the best '+$scope.filter.sport.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.keywords = 'Top '+$scope.filter.sport.name+' '+capperText+', Best '+$scope.filter.sport.name+' '+capperText;
             }
         }
 
         $scope.updateLeaderboard = function(){
-            updatePageMeta();
 
             var query = {
                 dateId:  $scope.filter.date.id,
@@ -2633,6 +2649,7 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 $scope.leaderboard = leaderboard;
                 setPages();
                 updateRank();
+                updatePageMeta();
             }
 
             Leaderboard.getLeaderboard(query, cb);
@@ -8809,6 +8826,56 @@ angular.module('fu').factory('Hub', ['ApiHub', 'ApiHubPicks',
         return {
             getHub: getHub,
             getPicks: getPicks
+        };
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('Keywords', [
+    function() {
+
+        var getCapperText = function(sportName, capitalize){
+            var capperText = 'tipsters';
+            switch(sportName){
+                case 'Baseball':
+                case 'Basketball':
+                case 'Hockey':
+                case 'Football':
+                case 'Curling':
+                case 'Mixed Martial Arts':
+                case 'Boxing':
+                    capperText = 'handicappers';
+                    break;
+            }
+
+            if(capitalize) capperText = capperText.charAt(0).toUpperCase() + capperText.slice(1);
+            return capperText;
+
+        };
+
+
+        var getPicksText = function(sportName, capitalize){
+            var picksText = 'tips';
+            switch(sportName){
+                case 'Baseball':
+                case 'Basketball':
+                case 'Hockey':
+                case 'Football':
+                case 'Curling':
+                case 'Mixed Martial Arts':
+                case 'Boxing':
+                    picksText = 'picks';
+                    break;
+            }
+
+            if(capitalize) picksText = picksText.charAt(0).toUpperCase() + picksText.slice(1);
+            return picksText;
+
+        };
+
+        return {
+            getCapperText: getCapperText,
+            getPicksText: getPicksText
         };
     }
 ]);
