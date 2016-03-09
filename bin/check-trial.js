@@ -22,21 +22,21 @@ mongoose.connect(uristring, function (err, res) {
         console.log ('ERROR connecting to: ' + uristring + '. ' + err);
     } else {
         console.log ('Succeeded connected to: ' + uristring);
+
+        function checkTrial() {
+            function cb(err){
+                console.log('done');
+                if(err)console.log(err);
+                mongoose.connection.close();
+            }
+
+            AdminService.checkTrial(cb);
+        }
+
+        checkTrial();
     }
 });
 
 
 var AdminService = require('../modules/fu/server/services/admin.server.service.js');
 
-
-function checkTrial() {
-    function cb(err){
-        console.log('done');
-        if(err)console.log(err);
-        mongoose.connection.close();
-    }
-
-    AdminService.checkTrial(cb);
-}
-
-checkTrial();
