@@ -336,9 +336,9 @@ angular.module('articles').controller('AdminViewArticleController', ['$scope', '
 
 'use strict';
 
-angular.module('articles').controller('BlogController', ['$scope', 'Articles', '$state',
-    function ($scope, Articles, $state) {
-
+angular.module('articles').controller('BlogController', ['$scope', 'Articles', '$state', 'Loading',
+    function ($scope, Articles, $state, Loading) {
+        $scope.loading = Loading;
 
         function cb(err, articles){
             $scope.articles = articles;
@@ -355,25 +355,28 @@ angular.module('articles').controller('BlogArticleController', ['$scope', '$loca
     function ($scope, $location, articleResolve, Page, $state, $filter) {
         $scope.article = articleResolve;
         $scope.article.$promise.then(function(article){
+            Page.meta.title = $scope.article.title+' | FansUnite Blog';
+            Page.meta.description = $filter('striptags')($scope.article.content).substring(0,200);
+            Page.meta.keywords = $scope.article.keywords;
         }, function(){
            $state.go('not-found');
         });
         $scope.location = $location;
-        Page.meta.title = $scope.article.title+' | FansUnite Blog';
-        Page.meta.description = $filter('striptags')($scope.article.content).substring(0,200);
-        Page.meta.keywords = $scope.article.keywords;
     }
 ]);
 
 'use strict';
 
-angular.module('articles').controller('BlogHomeController', ['$scope', 'Articles',
-    function ($scope, Articles) {
+angular.module('articles').controller('BlogHomeController', ['$scope', 'Articles', 'Loading',
+    function ($scope, Articles, Loading) {
+        $scope.loading = Loading;
 
         function cb(err, articles){
             $scope.articles = articles;
+            $scope.loading.isLoading.pageLoading = false;
         }
 
+        $scope.loading.isLoading.pageLoading = true;
         Articles.getAll(cb);
 
     }
@@ -4183,6 +4186,7 @@ angular.module('core').controller('ProController', ['$scope', '$state', '$anchor
         $scope.page = Page;
         $scope.mixpanel = Mixpanel;
         $scope.user = User;
+        $scope.authentication = Authentication;
 
 
         $scope.newSubscription = function(plan){
@@ -5959,7 +5963,7 @@ angular.module('fu').directive('hotPick', function () {
                     $scope.value = $filter('formatSpread')($scope.hotPick.pick.value);
                     break;
                 case 'total points':
-                    $scope.value = $filter('formatPoints')($scope.hotPick.pick.value);
+                    $scope.value = $scope.hotPick.pick.value;
                     break;
             }
         }]

@@ -1,31 +1,38 @@
 <div data-ng-controller="BlogHomeController">
-    <div class="article featured-article">
-        <div class="header" style="background-image:url({{articles[0].imageUrl}})">
-            <div class="header-content">
-                <a ui-sref="blog.article({articleSlug:articleSlug:article[0].slug})">
-                    <h1>{{articles[0].title}}</h1>
-                    <h3>{{articles[0].author}} | {{articles[0].datePublished|date:'longDate'}}</h3>
-                </a>
-            </div>
-        </div>
+
+    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
+        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
     </div>
 
-    <div class="articles-list">
-        <div class="container">
-            <div class="col-sm-4" data-ng-repeat="article in articles" data-ng-if="$index > 0">
-                <a ui-sref="blog.article({articleSlug:article.slug})">
-                    <div class="article-container">
-                        <div class="image">
-                            <img data-ng-src="{{article.imageUrl}}" data-ng-if="article.imageUrl">
-                            <img class="article-logo" data-ng-src="modules/fu/client/img/general/logo-circle-lg.png" data-ng-if="!article.imageUrl">
-                        </div>
-                        <div class="article-content">
-                            <div class="title">
-                                {{article.title}}
+    <div data-ng-hide="loading.isLoading.pageLoading">
+        <div class="article featured-article">
+            <div class="header" style="background-image:url({{articles[0].imageUrl}})">
+                <div class="header-content">
+                    <a ui-sref="blog.article({articleSlug:article[0].slug})">
+                        <h1>{{articles[0].title}}</h1>
+                        <h3>{{articles[0].author}} | {{articles[0].datePublished|date:'longDate'}}</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="articles-list">
+            <div class="container">
+                <div class="col-sm-4" data-ng-repeat="article in articles" data-ng-if="$index > 0">
+                    <a ui-sref="blog.article({articleSlug:article.slug})">
+                        <div class="article-container">
+                            <div class="image">
+                                <img data-ng-src="{{article.imageUrl}}" data-ng-if="article.imageUrl">
+                                <img class="article-logo" data-ng-src="modules/fu/client/img/general/logo-circle-lg.png" data-ng-if="!article.imageUrl">
+                            </div>
+                            <div class="article-content">
+                                <div class="title">
+                                    {{article.title}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
