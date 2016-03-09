@@ -16,6 +16,21 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             contestantScore = event['contestant'+contestantNo+'AceScore'];
             opponentScore = event['contestant'+opponentNo+'AceScore'];
             break;
+        /*
+        case 'train':
+            contestantScore = event['contestant'+contestantNo+'TrainScore'];
+            opponentScore = event['contestant'+opponentNo+'TrainScore'];
+            break;
+        case 'dust 2':
+            contestantScore = event['contestant'+contestantNo+'Dust2Score'];
+            opponentScore = event['contestant'+opponentNo+'Dust2Score'];
+            break;
+        case 'inferno':
+            contestantScore = event['contestant'+contestantNo+'InfernoScore'];
+            opponentScore = event['contestant'+opponentNo+'InfernoScore'];
+            break;
+        */
+
         case 'match':
         case 'game':
         case 'matchups':
