@@ -2829,9 +2829,25 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
         }
 
         function setMetaData(){
-            Page.meta.title = $scope.event.contestant1.name +' vs. '+$scope.event.contestant2.name+' | Odds, Score and Consensus';
-            Page.meta.description = 'Find expert picks and the most up to date odds for '+$scope.event.contestant1.name +' vs. '+$scope.event.contestant2.name+' - '+new Date($scope.event.startTime).toDateString();
-            Page.meta.keywords = $scope.event.contestant1.name+', '+$scope.event.contestant2.name+', odds, scores, free bets';
+            var separator = ' at ';
+            var homeTeam;
+            var awayTeam;
+            if($scope.event.neutral) separator = ' vs. ';
+            if($scope.event.contestant1.ref.name2){
+                homeTeam = $scope.event.contestant1.ref.name2;
+            } else {
+                homeTeam = $scope.event.contestant1.name;
+            }
+            if($scope.event.contestant2.ref.name2){
+                awayTeam = $scope.event.contestant2.ref.name2;
+            } else {
+                awayTeam = $scope.event.contestant2.name;
+            }
+            var date = $filter('date')($scope.event.startTime, 'MMM d, y');
+
+            Page.meta.title = homeTeam + separator + awayTeam + ' '+ date +' | Odds, Free Tips, Pro Picks and Betting Discussion';
+            Page.meta.description = $scope.event.contestant1.name + ' vs. '+$scope.event.contestant2.name + '('+date+')' + ' odds, betting discussion, picks and consensus. Get free '+$scope.event.league.name+' tips and pro picks from our community.';
+            Page.meta.keywords = $scope.event.contestant1.name+', '+$scope.event.contestant2.name+', odds, betting discussion, free tips, pro picks, consensus';
         }
 
 
@@ -3006,7 +3022,7 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
             return $state.current.name.indexOf('blog') !== -1;
         };
         $scope.isAdmin = function(){
-            return  $scope.authentication.user.roles.indexOf('admin') !== -1;
+            if($scope.authentication.user) return  $scope.authentication.user.roles.indexOf('admin') !== -1;
         };
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
