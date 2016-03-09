@@ -434,7 +434,7 @@ function checkTrial(callback){
         startDate.setDate(startDate.getDate()-7);
 
         console.log(startDate);
-        var query = {trialStartDate: {$lte: new Date(startDate)}};
+        var query = {trial: true};
         console.log(query);
         UserBl.getByQuery(query, callback);
     }
