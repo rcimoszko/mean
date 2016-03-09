@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     async = require('async'),
     mongoose = require('mongoose'),
+    User = mongoose.model('User'),
     ContestantLogo = mongoose.model('ContestantLogo'),
     SportBl = require('../bl/sport.server.bl'),
     UserBl = require('../bl/user.server.bl'),
@@ -436,7 +437,7 @@ function checkTrial(callback){
         console.log(startDate);
         var query = {trial: true};
         console.log(query);
-        UserBl.getByQuery(query, callback);
+        User.find({trial: true}).exec(callback);
     }
 
     function updateTrialUsers(users, callback){
