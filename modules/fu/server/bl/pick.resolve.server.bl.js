@@ -31,6 +31,10 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             break;
         */
 
+        case 'series':
+            contestantScore = event['contestant'+contestantNo+'SetsWon'];
+            opponentScore = event['contestant'+opponentNo+'SetsWon'];
+            break;
         case 'match':
         case 'game':
         case 'matchups':

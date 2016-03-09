@@ -390,6 +390,8 @@ function insertScores_eSports(event, scores, scoreType, callback){
                     event.contestant2RegulationScore = scores.match.team1;
                     event.contestant1FinalScore = scores.match.team2;
                     event.contestant2FinalScore = scores.match.team1;
+                    event.contestant1SetsWon = scores.match.team2;
+                    event.contestant2SetsWon= scores.match.team1;
                     event.scores = true;
                     break;
             }
