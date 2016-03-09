@@ -445,7 +445,7 @@ function checkTrial(callback){
 
             function sendEmail(callback){
                 EmailBl.sendTrialOverEmail(user, 'fansunite.com', function(err){
-                    if(err)console.log(err)
+                    if(err)console.log(err);
                 });
                 callback();
             }

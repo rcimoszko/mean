@@ -9350,8 +9350,13 @@ angular.module('fu').service('Page', ['$location', function($location) {
         keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
     };
 
+    var getDescription = function(){
+        return meta.description;
+    };
+
     return {
-        meta: meta
+        meta: meta,
+        getDescription: getDescription
     };
 }]);
 

@@ -3368,7 +3368,7 @@ notification:last-of-type .notification {
   left: 0;
   display: none;
 }
-.bet-slip-container .bet-slip h1 {
+.bet-slip-container .bet-slip h4 {
   font-size: 18px;
   margin: 0;
   padding: 8px;
@@ -3378,7 +3378,7 @@ notification:last-of-type .notification {
   cursor: pointer;
   border-bottom: 1px solid #eeeeee;
 }
-.bet-slip-container .bet-slip h1 .close {
+.bet-slip-container .bet-slip h4 .close {
   line-height: 0.75;
   color: white;
 }
@@ -3394,7 +3394,7 @@ notification:last-of-type .notification {
   margin-top: 50px;
   text-align: center;
 }
-.bet-slip-container .bet-slip .picks-container h2 {
+.bet-slip-container .bet-slip .picks-container h5 {
   text-align: center;
   font-size: 16px;
   font-weight: 300;
