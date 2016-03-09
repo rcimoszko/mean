@@ -438,29 +438,19 @@ function checkTrial(callback){
     }
 
     function updateTrialUsers(users, callback){
-        console.log(users);
 
         function processUser(user, callback){
-            console.log(user.username);
-            console.log(user.trial);
-            console.log(user.trialStartDate);
 
             var todo = [];
 
             function sendEmail(callback){
-                /*
                 EmailBl.sendTrialOverEmail(user, 'fansunite.com', function(err){
                     if(err)console.log(err)
                 });
-                */
                 callback();
             }
 
             function updateUser(callback){
-                callback();
-
-
-                /*
                 user.trail = false;
                 user.trialEndDate = new Date();
                 user.trialUsed = true;
@@ -470,7 +460,6 @@ function checkTrial(callback){
                 }
 
                 user.save(cb);
-                */
             }
 
             todo.push(sendEmail);

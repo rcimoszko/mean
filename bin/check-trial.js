@@ -16,26 +16,27 @@ require('../modules/fu/server/models/chat.server.model.js');
 require('../modules/fu/server/models/verificationtoken.server.model.js');
 require('../modules/fu/server/models/event.server.model.js');
 
-
 var AdminService = require('../modules/fu/server/services/admin.server.service.js');
+
+
 
 mongoose.connect(uristring, function (err, res) {
     if (err) {
         console.log ('ERROR connecting to: ' + uristring + '. ' + err);
     } else {
         console.log ('Succeeded connected to: ' + uristring);
-
-        function checkTrial() {
-            function cb(err){
-                console.log('done');
-                if(err)console.log(err);
-                mongoose.connection.close();
-            }
-
-            AdminService.checkTrial(cb);
-        }
-
-        checkTrial();
+        setTimeout(checkTrialProcess, 3000);
     }
 });
+
+function checkTrialProcess() {
+    console.log('start');
+    function cb(err){
+        if(err)console.log(err);
+        mongoose.connection.close();
+    }
+
+    AdminService.checkTrial(cb);
+}
+
 
