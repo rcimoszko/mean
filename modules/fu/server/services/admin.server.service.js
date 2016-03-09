@@ -431,7 +431,7 @@ function checkTrial(callback){
 
     function getTrialUsers(callback){
         var startDate = new Date();
-        startDate.setDate(startDate.getDate()-7);
+        startDate.setDate(startDate.getDate()-5);
         console.log(startDate);
         var query = {trialStartDate: {$lt:startDate}, trial:true};
         UserBl.getByQuery(query, callback);
