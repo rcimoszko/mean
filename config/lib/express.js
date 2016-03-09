@@ -123,27 +123,9 @@ module.exports.initUrl = function(app){
         }
     };
 
+    app.use(forceNoWww);
+    app.use(forceSsl);
 
-    var seo = require('mean-seo');
-
-    if (process.env.NODE_ENV === 'production') {
-        app.use(forceNoWww);
-        app.use(forceSsl);
-
-        app.use(seo({
-            cacheClient: 'redis',
-            redisURL: process.env.REDISCLOUD_URL
-        }));
-
-    } else {
-        app.use(forceNoWww);
-        seo = require('mean-seo');
-
-        app.use(seo({
-            cacheClient: 'disk',
-            cacheDuration: 2 * 60 * 60 * 24 * 1000
-        }));
-    }
 };
 
 
