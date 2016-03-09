@@ -2,7 +2,7 @@
     <div class="article featured-article">
         <div class="header" style="background-image:url({{articles[0].imageUrl}})">
             <div class="header-content">
-                <a ui-sref="blog.article({articleSlug:article[0].slug})">
+                <a ui-sref="blog.article({articleSlug:articleSlug:article[0].slug})">
                     <h1>{{articles[0].title}}</h1>
                     <h3>{{articles[0].author}} | {{articles[0].datePublished|date:'longDate'}}</h3>
                 </a>
