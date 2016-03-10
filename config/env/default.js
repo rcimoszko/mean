@@ -28,6 +28,7 @@ module.exports = {
   sessionKey: 'sessionId',
   sessionCollection: 'sessions',
   logo: '/modules/fu/client/img/general/logo-circle-lg.png',
+  logoFacebook: '/modules/fu/client/img/general/logo-facebook.png',
   favicon: 'modules/core/client/img/brand/favicon.ico',
   uploads: {
     profileUpload: {

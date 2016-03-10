@@ -36,6 +36,7 @@ module.exports.initLocalVariables = function (app) {
   app.locals.cssFiles = config.files.client.css;
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
+  app.locals.logoFacebook = config.logoFacebook;
   app.locals.favicon = config.favicon;
 
   // Passing the request url to environment locals
