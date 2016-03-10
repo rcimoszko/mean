@@ -6,6 +6,12 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
         $scope.leagueSlug = $stateParams.leagueSlug;
         $scope.sportSlug = $stateParams.sportSlug;
 
+        function updateMeta(){
+            Page.meta.title = $scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' Betting Odds | Free Online Sports Betting';
+            Page.meta.description = 'Latest '+$scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' betting odds. Track your bets with our free online sportsbook.';
+            Page.meta.keywords = $scope.activeSport.name+ ' odds, ' + MakePicks.active.league.name + ' odds, free online sportsbook, free sports betting';
+        }
+
         $scope.updateSport = function(sport){
             $scope.activeSub1 = null;
             if(sport === $scope.activeSport){
@@ -23,13 +29,14 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
                 $scope.activeSub1 = sub1;
                 $scope.activeSub2 = null;
                 MakePicks.active.league = $scope.activeSub1;
+                updateMeta();
             }
         };
 
         $scope.updateSub2 = function(sub2){
             $scope.activeSub2 = sub2;
             MakePicks.active.league = $scope.activeSub2;
-            Page.meta.title = MakePicks.active.league.name+' Odds | Best Odds, Spread, Futures and Moneyline Bets';
+            updateMeta();
         };
 
         $scope.setActiveMenu = function(){
@@ -45,6 +52,7 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
                                 $scope.activeSub1 = sub1;
                                 $scope.activeSub2 = sub2;
                                 MakePicks.active.league = $scope.activeSub2;
+                                updateMeta();
                                 break;
                             }
                         }
@@ -52,6 +60,7 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
                     if(sub1.slug === $scope.leagueSlug){
                         $scope.activeSub1 = sub1;
                         MakePicks.active.league = $scope.activeSub1;
+                        updateMeta();
                         break;
                     }
                 }

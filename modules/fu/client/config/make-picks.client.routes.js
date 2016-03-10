@@ -11,15 +11,15 @@ angular.module('fu').config(['$stateProvider',
             .state('makePicks.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/make-picks/make-picks.picks.client.view.html',
-                title: 'Make Picks | Best Odds, Spread, Futures and Moneyline Bets',
-                description: 'Make picks on the best odds from the best sports books.',
-                keywords: 'pinnacle sports odds, live odds, sports picks'
+                title: 'Sports Odds | Free Online Sports Betting',
+                description: 'Latest betting odds for every sport. Track your bets with our free online sportsbook.',
+                keywords: 'free online sportsbook, free online sports betting, latest odds'
             })
             .state('makePicks.league', {
                 url: '/:sportSlug/:leagueSlug',
                 templateUrl: 'modules/fu/client/views/make-picks/make-picks.picks.client.view.html',
-                description: 'Make picks on the best odds from the best sports books.',
-                keywords: 'pinnacle sports odds, live odds, sports picks'
+                description: 'Latest betting odds for every sport. Track your bets with our free online sportsbook.',
+                keywords: 'free online sportsbook, free online sports betting, latest odds'
             });
 
     }
