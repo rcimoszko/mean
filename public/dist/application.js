@@ -239,8 +239,9 @@ angular.module('articles').config(['$stateProvider',
             .state('blog.home', {
                 url: '',
                 templateUrl: 'modules/articles/client/views/blog/blog.home.client.view.html',
-                title: 'FansUnite Blog | Betting Tips, Free Picks, Odds and Scores',
-                description: 'FansUnite blog'
+                title: 'Sports Betting Blog | FansUnite',
+                description: 'Betting predictions, previews, analysis and advice for upcoming NBA, NHL, MLB and NFL games.',
+                keywords: 'betting, predictions, previews, analysis, advice'
             })
             .state('blog.article', {
                 url: '/:articleSlug',
@@ -914,6 +915,7 @@ angular.module('fu').config(['$stateProvider',
                 url: '',
                 templateUrl: 'modules/fu/client/views/admin/admin.home.client.view.html',
                 controller: 'AdminHomeController',
+                title: 'Admin | FansUnite',
                 data: {
                     roles: ['admin']
                 }
@@ -1266,9 +1268,9 @@ angular.module('fu').config(['$stateProvider',
             .state('discover.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                title: 'Top Handicappers | Free Picks',
-                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
-                keywords: 'best tipsters, top handicappers, profit, roi'
+                title: 'Top Handicappers | FansUnite',
+                description: 'Find handicappers with 100% verified and transparent results to follow, track and copy their predictions. ',
+                keywords: 'top handicappers, best tipsters, fansunite leaderboard'
             })
             .state('discover.sport', {
                 url: '/:sportSlug',
@@ -1300,7 +1302,9 @@ angular.module('fu').config(['$stateProvider',
             .state('hub', {
                 url: '/hub',
                 templateUrl: 'modules/fu/client/views/hub.client.view.html',
-                title: 'Hub | Betting Tips, Free Picks, Odds and Scores',
+                title: 'Hub | FansUnite',
+                description: '',
+                keywords: '',
                 data: {
                     roles: ['user']
                 }
@@ -1330,8 +1334,8 @@ angular.module('fu').config(['$stateProvider',
             .state('makePicks.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/make-picks/make-picks.picks.client.view.html',
-                title: 'Sports Odds | Free Online Sports Betting',
-                description: 'Latest betting odds for every sport. Track your bets with our free online sportsbook.',
+                title: 'Free Online Sportsbook | FansUnite',
+                description: 'Track your bets on our free online sportsbook with up-to-date odds for every sport and league.',
                 keywords: 'free online sportsbook, free online sports betting, latest odds'
             })
             .state('makePicks.league', {
@@ -1413,51 +1417,51 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             .state('static.about', {
                 url:'/about',
                 templateUrl: '/modules/fu/client/views/static/static.about.client.view.html',
-                title: 'About Us | FansUnite',
-                description: 'About FansUnite.',
-                keywords: 'what is fansunite'
+                title: 'About FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is a Sportsbetting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'sportsbetting, social network, community'
             })
             .state('static.betting101', {
                 url:'/betting101',
                 templateUrl: '/modules/fu/client/views/static/static.betting101.client.view.html',
-                title: 'Betting 101 | Learn How to Bet on Sports',
-                description: 'Learn the basics of how to bet on sports. You will learn how to bet the moneyline, against the spread and totals.',
-                keywords: 'learn how to bet on sports, bet against the spread, bet on totals'
+                title: 'Learn the Basics of Sportsbetting | FansUnite',
+                description: 'Learn how to bet moneylines, point spreads, total points and team totals. Understand the different odds formats and bet types.',
+                keywords: 'moneyline, spreads, totals, team totals'
             })
             .state('static.glossary', {
                 url: '/glossary',
                 templateUrl: '/modules/fu/client/views/static/static.glossary.client.view.html',
-                title: 'Betting Terms: Spread, Over/Under and Moneyline | FansUnite',
+                title: 'Betting Glossary | FansUnite',
                 description: 'Find the most common betting terms that every sports bettor amateur to professional needs to know.',
-                keywords: 'sports betting terms, spread betting, learn how to bet, sports betting basics'
+                keywords: 'glossary, learn sportsbetting, teach sportsbetting'
             }).
             state('static.howPicksAreGraded', {
                 url: '/how-picks-are-graded',
                 templateUrl: '/modules/fu/client/views/static/static.how-picks-are-graded.client.view.html',
-                title: 'How Wagers are Graded | FansUnite',
-                description: 'How FansUnite resolves all of its wagers.',
-                keywords: 'sports betting rules, how bets are graded'
+                title: 'Learn How Picks are Graded at FansUnite | Sportsbetting Social Network',
+                description: 'Track your bets on FansUnite and have our platform automatically grade each wager. Learn more about how each bet is graded.',
+                keywords: 'bet tracking, pick tracker'
             }).
             state('static.faq', {
                 url: '/faq',
                 templateUrl: '/modules/fu/client/views/static/static.faq.client.view.html',
-                title: 'FAQ | FansUnite',
-                description: 'Find answers to frequently asked questions.',
-                keywords: 'fansunite faq'
+                title: 'FAQ at FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is a unique Sportsbetting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'faq, sportsbetting, social network, community'
             }).
             state('static.terms', {
                 url: '/terms',
                 templateUrl: '/modules/fu/client/views/static/static.terms.client.view.html',
-                title: 'Terms of Use | FansUnite',
-                description: 'Terms of use.',
-                keywords: 'terms of use'
+                title: 'FansUnite Terms | Sportsbetting Social Network',
+                description: '',
+                keywords: ''
             }).
             state('static.rules', {
                 url: '/rules',
                 templateUrl: '/modules/fu/client/views/static/static.rules.client.view.html',
-                title: 'Rules | FansUnite',
-                description: 'FansUnite rules.',
-                keywords: 'fansunite rules'
+                title: 'FansUnite Rules | Sportsbetting Social Network',
+                description: '',
+                keywords: ''
             }).
             state('static.privacy', {
                 url: '/privacy',
@@ -1469,9 +1473,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.contact', {
                 url: '/contact',
                 templateUrl: '/modules/fu/client/views/static/static.contact.client.view.html',
-                title: 'Contact Us | FansUnite',
-                description: 'Contact information for FansUnite.',
-                keywords: 'contact fansunite'
+                title: 'Contact FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is always open to feedback. Contact us with any questions, comments and suggestions.',
+                keywords: 'contact us, feedback, suggestions'
             }).
             state('static.offer-not-available', {
                 url: '/not-available',
@@ -1482,17 +1486,16 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.userguide', {
                 url: '/user-guide',
                 templateUrl: '/modules/fu/client/views/static/static.user-guide.client.view.html',
-                title: 'User Guide | FansUnite',
-                description: 'FansUnite User guide.',
-                keywords: 'how fansunite works, fansunite user guide'
+                title: 'FansUnite User Guide | Sportsbetting Social Network',
+                description: 'Learn how to use FansUnite, a social sportsbetting platform. Follow the top handicappers and become more profitable.',
+                keywords: 'user guide, profitable, sportsbetting'
             }).
             state('static.sportsbooks', {
                 url: '/top-10-sportsbooks',
                 templateUrl: '/modules/fu/client/views/static/static.top-10-sports-books.client.view.html',
-                title: 'Top 10 Sportsbooks | FansUnite',
-                description: 'Top 10 Sportsbooks.',
+                title: 'Top 10 Sportsbooks | Unbiased Reviews | FansUnite',
+                description: 'Unbiased sportsbook reviews from FansUnite. Find the best online sportsbook.',
                 keywords: 'best online sportsbook, betting offers, free bets'
-
             }).
             state('static.sportsbookReviews', {
                 url: '/sportsbook-review/:name',
@@ -1502,22 +1505,22 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 url: '/monthly-revenue-share',
                 templateUrl: '/modules/fu/client/views/static/static.monthly-revenue-share.client.view.html',
                 title: 'Monthly Revenue Share | FansUnite',
-                description: 'About FansUnite monthly revenue share.',
-                keywords: 'make money betting on sports'
+                description: "FansUnite rewards it's top handicappers with a monthly revenue share. Eligible members receive a portion of our revenue each month.",
+                keywords: 'revenue share, top handicappers, rewards'
             }).
             state('static.press', {
                 url: '/press',
                 templateUrl: '/modules/fu/client/views/static/static.press.client.view.html',
-                title: 'Press | FansUnite',
-                description: 'Sports betting community for handicappers looking to get free picks, practice their betting strategy and see where the top guys are actually putting their money.',
-                keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
+                title: 'FansUnite Press | Sportsbetting Social Network',
+                description: 'News and press about FansUnite, the sportsbetting social network.',
+                keywords: 'press release, fansunite news, fansunite articles'
             }).
             state('whyGoPro', {
                 url: '/why-go-pro',
                 templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',
-                title: 'Why Go Pro | FansUnite',
-                description: 'About FansUnite monthly revenue share.',
-                keywords: 'make money betting on sports'
+                title: 'FansUnite Pro Membership | Sportsbetting Social Network',
+                description: 'Join FansUnite Pro subscription to get access to our pro picks, email notifications and weekly betting progress reports.',
+                keywords: 'pro picks, email notifications, progress reports'
             });
     }
 ]);
@@ -1542,7 +1545,9 @@ angular.module('fu').config(['$stateProvider',
                 data: {
                     roles: ['user']
                 },
-                title: 'My Settings | Betting Tips, Free Picks, Odds and Scores'
+                title: 'Settings | FansUnite',
+                description: '',
+                keywords: ''
             })
             .state('myFollowing', {
                 url: '/my-following',
@@ -1550,7 +1555,9 @@ angular.module('fu').config(['$stateProvider',
                 data: {
                     roles: ['user']
                 },
-                title: 'My Handicappers | Verified Record and History'
+                title: 'My Handicappers | FansUnite',
+                description : '',
+                keywords: ''
             });
     }
 ]);
@@ -2378,9 +2385,9 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         function updateMetaData(){
-            Page.meta.title = $scope.channel.name + ' Betting Channel | Free Tips, Pro Picks, Odds and Consensus';
-            Page.meta.description = 'Daily '+$scope.channel.name+' betting discussion, pro picks, free tips, odds and community consensus.';
-            Page.meta.keywords = $scope.channel.name+' betting, pro picks, free tips, odds, consensus';
+            Page.meta.title = $scope.channel.name + ' Betting Community | FansUnite';
+            Page.meta.description = 'Daily '+$scope.channel.name+' betting discussions, pro picks, free tips, odds and community consensus.';
+            Page.meta.keywords = $scope.channel.name+' betting, '+$scope.channel.name+' pro picks, '+$scope.channel.name+' free tips, '+$scope.channel.name+' odds, '+$scope.channel.name+' consensus';
         }
 
         function cb(err, channelContent){
@@ -2610,25 +2617,23 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             var picksText = 'picks';
             if($scope.filter.sport._id !== 'all'){
                 capperTextCap = Keywords.getCapperText($scope.filter.sport.name, true);
-                picksTextCap = Keywords.getPicksText($scope.filter.sport.name, true);
                 capperText = Keywords.getCapperText($scope.filter.sport.name, false);
-                picksText = Keywords.getPicksText($scope.filter.sport.name, false);
             }
 
             console.log($scope.filter);
 
             if($scope.filter.contestant._id !== 'all'){
-                $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.contestant.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
-                $scope.page.meta.keywords = 'Top '+$scope.filter.contestant.name+' '+capperText+', Best '+$scope.filter.contestant.name+' '+capperText;
+                $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.contestant.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
+                $scope.page.meta.keywords = 'top '+$scope.filter.contestant.name+' '+capperText+', best '+$scope.filter.contestant.name+' '+capperText;
             } else if ($scope.filter.league._id !== 'all' ){
-                $scope.page.meta.title = 'Top '+$scope.filter.league.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.league.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
-                $scope.page.meta.keywords = 'Top '+$scope.filter.league.name+' '+capperText+', Best '+$scope.filter.league.name+' '+capperText;
+                $scope.page.meta.title = 'Top '+$scope.filter.league.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.league.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
+                $scope.page.meta.keywords = 'top '+$scope.filter.league.name+' '+capperText+', best '+$scope.filter.league.name+' '+capperText;
             } else if ($scope.filter.sport._id !== 'all'){
-                $scope.page.meta.title = 'Top '+$scope.filter.sport.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.sport.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
-                $scope.page.meta.keywords = 'Top '+$scope.filter.sport.name+' '+capperText+', Best '+$scope.filter.sport.name+' '+capperText;
+                $scope.page.meta.title = 'Top '+$scope.filter.sport.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.sport.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
+                $scope.page.meta.keywords = 'top '+$scope.filter.sport.name+' '+capperText+', best '+$scope.filter.sport.name+' '+capperText;
             }
         }
 
@@ -2860,10 +2865,10 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             } else {
                 awayTeam = $scope.event.contestant2.name;
             }
-            var date = $filter('date')($scope.event.startTime, 'MMM d, y');
+            var date = $filter('date')($scope.event.startTime, 'MMM d y');
 
-            Page.meta.title = homeTeam + separator + awayTeam + ' '+ date +' | Odds, Free Tips, Pro Picks and Betting Discussion';
-            Page.meta.description = $scope.event.contestant1.name + ' vs. '+$scope.event.contestant2.name + '('+date+')' + ' odds, betting discussion, picks and consensus. Get free '+$scope.event.league.name+' tips and pro picks from our community.';
+            Page.meta.title = homeTeam + separator + awayTeam + ' Odds, Picks, Consensus & Discussion - '+ date +' | FansUnite';
+            Page.meta.description =  'Up-to-date odds, free picks, community consensus and betting discussion for '+$scope.event.contestant1.name+' vs. '+$scope.event.contestant2.name+' ('+ date + ').';
             Page.meta.keywords = $scope.event.contestant1.name+', '+$scope.event.contestant2.name+', odds, betting discussion, free tips, pro picks, consensus';
         }
 
@@ -3090,9 +3095,9 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
         $scope.sportSlug = $stateParams.sportSlug;
 
         function updateMeta(){
-            Page.meta.title = $scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' Betting Odds | Free Online Sports Betting';
-            Page.meta.description = 'Latest '+$scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' betting odds. Track your bets with our free online sportsbook.';
-            Page.meta.keywords = $scope.activeSport.name+ ' odds, ' + MakePicks.active.league.name + ' odds, free online sportsbook, free sports betting';
+            Page.meta.title = 'Free '+$scope.activeSport.name+ ' - '+MakePicks.active.league.name+' Online Sportsbook | FansUnite';
+            Page.meta.description = 'Track your bets on our free online sportsbook with up-to-date '+MakePicks.active.league.name+' odds.';
+            Page.meta.keywords = 'free '+MakePicks.active.league.name+' online sportsbook, free online '+MakePicks.active.league.name+' betting, latest odds';
         }
 
         $scope.updateSport = function(sport){
@@ -3432,9 +3437,9 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
         $scope.location = $location;
         if(!$scope.username) $state.go('hub');
 
-        Page.meta.title = $scope.username + ' Profile | Verified Record and History';
-        Page.meta.description = 'Get an unedited look into the complete history FansUnite’s top handicappers';
-        Page.meta.keywords = $scope.username + ', betting history';
+        Page.meta.title = $scope.username + ' Picks & Verified Record | FansUnite';
+        Page.meta.description = 'Get access to '+$scope.username+"'s sportsbetting picks with 100% verified and transparent results.";
+        Page.meta.keywords = 'free picks, free tips, pro picks, pro tips';
 
         function cbGetProfile(err, profile){
             if(!profile) $state.go('not-found');
@@ -4309,7 +4314,7 @@ angular.module('core').controller('SportsbookController', ['$scope', '$statePara
             //If sportsbook name, Review Page
             $scope.sportsbook = SportsbookService.getSportsbook($scope.sportsbookName.replace('-',' '));
             Page.meta.title = $scope.sportsbookName.replace('-', ' ')+' Review | FansUnite' ;
-            Page.meta.description = $scope.sportsbookName.replace('-', ' ')+' review from FansUnite.';
+            Page.meta.description = 'Unbiased review of '+ $scope.sportsbookName.replace('-', ' ')+' from FansUnite.';
             Page.meta.keywords = $scope.sportsbookName+' review, '+$scope.sportsbookName+' betting offers, '+$scope.sportsbookName+' free bets';
 
             if(!$scope.sportsbook){
@@ -9421,18 +9426,13 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
 
 angular.module('fu').service('Page', ['$location', function($location) {
     var meta = {
-        title: 'FansUnite | Betting Tips, Free Picks, Odds and Scores',
-        description: 'Sports betting community for handicappers looking to get free picks, practice their betting strategy and see where the top guys are actually putting their money',
-        keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
-    };
-
-    var getDescription = function(){
-        return meta.description;
+        title: 'FansUnite | Sportsbetting Social Network',
+        description: 'Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+        keywords: 'sportsbetting social network, sportsbetting community, bet tracking'
     };
 
     return {
-        meta: meta,
-        getDescription: getDescription
+        meta: meta
     };
 }]);
 
@@ -10813,7 +10813,8 @@ angular.module('message').config(['$stateProvider',
                 templateUrl: 'modules/message/client/views/messages.client.view.html',
                 controller: 'MessagesController',
                 title: 'Messages | FansUnite',
-                description: 'Private Messages',
+                description: '',
+                keywords: '',
                 abstract: true,
                 data: {
                     roles: ['user']

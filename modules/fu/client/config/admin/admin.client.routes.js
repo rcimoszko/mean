@@ -8,7 +8,7 @@ angular.module('fu').config(['$stateProvider',
                 url: '',
                 templateUrl: 'modules/fu/client/views/admin/admin.home.client.view.html',
                 controller: 'AdminHomeController',
-                title: 'Admin | FansUnite'
+                title: 'Admin | FansUnite',
                 data: {
                     roles: ['admin']
                 }
