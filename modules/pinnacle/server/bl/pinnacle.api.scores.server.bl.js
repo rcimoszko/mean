@@ -11,7 +11,6 @@ var mongoose = require('mongoose'),
     async = require('async');
 
 function processEvent(scoreApi, pinnacleLeague, callback){
-    console.log(scoreApi);
     var todo = [];
     var sportName = pinnacleLeague.pinnacleSport.name;
     var leagueName = pinnacleLeague.name;
