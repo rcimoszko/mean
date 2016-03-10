@@ -129,5 +129,6 @@ module.exports = {
     mailchimp: {
         apiKey: '65e7a9d6f2340ff0a32b6108343bf392-us6',
         listName:  'FansUnite Users'
-    }
+    },
+    mainUrl: 'https://fansunite.com'
 };
