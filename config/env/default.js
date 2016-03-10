@@ -3,8 +3,8 @@
 module.exports = {
   app: {
     title: 'FansUnite',
-    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-    keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
+    description: 'Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+    keywords: 'sportsbetting social network, sportsbetting community, bet tracking',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
   port: process.env.PORT || 3000,
@@ -27,7 +27,7 @@ module.exports = {
   // for obsecurity reasons
   sessionKey: 'sessionId',
   sessionCollection: 'sessions',
-  logo: 'modules/core/client/img/brand/logo.png',
+  logo: 'modules/fu/client/img/general/logo-full.png',
   favicon: 'modules/core/client/img/brand/favicon.ico',
   uploads: {
     profileUpload: {

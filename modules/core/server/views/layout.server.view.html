@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <base href="/">
-    <title data-ng-bind="page.meta.title"></title>
+    <title data-ng-bind="page.meta.title">{{title}}</title>
 
     <!-- Semantic META -->
-    <meta name="description" data-ng-if="page.meta.description" content="{{page.getDescription()}}">
-    <meta name="keywords" data-ng-if="page.meta.keywords"  content="{{page.meta.keywords}}">
+    <meta name="description" content="{{description}}">
+    <meta name="keywords"  content="{{keywords}}">
 
     <!-- Apple META -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,17 +17,17 @@
 
     <!-- Facebook META -->
     <meta property="fb:app_id" content="{{facebookAppId}}">
-    <meta property="og:site_name" content="{{page.meta.title}}">
-    <meta property="og:title" content="{{page.meta.title}}">
-    <meta property="og:description" content="{{page.meta.description}}">
-    <meta property="og:url" content="{{location.url()}}">
+    <meta property="og:site_name" content="{{title}}">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:url" content="{{url}}">
     <meta property="og:image" content="{{logo}}">
     <meta property="og:type" content="website">
 
     <!-- Twitter META -->
-    <meta name="twitter:title" content="{{page.meta.title}}">
-    <meta name="twitter:description" content="{{page.meta.description}}">
-    <meta name="twitter:url" content="{{location.url()}}">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{description}}">
+    <meta name="twitter:url" content="{{url}}">
     <meta name="twitter:image" content="{{logo}}">
 
     <!-- Fav Icon -->

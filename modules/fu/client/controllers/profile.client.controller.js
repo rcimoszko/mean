@@ -8,9 +8,9 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
         $scope.location = $location;
         if(!$scope.username) $state.go('hub');
 
-        Page.meta.title = $scope.username + ' Profile | Verified Record and History';
-        Page.meta.description = 'Get an unedited look into the complete history FansUnite’s top handicappers';
-        Page.meta.keywords = $scope.username + ', betting history';
+        Page.meta.title = $scope.username + ' Picks & Verified Record | FansUnite';
+        Page.meta.description = 'Get access to '+$scope.username+"'s sportsbetting picks with 100% verified and transparent results.";
+        Page.meta.keywords = 'free picks, free tips, pro picks, pro tips';
 
         function cbGetProfile(err, profile){
             if(!profile) $state.go('not-found');

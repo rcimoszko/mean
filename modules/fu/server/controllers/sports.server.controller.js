@@ -27,6 +27,22 @@ function byId(req, res, next, id){
     SportBl.get(id, cb);
 }
 
+function bySlug(req, res, next, slug){
+
+    function cb (err, sport){
+        if (err) return next(err);
+        if (!sport) {
+            return res.status(404).send({
+                message: 'Sport not found'
+            });
+        }
+        req.sport = sport;
+        next();
+    }
+
+    SportBl.getBySlug(slug, cb);
+}
+
 function getAll(req, res, next){
 
     function cb (err, sports){
@@ -83,6 +99,7 @@ function del(req, res, next){
 }
 
 exports.byId    = byId;
+exports.bySlug  = bySlug;
 exports.getAll  = getAll;
 exports.get     = get;
 exports.update  = update;

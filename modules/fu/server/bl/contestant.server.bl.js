@@ -20,6 +20,15 @@ function get(id, callback){
     Contestant.findById(id).exec(cb);
 }
 
+function getBySlug(slug, callback){
+
+    function cb(err, contestant){
+        callback(err, contestant);
+    }
+
+    Contestant.findOne({slug:slug}).exec(cb);
+}
+
 function getAll(callback){
 
     function cb(err, contestants){
@@ -165,6 +174,7 @@ function getByLeagueId(leagueId, callback){
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
+exports.getBySlug   = getBySlug;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;

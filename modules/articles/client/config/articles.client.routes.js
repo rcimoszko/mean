@@ -11,8 +11,9 @@ angular.module('articles').config(['$stateProvider',
             .state('blog.home', {
                 url: '',
                 templateUrl: 'modules/articles/client/views/blog/blog.home.client.view.html',
-                title: 'FansUnite Blog | Betting Tips, Free Picks, Odds and Scores',
-                description: 'FansUnite blog'
+                title: 'Sports Betting Blog | FansUnite',
+                description: 'Betting predictions, previews, analysis and advice for upcoming NBA, NHL, MLB and NFL games.',
+                keywords: 'betting, predictions, previews, analysis, advice'
             })
             .state('blog.article', {
                 url: '/:articleSlug',

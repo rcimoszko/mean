@@ -159,16 +159,16 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             console.log($scope.filter);
 
             if($scope.filter.contestant._id !== 'all'){
-                $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.contestant.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.contestant.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
                 $scope.page.meta.keywords = 'Top '+$scope.filter.contestant.name+' '+capperText+', Best '+$scope.filter.contestant.name+' '+capperText;
             } else if ($scope.filter.league._id !== 'all' ){
-                $scope.page.meta.title = 'Top '+$scope.filter.league.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.league.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.title = 'Top '+$scope.filter.league.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.league.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
                 $scope.page.meta.keywords = 'Top '+$scope.filter.league.name+' '+capperText+', Best '+$scope.filter.league.name+' '+capperText;
             } else if ($scope.filter.sport._id !== 'all'){
-                $scope.page.meta.title = 'Top '+$scope.filter.sport.name+' '+capperTextCap + ' | Free Betting ' +picksTextCap;
-                $scope.page.meta.description = 'Find the best '+$scope.filter.sport.name+' '+capperText+'. Get free '+picksText+' from '+capperText+' with fully verified and transparent records.';
+                $scope.page.meta.title = 'Top '+$scope.filter.sport.name+' '+capperTextCap + ' | FansUnite';
+                $scope.page.meta.description = 'Find the best '+$scope.filter.sport.name+' '+capperText+' with 100% verified and transparent results to follow, track and copy their predictions.';
                 $scope.page.meta.keywords = 'Top '+$scope.filter.sport.name+' '+capperText+', Best '+$scope.filter.sport.name+' '+capperText;
             }
         }

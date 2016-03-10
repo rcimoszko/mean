@@ -32,9 +32,9 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         function updateMetaData(){
-            Page.meta.title = $scope.channel.name + ' Betting Channel | Free Tips, Pro Picks, Odds and Consensus';
-            Page.meta.description = 'Daily '+$scope.channel.name+' betting discussion, pro picks, free tips, odds and community consensus.';
-            Page.meta.keywords = $scope.channel.name+' betting, pro picks, free tips, odds, consensus';
+            Page.meta.title = $scope.channel.name + ' Betting Community | FansUnite';
+            Page.meta.description = 'Daily '+$scope.channel.name+' betting discussions, pro picks, free tips, odds and community consensus.';
+            Page.meta.keywords = $scope.channel.name+' betting, '+$scope.channel.name+' pro picks, '+$scope.channel.name+' free tips, '+$scope.channel.name+' odds, '+$scope.channel.name+' consensus';
         }
 
         function cb(err, channelContent){

@@ -56,10 +56,10 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
             } else {
                 awayTeam = $scope.event.contestant2.name;
             }
-            var date = $filter('date')($scope.event.startTime, 'MMM d, y');
+            var date = $filter('date')($scope.event.startTime, 'MMM d y');
 
-            Page.meta.title = homeTeam + separator + awayTeam + ' '+ date +' | Odds, Free Tips, Pro Picks and Betting Discussion';
-            Page.meta.description = $scope.event.contestant1.name + ' vs. '+$scope.event.contestant2.name + '('+date+')' + ' odds, betting discussion, picks and consensus. Get free '+$scope.event.league.name+' tips and pro picks from our community.';
+            Page.meta.title = homeTeam + separator + awayTeam + ' Odds, Picks, Consensus & Discussion - '+ date +' | FansUnite';
+            Page.meta.description =  'Up-to-date odds, free picks, community consensus and betting discussion for '+$scope.event.contestant1.name+' vs. '+$scope.event.contestant2.name+' ('+ date + ').';
             Page.meta.keywords = $scope.event.contestant1.name+', '+$scope.event.contestant2.name+', odds, betting discussion, free tips, pro picks, consensus';
         }
 

@@ -18,6 +18,14 @@ function get(id, callback){
 
     Sport.findById(id).exec(cb);
 }
+function getBySlug(slug, callback){
+
+    function cb(err, sport){
+        callback(err, sport);
+    }
+
+    Sport.findOne({slug:slug}).exec(cb);
+}
 
 function getAll(callback){
 
@@ -100,6 +108,7 @@ function getResolveList(callback){
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
+exports.getBySlug   = getBySlug;
 exports.create      = create;
 exports.update      = update;
 exports.delete      = del;

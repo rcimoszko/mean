@@ -11,9 +11,9 @@ angular.module('fu').config(['$stateProvider',
             .state('discover.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/discover/discover-table.client.view.html',
-                title: 'Top Handicappers | Free Picks',
-                description: 'Find the best handicapper to suit your sports betting needs. All records are fully verified and transparent, what you see is what you get.',
-                keywords: 'best tipsters, top handicappers, profit, roi'
+                title: 'Top Handicappers | FansUnite',
+                description: 'Find handicappers with 100% verified and transparent results to follow, track and copy their predictions. ',
+                keywords: 'top handicappers, best tipsters, fansunite leaderboard'
             })
             .state('discover.sport', {
                 url: '/:sportSlug',

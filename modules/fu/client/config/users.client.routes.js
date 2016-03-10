@@ -27,7 +27,9 @@ angular.module('fu').config(['$stateProvider',
                 data: {
                     roles: ['user']
                 },
-                title: 'My Tipsters | Verified Record and History'
+                title: 'My Handicappers | FansUnite',
+                description : '',
+                keywords: ''
             });
     }
 ]);

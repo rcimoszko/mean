@@ -14,5 +14,6 @@ module.exports = function (app) {
         .delete(ctrl.delete);
 
     app.param('contestantId', ctrl.byId);
+    app.param('contestantSlug', ctrl.bySlug);
 
 };
