@@ -12,51 +12,51 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             .state('static.about', {
                 url:'/about',
                 templateUrl: '/modules/fu/client/views/static/static.about.client.view.html',
-                title: 'About Us | FansUnite',
-                description: 'About FansUnite.',
-                keywords: 'what is fansunite'
+                title: 'About FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is a Sportsbetting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'sportsbetting, social network, community'
             })
             .state('static.betting101', {
                 url:'/betting101',
                 templateUrl: '/modules/fu/client/views/static/static.betting101.client.view.html',
-                title: 'Betting 101 | Learn How to Bet on Sports',
-                description: 'Learn the basics of how to bet on sports. You will learn how to bet the moneyline, against the spread and totals.',
-                keywords: 'learn how to bet on sports, bet against the spread, bet on totals'
+                title: 'Learn the Basics of Sportsbetting | FansUnite',
+                description: 'Learn how to bet moneylines, point spreads, total points and team totals. Understand the different odds formats and bet types.',
+                keywords: 'moneyline, spreads, totals, team totals'
             })
             .state('static.glossary', {
                 url: '/glossary',
                 templateUrl: '/modules/fu/client/views/static/static.glossary.client.view.html',
-                title: 'Betting Terms: Spread, Over/Under and Moneyline | FansUnite',
+                title: 'Betting Glossary | FansUnite',
                 description: 'Find the most common betting terms that every sports bettor amateur to professional needs to know.',
-                keywords: 'sports betting terms, spread betting, learn how to bet, sports betting basics'
+                keywords: 'glossary, learn sportsbetting, teach sportsbetting'
             }).
             state('static.howPicksAreGraded', {
                 url: '/how-picks-are-graded',
                 templateUrl: '/modules/fu/client/views/static/static.how-picks-are-graded.client.view.html',
-                title: 'How Wagers are Graded | FansUnite',
-                description: 'How FansUnite resolves all of its wagers.',
-                keywords: 'sports betting rules, how bets are graded'
+                title: 'Learn How Picks are Graded at FansUnite | Sportsbetting Social Network',
+                description: 'Track your bets on FansUnite and have our platform automatically grade each wager. Learn more about how each bet is graded.',
+                keywords: 'bet tracking, pick tracker'
             }).
             state('static.faq', {
                 url: '/faq',
                 templateUrl: '/modules/fu/client/views/static/static.faq.client.view.html',
-                title: 'FAQ | FansUnite',
-                description: 'Find answers to frequently asked questions.',
-                keywords: 'fansunite faq'
+                title: 'FAQ at FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is a unique Sportsbetting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'faq, sportsbetting, social network, community'
             }).
             state('static.terms', {
                 url: '/terms',
                 templateUrl: '/modules/fu/client/views/static/static.terms.client.view.html',
-                title: 'Terms of Use | FansUnite',
-                description: 'Terms of use.',
-                keywords: 'terms of use'
+                title: 'FansUnite Terms | Sportsbetting Social Network',
+                description: '',
+                keywords: ''
             }).
             state('static.rules', {
                 url: '/rules',
                 templateUrl: '/modules/fu/client/views/static/static.rules.client.view.html',
-                title: 'Rules | FansUnite',
-                description: 'FansUnite rules.',
-                keywords: 'fansunite rules'
+                title: 'FansUnite Rules | Sportsbetting Social Network',
+                description: '',
+                keywords: ''
             }).
             state('static.privacy', {
                 url: '/privacy',
@@ -68,9 +68,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.contact', {
                 url: '/contact',
                 templateUrl: '/modules/fu/client/views/static/static.contact.client.view.html',
-                title: 'Contact Us | FansUnite',
-                description: 'Contact information for FansUnite.',
-                keywords: 'contact fansunite'
+                title: 'Contact FansUnite | Sportsbetting Social Network',
+                description: 'FansUnite is always open to feedback. Contact us with any questions, comments and suggestions.',
+                keywords: 'contact us, feedback, suggestions'
             }).
             state('static.offer-not-available', {
                 url: '/not-available',
@@ -81,17 +81,16 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.userguide', {
                 url: '/user-guide',
                 templateUrl: '/modules/fu/client/views/static/static.user-guide.client.view.html',
-                title: 'User Guide | FansUnite',
-                description: 'FansUnite User guide.',
-                keywords: 'how fansunite works, fansunite user guide'
+                title: 'FansUnite User Guide | Sportsbetting Social Network',
+                description: 'Learn how to use FansUnite, a social sportsbetting platform. Follow the top handicappers and become more profitable.',
+                keywords: 'user guide, profitable, sportsbetting'
             }).
             state('static.sportsbooks', {
                 url: '/top-10-sportsbooks',
                 templateUrl: '/modules/fu/client/views/static/static.top-10-sports-books.client.view.html',
-                title: 'Top 10 Sportsbooks | FansUnite',
-                description: 'Top 10 Sportsbooks.',
+                title: 'Top 10 Sportsbooks | Unbiased Reviews | FansUnite',
+                description: 'Unbiased sportsbook reviews from FansUnite. Find the best online sportsbook.',
                 keywords: 'best online sportsbook, betting offers, free bets'
-
             }).
             state('static.sportsbookReviews', {
                 url: '/sportsbook-review/:name',
@@ -101,22 +100,22 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 url: '/monthly-revenue-share',
                 templateUrl: '/modules/fu/client/views/static/static.monthly-revenue-share.client.view.html',
                 title: 'Monthly Revenue Share | FansUnite',
-                description: 'About FansUnite monthly revenue share.',
-                keywords: 'make money betting on sports'
+                description: "FansUnite rewards it's top handicappers with a monthly revenue share. Eligible members receive a portion of our revenue each month.",
+                keywords: 'revenue share, top handicappers, rewards'
             }).
             state('static.press', {
                 url: '/press',
                 templateUrl: '/modules/fu/client/views/static/static.press.client.view.html',
-                title: 'Press | FansUnite',
-                description: 'Sports betting community for handicappers looking to get free picks, practice their betting strategy and see where the top guys are actually putting their money.',
-                keywords: 'sports betting community, free sports picks, learn how to bet verified handicappers, fansunite'
+                title: 'FansUnite Press | Sportsbetting Social Network',
+                description: 'News and press about FansUnite, the sportsbetting social network.',
+                keywords: 'press release, fansunite news, fansunite articles'
             }).
             state('whyGoPro', {
                 url: '/why-go-pro',
                 templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',
-                title: 'Why Go Pro | FansUnite',
-                description: 'About FansUnite monthly revenue share.',
-                keywords: 'make money betting on sports'
+                title: 'FansUnite Pro Membership | Sportsbetting Social Network',
+                description: 'Join FansUnite Pro subscription to get access to our pro picks, email notifications and weekly betting progress reports.',
+                keywords: 'pro picks, email notifications, progress reports'
             });
     }
 ]);

@@ -7,9 +7,9 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
         $scope.sportSlug = $stateParams.sportSlug;
 
         function updateMeta(){
-            Page.meta.title = $scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' Betting Odds | Free Online Sports Betting';
-            Page.meta.description = 'Latest '+$scope.activeSport.name+ ' - ' + MakePicks.active.league.name + ' betting odds. Track your bets with our free online sportsbook.';
-            Page.meta.keywords = $scope.activeSport.name+ ' odds, ' + MakePicks.active.league.name + ' odds, free online sportsbook, free sports betting';
+            Page.meta.title = 'Free '+$scope.activeSport.name+ ' - '+MakePicks.active.league.name+' Online Sportsbook | FansUnite';
+            Page.meta.description = 'Track your bets on our free online sportsbook with up-to-date '+MakePicks.active.league.name+' odds.';
+            Page.meta.keywords = 'free '+MakePicks.active.league.name+' online sportsbook, free online '+MakePicks.active.league.name+' betting, latest odds';
         }
 
         $scope.updateSport = function(sport){

@@ -9,7 +9,7 @@ angular.module('core').controller('SportsbookController', ['$scope', '$statePara
             //If sportsbook name, Review Page
             $scope.sportsbook = SportsbookService.getSportsbook($scope.sportsbookName.replace('-',' '));
             Page.meta.title = $scope.sportsbookName.replace('-', ' ')+' Review | FansUnite' ;
-            Page.meta.description = $scope.sportsbookName.replace('-', ' ')+' review from FansUnite.';
+            Page.meta.description = 'Unbiased review of '+ $scope.sportsbookName.replace('-', ' ')+' from FansUnite.';
             Page.meta.keywords = $scope.sportsbookName+' review, '+$scope.sportsbookName+' betting offers, '+$scope.sportsbookName+' free bets';
 
             if(!$scope.sportsbook){

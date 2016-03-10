@@ -19,7 +19,9 @@ angular.module('fu').config(['$stateProvider',
                 data: {
                     roles: ['user']
                 },
-                title: 'My Settings | Betting Tips, Free Picks, Odds and Scores'
+                title: 'Settings | FansUnite',
+                description: '',
+                keywords: ''
             })
             .state('myFollowing', {
                 url: '/my-following',

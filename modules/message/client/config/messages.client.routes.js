@@ -8,7 +8,8 @@ angular.module('message').config(['$stateProvider',
                 templateUrl: 'modules/message/client/views/messages.client.view.html',
                 controller: 'MessagesController',
                 title: 'Messages | FansUnite',
-                description: 'Private Messages',
+                description: '',
+                keywords: '',
                 abstract: true,
                 data: {
                     roles: ['user']

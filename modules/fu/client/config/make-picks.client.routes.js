@@ -11,8 +11,8 @@ angular.module('fu').config(['$stateProvider',
             .state('makePicks.home', {
                 url: '',
                 templateUrl: 'modules/fu/client/views/make-picks/make-picks.picks.client.view.html',
-                title: 'Sports Odds | Free Online Sports Betting',
-                description: 'Latest betting odds for every sport. Track your bets with our free online sportsbook.',
+                title: 'Free Online Sportsbook | FansUnite',
+                description: 'Track your bets on our free online sportsbook with up-to-date odds for every sport and league.',
                 keywords: 'free online sportsbook, free online sports betting, latest odds'
             })
             .state('makePicks.league', {
