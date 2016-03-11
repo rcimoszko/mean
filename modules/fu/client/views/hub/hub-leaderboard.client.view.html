@@ -2,6 +2,9 @@
     <div class="panel-body">
         <h1>
             REV SHARE LEADERS <span class="time-heading">THIS MONTH</span>
+            <span class="pull-right">
+                Rank: {{rank}}
+            </span>
         </h1>
         <table class="table leaderboard-sm table-condensed">
             <thead>
@@ -11,13 +14,18 @@
                 <th class="text-center actions">ACTIONS</th>
             </thead>
             <tbody>
-            <tr data-ng-repeat="user in hub.leaderboard">
-                <td class="rank">{{$index+1}}</td>
+            <tr data-ng-repeat="user in hub.leaderboard | startFrom:(currentPage-1)*pageSize | limitTo:pageSize">
+                <td class="rank">{{$index+1 +((currentPage-1)*pageSize)}}</td>
                 <td class="username"><a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a></td>
                 <td class="text-center profit">{{user.profit| number:1}}</td>
                 <td class="actions">
                     <btn-follow user-id="user.user._id"></btn-follow>
                     <btn-pending-picks username="user.user.username" pick-count="user.pending"></btn-pending-picks>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="pages text-center">
+                    <pagination total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" max-size="maxSize" class="pagination-xs" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
                 </td>
             </tr>
             </tbody>

@@ -24,7 +24,7 @@ function getPopularGames(callback){
 }
 
 function getLeaderboard(callback){
-    LeaderboardBl.buildLeaderboard('thisMonth', 'all', 'all', 'all', 'both', 'all', 'all', null, null, 5, callback);
+    LeaderboardBl.buildLeaderboard('thisMonth', 'all', 'all', 'all', 'both', 'all', 'all', null, null, null, callback);
 }
 
 function getTrending(callback){
