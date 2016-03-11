@@ -4459,6 +4459,7 @@ angular.module('fu').controller('TopMenuController', ['$scope', '$state', 'Authe
         };
 
         $scope.searchSelected = function($model){
+            $scope.searchText = '';
             switch($model.type){
                 case 'event':
                     $state.go('gamecenter', {eventSlug: $model.slug, leagueSlug: $model.leagueSlug});
