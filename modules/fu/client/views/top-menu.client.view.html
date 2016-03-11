@@ -1,12 +1,12 @@
 <div data-ng-controller="TopMenuController">
     <div class="logo-container" data-ng-if="!authentication.user || isBlog()" >
         <a ui-sref="home">
-            <img data-ng-src="/modules/fu/client/img/general/logo-full.png">
+            <img alt="FansUnite Logo" data-ng-src="/modules/fu/client/img/general/logo-full.png">
         </a>
     </div>
     <div class="avatar-container" data-ng-if="authentication.user" data-ng-click="toggleSideMenu()">
         <a href>
-            <avatar url="authentication.user.avatarUrl" size="'sm'"></avatar>
+            <avatar username="authentication.user.username" url="authentication.user.avatarUrl" size="'sm'"></avatar>
         </a>
     </div>
     <div class="search-container">
@@ -29,21 +29,6 @@
                    typeahead="result as result.name for result in getResults($viewValue)">
         </div>
     </div>
-
-    <!--
-    <div class="menu-links  pull-right" collapse="!isCollapsed">
-        <ul class="auth" data-ng-if="!authentication.user">
-            <li><a ui-sref="login" data-ng-class="{active: $scope.state.current.name === 'login'}">Login</a></li>
-            <li><a ui-sref="signup" data-ng-class="{active: $scope.state.current.name === 'signup'}">Sign Up</a></li>
-        </ul>
-        <ul  class="auth">
-            <li><a ui-sref="blog.home" data-ng-class="{active:  $scope.state.current.name === 'blog'}">Blog</a></li>
-            <li><a ui-sref="makePicks.home" data-ng-class="{active:  $scope.state.current.name === 'makePicks'}">Make Picks</a></li>
-            <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
-        </ul>
-    </div>
-    -->
-
 
     <nav class="collapse navbar-collapse menu-links" collapse="!isCollapsed" role="navigation">
         <div class="pull-right trial-btn-container" data-ng-if="user.info.status === 'free' && !authentication.user.trialUsed">

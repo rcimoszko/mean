@@ -14,7 +14,7 @@
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="user in followingLeaderboard|orderBy:currentOrder:false|limitTo:limit()">
-                            <td class="username"><avatar size="'xs'" url="user.avatarUrl"></avatar><a ui-sref="profile({username:user.username})">{{user.username}}<a/></td>
+                            <td class="username"><avatar username="user.username" size="'xs'" url="user.avatarUrl"></avatar><a ui-sref="profile({username:user.username})">{{user.username}}<a/></td>
                             <td class="text-center profit" data-ng-class="{'active': order === 'profit'}">{{user.profit| number:1}}</td>
                             <td class="text-center roi" data-ng-class="{'active': order === 'roi'}">{{user.roi|number:1}}%</td>
                             <td class="text-center win-loss" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>

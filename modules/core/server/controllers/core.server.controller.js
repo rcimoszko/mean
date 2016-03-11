@@ -392,6 +392,5 @@ exports.renderNotFound = function (req, res) {
 
 
 exports.contestRedirect = function(req, res){
-    console.log(req);
     res.redirect(301, '/monthly-revenue-share');
 };

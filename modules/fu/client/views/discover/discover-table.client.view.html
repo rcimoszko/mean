@@ -12,7 +12,7 @@
     <tbody>
         <tr data-ng-repeat="user in leaderboard|orderBy:currentOrder:false | startFrom:(currentPage-1)*pageSize | limitTo:pageSize" data-ng-class="{active: user.user.username === authentication.user.username}">
             <td class="rank">{{$index+1 +((currentPage-1)*pageSize)}}</td>
-            <td class="username"><a ui-sref="profile({username:user.user.username})"><img class="avatar avatar-circle avatar-xs" data-ng-src="{{user.user.avatarUrl}}" alt="Profile Image"/>{{user.user.username}}</a></td>
+            <td class="username"><a ui-sref="profile({username:user.user.username})"><img class="avatar avatar-circle avatar-xs" data-ng-src="{{user.user.avatarUrl}}" alt="{{user.user.username}} Profile Image"/>{{user.user.username}}</a></td>
             <td class="value profit" data-ng-class="{'active': order === 'profit'}">{{user.profit | number:1}}</td>
             <td class="value roi" data-ng-class="{'active': order === 'roi'}">{{user.roi | number:1}}%</td>
             <td class="value win-loss" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>

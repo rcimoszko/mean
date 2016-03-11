@@ -5,6 +5,7 @@ angular.module('fu').directive('logo', function () {
         restrict: 'E',
         scope: {
             url: '=',
+            contestantName: '=',
             size: '='
         },
         templateUrl: 'modules/fu/client/templates/contestant/logo.client.template.html',

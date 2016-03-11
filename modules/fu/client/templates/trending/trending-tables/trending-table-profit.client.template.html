@@ -6,7 +6,7 @@
     </thead>
     <tbody>
     <tr data-ng-repeat="user in users">
-        <td class="username"><avatar size="'xs'" url="user.user.avatarUrl"></avatar>
+        <td class="username"><avatar username="user.user.username" size="'xs'" url="user.user.avatarUrl"></avatar>
             <a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a>
         </td>
         <td class="value text-center">{{user.profit|formatProfit}}</td>
