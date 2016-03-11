@@ -3934,6 +3934,9 @@ notification:last-of-type .notification {
 #tracker table#history td {
   padding: 8px;
 }
+#tracker table#history td.game-name a {
+  color: #2b2b2c;
+}
 #tracker .tab-content {
   padding: 20px;
 }

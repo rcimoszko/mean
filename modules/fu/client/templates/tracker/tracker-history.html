@@ -143,7 +143,8 @@
             <tr data-ng-repeat="pick in picks | filter:search.text | filter:historyFilter | startFrom:(currentPage-1)*pageSize.number | limitTo:pageSize.number ">
                 <td class="{{pick.result.toLowerCase()}}">{{pick.result}}</td>
                 <td>{{pick.event.startTime|date:'M/d/yy'}}<br/>{{pick.event.startTime|date:'h:mm a'}}</td>
-                <td class="text-left">
+                <td class="text-left game-name">
+                    <a ui-sref="gamecenter({eventSlug: pick.event.slug, leagueSlug: pick.league.slug})">
                     <span data-ng-if="contestantService.getContestantSwitch(pick.event)">
                         <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2.name}}</span><br/>
                         <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1.name}}</span>
@@ -152,6 +153,7 @@
                         <span data-ng-class="{winner: pick.event.contestant1.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant1.name}}</span><br/>
                         <span data-ng-class="{winner: pick.event.contestant2.ref === pick.event.contestantWinner.ref}">{{pick.event.contestant2.name}}</span>
                     </span>
+                    </a>
                 </td>
                 <td>
                     <span data-ng-if="contestantService.getContestantSwitch(pick.event)">
