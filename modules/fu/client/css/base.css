@@ -2116,6 +2116,17 @@ notification:last-of-type .notification {
     color: #6a6b6c;
   }
 }
+.make-picks-sub-menu h1 .heading h1 {
+  display: inline-block;
+  margin: 0;
+  font-weight: inherit;
+  color: white;
+}
+@media (min-width: 768px) {
+  .make-picks-sub-menu h1 .heading h1 {
+    color: #6a6b6c;
+  }
+}
 .make-picks-sub-menu h1 .bet-duration-filter {
   position: absolute;
   right: 0;
@@ -3124,6 +3135,7 @@ notification:last-of-type .notification {
 }
 .channel-top-menu .channel-name {
   position: absolute;
+  margin: 0;
   left: 0;
   width: 18%;
   white-space: nowrap;
@@ -3791,11 +3803,12 @@ notification:last-of-type .notification {
 .profile-info {
   text-align: center;
 }
-.profile-info h2 {
+.profile-info h1 {
   font-size: 18px;
   text-transform: uppercase;
   margin-top: 8px;
   margin-bottom: 6px;
+  font-weight: normal;
 }
 .profile-info .count {
   color: #2b2b2c;

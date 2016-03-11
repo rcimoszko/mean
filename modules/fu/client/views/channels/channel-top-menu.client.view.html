@@ -1,5 +1,5 @@
 <div class="channel-top-menu clearfix">
-    <span class="channel-name">{{channel.name}}</span>
+    <h1 class="channel-name">{{channel.name}}</h1>
     <span class="date-menu">
         <ng-include src="'/modules/fu/client/views/channels/channel-top-menus/channel-top-menu-weekly.client.view.html'" data-ng-if="channel.dateGroup === 'weekly'"></ng-include>
         <ng-include src="'/modules/fu/client/views/channels/channel-top-menus/channel-top-menu-daily.client.view.html'" data-ng-if="channel.dateGroup === 'daily'"></ng-include>
