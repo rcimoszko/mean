@@ -2908,8 +2908,8 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
 
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter) {
         $scope.authentication = Authentication;
         $scope.loading = Loading;
         $scope.socket = SocketHub;
@@ -2925,6 +2925,8 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             $scope.loading.isLoading.pageLoading = false;
             $scope.hub = hub;
             $scope.disableScroll = false;
+            setPages();
+            updateRank();
         }
         $scope.loading.isLoading.pageLoading = true;
         Hub.getHub(cbGetHub);
@@ -3022,7 +3024,32 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         };
         $scope.getTalk();
 
+        /**
+         * Leaderboard
+         */
 
+
+        function setPages(){
+            $scope.totalItems = $scope.hub.leaderboard.length;
+            $scope.currentPage = 1;
+            $scope.pageSize = 5;
+            $scope.maxSize = 0;
+        }
+
+        $scope.rank = 'N/A';
+
+        function updateRank(){
+            var rankFound = false;
+            var leaderboard = $filter('orderBy')($scope.hub.leaderboard, $scope.currentOrder);
+            console.log(leaderboard);
+            for(var i=0; i<leaderboard.length; i++){
+                if($scope.authentication.user._id === leaderboard[i].user._id){
+                    $scope.rank = i+1;
+                    rankFound = true;
+                }
+            }
+            if(!rankFound) $scope.rank = 'N/A';
+        }
 
     }
 ]);
