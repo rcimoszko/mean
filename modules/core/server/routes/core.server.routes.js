@@ -37,8 +37,8 @@ module.exports = function (app) {
     app.route('/rules').get(core.rules);
     app.route('/terms').get(core.terms);
 
-
-
+    app.route('/contests').get(core.contestRedirect);
+    app.route('/contests/*').get(core.contestRedirect);
 
     // Define error pages
     app.route('/server-error').get(core.renderServerError);
