@@ -40,6 +40,22 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case 'matchups':
         case 'fight':
             switch(event.sport.name.toLowerCase()){
+                case 'e-sports':
+                    switch(pick.betType.toLowerCase()){
+                        case '1st blood':
+                            contestantScore = event['contestant'+contestantNo+'FirstBlood'];
+                            opponentScore = event['contestant'+opponentNo+'FirstBlood'];
+                            break;
+                        case '1st to 10 kills':
+                            contestantScore = event['contestant'+contestantNo+'KillsFirst'];
+                            opponentScore = event['contestant'+opponentNo+'KillsFirst'];
+                            break;
+                        default:
+                            contestantScore = event['contestant'+contestantNo+'FinalScore'];
+                            opponentScore = event['contestant'+opponentNo+'FinalScore'];
+                            break;
+                    }
+                    break;
                 case 'soccer':
                 case 'handball':
                 case 'hockey':

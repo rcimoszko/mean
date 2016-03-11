@@ -79,12 +79,17 @@ var EventSchema = new Schema({
     contestant1OTScore:         {type: Number},
     contestant2OTScore:         {type: Number},
 
+    contestant1KillsFirst:      {type: Number},
+    contestant2KillsFirst:      {type: Number},
     contestant1Set1KillsFirst:  {type: Number},
     contestant2Set1KillsFirst:  {type: Number},
     contestant1Set2KillsFirst:  {type: Number},
     contestant2Set2KillsFirst:  {type: Number},
     contestant1Set3KillsFirst:  {type: Number},
     contestant2Set3KillsFirst:  {type: Number},
+
+    contestant1FirstBlood:  {type: Number},
+    contestant2FirstBlood:  {type: Number},
     contestant1Set1FirstBlood:  {type: Number},
     contestant2Set1FirstBlood:  {type: Number},
     contestant1Set2FirstBlood:  {type: Number},

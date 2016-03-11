@@ -287,6 +287,14 @@ function insertScores_eSports(event, scores, scoreType, callback){
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
+                case '1st blood':
+                    event.contestant1FirstBlood = scores.match.team2;
+                    event.contestant2FirstBlood = scores.match.team1;
+                    break;
+                case '1st to 10 kills':
+                    event.contestant1KillsFirst = scores.match.team2;
+                    event.contestant2KillsFirst = scores.match.team1;
+                    break;
                 case 'kills':
                     event.contestant1RegulationScore = scores.match.team2;
                     event.contestant2RegulationScore = scores.match.team1;
