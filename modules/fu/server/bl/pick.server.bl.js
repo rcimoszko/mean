@@ -7,7 +7,10 @@ var _ = require('lodash'),
     PickResolveBl = require('./pick.resolve.server.bl'),
     Pick = mongoose.model('Pick');
 
-var populate = [{path: 'event', select: '-pinnacleBets'},{path:'user.ref', select:'avatarUrl username'},{path:'league'}];
+var populate = [{path: 'event', select: '-pinnacleBets'},
+                {path:'user.ref', select:'avatarUrl username'},
+                {path:'league'},
+                {path:'bet', model:'Bet'}];
 
 function get(id, callback){
 

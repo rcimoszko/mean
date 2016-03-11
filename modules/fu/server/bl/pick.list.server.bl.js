@@ -130,7 +130,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  authUser
     function populatePicks(callback){
         var populate = [{path: 'event', model:'Event'},
                         {path:'picks.user.ref', model: 'User', select: 'username avatarUrl'},
-                        {path:'picks.bet', model:'Bet'},];  //had to populate bets for copying bets
+                        {path:'picks.bet', model:'Bet'}];  //had to populate bets for copying bets
         PickBl.populateBy(events, populate, callback);
     }
 
