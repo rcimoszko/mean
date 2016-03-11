@@ -20,9 +20,11 @@ function filterMainLine(bet){
 function groupContestantName(bet){
     if(bet.contestant) return bet.contestant.name;
 }
+
 function filterMoneylines(bet){
     return bet.draw === undefined;
 }
+
 function setActive(bets){
     for(var i=0; i<bets.length; i++){
         if(!bets[i].altLine) bets[i].active = true;
@@ -125,6 +127,17 @@ function processEventBets(events, processedEvents, callback){
         var bets = [];
 
 
+        function switchContestants(callback){
+            var leagueSwitch = ['NCAAB', 'NBA', 'NHL', 'NFL', 'MLB', 'MLB Preseason', 'NBA Preseason', 'NCAAF'];
+
+            if(leagueSwitch.indexOf(event.league.name) !== -1){
+                var contestant1 = event.contestant1;
+                event.contestant1 = event.contestant2;
+                event.contestant2 = contestant1;
+            }
+            callback();
+        }
+
         function groupBets(callback){
 
             bets = _.groupBy(event.pinnacleBets, 'betDuration');
@@ -168,6 +181,7 @@ function processEventBets(events, processedEvents, callback){
             callback();
         }
 
+        todo.push(switchContestants);
         todo.push(groupBets);
         //todo.push(divideBets);
         todo.push(removeBets);
