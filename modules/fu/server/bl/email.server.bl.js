@@ -491,7 +491,7 @@ function sendHotPickEmail(hotPick, hostName, callback){
     }
 
     function sendEmails(users, callback){
-        console.log(users);
+        console.log(users.length);
         return callback(null);
 
         function sendEmail_todo(user, callback){
