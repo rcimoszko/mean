@@ -367,6 +367,8 @@ UserSchema.methods.checkPremium = function(callback) {
     var _this = this;
     if(_this.stripeId && _this.subscriptionId){
         stripe.customers.retrieveSubscription(this.stripeId, this.subscriptionId, function(err, subscription) {
+            console.log(subscription);
+            console.log(_this);
             if(subscription){
                 var plan = subscription.plan;
                 var endDate = new Date(subscription.current_period_end*1000);

@@ -483,6 +483,30 @@ function updateHotPick(callback){
     HotpickBl.updateHotPick(callback);
 }
 
+function checkPremium(callback){
+    var todo = [];
+
+    function getUsers(callback){
+        UserBl.getHotPickUsers(callback);
+    }
+
+    function updatePremium(users, callback){
+
+        function updatePremium(user, callback){
+            user.checkPremium(callback);
+        }
+
+        async.eachSeries(users, updatePremium, callback);
+
+    }
+
+    todo.push(getUsers);
+    todo.push(updatePremium);
+
+
+    async.waterfall(todo, callback);
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -496,3 +520,4 @@ exports.assignCommentIds    = assignCommentIds;
 exports.assignLogos = assignLogos;
 exports.checkTrial  = checkTrial;
 exports.updateHotPick  = updateHotPick;
+exports.checkPremium = checkPremium;
