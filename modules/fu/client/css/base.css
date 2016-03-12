@@ -3118,6 +3118,18 @@ notification:last-of-type .notification {
   border-bottom: 1px solid #eaeaea;
   margin-bottom: 10px;
 }
+.hub-banner .header {
+  background-color: #21759b;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  border-radius: 3px 3px 0 0;
+}
+.hub-banner .body {
+  text-align: center;
+  padding: 5px 0;
+}
 .hub-picks-feed .tab-content {
   height: 675px;
 }

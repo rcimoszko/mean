@@ -100,7 +100,8 @@ function get(event, league, user, callback){
     }
 
     function getEvent(callback){
-        callback(null, event);
+        var populate = [{path: 'sport.ref', model:'Sport'},{path: 'league.ref', model:'League'}];
+        m_Event.populate(event, populate, callback);
     }
 
     var todo = {

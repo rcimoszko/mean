@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService) {
         $scope.authentication = Authentication;
+        $scope.user = User;
         $scope.loading = Loading;
         $scope.socket = SocketHub;
         if($scope.socket){
@@ -142,6 +143,10 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             }
             if(!rankFound) $scope.rank = 'N/A';
         }
+
+        $scope.showSubscriptionModal = function(){
+            StripeService.showSubscriptionModal();
+        };
 
     }
 ]);

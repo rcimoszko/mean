@@ -12,6 +12,7 @@
                         <ng-include src="'/modules/fu/client/views/hub/hub-discussion.client.view.html'"></ng-include>
                     </div>
                     <div class="col-lg-6">
+                        <ng-include data-ng-if="user.info.status === 'lifetime premium'" src="'/modules/fu/client/views/hub/hub-banner.client.view.html'"></ng-include>
                         <ng-include src="'/modules/fu/client/views/hub/hub-chat.client.view.html'"></ng-include>
                         <ng-include src="'/modules/fu/client/views/hub/hub-trending.client.view.html'"></ng-include>
                         <ng-include src="'/modules/fu/client/views/hub/hub-leaderboard.client.view.html'"></ng-include>

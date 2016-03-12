@@ -5,10 +5,10 @@ angular.module('fu').controller('ModalSubscriptionController', ['$scope', '$moda
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
         $scope.stripeService = StripeService;
+        $scope.authentication = Authentication;
         $scope.modal.closeModal($scope.modalInstance);
         $scope.location = $location;
         $scope.user = User;
-        console.log($scope.user.info.status);
 
         $scope.newSubscription = function(plan){
             function cb(err){

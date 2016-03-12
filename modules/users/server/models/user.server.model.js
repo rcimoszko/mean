@@ -186,7 +186,8 @@ var UserSchema = new Schema({
     trialEndDate:           {type: Date},
     trialUsed:              {type: Boolean, default: false},
 
-    newFollowerEmail:       {type: Boolean, default: true}
+    newFollowerEmail:       {type: Boolean, default: true},
+    hotPickEmail:           {type: Boolean, default: true}
 });
 
 UserSchema.path('description').validate(function (v) {

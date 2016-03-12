@@ -481,17 +481,19 @@ function sendHotPickEmail(hotPick, hostName, callback){
     }
 
     function processHotPick(hotPick, callback){
-        hotPickInfo.header = hotPick.sport.name+' // '+hotPick.league.name+' // '+hotPick.event.contestant2.name+' @ '+hotPick.event.contestant1.name + ' // '+new Date(hotPick.event.startTime).toUTCString();
+        hotPickInfo.header = hotPick.sport.name+' | '+hotPick.league.name+' | '+hotPick.event.contestant2.name+' @ '+hotPick.event.contestant1.name + ' | '+new Date(hotPick.event.startTime).toUTCString();
         hotPickInfo.betName = betName(hotPick.bet.toJSON());
         callback();
     }
 
     function getUsers(callback){
-        var query = {roles:'admin', username: {$in:['nshuster', 'deghdami', 'rcimoszko']}};
-        UserBl.getByQuery(query, callback);
+        UserBl.getHotPickUsers(callback);
+        callback(null);
     }
 
     function sendEmails(users, callback){
+        console.log(users);
+        return callback(null);
 
         function sendEmail_todo(user, callback){
             if(!user.email) return callback();

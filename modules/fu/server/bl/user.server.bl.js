@@ -564,6 +564,14 @@ function getByQuery(query, callback){
     User.find(query, callback);
 }
 
+function getHotPickUsers(callback){
+    var query = {$and:[
+                    {$or:[{trial:true}, {base:true}, {premium:true}]},
+                    {$or:[{hotPickEmail:true}, {hotPickEmail:{$exists:false}}]}
+                    ]
+                };
+    User.find(query, callback);
+}
 
 exports.getByUsername       = getByUsername;
 exports.getByQuery          = getByQuery;
@@ -580,3 +588,4 @@ exports.getForSearch        = getForSearch;
 exports.uploadProfilePicture    = uploadProfilePicture;
 exports.getNewMessageCount      = getNewMessageCount;
 exports.updateStreak         = updateStreak;
+exports.getHotPickUsers      = getHotPickUsers;
