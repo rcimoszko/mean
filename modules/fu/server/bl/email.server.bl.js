@@ -488,7 +488,6 @@ function sendHotPickEmail(hotPick, hostName, callback){
 
     function getUsers(callback){
         UserBl.getHotPickUsers(callback);
-        callback(null);
     }
 
     function sendEmails(users, callback){
