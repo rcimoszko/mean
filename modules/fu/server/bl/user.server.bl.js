@@ -566,7 +566,7 @@ function getByQuery(query, callback){
 
 function getHotPickUsers(callback){
     var query = {$and:[
-                    {$or:[{trial:true}, {base:true}, {premium:true}]},
+                    {$or:[{trial:true}, {base:true}, {premium:true, lifetimePremium:false}]},
                     {$or:[{hotPickEmail:true}, {hotPickEmail:{$exists:false}}]}
                     ]
                 };
