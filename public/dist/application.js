@@ -2908,9 +2908,10 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
 
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService) {
         $scope.authentication = Authentication;
+        $scope.user = User;
         $scope.loading = Loading;
         $scope.socket = SocketHub;
         if($scope.socket){
@@ -3050,6 +3051,10 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             }
             if(!rankFound) $scope.rank = 'N/A';
         }
+
+        $scope.showSubscriptionModal = function(){
+            StripeService.showSubscriptionModal();
+        };
 
     }
 ]);
@@ -3427,11 +3432,12 @@ angular.module('fu').controller('MyFollowingController', ['$scope', 'User', 'Spo
 
 'use strict';
 
-angular.module('fu').controller('ModalNotificationsController', ['$scope', '$modalInstance', 'Modal', 'User',
-    function($scope, $modalInstance, Modal, User) {
+angular.module('fu').controller('ModalNotificationsController', ['$scope', '$modalInstance', 'Modal', 'User', 'Authentication',
+    function($scope, $modalInstance, Modal, User, Authentication) {
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
         $scope.notifications = User.info.notifications;
+        $scope.authentication = Authentication;
 
     }
 ]);
@@ -4372,10 +4378,10 @@ angular.module('fu').controller('ModalSubscriptionController', ['$scope', '$moda
         $scope.modal = Modal;
         $scope.modalInstance = $modalInstance;
         $scope.stripeService = StripeService;
+        $scope.authentication = Authentication;
         $scope.modal.closeModal($scope.modalInstance);
         $scope.location = $location;
         $scope.user = User;
-        console.log($scope.user.info.status);
 
         $scope.newSubscription = function(plan){
             function cb(err){
