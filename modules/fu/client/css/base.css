@@ -3901,7 +3901,7 @@ notification:last-of-type .notification {
 .profile-stats .statistic .statistic-icon .fa-database {
   color: #9e9e9e;
 }
-.profile-stats .statistic .statistic-icon .fa-sort-numeric-asc {
+.profile-stats .statistic .statistic-icon .fa-arrows-v {
   color: #009688;
 }
 .profile-stats .statistic .statistic-value-container {
