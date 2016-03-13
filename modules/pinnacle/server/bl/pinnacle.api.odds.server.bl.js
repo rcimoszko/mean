@@ -436,6 +436,13 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                 } else {
                     betData.betDuration = betTypeInfo;
                 }
+                if(betData.betDuration === 'kills' && !betData.betType){
+                    betData.betType = 'match';
+                    if('spreads' in oddsApi)  betData.betType = 'spread';
+                    if('totals' in oddsApi)     betData.betType = 'totals';
+                    break;
+                }
+
                 if(betData.betType){
                     if(betData.betType.toLowerCase() === 'kills'){
                         if('spreads' in oddsApi)  betData.betType = 'spread';
@@ -559,7 +566,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true}, callback);
+        PinnacleSportBl.getByQuery({active:true, name:'Basketball'}, callback);
     }
 
     function processSports(pinnacleSports, callback){

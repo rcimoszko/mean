@@ -490,7 +490,7 @@ function checkPremium(callback){
         UserBl.getHotPickUsers(callback);
     }
 
-    function updatePremium(users, callback){
+    function updatePremium_todo(users, callback){
 
         function updatePremium(user, callback){
             user.checkPremium(callback);
@@ -501,7 +501,7 @@ function checkPremium(callback){
     }
 
     todo.push(getUsers);
-    todo.push(updatePremium);
+    todo.push(updatePremium_todo);
 
 
     async.waterfall(todo, callback);
