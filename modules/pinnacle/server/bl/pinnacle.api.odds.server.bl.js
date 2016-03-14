@@ -421,7 +421,6 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
             case '+2.5 sets':
                 betData.betDuration = 'match';
                 break;
-
             case 'ot included':
                 if(betData.betDuration === 'game') betData.betDuration = 'game (OT included)';
                 break;
@@ -571,7 +570,7 @@ function updateInsertAllOdds(callback){
     var todo = [];
 
     function getActiveSports(callback){
-        PinnacleSportBl.getByQuery({active:true, name:'Basketball'}, callback);
+        PinnacleSportBl.getByQuery({active:true}, callback);
     }
 
     function processSports(pinnacleSports, callback){
