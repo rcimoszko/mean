@@ -14,7 +14,7 @@
                 <th class="text-center actions">ACTIONS</th>
             </thead>
             <tbody>
-            <tr data-ng-repeat="user in hub.leaderboard | startFrom:(currentPage-1)*pageSize | limitTo:pageSize">
+            <tr data-ng-repeat="user in hub.leaderboard |orderBy:'profit':true | startFrom:(currentPage-1)*pageSize | limitTo:pageSize">
                 <td class="rank">{{$index+1 +((currentPage-1)*pageSize)}}</td>
                 <td class="username"><a ui-sref="profile({username:user.user.username})">{{user.user.username}}</a></td>
                 <td class="text-center profit">{{user.profit| number:1}}</td>
