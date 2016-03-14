@@ -1372,7 +1372,7 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
         case 'E Sports':
             var leagueGroupName = LeagueBl.getEsportsGroupName(leagueName);
             switch(leagueGroupName){
-                case 'starcraft':
+                case 'starcraft 2':
                     insertScores_starcraft(event, scores, scoreType, callback);
                     break;
                 case 'dota 2':

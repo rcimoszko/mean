@@ -15,6 +15,7 @@ var _ = require('lodash'),
     EmailBl = require('../bl/email.server.bl'),
     HotpickBl = require('../bl/hotpick.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
+    GroupBl = require('../bl/group.server.bl'),
     slug = require('speakingurl');
 
 function assignSlugs(callback){
@@ -507,6 +508,44 @@ function checkPremium(callback){
     async.waterfall(todo, callback);
 }
 
+function assignEsportsGroups(callback){
+    var todo = [];
+
+    function getEsportsLeagues(callback){
+        LeagueBl.getByQuery({'sport.name': 'E Sports'}, callback);
+    }
+
+    function processLeagues(leagues, callback){
+
+        function processLeague(league, callback){
+            var groupName = LeagueBl.getEsportsGroupName(league.name);
+            console.log(league.name);
+            console.log(groupName);
+            if(!groupName) return callback();
+
+            var query = {name: {$regex: new RegExp('^' + groupName +'$', 'i')}};
+
+            GroupBl.getOneByQuery(query, function(err, group){
+                if(err || !group) return callback();
+
+                function cb(err){
+                    callback(err);
+                }
+
+                league.group = {name: group.name, ref: group._id};
+                league.save(cb);
+            });
+        }
+
+        async.eachSeries(leagues, processLeague, callback);
+    }
+
+    todo.push(getEsportsLeagues);
+    todo.push(processLeagues);
+
+    async.waterfall(todo, callback);
+}
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
@@ -521,3 +560,5 @@ exports.assignLogos = assignLogos;
 exports.checkTrial  = checkTrial;
 exports.updateHotPick  = updateHotPick;
 exports.checkPremium = checkPremium;
+
+exports.assignEsportsGroups = assignEsportsGroups;

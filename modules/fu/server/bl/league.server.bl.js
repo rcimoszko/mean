@@ -83,15 +83,18 @@ function getBySlug(slug, callback){
 function getEsportsGroupName(leagueName){
     //starcraft, dota 2, cs:go, league of legends
     var groupNames = {
-        'starcraft':            ['starcraft'],
+        'starcraft 2':          ['starcraft'],
         'dota 2':               ['dota'],
         'cs:go':                ['cs:go', 'counter'],
         'league of legends':    ['league of', 'lol']
     };
 
     for(var groupName in groupNames){
-        if(groupNames[groupName].indexOf(leagueName.toLowerCase()) !== -1){
-            return groupName;
+        var names = groupNames[groupName];
+        for(var i= 0;i<names.length; i++){
+            if(leagueName.toLowerCase().indexOf(names[i]) !== -1){
+                return groupName;
+            }
         }
     }
 

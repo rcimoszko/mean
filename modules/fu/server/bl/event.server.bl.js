@@ -19,7 +19,7 @@ function get(id, callback){
         callback(err, event);
     }
 
-    m_Event.findById(id).exec(cb);
+    m_Event.findById(id).populate('league.ref').exec(cb);
 }
 
 function getBySlug(slug, callback){

@@ -24,18 +24,18 @@ mongoose.connect(uristring, function (err, res) {
         console.log ('ERROR connecting to: ' + uristring + '. ' + err);
     } else {
         console.log ('Succeeded connected to: ' + uristring);
-        setTimeout(unitReset, 3000);
+        setTimeout(assignEsportsGroups, 3000);
     }
 });
 
+var AdminService = require('../modules/fu/server/services/admin.server.service.js');
 
-function unitReset() {
-    var today = new Date();
-    if(today.getDay() === 1){
-        console.log('unit reset');
-        mongoose.model('User').update({}, {$set: {units:150}}, {multi:true}, function(err, done){
-            console.log(err);
-            console.log(done);
-        });
+
+function assignEsportsGroups() {
+    function cb(err){
+        if(err)console.log(err);
+        mongoose.connection.close();
     }
+
+    AdminService.assignEsportsGroups(cb);
 }

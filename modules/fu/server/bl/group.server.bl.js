@@ -62,6 +62,10 @@ function getByQuery(query, callback){
     Group.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    Group.findOne(query, callback);
+}
+
 function getBySport(sport, callback){
     getByQuery({'sport.ref':sport}, callback);
 }
@@ -76,3 +80,4 @@ exports.delete      = del;
 
 exports.getByQuery  = getByQuery;
 exports.getBySport  = getBySport;
+exports.getOneByQuery = getOneByQuery;
