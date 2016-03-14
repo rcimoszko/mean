@@ -80,6 +80,23 @@ function getBySlug(slug, callback){
     League.findOne({slug:slug}).exec(cb);
 }
 
+function getEsportsGroupName(leagueName){
+    //starcraft, dota 2, cs:go, league of legends
+    var groupNames = {
+        'starcraft':            ['starcraft'],
+        'dota 2':               ['dota'],
+        'cs:go':                ['cs:go', 'counter'],
+        'league of legends':    ['league of', 'lol']
+    };
+
+    for(var groupName in groupNames){
+        if(groupNames[groupName].indexOf(leagueName.toLowerCase()) !== -1){
+            return groupName;
+        }
+    }
+
+}
+
 exports.populate    = populate;
 exports.getAll      = getAll;
 exports.get         = get;
@@ -91,3 +108,5 @@ exports.getByQuery  = getByQuery;
 exports.getOneByQuery  = getOneByQuery;
 exports.getBySport  = getBySport;
 exports.getBySlug  = getBySlug;
+
+exports.getEsportsGroupName = getEsportsGroupName;
