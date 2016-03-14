@@ -13,31 +13,130 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
 
     switch(pick.betDuration){
         case 'ace':
-            contestantScore = event['contestant'+contestantNo+'AceScore'];
-            opponentScore = event['contestant'+opponentNo+'AceScore'];
+            contestantScore = event['contestant'+contestantNo+'AceWinner'];
+            opponentScore = event['contestant'+opponentNo+'AceWinner'];
             break;
         case 'kills':
             contestantScore = event['contestant'+contestantNo+'FinalScore'];
             opponentScore = event['contestant'+opponentNo+'FinalScore'];
             break;
-        /*
-        case 'train':
-            contestantScore = event['contestant'+contestantNo+'TrainScore'];
-            opponentScore = event['contestant'+opponentNo+'TrainScore'];
+        case 'cache':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'CacheFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'CacheFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'CacheFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'CacheFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'CacheScore'];
+                    opponentScore = event['contestant'+opponentNo+'CacheScore'];
+                    break;
+            }
             break;
         case 'dust 2':
-            contestantScore = event['contestant'+contestantNo+'Dust2Score'];
-            opponentScore = event['contestant'+opponentNo+'Dust2Score'];
+        case 'dust2':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'Dust2FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Dust2FirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'Dust2FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Dust2FirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'Dust2Score'];
+                    opponentScore = event['contestant'+opponentNo+'Dust2Score'];
+                    break;
+            }
+            break;
+        case 'overpass':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'OverpassFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'OverpassFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'OverpassFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'OverpassFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'OverpassScore'];
+                    opponentScore = event['contestant'+opponentNo+'OverpassScore'];
+                    break;
+            }
             break;
         case 'inferno':
-            contestantScore = event['contestant'+contestantNo+'InfernoScore'];
-            opponentScore = event['contestant'+opponentNo+'InfernoScore'];
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'InfernoFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'InfernoFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'InfernoFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'InfernoFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'InfernoScore'];
+                    opponentScore = event['contestant'+opponentNo+'InfernoScore'];
+                    break;
+            }
             break;
-        */
-
+        case 'cobble':
+        case 'cobble.':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'CobbleFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'CobbleFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'CobbleFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'CobbleFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'CobbleScore'];
+                    opponentScore = event['contestant'+opponentNo+'CobbleScore'];
+                    break;
+            }
+            break;
+        case 'train':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'TrainFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'TrainFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'TrainFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'TrainFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'TrainScore'];
+                    opponentScore = event['contestant'+opponentNo+'TrainScore'];
+                    break;
+            }
+            break;
+        case 'mirage':
+            switch(pick.betType.toLowerCase()){
+                case '1st round':
+                    contestantScore = event['contestant'+contestantNo+'MirageFirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'MirageFirstRd'];
+                    break;
+                case '1st to 5 rounds':
+                    contestantScore = event['contestant'+contestantNo+'MirageFirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'MirageFirstTo5Rds'];
+                    break;
+                default:
+                    contestantScore = event['contestant'+contestantNo+'MirageScore'];
+                    opponentScore = event['contestant'+opponentNo+'MirageScore'];
+                    break;
+            }
+            break;
         case 'series':
-            contestantScore = event['contestant'+contestantNo+'SetsWon'];
-            opponentScore = event['contestant'+opponentNo+'SetsWon'];
+            contestantScore = event['contestant'+contestantNo+'MapsWon'];
+            opponentScore = event['contestant'+opponentNo+'MapsWon'];
             break;
         case 'match':
         case 'game':
@@ -53,6 +152,15 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                         case '1st to 10 kills':
                             contestantScore = event['contestant'+contestantNo+'KillsFirst'];
                             opponentScore = event['contestant'+opponentNo+'KillsFirst'];
+                            break;
+                        case 'moneyline':
+                            if(typeof event['contestant'+contestantNo+'MatchWinner'] !== 'undefined' && typeof event['contestant'+opponentNo+'MatchWinner'] !== 'undefined'){
+                                contestantScore = event['contestant'+contestantNo+'MatchWinner'];
+                                opponentScore = event['contestant'+opponentNo+'MatchWinner'];
+                            } else {
+                                contestantScore = event['contestant'+contestantNo+'FinalScore'];
+                                opponentScore = event['contestant'+opponentNo+'FinalScore'];
+                            }
                             break;
                         default:
                             contestantScore = event['contestant'+contestantNo+'FinalScore'];
@@ -100,28 +208,40 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
             }
             break;
         case '1st set winner':
+            contestantScore = event['contestant'+contestantNo+'Set1Score'];
+            opponentScore = event['contestant'+opponentNo+'Set1Score'];
+            break;
         case 'map 1':
         case '1st map':
             switch(pick.betType.toLowerCase()){
                 case '1st blood':
-                    contestantScore = event['contestant'+contestantNo+'Set1FirstBlood'];
-                    opponentScore = event['contestant'+opponentNo+'Set1FirstBlood'];
+                    contestantScore = event['contestant'+contestantNo+'Map1FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Map1FirstBlood'];
                     break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Set1KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Set1KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map1KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Map1KillsFirst'];
                     break;
                 case '1st round':
-                    contestantScore = event['contestant'+contestantNo+'Set1FirstRd'];
-                    opponentScore = event['contestant'+opponentNo+'Set1FirstRd'];
+                    contestantScore = event['contestant'+contestantNo+'Map1FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Map1FirstRd'];
                     break;
                 case '1st to 5 rounds':
-                    contestantScore = event['contestant'+contestantNo+'Set1FirstTo5Rds'];
-                    opponentScore = event['contestant'+opponentNo+'Set1FirstTo5Rds'];
+                    contestantScore = event['contestant'+contestantNo+'Map1FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Map1FirstTo5Rds'];
+                    break;
+                case 'moneyline':
+                    if(typeof event['contestant'+contestantNo+'Map1Winner'] !== 'undefined' && typeof event['contestant'+opponentNo+'Map1Winner'] !== 'undefined'){
+                        contestantScore = event['contestant'+contestantNo+'Map1Winner'];
+                        opponentScore = event['contestant'+opponentNo+'Map1Winner'];
+                    } else {
+                        contestantScore = event['contestant'+contestantNo+'Map1Score'];
+                        opponentScore = event['contestant'+opponentNo+'Map1Score'];
+                    }
                     break;
                 default:
-                    contestantScore = event['contestant'+contestantNo+'Set1Score'];
-                    opponentScore = event['contestant'+opponentNo+'Set1Score'];
+                    contestantScore = event['contestant'+contestantNo+'Map1Score'];
+                    opponentScore = event['contestant'+opponentNo+'Map1Score'];
                     break;
             }
             break;
@@ -129,24 +249,33 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case '2nd map':
             switch(pick.betType.toLowerCase()){
                 case '1st blood':
-                    contestantScore = event['contestant'+contestantNo+'Set2FirstBlood'];
-                    opponentScore = event['contestant'+opponentNo+'Set2FirstBlood'];
+                    contestantScore = event['contestant'+contestantNo+'Map2FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Map2FirstBlood'];
                     break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Set2KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Set2KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map2KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Map2KillsFirst'];
                     break;
                 case '1st round':
-                    contestantScore = event['contestant'+contestantNo+'Set2FirstRd'];
-                    opponentScore = event['contestant'+opponentNo+'Set2FirstRd'];
+                    contestantScore = event['contestant'+contestantNo+'Map2FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Map2FirstRd'];
                     break;
                 case '1st to 5 rounds':
-                    contestantScore = event['contestant'+contestantNo+'Set2FirstTo5Rds'];
-                    opponentScore = event['contestant'+opponentNo+'Set2FirstTo5Rds'];
+                    contestantScore = event['contestant'+contestantNo+'Map2FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Map2FirstTo5Rds'];
+                    break;
+                case 'moneyline':
+                    if(typeof event['contestant'+contestantNo+'Map2Winner'] !== 'undefined' && typeof event['contestant'+opponentNo+'Map2Winner'] !== 'undefined'){
+                        contestantScore = event['contestant'+contestantNo+'Map2Winner'];
+                        opponentScore = event['contestant'+opponentNo+'Map2Winner'];
+                    } else {
+                        contestantScore = event['contestant'+contestantNo+'Map2Score'];
+                        opponentScore = event['contestant'+opponentNo+'Map2Score'];
+                    }
                     break;
                 default:
-                    contestantScore = event['contestant'+contestantNo+'Set2Score'];
-                    opponentScore = event['contestant'+opponentNo+'Set2Score'];
+                    contestantScore = event['contestant'+contestantNo+'Map2Score'];
+                    opponentScore = event['contestant'+opponentNo+'Map2Score'];
                     break;
             }
             break;
@@ -154,24 +283,33 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case '3rd map':
             switch(pick.betType.toLowerCase()){
                 case '1st blood':
-                    contestantScore = event['contestant'+contestantNo+'Set3FirstBlood'];
-                    opponentScore = event['contestant'+opponentNo+'Set3FirstBlood'];
+                    contestantScore = event['contestant'+contestantNo+'Map3FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Map3FirstBlood'];
                     break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Set3KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Set3KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map3KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Map3KillsFirst'];
                     break;
                 case '1st round':
-                    contestantScore = event['contestant'+contestantNo+'Set3FirstRd'];
-                    opponentScore = event['contestant'+opponentNo+'Set3FirstRd'];
+                    contestantScore = event['contestant'+contestantNo+'Map3FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Map3FirstRd'];
                     break;
                 case '1st to 5 rounds':
-                    contestantScore = event['contestant'+contestantNo+'Set3FirstTo5Rds'];
-                    opponentScore = event['contestant'+opponentNo+'Set3FirstTo5Rds'];
+                    contestantScore = event['contestant'+contestantNo+'Map3FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Map3FirstTo5Rds'];
+                    break;
+                case 'moneyline':
+                    if(typeof event['contestant'+contestantNo+'Map3Winner'] !== 'undefined' && typeof event['contestant'+opponentNo+'Map3Winner'] !== 'undefined'){
+                        contestantScore = event['contestant'+contestantNo+'Map3Winner'];
+                        opponentScore = event['contestant'+opponentNo+'Map3Winner'];
+                    } else {
+                        contestantScore = event['contestant'+contestantNo+'Map3Score'];
+                        opponentScore = event['contestant'+opponentNo+'Map3Score'];
+                    }
                     break;
                 default:
-                    contestantScore = event['contestant'+contestantNo+'Set3Score'];
-                    opponentScore = event['contestant'+opponentNo+'Set3Score'];
+                    contestantScore = event['contestant'+contestantNo+'Map3Score'];
+                    opponentScore = event['contestant'+opponentNo+'Map3Score'];
                     break;
             }
             break;
@@ -179,24 +317,33 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case '4th map':
             switch(pick.betType.toLowerCase()){
                 case '1st blood':
-                    contestantScore = event['contestant'+contestantNo+'Set4FirstBlood'];
-                    opponentScore = event['contestant'+opponentNo+'Set4FirstBlood'];
+                    contestantScore = event['contestant'+contestantNo+'Map4FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Map4FirstBlood'];
                     break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Set4KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Set4KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map4KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Map4KillsFirst'];
                     break;
                 case '1st round':
-                    contestantScore = event['contestant'+contestantNo+'Set4FirstRd'];
-                    opponentScore = event['contestant'+opponentNo+'Set4FirstRd'];
+                    contestantScore = event['contestant'+contestantNo+'Map4FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Map4FirstRd'];
                     break;
                 case '1st to 5 rounds':
-                    contestantScore = event['contestant'+contestantNo+'Set4FirstTo5Rds'];
-                    opponentScore = event['contestant'+opponentNo+'Set4FirstTo5Rds'];
+                    contestantScore = event['contestant'+contestantNo+'Map4FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Map4FirstTo5Rds'];
+                    break;
+                case 'moneyline':
+                    if(typeof event['contestant'+contestantNo+'Map4Winner'] !== 'undefined' && typeof event['contestant'+opponentNo+'Map4Winner'] !== 'undefined'){
+                        contestantScore = event['contestant'+contestantNo+'Map4Winner'];
+                        opponentScore = event['contestant'+opponentNo+'Map4Winner'];
+                    } else {
+                        contestantScore = event['contestant'+contestantNo+'Map4Score'];
+                        opponentScore = event['contestant'+opponentNo+'Map4Score'];
+                    }
                     break;
                 default:
-                    contestantScore = event['contestant'+contestantNo+'Set4Score'];
-                    opponentScore = event['contestant'+opponentNo+'Set4Score'];
+                    contestantScore = event['contestant'+contestantNo+'Map4Score'];
+                    opponentScore = event['contestant'+opponentNo+'Map4Score'];
                     break;
             }
             break;
@@ -204,26 +351,43 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case '5th map':
             switch(pick.betType.toLowerCase()){
                 case '1st blood':
-                    contestantScore = event['contestant'+contestantNo+'Set5FirstBlood'];
-                    opponentScore = event['contestant'+opponentNo+'Set5FirstBlood'];
+                    contestantScore = event['contestant'+contestantNo+'Map5FirstBlood'];
+                    opponentScore = event['contestant'+opponentNo+'Map5FirstBlood'];
                     break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Set5KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Set5KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map5KillsFirst'];
+                    opponentScore = event['contestant'+opponentNo+'Map5KillsFirst'];
                     break;
                 case '1st round':
-                    contestantScore = event['contestant'+contestantNo+'Set5FirstRd'];
-                    opponentScore = event['contestant'+opponentNo+'Set5FirstRd'];
+                    contestantScore = event['contestant'+contestantNo+'Map5FirstRd'];
+                    opponentScore = event['contestant'+opponentNo+'Map5FirstRd'];
                     break;
                 case '1st to 5 rounds':
-                    contestantScore = event['contestant'+contestantNo+'Set5FirstTo5Rds'];
-                    opponentScore = event['contestant'+opponentNo+'Set5FirstTo5Rds'];
+                    contestantScore = event['contestant'+contestantNo+'Map5FirstTo5Rds'];
+                    opponentScore = event['contestant'+opponentNo+'Map5FirstTo5Rds'];
+                    break;
+                case 'moneyline':
+                    if(typeof event['contestant'+contestantNo+'Map5Winner'] !== 'undefined' && typeof event['contestant'+opponentNo+'Map5Winner'] !== 'undefined'){
+                        contestantScore = event['contestant'+contestantNo+'Map5Winner'];
+                        opponentScore = event['contestant'+opponentNo+'Map5Winner'];
+                    } else {
+                        contestantScore = event['contestant'+contestantNo+'Map5Score'];
+                        opponentScore = event['contestant'+opponentNo+'Map5Score'];
+                    }
                     break;
                 default:
-                    contestantScore = event['contestant'+contestantNo+'Set5Score'];
-                    opponentScore = event['contestant'+opponentNo+'Set5Score'];
+                    contestantScore = event['contestant'+contestantNo+'Map5Score'];
+                    opponentScore = event['contestant'+opponentNo+'Map5Score'];
                     break;
             }
+            break;
+        case 'map 6': //starcraft
+            contestantScore = event['contestant'+contestantNo+'Map6Winner'];
+            opponentScore = event['contestant'+opponentNo+'Map6Winner'];
+            break;
+        case 'map 7': //starcraft
+            contestantScore = event['contestant'+contestantNo+'Map7Winner'];
+            opponentScore = event['contestant'+opponentNo+'Map7Winner'];
             break;
         case '2nd half':
             switch(event.sport.name.toLowerCase()){
@@ -568,6 +732,23 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     break;
             }
             break;
+
+        case 'series':
+            gameSpread = contestantScore - opponentScore;
+            comparison = gameSpread + pick.spread;
+            if(comparison === 0.25){
+                result = 'Half-Win';
+            } else if (comparison === -0.25){
+                result = 'Half-Loss';
+            } else if(comparison > 0){
+                result = 'Win';
+            } else if(comparison === 0){
+                result = 'Push';
+            } else {
+                result = 'Loss';
+            }
+            break;
+
         case 'sets':
             contestantSetsWon = 0;
             opponentSetsWon = 0;
@@ -590,7 +771,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     result = 'Loss';
                 }
             }
-
             break;
     }
 
