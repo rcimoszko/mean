@@ -134,7 +134,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         function updateRank(){
             var rankFound = false;
             var leaderboard = $filter('orderBy')($scope.hub.leaderboard, 'profit', true);
-            console.log(leaderboard);
             for(var i=0; i<leaderboard.length; i++){
                 if($scope.authentication.user._id === leaderboard[i].user._id){
                     $scope.rank = i+1;
