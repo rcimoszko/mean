@@ -149,9 +149,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                             contestantScore = event['contestant'+contestantNo+'FirstBlood'];
                             opponentScore = event['contestant'+opponentNo+'FirstBlood'];
                             break;
+                        case '1st to 5 kills':
+                            contestantScore = event['contestant'+contestantNo+'Kills5First'];
+                            opponentScore = event['contestant'+opponentNo+'Kills5First'];
+                            break;
                         case '1st to 10 kills':
-                            contestantScore = event['contestant'+contestantNo+'KillsFirst'];
-                            opponentScore = event['contestant'+opponentNo+'KillsFirst'];
+                            contestantScore = event['contestant'+contestantNo+'Kills10First'];
+                            opponentScore = event['contestant'+opponentNo+'Kills10First'];
                             break;
                         case 'moneyline':
                             if(typeof event['contestant'+contestantNo+'MatchWinner'] !== 'undefined' && typeof event['contestant'+opponentNo+'MatchWinner'] !== 'undefined'){
@@ -218,9 +222,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Map1FirstBlood'];
                     opponentScore = event['contestant'+opponentNo+'Map1FirstBlood'];
                     break;
+                case '1st to 5 kills':
+                    contestantScore = event['contestant'+contestantNo+'Map1Kills5First'];
+                    opponentScore = event['contestant'+opponentNo+'Map1Kills5First'];
+                    break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Map1KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Map1KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map1Kills10First'];
+                    opponentScore = event['contestant'+opponentNo+'Map1Kills10First'];
                     break;
                 case '1st round':
                     contestantScore = event['contestant'+contestantNo+'Map1FirstRd'];
@@ -252,9 +260,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Map2FirstBlood'];
                     opponentScore = event['contestant'+opponentNo+'Map2FirstBlood'];
                     break;
+                case '1st to 5 kills':
+                    contestantScore = event['contestant'+contestantNo+'Map2Kills5First'];
+                    opponentScore = event['contestant'+opponentNo+'Map2Kills5First'];
+                    break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Map2KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Map2KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map2Kills10First'];
+                    opponentScore = event['contestant'+opponentNo+'Map2Kills10First'];
                     break;
                 case '1st round':
                     contestantScore = event['contestant'+contestantNo+'Map2FirstRd'];
@@ -286,9 +298,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Map3FirstBlood'];
                     opponentScore = event['contestant'+opponentNo+'Map3FirstBlood'];
                     break;
+                case '1st to 5 kills':
+                    contestantScore = event['contestant'+contestantNo+'Map3Kills5First'];
+                    opponentScore = event['contestant'+opponentNo+'Map3Kills5First'];
+                    break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Map3KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Map3KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map3Kills10First'];
+                    opponentScore = event['contestant'+opponentNo+'Map3Kills10First'];
                     break;
                 case '1st round':
                     contestantScore = event['contestant'+contestantNo+'Map3FirstRd'];
@@ -320,9 +336,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Map4FirstBlood'];
                     opponentScore = event['contestant'+opponentNo+'Map4FirstBlood'];
                     break;
+                case '1st to 5 kills':
+                    contestantScore = event['contestant'+contestantNo+'Map4Kills5First'];
+                    opponentScore = event['contestant'+opponentNo+'Map4Kills5First'];
+                    break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Map4KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Map4KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map4Kills10First'];
+                    opponentScore = event['contestant'+opponentNo+'Map4Kills10First'];
                     break;
                 case '1st round':
                     contestantScore = event['contestant'+contestantNo+'Map4FirstRd'];
@@ -354,9 +374,13 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                     contestantScore = event['contestant'+contestantNo+'Map5FirstBlood'];
                     opponentScore = event['contestant'+opponentNo+'Map5FirstBlood'];
                     break;
+                case '1st to 5 kills':
+                    contestantScore = event['contestant'+contestantNo+'Map5Kills5First'];
+                    opponentScore = event['contestant'+opponentNo+'Map5Kills5First'];
+                    break;
                 case '1st to 10 kills':
-                    contestantScore = event['contestant'+contestantNo+'Map5KillsFirst'];
-                    opponentScore = event['contestant'+opponentNo+'Map5KillsFirst'];
+                    contestantScore = event['contestant'+contestantNo+'Map5Kills10First'];
+                    opponentScore = event['contestant'+opponentNo+'Map5Kills10First'];
                     break;
                 case '1st round':
                     contestantScore = event['contestant'+contestantNo+'Map5FirstRd'];

@@ -294,9 +294,13 @@ function insertScores_dotaLeague(event, scores, scoreType, callback){
                     event.contestant1FirstBlood = scores.match.team2;
                     event.contestant2FirstBlood = scores.match.team1;
                     break;
+                case '1st to 5 kills':
+                    event.contestant1Kills5First = scores.match.team2;
+                    event.contestant2Kills5First = scores.match.team1;
+                    break;
                 case '1st to 10 kills':
-                    event.contestant1KillsFirst = scores.match.team2;
-                    event.contestant2KillsFirst = scores.match.team1;
+                    event.contestant1Kills10First = scores.match.team2;
+                    event.contestant2Kills10First = scores.match.team1;
                     break;
                 case 'kills':
                     event.contestant1RegulationScore = scores.match.team2;
@@ -336,28 +340,55 @@ function insertScores_dotaLeague(event, scores, scoreType, callback){
                 //1st to 10 kills per map
                 case 'map 1, 1st to 10 kills':
                 case '1st map, 1st to 10 kills':
-                    event.contestant1Map1KillsFirst = scores.match.team2;
-                    event.contestant2Map1KillsFirst = scores.match.team1;
+                    event.contestant1Map1Kills10First = scores.match.team2;
+                    event.contestant2Map1Kills10First = scores.match.team1;
                     break;
                 case 'map 2, 1st to 10 kills':
                 case '2nd map, 1st to 10 kills':
-                    event.contestant1Map2KillsFirst = scores.match.team2;
-                    event.contestant2Map2KillsFirst = scores.match.team1;
+                    event.contestant1Map2Kills10First = scores.match.team2;
+                    event.contestant2Map2Kills10First = scores.match.team1;
                     break;
                 case 'map 3, 1st to 10 kills':
                 case '3rd map, 1st to 10 kills':
-                    event.contestant1Map3KillsFirst = scores.match.team2;
-                    event.contestant2Map3KillsFirst = scores.match.team1;
+                    event.contestant1Map3Kills10First = scores.match.team2;
+                    event.contestant2Map3Kills10First = scores.match.team1;
                     break;
                 case 'map 4, 1st to 10 kills':
                 case '4th map, 1st to 10 kills':
-                    event.contestant1Map4KillsFirst = scores.match.team2;
-                    event.contestant2Map4KillsFirst = scores.match.team1;
+                    event.contestant1Map4Kills10First = scores.match.team2;
+                    event.contestant2Map4Kills10First = scores.match.team1;
                     break;
                 case 'map 5, 1st to 10 kills':
                 case '5th map, 1st to 10 kills':
-                    event.contestant1Map5KillsFirst = scores.match.team2;
-                    event.contestant2Map5KillsFirst = scores.match.team1;
+                    event.contestant1Map5Kills10First = scores.match.team2;
+                    event.contestant2Map5Kills10First = scores.match.team1;
+                    break;
+
+                //1st to 10 kills per map
+                case 'map 1, 1st to 5 kills':
+                case '1st map, 1st to 5 kills':
+                    event.contestant1Map1Kills5First = scores.match.team2;
+                    event.contestant2Map1Kills5First = scores.match.team1;
+                    break;
+                case 'map 2, 1st to 5 kills':
+                case '2nd map, 1st to 5 kills':
+                    event.contestant1Map2Kills5First = scores.match.team2;
+                    event.contestant2Map2Kills5First = scores.match.team1;
+                    break;
+                case 'map 3, 1st to 5 kills':
+                case '3rd map, 1st to 5 kills':
+                    event.contestant1Map3Kills5First = scores.match.team2;
+                    event.contestant2Map3Kills5First = scores.match.team1;
+                    break;
+                case 'map 4, 1st to 5 kills':
+                case '4th map, 1st to 5 kills':
+                    event.contestant1Map4Kills5First = scores.match.team2;
+                    event.contestant2Map4Kills5First = scores.match.team1;
+                    break;
+                case 'map 5, 1st to 5 kills':
+                case '5th map, 1st to 5 kills':
+                    event.contestant1Map5Kills5First = scores.match.team2;
+                    event.contestant2Map5Kills5First = scores.match.team1;
                     break;
 
                 //1st blood per map
@@ -585,7 +616,6 @@ function insertScores_csGo(event, scores, scoreType, callback){
                 case 'overpass, 1st round':
                     event.contestant1OverpassFirstRd = scores.match.team2;
                     event.contestant2OverpassFirstRd = scores.match.team1;
-                    break;
                     break;
                 case 'inferno, 1st round':
                     event.contestant1InfernoFirstRd = scores.match.team2;
@@ -1383,7 +1413,6 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
                     insertScores_csGo(event, scores, scoreType, callback);
                     break;
             }
-
 
             break;
         case 'Field Hockey':
