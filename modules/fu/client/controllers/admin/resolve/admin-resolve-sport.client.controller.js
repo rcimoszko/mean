@@ -26,16 +26,19 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
             return event.event.league.name !== 'NCAAB';
         };
         $scope.isDotaOrLeague = function(event){
-            console.log(event.event.league.ref);
             if(event.event.league.ref.group){
                 return event.event.league.ref.group.name === 'League of Legends' || event.event.league.ref.group.name === 'Dota 2';
             }
         };
         $scope.isCsGo = function(event){
-            return event.event.league.ref.group.name === 'CS:GO';
+            if(event.event.league.ref.group) {
+                return event.event.league.ref.group.name === 'CS:GO';
+            }
         };
         $scope.isStarcraft = function(event){
-            return event.event.league.ref.group.name === 'Starcraft 2';
+            if(event.event.league.ref.group) {
+                return event.event.league.ref.group.name === 'Starcraft 2';
+            }
         };
 
         /**
