@@ -576,6 +576,33 @@ function getHotPickUsers(callback){
     User.find(query, callback);
 }
 
+function returnUnits(userId, units, callback){
+    var todo = [];
+
+    function findUser(callback){
+        User.findById(userId, callback);
+    }
+
+    function returnUnitsToUser(user, callback){
+        if(!user) return callback();
+        var totalUnits = user.units + units;
+        if(totalUnits > 150) totalUnits = 150;
+        user.units = totalUnits;
+        function cb(err){
+            callback(err);
+        }
+
+        user.save(cb);
+    }
+
+    todo.push(findUser);
+    todo.push(returnUnitsToUser);
+
+    async.waterfall(todo, callback);
+
+
+}
+
 exports.getByUsername       = getByUsername;
 exports.getByQuery          = getByQuery;
 exports.getFollowing        = getFollowing;
@@ -592,3 +619,4 @@ exports.uploadProfilePicture    = uploadProfilePicture;
 exports.getNewMessageCount      = getNewMessageCount;
 exports.updateStreak         = updateStreak;
 exports.getHotPickUsers      = getHotPickUsers;
+exports.returnUnits          = returnUnits;

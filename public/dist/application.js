@@ -1793,8 +1793,23 @@ angular.module('fu.admin').controller('AdminEditEventController', ['$scope', 'ev
             if (confirm('Are you sure you want to resolve this event?')) {
                 Events.resolve(event, cb);
             }
-
         };
+
+        $scope.cancelEvent = function(event){
+
+            function cb(err, updatedEvent){
+                if(err){
+                    alert(err);
+                } else {
+                    $scope.getPicks();
+                }
+            }
+
+            if (confirm('Are you sure you want cancel this event?')) {
+                Events.cancel(event, cb);
+            }
+        };
+        
 
         $scope.boxingMethodOfVictory = ['Decision', 'Knockout', 'Draw', 'Disqualification', 'No Contest'];
         $scope.mmaMethodOfVictory = ['Decision', 'Knockout', 'Submission', 'Draw', 'Disqualification', 'No Contest'];

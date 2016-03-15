@@ -97,6 +97,7 @@ function updateBy(query, update, callback){
 
 function cancel(event, callback){
     var todo = [];
+    console.log('CANCEL EVENT');
 
     function cancelEvent(callback){
 
@@ -104,6 +105,9 @@ function cancel(event, callback){
             callback(err);
         }
         event.cancelled = true;
+        event.over = true;
+        event.endTime = new Date();
+        event.resolved = true;
         event.save(cb);
     }
 

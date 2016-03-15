@@ -4,6 +4,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     async = require('async'),
     EventBl = require('./event.server.bl'),
+    UserBl = require('./user.server.bl'),
     PickResolveBl = require('./pick.resolve.server.bl'),
     Pick = mongoose.model('Pick');
 
@@ -111,13 +112,44 @@ function cancelPick(pick, callback){
 }
 
 function cancelPicksByEvent(event, callback){
-    var update = {
-        roi: 0,
-        profit: 0,
-        result: 'Cancelled'
-    };
+    console.log('TEST');
 
-    Pick.update({event:event}, update, {multi:true}, callback);
+    var todo = [];
+
+    function cancelPicks(callback){
+        var update = {
+            roi: 0,
+            profit: 0,
+            result: 'Cancelled'
+        };
+
+        function cb(err){
+            callback(err);
+        }
+
+        Pick.update({event:event}, update, {multi:true}, cb);
+    }
+
+    function getPicks(callback){
+        getByQuery({event:event}, callback);
+    }
+
+    function returnUnits(picks, callback){
+        if(picks.length === 0) return callback();
+
+        function returnUserUnits(pick, callback){
+            UserBl.returnUnits(pick.user.ref, pick.units, callback);
+        }
+
+        async.eachSeries(picks, returnUserUnits, callback);
+    }
+
+    todo.push(cancelPicks);
+    todo.push(getPicks);
+    todo.push(returnUnits);
+
+    async.waterfall(todo, callback);
+
 }
 
 function resolve(pick, data, callback){
