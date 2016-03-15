@@ -114,6 +114,14 @@
                     <input id="new-follower" data-ng-model="authentication.user.newFollowerEmail" data-ng-click="updateUserProfile()" class="toggle" type="checkbox">
                     <label for="new-follower"></label>
                 </div>
+
+                <div data-ng-if="user.info.status === 'old premium' || user.info.status === 'premium' || user.info.status === 'trial' || user.info.status === 'lifetime premium with base'|| user.info.status === 'base'">
+                    <label class="control-label">New Hot Pick</label>
+                    <div class="toggle-container">
+                        <input id="new-hotpick" data-ng-model="authentication.user.newHotPickEmail" data-ng-click="updateUserProfile()" class="toggle" type="checkbox">
+                        <label for="new-hotpick"></label>
+                    </div>
+                </div>
             </div>
 
             <div data-ng-if="user.info.status === 'old premium' || user.info.status === 'premium' || user.info.status === 'trial' || user.info.status === 'lifetime premium with base'|| user.info.status === 'base'">
