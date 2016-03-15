@@ -508,6 +508,9 @@ function updateStreak(userId, callback){
                     loseStreak = 1;
                     winStreak = 0;
                     currentStreakType = 'lose';
+                } else if (picks[i].result.toLowerCase().indexOf('push') !== -1){
+                    loseStreak = 0;
+                    winStreak = 0;
                 } else {
                     for(var j=0; j<picks.length; j++){
                         if(picks[j].result.toLowerCase().indexOf('win') !== -1){
