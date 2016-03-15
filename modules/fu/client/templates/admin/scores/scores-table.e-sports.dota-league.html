@@ -1,4 +1,4 @@
-<div data-ng-repeat="eventGroup in events" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event); setWinner(event);">
+<div data-ng-repeat="eventGroup in events|filter:isDotaOrLeague" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event); setWinner(event);">
     <table class="table scores-table">
         <thead>
             <th>Start Time</th>
