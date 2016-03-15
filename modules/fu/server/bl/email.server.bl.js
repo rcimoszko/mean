@@ -505,7 +505,8 @@ function sendHotPickEmail(hotPick, hostName, callback){
                 var json = {
                     user: user.username,
                     hotPickInfo: hotPickInfo,
-                    url: 'https://' + hostName + '/make-picks'
+                    url: 'https://' + hostName + '/make-picks',
+                    manageUrl: 'https://' + hostName + '/settings'
                 };
                 renderTemplate(templatePath, json, cb);
             }
