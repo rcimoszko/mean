@@ -555,33 +555,33 @@ function insertScores_csGo(event, scores, scoreType, callback){
                     break;
                 case 'cache':
                     event.contestant1CacheScore = scores.match.team2;
-                    event.contestant2CacheScore = scores.match.team2;
+                    event.contestant2CacheScore = scores.match.team1;
                     break;
                 case 'dust 2':
                 case 'dust2':
                     event.contestant1Dust2Score = scores.match.team2;
-                    event.contestant2Dust2Score = scores.match.team2;
+                    event.contestant2Dust2Score = scores.match.team1;
                     break;
                 case 'overpass':
                     event.contestant1OverpassScore = scores.match.team2;
-                    event.contestant2OverpassScore = scores.match.team2;
+                    event.contestant2OverpassScore = scores.match.team1;
                     break;
                 case 'inferno':
                     event.contestant1InfernoScore = scores.match.team2;
-                    event.contestant2InfernoScore = scores.match.team2;
+                    event.contestant2InfernoScore = scores.match.team1;
                     break;
                 case 'cobble':
                 case 'cobble.':
                     event.contestant1CobbleScore = scores.match.team2;
-                    event.contestant2CobbleScore = scores.match.team2;
+                    event.contestant2CobbleScore = scores.match.team1;
                     break;
                 case 'train':
                     event.contestant1TrainScore = scores.match.team2;
-                    event.contestant2TrainScore = scores.match.team2;
+                    event.contestant2TrainScore = scores.match.team1;
                     break;
                 case 'mirage':
                     event.contestant1MirageScore = scores.match.team2;
-                    event.contestant2MirageScore = scores.match.team2;
+                    event.contestant2MirageScore = scores.match.team1;
                     break;
 
                 case 'map 1, 1st round':
