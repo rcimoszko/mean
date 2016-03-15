@@ -93,7 +93,6 @@ var UserSchema = new Schema({
     type: String,
     unique: 'Username already exists',
     required: 'Please fill in a username',
-    lowercase: true,
     trim: true
   },
   password: {
@@ -187,7 +186,8 @@ var UserSchema = new Schema({
     trialUsed:              {type: Boolean, default: false},
 
     newFollowerEmail:       {type: Boolean, default: true},
-    hotPickEmail:           {type: Boolean, default: true}
+    hotPickEmail:           {type: Boolean, default: true},
+    lastLogin:              {type: Date, default: Date.now}
 });
 
 UserSchema.path('description').validate(function (v) {

@@ -130,6 +130,8 @@ exports.signin = function (req, res, next) {
                 if (err) {
                     res.status(400).send(err);
                 } else {
+                    user.lastLogin = new Date();
+                    user.save();
                     res.json(user);
                 }
             });
@@ -170,7 +172,6 @@ exports.oauthCallback = function (strategy) {
         delete req.session.redirect_to;
 
         passport.authenticate(strategy, function (err, user, redirectURL) {
-            console.log(err);
             if (err) {
                 return res.redirect('/login?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
             }
@@ -181,7 +182,8 @@ exports.oauthCallback = function (strategy) {
                 if (err) {
                     return res.redirect('/signin');
                 }
-
+                user.lastLogin = new Date();
+                user.save();
                 return res.redirect(redirectURL);
             });
         })(req, res, next);
