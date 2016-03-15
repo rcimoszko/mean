@@ -16,7 +16,6 @@ function getLeaderboardQuery(pendingCompleted, dateId, filterType, filterId, bet
             query = {$match: {result: 'Pending' }};
             break;
     }
-    console.log(filterId);
 
     if (filterType !== 'all')    query.$match[filterType] = mongoose.Types.ObjectId(filterId);
     if (betType !== 'all')       query.$match.betType = betType;

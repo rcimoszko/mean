@@ -1354,8 +1354,8 @@ function insertScores_golf(event, scores, callback){
 }
 
 function insertScores(event, scores, sportName, leagueName, scoreType, callback){
-    console.log('scores', scores);
-    console.log('scoreType', scoreType);
+    //console.log('scores', scores);
+    //console.log('scoreType', scoreType);
     switch(sportName){
         case 'Badminton':
             insertScores_badminton(event, scores, callback);
