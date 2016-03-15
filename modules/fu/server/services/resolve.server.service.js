@@ -97,7 +97,7 @@ function checkEventScores(event, callback){
         case 'Darts':
             break;
         case 'E Sports':
-            if(event.contestant1FinalScore === 0 && event.contestant2FinalScore === 0) noResolve = true;
+            //if(event.contestant1FinalScore === 0 && event.contestant2FinalScore === 0) noResolve = true;
             break;
         case 'Handball':
             break;
