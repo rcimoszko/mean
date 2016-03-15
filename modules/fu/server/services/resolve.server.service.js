@@ -193,7 +193,7 @@ function resolve(callback){
             todo.push(resolvePicks);
 
             function cb(err){
-                if(err) console.log(err);
+                //if(err) console.log(err);
                 callback();
             }
 
