@@ -28,7 +28,7 @@ function getBySlug(slug, callback){
         callback(err, event);
     }
 
-    m_Event.findOne({slug:slug}).exec(cb);
+    m_Event.findOne({slug:slug}).populate('league.ref').exec(cb);
 }
 
 function getAll(callback){
