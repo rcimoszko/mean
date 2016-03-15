@@ -12,14 +12,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             .state('static.about', {
                 url:'/about',
                 templateUrl: '/modules/fu/client/views/static/static.about.client.view.html',
-                title: 'About FansUnite | Sportsbetting Social Network',
-                description: 'FansUnite is a Sportsbetting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
-                keywords: 'sportsbetting, social network, community'
+                title: 'About FansUnite | Sports Betting Social Network',
+                description: 'FansUnite is a Sports betting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'sports betting, social network, community'
             })
             .state('static.betting101', {
                 url:'/betting101',
                 templateUrl: '/modules/fu/client/views/static/static.betting101.client.view.html',
-                title: 'Learn the Basics of Sportsbetting | FansUnite',
+                title: 'Learn the Basics of Sports Betting | FansUnite',
                 description: 'Learn how to bet moneylines, point spreads, total points and team totals. Understand the different odds formats and bet types.',
                 keywords: 'moneyline, spreads, totals, team totals'
             })
@@ -28,33 +28,33 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: '/modules/fu/client/views/static/static.glossary.client.view.html',
                 title: 'Betting Glossary | FansUnite',
                 description: 'Find the most common betting terms that every sports bettor amateur to professional needs to know.',
-                keywords: 'glossary, learn sportsbetting, teach sportsbetting'
+                keywords: 'glossary, learn sports betting, teach sports betting'
             }).
             state('static.howPicksAreGraded', {
                 url: '/how-picks-are-graded',
                 templateUrl: '/modules/fu/client/views/static/static.how-picks-are-graded.client.view.html',
-                title: 'Learn How Picks are Graded at FansUnite | Sportsbetting Social Network',
+                title: 'Learn How Picks are Graded at FansUnite | Sports Betting Social Network',
                 description: 'Track your bets on FansUnite and have our platform automatically grade each wager. Learn more about how each bet is graded.',
                 keywords: 'bet tracking, pick tracker'
             }).
             state('static.faq', {
                 url: '/faq',
                 templateUrl: '/modules/fu/client/views/static/static.faq.client.view.html',
-                title: 'FAQ at FansUnite | Sportsbetting Social Network',
-                description: 'FansUnite is a unique Sportsbetting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
-                keywords: 'faq, sportsbetting, social network, community'
+                title: 'FAQ at FansUnite | Sports Betting Social Network',
+                description: 'FansUnite is a unique Sports Betting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+                keywords: 'faq, sports betting, social network, community'
             }).
             state('static.terms', {
                 url: '/terms',
                 templateUrl: '/modules/fu/client/views/static/static.terms.client.view.html',
-                title: 'FansUnite Terms | Sportsbetting Social Network',
+                title: 'FansUnite Terms | Sports Betting Social Network',
                 description: '',
                 keywords: ''
             }).
             state('static.rules', {
                 url: '/rules',
                 templateUrl: '/modules/fu/client/views/static/static.rules.client.view.html',
-                title: 'FansUnite Rules | Sportsbetting Social Network',
+                title: 'FansUnite Rules | Sports Betting Social Network',
                 description: '',
                 keywords: ''
             }).
@@ -68,7 +68,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.contact', {
                 url: '/contact',
                 templateUrl: '/modules/fu/client/views/static/static.contact.client.view.html',
-                title: 'Contact FansUnite | Sportsbetting Social Network',
+                title: 'Contact FansUnite | Sports Betting Social Network',
                 description: 'FansUnite is always open to feedback. Contact us with any questions, comments and suggestions.',
                 keywords: 'contact us, feedback, suggestions'
             }).
@@ -81,9 +81,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.userguide', {
                 url: '/user-guide',
                 templateUrl: '/modules/fu/client/views/static/static.user-guide.client.view.html',
-                title: 'FansUnite User Guide | Sportsbetting Social Network',
-                description: 'Learn how to use FansUnite, a social sportsbetting platform. Follow the top handicappers and become more profitable.',
-                keywords: 'user guide, profitable, sportsbetting'
+                title: 'FansUnite User Guide | Sports Betting Social Network',
+                description: 'Learn how to use FansUnite, a social sports betting platform. Follow the top handicappers and become more profitable.',
+                keywords: 'user guide, profitable, sports betting'
             }).
             state('static.sportsbooks', {
                 url: '/top-10-sportsbooks',
@@ -106,14 +106,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('static.press', {
                 url: '/press',
                 templateUrl: '/modules/fu/client/views/static/static.press.client.view.html',
-                title: 'FansUnite Press | Sportsbetting Social Network',
-                description: 'News and press about FansUnite, the sportsbetting social network.',
+                title: 'FansUnite Press | Sports Betting Social Network',
+                description: 'News and press about FansUnite, the sports betting social network.',
                 keywords: 'press release, fansunite news, fansunite articles'
             }).
             state('whyGoPro', {
                 url: '/why-go-pro',
                 templateUrl: '/modules/fu/client/views/static/static.why-go-pro.client.view.html',
-                title: 'FansUnite Pro Membership | Sportsbetting Social Network',
+                title: 'FansUnite Pro Membership | Sports Betting Social Network',
                 description: 'Join FansUnite Pro subscription to get access to our pro picks, email notifications and weekly betting progress reports.',
                 keywords: 'pro picks, email notifications, progress reports'
             });

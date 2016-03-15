@@ -45,7 +45,7 @@ exports.profile = function (req, res) {
 
     res.render('modules/core/server/views/index', {
         title: userProfile.username + ' Picks & Verified Record | FansUnite',
-        description: 'Get access to '+userProfile.username+"'s sportsbetting picks with 100% verified and transparent results.",
+        description: 'Get access to '+userProfile.username+"'s sports betting picks with 100% verified and transparent results.",
         keywords: 'free picks, free tips, pro picks, pro tips',
         user: req.user || null
     });
@@ -218,16 +218,16 @@ exports.settings = function (req, res) {
  */
 exports.userGuide = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite User Guide | Sportsbetting Social Network',
-        description: 'Learn how to use FansUnite, a social sportsbetting platform. Follow the top handicappers and become more profitable.',
-        keywords: 'user guide, profitable, sportsbetting',
+        title: 'FansUnite User Guide | Sports Betting Social Network',
+        description: 'Learn how to use FansUnite, a social sports betting platform. Follow the top handicappers and become more profitable.',
+        keywords: 'user guide, profitable, sports betting',
         user: req.user || null,
         index: true
     });
 };
 exports.betting101 = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'Learn the Basics of Sportsbetting | FansUnite',
+        title: 'Learn the Basics of Sports Betting | FansUnite',
         description: 'Learn how to bet moneylines, point spreads, total points and team totals. Understand the different odds formats and bet types.',
         keywords: 'moneyline, spreads, totals, team totals, learn beting',
         user: req.user || null,
@@ -236,9 +236,9 @@ exports.betting101 = function(req, res) {
 };
 exports.faq = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FAQ at FansUnite | Sportsbetting Social Network',
-        description: 'FansUnite is a unique Sportsbetting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
-        keywords: 'faq, sportsbetting, social network, community',
+        title: 'FAQ at FansUnite | Sports Betting Social Network',
+        description: 'FansUnite is a unique Sports Betting platform where you can collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+        keywords: 'faq, sports betting, social network, community',
         user: req.user || null,
         index: true
     });
@@ -247,14 +247,14 @@ exports.glossary = function(req, res) {
     res.render('modules/core/server/views/index', {
         title: 'Betting Glossary | FansUnite',
         description: 'Find the most common betting terms that every sports bettor amateur to professional needs to know.',
-        keywords: 'glossary, learn sportsbetting, teach sportsbetting',
+        keywords: 'glossary, learn sports betting, teach sports betting',
         user: req.user || null,
         index: true
     });
 };
 exports.howPicksAreGraded = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'Learn How Picks are Graded at FansUnite | Sportsbetting Social Network',
+        title: 'Learn How Picks are Graded at FansUnite | Sports Betting Social Network',
         description: 'Track your bets on FansUnite and have our platform automatically grade each wager. Learn more about how each bet is graded.',
         keywords: 'bet tracking, pick tracker',
         user: req.user || null,
@@ -263,9 +263,9 @@ exports.howPicksAreGraded = function(req, res) {
 };
 exports.about = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'About FansUnite | Sportsbetting Social Network',
-        description: 'FansUnite is a Sportsbetting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
-        keywords: 'sportsbetting, social network, community',
+        title: 'About FansUnite | Sports Betting Social Network',
+        description: 'FansUnite is a Sports Betting Social Network. Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
+        keywords: 'sports betting, social network, community',
         user: req.user || null,
         index: true
     });
@@ -281,7 +281,7 @@ exports.monthlyRevenueShare = function(req, res) {
 };
 exports.privacy = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite Privacy Policy | Sportsbetting Social Network',
+        title: 'FansUnite Privacy Policy | Sports Betting Social Network',
         description: '',
         keywords: '',
         user: req.user || null
@@ -289,7 +289,7 @@ exports.privacy = function(req, res) {
 };
 exports.terms = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite Terms | Sportsbetting Social Network',
+        title: 'FansUnite Terms | Sports Betting Social Network',
         description: '',
         keywords: '',
         user: req.user || null
@@ -297,7 +297,7 @@ exports.terms = function(req, res) {
 };
 exports.rules = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite Rules | Sportsbetting Social Network',
+        title: 'FansUnite Rules | Sports Betting Social Network',
         description: '',
         keywords: '',
         user: req.user || null,
@@ -306,7 +306,7 @@ exports.rules = function(req, res) {
 };
 exports.contact = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'Contact FansUnite | Sportsbetting Social Network',
+        title: 'Contact FansUnite | Sports Betting Social Network',
         description: 'FansUnite is always open to feedback. Contact us with any questions, comments and suggestions.',
         keywords: 'contact us, feedback, suggestions',
         user: req.user || null,
@@ -315,7 +315,7 @@ exports.contact = function(req, res) {
 };
 exports.whyGoPro = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite Pro Membership | Sportsbetting Social Network',
+        title: 'FansUnite Pro Membership | Sports Betting Social Network',
         description: 'Join FansUnite Pro subscription to get access to our pro picks, email notifications and weekly betting progress reports.',
         keywords: 'pro picks, email notifications, progress reports',
         user: req.user || null,
@@ -347,8 +347,8 @@ exports.sportsbookReview = function(req, res) {
 
 exports.press = function(req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite Press | Sportsbetting Social Network',
-        description: 'News and press about FansUnite, the sportsbetting social network.',
+        title: 'FansUnite Press | Sports Betting Social Network',
+        description: 'News and press about FansUnite, the sports betting social network.',
         keywords: 'press release, fansunite news, fansunite articles',
         user: req.user || null,
         index: true
@@ -358,9 +358,9 @@ exports.press = function(req, res) {
 
 exports.renderIndex = function (req, res) {
     res.render('modules/core/server/views/index', {
-        title: 'FansUnite | Sportsbetting Social Network',
+        title: 'FansUnite | Sports Betting Social Network',
         description: 'Collaborate with the community and have access to thousands of sports bettors to follow, track and copy their predictions.',
-        keywords: 'sportsbetting social network, sportsbetting community, bet tracking',
+        keywords: 'sports betting social network, sports betting community, bet tracking',
         user: req.user || null
     });
 };
