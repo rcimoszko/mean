@@ -25,6 +25,22 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
         $scope.isNotNCAAB = function(event){
             return event.event.league.name !== 'NCAAB';
         };
+        $scope.isDotaOrLeague = function(event){
+            if(event.event.league.ref.group){
+                return event.event.league.ref.group.name === 'League of Legends' || event.event.league.ref.group.name === 'Dota 2';
+            }
+        };
+        $scope.isCsGo = function(event){
+            if(event.event.league.ref.group) {
+                return event.event.league.ref.group.name === 'CS:GO';
+            }
+        };
+        $scope.isStarcraft = function(event){
+            if(event.event.league.ref.group) {
+                return event.event.league.ref.group.name === 'Starcraft 2';
+            }
+        };
+
         /**
          * Boxing/MMA
          */

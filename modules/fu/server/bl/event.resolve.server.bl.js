@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 
 function assignWinner(event, callback){
 
@@ -204,45 +206,8 @@ function insertScores_darts(event, scores, callback){
 }
 
 function insertScores_eSports(event, scores, callback){
-    var scoresUpdated = false;
-    var contestant1SetsWon = 0;
-    var contestant2SetsWon = 0;
-    var contestant1FinalScore = 0;
-    var contestant2FinalScore = 0;
 
-    for(var i=1; i<=5; i++){
-        if(scores['contestant1Set'+i+'Score'] && scores['contestant2Set'+i+'Score']){
-            event['contestant1Set'+i+'Score'] = scores['contestant1Set'+i+'Score'];
-            event['contestant2Set'+i+'Score'] = scores['contestant2Set'+i+'Score'];
-            if(scores['contestant1Set'+i+'Score'] > scores['contestant2Set'+i+'Score']){
-                contestant1SetsWon++;
-            } else if(scores['contestant2Set'+i+'Score'] > scores['contestant1Set'+i+'Score']){
-                contestant2SetsWon++;
-            }
-            contestant1FinalScore = contestant1FinalScore + scores['contestant1Set'+i+'Score'];
-            contestant2FinalScore = contestant2FinalScore + scores['contestant2Set'+i+'Score'];
-        }
-    }
-
-    if(contestant1FinalScore !== 0 && contestant2FinalScore !==0){
-        event.contestant1FinalScore = contestant1FinalScore;
-        event.contestant2FinalScore = contestant2FinalScore;
-        event.contestant1RegulationScore = contestant1FinalScore;
-        event.contestant2RegulationScore = contestant2FinalScore;
-        scoresUpdated = true;
-    }
-
-    if(typeof scores.contestant1FinalScore === 'number' && typeof scores.contestant2FinalScore === 'number'  && !scoresUpdated){
-        event.contestant1FinalScore = scores.contestant1FinalScore;
-        event.contestant2FinalScore = scores.contestant2FinalScore;
-        event.contestant1RegulationScore = scores.contestant1FinalScore;
-        event.contestant2RegulationScore = scores.contestant2FinalScore;
-    }
-    if(contestant1SetsWon !== 0 && contestant2SetsWon !== 0){
-        event.contestant1SetsWon = contestant1SetsWon;
-        event.contestant2SetsWon = contestant2SetsWon;
-    }
-
+    event = _.extend(event, scores);
     callback();
 
 }

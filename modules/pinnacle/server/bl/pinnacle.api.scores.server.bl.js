@@ -14,7 +14,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     var todo = [];
     var sportName = pinnacleLeague.pinnacleSport.name;
     var leagueName = pinnacleLeague.name;
-    console.log(scoreApi);
+    //console.log(scoreApi);
 
     function getEvent(callback){
         var query = {pinnacleIds:scoreApi.id, startTime: {$lte: new Date()}};

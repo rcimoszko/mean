@@ -34,6 +34,7 @@
                             <thead>
                                 <th>Bet</th>
                                 <th>Bet Type</th>
+                                <th>Bet Duration</th>
                                 <th>Odds</th>
                                 <th>Units</th>
                                 <th>Profit</th>
@@ -45,6 +46,7 @@
                                 <tr data-ng-repeat="pick in picks">
                                     <td>{{pick|betName:event}}</td>
                                     <td>{{pick.betType}}</td>
+                                    <td>{{pick.betDuration}}</td>
                                     <td>{{pick.odds|formatOdds}}</td>
                                     <td>{{pick.units}}</td>
                                     <td>{{pick.profit|formatProfit}}</td>

@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     _ = require('lodash'),
+    LeagueBl = require('../../../fu/server/bl/league.server.bl'),
     async = require('async');
 
 
@@ -283,72 +284,118 @@ function insertScores_dartsLegs(event, scores, callback){
     callback();
 }
 
-function insertScores_eSports(event, scores, scoreType, callback){
+function insertScores_dotaLeague(event, scores, scoreType, callback){
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
+
+                //Overall
                 case '1st blood':
                     event.contestant1FirstBlood = scores.match.team2;
                     event.contestant2FirstBlood = scores.match.team1;
                     break;
+                case '1st to 5 kills':
+                    event.contestant1Kills5First = scores.match.team2;
+                    event.contestant2Kills5First = scores.match.team1;
+                    break;
                 case '1st to 10 kills':
-                    event.contestant1KillsFirst = scores.match.team2;
-                    event.contestant2KillsFirst = scores.match.team1;
+                    event.contestant1Kills10First = scores.match.team2;
+                    event.contestant2Kills10First = scores.match.team1;
                     break;
                 case 'kills':
                     event.contestant1RegulationScore = scores.match.team2;
                     event.contestant2RegulationScore = scores.match.team1;
                     event.contestant1FinalScore = scores.match.team2;
                     event.contestant2FinalScore = scores.match.team1;
+                    event.scores = true;
                     break;
-                case 'ace':
-                    event.contestant1AceScore = scores.match.team2;
-                    event.contestant2AceScore = scores.match.team1;
-                    break;
+
+                //Map Winners
                 case 'map 1':
                 case '1st map':
-                    event.contestant1Set1Score = scores.match.team2;
-                    event.contestant2Set1Score = scores.match.team1;
+                    event.contestant1Map1Winner = scores.match.team2;
+                    event.contestant2Map1Winner = scores.match.team1;
                     break;
                 case 'map 2':
                 case '2nd map':
-                    event.contestant1Set2Score = scores.match.team2;
-                    event.contestant2Set2Score = scores.match.team1;
+                    event.contestant1Map2Winner = scores.match.team2;
+                    event.contestant2Map2Winner = scores.match.team1;
                     break;
                 case 'map 3':
                 case '3rd map':
-                    event.contestant1Set3Score = scores.match.team2;
-                    event.contestant2Set3Score = scores.match.team1;
+                    event.contestant1Map3Winner = scores.match.team2;
+                    event.contestant2Map3Winner = scores.match.team1;
                     break;
                 case 'map 4':
                 case '4th map':
-                    event.contestant1Set4Score = scores.match.team2;
-                    event.contestant2Set4Score = scores.match.team1;
+                    event.contestant1Map4Winner = scores.match.team2;
+                    event.contestant2Map4Winner = scores.match.team1;
                     break;
                 case 'map 5':
                 case '5th map':
-                    event.contestant1Set5Score = scores.match.team2;
-                    event.contestant2Set5Score = scores.match.team1;
+                    event.contestant1Map5Winner = scores.match.team2;
+                    event.contestant2Map5Winner = scores.match.team1;
                     break;
+
+                //1st to 10 kills per map
                 case 'map 1, 1st to 10 kills':
                 case '1st map, 1st to 10 kills':
-                    event.contestant1Set1KillsFirst = scores.match.team2;
-                    event.contestant2Set1KillsFirst = scores.match.team1;
+                    event.contestant1Map1Kills10First = scores.match.team2;
+                    event.contestant2Map1Kills10First = scores.match.team1;
                     break;
                 case 'map 2, 1st to 10 kills':
                 case '2nd map, 1st to 10 kills':
-                    event.contestant1Set2KillsFirst = scores.match.team2;
-                    event.contestant2Set2KillsFirst = scores.match.team1;
+                    event.contestant1Map2Kills10First = scores.match.team2;
+                    event.contestant2Map2Kills10First = scores.match.team1;
                     break;
                 case 'map 3, 1st to 10 kills':
                 case '3rd map, 1st to 10 kills':
-                    event.contestant1Set3KillsFirst = scores.match.team2;
-                    event.contestant2Set3KillsFirst = scores.match.team1;
+                    event.contestant1Map3Kills10First = scores.match.team2;
+                    event.contestant2Map3Kills10First = scores.match.team1;
                     break;
+                case 'map 4, 1st to 10 kills':
+                case '4th map, 1st to 10 kills':
+                    event.contestant1Map4Kills10First = scores.match.team2;
+                    event.contestant2Map4Kills10First = scores.match.team1;
+                    break;
+                case 'map 5, 1st to 10 kills':
+                case '5th map, 1st to 10 kills':
+                    event.contestant1Map5Kills10First = scores.match.team2;
+                    event.contestant2Map5Kills10First = scores.match.team1;
+                    break;
+
+                //1st to 10 kills per map
+                case 'map 1, 1st to 5 kills':
+                case '1st map, 1st to 5 kills':
+                    event.contestant1Map1Kills5First = scores.match.team2;
+                    event.contestant2Map1Kills5First = scores.match.team1;
+                    break;
+                case 'map 2, 1st to 5 kills':
+                case '2nd map, 1st to 5 kills':
+                    event.contestant1Map2Kills5First = scores.match.team2;
+                    event.contestant2Map2Kills5First = scores.match.team1;
+                    break;
+                case 'map 3, 1st to 5 kills':
+                case '3rd map, 1st to 5 kills':
+                    event.contestant1Map3Kills5First = scores.match.team2;
+                    event.contestant2Map3Kills5First = scores.match.team1;
+                    break;
+                case 'map 4, 1st to 5 kills':
+                case '4th map, 1st to 5 kills':
+                    event.contestant1Map4Kills5First = scores.match.team2;
+                    event.contestant2Map4Kills5First = scores.match.team1;
+                    break;
+                case 'map 5, 1st to 5 kills':
+                case '5th map, 1st to 5 kills':
+                    event.contestant1Map5Kills5First = scores.match.team2;
+                    event.contestant2Map5Kills5First = scores.match.team1;
+                    break;
+
+                //1st blood per map
                 case 'map 1, 1st blood':
                 case '1st map, 1st blood':
-                    event.contestant1Set1FirstBlood = scores.match.team2;
-                    event.contestant2Set1FirstBlood = scores.match.team1;
+                    event.contestant1Map1FirstBlood = scores.match.team2;
+                    event.contestant2Map1FirstBlood = scores.match.team1;
                     break;
                 case 'map 2, 1st blood':
                 case '2nd map, 1st blood':
@@ -357,55 +404,289 @@ function insertScores_eSports(event, scores, scoreType, callback){
                     break;
                 case 'map 3, 1st blood':
                 case '3rd map, 1st blood':
-                    event.contestant1Set3FirstBlood = scores.match.team2;
-                    event.contestant2Set3FirstBlood = scores.match.team1;
+                    event.contestant1Map3FirstBlood = scores.match.team2;
+                    event.contestant2Map3FirstBlood = scores.match.team1;
                     break;
+                case 'map 4, 1st blood':
+                case '4th map, 1st blood':
+                    event.contestant1Map4FirstBlood = scores.match.team2;
+                    event.contestant2Map4FirstBlood = scores.match.team1;
+                    break;
+                case 'map 5, 1st blood':
+                case '5th map, 1st blood':
+                    event.contestant1Map5FirstBlood = scores.match.team2;
+                    event.contestant2Map5FirstBlood = scores.match.team1;
+                    break;
+
+                //kills per map
                 case 'map 1, kills':
                 case '1st map, kills':
-                    event.contestant1Set1Score = scores.match.team2;
-                    event.contestant2Set1Score = scores.match.team1;
+                    event.contestant1Map1Score = scores.match.team2;
+                    event.contestant2Map1Score = scores.match.team1;
                     break;
                 case 'map 2, kills':
                 case '2nd map, kills':
-                    event.contestant1Set2Score = scores.match.team2;
-                    event.contestant2Set2Score = scores.match.team1;
+                    event.contestant1Map2Score = scores.match.team2;
+                    event.contestant2Map2Score = scores.match.team1;
                     break;
                 case 'map 3, kills':
                 case '3rd map, kills':
-                    event.contestant1Set3Score = scores.match.team2;
-                    event.contestant2Set3Score = scores.match.team1;
+                    event.contestant1Map3Score = scores.match.team2;
+                    event.contestant2Map3Score = scores.match.team1;
                     break;
-                case 'map 1, 1st round':
-                    event.contestant1Set1FirstRd = scores.match.team2;
-                    event.contestant2Set1FirstRd = scores.match.team1;
+                case 'map 4, kills':
+                case '4th map, kills':
+                    event.contestant1Map4Score = scores.match.team2;
+                    event.contestant2Map4Score = scores.match.team1;
                     break;
-                case 'map 2, 1st round':
-                    event.contestant1Set2FirstRd = scores.match.team2;
-                    event.contestant2Set2FirstRd = scores.match.team1;
+                case 'map 5, kills':
+                case '5th map, kills':
+                    event.contestant1Map5Score = scores.match.team2;
+                    event.contestant2Map5Score = scores.match.team1;
                     break;
-                case 'map 3, 1st round':
-                    event.contestant1Set3FirstRd = scores.match.team2;
-                    event.contestant2Set3FirstRd = scores.match.team1;
+
+                //series
+                case 'series':
+                    event.contestant1MapsWon = scores.match.team2;
+                    event.contestant2MapsWon = scores.match.team1;
+                    event.scores = true;
                     break;
-                case 'map 1, 1st to 5 rounds':
-                    event.contestant1Set1FirstTo5Rds = scores.match.team2;
-                    event.contestant2Set1FirstTo5Rds = scores.match.team1;
+            }
+        } else {
+            event.contestant1MatchWinner = scores.match.team2;
+            event.contestant2MatchWinner = scores.match.team1;
+            event.scores = true;
+        }
+    }
+    callback();
+}
+
+function insertScores_starcraft(event, scores, scoreType, callback){
+    if('match' in scores){
+        if(scoreType){
+            switch(scoreType.toLowerCase()){
+                //Map Winners
+                case 'ace':
+                    event.contestant1AceWinner = scores.match.team2;
+                    event.contestant2AceWinner = scores.match.team1;
                     break;
-                case 'map 2, 1st to 5 rounds':
-                    event.contestant1Set2FirstTo5Rds = scores.match.team2;
-                    event.contestant2Set2FirstTo5Rds = scores.match.team1;
+                case 'map 1':
+                case '1st map':
+                    event.contestant1Map1Winner = scores.match.team2;
+                    event.contestant2Map1Winner = scores.match.team1;
                     break;
-                case 'map 3, 1st to 5 rounds':
-                    event.contestant1Set3FirstTo5Rds = scores.match.team2;
-                    event.contestant2Set3FirstTo5Rds = scores.match.team1;
+                case 'map 2':
+                case '2nd map':
+                    event.contestant1Map2Winner = scores.match.team2;
+                    event.contestant2Map2Winner = scores.match.team1;
+                    break;
+                case 'map 3':
+                case '3rd map':
+                    event.contestant1Map3Winner = scores.match.team2;
+                    event.contestant2Map3Winner = scores.match.team1;
+                    break;
+                case 'map 4':
+                case '4th map':
+                    event.contestant1Map4Winner = scores.match.team2;
+                    event.contestant2Map4Winner = scores.match.team1;
+                    break;
+                case 'map 5':
+                case '5th map':
+                    event.contestant1Map5Winner = scores.match.team2;
+                    event.contestant2Map5Winner = scores.match.team1;
+                    break;
+                case 'map 6':
+                case '6th map':
+                    event.contestant1Map6Winner = scores.match.team2;
+                    event.contestant2Map6Winner = scores.match.team1;
+                    break;
+                case 'map 7':
+                case '7th map':
+                    event.contestant1Map7Winner = scores.match.team2;
+                    event.contestant2Map7Winner = scores.match.team1;
                     break;
                 case 'series':
-                    event.contestant1RegulationScore = scores.match.team2;
-                    event.contestant2RegulationScore = scores.match.team1;
-                    event.contestant1FinalScore = scores.match.team2;
-                    event.contestant2FinalScore = scores.match.team1;
-                    event.contestant1SetsWon = scores.match.team2;
-                    event.contestant2SetsWon = scores.match.team1;
+                    event.contestant1MapsWon = scores.match.team2;
+                    event.contestant2MapsWon = scores.match.team1;
+                    event.scores = true;
+                    break;
+            }
+        } else {
+            event.contestant1RegulationScore = scores.match.team2;
+            event.contestant2RegulationScore = scores.match.team1;
+            event.contestant1FinalScore = scores.match.team2;
+            event.contestant2FinalScore = scores.match.team1;
+            event.scores = true;
+        }
+    }
+    callback();
+}
+
+function insertScores_csGo(event, scores, scoreType, callback){
+    if('match' in scores){
+        if(scoreType){
+            switch(scoreType.toLowerCase()){
+                //cache, dust2, overpass, inferno, cobble., train, mirage
+
+                case 'map 1':
+                case '1st map':
+                    event.contestant1Map1Score = scores.match.team2;
+                    event.contestant2Map1Score = scores.match.team1;
+                    break;
+                case 'map 2':
+                case '2nd map':
+                    event.contestant1Map2Score = scores.match.team2;
+                    event.contestant2Map2Score = scores.match.team1;
+                    break;
+                case 'map 3':
+                case '3rd map':
+                    event.contestant1Map3Score = scores.match.team2;
+                    event.contestant2Map3Score = scores.match.team1;
+                    break;
+                case 'map 4':
+                case '4th map':
+                    event.contestant1Map4Score = scores.match.team2;
+                    event.contestant2Map4Score = scores.match.team1;
+                    break;
+                case 'map 5':
+                case '5th map':
+                    event.contestant1Map5Score = scores.match.team2;
+                    event.contestant2Map5Score = scores.match.team1;
+                    break;
+                case 'cache':
+                    event.contestant1CacheScore = scores.match.team2;
+                    event.contestant2CacheScore = scores.match.team2;
+                    break;
+                case 'dust 2':
+                case 'dust2':
+                    event.contestant1Dust2Score = scores.match.team2;
+                    event.contestant2Dust2Score = scores.match.team2;
+                    break;
+                case 'overpass':
+                    event.contestant1OverpassScore = scores.match.team2;
+                    event.contestant2OverpassScore = scores.match.team2;
+                    break;
+                case 'inferno':
+                    event.contestant1InfernoScore = scores.match.team2;
+                    event.contestant2InfernoScore = scores.match.team2;
+                    break;
+                case 'cobble':
+                case 'cobble.':
+                    event.contestant1CobbleScore = scores.match.team2;
+                    event.contestant2CobbleScore = scores.match.team2;
+                    break;
+                case 'train':
+                    event.contestant1TrainScore = scores.match.team2;
+                    event.contestant2TrainScore = scores.match.team2;
+                    break;
+                case 'mirage':
+                    event.contestant1MirageScore = scores.match.team2;
+                    event.contestant2MirageScore = scores.match.team2;
+                    break;
+
+                case 'map 1, 1st round':
+                    event.contestant1Map1FirstRd = scores.match.team2;
+                    event.contestant2Map1FirstRd = scores.match.team1;
+                    break;
+                case 'map 2, 1st round':
+                    event.contestant1Map2FirstRd = scores.match.team2;
+                    event.contestant2Map2FirstRd = scores.match.team1;
+                    break;
+                case 'map 3, 1st round':
+                    event.contestant1Map3FirstRd = scores.match.team2;
+                    event.contestant2Map3FirstRd = scores.match.team1;
+                    break;
+                case 'map 4, 1st round':
+                    event.contestant1Map4FirstRd = scores.match.team2;
+                    event.contestant2Map4FirstRd = scores.match.team1;
+                    break;
+                case 'map 5, 1st round':
+                    event.contestant1Map5FirstRd = scores.match.team2;
+                    event.contestant2Map5FirstRd = scores.match.team1;
+                    break;
+                case 'cache, 1st round':
+                    event.contestant1CacheFirstRd = scores.match.team2;
+                    event.contestant2CacheFirstRd = scores.match.team1;
+                    break;
+                case 'dust 2, 1st round':
+                case 'dust2, 1st round':
+                    event.contestant1Dust2FirstRd = scores.match.team2;
+                    event.contestant2Dust2FirstRd = scores.match.team1;
+                    break;
+                case 'overpass, 1st round':
+                    event.contestant1OverpassFirstRd = scores.match.team2;
+                    event.contestant2OverpassFirstRd = scores.match.team1;
+                    break;
+                case 'inferno, 1st round':
+                    event.contestant1InfernoFirstRd = scores.match.team2;
+                    event.contestant2InfernoFirstRd = scores.match.team1;
+                    break;
+                case 'cobble, 1st round':
+                case 'cobble., 1st round':
+                    event.contestant1CobbleFirstRd = scores.match.team2;
+                    event.contestant2CobbleFirstRd = scores.match.team1;
+                    break;
+                case 'train, 1st round':
+                    event.contestant1TrainFirstRd = scores.match.team2;
+                    event.contestant2TrainFirstRd = scores.match.team1;
+                    break;
+                case 'mirage, 1st round':
+                    event.contestant1MirageFirstRd = scores.match.team2;
+                    event.contestant2MirageFirstRd = scores.match.team1;
+                    break;
+                case 'map 1, 1st to 5 rounds':
+                    event.contestant1Map1FirstTo5Rds = scores.match.team2;
+                    event.contestant2Map1FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 2, 1st to 5 rounds':
+                    event.contestant1Map2FirstTo5Rds = scores.match.team2;
+                    event.contestant2Map2FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 3, 1st to 5 rounds':
+                    event.contestant1Map3FirstTo5Rds = scores.match.team2;
+                    event.contestant2Map3FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 4, 1st to 5 rounds':
+                    event.contestant1Map4FirstTo5Rds = scores.match.team2;
+                    event.contestant2Map4FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'map 5, 1st to 5 rounds':
+                    event.contestant1Map5FirstTo5Rds = scores.match.team2;
+                    event.contestant2Map5FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'cache, 1st to 5 rounds':
+                    event.contestant1CacheFirstTo5Rds = scores.match.team2;
+                    event.contestant2CacheFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'dust2, 1st to 5 rounds':
+                case 'dust 2, 1st to 5 rounds':
+                    event.contestant1Dust2FirstTo5Rds = scores.match.team2;
+                    event.contestant2Dust2FirstTo5Rds = scores.match.team1;
+                    break;
+                case 'overpass, 1st to 5 rounds':
+                    event.contestant1OverpassFirstTo5Rds = scores.match.team2;
+                    event.contestant2OverpassFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'inferno, 1st to 5 rounds':
+                    event.contestant1InfernoFirstTo5Rds = scores.match.team2;
+                    event.contestant2InfernoFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'cobble, 1st to 5 rounds':
+                case 'cobble., 1st to 5 rounds':
+                    event.contestant1CobbleFirstTo5Rds = scores.match.team2;
+                    event.contestant2CobbleFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'train, 1st to 5 rounds':
+                    event.contestant1TrainFirstTo5Rds = scores.match.team2;
+                    event.contestant2TrainFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'mirage, 1st to 5 rounds':
+                    event.contestant1MirageFirstTo5Rds = scores.match.team2;
+                    event.contestant2MirageFirstTo5Rds = scores.match.team1;
+                    break;
+                case 'series':
+                    event.contestant1MapsWon = scores.match.team2;
+                    event.contestant2MapsWon = scores.match.team1;
                     event.scores = true;
                     break;
             }
@@ -1073,8 +1354,8 @@ function insertScores_golf(event, scores, callback){
 }
 
 function insertScores(event, scores, sportName, leagueName, scoreType, callback){
-    console.log('scores', scores);
-    console.log('scoreType', scoreType);
+    //console.log('scores', scores);
+    //console.log('scoreType', scoreType);
     switch(sportName){
         case 'Badminton':
             insertScores_badminton(event, scores, callback);
@@ -1119,7 +1400,20 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
             insertScores_dartsLegs(event, scores, callback);
             break;
         case 'E Sports':
-            insertScores_eSports(event, scores, scoreType, callback);
+            var leagueGroupName = LeagueBl.getEsportsGroupName(leagueName);
+            switch(leagueGroupName){
+                case 'starcraft 2':
+                    insertScores_starcraft(event, scores, scoreType, callback);
+                    break;
+                case 'dota 2':
+                case 'league of legends':
+                    insertScores_dotaLeague(event, scores, scoreType, callback);
+                    break;
+                case 'cs:go':
+                    insertScores_csGo(event, scores, scoreType, callback);
+                    break;
+            }
+
             break;
         case 'Field Hockey':
             insertScores_fieldHockey(event, scores, callback);

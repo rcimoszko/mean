@@ -1,0 +1,222 @@
+<div data-ng-repeat="eventGroup in events|filter:isCsGo" ng-init="event = eventGroup.event; contestants = setContestants(eventGroup.event); setWinner(event);">
+    <table class="table scores-table">
+        <thead>
+        <th>Start Time</th>
+        <th>League</th>
+        <th class="text-center">Picks</th>
+        <th>Match</th>
+        <th>1st Map</th>
+        <th>2nd Map</th>
+        <th>3rd Map</th>
+        <th>4th Map</th>
+        <th>5th Map</th>
+        <th>Final Score</th>
+        <th>Series</th>
+        <th>Winner</th>
+        <th>Resolve</th>
+        <th>Cancel</th>
+        <th>Edit</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="5" class="text-center">Score</td>
+            <td colspan="6"></td>
+        </tr>
+
+        <tr class="first-contestant">
+            <td rowspan="2" class="valign">{{event.startTime|date:'MMM d, yyyy'}} <br/>{{event.startTime|date:'h:mm a'}}</td>
+            <td rowspan="2" class="valign">{{event.league.name}}</td>
+            <td class="text-center valign" rowspan="2">{{eventGroup.count}}</td>
+            <td>{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map1Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map2Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map3Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map4Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map5Score"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant1FinalScore"/></td>
+            <input type="number" min="0" data-ng-model="event.contestant1MapsWon"/></td>
+            <td rowspan="2">
+                <select class="form-control" data-ng-model="event.contestantWinner" data-ng-options=" contestant.name for contestant in contestants ">
+                </select>
+            </td>
+            <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">RESOLVE</button></td>
+            <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
+            <td rowspan="2" class="valign"><a ui-sref="admin.editEvent({eventId:event._id})" class="btn btn-default">EDIT</a></td>
+        </tr>
+        <tr class="second-contestant">
+            <td>{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map1Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map2Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map3Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map4Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map5Score"/></td>
+            <td class="extra"><input type="number" min="0" data-ng-model="event.contestant2FinalScore"/></td>
+            <input type="number" min="0" data-ng-model="event.contestant2MapsWon"/></td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="5" class="text-center">1st Round</td>
+            <td colspan="5"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map1FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map2FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map3FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map4FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map5FirstRd"/></td>
+            <td colspan="7"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map1FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map2FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map3FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map4FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map5FirstRd"/></td>
+            <td colspan="7"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="5" class="text-center">1st to 5 Rounds</td>
+            <td colspan="6"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map1FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map2FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map3FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map4FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Map5FirstTo5Rds"/></td>
+            <td colspan="7"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map1FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map2FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map3FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map4FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Map5FirstTo5Rds"/></td>
+            <td colspan="7"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"></td>
+            <td>Cache</td>
+            <td>Dust 2</td>
+            <td>Overpass</td>
+            <td>Inferno</td>
+            <td>Cobble</td>
+            <td>Train</td>
+            <td>Mirage</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CacheScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Dust2Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1OverpassScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1InfernoScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CobbleScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1TrainScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1MirageScore"/></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CacheScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Dust2Score"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2OverpassScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2InfernoScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CobbleScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2TrainScore"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2MirageScore"/></td>
+            <td colspan="4"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="5" class="text-center">1st Round</td>
+            <td colspan="6"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"></td>
+            <td>Cache</td>
+            <td>Dust 2</td>
+            <td>Overpass</td>
+            <td>Inferno</td>
+            <td>Cobble</td>
+            <td>Train</td>
+            <td>Mirage</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CacheFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Dust2FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1OverpassFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1InfernoFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CobbleFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1TrainFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1MirageFirstRd"/></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CacheFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Dust2FirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2OverpassFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2InfernoFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CobbleFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2TrainFirstRd"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2MirageFirstRd"/></td>
+            <td colspan="4"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="5" class="text-center">1st to 5 Rounds</td>
+            <td colspan="6"></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"></td>
+            <td>Cache</td>
+            <td>Dust 2</td>
+            <td>Overpass</td>
+            <td>Inferno</td>
+            <td>Cobble</td>
+            <td>Train</td>
+            <td>Mirage</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant1.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CacheFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1Dust2FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1OverpassFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1InfernoFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1CobbleFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1TrainFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant1MirageFirstTo5Rds"/></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="4">{{event.contestant2.name}}</td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CacheFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2Dust2FirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2OverpassFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2InfernoFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2CobbleFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2TrainFirstTo5Rds"/></td>
+            <td><input type="number" min="0" data-ng-model="event.contestant2MirageFirstTo5Rds"/></td>
+            <td colspan="4"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

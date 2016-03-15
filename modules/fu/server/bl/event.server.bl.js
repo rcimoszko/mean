@@ -19,7 +19,7 @@ function get(id, callback){
         callback(err, event);
     }
 
-    m_Event.findById(id).exec(cb);
+    m_Event.findById(id).populate('league.ref').exec(cb);
 }
 
 function getBySlug(slug, callback){
@@ -217,6 +217,13 @@ function getResolveEvents(sport, callback){
         populateBy(events, populate, callback);
     }
 
+
+    function populateLeagues(events, callback){
+        console.log(events);
+        var populate = {path: 'event.league.ref', model:'League'};
+        populateBy(events, populate, callback);
+    }
+
     function sortEvents(events, callback){
         events = _.sortBy(events, function(event){
             return new Date(event.event.startTime);
@@ -226,6 +233,7 @@ function getResolveEvents(sport, callback){
 
     todo.push(groupPicks);
     todo.push(populateEvents);
+    todo.push(populateLeagues);
     todo.push(sortEvents);
 
     async.waterfall(todo, callback);

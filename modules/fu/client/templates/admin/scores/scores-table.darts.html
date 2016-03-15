@@ -8,6 +8,7 @@
         <th>Draw</th>
         <th>Resolve</th>
         <th>Cancel</th>
+        <th>Edit</th>
     </thead>
     <tbody>
     <tr class="first-contestant" data-ng-repeat-start="eventGroup in events" ng-init="event = eventGroup.event;contestants =  setContestants(eventGroup.event); setWinner(event);">
@@ -22,6 +23,7 @@
         <td rowspan="2" class="valign text-center"><input type="checkbox" data-ng-model="event.draw"/></td>
         <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="saveEvent(event)">RESOLVE</button></td>
         <td rowspan="2" class="valign"><button class="btn btn-default" data-ng-click="cancelEvent(event)">CANCEL</button></td>
+        <td rowspan="2" class="valign"><a ui-sref="admin.editEvent({eventId:event._id})" class="btn btn-default">EDIT</a></td>
     </tr>
     <tr class="second-contestant" data-ng-repeat-end>
         <td>{{event.contestant2.name}}</td>
