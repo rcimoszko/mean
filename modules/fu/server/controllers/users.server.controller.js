@@ -5,6 +5,22 @@ var path = require('path'),
     UserBl = require('../bl/user.server.bl');
 
 
+function getAll(req, res, next){
+
+    function cb (err, users){
+        if (err) return next(err);
+        if (!users) {
+            return res.status(404).send({
+                message: 'Users not found'
+            });
+        }
+        res.json(users);
+    }
+
+    UserBl.getAll(cb);
+}
+
+
 function byUsername(req, res, next, username){
 
     function cb (err, user){
@@ -22,3 +38,4 @@ function byUsername(req, res, next, username){
 }
 
 exports.byUsername    = byUsername;
+exports.getAll        = getAll;

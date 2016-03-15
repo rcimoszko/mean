@@ -1231,6 +1231,23 @@ angular.module('fu.admin').config(['$stateProvider',
 
 'use strict';
 
+angular.module('fu.admin').config(['$stateProvider',
+    function ($stateProvider) {
+        $stateProvider
+            .state('admin.newUsers', {
+                url: '/new-users',
+                templateUrl: 'modules/fu/client/views/admin/users/admin-new-users.client.view.html',
+                controller: 'AdminNewUsersController',
+                data: {
+                    roles: ['admin']
+                }
+            });
+
+    }
+]);
+
+'use strict';
+
 angular.module('fu').config(['$stateProvider',
     function ($stateProvider) {
         $stateProvider
@@ -2240,6 +2257,37 @@ angular.module('fu.admin').controller('AdminResolveSportController', ['$scope', 
                 if (found.length) event.contestantWinner = contestants[contestants.indexOf(found[0])];
             }
         };
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminNewUsersController', ['$scope', 'Users',
+    function ($scope, Users) {
+
+        function cb(err, users){
+            console.log(users);
+            $scope.users = users;
+        }
+
+        Users.getNew(cb);
+
+
+        $scope.unverifiedFilter = false;
+        $scope.trialFilter = false;
+        $scope.trialEndFilter = false;
+        $scope.premiumFilter = false;
+        $scope.pickMadeFilter = false;
+
+        $scope.activeFilter = function(user){
+            if($scope.unverifiedFilter && user.verified)return false;
+            if($scope.trialFilter && !user.trial) return false;
+            if($scope.trialEndFilter && !user.trialUsed) return false;
+            if($scope.premiumFilter && !user.premium) return false;
+            if($scope.pickMadeFilter && !user.pickMade) return false;
+            return true;
+        };
+
     }
 ]);
 
@@ -4807,6 +4855,17 @@ angular.module('fu.admin').directive('adminBoolean', function () {
             model: '='
         },
         templateUrl: 'modules/fu/client/templates/admin/edit/admin.boolean.client.template.html'
+    };
+});
+'use strict';
+
+angular.module('fu.admin').directive('adminCheckmark', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            model: '='
+        },
+        templateUrl: 'modules/fu/client/templates/admin/edit/admin.checkmark.client.template.html'
     };
 });
 'use strict';
@@ -8070,6 +8129,17 @@ angular.module('fu').factory('ApiUsersFollow', ['$resource',
 
 'use strict';
 
+angular.module('fu').factory('ApiUsersNew', ['$resource',
+    function ($resource) {
+        return $resource('/api/users/new', {}, {
+            update: { method: 'PUT' }
+        });
+    }
+]);
+
+
+'use strict';
+
 angular.module('fu').factory('ApiUsersUnfollow', ['$resource',
     function ($resource) {
         return $resource('/api/users/:userId/unfollow', { userId: '@userId' }, {
@@ -10862,8 +10932,8 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
 ]);
 'use strict';
 
-angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile',
-    function(Authentication, ApiUserProfile) {
+angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile', 'ApiUsers', 'ApiUsersNew',
+    function(Authentication, ApiUserProfile, ApiUsers, ApiUsersNew) {
 
         var getProfile = function(username, callback){
             function cbSuccess(profile){
@@ -10878,9 +10948,37 @@ angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile',
         };
 
 
+        var getAll = function(callback){
+            function cbSuccess(users){
+                callback(null, users);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUsers.query(cbSuccess, cbError);
+        };
+
+        var getNew = function(callback){
+            function cbSuccess(users){
+                callback(null, users);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUsersNew.query(cbSuccess, cbError);
+        };
+
+
+
 
         return {
-            getProfile: getProfile
+            getProfile: getProfile,
+            getAll: getAll,
+            getNew: getNew
         };
 
     }

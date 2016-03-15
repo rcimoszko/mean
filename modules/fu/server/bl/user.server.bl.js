@@ -25,6 +25,27 @@ function getByUsername(username, callback){
     User.findOne({'username':{ $regex: new RegExp('^' + username +'$', 'i')}}).exec(cb);
 }
 
+function getAll(callback){
+
+    function cb(err, users){
+        callback(err, users);
+    }
+
+    User.find().exec(cb);
+
+}
+
+
+function getNew(callback){
+
+    function cb(err, users){
+        callback(err, users);
+    }
+
+    User.find().sort({'created':-1}).limit(500).exec(cb);
+}
+
+
 function getFollowing(user, query, callback){
     var todo = [];
     var dateId = query.dateId;
@@ -620,3 +641,5 @@ exports.getNewMessageCount      = getNewMessageCount;
 exports.updateStreak         = updateStreak;
 exports.getHotPickUsers      = getHotPickUsers;
 exports.returnUnits          = returnUnits;
+exports.getAll               = getAll;
+exports.getNew               = getNew;

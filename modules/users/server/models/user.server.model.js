@@ -187,7 +187,7 @@ var UserSchema = new Schema({
 
     newFollowerEmail:       {type: Boolean, default: true},
     hotPickEmail:           {type: Boolean, default: true},
-    lastLogin:              {type: Date, default: Date.now}
+    lastLogin:              {type: Date}
 });
 
 UserSchema.path('description').validate(function (v) {

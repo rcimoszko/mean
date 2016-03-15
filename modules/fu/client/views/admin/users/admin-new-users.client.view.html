@@ -1,0 +1,55 @@
+<section class="content-padding-top">
+    <div class="btn-container">
+        <button type="button" class="btn btn-default" data-ng-model="unverifiedFilter" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Not Verified
+        </button>
+        <button type="button" class="btn btn-default" data-ng-model="trialFilter" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Trial
+        </button>
+        <button type="button" class="btn btn-default" data-ng-model="trialEndFilter" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Trial End
+        </button>
+        <button type="button" class="btn btn-default" data-ng-model="premiumFilter" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Premium
+        </button>
+        <button type="button" class="btn btn-default" data-ng-model="pickMadeFilter" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Pick Made
+        </button>
+    </div>
+
+    <table class="table table-condensed">
+        <thead>
+            <th>User</th>
+            <th>Provider</th>
+            <th>Email</th>
+            <th>Verified</th>
+            <th>Created</th>
+            <th>Last Login</th>
+            <th>Trial</th>
+            <th>Trial Start</th>
+            <th>Trial End</th>
+            <th>Premium</th>
+            <th>Pick Made</th>
+            <th>Following</th>
+            <th>Follow</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="user in users|orderBy:'created':true|filter:activeFilter">
+                <td>{{user.username}}</td>
+                <td>{{user.provider}}</td>
+                <td>{{user.email}}</td>
+                <td><admin-checkmark model="user.verified"></admin-checkmark></td>
+                <td>{{user.created|date:'short'}}</td>
+                <td>{{user.lastLogin|date:'short'}}</td>
+                <td><admin-checkmark model="user.trial"></admin-checkmark></td>
+                <td>{{user.trialStartDate|date:'short'}}</td>
+                <td>{{user.trialEndDate|date:'short'}}</td>
+                <td><admin-checkmark model="user.premium"></admin-checkmark></td>
+                <td><admin-checkmark model="user.pickMade"></admin-checkmark></td>
+                <td>{{user.followingCount}}</td>
+                <td>{{user.followerCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
