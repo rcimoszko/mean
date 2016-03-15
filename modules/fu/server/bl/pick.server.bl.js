@@ -112,7 +112,6 @@ function cancelPick(pick, callback){
 }
 
 function cancelPicksByEvent(event, callback){
-    console.log('TEST');
 
     var todo = [];
 
