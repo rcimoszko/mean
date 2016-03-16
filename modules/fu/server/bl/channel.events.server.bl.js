@@ -431,7 +431,7 @@ function get(channel, user, date, callback){
         var eventsByDate = _.groupBy(events, function(event){
             console.log(event.startTime);
             var date = new Date(event.startTime);
-            date.setHours(date.getHours()+7);
+            date.setHours(date.getHours()-6);
             console.log(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         });
