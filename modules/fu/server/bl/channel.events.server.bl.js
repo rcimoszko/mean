@@ -353,7 +353,7 @@ function get(channel, user, date, callback){
 
     function filterTennisEvents(events, callback){
         events = _.filter(events, function(event){
-            return event.contestant1.name.toLowerCase().indexOf(' of set ') === -1 && event.contestant2.name.toLowerCase().indexOf(' of set ') === -1;
+            return event.contestant1.name.toLowerCase().indexOf(' set ') === -1 && event.contestant2.name.toLowerCase().indexOf(' set ') === -1;
         });
         callback(null, events);
     }
