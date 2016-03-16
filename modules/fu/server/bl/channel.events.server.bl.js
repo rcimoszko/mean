@@ -347,6 +347,9 @@ function get(channel, user, date, callback){
 
     var todo = [];
 
+    var tzAdjust = new Date(date).getHours();
+    console.log(tzAdjust);
+
     function getEvents(callback) {
         var dateQuery = getDateQuery(channel.dateGroup, date);
         var query = {startTime: dateQuery, $or:[{cancelled:false}, {cancelled:{$exists:false}}]};
@@ -431,8 +434,8 @@ function get(channel, user, date, callback){
 
         var eventsByDate = _.groupBy(events, function(event){
             var eventDate = new Date(event.startTime);
-            eventDate.setHours(eventDate.getHours()-6);
-            console.log(new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate()));
+
+            eventDate.setHours(eventDate.getHours()-tzAdjust);
             return new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
         });
 

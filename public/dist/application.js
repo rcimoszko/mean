@@ -2466,6 +2466,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
 
         function setDate(date){
             $scope.currentDate = new Date(date);
+            $scope.currentDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate());
             $scope.yesterday = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - 1);
             $scope.dayBeforeYesterday = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - 2);
             $scope.tomorrow = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + 1);
@@ -2476,6 +2477,8 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
             var date = $scope.date.split('-');
             date = new Date(date[0], date[1]-1, date[2]);
             setDate(date);
+        } else {
+            setDate( new Date());
         }
 
         function setupSocket(){
@@ -2504,10 +2507,8 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
                 switch($scope.channel.dateGroup){
                     case 'upcoming':
                         $scope.upcoming = true;
-                        setDate( new Date());
                         break;
                     case 'daily':
-                        setDate( new Date());
                         break;
                     case 'weekly':
                         break;
@@ -2517,6 +2518,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         $scope.loading.isLoading.pageLoading = true;
+        console.log($scope.currentDate);
         Channels.getContent($scope.channelSlug, $scope.currentDate, cb);
 
         $scope.updateDate = function(date){
@@ -9441,20 +9443,6 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             }
         };
 
-        var hubTabsClick = function(tab){
-            var eventName;
-            switch(tab){
-                case 'following':
-                    eventName = event.hubFollowingTabClicked;
-                    break;
-                case 'pro':
-                    eventName = event.hubProTabClicked;
-                    break;
-            }
-            if(eventName){
-                mixpanel.track(eventName);
-            }
-        };
 
         var makePick = function(count){
             mixpanel.track(event.pickMade, {
@@ -9573,7 +9561,6 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             createAccount: createAccount,
             login: login,
             makePick: makePick,
-            hubTabsClick: hubTabsClick,
             joinClicked: joinClicked,
             pageViewed: pageViewed,
             accountVerified: accountVerified,
