@@ -19,6 +19,7 @@
 
     <table class="table table-condensed">
         <thead>
+            <th></th>
             <th>User</th>
             <th>Provider</th>
             <th>Email</th>
@@ -35,6 +36,7 @@
         </thead>
         <tbody>
             <tr data-ng-repeat="user in users|orderBy:'created':true|filter:activeFilter">
+                <td>{{$index+1}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.provider}}</td>
                 <td>{{user.email}}</td>

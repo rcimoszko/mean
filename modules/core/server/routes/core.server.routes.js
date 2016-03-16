@@ -19,6 +19,8 @@ module.exports = function (app) {
     app.route('/make-picks').get(core.makePicks);
     app.route('/make-picks/:sportSlug/:leagueSlug').get(core.makePicksLeague);
     app.route('/messages').get(core.messages);
+    app.route('/login').get(core.login);
+    app.route('/signup').get(core.signup);
 
     //static
     app.route('/about').get(core.about);

@@ -203,6 +203,24 @@ exports.messages = function (req, res) {
     });
 };
 
+exports.login = function(req, res){
+    res.render('modules/core/server/views/index', {
+        title: 'Login | FansUnite',
+        description: '',
+        keywords: '',
+        user: req.user || null
+    });
+};
+
+exports.signup = function(req, res){
+    res.render('modules/core/server/views/index', {
+        title: 'Sign Up | FansUnite',
+        description: '',
+        keywords: '',
+        user: req.user || null
+    });
+};
+
 exports.settings = function (req, res) {
     res.render('modules/core/server/views/index', {
         title: 'Settings | FansUnite',
