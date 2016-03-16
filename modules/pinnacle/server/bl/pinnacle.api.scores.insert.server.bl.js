@@ -1140,7 +1140,6 @@ function insertScores_tableTennis(event, scores, callback){
 }
 
 function insertScores_tennis(event, scores, scoreType, callback){
-    console.log('scores', scores, 'scoreType', scoreType);
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
