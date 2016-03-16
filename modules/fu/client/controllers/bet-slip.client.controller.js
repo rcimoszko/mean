@@ -76,6 +76,7 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
             function cb(err){
                 if(err) handleError(err);
 
+
             }
 
             Modal.showModal(

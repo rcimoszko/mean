@@ -147,10 +147,8 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             }
         };
 
-        var makePick = function(count, sports, leagues){
+        var makePick = function(count){
             mixpanel.track(event.pickMade, {
-                'Sports': sports,
-                'Leagues': leagues,
                 'Count': count
             });
         };

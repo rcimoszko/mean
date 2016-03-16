@@ -55,7 +55,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
   }
 ]);
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(["$rootScope", "$state", "Authentication", function ($rootScope, $state, Authentication) {
+angular.module(ApplicationConfiguration.applicationModuleName).run(["$rootScope", "$state", "$location", "Authentication", "Mixpanel", function ($rootScope, $state, $location, Authentication, Mixpanel) {
 
   // Check authentication before changing state
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -85,6 +85,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(["$rootScope"
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     storePreviousState(fromState, fromParams);
   });
+
+
+
+    $rootScope.$on('$locationChangeSuccess', function() {
+        var isGuest = Authentication.user ? true : false;
+        Mixpanel.pageViewed($location.path(), isGuest);
+    });
 
   // Store previous state
   function storePreviousState(state, params) {
@@ -2422,6 +2429,7 @@ angular.module('fu').controller('BetSlipController', ['$scope', 'BetSlip', '$roo
 
             function cb(err){
                 if(err) handleError(err);
+
 
             }
 
@@ -8151,8 +8159,8 @@ angular.module('fu').factory('ApiUsersUnfollow', ['$resource',
 
 'use strict';
 
-angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication', 'User',
-    function($filter, ApiUserMakePicks, Loading, Authentication, User) {
+angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication', 'User', 'Mixpanel',
+    function($filter, ApiUserMakePicks, Loading, Authentication, User, Mixpanel) {
         var events = [];
         var stats = {count:0};
         var status = {submitted: false, error: false};
@@ -8253,6 +8261,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
             Loading.isLoading.pickSubmit = true;
 
             function cbSuccess(results){
+                Mixpanel.makePick(stats.count);
                 removeAllSelected();
                 Loading.isLoading.pickSubmit = false;
                 status.submitted = true;
@@ -9447,10 +9456,8 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             }
         };
 
-        var makePick = function(count, sports, leagues){
+        var makePick = function(count){
             mixpanel.track(event.pickMade, {
-                'Sports': sports,
-                'Leagues': leagues,
                 'Count': count
             });
         };
@@ -10890,8 +10897,8 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
 ]);
 'use strict';
 
-angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
-    function(Authentication, ApiAuth, User) {
+angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User', 'Mixpanel',
+    function(Authentication, ApiAuth, User, Mixpanel) {
 
         var signup = function(form, callback){
 
@@ -10912,6 +10919,7 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
 
             function cbSuccess(response){
                 Authentication.user = response;
+                Mixpanel.login();
                 User.initialize();
                 callback(null);
             }

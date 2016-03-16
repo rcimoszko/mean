@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
-    function(Authentication, ApiAuth, User) {
+angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User', 'Mixpanel',
+    function(Authentication, ApiAuth, User, Mixpanel) {
 
         var signup = function(form, callback){
 
@@ -22,6 +22,7 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User',
 
             function cbSuccess(response){
                 Authentication.user = response;
+                Mixpanel.login();
                 User.initialize();
                 callback(null);
             }

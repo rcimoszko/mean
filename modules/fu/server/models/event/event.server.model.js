@@ -199,6 +199,8 @@ var EventSchema = new Schema({
 
     contestant1MapsWon:         {type: Number},
     contestant2MapsWon:         {type: Number},
+    contestant1MatchWinner:         {type: Number},
+    contestant2MatchWinner:         {type: Number},
 
     //CS:GO
     contestant1OverpassScore:   {type: Number},

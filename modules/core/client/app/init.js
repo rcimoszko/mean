@@ -12,7 +12,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
   }
 ]);
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
+angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, $location, Authentication, Mixpanel) {
 
   // Check authentication before changing state
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -42,6 +42,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     storePreviousState(fromState, fromParams);
   });
+
+
+
+    $rootScope.$on('$locationChangeSuccess', function() {
+        var isGuest = Authentication.user ? true : false;
+        Mixpanel.pageViewed($location.path(), isGuest);
+    });
 
   // Store previous state
   function storePreviousState(state, params) {

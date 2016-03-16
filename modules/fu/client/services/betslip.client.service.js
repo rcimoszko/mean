@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication', 'User',
-    function($filter, ApiUserMakePicks, Loading, Authentication, User) {
+angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loading', 'Authentication', 'User', 'Mixpanel',
+    function($filter, ApiUserMakePicks, Loading, Authentication, User, Mixpanel) {
         var events = [];
         var stats = {count:0};
         var status = {submitted: false, error: false};
@@ -102,6 +102,7 @@ angular.module('fu').factory('BetSlip', [ '$filter', 'ApiUserMakePicks', 'Loadin
             Loading.isLoading.pickSubmit = true;
 
             function cbSuccess(results){
+                Mixpanel.makePick(stats.count);
                 removeAllSelected();
                 Loading.isLoading.pickSubmit = false;
                 status.submitted = true;
