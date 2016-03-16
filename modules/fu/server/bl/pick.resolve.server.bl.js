@@ -166,6 +166,15 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
                                 opponentScore = event['contestant'+opponentNo+'FinalScore'];
                             }
                             break;
+                        case 'spread':
+                            if(typeof event['contestant'+contestantNo+'FinalScore'] !== 'undefined' && typeof event['contestant'+opponentNo+'FinalScore'] !== 'undefined'){
+                                contestantScore = event['contestant'+contestantNo+'FinalScore'];
+                                opponentScore = event['contestant'+opponentNo+'FinalScore'];
+                            } else {
+                                contestantScore = event['contestant'+contestantNo+'MatchWinner'];
+                                opponentScore = event['contestant'+opponentNo+'MatchWinner'];
+                            }
+                            break;
                         default:
                             contestantScore = event['contestant'+contestantNo+'FinalScore'];
                             opponentScore = event['contestant'+opponentNo+'FinalScore'];
