@@ -143,7 +143,7 @@ function getScores(event, pick, contestantNo, opponentNo, callback){
         case 'matchups':
         case 'fight':
             switch(event.sport.name.toLowerCase()){
-                case 'e-sports':
+                case 'e sports':
                     switch(pick.betType.toLowerCase()){
                         case '1st blood':
                             contestantScore = event['contestant'+contestantNo+'FirstBlood'];

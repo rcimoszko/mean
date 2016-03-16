@@ -132,20 +132,6 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             }
         };
 
-        var hubTabsClick = function(tab){
-            var eventName;
-            switch(tab){
-                case 'following':
-                    eventName = event.hubFollowingTabClicked;
-                    break;
-                case 'pro':
-                    eventName = event.hubProTabClicked;
-                    break;
-            }
-            if(eventName){
-                mixpanel.track(eventName);
-            }
-        };
 
         var makePick = function(count){
             mixpanel.track(event.pickMade, {
@@ -264,7 +250,6 @@ angular.module('fu').factory('Mixpanel', [ 'Authentication',
             createAccount: createAccount,
             login: login,
             makePick: makePick,
-            hubTabsClick: hubTabsClick,
             joinClicked: joinClicked,
             pageViewed: pageViewed,
             accountVerified: accountVerified,
