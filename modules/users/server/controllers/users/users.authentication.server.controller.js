@@ -123,6 +123,8 @@ exports.signin = function (req, res, next) {
             res.status(400).send(info);
         } else {
             // Remove sensitive data before login
+            //user.lastLogin = new Date();
+
             user.password = undefined;
             user.salt = undefined;
 
@@ -130,8 +132,6 @@ exports.signin = function (req, res, next) {
                 if (err) {
                     res.status(400).send(err);
                 } else {
-                    user.lastLogin = new Date();
-                    user.save();
                     res.json(user);
                 }
             });
@@ -183,7 +183,7 @@ exports.oauthCallback = function (strategy) {
                     return res.redirect('/signin');
                 }
                 user.lastLogin = new Date();
-                user.save();
+                //user.save();
                 return res.redirect(redirectURL);
             });
         })(req, res, next);
