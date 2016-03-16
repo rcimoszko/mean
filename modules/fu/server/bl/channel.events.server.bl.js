@@ -337,6 +337,7 @@ function getDateQuery(dateGroup, date){
     } else {
         query = { $gte: timeIntervalStart};
     }
+    console.log(query);
 
     return query;
 }
