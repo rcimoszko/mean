@@ -351,6 +351,13 @@ function get(channel, user, date, callback){
         EventBl.getByQuery(query, callback);
     }
 
+    function filterTennisEvents(events, callback){
+        events = _.filter(events, function(event){
+            return event.contestant1.name.toLowerCase().indexOf(' of set ') === -1 && event.contestant2.name.toLowerCase().indexOf(' of set ') === -1;
+        });
+        callback(null, events);
+    }
+
     function populateBets(events, callback) {
         var populate = [{path: 'pinnacleBets', model: 'Bet'},
                         {path:'contestant1.ref', model: 'Contestant'},
@@ -443,6 +450,7 @@ function get(channel, user, date, callback){
     }
 
     todo.push(getEvents);
+    todo.push(filterTennisEvents);
     todo.push(populateBets);
     todo.push(filterDisabledContestants);
     todo.push(getPicks);

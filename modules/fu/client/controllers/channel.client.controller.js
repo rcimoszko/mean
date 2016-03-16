@@ -63,7 +63,6 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
         }
 
         $scope.loading.isLoading.pageLoading = true;
-        console.log($scope.currentDate);
         Channels.getContent($scope.channelSlug, $scope.currentDate, cb);
 
         $scope.updateDate = function(date){
