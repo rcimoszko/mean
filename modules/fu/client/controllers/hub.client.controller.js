@@ -149,5 +149,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             StripeService.showSubscriptionModal();
         };
 
+
     }
 ]);

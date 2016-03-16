@@ -23,7 +23,9 @@ var ApplicationConfiguration = (function () {
       //'scrollToFixed',
       'angular.filter',
       'angulartics',
-      'angulartics.google.analytics'];
+      'angulartics.google.analytics',
+      'angular-intro'
+  ];
 
   // Add a new vertical module
   var registerModule = function (moduleName, dependencies) {

@@ -32,7 +32,9 @@ module.exports = {
         //'public/lib/angular-scrolltofixed/dist/angular-scrolltofixed.min.js'
         'public/lib/ngSticky/dist/sticky.min.js',
         'public/lib/angulartics/dist/angulartics.min.js',
-        'public/lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js'
+        'public/lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+        'public/lib/intro.js/minified/intro.min.js',
+        'public/lib/angular-intro.js/build/angular-intro.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

@@ -38,5 +38,56 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
                 $scope.resendError = response.message;
             });
         };
+
+        /**
+         * Walkthrough
+         */
+
+        $scope.CompletedEvent = function (scope) {
+            console.log("Completed Event called");
+        };
+
+        $scope.ExitEvent = function (scope) {
+            console.log("Exit Event called");
+        };
+
+        $scope.ChangeEvent = function (targetElement, scope) {
+            console.log("Change Event called");
+            console.log(targetElement);  //The target element
+            console.log(this);  //The IntroJS object
+        };
+
+        $scope.BeforeChangeEvent = function (targetElement, scope) {
+            console.log("Before Change Event called");
+            console.log(targetElement);
+        };
+
+        $scope.AfterChangeEvent = function (targetElement, scope) {
+            console.log("After Change Event called");
+            console.log(targetElement);
+        };
+
+        $scope.IntroOptions = {
+            steps:[
+                {
+                    element: '#step1',
+                    intro: "Menu"
+                },
+                {
+                    element: '#step2',
+                    intro: "Picks Feed"
+                }
+            ],
+            showStepNumbers: false,
+            exitOnOverlayClick: true,
+            exitOnEsc:true,
+            nextLabel: '<strong>NEXT!</strong>',
+            prevLabel: '<span style="color:green">Previous</span>',
+            skipLabel: 'Exit',
+            doneLabel: 'Thanks'
+        };
+
+        $scope.ShouldAutoStart = false;
+
     }
 ]);

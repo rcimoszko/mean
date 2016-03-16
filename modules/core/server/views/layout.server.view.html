@@ -80,16 +80,24 @@
 </head>
 
 <body>
-    <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user,  'is-blog': isBlog()}"></header>
-    <ng-include src="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user" data-ng-hide="isBlog()"></ng-include>
-    <section id="content"  data-ng-class="{auth: authentication.user, blog: isBlog() }">
-        <ng-include src="'/modules/fu/client/views/unverified.client.view.html'" data-ng-if="authentication.user && !authentication.user.verified"></ng-include>
-        {% block content %}{% endblock %}
+    <div ng-intro-options="IntroOptions" ng-intro-method="CallMe"
+         ng-intro-oncomplete="CompletedEvent" ng-intro-onexit="ExitEvent"
+         ng-intro-onchange="ChangeEvent" ng-intro-onbeforechange="BeforeChangeEvent"
+         ng-intro-onafterchange="AfterChangeEvent"
+         ng-intro-autostart="ShouldAutoStart">
 
-        <ng-include src="'/modules/fu/client/views/footer.client.view.html'" data-ng-hide="isPicksPage()" data-ng-if="!loading.isLoading.pageLoading"></ng-include>
-    </section>
+        <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user,  'is-blog': isBlog()}"></header>
+        <ng-include src="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user" data-ng-hide="isBlog()"></ng-include>
+        <section id="content"  data-ng-class="{auth: authentication.user, blog: isBlog() }">
+            <ng-include src="'/modules/fu/client/views/unverified.client.view.html'" data-ng-if="authentication.user && !authentication.user.verified"></ng-include>
+            <a class="btn btn-large btn-success" ng-click="CallMe();">Demo</a>
+            {% block content %}{% endblock %}
 
-    <ng-include src="'/modules/fu/client/views/bet-slip.client.view.html'"></ng-include>
+            <ng-include src="'/modules/fu/client/views/footer.client.view.html'" data-ng-hide="isPicksPage()" data-ng-if="!loading.isLoading.pageLoading"></ng-include>
+        </section>
+
+        <ng-include src="'/modules/fu/client/views/bet-slip.client.view.html'"></ng-include>
+    </div>
 
     <!--Embedding The User Object-->
     <script type="text/javascript">
