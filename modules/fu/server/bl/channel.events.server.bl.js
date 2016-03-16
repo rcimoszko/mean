@@ -309,35 +309,29 @@ function processPendingEvent(event, pEvent, picks, user, callback){
 }
 
 
-function getDateQuery(dateGroup, date){
+function getDateQuery(dateGroup, tzAdjust, date){
     var timeIntervalStart;
     var timeIntervalEnd;
     var today = new Date();
-    var tzAdjust = TimezoneBl.timezoneAdjust;
-    if(date){
-        timeIntervalStart = new Date(date);
-        timeIntervalEnd = new Date(date);
-        timeIntervalEnd.setDate(timeIntervalStart.getDate()+1);
-    } else{
-        switch(dateGroup){
-            case 'weekly':
-            case 'daily':
-                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0);
-                timeIntervalEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1, 0, 0);
-                break;
-            default: //upcoming
-                timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()-tzAdjust, 0);
-                break;
-        }
-    }
 
+    switch(dateGroup){
+        case 'daily':
+            timeIntervalStart = new Date(date);
+            timeIntervalEnd = new Date(date);
+            timeIntervalEnd.setDate(timeIntervalStart.getDate()+1);
+            break;
+        case 'weekly':
+            break;
+        default:
+            timeIntervalStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()-tzAdjust, 0);
+            break;
+    }
     var query = {};
     if(timeIntervalEnd){
         query = {$lte: timeIntervalEnd, $gte: timeIntervalStart};
     } else {
         query = { $gte: timeIntervalStart};
     }
-    console.log(query);
 
     return query;
 }
@@ -348,10 +342,9 @@ function get(channel, user, date, callback){
     var todo = [];
 
     var tzAdjust = new Date(date).getHours();
-    console.log(tzAdjust);
 
     function getEvents(callback) {
-        var dateQuery = getDateQuery(channel.dateGroup, date);
+        var dateQuery = getDateQuery(channel.dateGroup, tzAdjust, date);
         var query = {startTime: dateQuery, $or:[{cancelled:false}, {cancelled:{$exists:false}}]};
         if(channel.type === 'sport') query['sport.ref'] = channel.sport.ref;
         if(channel.type === 'league') query['league.ref'] = channel.league.ref;
