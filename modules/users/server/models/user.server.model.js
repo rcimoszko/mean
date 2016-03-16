@@ -240,6 +240,12 @@ UserSchema.pre('save', function(next) {
             this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
             this.password = this.hashPassword(this.password);
         }
+    } else {
+        if (this.password && this.isModified('password')) {
+            this.updatePassword = false;
+            this.salt = crypto.randomBytes(16).toString('base64');
+            this.password = this.hashPassword(this.password);
+        }
     }
     next();
 });
