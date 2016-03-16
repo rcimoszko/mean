@@ -235,21 +235,12 @@ UserSchema.methods.authenticate = function (password) {
 
 //Pres save to check password
 UserSchema.pre('save', function(next) {
-    if(this.isModified('password')){
-        if(!this.updatePassword){
-            if (this.password && this.password.length > 6 && this.password.length !== 88) {
-                this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-                this.password = this.hashPassword(this.password);
-            }
-        } else {
-            if (this.password && this.isModified('password')) {
-                this.updatePassword = false;
-                this.salt = crypto.randomBytes(16).toString('base64');
-                this.password = this.hashPassword(this.password);
-            }
+    if(!this.updatePassword){
+        if (this.password && this.password.length > 6 && this.password.length !== 88) {
+            this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+            this.password = this.hashPassword(this.password);
         }
-    }
-
+    } 
     next();
 });
 
