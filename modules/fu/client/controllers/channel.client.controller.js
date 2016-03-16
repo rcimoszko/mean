@@ -80,6 +80,7 @@ angular.module('fu').controller('ChannelController', ['$scope', '$state', '$stat
             if($scope.upcoming){
                 Channels.getEvents($scope.channelSlug, null, cb);
             } else {
+                console.log($scope.currentDate);
                 Channels.getEvents($scope.channelSlug, $scope.currentDate, cb);
             }
         };
