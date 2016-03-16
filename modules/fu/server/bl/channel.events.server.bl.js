@@ -428,12 +428,12 @@ function get(channel, user, date, callback){
 
     function groupEventsByDay(events, callback){
 
+
         var eventsByDate = _.groupBy(events, function(event){
-            console.log(event.startTime);
-            var date = new Date(event.startTime);
-            date.setHours(date.getHours()-6);
-            console.log(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            var eventDate = new Date(event.startTime);
+            eventDate.setHours(eventDate.getHours()-date.getHours());
+            console.log(new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate()));
+            return new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
         });
 
         events = [];
