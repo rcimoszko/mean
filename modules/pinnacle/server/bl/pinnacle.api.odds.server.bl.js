@@ -450,7 +450,7 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                     }
                 }
 
-                if(betData.betType){
+                if(betData.betType !== null){
                     if(betData.betType.toLowerCase() === 'kills'){
                         betData.betType = null;
                     }
