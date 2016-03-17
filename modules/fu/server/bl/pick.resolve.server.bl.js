@@ -672,7 +672,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     }
                     break;
             }
-
             break;
         case 'total points':
         case 'team totals':
@@ -765,7 +764,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     break;
             }
             break;
-
         case 'series':
             gameSpread = contestantScore - opponentScore;
             comparison = gameSpread + pick.spread;
@@ -781,7 +779,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 result = 'Loss';
             }
             break;
-
         case 'sets':
             contestantSetsWon = 0;
             opponentSetsWon = 0;
@@ -803,6 +800,13 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 } else if (comparison < 0) {
                     result = 'Loss';
                 }
+            }
+            break;
+        default:
+            if(durationWinner === String(pick.contestant.ref)){
+                result = 'Win';
+            } else {
+                result = 'Loss';
             }
             break;
     }
@@ -890,7 +894,6 @@ function resolvePick(event, pick, callback){
     }
 
     function getWinner_todo(contestantScore, opponentScore, callback){
-        console.log(contestantScore, opponentScore);
         if(typeof contestantScore === 'undefined' || typeof opponentScore === 'undefined') return callback('Scores Undefined');
         function cb(durationWinner){
             callback(null, contestantScore, opponentScore, durationWinner);
@@ -901,7 +904,6 @@ function resolvePick(event, pick, callback){
     }
 
     function getResult_todo(contestantScore, opponentScore, durationWinner, callback){
-        console.log(durationWinner);
         if(typeof durationWinner === 'undefined') return callback('Winner Undefined');
         function cb(durationResult){
             callback(null, durationResult);
