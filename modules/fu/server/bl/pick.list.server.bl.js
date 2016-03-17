@@ -151,6 +151,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  authUser
             var event = eventGroup.event;
 
             function createEvent(callback){
+
                 pEvent = {
                     _id:            event._id,
                     sport:          event.sport,

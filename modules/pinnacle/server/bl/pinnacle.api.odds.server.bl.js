@@ -437,6 +437,8 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                         case '1st blood':
                         case '1st to 5 kill':
                         case '1st to 10 kills':
+                        case 'kills':
+                        case 'series':
                             betData.betType = betTypeInfo;
                             betData.betDuration = 'match';
                             break;
