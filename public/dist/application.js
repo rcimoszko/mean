@@ -1165,6 +1165,23 @@ angular.module('fu.admin').config(['$stateProvider',
 
 angular.module('fu.admin').config(['$stateProvider',
     function ($stateProvider) {
+        $stateProvider
+            .state('admin.metricsEngagement', {
+                url: '/engagement-metrics',
+                templateUrl: 'modules/fu/client/views/admin/metrics/admin-metrics-engagement.client.view.html',
+                controller: 'AdminMetricsEngagementController',
+                data: {
+                    roles: ['admin']
+                }
+            });
+
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').config(['$stateProvider',
+    function ($stateProvider) {
 
         $stateProvider
             .state('admin.allProPicks', {
@@ -2079,6 +2096,20 @@ angular.module('fu.admin').controller('AdminListSportsController', ['$scope', 'S
         }
 
         Sports.getAll(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$scope', 'Metrics',
+    function ($scope, Metrics) {
+        var query = {dateType:'daily'};
+
+        function cb(err, metrics){
+            $scope.metrics = metrics;
+        }
+
+        Metrics.get(query, cb);
     }
 ]);
 
@@ -5781,6 +5812,9 @@ angular.module('fu').directive('betSection', ["$compile", function ($compile) {
                 case 'sets':
                     directive = '<bet-section-sets event="event" bets="bets"></bet-section-sets>';
                     break;
+                case 'series':
+                    directive = '<bet-section-series event="event" bets="bets"></bet-section-series>';
+                    break;
                 case 'total points':
                     directive = '<bet-section-total-points event="event"  bets="bets"></bet-section-total-points>';
                     break;
@@ -5834,6 +5868,23 @@ angular.module('fu').directive('betSectionMoneyline', function () {
             if($scope.bets && 'draw' in $scope.bets){
                 $scope.isDraw = true;
             }
+        }]
+    };
+});
+'use strict';
+
+angular.module('fu').directive('betSectionSeries', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            bets: '=',
+            event: '='
+        },
+        templateUrl: 'modules/fu/client/templates/make-picks/bet-sections/bet-section-series.client.template.html',
+        controller: ['$scope', function ($scope){
+            $scope.contestant1Name = $scope.event.contestant1.name;
+            $scope.contestant2Name = $scope.event.contestant2.name;
+
         }]
     };
 });
@@ -7961,6 +8012,14 @@ angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
 
 'use strict';
 
+angular.module('fu').factory('ApiMetrics', ['$resource',
+    function ($resource) {
+        return $resource('api/metrics', {});
+    }
+]);
+
+'use strict';
+
 angular.module('fu').factory('ApiPicks', ['$resource',
     function ($resource) {
         return $resource('api/picks/:_id/:action', { _id: '@_id' }, {
@@ -9326,6 +9385,29 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
             active:     active
         };
 
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('Metrics', [ 'ApiMetrics',
+    function(ApiMetrics) {
+
+        var get = function(query, callback){
+            function cbSuccess(metrics){
+                callback(null, metrics);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiMetrics.query(query, cbSuccess, cbError);
+
+        };
+
+        return {
+            get: get
+        };
     }
 ]);
 'use strict';
