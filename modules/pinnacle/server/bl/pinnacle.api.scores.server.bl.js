@@ -14,7 +14,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     var todo = [];
     var sportName = pinnacleLeague.pinnacleSport.name;
     var leagueName = pinnacleLeague.name;
-    //console.log(scoreApi);
+    console.log(scoreApi);
 
     function getEvent(callback){
         var query = {pinnacleIds:scoreApi.id, startTime: {$lte: new Date()}};
@@ -24,7 +24,7 @@ function processEvent(scoreApi, pinnacleLeague, callback){
     function processPeriods(event, callback){
         var scores = {};
         if(!event) return callback('event not found or resolved');
-        //console.log(event.contestant1.name + ' vs. '+ event.contestant2.name);
+        console.log(event.contestant1.name + ' vs. '+ event.contestant2.name);
         function processPeriod_loop(periodApi, callback){
             var betDuration = PinBetDuration.getBetDuration(sportName, periodApi.number);
             scores[betDuration] = {team1: periodApi.team2Score, team2: periodApi.team1Score};

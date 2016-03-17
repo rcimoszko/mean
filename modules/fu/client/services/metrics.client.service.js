@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('fu').factory('Metrics', [ 'ApiMetrics',
-    function(ApiMetrics) {
+angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral',
+    function(ApiMetricsGeneral) {
 
-        var get = function(query, callback){
+        var getGeneral = function(query, callback){
             function cbSuccess(metrics){
                 callback(null, metrics);
             }
@@ -12,12 +12,12 @@ angular.module('fu').factory('Metrics', [ 'ApiMetrics',
                 callback(response.data.message);
             }
 
-            ApiMetrics.query(query, cbSuccess, cbError);
+            ApiMetricsGeneral.query(query, cbSuccess, cbError);
 
         };
 
         return {
-            get: get
+            getGeneral: getGeneral
         };
     }
 ]);

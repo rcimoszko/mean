@@ -1,0 +1,18 @@
+<section class="content-padding-top">
+    <table class="table table-condensed">
+        <thead>
+            <th>Date</th>
+            <th>New Users</th>
+            <th>Picks</th>
+            <th>Comments</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="metric in metrics">
+                <td>{{ metric.date | date:'mediumDate'}}</td>
+                <td>{{metric.userCount}}</td>
+                <td>{{metric.pickCount}}</td>
+                <td>{{metric.commentCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

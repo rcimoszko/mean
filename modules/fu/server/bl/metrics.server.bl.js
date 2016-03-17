@@ -12,13 +12,28 @@ var async = require('async'),
 function getGeneral(query, callback){
 
     //var dateType = query.dateType;
+    var dateType = query.dateType;
+    var project = {};
+
+    switch(dateType){
+        case 'daily':
+        case 'weekly':
+            project = {$project: {
+                day: { $dayOfMonth: '$created'},
+                year: { $year: '$created'},
+                month: { $month: '$created'}
+            }};
+            break;
+        case 'monthly':
+            project = {$project: {
+                year: { $year: '$created'},
+                month: { $month: '$created'}
+            }};
+            break;
+    }
 
     function getNewUserCount(callback){
-        var project = {$project: {
-            day: { $dayOfMonth: '$created'},
-            year: { $year: '$created'},
-            month: { $month: '$created'}
-        }};
+
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
             userCount:  {$sum: 1}
@@ -31,11 +46,6 @@ function getGeneral(query, callback){
 
     function getPickCount(callback){
 
-        var project = {$project: {
-            day: { $dayOfMonth: '$timeSubmitted'},
-            year: { $year: '$timeSubmitted'},
-            month: { $month: '$timeSubmitted'}
-        }};
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
             pickCount:  {$sum: 1}
@@ -48,11 +58,6 @@ function getGeneral(query, callback){
 
     function getCommentCount(callback){
 
-        var project = {$project: {
-            day: { $dayOfMonth: '$timestamp'},
-            year: { $year: '$timestamp'},
-            month: { $month: '$timestamp'}
-        }};
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
             commentCount:  {$sum: 1}
@@ -71,9 +76,28 @@ function getGeneral(query, callback){
     };
 
     function done(err, results){
-        var merged = _.merge(results.comments, results.picks);
-        merged = _.merge(merged, results.newUsers);
-        callback(null, merged);
+        var metrics = [];
+
+        var currentDate = new Date();
+        var endDate = new Date(2014, 11, 1);
+
+        function filterDay(metric){
+            return metric._id.year === currentDate.getFullYear() && metric._id.month === currentDate.getMonth() + 1 && metric._id.day === currentDate.getDate();
+        }
+
+        while(currentDate > endDate){
+            var pickCount = _.find(results.picks, filterDay);
+            var userCount = _.find(results.newUsers, filterDay);
+            var commentCount = _.find(results.comments, filterDay);
+            var date = new Date(currentDate);
+            var metric = {date: date};
+            if(pickCount) metric.pickCount = pickCount.pickCount;
+            if(userCount) metric.userCount = userCount.userCount;
+            if(commentCount) metric.commentCount = commentCount.commentCount;
+            metrics.push(metric);
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+        callback(err, metrics);
     }
 
     async.parallel(todo, done);
