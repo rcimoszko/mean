@@ -141,6 +141,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
     var betData = _.clone(initialBetData);
     var spreads = {};
     if(!betData.betType) betData.betType = 'moneyline';
+    if(betData.betType === 'series') betData.betType = 'moneyline';
     betData.pinnacleId = oddsApi.lineId;
 
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
@@ -320,6 +321,7 @@ function processTotals(oddsApi, initialBetData, event, callback){
                 betData.odds = totalsApi[betData.overUnder];
                 betData.points = totalsApi.points;
                 if(!betData.betType) betData.betType = 'total points';
+                if(betData.betType === 'series') betData.betType = 'series totals';
                 callback(null);
             }
 
