@@ -453,8 +453,8 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                         betData.betType = null;
                     }
 
-                    if(betData.betType.toLowerCase() === 'series'){
-                        betData.betType = null;
+                    if(betData.betType.toLowerCase() === 'series'  && ('spreads' in oddsApi) ){
+                        betData.betType = 'series';
                     }
                 }
                 break;
