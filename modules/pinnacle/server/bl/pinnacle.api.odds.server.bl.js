@@ -454,7 +454,7 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                     if(betData.betType.toLowerCase() === 'kills'){
                         betData.betType = null;
                     }
-
+                    console.log(betData.betType);
                     if(betData.betType.toLowerCase() === 'series'  && ('spreads' in oddsApi) ){
                         betData.betType = 'series';
                     }
