@@ -802,6 +802,20 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 }
             }
             break;
+        case '1st to 5 kills':
+        case '1st to 10 kills':
+        case '1st round':
+        case '1st to 5 rounds':
+        case '1st blood':
+            if(durationWinner === 'draw'){
+                result = 'Push';
+            } else if(durationWinner === String(pick.contestant.ref)){
+                result = 'Win';
+            } else {
+                result = 'Loss';
+            }
+            break;
+
     }
 
     callback(result);
