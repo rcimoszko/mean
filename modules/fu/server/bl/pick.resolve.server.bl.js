@@ -802,13 +802,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 }
             }
             break;
-        default:
-            if(durationWinner === String(pick.contestant.ref)){
-                result = 'Win';
-            } else {
-                result = 'Loss';
-            }
-            break;
     }
 
     callback(result);
