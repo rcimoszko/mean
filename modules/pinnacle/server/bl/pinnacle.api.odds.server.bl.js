@@ -434,9 +434,8 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                     betData.betDuration = betTypeInfo.split(', ')[0];
                 } else {
                     switch(betTypeInfo.toLowerCase()){
-                        case 'kills':
-                        case 'series':
                         case '1st blood':
+                        case '1st to 5 kill':
                         case '1st to 10 kills':
                             betData.betType = betTypeInfo;
                             betData.betDuration = 'match';
@@ -449,13 +448,11 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
 
                 if(betData.betType){
                     if(betData.betType.toLowerCase() === 'kills'){
-                        if('spreads' in oddsApi)    betData.betType = 'spread';
-                        if('totals' in oddsApi)     betData.betType = 'totals';
+                        betData.betType = null;
                     }
 
                     if(betData.betType.toLowerCase() === 'series'){
-                        if('spreads' in oddsApi)    betData.betType = 'spread';
-                        if('moneyline' in oddsApi)  betData.betType = 'moneyline';
+                        betData.betType = null;
                     }
                 }
                 break;

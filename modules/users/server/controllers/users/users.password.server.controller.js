@@ -215,7 +215,6 @@ exports.changePassword = function (req, res, next) {
                     if (user.authenticate(passwordDetails.currentPassword)) {
                         if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                             user.password = passwordDetails.newPassword;
-                            console.log(user.password);
 
                             user.save(function (err) {
                                 if (err) {

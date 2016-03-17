@@ -45,6 +45,9 @@ function getNew(callback){
     User.find().sort({'created':-1}).limit(500).exec(cb);
 }
 
+function aggregate(aggArray, callback){
+    User.aggregate(aggArray, callback);
+}
 
 function getFollowing(user, query, callback){
     var todo = [];
@@ -643,3 +646,4 @@ exports.getHotPickUsers      = getHotPickUsers;
 exports.returnUnits          = returnUnits;
 exports.getAll               = getAll;
 exports.getNew               = getNew;
+exports.aggregate            = aggregate;

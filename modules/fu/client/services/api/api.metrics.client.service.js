@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
+angular.module('fu').factory('ApiMetrics', ['$resource',
     function ($resource) {
         return $resource('api/metrics', {});
     }

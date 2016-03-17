@@ -3,7 +3,7 @@
 angular.module('fu').factory('Metrics', [ 'ApiMetrics',
     function(ApiMetrics) {
 
-        var get = function(callback){
+        var get = function(query, callback){
             function cbSuccess(metrics){
                 callback(null, metrics);
             }
@@ -12,7 +12,7 @@ angular.module('fu').factory('Metrics', [ 'ApiMetrics',
                 callback(response.data.message);
             }
 
-            ApiMetrics.query(cbSuccess, cbError);
+            ApiMetrics.query(query, cbSuccess, cbError);
 
         };
 
