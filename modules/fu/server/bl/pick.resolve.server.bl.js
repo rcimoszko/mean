@@ -890,6 +890,7 @@ function resolvePick(event, pick, callback){
     }
 
     function getWinner_todo(contestantScore, opponentScore, callback){
+        console.log(contestantScore, opponentScore);
         if(typeof contestantScore === 'undefined' || typeof opponentScore === 'undefined') return callback('Scores Undefined');
         function cb(durationWinner){
             callback(null, contestantScore, opponentScore, durationWinner);
@@ -900,6 +901,7 @@ function resolvePick(event, pick, callback){
     }
 
     function getResult_todo(contestantScore, opponentScore, durationWinner, callback){
+        console.log(durationWinner);
         if(typeof durationWinner === 'undefined') return callback('Winner Undefined');
         function cb(durationResult){
             callback(null, durationResult);
