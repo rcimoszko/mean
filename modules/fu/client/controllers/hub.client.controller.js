@@ -31,10 +31,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.picks = {
             all:{
                 pending: [],
+                "in play": [],
                 completed: []
             },
             pro: {
                 pending: [],
+                "in play": [],
                 completed: []
             }
         };
@@ -42,10 +44,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.pages = {
             all:{
                 pending: 0,
+                "in play": 0,
                 completed: 0
             },
             pro: {
                 pending: 0,
+                "in play": 0,
                 completed: 0
             }
         };
@@ -53,7 +57,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.tab = 'all';
 
 
-        $scope.pickFilters = ['pending', 'completed'];
+        $scope.pickFilters = ['pending', 'in play', 'completed'];
         $scope.pickFilter = $scope.pickFilters[0];
         $scope.setPickFilter = function(pickFilter){
         };

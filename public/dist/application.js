@@ -2117,7 +2117,7 @@ angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$sco
             $scope.metrics = metrics;
         }
 
-        Metrics.get(query, cb);
+        Metrics.getEngagement(query, cb);
     }
 ]);
 
@@ -3105,10 +3105,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.picks = {
             all:{
                 pending: [],
+                "in play": [],
                 completed: []
             },
             pro: {
                 pending: [],
+                "in play": [],
                 completed: []
             }
         };
@@ -3116,10 +3118,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.pages = {
             all:{
                 pending: 0,
+                "in play": 0,
                 completed: 0
             },
             pro: {
                 pending: 0,
+                "in play": 0,
                 completed: 0
             }
         };
@@ -3127,7 +3131,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.tab = 'all';
 
 
-        $scope.pickFilters = ['pending', 'completed'];
+        $scope.pickFilters = ['pending', 'in play', 'completed'];
         $scope.pickFilter = $scope.pickFilters[0];
         $scope.setPickFilter = function(pickFilter){
         };
@@ -8044,6 +8048,14 @@ angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
 
 'use strict';
 
+angular.module('fu').factory('ApiMetricsEngagement', ['$resource',
+    function ($resource) {
+        return $resource('api/metrics/engagement', {});
+    }
+]);
+
+'use strict';
+
 angular.module('fu').factory('ApiMetricsGeneral', ['$resource',
     function ($resource) {
         return $resource('api/metrics/general', {});
@@ -9421,8 +9433,8 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
 ]);
 'use strict';
 
-angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral',
-    function(ApiMetricsGeneral) {
+angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral', 'ApiMetricsEngagement',
+    function(ApiMetricsGeneral, ApiMetricsEngagement) {
 
         var getGeneral = function(query, callback){
             function cbSuccess(metrics){
@@ -9437,8 +9449,22 @@ angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral',
 
         };
 
+        var getEngagement = function(query, callback){
+            function cbSuccess(metrics){
+                callback(null, metrics);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiMetricsEngagement.query(query, cbSuccess, cbError);
+
+        };
+
         return {
-            getGeneral: getGeneral
+            getGeneral: getGeneral,
+            getEngagement: getEngagement
         };
     }
 ]);

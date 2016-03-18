@@ -8,6 +8,6 @@ angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$sco
             $scope.metrics = metrics;
         }
 
-        Metrics.get(query, cb);
+        Metrics.getEngagement(query, cb);
     }
 ]);

@@ -7,7 +7,7 @@ exports.invokeRolesPolicies = function () {
     acl.allow([{
         roles: ['admin'],
         allows: [{
-            resources: '/api/metrics',
+            resources: '/api/metrics/engagement',
             permissions: ['get']
         }]
     }]);

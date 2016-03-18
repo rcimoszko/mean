@@ -4808,6 +4808,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container {
   overflow: hidden;
   border-bottom: 1px solid #eaeaea;
+  position: relative;
   padding-bottom: 15px;
   min-height: 75px;
   padding-left: 10px;
@@ -4826,7 +4827,7 @@ notification:last-of-type .notification {
   font-size: 14px;
   color: #2b2b2c;
   margin-bottom: 5px;
-  margin-right: 8px;
+  margin-right: 20px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
   background-color: #4CAF50;
@@ -4842,6 +4843,13 @@ notification:last-of-type .notification {
 }
 .pick-list .pick .pick-container .bet-name .copy-pick .fa {
   margin-right: 3px;
+}
+.pick-list .pick .pick-container .timestamp {
+  position: absolute;
+  right: 0;
+  font-size: 10px;
+  top: 4px;
+  color: #aaabac;
 }
 .pick-list .pick .pick-container .bet-duration {
   font-size: 11px;
