@@ -351,15 +351,43 @@ function getEngagement(query, callback){
         async.eachSeries(metrics, processCategory, cb);
     }
 
-    function getFollowCount(callback){
+    function getFollowCount(metrics, callback){
 
+        function processCategory(category, callback){
+
+            category.followCount = 0;
+
+            function getUserFollows(user, callback){
+                var created = new Date(user.created);
+                var query = {'follower.ref':user._id,
+                    startDate: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
+                function cb(err, follows){
+                    if(follows.length){
+                        category.followCount = category.followCount + 1;
+                    }
+                    callback(err);
+                }
+                FollowBl.getByQuery(query, cb);
+            }
+            async.eachSeries(category.users, getUserFollows, callback);
+
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
     }
 
 
     todo.push(getNewUsersCount);
     todo.push(processDates);
     todo.push(getPickCount);
-    //todo.push(getFollowCount);
+    todo.push(getFollowCount);
 
     async.waterfall(todo, callback);
 
