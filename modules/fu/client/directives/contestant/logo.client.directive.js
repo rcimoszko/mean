@@ -16,16 +16,16 @@ angular.module('fu').directive('logo', function () {
 
             switch($scope.size){
                 case 'xs':
-                    insert = '/c_fit,h_25/f_auto';
+                    insert = '/c_fit,h_25/fl_lossy,f_auto';
                     break;
                 case 'sm':
-                    insert = '/c_fit,h_30/f_auto';
+                    insert = '/c_fit,h_30/fl_lossy,f_auto';
                     break;
                 case 'md':
-                    insert = '/c_fit,h_60/f_auto';
+                    insert = '/c_fit,h_60/fl_lossy,f_auto';
                     break;
                 case 'lg':
-                    insert = '/c_fit,h_90/f_auto';
+                    insert = '/c_fit,h_90/fl_lossy,f_auto';
                     break;
             }
 

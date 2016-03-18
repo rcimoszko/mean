@@ -2,16 +2,22 @@
 
 angular.module('fu.admin').controller('AdminMetricsGeneralController', ['$scope', '$filter', 'Metrics',
     function ($scope, $filter, Metrics) {
-        var query = {dateType:'daily'};
 
-        function cb(err, metrics){
-            $scope.metrics = metrics;
-        }
+        $scope.dates = ['daily', 'weekly', 'monthly'];
+        $scope.date = $scope.dates[0];
 
-        Metrics.getGeneral(query, cb);
+        $scope.getMetrics = function(){
 
-        $scope.getDate = function(date){
-            return  $filter('date')(new Date(date.year, date.month, date.day), 'short');
-        }
+            var query = {dateType:$scope.date};
+
+            function cb(err, metrics){
+                $scope.metrics = metrics;
+            }
+
+            Metrics.getGeneral(query, cb);
+        };
+
+        $scope.getMetrics();
+
     }
 ]);

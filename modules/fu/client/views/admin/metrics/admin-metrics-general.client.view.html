@@ -1,4 +1,11 @@
 <section class="content-padding-top">
+
+    <div class="btn-container row">
+        <div class="col-xs-3">
+            <select class="form-control" name="dates" id="dates" ng-options="date for date in dates" data-ng-model="date" data-ng-change="getMetrics()"></select>
+        </div>
+    </div>
+
     <table class="table table-condensed">
         <thead>
             <th>Date</th>

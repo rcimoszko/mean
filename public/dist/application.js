@@ -1166,8 +1166,16 @@ angular.module('fu.admin').config(['$stateProvider',
 angular.module('fu.admin').config(['$stateProvider',
     function ($stateProvider) {
         $stateProvider
+            .state('admin.metricsGeneral', {
+                url: '/metrics-general',
+                templateUrl: 'modules/fu/client/views/admin/metrics/admin-metrics-general.client.view.html',
+                controller: 'AdminMetricsGeneralController',
+                data: {
+                    roles: ['admin']
+                }
+            })
             .state('admin.metricsEngagement', {
-                url: '/engagement-metrics',
+                url: '/metrics-engagement',
                 templateUrl: 'modules/fu/client/views/admin/metrics/admin-metrics-engagement.client.view.html',
                 controller: 'AdminMetricsEngagementController',
                 data: {
@@ -2110,6 +2118,30 @@ angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$sco
         }
 
         Metrics.get(query, cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminMetricsGeneralController', ['$scope', '$filter', 'Metrics',
+    function ($scope, $filter, Metrics) {
+
+        $scope.dates = ['daily', 'weekly', 'monthly'];
+        $scope.date = $scope.dates[0];
+
+        $scope.getMetrics = function(){
+
+            var query = {dateType:$scope.date};
+
+            function cb(err, metrics){
+                $scope.metrics = metrics;
+            }
+
+            Metrics.getGeneral(query, cb);
+        };
+
+        $scope.getMetrics();
+
     }
 ]);
 
@@ -5697,16 +5729,16 @@ angular.module('fu').directive('logo', function () {
 
             switch($scope.size){
                 case 'xs':
-                    insert = '/c_fit,h_25/f_auto';
+                    insert = '/c_fit,h_25/fl_lossy,f_auto';
                     break;
                 case 'sm':
-                    insert = '/c_fit,h_30/f_auto';
+                    insert = '/c_fit,h_30/fl_lossy,f_auto';
                     break;
                 case 'md':
-                    insert = '/c_fit,h_60/f_auto';
+                    insert = '/c_fit,h_60/fl_lossy,f_auto';
                     break;
                 case 'lg':
-                    insert = '/c_fit,h_90/f_auto';
+                    insert = '/c_fit,h_90/fl_lossy,f_auto';
                     break;
             }
 
@@ -8012,9 +8044,9 @@ angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
 
 'use strict';
 
-angular.module('fu').factory('ApiMetrics', ['$resource',
+angular.module('fu').factory('ApiMetricsGeneral', ['$resource',
     function ($resource) {
-        return $resource('api/metrics', {});
+        return $resource('api/metrics/general', {});
     }
 ]);
 
@@ -9389,10 +9421,10 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
 ]);
 'use strict';
 
-angular.module('fu').factory('Metrics', [ 'ApiMetrics',
-    function(ApiMetrics) {
+angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral',
+    function(ApiMetricsGeneral) {
 
-        var get = function(query, callback){
+        var getGeneral = function(query, callback){
             function cbSuccess(metrics){
                 callback(null, metrics);
             }
@@ -9401,12 +9433,12 @@ angular.module('fu').factory('Metrics', [ 'ApiMetrics',
                 callback(response.data.message);
             }
 
-            ApiMetrics.query(query, cbSuccess, cbError);
+            ApiMetricsGeneral.query(query, cbSuccess, cbError);
 
         };
 
         return {
-            get: get
+            getGeneral: getGeneral
         };
     }
 ]);

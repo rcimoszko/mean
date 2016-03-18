@@ -11,28 +11,28 @@ var async = require('async'),
 
 function getGeneral(query, callback){
 
-    //var dateType = query.dateType;
     var dateType = query.dateType;
-    var project = {};
-
-    switch(dateType){
-        case 'daily':
-        case 'weekly':
-            project = {$project: {
-                day: { $dayOfMonth: '$created'},
-                year: { $year: '$created'},
-                month: { $month: '$created'}
-            }};
-            break;
-        case 'monthly':
-            project = {$project: {
-                year: { $year: '$created'},
-                month: { $month: '$created'}
-            }};
-            break;
-    }
 
     function getNewUserCount(callback){
+
+        var project = {};
+
+        switch(dateType){
+            case 'daily':
+            case 'weekly':
+                project = {$project: {
+                    day: { $dayOfMonth: '$created'},
+                    year: { $year: '$created'},
+                    month: { $month: '$created'}
+                }};
+                break;
+            case 'monthly':
+                project = {$project: {
+                    year: { $year: '$created'},
+                    month: { $month: '$created'}
+                }};
+                break;
+        }
 
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
@@ -45,6 +45,23 @@ function getGeneral(query, callback){
     }
 
     function getPickCount(callback){
+        var project = {};
+        switch(dateType){
+            case 'daily':
+            case 'weekly':
+                project = {$project: {
+                    day: { $dayOfMonth: '$timeSubmitted'},
+                    year: { $year: '$timeSubmitted'},
+                    month: { $month: '$timeSubmitted'}
+                }};
+                break;
+            case 'monthly':
+                project = {$project: {
+                    year: { $year: '$timeSubmitted'},
+                    month: { $month: '$timeSubmitted'}
+                }};
+                break;
+        }
 
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
@@ -57,6 +74,23 @@ function getGeneral(query, callback){
     }
 
     function getCommentCount(callback){
+        var project = {};
+        switch(dateType){
+            case 'daily':
+            case 'weekly':
+                project = {$project: {
+                    day: { $dayOfMonth: '$timestamp'},
+                    year: { $year: '$timestamp'},
+                    month: { $month: '$timestamp'}
+                }};
+                break;
+            case 'monthly':
+                project = {$project: {
+                    year: { $year: '$timestamp'},
+                    month: { $month: '$timestamp'}
+                }};
+                break;
+        }
 
         var group = {$group: {
             _id:    {year: '$year', month: '$month', day: '$day'},
@@ -78,25 +112,73 @@ function getGeneral(query, callback){
     function done(err, results){
         var metrics = [];
 
-        var currentDate = new Date();
-        var endDate = new Date(2014, 11, 1);
 
         function filterDay(metric){
             return metric._id.year === currentDate.getFullYear() && metric._id.month === currentDate.getMonth() + 1 && metric._id.day === currentDate.getDate();
         }
-
-        while(currentDate > endDate){
-            var pickCount = _.find(results.picks, filterDay);
-            var userCount = _.find(results.newUsers, filterDay);
-            var commentCount = _.find(results.comments, filterDay);
-            var date = new Date(currentDate);
-            var metric = {date: date};
-            if(pickCount) metric.pickCount = pickCount.pickCount;
-            if(userCount) metric.userCount = userCount.userCount;
-            if(commentCount) metric.commentCount = commentCount.commentCount;
-            metrics.push(metric);
-            currentDate.setDate(currentDate.getDate() - 1);
+        function filterMonth(metric){
+            return metric._id.year === currentMonth.getFullYear() && metric._id.month === currentMonth.getMonth() + 1;
         }
+
+        var pickCount;
+        var userCount;
+        var commentCount;
+        var metric;
+        var currentDate = new Date();
+        var endDate = new Date(2013, 11, 1);
+
+        switch (dateType){
+            case 'daily':
+                while(currentDate > endDate){
+                    pickCount = _.find(results.picks, filterDay);
+                    userCount = _.find(results.newUsers, filterDay);
+                    commentCount = _.find(results.comments, filterDay);
+                    var date = new Date(currentDate);
+                    metric = {date: date};
+                    if(pickCount) metric.pickCount = pickCount.pickCount;
+                    if(userCount) metric.userCount = userCount.userCount;
+                    if(commentCount) metric.commentCount = commentCount.commentCount;
+                    metrics.push(metric);
+                    currentDate.setDate(currentDate.getDate() - 1);
+                }
+                break;
+            case 'weekly':
+                var currentWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay());
+
+                metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0};
+
+                while(currentDate > endDate){
+                    pickCount = _.find(results.picks, filterDay);
+                    userCount = _.find(results.newUsers, filterDay);
+                    commentCount = _.find(results.comments, filterDay);
+                    if(currentDate > currentWeek){
+                        if(pickCount) metric.pickCount = metric.pickCount + pickCount.pickCount;
+                        if(userCount) metric.userCount = metric.userCount + userCount.userCount;
+                        if(commentCount) metric.commentCount = metric.commentCount + commentCount.commentCount;
+                    } else {
+                        metrics.push(metric);
+                        currentWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()-7);
+                        metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0};
+                    }
+                    currentDate.setDate(currentDate.getDate() - 1);
+                }
+                break;
+            case 'monthly':
+                var currentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                while(currentMonth > endDate){
+                    pickCount = _.find(results.picks, filterMonth);
+                    userCount = _.find(results.newUsers, filterMonth);
+                    commentCount = _.find(results.comments, filterMonth);
+                    metric = {date: new Date(currentMonth)};
+                    if(pickCount) metric.pickCount = pickCount.pickCount;
+                    if(userCount) metric.userCount = userCount.userCount;
+                    if(commentCount) metric.commentCount = commentCount.commentCount;
+                    metrics.push(metric);
+                    currentMonth.setMonth(currentMonth.getMonth() - 1);
+                }
+                break;
+        }
+
         callback(err, metrics);
     }
 
