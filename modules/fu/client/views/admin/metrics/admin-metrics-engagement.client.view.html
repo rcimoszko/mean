@@ -1,12 +1,18 @@
 <section class="content-padding-top">
     <table class="table">
         <thead>
-            <th>New Users</th>
-            <th>% Made Pick</th>
-            <th>% Made Pick</th>
+            <th>Date</th>
+            <th># New Users</th>
+            <th colspan="2" class="text-center">Pick Made on Date Created</th>
+            <th colspan="2" class="text-center">Follow on Date Created</th>
         </thead>
         <tbody>
-            <tr data-ng-repeat="metric in metrics"></tr>
+            <tr data-ng-repeat="metric in metrics">
+                <td>{{metric.date|date:'short'}}</td>
+                <td>{{metric.userCount}}</td>
+                <td class="text-center">{{metric.pickMadeCount}}</td>
+                <td class="text-center">{{((metric.pickMadeCount/metric.userCount)*100).toFixed(1)}}%</td>
+            </tr>
         </tbody>
     </table>
 

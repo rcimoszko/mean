@@ -5,6 +5,7 @@ angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$sco
         var query = {dateType:'daily'};
 
         function cb(err, metrics){
+            console.log(metrics);
             $scope.metrics = metrics;
         }
 
