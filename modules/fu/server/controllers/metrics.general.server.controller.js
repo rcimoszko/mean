@@ -7,6 +7,7 @@ var path = require('path'),
 
 function get(req, res) {
     function cb(err, metrics){
+        console.log(err);
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)

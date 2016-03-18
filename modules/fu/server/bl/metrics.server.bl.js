@@ -4,7 +4,8 @@ var async = require('async'),
     _ = require('lodash'),
     UserBl = require('./user.server.bl'),
     CommentBl = require('./comment.server.bl'),
-    //ChatBl = require('./chat.server.bl'),
+    FollowBl = require('./follow.server.bl'),
+    ChatBl = require('./chat.server.bl'),
     PickBl = require('./pick.server.bl');
 
 
@@ -103,15 +104,75 @@ function getGeneral(query, callback){
 
     }
 
+    function getFollowCount(callback){
+        var project = {};
+        switch(dateType){
+            case 'daily':
+            case 'weekly':
+                project = {$project: {
+                    day: { $dayOfMonth: '$startDate'},
+                    year: { $year: '$startDate'},
+                    month: { $month: '$startDate'}
+                }};
+                break;
+            case 'monthly':
+                project = {$project: {
+                    year: { $year: '$startDate'},
+                    month: { $month: '$startDate'}
+                }};
+                break;
+        }
+
+        var group = {$group: {
+            _id:    {year: '$year', month: '$month', day: '$day'},
+            followCount:  {$sum: 1}
+        }};
+
+        var aggArray = [project, group];
+
+        FollowBl.aggregate(aggArray, callback);
+    }
+
+    function getChatCount(callback){
+        var project = {};
+        switch(dateType){
+            case 'daily':
+            case 'weekly':
+                project = {$project: {
+                    day: { $dayOfMonth: '$timestamp'},
+                    year: { $year: '$timestamp'},
+                    month: { $month: '$timestamp'}
+                }};
+                break;
+            case 'monthly':
+                project = {$project: {
+                    year: { $year: '$timestamp'},
+                    month: { $month: '$timestamp'}
+                }};
+                break;
+        }
+
+        var group = {$group: {
+            _id:    {year: '$year', month: '$month', day: '$day'},
+            chatCount:  {$sum: 1}
+        }};
+
+        var aggArray = [project, group];
+
+        ChatBl.aggregate(aggArray, callback);
+    }
+
     var todo = {
         newUsers: getNewUserCount,
         picks: getPickCount,
-        comments: getCommentCount
+        comments: getCommentCount,
+        follows: getFollowCount,
+        chats: getChatCount
     };
 
     function done(err, results){
-        var metrics = [];
 
+        var metrics = [];
 
         function filterDay(metric){
             return metric._id.year === currentDate.getFullYear() && metric._id.month === currentDate.getMonth() + 1 && metric._id.day === currentDate.getDate();
@@ -123,6 +184,8 @@ function getGeneral(query, callback){
         var pickCount;
         var userCount;
         var commentCount;
+        var followCount;
+        var chatCount;
         var metric;
         var currentDate = new Date();
         var endDate = new Date(2013, 11, 1);
@@ -133,11 +196,15 @@ function getGeneral(query, callback){
                     pickCount = _.find(results.picks, filterDay);
                     userCount = _.find(results.newUsers, filterDay);
                     commentCount = _.find(results.comments, filterDay);
+                    followCount = _.find(results.follows, filterDay);
+                    chatCount = _.find(results.chats, filterDay);
                     var date = new Date(currentDate);
                     metric = {date: date};
-                    if(pickCount) metric.pickCount = pickCount.pickCount;
-                    if(userCount) metric.userCount = userCount.userCount;
-                    if(commentCount) metric.commentCount = commentCount.commentCount;
+                    if(pickCount)       metric.pickCount = pickCount.pickCount;
+                    if(userCount)       metric.userCount = userCount.userCount;
+                    if(commentCount)    metric.commentCount = commentCount.commentCount;
+                    if(followCount)     metric.followCount = followCount.followCount;
+                    if(chatCount)       metric.chatCount = chatCount.chatCount;
                     metrics.push(metric);
                     currentDate.setDate(currentDate.getDate() - 1);
                 }
@@ -145,20 +212,24 @@ function getGeneral(query, callback){
             case 'weekly':
                 var currentWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay());
 
-                metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0};
+                metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0, followCount:0, chatCount:0};
 
                 while(currentDate > endDate){
                     pickCount = _.find(results.picks, filterDay);
                     userCount = _.find(results.newUsers, filterDay);
                     commentCount = _.find(results.comments, filterDay);
+                    followCount = _.find(results.follows, filterDay);
+                    chatCount = _.find(results.chats, filterDay);
                     if(currentDate > currentWeek){
-                        if(pickCount) metric.pickCount = metric.pickCount + pickCount.pickCount;
-                        if(userCount) metric.userCount = metric.userCount + userCount.userCount;
-                        if(commentCount) metric.commentCount = metric.commentCount + commentCount.commentCount;
+                        if(pickCount)       metric.pickCount = metric.pickCount + pickCount.pickCount;
+                        if(userCount)       metric.userCount = metric.userCount + userCount.userCount;
+                        if(commentCount)    metric.commentCount = metric.commentCount + commentCount.commentCount;
+                        if(followCount)     metric.followCount = metric.followCount + followCount.followCount;
+                        if(chatCount)       metric.chatCount = metric.chatCount + chatCount.chatCount;
                     } else {
                         metrics.push(metric);
                         currentWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()-7);
-                        metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0};
+                        metric = {date: new Date(currentWeek), pickCount:0, userCount:0, commentCount:0, followCount:0, chatCount: 0};
                     }
                     currentDate.setDate(currentDate.getDate() - 1);
                 }
@@ -169,10 +240,14 @@ function getGeneral(query, callback){
                     pickCount = _.find(results.picks, filterMonth);
                     userCount = _.find(results.newUsers, filterMonth);
                     commentCount = _.find(results.comments, filterMonth);
+                    followCount = _.find(results.follows, filterMonth);
+                    chatCount = _.find(results.chats, filterMonth);
                     metric = {date: new Date(currentMonth)};
-                    if(pickCount) metric.pickCount = pickCount.pickCount;
-                    if(userCount) metric.userCount = userCount.userCount;
-                    if(commentCount) metric.commentCount = commentCount.commentCount;
+                    if(pickCount)       metric.pickCount = pickCount.pickCount;
+                    if(userCount)       metric.userCount = userCount.userCount;
+                    if(commentCount)    metric.commentCount = commentCount.commentCount;
+                    if(followCount)     metric.followCount = followCount.followCount;
+                    if(chatCount)       metric.chatCount = chatCount.chatCount;
                     metrics.push(metric);
                     currentMonth.setMonth(currentMonth.getMonth() - 1);
                 }

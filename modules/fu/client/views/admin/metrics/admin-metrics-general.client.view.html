@@ -12,6 +12,8 @@
             <th>New Users</th>
             <th>Picks</th>
             <th>Comments</th>
+            <th>Follows</th>
+            <th>Chat Count</th>
         </thead>
         <tbody>
             <tr data-ng-repeat="metric in metrics">
@@ -19,6 +21,8 @@
                 <td>{{metric.userCount}}</td>
                 <td>{{metric.pickCount}}</td>
                 <td>{{metric.commentCount}}</td>
+                <td>{{metric.followCount}}</td>
+                <td>{{metric.chatCount}}</td>
             </tr>
         </tbody>
     </table>
