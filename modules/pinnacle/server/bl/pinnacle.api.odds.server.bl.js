@@ -437,7 +437,7 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                 } else {
                     switch(betTypeInfo.toLowerCase()){
                         case '1st blood':
-                        case '1st to 5 kill':
+                        case '1st to 5 kills':
                         case '1st to 10 kills':
                         case 'kills':
                         case 'series':
