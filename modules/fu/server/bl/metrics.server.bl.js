@@ -262,53 +262,37 @@ function getGeneral(query, callback){
 }
 
 
-function getEngagement(query, callback){
-
-    var dateType = query.dateType;
-
+function getEngagementDaily(callback){
     var todo = [];
 
     function getNewUsersCount(callback){
 
         var match = {$match:{created: {$gte: new Date(2016, 1, 1)}}};
 
-        var project = {};
-
-        switch(dateType){
-            case 'daily':
-            case 'weekly':
-                project = {$project: {
-                    day:   { $dayOfMonth: '$created'},
-                    month: { $month: '$created'},
-                    year:  { $year: '$created'},
-                    user:  '$$ROOT'
-                }};
-                break;
-            case 'monthly':
-                project = {$project: {
-                    year: { $year: '$created'},
-                    month: { $month: '$created'}
-                }};
-                break;
-        }
+        var project = {$project: {
+            day:   { $dayOfMonth: '$created'},
+            month: { $month: '$created'},
+            year:  { $year: '$created'},
+            user:  '$$ROOT'
+        }};
 
         var group = {$group: {
             _id:        {year: '$year', month: '$month', day: '$day'},
             users:      {$addToSet: '$user'},
             userCount:  {$sum: 1}
         }};
+        var sort = {$sort:{_id:-1}};
 
 
-        var aggArray = [match, project, group];
+        var aggArray = [match, project, group, sort];
 
         UserBl.aggregate(aggArray, callback);
     }
 
     function processDates(metrics, callback){
-        metrics = _.sortBy(metrics, '_id');
 
         function processCategory(category, callback){
-            category.date = new Date(category._id.year, category._id.month, category._id.day);
+            category.date =  new Date(category._id.year, category._id.month - 1, category._id.day);
             callback();
         }
 
@@ -328,10 +312,10 @@ function getEngagement(query, callback){
             function getUserPicks(user, callback){
                 var created = new Date(user.created);
                 var query = {'user.ref':user._id,
-                            timeSubmitted: {$gte: created,
-                                            $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
-                                            }
-                            };
+                    timeSubmitted: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
                 function cb(err, picks){
                     if(picks.length){
                         category.pickMadeCount = category.pickMadeCount + 1;
@@ -367,6 +351,8 @@ function getEngagement(query, callback){
                 function cb(err, follows){
                     if(follows.length){
                         category.followCount = category.followCount + 1;
+
+
                     }
                     callback(err);
                 }
@@ -383,6 +369,263 @@ function getEngagement(query, callback){
         async.eachSeries(metrics, processCategory, cb);
     }
 
+    todo.push(getNewUsersCount);
+    todo.push(processDates);
+    todo.push(getPickCount);
+    todo.push(getFollowCount);
+
+    async.waterfall(todo, callback);
+}
+
+function getEngagementWeekly(callback){
+    var todo = [];
+    var metricsArray = [];
+
+    function getNewUsersCount(callback){
+
+        var match = {$match:{created: {$gte: new Date(2016, 0, 1)}}};
+
+        var project = {$project: {
+            day:   { $dayOfMonth: '$created'},
+            month: { $month: '$created'},
+            year:  { $year: '$created'},
+            user:  '$$ROOT'
+        }};
+
+        var group = {$group: {
+            _id:        {year: '$year', month: '$month', day: '$day'},
+            users:      {$addToSet: '$user'},
+            userCount:  {$sum: 1}
+        }};
+        var sort = {$sort:{_id:-1}};
+
+
+        var aggArray = [match, project, group, sort];
+
+        UserBl.aggregate(aggArray, callback);
+    }
+
+    function processDates(metrics, callback){
+
+        function processCategory(category, callback){
+            category.date = new Date(category._id.year, category._id.month - 1, category._id.day);
+            callback();
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
+
+    function getPickCount(metrics, callback){
+
+        function processCategory(category, callback){
+
+            category.pickMadeCount = 0;
+
+            function getUserPicks(user, callback){
+                var created = new Date(user.created);
+                var query = {'user.ref':user._id,
+                    timeSubmitted: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
+                function cb(err, picks){
+                    if(picks.length){
+                        category.pickMadeCount = category.pickMadeCount + 1;
+                    }
+                    callback(err);
+                }
+                PickBl.getByQuery(query, cb);
+            }
+            async.eachSeries(category.users, getUserPicks, callback);
+
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
+
+    function getFollowCount(metrics, callback){
+
+        function processCategory(category, callback){
+
+            category.followCount = 0;
+
+            function getUserFollows(user, callback){
+                var created = new Date(user.created);
+                var query = {'follower.ref':user._id,
+                    startDate: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
+                function cb(err, follows){
+                    if(follows.length){
+                        category.followCount = category.followCount + 1;
+
+
+                    }
+                    callback(err);
+                }
+                FollowBl.getByQuery(query, cb);
+            }
+            async.eachSeries(category.users, getUserFollows, callback);
+
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
+
+    function processWeekly(metrics, callback){
+
+        var currentWeek = new Date(metrics[0]._id.year, metrics[0]._id.month - 1, metrics[0]._id.day);
+        currentWeek.setDate(currentWeek.getDate() - currentWeek.getDay());
+        var weeklyMetric = {date: currentWeek, userCount:0, pickMadeCount: 0, followCount: 0};
+
+        function groupWeekly(metric, callback){
+            if(metric.date > currentWeek){
+                weeklyMetric.pickMadeCount = weeklyMetric.pickMadeCount + metric.pickMadeCount;
+                weeklyMetric.userCount = weeklyMetric.userCount + metric.userCount;
+                weeklyMetric.followCount = weeklyMetric.followCount + metric.followCount;
+            } else {
+                metricsArray.push(weeklyMetric);
+                currentWeek.setDate(currentWeek.getDate()-7);
+                console.log(currentWeek);
+                weeklyMetric = {date: new Date(currentWeek), userCount:0, pickMadeCount: 0, followCount: 0};
+            }
+            callback();
+        }
+
+        function cb(err){
+            callback(err, metricsArray);
+        }
+
+        async.eachSeries(metrics, groupWeekly, cb);
+    }
+
+    todo.push(getNewUsersCount);
+    todo.push(processDates);
+    todo.push(getPickCount);
+    todo.push(getFollowCount);
+    todo.push(processWeekly);
+
+    async.waterfall(todo, callback);
+}
+
+function getEngagementMonthly(callback){
+    var todo = [];
+
+    function getNewUsersCount(callback){
+
+        var match = {$match:{created: {$gte: new Date(2015, 6, 1)}}};
+
+        var project = {$project: {
+            month: { $month: '$created'},
+            year:  { $year: '$created'},
+            user:  '$$ROOT'
+        }};
+
+        var group = {$group: {
+            _id:        {year: '$year', month: '$month'},
+            users:      {$addToSet: '$user'},
+            userCount:  {$sum: 1}
+        }};
+        var sort = {$sort:{_id:-1}};
+
+
+        var aggArray = [match, project, group, sort];
+
+        UserBl.aggregate(aggArray, callback);
+    }
+
+    function processDates(metrics, callback){
+
+        function processCategory(category, callback){
+            category.date =  new Date(category._id.year, category._id.month-1);
+            callback();
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
+
+    function getPickCount(metrics, callback){
+
+        function processCategory(category, callback){
+
+            category.pickMadeCount = 0;
+
+            function getUserPicks(user, callback){
+                var created = new Date(user.created);
+                var query = {'user.ref':user._id,
+                    timeSubmitted: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
+                function cb(err, picks){
+                    if(picks.length){
+                        category.pickMadeCount = category.pickMadeCount + 1;
+                    }
+                    callback(err);
+                }
+                PickBl.getByQuery(query, cb);
+            }
+            async.eachSeries(category.users, getUserPicks, callback);
+
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
+
+    function getFollowCount(metrics, callback){
+
+        function processCategory(category, callback){
+
+            category.followCount = 0;
+
+            function getUserFollows(user, callback){
+                var created = new Date(user.created);
+                var query = {'follower.ref':user._id,
+                    startDate: {$gte: created,
+                        $lte:new Date(created.getFullYear(), created.getMonth(), created.getDate(), created.getHours() + 1)
+                    }
+                };
+                function cb(err, follows){
+                    if(follows.length){
+                        category.followCount = category.followCount + 1;
+
+
+                    }
+                    callback(err);
+                }
+                FollowBl.getByQuery(query, cb);
+            }
+            async.eachSeries(category.users, getUserFollows, callback);
+
+        }
+
+        function cb(err){
+            callback(err, metrics);
+        }
+
+        async.eachSeries(metrics, processCategory, cb);
+    }
 
     todo.push(getNewUsersCount);
     todo.push(processDates);
@@ -390,6 +633,26 @@ function getEngagement(query, callback){
     todo.push(getFollowCount);
 
     async.waterfall(todo, callback);
+
+
+
+}
+
+function getEngagement(query, callback){
+
+    var dateType = query.dateType;
+
+    switch(dateType){
+        case 'daily':
+            getEngagementDaily(callback);
+            break;
+        case 'weekly':
+            getEngagementWeekly(callback);
+            break;
+        case 'monthly':
+            getEngagementMonthly(callback);
+            break;
+    }
 
 }
 
