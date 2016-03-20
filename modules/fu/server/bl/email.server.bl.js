@@ -548,9 +548,14 @@ function sendHotPickEmail(hotPick, hostName, callback){
     async.waterfall(todo, callback);
 }
 
+function sendIntroductionEmail(user, hostName, callback){
+
+}
+
 exports.sendVerificationEmail   = sendVerificationEmail;
 exports.sendFollowerEmail       = sendFollowerEmail;
 exports.sendMessageEmail        = sendMessageEmail;
 exports.sendPicksEmails         = sendPicksEmails;
 exports.sendTrialOverEmail      = sendTrialOverEmail;
 exports.sendHotPickEmail        = sendHotPickEmail;
+exports.sendIntroductionEmail   = sendIntroductionEmail;

@@ -1,0 +1,48 @@
+<div class="modal-body intro">
+    <div class="row">
+        <div data-ng-if="slide === 1">
+            <div class="col-xs-6 goal-options" data-ng-click="nextSlide('track')">
+                <a href>
+                    <i class="fa fa-line-chart"></i>
+                    <div class="text">
+                        I'm Here to Track my Bets
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6 goal-options" data-ng-click="nextSlide('picks')">
+                <a href>
+                    <i class="fa fa-users"></i>
+                    <div class="text">
+                    Looking for Winning Picks
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6  goal-options" data-ng-click="nextSlide('learn')">
+                <a href>
+                    <i class="fa fa-leanpub"></i>
+                    <div class="text">
+                        I'm Here to Learn How to Bet on Sports
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6  goal-options" data-ng-click="nextSlide('rev share')">
+                <a href>
+                    <i class="fa fa-trophy"></i>
+                    <div class="text">
+                        Play for Fun and Compete for Rev Share
+                    </div>
+                </a>
+            </div>
+            <!--
+            <div class="col-xs-12" data-ng-click="nextSlide('other')">Other</div>
+            -->
+        </div>
+        <div data-ng-if="slide === 2">
+            <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-track.client.view.html'" data-ng-if="authentication.user.goal === 'track'"></ng-include>
+            <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-pick.client.view.html'" data-ng-if="authentication.user.goal === 'picks'"></ng-include>
+            <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-learn.client.view.html'" data-ng-if="authentication.user.goal === 'learn'"></ng-include>
+            <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-rev-share.client.view.html'" data-ng-if="authentication.user.goal === 'rev share'"></ng-include>
+            <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-other.client.view.html'" data-ng-if="authentication.user.goal === 'other'"></ng-include>
+        </div>
+    </div>
+</div>

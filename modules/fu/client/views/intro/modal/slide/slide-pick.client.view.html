@@ -1,0 +1,27 @@
+<div class="text-center slide-pick" data-ng-controller="SlidePickController">
+    <div class="text">
+        <h3>
+            Follow the Top 3 Bettors this Month!
+        </h3>
+    </div>
+
+    <div class="follow-container">
+        <div class="trending-card" data-ng-repeat="leader in leaders">
+            <avatar username="leader.user.username" url="leader.user.avatarUrl" size="'lg'"></avatar>
+            <div class="username">
+                <a ui-sref="profile({username:leader.user.username})">{{leader.user.username}}</a>
+            </div>
+            <div class="stat-value">+ {{leader.profit|formatProfit}} units</div>
+            <div class="pending-count">{{leader.pending}} Pick(s)</div>
+            <div>
+                <btn-follow-rect user-id="leader.user._id" size="'lg'"></btn-follow-rect>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <a ui-sref="discover.home" class="btn btn-blue-2-empty">
+            Find More Handicappers
+        </a>
+    </div>
+</div>

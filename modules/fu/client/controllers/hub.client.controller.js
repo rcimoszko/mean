@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService', 'Modal',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService, Modal) {
         $scope.authentication = Authentication;
         $scope.user = User;
         $scope.loading = Loading;
@@ -152,6 +152,16 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.showSubscriptionModal = function(){
             StripeService.showSubscriptionModal();
         };
+
+        $scope.showModal = function(){
+            Modal.showModal(
+                '/modules/fu/client/views/intro/modal/modal-intro.client.view.html',
+                'ModalIntroController',
+                null,
+                'lg'
+            );
+        };
+        $scope.showModal();
 
     }
 ]);

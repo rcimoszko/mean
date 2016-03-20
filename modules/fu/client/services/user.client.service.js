@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus', 'ApiUserFollowingSettings',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus, ApiUserFollowingSettings) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUsers', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus', 'ApiUserFollowingSettings',
+    function(Authentication, ApiUsers, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus, ApiUserFollowingSettings) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -180,6 +180,22 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserInfo.get({}, cbSuccess, cbError);
         };
 
+        var update = function(callback){
+
+            function cbSuccess(response){
+                Authentication.user = response;
+                callback();
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            var user = new ApiUsers(Authentication.user);
+
+            user.$update(cbSuccess, cbError);
+        };
+
         var info = {initialized: false,
                     following: [],
                     channels: [],
@@ -202,6 +218,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             getFollowingSettings: getFollowingSettings,
             updateFollowingSettings: updateFollowingSettings,
             initialize: initialize,
+            update: update,
 
             createConversation: createConversation,
             readNotification: readNotification,

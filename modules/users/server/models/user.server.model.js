@@ -187,7 +187,8 @@ var UserSchema = new Schema({
 
     newFollowerEmail:       {type: Boolean, default: true},
     hotPickEmail:           {type: Boolean, default: true},
-    lastLogin:              {type: Date}
+    lastLogin:              {type: Date},
+    goal:                   {type: String, enum:['track', 'picks', 'learn', 'rev share', 'other']},
 });
 
 UserSchema.path('description').validate(function (v) {
@@ -377,8 +378,6 @@ UserSchema.methods.checkPremium = function(callback) {
     var _this = this;
     if(_this.stripeId && _this.subscriptionId){
         stripe.customers.retrieveSubscription(this.stripeId, this.subscriptionId, function(err, subscription) {
-            console.log(subscription);
-            console.log(_this);
             if(subscription){
                 var plan = subscription.plan;
                 var endDate = new Date(subscription.current_period_end*1000);
