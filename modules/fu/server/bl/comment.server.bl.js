@@ -45,6 +45,10 @@ function update(data, comment, callback) {
     comment.save(cb);
 }
 
+function aggregate(aggArray, callback){
+    m_Comment.aggregate(aggArray, callback);
+}
+
 function createEventComment(text, event, user, callback){
     var todo = [];
     var comment = {
@@ -369,6 +373,7 @@ exports.update      = update;
 exports.delete      = del;
 exports.getByQuery  = getByQuery;
 exports.populateBy  = populateBy;
+exports.aggregate   = aggregate;
 
 exports.getPreviews  = getPreviews;
 

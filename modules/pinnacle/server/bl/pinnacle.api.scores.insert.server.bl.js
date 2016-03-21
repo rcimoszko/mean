@@ -1140,7 +1140,6 @@ function insertScores_tableTennis(event, scores, callback){
 }
 
 function insertScores_tennis(event, scores, scoreType, callback){
-    console.log('scores', scores, 'scoreType', scoreType);
     if('match' in scores){
         if(scoreType){
             switch(scoreType.toLowerCase()){
@@ -1401,6 +1400,7 @@ function insertScores(event, scores, sportName, leagueName, scoreType, callback)
             break;
         case 'E Sports':
             var leagueGroupName = LeagueBl.getEsportsGroupName(leagueName);
+            if(!leagueGroupName) callback();
             switch(leagueGroupName){
                 case 'starcraft 2':
                     insertScores_starcraft(event, scores, scoreType, callback);

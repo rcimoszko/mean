@@ -82,6 +82,11 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
         if(leagueId !== 'all')                query.league = mongoose.Types.ObjectId(leagueId);
         if(pendingCompleted === 'pending'){
             query.result = 'Pending';
+            query.eventStartTime = {$gte: new Date()};
+        }
+        if(pendingCompleted === 'in play')    {
+            query.result = 'Pending';
+            query.eventStartTime = {$lte: new Date()};
         }
         if(pendingCompleted === 'completed')  query.result = {$ne: 'Pending'};
         if(userId)                            query['user.ref'] = mongoose.Types.ObjectId(userId);
@@ -92,7 +97,7 @@ function getEventPickList(sportId, leagueId, userId, pro, page, pageLimit, pickL
         var project = {$project: {event: '$_id', picks: 1}};
 
         var sort;
-        if(pendingCompleted === 'pending')    sort = {eventStartTime: 1};
+        if(pendingCompleted === 'pending' || pendingCompleted === 'in play')    sort = {eventStartTime: 1};
         if(pendingCompleted === 'completed')  sort = {eventStartTime: -1};
 
         sort = {$sort: sort};
@@ -151,6 +156,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  authUser
             var event = eventGroup.event;
 
             function createEvent(callback){
+
                 pEvent = {
                     _id:            event._id,
                     sport:          event.sport,
@@ -318,7 +324,7 @@ function processEventList(events, userId, pendingCompleted, pickLimit,  authUser
         }
 
         function cb(err){
-            if(pendingCompleted === 'pending') {
+            if(pendingCompleted === 'pending' || pendingCompleted === 'in play') {
                 processedEvents = _.sortBy(processedEvents, function(event){
                     return event.startTime;
                 });

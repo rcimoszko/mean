@@ -86,7 +86,7 @@ function getEsportsGroupName(leagueName){
         'starcraft 2':          ['starcraft'],
         'dota 2':               ['dota'],
         'cs:go':                ['cs:go', 'counter'],
-        'league of legends':    ['league of', 'lol']
+        'league of legends':    ['league of', 'lol', 'league championship']
     };
 
     for(var groupName in groupNames){

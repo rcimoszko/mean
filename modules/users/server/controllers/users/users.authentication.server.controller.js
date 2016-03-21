@@ -123,17 +123,18 @@ exports.signin = function (req, res, next) {
             res.status(400).send(info);
         } else {
             // Remove sensitive data before login
-            user.password = undefined;
-            user.salt = undefined;
+            user.lastLogin = new Date();
+            user.save(function(err){
+                user.password = undefined;
+                user.salt = undefined;
 
-            req.login(user, function (err) {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    user.lastLogin = new Date();
-                    user.save();
-                    res.json(user);
-                }
+                req.login(user, function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    } else {
+                        res.json(user);
+                    }
+                });
             });
         }
     })(req, res, next);

@@ -4396,6 +4396,9 @@ notification:last-of-type .notification {
   color: #aaabac;
   font-size: 14px;
 }
+#press .panel p {
+  margin-bottom: 5px;
+}
 #subscription-plans {
   width: 100%;
   max-width: 900px;
@@ -4808,6 +4811,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container {
   overflow: hidden;
   border-bottom: 1px solid #eaeaea;
+  position: relative;
   padding-bottom: 15px;
   min-height: 75px;
   padding-left: 10px;
@@ -4826,7 +4830,7 @@ notification:last-of-type .notification {
   font-size: 14px;
   color: #2b2b2c;
   margin-bottom: 5px;
-  margin-right: 8px;
+  margin-right: 20px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
   background-color: #4CAF50;
@@ -4842,6 +4846,13 @@ notification:last-of-type .notification {
 }
 .pick-list .pick .pick-container .bet-name .copy-pick .fa {
   margin-right: 3px;
+}
+.pick-list .pick .pick-container .timestamp {
+  position: absolute;
+  right: 0;
+  font-size: 10px;
+  top: 4px;
+  color: #aaabac;
 }
 .pick-list .pick .pick-container .bet-duration {
   font-size: 11px;
@@ -5551,4 +5562,99 @@ notification:last-of-type .notification {
 .settings .panel-body h3 {
   margin: 20px 0;
   text-align: center;
+}
+@media (min-width: 768px) {
+  .modal-intro {
+    width: 600px;
+  }
+}
+.intro {
+  padding-bottom: 0;
+  min-height: 498px;
+}
+.intro h2 {
+  margin-bottom: 30px;
+}
+.intro .goal-options {
+  cursor: pointer;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  height: 200px;
+  padding: 30px;
+}
+.intro .goal-options:hover {
+  background-color: #21759b;
+}
+.intro .goal-options:hover .text {
+  color: white;
+}
+.intro .goal-options:hover .fa {
+  color: white;
+}
+.intro .goal-options .fa {
+  font-size: 70px;
+}
+.intro .text {
+  font-size: 18px;
+  margin-top: 20px;
+  color: #6a6b6c;
+  padding: 0 10px;
+}
+.intro .btn-container {
+  margin: 20px 0;
+}
+.slide-pick .trending-card {
+  float: none;
+  display: inline-block;
+}
+.slide-pick .trending-card .stat-value {
+  padding: 5px;
+  font-size: 20px;
+}
+.slide-pick .trending-card .pending-count {
+  font-size: 16px;
+  margin: 8px;
+}
+.slide-pick .follow-container {
+  margin: 45px 0;
+}
+.slide-tracker {
+  padding: 0 20px;
+}
+.slide-tracker img {
+  max-width: 100%;
+}
+.slide-rev-share .leaderboard-sm {
+  max-width: 300px;
+  margin: 30px auto;
+  border: 1px solid #eaeaea;
+}
+.slide-learn {
+  padding: 0 40px;
+}
+.slide-learn h4 {
+  margin: 45px 0;
+}
+.slide-general {
+  padding: 0 50px;
+}
+.slide-general h1 {
+  color: #21759b;
+  font-weight: normal;
+}
+.slide-general .icon-container {
+  font-size: 60px;
+}
+.slide-general .row {
+  margin: 20px 0;
+}
+.slide-general .btn-container {
+  margin: 20px 0;
+}
+.unverified.picks {
+  margin-right: 300px;
 }

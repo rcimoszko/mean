@@ -34,6 +34,11 @@ function create(data, callback){
     chat.save(cb);
 }
 
+function aggregate(aggArray, callback){
+    Chat.aggregate(aggArray, callback);
+}
+
 exports.getChannelChat = getChannelChat;
 exports.getHubChat = getHubChat;
 exports.create = create;
+exports.aggregate = aggregate;

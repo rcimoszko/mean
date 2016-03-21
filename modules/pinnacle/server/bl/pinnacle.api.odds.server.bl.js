@@ -141,6 +141,7 @@ function processMoneylines(oddsApi, eventPinId, initialBetData, event, callback)
     var betData = _.clone(initialBetData);
     var spreads = {};
     if(!betData.betType) betData.betType = 'moneyline';
+    if(betData.betType === 'series') betData.betType = 'moneyline';
     betData.pinnacleId = oddsApi.lineId;
 
     if(event.pinnacleEventType && eventPinId in event.pinnacleEventType){
@@ -320,6 +321,7 @@ function processTotals(oddsApi, initialBetData, event, callback){
                 betData.odds = totalsApi[betData.overUnder];
                 betData.points = totalsApi.points;
                 if(!betData.betType) betData.betType = 'total points';
+                if(betData.betType === 'series') betData.betType = 'series totals';
                 callback(null);
             }
 
@@ -434,10 +436,11 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
                     betData.betDuration = betTypeInfo.split(', ')[0];
                 } else {
                     switch(betTypeInfo.toLowerCase()){
+                        case '1st blood':
+                        case '1st to 5 kills':
+                        case '1st to 10 kills':
                         case 'kills':
                         case 'series':
-                        case '1st blood':
-                        case '1st to 10 kills':
                             betData.betType = betTypeInfo;
                             betData.betDuration = 'match';
                             break;
@@ -449,13 +452,10 @@ function processOdds(oddsApi, eventPinId, event, pinnacleLeague, callback){
 
                 if(betData.betType){
                     if(betData.betType.toLowerCase() === 'kills'){
-                        if('spreads' in oddsApi)    betData.betType = 'spread';
-                        if('totals' in oddsApi)     betData.betType = 'totals';
+                        betData.betType = null;
                     }
-
-                    if(betData.betType.toLowerCase() === 'series'){
-                        if('spreads' in oddsApi)    betData.betType = 'spread';
-                        if('moneyline' in oddsApi)  betData.betType = 'moneyline';
+                    if(betData.betType && betData.betType.toLowerCase() === 'series'  && ('spreads' in oddsApi) ){
+                        betData.betType = 'series';
                     }
                 }
                 break;

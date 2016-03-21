@@ -1165,6 +1165,31 @@ angular.module('fu.admin').config(['$stateProvider',
 
 angular.module('fu.admin').config(['$stateProvider',
     function ($stateProvider) {
+        $stateProvider
+            .state('admin.metricsGeneral', {
+                url: '/metrics-general',
+                templateUrl: 'modules/fu/client/views/admin/metrics/admin-metrics-general.client.view.html',
+                controller: 'AdminMetricsGeneralController',
+                data: {
+                    roles: ['admin']
+                }
+            })
+            .state('admin.metricsEngagement', {
+                url: '/metrics-engagement',
+                templateUrl: 'modules/fu/client/views/admin/metrics/admin-metrics-engagement.client.view.html',
+                controller: 'AdminMetricsEngagementController',
+                data: {
+                    roles: ['admin']
+                }
+            });
+
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').config(['$stateProvider',
+    function ($stateProvider) {
 
         $stateProvider
             .state('admin.allProPicks', {
@@ -2079,6 +2104,53 @@ angular.module('fu.admin').controller('AdminListSportsController', ['$scope', 'S
         }
 
         Sports.getAll(cb);
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminMetricsEngagementController', ['$scope', 'Metrics',
+    function ($scope, Metrics) {
+
+        $scope.dates = ['daily', 'weekly', 'monthly'];
+        $scope.date = $scope.dates[0];
+
+        $scope.getMetrics = function(){
+
+            var query = {dateType:$scope.date};
+
+            function cb(err, metrics){
+                $scope.metrics = metrics;
+            }
+
+            Metrics.getEngagement(query, cb);
+        };
+
+        $scope.getMetrics();
+    }
+]);
+
+'use strict';
+
+angular.module('fu.admin').controller('AdminMetricsGeneralController', ['$scope', '$filter', 'Metrics',
+    function ($scope, $filter, Metrics) {
+
+        $scope.dates = ['daily', 'weekly', 'monthly'];
+        $scope.date = $scope.dates[0];
+
+        $scope.getMetrics = function(){
+
+            var query = {dateType:$scope.date};
+
+            function cb(err, metrics){
+                $scope.metrics = metrics;
+            }
+
+            Metrics.getGeneral(query, cb);
+        };
+
+        $scope.getMetrics();
+
     }
 ]);
 
@@ -3042,10 +3114,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.picks = {
             all:{
                 pending: [],
+                "in play": [],
                 completed: []
             },
             pro: {
                 pending: [],
+                "in play": [],
                 completed: []
             }
         };
@@ -3053,10 +3127,12 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.pages = {
             all:{
                 pending: 0,
+                "in play": 0,
                 completed: 0
             },
             pro: {
                 pending: 0,
+                "in play": 0,
                 completed: 0
             }
         };
@@ -3064,7 +3140,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.tab = 'all';
 
 
-        $scope.pickFilters = ['pending', 'completed'];
+        $scope.pickFilters = ['pending', 'in play', 'completed'];
         $scope.pickFilter = $scope.pickFilters[0];
         $scope.setPickFilter = function(pickFilter){
         };
@@ -5660,6 +5736,26 @@ angular.module('fu').directive('logo', function () {
         },
         templateUrl: 'modules/fu/client/templates/contestant/logo.client.template.html',
         controller: ['$scope',  function ($scope){
+            var insert = '';
+            var subString = $scope.url.substring(0, $scope.url.lastIndexOf('/'));
+            var index = subString.lastIndexOf('/');
+
+            switch($scope.size){
+                case 'xs':
+                    insert = '/c_fit,h_25/fl_lossy,f_auto';
+                    break;
+                case 'sm':
+                    insert = '/c_fit,h_30/fl_lossy,f_auto';
+                    break;
+                case 'md':
+                    insert = '/c_fit,h_60/fl_lossy,f_auto';
+                    break;
+                case 'lg':
+                    insert = '/c_fit,h_90/fl_lossy,f_auto';
+                    break;
+            }
+
+            $scope.url = $scope.url.slice(0, index) + insert + $scope.url.slice(index);
 
         }]
     };
@@ -5761,6 +5857,9 @@ angular.module('fu').directive('betSection', ["$compile", function ($compile) {
                 case 'sets':
                     directive = '<bet-section-sets event="event" bets="bets"></bet-section-sets>';
                     break;
+                case 'series':
+                    directive = '<bet-section-series event="event" bets="bets"></bet-section-series>';
+                    break;
                 case 'total points':
                     directive = '<bet-section-total-points event="event"  bets="bets"></bet-section-total-points>';
                     break;
@@ -5814,6 +5913,23 @@ angular.module('fu').directive('betSectionMoneyline', function () {
             if($scope.bets && 'draw' in $scope.bets){
                 $scope.isDraw = true;
             }
+        }]
+    };
+});
+'use strict';
+
+angular.module('fu').directive('betSectionSeries', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            bets: '=',
+            event: '='
+        },
+        templateUrl: 'modules/fu/client/templates/make-picks/bet-sections/bet-section-series.client.template.html',
+        controller: ['$scope', function ($scope){
+            $scope.contestant1Name = $scope.event.contestant1.name;
+            $scope.contestant2Name = $scope.event.contestant2.name;
+
         }]
     };
 });
@@ -7941,6 +8057,22 @@ angular.module('fu').factory('ApiMakePicksMenu', ['$resource',
 
 'use strict';
 
+angular.module('fu').factory('ApiMetricsEngagement', ['$resource',
+    function ($resource) {
+        return $resource('api/metrics/engagement', {});
+    }
+]);
+
+'use strict';
+
+angular.module('fu').factory('ApiMetricsGeneral', ['$resource',
+    function ($resource) {
+        return $resource('api/metrics/general', {});
+    }
+]);
+
+'use strict';
+
 angular.module('fu').factory('ApiPicks', ['$resource',
     function ($resource) {
         return $resource('api/picks/:_id/:action', { _id: '@_id' }, {
@@ -9306,6 +9438,43 @@ angular.module('fu').factory('MakePicks', ['ApiMakePicks', 'ApiMakePicksMenu',
             active:     active
         };
 
+    }
+]);
+'use strict';
+
+angular.module('fu').factory('Metrics', [ 'ApiMetricsGeneral', 'ApiMetricsEngagement',
+    function(ApiMetricsGeneral, ApiMetricsEngagement) {
+
+        var getGeneral = function(query, callback){
+            function cbSuccess(metrics){
+                callback(null, metrics);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiMetricsGeneral.query(query, cbSuccess, cbError);
+
+        };
+
+        var getEngagement = function(query, callback){
+            function cbSuccess(metrics){
+                callback(null, metrics);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiMetricsEngagement.query(query, cbSuccess, cbError);
+
+        };
+
+        return {
+            getGeneral: getGeneral,
+            getEngagement: getEngagement
+        };
     }
 ]);
 'use strict';

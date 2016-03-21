@@ -71,7 +71,16 @@
     </script>
     <noscript><p><img src="//analytics.maaxmarket.com/piwik/piwik.php?idsite=86" style="border:0;" alt="" /></p></noscript>
 
+    <script type="text/javascript">
+        setTimeout(function(){var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0027/9684.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+
     {% endif %}
+
+
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -90,7 +99,6 @@
         <ng-include src="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user" data-ng-hide="isBlog()"></ng-include>
         <section id="content"  data-ng-class="{auth: authentication.user, blog: isBlog() }">
             <ng-include src="'/modules/fu/client/views/unverified.client.view.html'" data-ng-if="authentication.user && !authentication.user.verified"></ng-include>
-            <a class="btn btn-large btn-success" ng-click="CallMe();">Demo</a>
             {% block content %}{% endblock %}
 
             <ng-include src="'/modules/fu/client/views/footer.client.view.html'" data-ng-hide="isPicksPage()" data-ng-if="!loading.isLoading.pageLoading"></ng-include>
@@ -98,6 +106,7 @@
 
         <ng-include src="'/modules/fu/client/views/bet-slip.client.view.html'"></ng-include>
     </div>
+
 
     <!--Embedding The User Object-->
     <script type="text/javascript">

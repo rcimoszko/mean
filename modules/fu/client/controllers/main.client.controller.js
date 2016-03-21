@@ -87,7 +87,7 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
             doneLabel: 'Thanks'
         };
 
-        $scope.ShouldAutoStart = false;
+        $scope.ShouldAutoStart = true;
 
     }
 ]);

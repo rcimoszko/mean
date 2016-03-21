@@ -256,6 +256,9 @@ function populateBy(follows, populate, callback){
     Follow.populate(follows, populate, callback);
 }
 
+function getByQuery(query, callback){
+    Follow.find(query, callback);
+}
 
 
 function updateNotify(data, follow, callback) {
@@ -289,3 +292,4 @@ exports.getFollowerListForEmails     = getFollowerListForEmails;
 exports.updateNotify     = updateNotify;
 exports.aggregate       = aggregate;
 exports.populateBy       = populateBy;
+exports.getByQuery       = getByQuery;

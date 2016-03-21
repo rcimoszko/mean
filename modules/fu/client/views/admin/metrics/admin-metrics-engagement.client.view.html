@@ -1,0 +1,29 @@
+<section class="content-padding-top">
+
+    <div class="btn-container row">
+        <div class="col-xs-3">
+            <select class="form-control" name="dates" id="dates" ng-options="date for date in dates" data-ng-model="date" data-ng-change="getMetrics()"></select>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <th>Date</th>
+            <th class="text-center"># New Users</th>
+            <th colspan="2" class="text-center">Pick Made on Date Created</th>
+            <th colspan="2" class="text-center">Follow on Date Created</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="metric in metrics|orderBy:'date':true">
+                <td>{{metric.date|date:'mediumDate'}}</td>
+                <td class="text-center">{{metric.userCount}}</td>
+                <td class="text-right">{{metric.pickMadeCount}}</td>
+                <td class="text-left">{{((metric.pickMadeCount/metric.userCount)*100).toFixed(1)}}%</td>
+                <td class="text-right">{{metric.followCount}}</td>
+                <td class="text-left">{{((metric.followCount/metric.userCount)*100).toFixed(1)}}%</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>

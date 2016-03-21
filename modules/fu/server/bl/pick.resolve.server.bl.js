@@ -672,7 +672,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     }
                     break;
             }
-
             break;
         case 'total points':
         case 'team totals':
@@ -765,7 +764,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                     break;
             }
             break;
-
         case 'series':
             gameSpread = contestantScore - opponentScore;
             comparison = gameSpread + pick.spread;
@@ -781,7 +779,6 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 result = 'Loss';
             }
             break;
-
         case 'sets':
             contestantSetsWon = 0;
             opponentSetsWon = 0;
@@ -805,6 +802,20 @@ function getResult(event, pick, contestantNo, opponentNo, contestantScore, oppon
                 }
             }
             break;
+        case '1st to 5 kills':
+        case '1st to 10 kills':
+        case '1st round':
+        case '1st to 5 rounds':
+        case '1st blood':
+            if(durationWinner === 'draw'){
+                result = 'Push';
+            } else if(durationWinner === String(pick.contestant.ref)){
+                result = 'Win';
+            } else {
+                result = 'Loss';
+            }
+            break;
+
     }
 
     callback(result);

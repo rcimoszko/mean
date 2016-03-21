@@ -24,6 +24,12 @@
                     <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
                 </div>
             </div>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'in play'">
+                <event-pick-list events="picks.all['in play']" include-user="true"></event-pick-list>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
+            </div>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container" data-ng-if="pickFilter === 'completed'">
                 <event-pick-list events="picks.all.completed" include-user="true" ></event-pick-list>
                 <div class="load-container">
@@ -37,6 +43,12 @@
             </tab-heading>
             <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container"  data-ng-if="pickFilter === 'pending'">
                 <event-pick-list events="picks.pro.pending" include-user="true"></event-pick-list>
+                <div class="load-container">
+                    <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
+                </div>
+            </div>
+            <div lr-infinite-scroll="getMorePicks" class="event-pick-list-container"  data-ng-if="pickFilter === 'in play'">
+                <event-pick-list events="picks.pro['in play']" include-user="true"></event-pick-list>
                 <div class="load-container">
                     <loading is-loading="disableScroll" size="'md'" color="'blue-2'" bg-color="'white'"></loading>
                 </div>

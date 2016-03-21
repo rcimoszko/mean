@@ -89,6 +89,7 @@ function processBetTypes(betBt, betType){
             bets = processTeamTotals(betBt);
             break;
         case 'sets':
+        case 'series':
             bets = processSets(betBt);
             break;
         default:

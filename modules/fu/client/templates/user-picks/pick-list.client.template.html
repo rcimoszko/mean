@@ -19,6 +19,7 @@
                     {{pick|betName:event}} <span class="bet-duration">{{pick.betDuration}}</span>
                     <span class="copy-pick" data-ng-if="pick.copiedFrom"><span class="fa fa-retweet"></span>copied from <a ui-sref="profile({username: pick.copiedFrom.user.name})">{{pick.copiedFrom.user.name}}</a></span>
                 </div>
+                <div class="timestamp" am-time-ago="pick.timeSubmitted"></div>
                 <div class="statistics clearfix statistic-result-{{pick.result|formatResult}}">
                     <div class="stat-container">
                         <div class="stat-value">{{pick.units}}</div>
