@@ -3281,6 +3281,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             showStepNumbers: false,
             scrollToElement: false,
             exitOnEsc:true,
+            exitOnOverlayClick: false,
             nextLabel: 'NEXT',
             prevLabel: 'PREV',
             skipLabel: 'EXIT',
