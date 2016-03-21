@@ -158,7 +158,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
                 '/modules/fu/client/views/intro/modal/modal-intro.client.view.html',
                 'ModalIntroController',
                 null,
-                'lg'
+                'intro'
             );
         };
         $scope.showModal();

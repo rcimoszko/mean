@@ -1,41 +1,41 @@
 <div class="modal-body intro">
     <div class="row">
         <div data-ng-if="slide === 1">
+            <h2 class="text-center">
+                How can FansUnite Help you?
+            </h2>
+            <a href>
             <div class="col-xs-6 goal-options" data-ng-click="nextSlide('track')">
-                <a href>
-                    <i class="fa fa-line-chart"></i>
-                    <div class="text">
-                        I'm Here to Track my Bets
-                    </div>
-                </a>
+                <i class="fa fa-line-chart"></i>
+                <div class="text">
+                    Track my Bets
+                </div>
             </div>
+            </a>
+            <a href>
             <div class="col-xs-6 goal-options" data-ng-click="nextSlide('picks')">
-                <a href>
-                    <i class="fa fa-users"></i>
-                    <div class="text">
+                <i class="fa fa-users"></i>
+                <div class="text">
                     Looking for Winning Picks
-                    </div>
-                </a>
+                </div>
             </div>
+            </a>
+            <a href>
             <div class="col-xs-6  goal-options" data-ng-click="nextSlide('learn')">
-                <a href>
-                    <i class="fa fa-leanpub"></i>
-                    <div class="text">
-                        I'm Here to Learn How to Bet on Sports
-                    </div>
-                </a>
+                <i class="fa fa-leanpub"></i>
+                <div class="text">
+                    Learn How to Bet on Sports
+                </div>
             </div>
+            </a>
+            <a href>
             <div class="col-xs-6  goal-options" data-ng-click="nextSlide('rev share')">
-                <a href>
-                    <i class="fa fa-trophy"></i>
-                    <div class="text">
-                        Play for Fun and Compete for Rev Share
-                    </div>
-                </a>
+                <i class="fa fa-trophy"></i>
+                <div class="text">
+                    Play for Fun and Compete for Rev Share
+                </div>
             </div>
-            <!--
-            <div class="col-xs-12" data-ng-click="nextSlide('other')">Other</div>
-            -->
+            </a>
         </div>
         <div data-ng-if="slide === 2">
             <ng-include src="'/modules/fu/client/views/intro/modal/slide/slide-track.client.view.html'" data-ng-if="authentication.user.goal === 'track'"></ng-include>

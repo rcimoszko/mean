@@ -19,6 +19,10 @@ angular.module('fu').controller('ModalIntroController', ['$scope', '$modalInstan
             User.update(cb);
         };
 
+        $scope.closeModal = function(){
+            $scope.modal.closeModal($scope.modalInstance);
+        };
+
     }
 ]);
 

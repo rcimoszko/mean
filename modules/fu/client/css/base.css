@@ -87,7 +87,7 @@ p {
 }
 .btn-orange {
   background-color: #e9893a;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -96,12 +96,12 @@ p {
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  color: white;
+  color: #ffffff;
   background-color: #e67b23;
 }
 .btn-blue {
   background-color: #104673;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -110,12 +110,12 @@ p {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-  color: white;
+  color: #ffffff;
   background-color: #0d385d;
 }
 .btn-facebook {
   background-color: #4261b1;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -124,12 +124,12 @@ p {
 }
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: white;
+  color: #ffffff;
   background-color: #3b579e;
 }
 .btn-twitter {
   background-color: #6cadde;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -138,12 +138,12 @@ p {
 }
 .btn-twitter:hover,
 .btn-twitter:focus {
-  color: white;
+  color: #ffffff;
   background-color: #57a1d9;
 }
 .btn-google {
   background-color: #d15c40;
-  color: white;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -152,12 +152,12 @@ p {
 }
 .btn-google:hover,
 .btn-google:focus {
-  color: white;
+  color: #ffffff;
   background-color: #c74d30;
 }
 .btn-green {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #4caf50;
+  color: #ffffff;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -166,7 +166,7 @@ p {
 }
 .btn-green:hover,
 .btn-green:focus {
-  color: white;
+  color: #ffffff;
   background-color: #449d48;
 }
 .btn-blue-empty {
@@ -230,7 +230,7 @@ p {
   text-align: center;
 }
 .btn-tracker .fa {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .btn-follow-rect {
   background-color: #1ccf31;
@@ -396,10 +396,10 @@ p {
   background: #eeeeee;
 }
 .loading-bg-white:before {
-  background: white;
+  background: #ffffff;
 }
 .loading-bg-white:after {
-  background: white;
+  background: #ffffff;
 }
 .loading.loading-blue {
   box-shadow: inset 0 0 0 1em #104673;
@@ -414,7 +414,7 @@ p {
   box-shadow: inset 0 0 0 1em #eeeeee;
 }
 .loading.loading-white {
-  box-shadow: inset 0 0 0 1em white;
+  box-shadow: inset 0 0 0 1em #ffffff;
 }
 .loading-sm {
   font-size: 2px;
@@ -1382,7 +1382,7 @@ input.toggle:checked + label:after {
   }
 }
 .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   margin-right: 5px;
   padding: 0 3px;
@@ -1390,11 +1390,11 @@ input.toggle:checked + label:after {
 }
 .color-green,
 .win-color {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .color-red,
 .loss-color {
-  color: #F44336;
+  color: #f44336;
 }
 .search-container .dropdown-menu li .typeahead-group-header {
   padding-left: 10px;
@@ -1738,7 +1738,7 @@ notification:last-of-type .notification {
   right: 0;
   left: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -3321,7 +3321,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .channel-event .stats .stats-container.results-loss .value {
-  color: #F44336;
+  color: #f44336;
 }
 .channel-event .stats .stats-container .stat-section-header {
   padding-bottom: 5px;
@@ -3578,11 +3578,11 @@ notification:last-of-type .notification {
 }
 .pick-table tbody tr.win .profit,
 .pick-table tbody tr.win .roi {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-table tbody tr.loss .profit,
 .pick-table tbody tr.loss .roi {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-table tbody tr td {
   vertical-align: middle;
@@ -3887,13 +3887,13 @@ notification:last-of-type .notification {
   width: 40px;
 }
 .profile-stats .statistic .statistic-icon .fa-line-chart {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .profile-stats .statistic .statistic-icon .fa-refresh {
   color: #21759b;
 }
 .profile-stats .statistic .statistic-icon .fa-bar-chart {
-  color: #F44336;
+  color: #f44336;
 }
 .profile-stats .statistic .statistic-icon .fa-align-left {
   color: #607d8b;
@@ -4082,7 +4082,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 #tracker .loss {
-  color: #F44336;
+  color: #f44336;
 }
 #tracker .push {
   color: #104673;
@@ -4766,7 +4766,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .gamecenter-consensus .consensus-container .fa-arrow-circle-o-down {
-  color: #F44336;
+  color: #f44336;
 }
 .gamecenter-picks .tab-pane {
   height: 500px;
@@ -4833,7 +4833,7 @@ notification:last-of-type .notification {
   margin-right: 20px;
 }
 .pick-list .pick .pick-container .bet-name .pro-label {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   display: inline-block;
   margin-right: 3px;
   color: white;
@@ -4884,7 +4884,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-l .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hl .stat-value-result {
-  color: #F44336;
+  color: #f44336;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-profit,
@@ -4892,7 +4892,7 @@ notification:last-of-type .notification {
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-roi,
 .pick-list .pick .pick-container .statistics.statistic-result-w .stat-value-result,
 .pick-list .pick .pick-container .statistics.statistic-result-hw .stat-value-result {
-  color: #4CAF50;
+  color: #4caf50;
 }
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-profit,
 .pick-list .pick .pick-container .statistics.statistic-result-p .stat-value-roi,
@@ -5153,7 +5153,7 @@ notification:last-of-type .notification {
   color: #1ccf31;
 }
 .share .share-box-container .response-container .error {
-  color: #F44336;
+  color: #f44336;
 }
 .messages {
   margin-top: 20px;
@@ -5563,13 +5563,37 @@ notification:last-of-type .notification {
   margin: 20px 0;
   text-align: center;
 }
+@media (min-width: 768px) {
+  .modal-intro {
+    width: 600px;
+  }
+}
 .intro {
-  min-height: 500px;
+  padding-bottom: 0;
+  min-height: 498px;
+}
+.intro h2 {
+  margin-bottom: 30px;
 }
 .intro .goal-options {
+  cursor: pointer;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   text-align: center;
   height: 200px;
-  padding-top: 65px;
+  padding: 30px;
+}
+.intro .goal-options:hover {
+  background-color: #21759b;
+}
+.intro .goal-options:hover .text {
+  color: white;
+}
+.intro .goal-options:hover .fa {
+  color: white;
 }
 .intro .goal-options .fa {
   font-size: 70px;
@@ -5579,6 +5603,9 @@ notification:last-of-type .notification {
   margin-top: 20px;
   color: #6a6b6c;
   padding: 0 10px;
+}
+.intro .btn-container {
+  margin: 20px 0;
 }
 .slide-pick .trending-card {
   float: none;
@@ -5593,15 +5620,38 @@ notification:last-of-type .notification {
   margin: 8px;
 }
 .slide-pick .follow-container {
-  margin: 65px 0;
+  margin: 45px 0;
+}
+.slide-tracker {
+  padding: 0 20px;
+}
+.slide-tracker img {
+  max-width: 100%;
 }
 .slide-rev-share .leaderboard-sm {
   max-width: 300px;
-  margin: 70px auto;
+  margin: 30px auto;
+  border: 1px solid #eaeaea;
 }
 .slide-learn {
   padding: 0 40px;
 }
 .slide-learn h4 {
-  margin: 55px 0;
+  margin: 45px 0;
+}
+.slide-general {
+  padding: 0 50px;
+}
+.slide-general h1 {
+  color: #21759b;
+  font-weight: normal;
+}
+.slide-general .icon-container {
+  font-size: 60px;
+}
+.slide-general .row {
+  margin: 20px 0;
+}
+.slide-general .btn-container {
+  margin: 20px 0;
 }
