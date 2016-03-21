@@ -86,12 +86,12 @@ var UserSchema = new Schema({
   email: {
       type: String,
       trim: true,
-      validate: [unique('User', 'email'), 'Email already exists'],
+      validate: [unique('User', 'email', true), 'Email already exists'],
       match: [/.+\@.+\..+/, 'Please fill a valid address']
   },
   username: {
     type: String,
-    unique: 'Username already exists',
+    validate: [unique('User', 'username', true), 'Username already exists'],
     required: 'Please fill in a username',
     trim: true
   },
@@ -189,6 +189,10 @@ var UserSchema = new Schema({
     hotPickEmail:           {type: Boolean, default: true},
     lastLogin:              {type: Date},
     goal:                   {type: String, enum:['track', 'picks', 'learn', 'rev share', 'other']},
+
+    hubWalkthrough:         {type: Boolean, default: false},
+    picksWalkthrough:       {type: Boolean, default: false}
+
 });
 
 UserSchema.path('description').validate(function (v) {

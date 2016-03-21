@@ -36,7 +36,9 @@ module.exports = {
         'public/lib/angulartics/dist/angulartics.min.js',
         'public/lib/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
         'public/lib/intro.js/minified/intro.min.js',
-        'public/lib/angular-intro.js/build/angular-intro.min.js'
+        'public/lib/angular-intro.js/build/angular-intro.min.js',
+        'public/lib/re-tree/re-tree.min.js',
+        'public/lib/ng-device-detector/ng-device-detector.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

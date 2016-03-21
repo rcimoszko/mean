@@ -1634,6 +1634,8 @@ notification:last-of-type .notification {
 }
 #auth-side-menu .stats-container .units,
 #auth-side-menu .stats-container .profit {
+  position: relative;
+  background-color: #156790;
   float: left;
   width: 100%;
   text-align: center;
@@ -5654,6 +5656,34 @@ notification:last-of-type .notification {
 }
 .slide-general .btn-container {
   margin: 20px 0;
+}
+.introjs-tooltip {
+  direction: ltr;
+  max-width: 400px;
+  width: 250px;
+  padding: 20px;
+  font-size: 14px;
+  color: #6a6b6c;
+}
+.introjs-tooltip ul {
+  padding-left: 15px;
+}
+.introjs-tooltip ul li {
+  margin-bottom: 5px;
+}
+.introjs-tooltip .introjs-button {
+  background-image: none;
+  background-color: white;
+  padding: 3px 6px;
+  font-size: 14px;
+}
+.introjs-tooltip .introjs-tooltipbuttons {
+  text-align: right;
+  margin-top: 20px;
+}
+.introjs-tooltip .introjs-tooltipbuttons .introjs-prevbutton {
+  border: 1px solid #eaeaea;
+  margin-right: 2px;
 }
 .unverified.picks {
   margin-right: 300px;

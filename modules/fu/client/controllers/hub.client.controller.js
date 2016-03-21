@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService', 'Modal',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService, Modal) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService', '$timeout', 'deviceDetector',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService, $timeout, deviceDetector) {
         $scope.authentication = Authentication;
         $scope.user = User;
         $scope.loading = Loading;
         $scope.socket = SocketHub;
+        $scope.deviceDetector = deviceDetector;
         if($scope.socket){
             $scope.socket.connect();
         }
@@ -20,6 +21,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             $scope.disableScroll = false;
             setPages();
             updateRank();
+            if(!$scope.authentication.user.hubWalkthrough && $scope.deviceDetector.isDesktop()) $timeout($scope.startHubWalkthrough, 1000);
         }
         $scope.loading.isLoading.pageLoading = true;
         Hub.getHub(cbGetHub);
@@ -152,6 +154,55 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
         $scope.showSubscriptionModal = function(){
             StripeService.showSubscriptionModal();
         };
+
+        /**
+         * Walkthrough
+         */
+
+        $scope.CompletedHubWalkthrough  = function () {
+            $scope.authentication.user.hubWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.ExitHubWalkthrough = function () {
+            $scope.authentication.user.hubWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.HubIntroOptions = {
+            steps:[
+                {
+                    element: '#hub-step1',
+                    intro: 'Find upcoming picks from the community',
+                    position: 'right'
+                },
+                {
+                    element: '#hub-step2',
+                    intro: "Find the most popular games and picks",
+                    position: 'right'
+                },
+                {
+                    element: '#hub-step3',
+                    intro: "See what our community is discussing",
+                    position: 'top'
+                },
+                {
+                    element: '#hub-step4',
+                    intro: "Find trending handicappers",
+                    position: 'left'
+                }
+            ],
+            showStepNumbers: false,
+            scrollToElement: false,
+            exitOnEsc:true,
+            exitOnOverlayClick: false,
+            nextLabel: 'NEXT',
+            prevLabel: 'PREV',
+            skipLabel: 'EXIT',
+            doneLabel: 'Thanks',
+            showBullets: false
+        };
+
 
 
     }

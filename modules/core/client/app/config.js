@@ -24,7 +24,8 @@ var ApplicationConfiguration = (function () {
       'angular.filter',
       'angulartics',
       'angulartics.google.analytics',
-      'angular-intro'
+      'angular-intro',
+      'ng.deviceDetector'
   ];
 
   // Add a new vertical module

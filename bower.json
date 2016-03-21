@@ -28,7 +28,8 @@
     "ng-csv": "~0.3.6",
     "angular-scrolltofixed": "~0.2.0",
     "angulartics-google-analytics": "~0.1.4",
-    "angular-intro.js": "~2.0.0"
+    "angular-intro.js": "~2.0.0",
+    "ng-device-detector": "~3.0.1"
   },
   "resolutions": {
     "angular": "~1.3"

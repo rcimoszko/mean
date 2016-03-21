@@ -23,7 +23,10 @@ var ApplicationConfiguration = (function () {
       //'scrollToFixed',
       'angular.filter',
       'angulartics',
-      'angulartics.google.analytics'];
+      'angulartics.google.analytics',
+      'angular-intro',
+      'ng.deviceDetector'
+  ];
 
   // Add a new vertical module
   var registerModule = function (moduleName, dependencies) {
@@ -3083,12 +3086,13 @@ angular.module('fu').controller('GamecenterController', ['$scope', '$stateParams
 
 'use strict';
 
-angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService',
-    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService) {
+angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'Hub', 'CommentsPreviews', 'SocketHub', 'Loading', '$filter', 'User', 'StripeService', '$timeout', 'deviceDetector',
+    function ($scope, Authentication, Hub, CommentsPreviews, SocketHub, Loading, $filter, User, StripeService, $timeout, deviceDetector) {
         $scope.authentication = Authentication;
         $scope.user = User;
         $scope.loading = Loading;
         $scope.socket = SocketHub;
+        $scope.deviceDetector = deviceDetector;
         if($scope.socket){
             $scope.socket.connect();
         }
@@ -3103,6 +3107,7 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             $scope.disableScroll = false;
             setPages();
             updateRank();
+            if(!$scope.authentication.user.hubWalkthrough && $scope.deviceDetector.isDesktop()) $timeout($scope.startHubWalkthrough, 1000);
         }
         $scope.loading.isLoading.pageLoading = true;
         Hub.getHub(cbGetHub);
@@ -3236,13 +3241,143 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             StripeService.showSubscriptionModal();
         };
 
+        /**
+         * Walkthrough
+         */
+
+        $scope.CompletedHubWalkthrough  = function () {
+            $scope.authentication.user.hubWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.ExitHubWalkthrough = function () {
+            $scope.authentication.user.hubWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.HubIntroOptions = {
+            steps:[
+                {
+                    element: '#hub-step1',
+                    intro: 'Find upcoming picks from the community',
+                    position: 'right'
+                },
+                {
+                    element: '#hub-step2',
+                    intro: "Find the most popular games and picks",
+                    position: 'right'
+                },
+                {
+                    element: '#hub-step3',
+                    intro: "See what our community is discussing",
+                    position: 'top'
+                },
+                {
+                    element: '#hub-step4',
+                    intro: "Find trending handicappers",
+                    position: 'left'
+                }
+            ],
+            showStepNumbers: false,
+            scrollToElement: false,
+            exitOnEsc:true,
+            nextLabel: 'NEXT',
+            prevLabel: 'PREV',
+            skipLabel: 'EXIT',
+            doneLabel: 'Thanks',
+            showBullets: false
+        };
+
+
+
     }
 ]);
 
 'use strict';
 
-angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page', '$http',
-    function ($scope, $state, Authentication, User, Loading, $rootScope, Page, $http) {
+angular.module('fu').controller('ModalIntroController', ['$scope', '$modalInstance', 'Modal', 'Authentication', 'User',
+    function($scope, $modalInstance, Modal, Authentication, User) {
+
+        $scope.modal = Modal;
+        $scope.modalInstance = $modalInstance;
+        $scope.authentication = Authentication;
+        $scope.slide = 1;
+
+        $scope.nextSlide = function(goal){
+
+            $scope.authentication.user.goal = goal;
+
+            function cb(err){
+                if(!err) $scope.slide = 2;
+            }
+
+            User.update(cb);
+        };
+
+        $scope.closeModal = function(){
+            $scope.modal.closeModal($scope.modalInstance);
+        };
+
+    }
+]);
+
+
+'use strict';
+
+angular.module('fu').controller('SlidePickController', ['$scope', 'Leaderboard', '$filter',
+    function($scope, Leaderboard, $filter) {
+
+        var query = {
+            sportId:        'all',
+            leagueId:       'all',
+            contestantId:   'all',
+            homeAway:       'both',
+            betDuration:    'all',
+            betType:        'all',
+            minBets:        'all',
+            dateId:         'last30Days'
+        };
+
+        function cb(err, leaderboard){
+            $scope.leaders = $filter('filter')(leaderboard, function(leaderboard){
+                return leaderboard.pending > 0;
+            });
+            $scope.leaders = $filter('limitTo')($scope.leaders, 3);
+        }
+
+        Leaderboard.getLeaderboard(query, cb);
+    }
+]);
+'use strict';
+
+angular.module('fu').controller('SlideRevShareController', ['$scope', 'Leaderboard',
+    function($scope, Leaderboard) {
+
+        var query = {
+            sportId:        'all',
+            leagueId:       'all',
+            contestantId:   'all',
+            homeAway:       'both',
+            betDuration:    'all',
+            betType:        'all',
+            minBets:        'all',
+            dateId:         'thisMonth',
+            count:          5
+        };
+
+        function cb(err, leaderboard){
+            console.log(leaderboard);
+            $scope.leaderboard = leaderboard;
+        }
+
+        Leaderboard.getLeaderboard(query, cb);
+
+    }
+]);
+'use strict';
+
+angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page', '$http', '$timeout',
+    function ($scope, $state, Authentication, User, Loading, $rootScope, Page, $http, $timeout) {
         $scope.authentication = Authentication;
         $scope.loading = Loading;
         $scope.page = Page;
@@ -3279,6 +3414,50 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
                 $scope.resendError = response.message;
             });
         };
+
+        /**
+         * Walkthrough
+         */
+
+        $scope.ExitPicksWalkthrough = function () {
+            $scope.authentication.user.picksWalkthrough = true;
+            User.update(function(err){});
+        };
+        $scope.CompletedPicksWalkthrough = function () {
+            $scope.authentication.user.picksWalkthrough = true;
+            User.update(function(err){});
+        };
+
+
+        $scope.MakePicksIntroOptions = {
+            steps:[
+                {
+                    element: '#picks-step1',
+                    intro: '<ul><li>150 Units to wager each week</li><li>Units reset every Monday</li></ul>',
+                    position: 'right'
+                },
+                {
+                    element: '#picks-step3',
+                    intro: "Picks are added to you Bet Slip",
+                    position: 'left'
+                },
+                {
+                    element: '#make-picks-menu',
+                    intro: "Select a League and start making picks!",
+                    position: 'right'
+                }
+            ],
+            showStepNumbers: false,
+            exitOnOverlayClick: false,
+            scrollToElement: false,
+            exitOnEsc:true,
+            nextLabel: 'NEXT',
+            prevLabel: 'PREV',
+            skipLabel: 'EXIT',
+            doneLabel: 'Thanks',
+            showBullets: false
+        };
+
     }
 ]);
 
@@ -3300,16 +3479,17 @@ angular.module('fu').controller('MakePicksController', ['$scope',
 
 'use strict';
 
-angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks', '$rootScope', 'Page',
-    function ($scope, $stateParams, $filter, Authentication, MakePicks, $rootScope, Page) {
+angular.module('fu').controller('MakePicksMenuController', ['$scope', '$stateParams', '$filter', 'Authentication', 'MakePicks', '$rootScope', 'Page', 'deviceDetector',
+    function ($scope, $stateParams, $filter, Authentication, MakePicks, $rootScope, Page, deviceDetector) {
         $scope.authentication = Authentication;
         $scope.leagueSlug = $stateParams.leagueSlug;
         $scope.sportSlug = $stateParams.sportSlug;
+        $scope.deviceDetector = deviceDetector;
 
         function updateMeta(){
-            Page.meta.title = 'Free '+$scope.activeSport.name+ ' - '+MakePicks.active.league.name+' Online Sportsbook | FansUnite';
-            Page.meta.description = 'Track your bets on our free online sportsbook with up-to-date '+MakePicks.active.league.name+' odds.';
-            Page.meta.keywords = 'free '+MakePicks.active.league.name+' online sportsbook, free online '+MakePicks.active.league.name+' betting, latest odds';
+            Page.meta.title = 'Free '+$scope.activeSport.name+ ' - '+MakePicks.active.league.name+' Online Sports Book | FansUnite';
+            Page.meta.description = 'Track your bets on our free online sports book with up-to-date '+MakePicks.active.league.name+' odds.';
+            Page.meta.keywords = 'free '+MakePicks.active.league.name+' online sports book, free online '+MakePicks.active.league.name+' betting, latest odds';
         }
 
         $scope.updateSport = function(sport){
@@ -3366,6 +3546,7 @@ angular.module('fu').controller('MakePicksMenuController', ['$scope', '$statePar
                 }
             }
             $rootScope.$broadcast('menuSet');
+            if($scope.authentication.user && !$scope.authentication.user.picksWalkthrough && $scope.deviceDetector.isDesktop()) $scope.startPicksWalkthrough();
         };
 
 
@@ -4315,13 +4496,22 @@ angular.module('fu').controller('ModalShareController', ['$scope', 'type', 'pick
 ]);
 'use strict';
 
-angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', '$stateParams', '$timeout', '$location',
-    function($scope, $state, $stateParams, $timeout, $location) {
+angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', '$stateParams', '$timeout', '$location', 'Modal',
+    function($scope, $state, $stateParams, $timeout, $location, Modal) {
 
-        $scope.counter = 10;
+
         $scope.redirectUrl = $stateParams.redirect;
 
+        Modal.showModal(
+            '/modules/fu/client/views/intro/modal/modal-intro.client.view.html',
+            'ModalIntroController',
+            null,
+            'intro'
+        );
 
+
+        /*
+        $scope.counter = 10;
         $scope.onTimeout = function(){
             $scope.counter--;
             if($scope.counter === 0){
@@ -4338,6 +4528,7 @@ angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', 
         $scope.stop = function(){
             $timeout.cancel($scope.myTimeout);
         };
+        */
     }
 ]);
 
@@ -10839,8 +11030,8 @@ angular.module('fu').factory('UserPicks', ['$filter', 'Authentication', 'User',
 
 'use strict';
 
-angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus', 'ApiUserFollowingSettings',
-    function(Authentication, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus, ApiUserFollowingSettings) {
+angular.module('fu').factory('User', ['Authentication', 'ApiUsers', 'ApiUserPicksPending', 'ApiUserPicksCompleted', 'ApiUserFollowing', 'ApiUserInfo', 'ApiUserConversation', 'SocketUser', 'ApiUserNotification', 'ApiUserMessagecount', 'ApiUserStatus', 'ApiUserFollowingSettings',
+    function(Authentication, ApiUsers, ApiUserPicksPending, ApiUserPicksCompleted, ApiUserFollowing, ApiUserInfo, ApiUserConversation, SocketUser, ApiUserNotification, ApiUserMessagecount, ApiUserStatus, ApiUserFollowingSettings) {
 
         var getPendingPicks = function(callback){
             function cbSuccess(picks){
@@ -11019,6 +11210,22 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             ApiUserInfo.get({}, cbSuccess, cbError);
         };
 
+        var update = function(callback){
+
+            function cbSuccess(response){
+                Authentication.user = response;
+                callback();
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            var user = new ApiUsers(Authentication.user);
+
+            user.$update(cbSuccess, cbError);
+        };
+
         var info = {initialized: false,
                     following: [],
                     channels: [],
@@ -11041,6 +11248,7 @@ angular.module('fu').factory('User', ['Authentication', 'ApiUserPicksPending', '
             getFollowingSettings: getFollowingSettings,
             updateFollowingSettings: updateFollowingSettings,
             initialize: initialize,
+            update: update,
 
             createConversation: createConversation,
             readNotification: readNotification,

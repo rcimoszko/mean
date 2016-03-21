@@ -89,18 +89,15 @@
 </head>
 
 <body>
-    <div ng-intro-options="IntroOptions" ng-intro-method="CallMe"
-         ng-intro-oncomplete="CompletedEvent" ng-intro-onexit="ExitEvent"
-         ng-intro-onchange="ChangeEvent" ng-intro-onbeforechange="BeforeChangeEvent"
-         ng-intro-onafterchange="AfterChangeEvent"
-         ng-intro-autostart="ShouldAutoStart">
+    <div ng-intro-options="MakePicksIntroOptions" ng-intro-method="startPicksWalkthrough"
+         ng-intro-oncomplete="CompletedPicksWalkthrough" ng-intro-onexit="ExitPicksWalkthrough"
+         ng-intro-autostart="false">
 
         <header ng-include="'/modules/fu/client/views/top-menu.client.view.html'" id="top-menu" data-ng-class="{auth: authentication.user,  'is-blog': isBlog()}"></header>
         <ng-include src="'/modules/fu/client/views/auth-side-menu.client.view.html'" data-ng-if="authentication.user" data-ng-hide="isBlog()"></ng-include>
         <section id="content"  data-ng-class="{auth: authentication.user, blog: isBlog() }">
             <ng-include src="'/modules/fu/client/views/unverified.client.view.html'" data-ng-if="authentication.user && !authentication.user.verified"></ng-include>
             {% block content %}{% endblock %}
-
             <ng-include src="'/modules/fu/client/views/footer.client.view.html'" data-ng-hide="isPicksPage()" data-ng-if="!loading.isLoading.pageLoading"></ng-include>
         </section>
 

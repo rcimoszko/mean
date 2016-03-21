@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page', '$http',
-    function ($scope, $state, Authentication, User, Loading, $rootScope, Page, $http) {
+angular.module('fu').controller('MainController', ['$scope', '$state', 'Authentication', 'User', 'Loading', '$rootScope', 'Page', '$http', '$timeout',
+    function ($scope, $state, Authentication, User, Loading, $rootScope, Page, $http, $timeout) {
         $scope.authentication = Authentication;
         $scope.loading = Loading;
         $scope.page = Page;
@@ -43,51 +43,44 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
          * Walkthrough
          */
 
-        $scope.CompletedEvent = function (scope) {
-            console.log("Completed Event called");
+        $scope.ExitPicksWalkthrough = function () {
+            $scope.authentication.user.picksWalkthrough = true;
+            User.update(function(err){});
+        };
+        $scope.CompletedPicksWalkthrough = function () {
+            $scope.authentication.user.picksWalkthrough = true;
+            User.update(function(err){});
         };
 
-        $scope.ExitEvent = function (scope) {
-            console.log("Exit Event called");
-        };
 
-        $scope.ChangeEvent = function (targetElement, scope) {
-            console.log("Change Event called");
-            console.log(targetElement);  //The target element
-            console.log(this);  //The IntroJS object
-        };
-
-        $scope.BeforeChangeEvent = function (targetElement, scope) {
-            console.log("Before Change Event called");
-            console.log(targetElement);
-        };
-
-        $scope.AfterChangeEvent = function (targetElement, scope) {
-            console.log("After Change Event called");
-            console.log(targetElement);
-        };
-
-        $scope.IntroOptions = {
+        $scope.MakePicksIntroOptions = {
             steps:[
                 {
-                    element: '#step1',
-                    intro: "Menu"
+                    element: '#picks-step1',
+                    intro: '<ul><li>150 Units to wager each week</li><li>Units reset every Monday</li></ul>',
+                    position: 'right'
                 },
                 {
-                    element: '#step2',
-                    intro: "Picks Feed"
+                    element: '#picks-step3',
+                    intro: "Picks are added to you Bet Slip",
+                    position: 'left'
+                },
+                {
+                    element: '#make-picks-menu',
+                    intro: "Select a League and start making picks!",
+                    position: 'right'
                 }
             ],
             showStepNumbers: false,
-            exitOnOverlayClick: true,
+            exitOnOverlayClick: false,
+            scrollToElement: false,
             exitOnEsc:true,
-            nextLabel: '<strong>NEXT!</strong>',
-            prevLabel: '<span style="color:green">Previous</span>',
-            skipLabel: 'Exit',
-            doneLabel: 'Thanks'
+            nextLabel: 'NEXT',
+            prevLabel: 'PREV',
+            skipLabel: 'EXIT',
+            doneLabel: 'Thanks',
+            showBullets: false
         };
-
-        $scope.ShouldAutoStart = true;
 
     }
 ]);

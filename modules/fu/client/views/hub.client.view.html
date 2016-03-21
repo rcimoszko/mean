@@ -1,27 +1,32 @@
-<section data-ng-controller="HubController" class="hub content-padding-top">
-    <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
-        <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
-    </div>
-    <div class="container-fluid" data-ng-hide="loading.isLoading.pageLoading">
-        <div class="row">
+<section data-ng-controller="HubController" class="hub content-padding-top" >
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 pull-right">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ng-include src="'/modules/fu/client/views/hub/hub-consensus.client.view.html'"></ng-include>
-                        <ng-include src="'/modules/fu/client/views/hub/hub-discussion.client.view.html'"></ng-include>
-                    </div>
-                    <div class="col-lg-6">
-                        <ng-include data-ng-if="user.info.status === 'lifetime premium'" src="'/modules/fu/client/views/hub/hub-banner.client.view.html'"></ng-include>
-                        <ng-include src="'/modules/fu/client/views/hub/hub-chat.client.view.html'"></ng-include>
-                        <ng-include src="'/modules/fu/client/views/hub/hub-trending.client.view.html'"></ng-include>
-                        <ng-include src="'/modules/fu/client/views/hub/hub-leaderboard.client.view.html'"></ng-include>
+    <div ng-intro-options="HubIntroOptions" ng-intro-method="startHubWalkthrough"
+         ng-intro-oncomplete="CompletedHubWalkthrough" ng-intro-onexit="ExitHubWalkthrough"
+         ng-intro-autostart="false">
+        <div class="loading-container" data-ng-hide="!loading.isLoading.pageLoading">
+            <loading bg-color="'gray'" color="'blue-2'" is-loading="loading.isLoading.pageLoading"></loading>
+        </div>
+        <div class="container-fluid" data-ng-hide="loading.isLoading.pageLoading">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 pull-right">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ng-include src="'/modules/fu/client/views/hub/hub-consensus.client.view.html'"></ng-include>
+                            <ng-include src="'/modules/fu/client/views/hub/hub-discussion.client.view.html'"></ng-include>
+                        </div>
+                        <div class="col-lg-6">
+                            <ng-include data-ng-if="user.info.status === 'lifetime premium'" src="'/modules/fu/client/views/hub/hub-banner.client.view.html'"></ng-include>
+                            <ng-include src="'/modules/fu/client/views/hub/hub-chat.client.view.html'"></ng-include>
+                            <ng-include src="'/modules/fu/client/views/hub/hub-trending.client.view.html'"></ng-include>
+                            <ng-include src="'/modules/fu/client/views/hub/hub-leaderboard.client.view.html'"></ng-include>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 pull-left">
-                <ng-include src="'/modules/fu/client/views/hub/hub-picks-feed.client.view.html'"></ng-include>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 pull-left" >
+                    <ng-include src="'/modules/fu/client/views/hub/hub-picks-feed.client.view.html'"></ng-include>
+                </div>
             </div>
         </div>
     </div>
