@@ -7,13 +7,13 @@
     </h5>
 
     <div data-ng-if="redirectUrl" style="margin-top:20px;">
-        Re-directing back to previous page in {{counter}} seconds.
+        <!--Re-directing back to previous page in {{counter}} seconds.-->
         <div>
             <a href="{{redirectUrl}}">Go to previous page</a>
         </div>
     </div>
     <div data-ng-if="!redirectUrl">
-        Directing to hub in {{counter}} seconds.
+        <!--Directing to hub in {{counter}} seconds.-->
         <a ui-sref="hub">Continue to Hub</a>
     </div>
 </section>

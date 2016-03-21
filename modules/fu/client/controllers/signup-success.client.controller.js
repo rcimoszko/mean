@@ -1,12 +1,21 @@
 'use strict';
 
-angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', '$stateParams', '$timeout', '$location',
-    function($scope, $state, $stateParams, $timeout, $location) {
+angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', '$stateParams', '$timeout', '$location', 'Modal',
+    function($scope, $state, $stateParams, $timeout, $location, Modal) {
 
-        $scope.counter = 10;
+
         $scope.redirectUrl = $stateParams.redirect;
 
+        Modal.showModal(
+            '/modules/fu/client/views/intro/modal/modal-intro.client.view.html',
+            'ModalIntroController',
+            null,
+            'intro'
+        );
 
+
+        /*
+        $scope.counter = 10;
         $scope.onTimeout = function(){
             $scope.counter--;
             if($scope.counter === 0){
@@ -23,6 +32,7 @@ angular.module('fu').controller('SignUpSucesssController', ['$scope', '$state', 
         $scope.stop = function(){
             $timeout.cancel($scope.myTimeout);
         };
+        */
     }
 ]);
 

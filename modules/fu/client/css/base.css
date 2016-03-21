@@ -5655,3 +5655,6 @@ notification:last-of-type .notification {
 .slide-general .btn-container {
   margin: 20px 0;
 }
+.unverified.picks {
+  margin-right: 300px;
+}

@@ -153,15 +153,5 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             StripeService.showSubscriptionModal();
         };
 
-        $scope.showModal = function(){
-            Modal.showModal(
-                '/modules/fu/client/views/intro/modal/modal-intro.client.view.html',
-                'ModalIntroController',
-                null,
-                'intro'
-            );
-        };
-        $scope.showModal();
-
     }
 ]);
