@@ -191,6 +191,7 @@ var UserSchema = new Schema({
     goal:                   {type: String, enum:['track', 'picks', 'learn', 'rev share', 'other']},
 
     hubWalkthrough:         {type: Boolean, default: false},
+    discoverWalkthrough:    {type: Boolean, default: false},
     picksWalkthrough:       {type: Boolean, default: false}
 
 });

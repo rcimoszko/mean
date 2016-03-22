@@ -53,6 +53,9 @@ var verifyToken = function(token, callback) {
                 }
                 user.verified = true;
                 user.save(function(err) {
+                    EmailBl.sendIntroductionEmail(user, function(err){
+                        if(err) console.log(err);
+                    });
                     callback(err, user);
                 });
             });

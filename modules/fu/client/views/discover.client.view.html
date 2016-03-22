@@ -1,11 +1,14 @@
 <section id="discover" data-ng-controller="DiscoverController">
+    <div ng-intro-options="DiscoverIntroOptions" ng-intro-method="startDiscoverWalkthrough"
+         ng-intro-oncomplete="CompletedDiscoverWalkthrough" ng-intro-onexit="ExitDiscoverWalkthrough"
+         ng-intro-autostart="false">
     <div class="container-fluid filter-container leaderboard-filter">
         <div class="row">
-            <div class="col-xs-12 col-sm-2 rank">
+            <div class="col-xs-12 col-sm-2 rank" id="discover-step1">
                 <h2>RANK</h2>
                 <div class="rank-number">{{rank}}</div>
             </div>
-            <div class="col-xs-12 col-sm-10 filters">
+            <div class="col-xs-12 col-sm-10 filters" id="discover-step2">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
@@ -41,4 +44,5 @@
         </div>
     </div>
     <section ui-view></section>
+    </div>
 </section>

@@ -15,6 +15,7 @@ var _ = require('lodash'),
     EmailBl = require('../bl/email.server.bl'),
     HotpickBl = require('../bl/hotpick.server.bl'),
     ContestantBl = require('../bl/contestant.server.bl'),
+    FollowBl = require('../bl/follow.server.bl'),
     GroupBl = require('../bl/group.server.bl'),
     slug = require('speakingurl');
 
@@ -426,64 +427,6 @@ function assignLogos(callback){
     async.waterfall(todo, callback);
 }
 
-function checkTrial(callback){
-
-    var todo = [];
-
-    function getTrialUsers(callback){
-        var startDate = new Date();
-        startDate.setDate(startDate.getDate()-7);
-        console.log(startDate);
-        var query = {trialStartDate: {$lte:startDate}, trial:true};
-        UserBl.getByQuery(query, callback);
-    }
-
-    function updateTrialUsers(users, callback){
-
-        function processUser(user, callback){
-
-            var todo = [];
-
-            function sendEmail(callback){
-                EmailBl.sendTrialOverEmail(user, 'fansunite.com', function(err){
-                    if(err)console.log(err);
-                });
-                callback();
-            }
-
-            function updateUser(callback){
-                user.trial = false;
-                user.trialEndDate = new Date();
-                user.trialUsed = true;
-
-                function cb(err){
-                    callback(err);
-                }
-
-                user.save(cb);
-            }
-
-            todo.push(sendEmail);
-            todo.push(updateUser);
-
-            async.waterfall(todo, callback);
-
-        }
-        async.eachSeries(users, processUser, callback);
-    }
-
-
-    todo.push(getTrialUsers);
-    todo.push(updateTrialUsers);
-
-    async.waterfall(todo, callback);
-
-}
-
-function updateHotPick(callback){
-    HotpickBl.updateHotPick(callback);
-}
-
 function checkPremium(callback){
     var todo = [];
 
@@ -546,19 +489,158 @@ function assignEsportsGroups(callback){
     async.waterfall(todo, callback);
 }
 
+//check if user off trial every 10 min
+function checkTrial(callback){
+
+    var todo = [];
+
+    function getTrialUsers(callback){
+        var startDate = new Date();
+        startDate.setDate(startDate.getDate()-7);
+        console.log(startDate);
+        var query = {trialStartDate: {$lte:startDate}, trial:true};
+        UserBl.getByQuery(query, callback);
+    }
+
+    function updateTrialUsers(users, callback){
+
+        function processUser(user, callback){
+
+            var todo = [];
+
+            function sendEmail(callback){
+                EmailBl.sendTrialOverEmail(user, 'fansunite.com', function(err){
+                    if(err)console.log(err);
+                });
+                callback();
+            }
+
+            function updateUser(callback){
+                user.trial = false;
+                user.trialEndDate = new Date();
+                user.trialUsed = true;
+
+                function cb(err){
+                    callback(err);
+                }
+
+                user.save(cb);
+            }
+
+            todo.push(sendEmail);
+            todo.push(updateUser);
+
+            async.waterfall(todo, callback);
+
+        }
+        async.eachSeries(users, processUser, callback);
+    }
+
+
+    todo.push(getTrialUsers);
+    todo.push(updateTrialUsers);
+
+    async.waterfall(todo, callback);
+
+}
+
+//update hotpick every 10 min
+function updateHotPick(callback){
+    HotpickBl.updateHotPick(callback);
+}
+
+//check every 10 minutes, auto follow a user after 6 hours of account creation
+function autoFollow(callback){
+
+    var todo = [];
+    var usernames = ['deghdami', 'rcimoszko', 'dmcintyre', 'nshuter'];
+
+    function getNewUsers(callback){
+        var startDate = new Date();
+        var endDate = new Date();
+        startDate.setHours(startDate.getHours() - 6);
+        endDate.setHours(endDate.getHours() - 6);
+        endDate.setMinutes(endDate.getMinutes() + 10);
+        var query = {created:{$lte: endDate, $gte: startDate}};
+
+        UserBl.getByQuery(query, callback);
+    }
+
+    function followUsers(users, callback){
+
+        function followUser(user, callback){
+            var todo = [];
+
+            function getRandomUser(callback){
+                var randomIndex = Math.floor((Math.random() * 4)); // random number between 0-3;
+                var username = usernames[randomIndex];
+                var query = {username: username};
+                UserBl.getOneByQuery(query, callback);
+            }
+
+            function followWithUser(randomUser, callback){
+                FollowBl.follow(user, randomUser, 'fansunite.com', callback);
+            }
+
+            todo.push(getRandomUser);
+            todo.push(followWithUser);
+
+            async.waterfall(todo, callback);
+        }
+        async.eachSeries(users, followUser, callback);
+    }
+
+    todo.push(getNewUsers);
+    todo.push(followUsers);
+
+    async.waterfall(todo, callback);
+}
+
+//check every hour minutes, auto follow a user after 6 hours of account creation
+function sendBlogPost(callback){
+    var todo = [];
+
+    function getNewUsers(callback){
+        var startDate = new Date();
+        var endDate = new Date();
+        startDate.setDate(startDate.getDate() - 2);
+        endDate.setDate(endDate.getDate() - 2);
+        endDate.setHours(endDate.getHours() + 1);
+        var query = {created:{$lte: endDate, $gt: startDate}};
+
+        UserBl.getByQuery(query, callback);
+    }
+
+    function sendBlogEmails(users, callback){
+
+        function sendBlogEmail(user, callback){
+            EmailBl.sendBlogEmail(user, callback);
+        }
+
+        async.eachSeries(users, sendBlogEmail, callback);
+    }
+
+    todo.push(getNewUsers);
+    todo.push(sendBlogEmails);
+
+    async.waterfall(todo, callback);
+
+}
+
+
+
 exports.assignSlugs         = assignSlugs;
 exports.decoupleBets        = decoupleBets;
 exports.updateHockeyBets    = updateHockeyBets;
-
 exports.assignBetTypes        = assignBetTypes;
 exports.assignBetDurations    = assignBetDurations;
-
+exports.assignEsportsGroups = assignEsportsGroups;
 exports.createChannels    = createChannels;
 exports.assignCommentIds    = assignCommentIds;
-
 exports.assignLogos = assignLogos;
+
 exports.checkTrial  = checkTrial;
 exports.updateHotPick  = updateHotPick;
 exports.checkPremium = checkPremium;
-
-exports.assignEsportsGroups = assignEsportsGroups;
+exports.autoFollow = autoFollow;
+exports.sendBlogPost = sendBlogPost;

@@ -2,7 +2,7 @@
     <thead>
         <th class="rank">#</th>
         <th class="username">USERNAME</th>
-        <th class="value profit" data-ng-class="{'active': order === 'profit'}"><a href data-ng-click="updateOrder('profit')">PROFIT</a></th>
+        <th  id="discover-step3" class="value profit" data-ng-class="{'active': order === 'profit'}"><a href data-ng-click="updateOrder('profit')">PROFIT</a></th>
         <th class="value roi" data-ng-class="{'active': order === 'roi'}"><a href data-ng-click="updateOrder('roi')" >ROI</a></th>
         <th class="value win-loss" data-ng-class="{'active': order === 'wins'}"><a href data-ng-click="updateOrder('wins')">W/L</a></th>
         <th class="value avg-odds" data-ng-class="{'active': order === 'avgOdds'}"><a href data-ng-click="updateOrder('avgOdds')">AVG ODDS</a></th>
@@ -18,7 +18,7 @@
             <td class="value win-loss" data-ng-class="{'active': order === 'wins'}">{{user.wins}}-{{user.losses}}</td>
             <td class="value avg-odds" data-ng-class="{'active': order === 'avgOdds'}">{{user.avgOdds | formatOdds}}</td>
             <td class="value avg-bet" data-ng-class="{'active': order === 'avgBet'}">{{user.avgBet | number:1}}</td>
-            <td class="actions">
+            <td class="actions" id="discover-step4">
                 <btn-follow user-id="user.user._id"></btn-follow>
                 <btn-pending-picks username="user.user.username" pick-count="user.pending"></btn-pending-picks>
             </td>

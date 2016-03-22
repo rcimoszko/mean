@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard', 'Page', 'Keywords',
-    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard, Page, Keywords) {
+angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams', '$state', '$filter', 'Authentication', 'Leaderboard', 'Page', 'Keywords', 'User', 'deviceDetector', '$timeout',
+    function ($scope, $stateParams, $state, $filter, Authentication, Leaderboard, Page, Keywords, User, deviceDetector, $timeout) {
         $scope.authentication   = Authentication;
         $scope.sportSlug        = $stateParams.sportSlug;
         $scope.leagueSlug       = $stateParams.leagueSlug;
         $scope.contestantSlug   = $stateParams.contestantSlug;
         $scope.page = Page;
-
+        $scope.deviceDetector = deviceDetector;
 
 
         $scope.filters = {
@@ -132,7 +132,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             }
         };
 
-
         $scope.filter = {
             sport:       $scope.filters.sports[0],
             league:      $scope.filters.leagues[0],
@@ -153,8 +152,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 capperTextCap = Keywords.getCapperText($scope.filter.sport.name, true);
                 capperText = Keywords.getCapperText($scope.filter.sport.name, false);
             }
-
-            console.log($scope.filter);
 
             if($scope.filter.contestant._id !== 'all'){
                 $scope.page.meta.title = 'Top '+$scope.filter.contestant.name+' '+capperTextCap + ' | FansUnite';
@@ -189,6 +186,7 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 setPages();
                 updateRank();
                 updatePageMeta();
+                if($scope.authentication.user && !$scope.authentication.user.discoverWalkthrough && $scope.deviceDetector.isDesktop()) $timeout($scope.startDiscoverWalkthrough, 2000);
             }
 
             Leaderboard.getLeaderboard(query, cb);
@@ -227,7 +225,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
 
         }
 
-
         function selectSportDropdown(){
             var selectedSport = $filter('filter')($scope.filters.sports, function(sport){
                 return sport.slug === $scope.sportSlug;
@@ -238,8 +235,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 $scope.filter.sport = $scope.filters.sports[0];
             }
         }
-
-
 
         function selectLeagueDropdown(){
             var selectedLeague = $filter('filter')($scope.filters.leagues, function(league){
@@ -263,7 +258,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             }
         }
 
-
         function cbGetContestants(err, contestants){
             $scope.filters.contestants = $scope.filters.contestants.concat(contestants);
             if($scope.contestantSlug){
@@ -274,7 +268,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 $scope.updateLeaderboard();
             }
         }
-
 
         function cbGetLeagues(err, leagues){
             $scope.filters.leagues = $scope.filters.leagues.concat(leagues);
@@ -289,7 +282,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             }
         }
 
-
         function cbGetSports(err, sports){
             $scope.filters.sports = $scope.filters.sports.concat(sports);
             if($scope.sportSlug){
@@ -301,7 +293,6 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 $scope.updateLeaderboard();
             }
         }
-
 
         Leaderboard.getSports(cbGetSports);
 
@@ -337,6 +328,53 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
             if(!rankFound) $scope.rank = 'N/A';
         }
 
-    }
+        /**
+         * Walkthrough
+         */
 
+        $scope.CompletedDiscoverWalkthrough  = function () {
+            $scope.authentication.user.discoverWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.ExitDiscoverWalkthrough = function () {
+            $scope.authentication.user.discoverWalkthrough = true;
+            User.update(function(err){});
+        };
+
+        $scope.DiscoverIntroOptions = {
+            steps:[
+                {
+                    element: '#discover-step1',
+                    intro: 'See where you rank amongst the community',
+                    position: 'right'
+                },
+                {
+                    element: '#discover-step2',
+                    intro: 'Find the best bettors using our various filters',
+                    position: 'bottom'
+                },
+                {
+                    element: '#discover-step3',
+                    intro: 'Sort based on profit, roi, wins-losses, average odds and average bets',
+                    position: 'top'
+                },
+                {
+                    element: '#discover-step4',
+                    intro: 'Quick follow or find bettors with pending picks',
+                    position: 'left'
+                }
+
+            ],
+            showStepNumbers: false,
+            scrollToElement: false,
+            exitOnEsc:true,
+            exitOnOverlayClick: false,
+            nextLabel: 'NEXT',
+            prevLabel: 'PREV',
+            skipLabel: 'EXIT',
+            doneLabel: 'DONE',
+            showBullets: false
+        };
+    }
 ]);

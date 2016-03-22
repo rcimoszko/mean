@@ -591,6 +591,10 @@ function getByQuery(query, callback){
     User.find(query, callback);
 }
 
+function getOneByQuery(query, callback){
+    User.findOne(query, callback);
+}
+
 function getHotPickUsers(callback){
     var query = {$and:[
                     {$or:[{trial:true}, {base:true}, {premium:true, lifetimePremium:false}]},
@@ -630,6 +634,7 @@ function returnUnits(userId, units, callback){
 exports.getByUsername       = getByUsername;
 exports.getByQuery          = getByQuery;
 exports.getFollowing        = getFollowing;
+exports.getOneByQuery       = getOneByQuery;
 exports.getHub              = getHub;
 exports.getMessages         = getMessages;
 exports.getNotifications    = getNotifications;

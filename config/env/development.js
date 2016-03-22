@@ -71,6 +71,18 @@ module.exports = {
                     pass: 'fansunite123$'
                 }
             }
+        },
+        mailerDarius:{
+            from: process.env.MAILER_FROM_DARIUS || 'Darius <darius@fansunite.com>',
+            options:{
+                //auth: 'smtps://darius%40fansunite.com:fansunite123$@smtp.sendgrid.net',
+                host: 'smtp.sendgrid.net',
+                port: 587,
+                auth: {
+                    user: 'darius@fansunite.com',
+                    pass: 'fansunite123$'
+                }
+            }
         }
     },
     linkedin: {

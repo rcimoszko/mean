@@ -20,7 +20,6 @@ function verify(req, res, next){
     }
 
     var token = req.params.token;
-    console.log(token);
     VerificationTokenBl.verifyToken(token, cb);
 }
 

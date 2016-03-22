@@ -38,10 +38,13 @@
             <li><a ui-sref="login" data-ng-class="{active: $scope.state.current.name === 'login'}">Login</a></li>
             <li><a href="{{signupUrl()}}" data-ng-class="{active: $scope.state.current.name === 'signup'}">Sign Up</a></li>
         </ul>
+        <ul class="general nav navbar-nav" id="hub-step5">
+            <li><a ui-sref="makePicks.home" data-ng-class="{active:  $scope.state.current.name === 'makePicks'}">Make Picks</a></li>
+            <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
+        </ul>
         <ul class="general nav navbar-nav">
             <li><a ui-sref="blog.home" data-ng-class="{active:  $scope.state.current.name === 'blog'}">Blog</a></li>
-            <li id="step4"><a ui-sref="makePicks.home" data-ng-class="{active:  $scope.state.current.name === 'makePicks'}">Make Picks</a></li>
-            <li><a ui-sref="discover.home" data-ng-class="{active: $scope.state.current.name === 'discover' }">Discover</a></li>
+
         </ul>
     </nav>
 

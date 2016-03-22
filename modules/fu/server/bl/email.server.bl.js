@@ -38,6 +38,21 @@ function sendEmail(emailHTML, subject, emailTo, callback){
 
 }
 
+function sendEmail_darius(emailHTML, subject, emailTo, callback){
+    function cb(err){
+        callback(err);
+    }
+
+    var smtpTransport = nodemailer.createTransport(config.maaxMarket.mailerDarius.options);
+    var mailOptions = {
+        to: emailTo,
+        from: config.maaxMarket.mailerDarius.from,
+        subject: subject,
+        html: emailHTML
+    };
+    smtpTransport.sendMail(mailOptions, cb);
+}
+
 function sendVerificationEmail(token, user, hostName, callback) {
 
     var todo = [];
@@ -548,9 +563,86 @@ function sendHotPickEmail(hotPick, hostName, callback){
     async.waterfall(todo, callback);
 }
 
-function sendIntroductionEmail(user, hostName, callback){
+function sendIntroductionEmail(user, callback){
+    if(!user.email) return callback();
+    var todo = [];
 
+    function render(callback){
+        function cb(err, emailHTML){
+            callback(err, emailHTML);
+        }
+
+        var templatePath = 'modules/fu/server/views/templates/intro-email.server.view.html';
+        var json = {
+            user: user.username
+        };
+        renderTemplate(templatePath, json, cb);
+    }
+
+    function send(emailHTML, callback){
+        function cb(err){
+            callback(err);
+        }
+        var subject = 'Welcome to FansUnite!';
+        sendEmail_darius(emailHTML, subject, user.email, cb);
+    }
+
+    function cb(err){
+        if (err){
+            var e = new Error('Error sending email - sendIntroductionEmail');
+            e.error = err;
+            callback(e);
+            return;
+        }
+        callback();
+    }
+
+    todo.push(render);
+    todo.push(send);
+
+    async.waterfall(todo, cb);
 }
+
+function sendBlogEmail(user, callback){
+    if(!user.email) return callback();
+    var todo = [];
+
+    function render(callback){
+        function cb(err, emailHTML){
+            callback(err, emailHTML);
+        }
+
+        var templatePath = 'modules/fu/server/views/templates/tmu-blog-email.server.view.html';
+        var json = {
+            user: user.username
+        };
+        renderTemplate(templatePath, json, cb);
+    }
+
+    function send(emailHTML, callback){
+        function cb(err){
+            callback(err);
+        }
+        var subject = 'Welcome to FansUnite!';
+        sendEmail(emailHTML, subject, user.email, cb);
+    }
+
+    function cb(err){
+        if (err){
+            var e = new Error('Error sending email - sendIntroductionEmail');
+            e.error = err;
+            callback(e);
+            return;
+        }
+        callback();
+    }
+
+    todo.push(render);
+    todo.push(send);
+
+    async.waterfall(todo, cb);
+}
+
 
 exports.sendVerificationEmail   = sendVerificationEmail;
 exports.sendFollowerEmail       = sendFollowerEmail;
@@ -559,3 +651,4 @@ exports.sendPicksEmails         = sendPicksEmails;
 exports.sendTrialOverEmail      = sendTrialOverEmail;
 exports.sendHotPickEmail        = sendHotPickEmail;
 exports.sendIntroductionEmail   = sendIntroductionEmail;
+exports.sendBlogEmail       = sendBlogEmail;

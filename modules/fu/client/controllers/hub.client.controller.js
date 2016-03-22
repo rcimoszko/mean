@@ -155,53 +155,6 @@ angular.module('fu').controller('HubController', ['$scope', 'Authentication', 'H
             StripeService.showSubscriptionModal();
         };
 
-        /**
-         * Walkthrough
-         */
-
-        $scope.CompletedHubWalkthrough  = function () {
-            $scope.authentication.user.hubWalkthrough = true;
-            User.update(function(err){});
-        };
-
-        $scope.ExitHubWalkthrough = function () {
-            $scope.authentication.user.hubWalkthrough = true;
-            User.update(function(err){});
-        };
-
-        $scope.HubIntroOptions = {
-            steps:[
-                {
-                    element: '#hub-step1',
-                    intro: 'Find upcoming picks from the community',
-                    position: 'right'
-                },
-                {
-                    element: '#hub-step2',
-                    intro: "Find the most popular games and picks",
-                    position: 'right'
-                },
-                {
-                    element: '#hub-step3',
-                    intro: "See what our community is discussing",
-                    position: 'top'
-                },
-                {
-                    element: '#hub-step4',
-                    intro: "Find trending handicappers",
-                    position: 'left'
-                }
-            ],
-            showStepNumbers: false,
-            scrollToElement: false,
-            exitOnEsc:true,
-            exitOnOverlayClick: false,
-            nextLabel: 'NEXT',
-            prevLabel: 'PREV',
-            skipLabel: 'EXIT',
-            doneLabel: 'Thanks',
-            showBullets: false
-        };
 
 
 
