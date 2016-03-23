@@ -356,7 +356,7 @@ angular.module('fu').controller('DiscoverController', ['$scope', '$stateParams',
                 },
                 {
                     element: '#discover-step3',
-                    intro: 'Sort based on profit, roi, wins-losses, average odds and average bets',
+                    intro: 'Sort based on profit, ROI, wins-losses, average odds and average bets',
                     position: 'top'
                 },
                 {

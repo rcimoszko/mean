@@ -62,7 +62,7 @@ angular.module('fu').controller('MainController', ['$scope', '$state', 'Authenti
                 },
                 {
                     element: '#picks-step3',
-                    intro: "<ul><li>Picks are added to you Bet Slip</li><li>You can bet 1-5 units per bet type, and up to 15 on a single game</li><li>Place your unit size according to your confidence.</li></ul>",
+                    intro: "<ul><li>Picks are added to your Bet Slip</li><li>You can bet 1-5 units per bet type, and up to 15 on a single game</li><li>Place your unit size according to your confidence.</li></ul>",
                     position: 'left'
                 },
                 {
