@@ -3871,8 +3871,8 @@ angular.module('fu').controller('ModalPickCommentController', ['$scope', '$modal
 
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page', '$location',
-    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page, $location) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page', '$location', 'Modal',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page, $location, Modal) {
         $scope.username = $stateParams.username;
         $scope.authentication = Authentication;
         $scope.loading = Loading;
@@ -4497,14 +4497,67 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
          * General
          */
 
+        $scope.showFollowingModal = function(){
+            Modal.showModal(
+                'modules/fu/client/views/profile/modal/modal-profile-following.client.view.html',
+                'ModalProfileFollowingController',
+                {
+                    userId: function () {
+                        return $scope.profile.user._id;
+                    }
+                },
+                'lg'
+            );
+        };
 
-
-
-
+        $scope.showFollowerModal = function(){
+            Modal.showModal(
+                'modules/fu/client/views/profile/modal/modal-profile-followers.client.view.html',
+                'ModalProfileFollowersController',
+                {
+                    userId: function () {
+                        return $scope.profile.user._id;
+                    }
+                },
+                'lg'
+            );
+        };
 
 
     }
 ]);
+
+'use strict';
+
+angular.module('fu').controller('ModalProfileFollowersController', ['$scope', '$modalInstance', 'userId', 'Modal', 'Users',
+    function($scope, $modalInstance, userId, Modal, Users) {
+        $scope.modal = Modal;
+        $scope.modalInstance = $modalInstance;
+
+        function cb(err, followers){
+            $scope.followersList = followers;
+        }
+
+        Users.getFollowers(userId, cb);
+    }
+]);
+
+
+'use strict';
+
+angular.module('fu').controller('ModalProfileFollowingController', ['$scope', '$modalInstance', 'userId', 'Modal', 'Users',
+    function($scope, $modalInstance, userId, Modal, Users) {
+        $scope.modal = Modal;
+        $scope.modalInstance = $modalInstance;
+
+        function cb(err, following){
+            $scope.followingList = following;
+        }
+
+        Users.getFollowing(userId, cb);
+    }
+]);
+
 
 'use strict';
 
@@ -8509,6 +8562,28 @@ angular.module('fu').factory('ApiUsersFollow', ['$resource',
 
 'use strict';
 
+angular.module('fu').factory('ApiUsersFollowers', ['$resource',
+    function ($resource) {
+        return $resource('/api/users/:userId/followers', { userId: '@userId' }, {
+            update: { method: 'PUT' }
+        });
+    }
+]);
+
+
+'use strict';
+
+angular.module('fu').factory('ApiUsersFollowing', ['$resource',
+    function ($resource) {
+        return $resource('/api/users/:userId/following', { userId: '@userId' }, {
+            update: { method: 'PUT' }
+        });
+    }
+]);
+
+
+'use strict';
+
 angular.module('fu').factory('ApiUsersNew', ['$resource',
     function ($resource) {
         return $resource('/api/users/new', {}, {
@@ -11351,8 +11426,8 @@ angular.module('fu').factory('UserAuth', ['Authentication', 'ApiAuth', 'User', '
 ]);
 'use strict';
 
-angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile', 'ApiUsers', 'ApiUsersNew',
-    function(Authentication, ApiUserProfile, ApiUsers, ApiUsersNew) {
+angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile', 'ApiUsers', 'ApiUsersNew', 'ApiUsersFollowing', 'ApiUsersFollowers',
+    function(Authentication, ApiUserProfile, ApiUsers, ApiUsersNew, ApiUsersFollowing, ApiUsersFollowers) {
 
         var getProfile = function(username, callback){
             function cbSuccess(profile){
@@ -11391,11 +11466,36 @@ angular.module('fu').factory('Users', ['Authentication', 'ApiUserProfile', 'ApiU
             ApiUsersNew.query(cbSuccess, cbError);
         };
 
+        var getFollowing = function(userId, callback){
 
+            function cbSuccess(users){
+                callback(null, users);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUsersFollowing.query({userId: userId}, cbSuccess, cbError);
+        };
+
+        var getFollowers = function(userId, callback){
+            function cbSuccess(users){
+                callback(null, users);
+            }
+
+            function cbError(response){
+                callback(response.data.message);
+            }
+
+            ApiUsersFollowers.query({userId: userId}, cbSuccess, cbError);
+        };
 
 
         return {
             getProfile: getProfile,
+            getFollowing: getFollowing,
+            getFollowers: getFollowers,
             getAll: getAll,
             getNew: getNew
         };
