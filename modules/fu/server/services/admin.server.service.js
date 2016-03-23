@@ -606,6 +606,7 @@ function sendBlogPost(callback){
         endDate.setDate(endDate.getDate() - 2);
         endDate.setHours(endDate.getHours() + 1);
         var query = {created:{$lte: endDate, $gt: startDate}};
+        console.log(query);
 
         UserBl.getByQuery(query, callback);
     }
