@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page', '$location',
-    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page, $location) {
+angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stateParams', 'Users', 'Authentication', '$filter', 'Loading', 'Page', '$location', 'Modal',
+    function ($scope, $state, $stateParams, Users, Authentication, $filter, Loading, Page, $location, Modal) {
         $scope.username = $stateParams.username;
         $scope.authentication = Authentication;
         $scope.loading = Loading;
@@ -626,10 +626,31 @@ angular.module('fu').controller('ProfileController', ['$scope', '$state', '$stat
          * General
          */
 
+        $scope.showFollowingModal = function(){
+            Modal.showModal(
+                'modules/fu/client/views/profile/modal/modal-profile-following.client.view.html',
+                'ModalProfileFollowingController',
+                {
+                    userId: function () {
+                        return $scope.profile.user._id;
+                    }
+                },
+                'lg'
+            );
+        };
 
-
-
-
+        $scope.showFollowerModal = function(){
+            Modal.showModal(
+                'modules/fu/client/views/profile/modal/modal-profile-followers.client.view.html',
+                'ModalProfileFollowersController',
+                {
+                    userId: function () {
+                        return $scope.profile.user._id;
+                    }
+                },
+                'lg'
+            );
+        };
 
 
     }

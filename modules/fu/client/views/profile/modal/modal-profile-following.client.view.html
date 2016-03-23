@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="modal.closeModal(modalInstance)"><span aria-hidden="true">&times;</span></button>
+    FOLLOWING
+</div>
+
+<div class="modal-body clearfix">
+    <div class="col-xs-4 col-sm-3 col-lg-2 text-center" style="margin-bottom:15px;" data-ng-repeat="follower in followingList|orderBy:'name'">
+        <avatar username="follower.username" size="'sm'" url="follower.avatarUrl"></avatar>
+        <div class="username"><a ui-sref="profile({username:follower.username })">{{follower.username}}</a></div>
+        <btn-follow-rect user-id="follower._id" size="'xs'"></btn-follow-rect>
+    </div>
+</div>

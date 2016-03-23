@@ -36,6 +36,10 @@ function getDateQuery(dateId){
         case 'last90Days':
             timeIntervalStart.setDate(timeIntervalStart.getDate()-90);
             break;
+        case 'lastYear':
+            timeIntervalStart = new Date(today.getFullYear() - 1, 0, 1, 0, 0);
+            timeIntervalEnd = new Date(today.getFullYear(),  0, 1, 0, 0);
+            break;
         case 'last6Months':
             timeIntervalStart.setDate(timeIntervalStart.getDate()-180);
             break;
