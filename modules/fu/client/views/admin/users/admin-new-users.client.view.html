@@ -33,6 +33,7 @@
             <th>Pick Made</th>
             <th>Following</th>
             <th>Follow</th>
+            <th></th>
         </thead>
         <tbody>
             <tr data-ng-repeat="user in users|orderBy:'created':true|filter:activeFilter">
@@ -50,6 +51,7 @@
                 <td><admin-checkmark model="user.pickMade"></admin-checkmark></td>
                 <td>{{user.followingCount}}</td>
                 <td>{{user.followerCount}}</td>
+                <td>{{user.goal}}</td>
             </tr>
         </tbody>
     </table>

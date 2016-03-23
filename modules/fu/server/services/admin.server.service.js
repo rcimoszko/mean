@@ -553,7 +553,7 @@ function updateHotPick(callback){
 function autoFollow(callback){
 
     var todo = [];
-    var usernames = ['deghdami', 'rcimoszko', 'dmcintyre', 'nshuter'];
+    var usernames = ['deghdami', 'rcimoszko', 'dmcintyre', 'nshuster'];
 
     function getNewUsers(callback){
         var startDate = new Date();
@@ -561,13 +561,12 @@ function autoFollow(callback){
         startDate.setHours(startDate.getHours() - 6);
         endDate.setHours(endDate.getHours() - 6);
         endDate.setMinutes(endDate.getMinutes() + 10);
-        var query = {created:{$lte: endDate, $gte: startDate}};
+        var query = {created:{$lte: endDate, $gt: startDate}};
 
         UserBl.getByQuery(query, callback);
     }
 
     function followUsers(users, callback){
-
         function followUser(user, callback){
             var todo = [];
 
@@ -579,7 +578,7 @@ function autoFollow(callback){
             }
 
             function followWithUser(randomUser, callback){
-                FollowBl.follow(user, randomUser, 'fansunite.com', callback);
+                FollowBl.follow(randomUser, user, 'fansunite.com', false, callback);
             }
 
             todo.push(getRandomUser);

@@ -102,7 +102,7 @@ function updateFollowCount(user, userFollow, callback){
     async.waterfall(todo, callback);
 }
 
-function createFollow(user, userFollow, hostName, callback){
+function createFollow(user, userFollow, hostName, sendSocket, callback){
     var todo = [];
 
     function create(callback){
@@ -127,7 +127,7 @@ function createFollow(user, userFollow, hostName, callback){
         function cb(err){
             callback(err, follow);
         }
-        NotificationBl.createFollowNotification(userFollow, user, follow, cb);
+        NotificationBl.createFollowNotification(userFollow, user, follow, sendSocket, cb);
     }
 
     function sendEmail(follow, callback){
@@ -156,7 +156,7 @@ function updateFollow(follow, callback){
     follow.save(cb);
 }
 
-function follow(user, userFollow, hostName, callback){
+function follow(user, userFollow, hostName, sendSocket, callback){
     var todo = [];
 
     function findFollow(callback){
@@ -168,7 +168,7 @@ function follow(user, userFollow, hostName, callback){
         if(follow){
             updateFollow(follow, callback);
         } else {
-            createFollow(user, userFollow, hostName, callback);
+            createFollow(user, userFollow, hostName, sendSocket, callback);
         }
     }
 

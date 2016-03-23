@@ -1435,6 +1435,7 @@ input.toggle:checked + label:after {
 }
 .notification.new {
   background-color: #fbfbfb;
+  cursor: pointer;
 }
 notification:last-of-type .notification {
   border-bottom: 0;

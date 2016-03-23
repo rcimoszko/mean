@@ -43,7 +43,7 @@ function getByUser(userId, callback){
     getByQuery(query, callback);
 }
 
-function createFollowNotification(user, userFrom, follow, callback){
+function createFollowNotification(user, userFrom, follow, sendSocket, callback){
     var todo = [];
 
     function createNotification(callback){
@@ -53,6 +53,7 @@ function createFollowNotification(user, userFrom, follow, callback){
             type: 'follow',
             follow:follow
         };
+        console.log(notification);
 
         create(notification, callback);
     }
@@ -68,7 +69,7 @@ function createFollowNotification(user, userFrom, follow, callback){
 
     todo.push(createNotification);
     todo.push(populateNotification);
-    todo.push(sendNotification);
+    if(sendSocket) todo.push(sendNotification);
 
     async.waterfall(todo, callback);
 }
